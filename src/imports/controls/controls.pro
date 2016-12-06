@@ -1,4 +1,4 @@
-TARGET = nativecontrols 
+TARGET = qtnativecontrols
 TARGETPATH = Qt/NativeControls
 IMPORT_VERSION = 1.0
 
@@ -10,13 +10,14 @@ CONFIG += no_cxx_module
 DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 
 #HEADERS += \
-#    foo.h
+#    qnativeapplicationwindow.h \
+#    qnativecontrol.h
 
 SOURCES += \
-    plugin.cpp
-
-RESOURCES += \
-    qqc2macosstyleplugin.qrc
+    qtnativecontrolsplugin.cppi
+# \
+#    qnativecontrol.cpp \
+#    qnativeapplicationwindow.cpp
 
 OTHER_FILES += \
     qmldir

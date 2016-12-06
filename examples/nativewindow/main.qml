@@ -5,4 +5,16 @@ Native.ApplicationWindow {
     width: 480
     height: 640
     visible: true
+
+//	+ios {
+//
+//	}
+//
+//  +android {
+//
+//  }
+//
+//  +controls2 {
+//      contentItem: Item {}
+//  }
 }

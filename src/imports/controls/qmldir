@@ -1,0 +1,3 @@
+module Qt.NativeControls
+plugin qtnativecontrols
+classname QtNativeControlsPlugin

@@ -1,5 +1,4 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    nativecontrols \\
+    nativecontrols \
     imports
-
