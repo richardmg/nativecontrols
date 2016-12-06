@@ -45,23 +45,19 @@ class QtNativeControlsPlugin: public QQmlExtensionPlugin
 
 public:
 
-QtNativeControlsPlugin::QtNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
+QtNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
 {
 }
 
-void QtNativeControlsPlugin::registerTypes(const char *uri) override
-{
-    qmlRegisterType<QNativeWindow>(uri, 2, 0, "ApplicationWindow");
-}
-
-void QtNativeControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri) override
+void registerTypes(const char *uri) override
 {
 }
 
-QString QtNativeControlsPlugin::name() const override
+void initializeEngine(QQmlEngine *engine, const char *uri) override
 {
-    return QStringLiteral("QtNativeControls");
 }
+
+};
 
 QT_END_NAMESPACE
 

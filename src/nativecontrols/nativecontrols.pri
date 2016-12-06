@@ -1,10 +1,8 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativecontrol_p.h \
-    #$$PWD/qnativeapplicationwindow_p.h
+    $$PWD/qnativecontrol_p.h
 
 SOURCES += \
-    $$PWD/qnativecontrol.cpp \
-    #$$PWD/qnativeapplicationwindow.cpp
+    $$PWD/qnativecontrol.cpp
 

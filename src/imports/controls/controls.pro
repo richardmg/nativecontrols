@@ -14,7 +14,7 @@ DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 #    qnativecontrol.h
 
 SOURCES += \
-    qtnativecontrolsplugin.cppi
+    qtnativecontrolsplugin.cpp
 # \
 #    qnativecontrol.cpp \
 #    qnativeapplicationwindow.cpp

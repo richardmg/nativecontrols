@@ -3,6 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
+TARGET = nativewindow
 QT += gui qml quick
 RESOURCES += main.qrc
 
@@ -11,3 +12,6 @@ SOURCES += main.cpp
 
 OTHER_FILES += \
     main.qml
+
+target.path = $$[QT_INSTALL_EXAMPLES]/$$TARGET
+INSTALLS += target
