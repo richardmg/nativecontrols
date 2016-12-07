@@ -11,5 +11,6 @@ HEADERS += \
     $$PWD/qnativecontrol.h
 
 ios: include(ios/ios.pri)
+android: include(android/android.pri)
 
 load(qt_module)

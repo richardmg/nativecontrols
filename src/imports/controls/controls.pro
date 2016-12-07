@@ -1,3 +1,4 @@
 TEMPLATE = subdirs
 
-ios:SUBDIRS += ios
+ios: SUBDIRS += ios
+android: SUBDIRS += android
