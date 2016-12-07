@@ -3,7 +3,7 @@
 ** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Quick Controls 2 module of the Qt Toolkit.
+** This file is part of the Qt Quick Templates 2 module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,35 +34,34 @@
 **
 ****************************************************************************/
 
-#include <QtQml/qqmlextensionplugin.h>
-#include <QQmlEngine>
+#ifndef QNATIVECONTROLSGLOBAL_P_H
+#define QNATIVECONTROLSGLOBAL_P_H
 
-#include "qmlnativecontrol_p.h"
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+#include <QtCore/qglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class QtNativeControlsPlugin: public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
-
-public:
-
-QtNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
-{
-}
-
-void registerTypes(const char *uri) override
-{
-    qmlRegisterType<QmlNativeControl>(uri, 2, 0, "NativeControl");
-}
-
-void initializeEngine(QQmlEngine *engine, const char *uri) override
-{
-}
-
-};
+#ifndef QT_STATIC
+#  if defined(QT_BUILD_NATIVE_CONTROLS_LIB)
+#    define Q_NATIVECONTROLS_PRIVATE_EXPORT Q_DECL_EXPORT
+#  else
+#    define Q_NATIVECONTROLS_PRIVATE_EXPORT Q_DECL_IMPORT
+#  endif
+#else
+#  define Q_NATIVECONTROLS_PRIVATE_EXPORT
+#endif
 
 QT_END_NAMESPACE
 
-#include "qtnativecontrolsplugin.moc"
+#endif // QNATIVECONTROLSGLOBAL_P_H

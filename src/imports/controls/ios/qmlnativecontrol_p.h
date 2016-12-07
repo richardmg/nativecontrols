@@ -34,35 +34,27 @@
 **
 ****************************************************************************/
 
-#include <QtQml/qqmlextensionplugin.h>
-#include <QQmlEngine>
+#ifndef QNATIVECONTROL_H
+#define QNATIVECONTROL_H
 
-#include "qmlnativecontrol_p.h"
+#include <QtQml/qqmlparserstatus.h>
 
 QT_BEGIN_NAMESPACE
 
-class QtNativeControlsPlugin: public QQmlExtensionPlugin
+class QmlNativeControl : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+    Q_INTERFACES(QQmlParserStatus)
 
 public:
 
-QtNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
-{
-}
+    explicit QmlNativeControl(QObject *parent = nullptr);
+    virtual ~QmlNativeControl() {};
 
-void registerTypes(const char *uri) override
-{
-    qmlRegisterType<QmlNativeControl>(uri, 2, 0, "NativeControl");
-}
-
-void initializeEngine(QQmlEngine *engine, const char *uri) override
-{
-}
-
+    virtual void classBegin() override {};
+    virtual void componentComplete() override {};
 };
 
 QT_END_NAMESPACE
 
-#include "qtnativecontrolsplugin.moc"
+#endif // QNATIVECONTROL_H
