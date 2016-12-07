@@ -39,7 +39,7 @@
 
 #include <QtQml/qqmlparserstatus.h>
 
-#include "qnativecontrolsglobal_p.h"
+#include "qnativecontrolsglobal.h"
 
 QT_BEGIN_NAMESPACE
 
