@@ -1,10 +1,11 @@
 import QtQuick 2.1
-import Qt.NativeControls 1.0 as Native
+import Qt.NativeControls 1.0
 
-Native.ApplicationWindow {
-    width: 480
-    height: 640
-    visible: true
+NativeControl {
+//    width: 480
+//    height: 640
+//    visible: true
+    Component.onCompleted: print("Hurray")
 
 //	+ios {
 //

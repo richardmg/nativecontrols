@@ -54,7 +54,7 @@ QtNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
 
 void registerTypes(const char *uri) override
 {
-    qmlRegisterType<QmlNativeControl>(uri, 2, 0, "NativeControl");
+    qmlRegisterType<QmlNativeControl>(uri, 1, 0, "NativeControl");
 }
 
 void initializeEngine(QQmlEngine *engine, const char *uri) override
