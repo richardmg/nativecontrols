@@ -10,9 +10,6 @@ HEADERS += \
     $$PWD/qnativecontrolsglobal.h \
     $$PWD/qnativecontrol.h
 
-SOURCES += \
-    $$PWD/qnativecontrol.cpp
-
-MODULE_PLUGIN_TYPES = nativecontrols
+ios: include(ios/ios.pri)
 
 load(qt_module)
