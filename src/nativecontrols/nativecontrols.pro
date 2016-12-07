@@ -10,6 +10,9 @@ HEADERS += \
     $$PWD/qnativecontrolsglobal.h \
     $$PWD/qnativecontrol.h
 
+SOURCES += \
+    $$PWD/qnativecontrol.cpp
+
 ios: include(ios/ios.pri)
 android: include(android/android.pri)
 

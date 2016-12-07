@@ -1,4 +1,4 @@
 INCLUDEPATH += $$PWD
 
-SOURCES += \
-    $$PWD/qnativecontrol.cpp
+#SOURCES += \
+#    $$PWD/qnativewindow.cpp
