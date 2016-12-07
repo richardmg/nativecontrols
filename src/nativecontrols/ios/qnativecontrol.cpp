@@ -47,14 +47,6 @@ QNativeControl::~QNativeControl()
 {
 }
 
-void QNativeControl::classBegin()
-{
-}
-
-void QNativeControl::componentComplete()
-{
-}
-
 #include "moc_qnativecontrol.cpp"
 
 QT_END_NAMESPACE
