@@ -8,7 +8,8 @@ DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 
 HEADERS += \
     $$PWD/qnativecontrolsglobal.h \
-    $$PWD/qnativecontrol.h
+    $$PWD/qnativecontrol.h \
+    $$PWD/qnativeapplicationwindow.h
 
 SOURCES += \
     $$PWD/qnativecontrol.cpp

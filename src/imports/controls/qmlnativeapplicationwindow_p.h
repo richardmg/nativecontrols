@@ -37,22 +37,24 @@
 #ifndef QNATIVEAPPLICATIONWINDOW_H
 #define QNATIVEAPPLICATIONWINDOW_H
 
-#include "qnativecontrol.h"
+#include <QtCore/qobject.h>
+#include <QtQml/qqmlengine.h>
+
+#include "qmlnativecontrol_p.h"
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativeApplicationWindow : public QNativeControl
+class QmlNativeApplicationWindow : public QmlNativeControl
 {
     Q_OBJECT
 
 public:
-    explicit QNativeApplicationWindow(QObject *parent = nullptr);
-    virtual ~QNativeApplicationWindow();
-
-    bool visible() const;
-    void setVisible(bool visible);
+    explicit QmlNativeApplicationWindow(QObject *parent = nullptr);
+    virtual ~QmlNativeApplicationWindow() {}
 };
 
 QT_END_NAMESPACE
+
+QML_DECLARE_TYPE(QmlNativeApplicationWindow)
 
 #endif // QNATIVEAPPLICATIONWINDOW_H

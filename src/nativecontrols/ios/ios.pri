@@ -1,4 +1,4 @@
-INCLUDEPATH += $$PWD
+LIBS += -framework UIKit
 
-#SOURCES += \
-#    $$PWD/qnativewindow.mm
+OBJECTIVE_SOURCES += \
+    $$PWD/qnativeapplicationwindow.mm

@@ -38,6 +38,7 @@
 #include <QQmlEngine>
 
 #include "qmlnativecontrol_p.h"
+#include "qmlnativeapplicationwindow_p.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -54,7 +55,8 @@ QtNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
 
 void registerTypes(const char *uri) override
 {
-    qmlRegisterType<QmlNativeControl>(uri, 1, 0, "NativeControl");
+    qmlRegisterType<QmlNativeControl>(uri, 1, 0, "Control");
+    qmlRegisterType<QmlNativeApplicationWindow>(uri, 1, 0, "ApplicationWindow");
 }
 
 void initializeEngine(QQmlEngine *engine, const char *uri) override

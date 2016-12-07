@@ -37,6 +37,8 @@
 #ifndef QNATIVECONTROL_H
 #define QNATIVECONTROL_H
 
+#include <QtCore/qobject.h>
+#include <QtQml/qqmlengine.h>
 #include <QtQml/qqmlparserstatus.h>
 
 QT_BEGIN_NAMESPACE
@@ -56,5 +58,7 @@ public:
 };
 
 QT_END_NAMESPACE
+
+QML_DECLARE_TYPE(QmlNativeControl)
 
 #endif // QNATIVECONTROL_H

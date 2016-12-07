@@ -10,11 +10,13 @@ CONFIG += no_cxx_module
 DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 
 HEADERS += \
-    qmlnativecontrol_p.h
+    qmlnativecontrol_p.h \
+    qmlnativeapplicationwindow_p.h
 
 SOURCES += \
     qtnativecontrolsplugin.cpp \
-    qmlnativecontrol.cpp
+    qmlnativecontrol.cpp \
+    qmlnativeapplicationwindow.cpp
 
 OTHER_FILES += \
     qmldir
