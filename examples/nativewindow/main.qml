@@ -5,7 +5,11 @@ ApplicationWindow {
 //    width: 480
 //    height: 640
 //    visible: true
-    Component.onCompleted: print("Hurray")
+
+    Control {
+        Component.onCompleted: print("Hurray")
+
+    }
 
 //	+ios {
 //

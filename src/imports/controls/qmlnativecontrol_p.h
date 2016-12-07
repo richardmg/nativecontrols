@@ -39,6 +39,7 @@
 
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlengine.h>
+#include <QtQml/qqmllist.h>
 #include <QtQml/qqmlparserstatus.h>
 
 QT_BEGIN_NAMESPACE
@@ -46,15 +47,22 @@ QT_BEGIN_NAMESPACE
 class QmlNativeControl : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
+    Q_PROPERTY(QQmlListProperty<QObject> children READ children)
+
+    Q_CLASSINFO("DefaultProperty", "children")
     Q_INTERFACES(QQmlParserStatus)
 
 public:
-
     explicit QmlNativeControl(QObject *parent = nullptr);
     virtual ~QmlNativeControl() {};
 
     virtual void classBegin() override {};
     virtual void componentComplete() override {};
+
+    QQmlListProperty<QObject> children();
+
+private:
+    QList<QObject *> m_children;
 };
 
 QT_END_NAMESPACE

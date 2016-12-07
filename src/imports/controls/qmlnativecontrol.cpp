@@ -43,6 +43,11 @@ QmlNativeControl::QmlNativeControl(QObject *parent)
 {
 }
 
+QQmlListProperty<QObject> QmlNativeControl::children()
+{
+    return QQmlListProperty<QObject>(this, m_children);
+}
+
 #include "moc_qmlnativecontrol_p.cpp"
 
 QT_END_NAMESPACE
