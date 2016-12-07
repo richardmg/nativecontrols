@@ -39,9 +39,11 @@
 
 #include <QtQml/qqmlparserstatus.h>
 
+#include "qnativecontrolsglobal_p.h"
+
 QT_BEGIN_NAMESPACE
 
-class QNativeControl : public QObject, public QQmlParserStatus
+class Q_NATIVECONTROLS_EXPORT QNativeControl : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)

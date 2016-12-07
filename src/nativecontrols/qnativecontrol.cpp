@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativecontrol_p.h"
+#include "qnativecontrol.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -43,6 +43,6 @@ QNativeControl::QNativeControl(QObject *parent)
 {
 }
 
-#include "moc_qnativecontrol_p.cpp"
+#include "moc_qnativecontrol.cpp"
 
 QT_END_NAMESPACE
