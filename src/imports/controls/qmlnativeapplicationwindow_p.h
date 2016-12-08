@@ -34,11 +34,12 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPLICATIONWINDOW_H
-#define QNATIVEAPPLICATIONWINDOW_H
+#ifndef QMLNATIVEAPPLICATIONWINDOW_H
+#define QMLNATIVEAPPLICATIONWINDOW_H
 
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlengine.h>
+#include <QtNativeControls/qnativeapplicationwindow.h>
 
 #include "qmlnativecontrol_p.h"
 
@@ -60,11 +61,11 @@ signals:
     void visibleChanged(bool visible);
 
 private:
-    bool m_visible;
+    QNativeApplicationWindow *m_window;
 };
 
 QT_END_NAMESPACE
 
 QML_DECLARE_TYPE(QmlNativeApplicationWindow)
 
-#endif // QNATIVEAPPLICATIONWINDOW_H
+#endif // QMLNATIVEAPPLICATIONWINDOW_H

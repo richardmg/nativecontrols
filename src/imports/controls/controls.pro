@@ -1,8 +1,8 @@
-TARGET = qtnativecontrols
+TARGET = qmlnativecontrols
 TARGETPATH = Qt/NativeControls
 IMPORT_VERSION = 1.0
 
-QT += qml quick
+QT += qml nativecontrols
 QT_PRIVATE += core-private gui-private qml-private quick-private 
 
 CONFIG += no_cxx_module

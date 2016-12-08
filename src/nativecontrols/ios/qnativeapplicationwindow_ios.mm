@@ -42,12 +42,16 @@
 
 QT_BEGIN_NAMESPACE
 
-#define windowHandle static_cast<QWindow *>(m_handle);
-
 QNativeApplicationWindow::QNativeApplicationWindow(QObject *parent)
-    : QNativeControl(parent)
+    : QNativeControl(*new QNativeApplicationWindowPrivate(), parent)
 {
     d_func()->m_window = new QWindow();
+    d_func()->m_window->setWindowState(Qt::WindowFullScreen);
+}
+
+QNativeApplicationWindow::QNativeApplicationWindow(QNativeApplicationWindowPrivate &dd, QObject *parent)
+    : QNativeControl(dd, parent)
+{
 }
 
 QNativeApplicationWindow::~QNativeApplicationWindow()

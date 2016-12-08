@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVECONTROL_H
-#define QNATIVECONTROL_H
+#ifndef QMLNATIVECONTROL_H
+#define QMLNATIVECONTROL_H
 
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlengine.h>
@@ -69,4 +69,4 @@ QT_END_NAMESPACE
 
 QML_DECLARE_TYPE(QmlNativeControl)
 
-#endif // QNATIVECONTROL_H
+#endif // QMLNATIVECONTROL_H

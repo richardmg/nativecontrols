@@ -46,6 +46,11 @@ QNativeControl::QNativeControl(QObject *parent)
 {
 }
 
+QNativeControl::QNativeControl(QNativeControlPrivate &dd, QObject *parent)
+    : QObject(dd, parent)
+{
+}
+
 QNativeControl::~QNativeControl()
 {
 }
