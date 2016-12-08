@@ -34,45 +34,17 @@
 **
 ****************************************************************************/
 
-#include <UIKit/UIKit.h>
-
-#include "qnativepushbutton.h"
-#include "qnativepushbutton_ios_p.h"
+#include "qmlnativebutton_p.h"
 
 QT_BEGIN_NAMESPACE
 
-QNativePushButtonPrivate::QNativePushButtonPrivate(int version)
-    : QNativeControlPrivate(version)
-{}
-
-QNativePushButton::QNativePushButton(QObject *parent)
-    : QNativeControl(*new QNativePushButtonPrivate(), parent)
+QmlNativeButton::QmlNativeButton(QObject *parent)
+    : QmlNativeControl(parent)
+    , m_button(new QNativeButton(parent))
 {
-    UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 20, 100, 50)];
-    [uiButton setTitle:@"Click me" forState:UIControlStateNormal];
-    d_func()->setView(uiButton);
+    setNativeControl(m_button);
 }
 
-QNativePushButton::QNativePushButton(QNativePushButtonPrivate &dd, QObject *parent)
-    : QNativeControl(dd, parent)
-{
-}
-
-QNativePushButton::~QNativePushButton()
-{
-    d_func()->setView(nullptr);
-}
-
-bool QNativePushButton::isVisible() const
-{
-    return QNativeControl::isVisible();
-}
-
-void QNativePushButton::setVisible(bool visible)
-{
-    QNativeControl::setVisible(visible);
-}
-
-#include "moc_qnativepushbutton.cpp"
+#include "moc_qmlnativebutton_p.cpp"
 
 QT_END_NAMESPACE

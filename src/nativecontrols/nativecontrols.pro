@@ -10,7 +10,7 @@ HEADERS += \
     $$PWD/qnativecontrolsglobal.h \
     $$PWD/qnativecontrol.h \
     $$PWD/qnativeapplicationwindow.h \
-    $$PWD/qnativepushbutton.h
+    $$PWD/qnativebutton.h
 
 ios: include(ios/ios.pri)
 android: include(android/android.pri)

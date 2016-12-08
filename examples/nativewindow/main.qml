@@ -15,6 +15,10 @@ ApplicationWindow {
         }
     }
 
+    Button {
+
+    }
+
     Component.onCompleted: print("Application window completed")
 
 //	+ios {

@@ -42,27 +42,39 @@
 #include <QtQml/qqmllist.h>
 #include <QtQml/qqmlparserstatus.h>
 
+#include <QtNativeControls/qnativecontrol.h>
+
 QT_BEGIN_NAMESPACE
 
 class QmlNativeControl : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<QObject> children READ children)
+    Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 
+    Q_PROPERTY(QQmlListProperty<QObject> children READ children)
     Q_CLASSINFO("DefaultProperty", "children")
     Q_INTERFACES(QQmlParserStatus)
 
 public:
     explicit QmlNativeControl(QObject *parent = nullptr);
-    virtual ~QmlNativeControl() {};
+    virtual ~QmlNativeControl() {}
+    virtual void classBegin() override {}
+    virtual void componentComplete() override {}
 
-    virtual void classBegin() override {};
-    virtual void componentComplete() override {};
+    bool visible() const;
+    void setVisible(bool visible);
 
     QQmlListProperty<QObject> children();
 
+signals:
+    void visibleChanged(bool visible);
+
+protected:
+    void setNativeControl(QNativeControl *control);
+
 private:
     QList<QObject *> m_children;
+    QNativeControl *m_nativeControl;
 };
 
 QT_END_NAMESPACE

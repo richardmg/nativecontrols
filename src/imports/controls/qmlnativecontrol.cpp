@@ -43,9 +43,28 @@ QmlNativeControl::QmlNativeControl(QObject *parent)
 {
 }
 
+bool QmlNativeControl::visible() const
+{
+    return m_nativeControl->isVisible();
+}
+
+void QmlNativeControl::setVisible(bool visible)
+{
+    if (m_nativeControl->isVisible() == visible)
+        return;
+
+    m_nativeControl->setVisible(visible);
+    emit visibleChanged(visible);
+}
+
 QQmlListProperty<QObject> QmlNativeControl::children()
 {
     return QQmlListProperty<QObject>(this, m_children);
+}
+
+void QmlNativeControl::setNativeControl(QNativeControl *control)
+{
+    m_nativeControl = control;
 }
 
 #include "moc_qmlnativecontrol_p.cpp"

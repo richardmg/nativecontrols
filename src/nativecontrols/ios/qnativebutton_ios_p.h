@@ -9,14 +9,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativePushButton;
+class QNativeButton;
 
-class QNativePushButtonPrivate : public QNativeControlPrivate
+class QNativeButtonPrivate : public QNativeControlPrivate
 {
-    Q_DECLARE_PUBLIC(QNativePushButton)
+    Q_DECLARE_PUBLIC(QNativeButton)
 
 public:
-    explicit QNativePushButtonPrivate(int version = QObjectPrivateVersion);
+    explicit QNativeButtonPrivate(int version = QObjectPrivateVersion);
 };
 
 QT_END_NAMESPACE

@@ -39,6 +39,7 @@
 
 #include "qmlnativecontrol_p.h"
 #include "qmlnativeapplicationwindow_p.h"
+#include "qmlnativebutton_p.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -57,10 +58,13 @@ void registerTypes(const char *uri) override
 {
     qmlRegisterType<QmlNativeControl>(uri, 1, 0, "Control");
     qmlRegisterType<QmlNativeApplicationWindow>(uri, 1, 0, "ApplicationWindow");
+    qmlRegisterType<QmlNativeButton>(uri, 1, 0, "Button");
 }
 
 void initializeEngine(QQmlEngine *engine, const char *uri) override
 {
+    Q_UNUSED(engine);
+    Q_UNUSED(uri);
 }
 
 };

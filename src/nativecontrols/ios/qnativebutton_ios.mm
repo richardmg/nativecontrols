@@ -34,17 +34,48 @@
 **
 ****************************************************************************/
 
-#include "qmlnativeapplicationwindow_p.h"
+#include <UIKit/UIKit.h>
+
+#include "qnativebutton.h"
+#include "qnativebutton_ios_p.h"
 
 QT_BEGIN_NAMESPACE
 
-QmlNativeApplicationWindow::QmlNativeApplicationWindow(QObject *parent)
-    : QmlNativeControl(parent)
-    , m_window(new QNativeApplicationWindow(parent))
+QNativeButtonPrivate::QNativeButtonPrivate(int version)
+    : QNativeControlPrivate(version)
+{}
+
+QNativeButton::QNativeButton(QObject *parent)
+    : QNativeControl(*new QNativeButtonPrivate(), parent)
 {
-    setNativeControl(m_window);
+    UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 20, 100, 50)];
+    [uiButton setTitle:@"Click me" forState:UIControlStateNormal];
+    d_func()->setView(uiButton);
+
+    x
+    UIView *parentView = this->parent();
 }
 
-#include "moc_qmlnativeapplicationwindow_p.cpp"
+QNativeButton::QNativeButton(QNativeButtonPrivate &dd, QObject *parent)
+    : QNativeControl(dd, parent)
+{
+}
+
+QNativeButton::~QNativeButton()
+{
+    d_func()->setView(nullptr);
+}
+
+bool QNativeButton::isVisible() const
+{
+    return QNativeControl::isVisible();
+}
+
+void QNativeButton::setVisible(bool visible)
+{
+    QNativeControl::setVisible(visible);
+}
+
+#include "moc_qnativebutton.cpp"
 
 QT_END_NAMESPACE
