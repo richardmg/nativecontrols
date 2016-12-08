@@ -43,14 +43,24 @@ QT_BEGIN_NAMESPACE
 
 class QNativeControl;
 
+Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
+Q_FORWARD_DECLARE_OBJC_CLASS(UIControl);
+
 class QNativeControlPrivate : public QObjectPrivate
 {
     Q_DECLARE_PUBLIC(QNativeControl)
 
 public:
-    explicit QNativeControlPrivate(int version = QObjectPrivateVersion)
-        : QObjectPrivate(version)
-    {}
+    explicit QNativeControlPrivate(int version = QObjectPrivateVersion);
+
+    void setView(UIView *view);
+    UIView *view();
+    UIView *view() const;
+    UIControl *control();
+    UIControl *control() const;
+
+private:
+    UIView *m_uiView;
 };
 
 QT_END_NAMESPACE

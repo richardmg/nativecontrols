@@ -41,9 +41,16 @@
 
 QT_BEGIN_NAMESPACE
 
+QNativePushButtonPrivate::QNativePushButtonPrivate(int version)
+    : QNativeControlPrivate(version)
+{}
+
 QNativePushButton::QNativePushButton(QObject *parent)
     : QNativeControl(*new QNativePushButtonPrivate(), parent)
 {
+    UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 20, 100, 50)];
+    [uiButton setTitle:@"Click me" forState:UIControlStateNormal];
+    d_func()->setView(uiButton);
 }
 
 QNativePushButton::QNativePushButton(QNativePushButtonPrivate &dd, QObject *parent)
@@ -53,20 +60,19 @@ QNativePushButton::QNativePushButton(QNativePushButtonPrivate &dd, QObject *pare
 
 QNativePushButton::~QNativePushButton()
 {
-//    delete d_func()->m_window;
+    d_func()->setView(nullptr);
 }
 
 bool QNativePushButton::isVisible() const
 {
-    return false;
-//    return d_func()->m_window->isVisible();
+    return QNativeControl::isVisible();
 }
 
 void QNativePushButton::setVisible(bool visible)
 {
-//    d_func()->m_window->setVisible(visible);
+    QNativeControl::setVisible(visible);
 }
 
-#include "moc_qnativeapplicationwindow.cpp"
+#include "moc_qnativepushbutton.cpp"
 
 QT_END_NAMESPACE

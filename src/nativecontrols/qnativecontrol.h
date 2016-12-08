@@ -53,8 +53,8 @@ public:
     explicit QNativeControl(QObject *parent = nullptr);
     virtual ~QNativeControl();
 
-    virtual bool isVisible() const = 0;
-    virtual void setVisible(bool visible) = 0;
+    virtual bool isVisible() const;
+    virtual void setVisible(bool visible);
 
 protected:
     QNativeControl(QNativeControlPrivate &dd, QObject *parent = nullptr);

@@ -34,12 +34,46 @@
 **
 ****************************************************************************/
 
+#import <UIKit/UIKit.h>
+
 #include <QtCore/private/qobject_p.h>
 
 #include "qnativecontrol.h"
 #include "qnativecontrol_ios_p.h"
 
 QT_BEGIN_NAMESPACE
+
+QNativeControlPrivate::QNativeControlPrivate(int version)
+    : QObjectPrivate(version)
+    , m_uiView(nullptr)
+{
+}
+
+void QNativeControlPrivate::setView(UIView *view)
+{
+    [m_uiView release];
+    m_uiView = [view retain];
+}
+
+UIView *QNativeControlPrivate::view()
+{
+    return m_uiView;
+}
+
+UIView *QNativeControlPrivate::view() const
+{
+    return m_uiView;
+}
+
+UIControl *QNativeControlPrivate::control()
+{
+    return static_cast<UIControl *>(m_uiView);
+}
+
+UIControl *QNativeControlPrivate::control() const
+{
+    return static_cast<UIControl *>(m_uiView);
+}
 
 QNativeControl::QNativeControl(QObject *parent)
     : QObject(*new QNativeControlPrivate, parent)
@@ -53,6 +87,16 @@ QNativeControl::QNativeControl(QNativeControlPrivate &dd, QObject *parent)
 
 QNativeControl::~QNativeControl()
 {
+}
+
+bool QNativeControl::isVisible() const
+{
+    return !d_func()->control().hidden;
+}
+
+void QNativeControl::setVisible(bool visible)
+{
+    d_func()->control().hidden = !visible;
 }
 
 #include "moc_qnativecontrol.cpp"

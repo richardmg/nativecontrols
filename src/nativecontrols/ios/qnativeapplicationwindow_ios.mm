@@ -41,11 +41,22 @@
 
 QT_BEGIN_NAMESPACE
 
+QNativeApplicationWindowPrivate::QNativeApplicationWindowPrivate(int version)
+    : QNativeControlPrivate(version)
+{}
+
 QNativeApplicationWindow::QNativeApplicationWindow(QObject *parent)
     : QNativeControl(*new QNativeApplicationWindowPrivate(), parent)
 {
-    d_func()->m_window = new QWindow();
-    d_func()->m_window->setWindowState(Qt::WindowFullScreen);
+    // Note: using QWindow insteadof UIWindow directly means that it will be
+    // registered in QtGuiApplication (e.g QtGuiApplication::topLevelWindows()).
+    // Not sure if this is wanted or not, expecially if this needs to be
+    // cross platform behaviour.
+    QWindow *window = new QWindow();
+    window->setWindowState(Qt::WindowFullScreen);
+
+    d_func()->m_window = window;
+    d_func()->setView(reinterpret_cast<UIView *>(window->winId()));
 }
 
 QNativeApplicationWindow::QNativeApplicationWindow(QNativeApplicationWindowPrivate &dd, QObject *parent)
@@ -55,17 +66,18 @@ QNativeApplicationWindow::QNativeApplicationWindow(QNativeApplicationWindowPriva
 
 QNativeApplicationWindow::~QNativeApplicationWindow()
 {
+    d_func()->setView(nullptr);
     delete d_func()->m_window;
 }
 
 bool QNativeApplicationWindow::isVisible() const
 {
-    return d_func()->m_window->isVisible();
+    return QNativeControl::isVisible();
 }
 
 void QNativeApplicationWindow::setVisible(bool visible)
 {
-    d_func()->m_window->setVisible(visible);
+    QNativeControl::setVisible(visible);
 }
 
 #include "moc_qnativeapplicationwindow.cpp"

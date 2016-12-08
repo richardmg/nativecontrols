@@ -16,9 +16,7 @@ class QNativePushButtonPrivate : public QNativeControlPrivate
     Q_DECLARE_PUBLIC(QNativePushButton)
 
 public:
-    explicit QNativePushButtonPrivate(int version = QObjectPrivateVersion)
-        : QNativeControlPrivate(version)
-    {}
+    explicit QNativePushButtonPrivate(int version = QObjectPrivateVersion);
 };
 
 QT_END_NAMESPACE

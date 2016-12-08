@@ -52,9 +52,7 @@ class QNativeApplicationWindowPrivate : public QNativeControlPrivate
     Q_DECLARE_PUBLIC(QNativeApplicationWindow)
 
 public:
-    explicit QNativeApplicationWindowPrivate(int version = QObjectPrivateVersion)
-        : QNativeControlPrivate(version)
-    {}
+    explicit QNativeApplicationWindowPrivate(int version = QObjectPrivateVersion);
 
     QWindow *m_window;
 };
