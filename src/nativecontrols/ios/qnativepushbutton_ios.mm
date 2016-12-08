@@ -36,36 +36,35 @@
 
 #include <UIKit/UIKit.h>
 
-#include "qnativeapplicationwindow.h"
-#include "qnativeapplicationwindow_ios_p.h"
+#include "qnativepushbutton.h"
+#include "qnativepushbutton_ios_p.h"
 
 QT_BEGIN_NAMESPACE
 
-QNativeApplicationWindow::QNativeApplicationWindow(QObject *parent)
-    : QNativeControl(*new QNativeApplicationWindowPrivate(), parent)
+QNativePushButton::QNativePushButton(QObject *parent)
+    : QNativeControl(*new QNativePushButtonPrivate(), parent)
 {
-    d_func()->m_window = new QWindow();
-    d_func()->m_window->setWindowState(Qt::WindowFullScreen);
 }
 
-QNativeApplicationWindow::QNativeApplicationWindow(QNativeApplicationWindowPrivate &dd, QObject *parent)
+QNativePushButton::QNativePushButton(QNativePushButtonPrivate &dd, QObject *parent)
     : QNativeControl(dd, parent)
 {
 }
 
-QNativeApplicationWindow::~QNativeApplicationWindow()
+QNativePushButton::~QNativePushButton()
 {
-    delete d_func()->m_window;
+//    delete d_func()->m_window;
 }
 
-bool QNativeApplicationWindow::isVisible() const
+bool QNativePushButton::isVisible() const
 {
-    return d_func()->m_window->isVisible();
+    return false;
+//    return d_func()->m_window->isVisible();
 }
 
-void QNativeApplicationWindow::setVisible(bool visible)
+void QNativePushButton::setVisible(bool visible)
 {
-    d_func()->m_window->setVisible(visible);
+//    d_func()->m_window->setVisible(visible);
 }
 
 #include "moc_qnativeapplicationwindow.cpp"

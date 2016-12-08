@@ -9,7 +9,8 @@ DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 HEADERS += \
     $$PWD/qnativecontrolsglobal.h \
     $$PWD/qnativecontrol.h \
-    $$PWD/qnativeapplicationwindow.h
+    $$PWD/qnativeapplicationwindow.h \
+    $$PWD/qnativepushbutton.h
 
 ios: include(ios/ios.pri)
 android: include(android/android.pri)

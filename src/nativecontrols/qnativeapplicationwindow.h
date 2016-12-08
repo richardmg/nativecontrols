@@ -51,8 +51,8 @@ public:
     explicit QNativeApplicationWindow(QObject *parent = nullptr);
     virtual ~QNativeApplicationWindow();
 
-    bool isVisible() const;
-    void setVisible(bool visible);
+    virtual bool isVisible() const override;
+    virtual void setVisible(bool visible) override;
 
 protected:
     QNativeApplicationWindow(QNativeApplicationWindowPrivate &dd, QObject *parent = nullptr);
