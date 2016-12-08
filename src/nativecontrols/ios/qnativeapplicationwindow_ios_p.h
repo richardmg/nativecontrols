@@ -34,33 +34,31 @@
 **
 ****************************************************************************/
 
-#ifndef QIOSNATIVECONTROL_H
-#define QIOSNATIVECONTROL_H
+#ifndef QIOSNATIVEAPPLICATIONWINDOW_PRIVATE_H
+#define QIOSNATIVEAPPLICATIONWINDOW_PRIVATE_H
 
-#include <QtCore/qobject.h>
+#include <QtCore/private/qobject_p.h>
 
-#include "qnativecontrolsglobal.h"
+#include <QtGui/QWindow>
+
+#include "qnativecontrol_ios_p.h"
 
 QT_BEGIN_NAMESPACE
 
-class QNativeControlPrivate;
+class QNativeApplicationWindow;
 
-class Q_NATIVECONTROLS_EXPORT QNativeControl : public QObject
+class QNativeApplicationWindowPrivate : public QNativeControlPrivate
 {
-    Q_OBJECT
+    Q_DECLARE_PUBLIC(QNativeApplicationWindow)
 
 public:
-    explicit QNativeControl(QObject *parent = nullptr);
-    virtual ~QNativeControl();
+    explicit QNativeApplicationWindowPrivate(int version = QObjectPrivateVersion)
+        : QNativeControlPrivate(version)
+    {}
 
-protected:
-    QNativeControl(QNativeControlPrivate &dd, QObject *parent = nullptr);
-
-private:
-    Q_DECLARE_PRIVATE(QNativeControl)
-    Q_DISABLE_COPY(QNativeControl)
+    QWindow *m_window;
 };
 
 QT_END_NAMESPACE
 
-#endif // QIOSNATIVECONTROL_H
+#endif //QIOSNATIVEAPPLICATIONWINDOW_PRIVATE_H

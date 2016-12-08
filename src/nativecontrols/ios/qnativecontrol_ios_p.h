@@ -34,22 +34,25 @@
 **
 ****************************************************************************/
 
-#include <UIKit/UIKit.h>
+#ifndef QIOSNATIVECONTROL_PRIVATE_H
+#define QIOSNATIVECONTROL_PRIVATE_H
 
-#include "qnativeapplicationwindow.h"
+#include <QtCore/private/qobject_p.h>
 
 QT_BEGIN_NAMESPACE
 
-QNativeApplicationWindow::QNativeApplicationWindow(QObject *parent)
-    : QNativeControl(parent)
-{
-    qDebug() << Q_FUNC_INFO;
-}
+class QNativeControl;
 
-QNativeApplicationWindow::~QNativeApplicationWindow()
+class QNativeControlPrivate : public QObjectPrivate
 {
-}
+    Q_DECLARE_PUBLIC(QNativeControl)
 
-#include "moc_qnativeapplicationwindow.cpp"
+public:
+    explicit QNativeControlPrivate(int version = QObjectPrivateVersion)
+        : QObjectPrivate(version)
+    {}
+};
 
 QT_END_NAMESPACE
+
+#endif //QIOSNATIVECONTROL_PRIVATE_H

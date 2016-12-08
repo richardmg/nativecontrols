@@ -34,12 +34,15 @@
 **
 ****************************************************************************/
 
+#include <QtCore/private/qobject_p.h>
+
 #include "qnativecontrol.h"
+#include "qnativecontrol_ios_p.h"
 
 QT_BEGIN_NAMESPACE
 
 QNativeControl::QNativeControl(QObject *parent)
-    : QObject(parent)
+    : QObject(*new QNativeControlPrivate, parent)
 {
 }
 

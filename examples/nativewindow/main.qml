@@ -4,12 +4,18 @@ import Qt.NativeControls 1.0
 ApplicationWindow {
 //    width: 480
 //    height: 640
-//    visible: true
+    visible: true
 
     Control {
-        Component.onCompleted: print("Hurray")
+        Component.onCompleted: print("Outer control completed")
 
+        Control {
+            Component.onCompleted: print("Inner control completed")
+
+        }
     }
+
+    Component.onCompleted: print("Application window completed")
 
 //	+ios {
 //

@@ -11,9 +11,6 @@ HEADERS += \
     $$PWD/qnativecontrol.h \
     $$PWD/qnativeapplicationwindow.h
 
-SOURCES += \
-    $$PWD/qnativecontrol.cpp
-
 ios: include(ios/ios.pri)
 android: include(android/android.pri)
 

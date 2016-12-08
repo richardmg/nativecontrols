@@ -41,6 +41,8 @@
 
 QT_BEGIN_NAMESPACE
 
+class QNativeApplicationWindowPrivate;
+
 class Q_NATIVECONTROLS_EXPORT QNativeApplicationWindow : public QNativeControl
 {
     Q_OBJECT
@@ -49,8 +51,15 @@ public:
     explicit QNativeApplicationWindow(QObject *parent = nullptr);
     virtual ~QNativeApplicationWindow();
 
-    bool visible() const;
+    bool isVisible() const;
     void setVisible(bool visible);
+
+protected:
+    QNativeApplicationWindow(QNativeApplicationWindowPrivate &dd, QObject *parent = nullptr);
+
+private:
+    Q_DECLARE_PRIVATE(QNativeApplicationWindow)
+    Q_DISABLE_COPY(QNativeApplicationWindow)
 };
 
 QT_END_NAMESPACE

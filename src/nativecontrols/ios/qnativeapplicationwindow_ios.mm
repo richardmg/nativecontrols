@@ -34,33 +34,37 @@
 **
 ****************************************************************************/
 
-#ifndef QIOSNATIVECONTROL_H
-#define QIOSNATIVECONTROL_H
+#include <UIKit/UIKit.h>
 
-#include <QtCore/qobject.h>
+#include "qnativeapplicationwindow.h"
 
-#include "qnativecontrolsglobal.h"
+#include "qnativeapplicationwindow_ios_p.h"
 
 QT_BEGIN_NAMESPACE
 
-class QNativeControlPrivate;
+#define windowHandle static_cast<QWindow *>(m_handle);
 
-class Q_NATIVECONTROLS_EXPORT QNativeControl : public QObject
+QNativeApplicationWindow::QNativeApplicationWindow(QObject *parent)
+    : QNativeControl(parent)
 {
-    Q_OBJECT
+    d_func()->m_window = new QWindow();
+}
 
-public:
-    explicit QNativeControl(QObject *parent = nullptr);
-    virtual ~QNativeControl();
+QNativeApplicationWindow::~QNativeApplicationWindow()
+{
+    delete d_func()->m_window;
+}
 
-protected:
-    QNativeControl(QNativeControlPrivate &dd, QObject *parent = nullptr);
+bool QNativeApplicationWindow::isVisible() const
+{
+    return d_func()->m_window->isVisible();
+}
 
-private:
-    Q_DECLARE_PRIVATE(QNativeControl)
-    Q_DISABLE_COPY(QNativeControl)
-};
+void QNativeApplicationWindow::setVisible(bool visible)
+{
+    d_func()->m_window->setVisible(visible);
+}
+
+#include "moc_qnativeapplicationwindow.cpp"
 
 QT_END_NAMESPACE
-
-#endif // QIOSNATIVECONTROL_H
