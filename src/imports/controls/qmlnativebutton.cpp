@@ -40,7 +40,7 @@ QT_BEGIN_NAMESPACE
 
 QmlNativeButton::QmlNativeButton(QmlNativeControl *parent)
     : QmlNativeControl(parent)
-    , m_button(new QNativeButton(parent))
+    , m_button(new QNativeButton(parent ? parent->nativeControl() : nullptr))
 {
     setNativeControl(m_button);
 }

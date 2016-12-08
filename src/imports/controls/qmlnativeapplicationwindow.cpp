@@ -40,7 +40,7 @@ QT_BEGIN_NAMESPACE
 
 QmlNativeApplicationWindow::QmlNativeApplicationWindow(QmlNativeControl *parent)
     : QmlNativeControl(parent)
-    , m_window(new QNativeApplicationWindow(parent))
+    , m_window(new QNativeApplicationWindow(nullptr))
 {
     setNativeControl(m_window);
 }

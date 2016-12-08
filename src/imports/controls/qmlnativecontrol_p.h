@@ -64,13 +64,13 @@ public:
     bool visible() const;
     void setVisible(bool visible);
 
+    void setNativeControl(QNativeControl *control);
+    QNativeControl *nativeControl();
+
     QQmlListProperty<QmlNativeControl> children();
 
 signals:
     void visibleChanged(bool visible);
-
-protected:
-    void setNativeControl(QNativeControl *control);
 
 private:
     QList<QmlNativeControl *> m_children;

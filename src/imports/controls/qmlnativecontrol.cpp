@@ -67,6 +67,11 @@ void QmlNativeControl::setNativeControl(QNativeControl *control)
     m_nativeControl = control;
 }
 
+QNativeControl *QmlNativeControl::nativeControl()
+{
+    return m_nativeControl;
+}
+
 #include "moc_qmlnativecontrol_p.cpp"
 
 QT_END_NAMESPACE
