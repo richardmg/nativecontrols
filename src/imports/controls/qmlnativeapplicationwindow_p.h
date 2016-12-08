@@ -47,10 +47,20 @@ QT_BEGIN_NAMESPACE
 class QmlNativeApplicationWindow : public QmlNativeControl
 {
     Q_OBJECT
+    Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 
 public:
     explicit QmlNativeApplicationWindow(QObject *parent = nullptr);
     virtual ~QmlNativeApplicationWindow() {}
+
+    bool visible() const;
+    void setVisible(bool visible);
+
+signals:
+    void visibleChanged(bool visible);
+
+private:
+    bool m_visible;
 };
 
 QT_END_NAMESPACE

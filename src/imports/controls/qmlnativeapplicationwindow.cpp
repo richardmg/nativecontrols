@@ -43,6 +43,20 @@ QmlNativeApplicationWindow::QmlNativeApplicationWindow(QObject *parent)
 {
 }
 
+bool QmlNativeApplicationWindow::visible() const
+{
+    return m_visible;
+}
+
+void QmlNativeApplicationWindow::setVisible(bool visible)
+{
+    if (m_visible == visible)
+        return;
+
+    m_visible = visible;
+    emit visibleChanged(visible);
+}
+
 #include "moc_qmlnativeapplicationwindow_p.cpp"
 
 QT_END_NAMESPACE
