@@ -50,7 +50,7 @@ class QmlNativeApplicationWindow : public QmlNativeControl
     Q_OBJECT
 
 public:
-    explicit QmlNativeApplicationWindow(QObject *parent = nullptr);
+    explicit QmlNativeApplicationWindow(QmlNativeControl *parent = nullptr);
     virtual ~QmlNativeApplicationWindow() {}
 
 private:

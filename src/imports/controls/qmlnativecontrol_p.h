@@ -51,12 +51,12 @@ class QmlNativeControl : public QObject, public QQmlParserStatus
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 
-    Q_PROPERTY(QQmlListProperty<QObject> children READ children)
+    Q_PROPERTY(QQmlListProperty<QmlNativeControl> children READ children)
     Q_CLASSINFO("DefaultProperty", "children")
     Q_INTERFACES(QQmlParserStatus)
 
 public:
-    explicit QmlNativeControl(QObject *parent = nullptr);
+    explicit QmlNativeControl(QmlNativeControl *parent = nullptr);
     virtual ~QmlNativeControl() {}
     virtual void classBegin() override {}
     virtual void componentComplete() override {}
@@ -64,7 +64,7 @@ public:
     bool visible() const;
     void setVisible(bool visible);
 
-    QQmlListProperty<QObject> children();
+    QQmlListProperty<QmlNativeControl> children();
 
 signals:
     void visibleChanged(bool visible);
@@ -73,7 +73,7 @@ protected:
     void setNativeControl(QNativeControl *control);
 
 private:
-    QList<QObject *> m_children;
+    QList<QmlNativeControl *> m_children;
     QNativeControl *m_nativeControl;
 };
 

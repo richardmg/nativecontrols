@@ -14,7 +14,7 @@ class QmlNativeButton : public QmlNativeControl
     Q_OBJECT
 
 public:
-    explicit QmlNativeButton(QObject *parent = nullptr);
+    explicit QmlNativeButton(QmlNativeControl *parent = nullptr);
     virtual ~QmlNativeButton() {}
 
 private:

@@ -38,7 +38,7 @@
 
 QT_BEGIN_NAMESPACE
 
-QmlNativeControl::QmlNativeControl(QObject *parent)
+QmlNativeControl::QmlNativeControl(QmlNativeControl *parent)
     : QObject(parent)
 {
 }
@@ -57,9 +57,9 @@ void QmlNativeControl::setVisible(bool visible)
     emit visibleChanged(visible);
 }
 
-QQmlListProperty<QObject> QmlNativeControl::children()
+QQmlListProperty<QmlNativeControl> QmlNativeControl::children()
 {
-    return QQmlListProperty<QObject>(this, m_children);
+    return QQmlListProperty<QmlNativeControl>(this, m_children);
 }
 
 void QmlNativeControl::setNativeControl(QNativeControl *control)
