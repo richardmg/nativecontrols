@@ -1,5 +1,5 @@
 %modules = ( # path to module name map
-    "QtNativeAndroid" => "$basedir/src/android",
+    "QtNativeAndroid" => "$basedir/src/platforms/android",
 );
 %moduleheaders = ( # restrict the module headers to those found in relative path
 );

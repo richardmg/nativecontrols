@@ -13,6 +13,6 @@ features.path = $$[QT_HOST_DATA]/mkspecs/features
 INSTALLS += features
 
 include(android.pri)
-include(java/java.pri)
+include($$MODULE_PREFIX/src/android/java/java.pri)
 
 load(qt_module)

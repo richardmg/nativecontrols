@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    android \
-    imports
+    imports \
+    platforms
 
-imports.depends = android
+imports.depends = platforms
