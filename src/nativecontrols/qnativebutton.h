@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPUSHBUTTON_H
-#define QNATIVEPUSHBUTTON_H
+#ifndef QNATIVEBUTTON_H
+#define QNATIVEBUTTON_H
 
 #include <QtNativeControls/qnativecontrol.h>
 #include <QtNativeControls/qnativecontrolsglobal.h>
@@ -72,4 +72,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPUSHBUTTON_H
+#endif // QNATIVEBUTTON_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPLICATIONWINDOW_H
-#define QNATIVEAPPLICATIONWINDOW_H
+#ifndef QNATIVEWINDOW_H
+#define QNATIVEWINDOW_H
 
 #include <QtNativeControls/qnativebase.h>
 #include <QtNativeControls/qnativecontrolsglobal.h>
@@ -71,4 +71,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPLICATIONWINDOW_H
+#endif // QNATIVEWINDOW_H

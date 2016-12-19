@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QIOSNATIVECONTROL_H
-#define QIOSNATIVECONTROL_H
+#ifndef QNATIVECONTROL_H
+#define QNATIVECONTROL_H
 
 #include <QtCore/qobject.h>
 #include <QtGui/qwindow.h>
@@ -100,4 +100,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QIOSNATIVECONTROL_H
+#endif // QNATIVECONTROL_H

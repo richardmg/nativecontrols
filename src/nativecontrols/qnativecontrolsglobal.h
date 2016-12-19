@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVECONTROLSGLOBAL_P_H
-#define QNATIVECONTROLSGLOBAL_P_H
+#ifndef QNATIVECONTROLSGLOBAL_H
+#define QNATIVECONTROLSGLOBAL_H
 
 //
 //  W A R N I N G
@@ -64,4 +64,4 @@ QT_BEGIN_NAMESPACE
 
 QT_END_NAMESPACE
 
-#endif // QNATIVECONTROLSGLOBAL_P_H
+#endif // QNATIVECONTROLSGLOBAL_H
