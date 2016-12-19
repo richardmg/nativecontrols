@@ -1,3 +1,3 @@
-requires(qtHaveModule(qml))
-requires(qtHaveModule(androidextras))
+requires(qtHaveModule(quick))
+android: requires(qtHaveModule(androidextras))
 load(qt_parts)

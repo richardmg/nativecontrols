@@ -1,6 +1,10 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    imports \
-    platforms
+    nativecontrols \
+    platforms \
+    plugins \
+    imports
 
-imports.depends = platforms
+platforms.depends = nativecontrols
+plugins.depends = nativecontrols platforms
+imports.depends = nativecontrols platforms
