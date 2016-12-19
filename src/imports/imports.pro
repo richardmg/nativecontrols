@@ -1,3 +1,3 @@
 TEMPLATE = subdirs
-SUBDIRS += \
-    android
+
+android: SUBDIRS += android
