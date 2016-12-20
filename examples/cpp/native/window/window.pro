@@ -7,6 +7,7 @@ TARGET = window
 
 QT += nativecontrols
 
+android: QT += nativeandroid
 uikit: QT += nativeuikitcontrols
 
 # Input
