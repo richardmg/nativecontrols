@@ -78,17 +78,11 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject& instance) override;
 
-    static void onRegisterNativeMethods(jobject service);
-    static void onCreated(JNIEnv *env, jobject object, jlong instance);
-    static void onDestroyed(JNIEnv *env, jobject object, jlong instance);
-    static jboolean onStartCommand(JNIEnv *env, jobject object, jlong instance, jint flags, jint startId);
-
-private Q_SLOTS:
-    bool startCommand(int flags, int startId);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidService)
     Q_DECLARE_PRIVATE(QNativeAndroidService)
+
+    Q_PRIVATE_SLOT(d_func(), bool _q_startCommand(int flags, int startId))
 };
 
 QT_END_NAMESPACE
