@@ -62,7 +62,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidView : public QNativeAndroidContextua
 {
     Q_OBJECT
     Q_PROPERTY(QNativeAndroidView *parent READ parentView WRITE setParentView NOTIFY parentChanged)
-    Q_PROPERTY(QQmlListProperty<QNativeAndroidView> children READ children NOTIFY childrenChanged)
+    Q_PRIVATE_PROPERTY(QNativeAndroidView::d_func(), QQmlListProperty<QNativeAndroidView> children READ children NOTIFY childrenChanged DESIGNABLE false)
 
     Q_PROPERTY(QNativeAndroidDrawable *background READ background WRITE setBackground NOTIFY backgroundChanged)
     Q_PROPERTY(int backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
@@ -114,7 +114,6 @@ public:
     void setParentView(QNativeAndroidView *parent);
 
     QList<QNativeAndroidView *> childViews() const;
-    QQmlListProperty<QNativeAndroidView> children();
 
     QNativeAndroidLayoutParams *layoutParams() const;
     void setLayoutParams(QNativeAndroidLayoutParams *params);
@@ -279,11 +278,6 @@ protected:
 
     void addChild(QNativeAndroidView *child);
     void removeChild(QNativeAndroidView *child);
-
-    static void children_append(QQmlListProperty<QNativeAndroidView> *list, QNativeAndroidView *child);
-    static int children_count(QQmlListProperty<QNativeAndroidView> *list);
-    static QNativeAndroidView *children_at(QQmlListProperty<QNativeAndroidView> *list, int index);
-    static void children_clear(QQmlListProperty<QNativeAndroidView> *list);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;

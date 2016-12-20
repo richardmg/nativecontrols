@@ -60,6 +60,44 @@ void QNativeAndroidViewPrivate::init()
     q->requestPolish();
 }
 
+QQmlListProperty<QNativeAndroidView> QNativeAndroidViewPrivate::children()
+{
+    Q_Q(QNativeAndroidView);
+    return QQmlListProperty<QNativeAndroidView>(q, this,
+                                                &QNativeAndroidViewPrivate::children_append,
+                                                &QNativeAndroidViewPrivate::children_count,
+                                                &QNativeAndroidViewPrivate::children_at,
+                                                &QNativeAndroidViewPrivate::children_clear);
+}
+
+void QNativeAndroidViewPrivate::children_append(QQmlListProperty<QNativeAndroidView> *list, QNativeAndroidView *child)
+{
+    if (QNativeAndroidView *view = qobject_cast<QNativeAndroidView *>(list->object))
+        view->addChild(child);
+}
+
+int QNativeAndroidViewPrivate::children_count(QQmlListProperty<QNativeAndroidView> *list)
+{
+    if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data))
+        return d->childViews.count();
+    return 0;
+}
+
+QNativeAndroidView *QNativeAndroidViewPrivate::children_at(QQmlListProperty<QNativeAndroidView> *list, int index)
+{
+    if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data))
+        return d->childViews.at(index);
+    return nullptr;
+}
+
+void QNativeAndroidViewPrivate::children_clear(QQmlListProperty<QNativeAndroidView> *list)
+{
+    if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data)) {
+        while (!d->childViews.isEmpty())
+            d->childViews.first()->setParentView(0);
+    }
+}
+
 void QNativeAndroidViewPrivate::_q_updateBackground()
 {
     Q_Q(QNativeAndroidView);
@@ -196,13 +234,6 @@ QList<QNativeAndroidView *> QNativeAndroidView::childViews() const
 {
     Q_D(const QNativeAndroidView);
     return d->childViews;
-}
-
-QQmlListProperty<QNativeAndroidView> QNativeAndroidView::children()
-{
-    Q_D(QNativeAndroidView);
-    return QQmlListProperty<QNativeAndroidView>(this, d, &QNativeAndroidView::children_append, &QNativeAndroidView::children_count,
-                                                   &QNativeAndroidView::children_at, &QNativeAndroidView::children_clear);
 }
 
 QNativeAndroidLayoutParams *QNativeAndroidView::layoutParams() const
@@ -791,34 +822,6 @@ void QNativeAndroidView::removeChild(QNativeAndroidView *child)
     if (d->childViews.removeOne(child)) {
         viewChange(ViewChildRemovedChange, child);
         emit childrenChanged(d->childViews);
-    }
-}
-
-void QNativeAndroidView::children_append(QQmlListProperty<QNativeAndroidView> *list, QNativeAndroidView *child)
-{
-    if (QNativeAndroidView *view = qobject_cast<QNativeAndroidView *>(list->object))
-        view->addChild(child);
-}
-
-int QNativeAndroidView::children_count(QQmlListProperty<QNativeAndroidView> *list)
-{
-    if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data))
-        return d->childViews.count();
-    return 0;
-}
-
-QNativeAndroidView *QNativeAndroidView::children_at(QQmlListProperty<QNativeAndroidView> *list, int index)
-{
-    if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data))
-        return d->childViews.at(index);
-    return nullptr;
-}
-
-void QNativeAndroidView::children_clear(QQmlListProperty<QNativeAndroidView> *list)
-{
-    if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data)) {
-        while (!d->childViews.isEmpty())
-            d->childViews.first()->setParentView(0);
     }
 }
 

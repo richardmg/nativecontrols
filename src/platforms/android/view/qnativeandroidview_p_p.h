@@ -66,6 +66,13 @@ public:
 
     void init();
 
+    QQmlListProperty<QNativeAndroidView> children();
+
+    static void children_append(QQmlListProperty<QNativeAndroidView> *list, QNativeAndroidView *child);
+    static int children_count(QQmlListProperty<QNativeAndroidView> *list);
+    static QNativeAndroidView *children_at(QQmlListProperty<QNativeAndroidView> *list, int index);
+    static void children_clear(QQmlListProperty<QNativeAndroidView> *list);
+
     void _q_updateBackground();
     void _q_updateAnimation();
     bool _q_updateFocus(bool focus);
