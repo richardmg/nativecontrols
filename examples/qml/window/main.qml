@@ -4,7 +4,7 @@ import Qt.NativeControls 1.0
 NativeWindow {
 //    width: 480
 //    height: 640
-//    visible: true
+    visible: true
 
     Button {
         x: 10
