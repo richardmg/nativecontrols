@@ -46,6 +46,36 @@ QT_BEGIN_NAMESPACE
 
 Q_GLOBAL_STATIC(QReadWriteLock, instanceLock)
 
+QQmlListProperty<QObject> QNativeAndroidObjectPrivate::data()
+{
+    Q_Q(QNativeAndroidObject);
+    return QQmlListProperty<QObject>(q, this,
+                                     &QNativeAndroidObjectPrivate::data_append,
+                                     &QNativeAndroidObjectPrivate::data_count,
+                                     &QNativeAndroidObjectPrivate::data_at,
+                                     nullptr);
+}
+
+void QNativeAndroidObjectPrivate::data_append(QQmlListProperty<QObject> *list, QObject *object)
+{
+    if (QNativeAndroidObject *that = qobject_cast<QNativeAndroidObject *>(list->object))
+        object->setParent(that);
+}
+
+int QNativeAndroidObjectPrivate::data_count(QQmlListProperty<QObject> *list)
+{
+    if (QNativeAndroidObject *that = qobject_cast<QNativeAndroidObject *>(list->object))
+        return that->children().count();
+    return 0;
+}
+
+QObject *QNativeAndroidObjectPrivate::data_at(QQmlListProperty<QObject> *list, int index)
+{
+    if (QNativeAndroidObject *that = qobject_cast<QNativeAndroidObject *>(list->object))
+        return that->children().value(index);
+    return nullptr;
+}
+
 void QNativeAndroidObjectPrivate::setInstance(const QAndroidJniObject &newInstance)
 {
     Q_Q(QNativeAndroidObject);
@@ -166,32 +196,6 @@ void QNativeAndroidObject::objectChange(ObjectChange change)
 {
     Q_ASSERT(QtNativeAndroid::isMainQtThread());
     Q_UNUSED(change);
-}
-
-QQmlListProperty<QObject> QNativeAndroidObject::data()
-{
-    return QQmlListProperty<QObject>(this, 0, &QNativeAndroidObject::data_append,
-                                     &QNativeAndroidObject::data_count, &QNativeAndroidObject::data_at, 0);
-}
-
-void QNativeAndroidObject::data_append(QQmlListProperty<QObject> *list, QObject *object)
-{
-    if (QNativeAndroidObject *that = qobject_cast<QNativeAndroidObject *>(list->object))
-        object->setParent(that);
-}
-
-int QNativeAndroidObject::data_count(QQmlListProperty<QObject> *list)
-{
-    if (QNativeAndroidObject *that = qobject_cast<QNativeAndroidObject *>(list->object))
-        return that->children().count();
-    return 0;
-}
-
-QObject *QNativeAndroidObject::data_at(QQmlListProperty<QObject> *list, int index)
-{
-    if (QNativeAndroidObject *that = qobject_cast<QNativeAndroidObject *>(list->object))
-        return that->children().value(index);
-    return 0;
 }
 
 void QNativeAndroidObject::childEvent(QChildEvent *event)

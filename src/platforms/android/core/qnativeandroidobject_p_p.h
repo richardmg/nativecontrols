@@ -51,6 +51,7 @@
 #include <QtCore/private/qobject_p.h>
 #include <QtAndroidExtras/qandroidjniobject.h>
 #include <QtNativeAndroid/private/qnativeandroidobject_p.h>
+#include <QtQml/qqmllist.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -63,6 +64,12 @@ public:
     {
         return obj->d_func();
     }
+
+    QQmlListProperty<QObject> data();
+
+    static void data_append(QQmlListProperty<QObject> *list, QObject *object);
+    static int data_count(QQmlListProperty<QObject> *list);
+    static QObject *data_at(QQmlListProperty<QObject> *list, int index);
 
     void setInstance(const QAndroidJniObject &instance);
 

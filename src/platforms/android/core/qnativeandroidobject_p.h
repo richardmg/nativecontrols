@@ -51,7 +51,6 @@
 #include <QtNativeAndroid/private/qtnativeandroidglobal_p.h>
 
 #include <QtCore/qobject.h>
-#include <QtQml/qqmllist.h>
 #include <QtQml/qqmlparserstatus.h>
 #include <QtAndroidExtras/qandroidjniobject.h>
 #include <QtAndroidExtras/qandroidjnienvironment.h>
@@ -63,7 +62,7 @@ class QNativeAndroidObjectPrivate;
 class Q_NATIVEANDROID_EXPORT QNativeAndroidObject : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<QObject> data READ data NOTIFY dataChanged)
+    Q_PRIVATE_PROPERTY(QNativeAndroidObject::d_func(), QQmlListProperty<QObject> data READ data NOTIFY dataChanged DESIGNABLE false)
     Q_CLASSINFO("DefaultProperty", "data")
     Q_INTERFACES(QQmlParserStatus)
 
@@ -76,8 +75,6 @@ public:
     void construct();
     void inflate(const QAndroidJniObject &instance);
     void destruct();
-
-    QQmlListProperty<QObject> data();
 
     enum ObjectChange {
         InstanceChange
@@ -98,10 +95,6 @@ protected:
     void componentComplete() override;
 
     virtual void objectChange(ObjectChange change);
-
-    static void data_append(QQmlListProperty<QObject> *list, QObject *object);
-    static int data_count(QQmlListProperty<QObject> *list);
-    static QObject *data_at(QQmlListProperty<QObject> *list, int index);
 
     void childEvent(QChildEvent *event) override;
 
