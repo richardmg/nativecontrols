@@ -37,6 +37,69 @@
 
 QT_BEGIN_NAMESPACE
 
+class QNativeAndroidPlatformButton : private QNativeAndroidButton, public QNativePlatformButton
+{
+    Q_OBJECT
+
+public:
+    QNativeAndroidPlatformButton(QNativeButton *button)
+    {
+        // TODO: signal arguments
+        connect(this, &QNativeAndroidView::visibleChanged, [=]() { emit button->visibleChanged(isVisible()); });
+        connect(this, &QNativeAndroidButton::textChanged, [=]() { emit button->textChanged(text()); });
+        connect(this, &QNativeAndroidButton::click, button, &QNativeButton::clicked);
+    }
+
+    // QNativePlatformBase
+    void *controlHandle() override { return this; }
+    void setPlatformParent(QNativePlatformBase *parent) override
+    {
+        QNativeAndroidObject *nativeParent = static_cast<QNativeAndroidObject *>(parent->controlHandle());
+        if (QNativeAndroidActivity *nativeActivity = qobject_cast<QNativeAndroidActivity *>(nativeParent))
+            nativeActivity->setContentView(this);
+        else if (QNativeAndroidView *nativeView = qobject_cast<QNativeAndroidView *>(nativeParent))
+            setParentView(nativeView);
+    }
+
+    // QNativePlatformControl
+    bool visible() const override { return QNativeAndroidView::isVisible(); }
+    void setVisible(bool visible) override { QNativeAndroidView::setVisible(visible); }
+    // TODO: QNativeAndroidView::geometry() & setGeometry()
+    QRectF geometry() const override { return QRectF(QNativeAndroidView::x(), QNativeAndroidView::y(),
+                                                     QNativeAndroidView::width(), QNativeAndroidView::height()); }
+    void setGeometry(const QRectF &rect) override
+    {
+        QNativeAndroidView::setX(rect.x());
+        QNativeAndroidView::setY(rect.y());
+        QNativeAndroidView::setWidth(rect.width());
+        QNativeAndroidView::setHeight(rect.height());
+    }
+
+    // QNativePlatformButton
+    QString text() override { return QNativeAndroidButton::text(); }
+    void setText(const QString &text) override { QNativeAndroidButton::setText(text); }
+};
+
+class QNativeAndroidPlatformWindow : private QNativeAndroidActivity, public QNativePlatformWindow
+{
+    Q_OBJECT
+
+public:
+    QNativeAndroidPlatformWindow(QNativeWindow *window)
+    {
+        Q_UNUSED(window);
+    }
+
+    // QNativePlatformBase
+    void *controlHandle() override { return this; }
+    void setPlatformParent(QNativePlatformBase *parent) override { Q_UNUSED(parent); }
+
+    // QNativePlatformWindow ### TODO: how does this map to Activity?
+    bool isVisible() const override { return true; }
+    void setVisible(bool visible) override { Q_UNUSED(visible); }
+    void showFullScreen() override { QNativeAndroidActivity::start(); }
+};
+
 class QtNativeAndroidPlatformPlugin : public QObject, QNativePlatformPluginInterface
 {
     Q_OBJECT
@@ -44,8 +107,12 @@ class QtNativeAndroidPlatformPlugin : public QObject, QNativePlatformPluginInter
     Q_INTERFACES(QNativePlatformPluginInterface)
 
 public:
-    virtual QNativePlatformBase* create(QNativeBase *) const override
+    virtual QNativePlatformBase* create(QNativeBase *nativeBase) const override
     {
+        if (QNativeButton *nativeButton = qobject_cast<QNativeButton *>(nativeBase))
+            return new QNativeAndroidPlatformButton(nativeButton);
+        if (QNativeWindow *nativeWindow = qobject_cast<QNativeWindow *>(nativeBase))
+            return new QNativeAndroidPlatformWindow(nativeWindow);
         return nullptr;
     }
 };
