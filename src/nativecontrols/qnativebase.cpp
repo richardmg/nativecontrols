@@ -57,7 +57,7 @@ void QNativeBasePrivate::connectToPlatform()
 {
     // Note: This function must be called after this instance
     // has been fully constructed, so the plugins 'create' function
-    // can cast to the correct type and extract needed information.
+    // can cast to the correct type and extract any needed information.
     m_platformBase = QNativePlatformManager::create(q_func());
     syncPlatformParent();
 }
@@ -101,6 +101,11 @@ void QNativeBase::appendChild(QQmlListProperty<QObject> *list, QObject *objectCh
 
     self->m_data.append(child);
     child->setParent(self);
+    // Upon construction, the parent (self) might have be set from QObject private
+    // constructor, which means that the QChildEvent was sendt before the child
+    // was fully constructed (as is correct, according to childEvent docs). So
+    // we sync here an extra time to work around that case.
+    child->d_func()->syncPlatformParent();
 }
 
 QQmlListProperty<QObject> QNativeBase::data()
