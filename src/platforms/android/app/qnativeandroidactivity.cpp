@@ -130,6 +130,8 @@ void QNativeAndroidActivity::setContentView(QNativeAndroidView *view)
         }
         d->contentView = view;
         if (d->contentView) {
+            view->setParent(this);
+            view->setContext(this);
             connect(d->contentView, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidActivity::updateContentView);
             if (isComponentComplete())
                 d->contentView->construct();
