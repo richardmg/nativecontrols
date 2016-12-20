@@ -49,7 +49,6 @@
 //
 
 #include <QtNativeAndroid/private/qnativeandroidcontextual_p.h>
-#include <QtNativeAndroid/private/qnativeandroidoptional_p.h>
 #include <QtQml/qqml.h>
 
 QT_BEGIN_NAMESPACE
