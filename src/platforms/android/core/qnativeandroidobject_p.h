@@ -105,15 +105,11 @@ protected:
 
     void childEvent(QChildEvent *event) override;
 
-private Q_SLOTS:
-    void changeInstance();
-
 private:
     Q_DISABLE_COPY(QNativeAndroidObject)
     Q_DECLARE_PRIVATE(QNativeAndroidObject)
 
-    void setInstance(const QAndroidJniObject &instance);
-    friend class QNativeAndroidActivity;
+    Q_PRIVATE_SLOT(d_func(), void changeInstance())
 };
 
 QT_END_NAMESPACE

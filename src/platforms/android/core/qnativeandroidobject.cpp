@@ -46,6 +46,25 @@ QT_BEGIN_NAMESPACE
 
 Q_GLOBAL_STATIC(QReadWriteLock, instanceLock)
 
+void QNativeAndroidObjectPrivate::setInstance(const QAndroidJniObject &newInstance)
+{
+    Q_Q(QNativeAndroidObject);
+    QWriteLocker locker(instanceLock());
+    if (instance != newInstance) {
+        instance = newInstance;
+        // queue to Qt thread if necessary
+        QMetaObject::invokeMethod(q, "changeInstance", Qt::AutoConnection);
+    }
+}
+
+void QNativeAndroidObjectPrivate::changeInstance()
+{
+    Q_Q(QNativeAndroidObject);
+    Q_ASSERT(QtNativeAndroid::isMainQtThread());
+    q->objectChange(QNativeAndroidObject::InstanceChange);
+    emit q->instanceChanged();
+}
+
 QNativeAndroidObject::QNativeAndroidObject(QObject *parent)
     : QObject(*(new QNativeAndroidObjectPrivate), parent)
 {
@@ -70,24 +89,6 @@ QAndroidJniObject QNativeAndroidObject::instance() const
     return d->instance;
 }
 
-void QNativeAndroidObject::setInstance(const QAndroidJniObject &instance)
-{
-    Q_D(QNativeAndroidObject);
-    QWriteLocker locker(instanceLock());
-    if (d->instance != instance) {
-        d->instance = instance;
-        // queue to Qt thread if necessary
-        QMetaObject::invokeMethod(this, "changeInstance", Qt::AutoConnection);
-    }
-}
-
-void QNativeAndroidObject::changeInstance()
-{
-    Q_ASSERT(QtNativeAndroid::isMainQtThread());
-    objectChange(InstanceChange);
-    emit instanceChanged();
-}
-
 void QNativeAndroidObject::construct()
 {
     foreach (QObject *obj, children()) {
@@ -108,11 +109,12 @@ void QNativeAndroidObject::construct()
 
 void QNativeAndroidObject::inflate(const QAndroidJniObject &instance)
 {
+    Q_D(QNativeAndroidObject);
     std::function<void()> method = [=]() {
         QAndroidJniObject object(instance);
         if (object.isValid())
             onInflate(object);
-        setInstance(object);
+        d->setInstance(object);
     };
 
     if (QtNativeAndroid::isMainQtThread())
@@ -123,13 +125,14 @@ void QNativeAndroidObject::inflate(const QAndroidJniObject &instance)
 
 void QNativeAndroidObject::destruct()
 {
+    Q_D(QNativeAndroidObject);
     foreach (QObject *obj, children()) {
         QNativeAndroidObject *child = qobject_cast<QNativeAndroidObject *>(obj);
         if (child)
             child->destruct();
     }
 
-    setInstance(QAndroidJniObject());
+    d->setInstance(QAndroidJniObject());
 }
 
 QAndroidJniObject QNativeAndroidObject::onCreate()
@@ -200,3 +203,5 @@ void QNativeAndroidObject::childEvent(QChildEvent *event)
 }
 
 QT_END_NAMESPACE
+
+#include "moc_qnativeandroidobject_p.cpp"

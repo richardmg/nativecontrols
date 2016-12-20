@@ -50,12 +50,24 @@
 
 #include <QtCore/private/qobject_p.h>
 #include <QtAndroidExtras/qandroidjniobject.h>
+#include <QtNativeAndroid/private/qnativeandroidobject_p.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativeAndroidObjectPrivate : public QObjectPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidObject)
+
 public:
+    static QNativeAndroidObjectPrivate *get(QNativeAndroidObject *obj)
+    {
+        return obj->d_func();
+    }
+
+    void setInstance(const QAndroidJniObject &instance);
+
+    void changeInstance();
+
     bool complete = false;
     QAndroidJniObject instance;
 };

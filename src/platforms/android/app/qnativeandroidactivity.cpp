@@ -64,7 +64,7 @@ QNativeAndroidActivity::QNativeAndroidActivity(QObject *parent)
     d->window = new QNativeAndroidWindow(this);
 
     // TODO: multiple activities?
-    setInstance(QtAndroid::androidActivity());
+    d->setInstance(QtAndroid::androidActivity());
 }
 
 QNativeAndroidWindow *QNativeAndroidActivity::window() const
