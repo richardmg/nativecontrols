@@ -66,6 +66,10 @@ public:
     void connectToPlatform();
     void syncPlatformParent();
 
+    static void appendChild(QQmlListProperty<QObject> *list, QObject *obj);
+    QQmlListProperty<QObject> data();
+    bool isComplete();
+
     QNativePlatformBase *m_platformBase;
 };
 

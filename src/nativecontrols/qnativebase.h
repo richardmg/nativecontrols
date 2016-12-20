@@ -49,7 +49,7 @@ class QNativeBasePrivate;
 class Q_NATIVECONTROLS_EXPORT QNativeBase : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<QObject> data READ data)
+    Q_PRIVATE_PROPERTY(QNativeBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
     Q_CLASSINFO("DefaultProperty", "data")
 
 public:
@@ -58,20 +58,13 @@ public:
 
     QNativePlatformBase *platformHandle();
 
-    // TODO: move to private (make private property)
-    static void appendChild(QQmlListProperty<QObject> *list, QObject *obj);
-    QQmlListProperty<QObject> data();
-
 protected:
     QNativeBase(QNativeBasePrivate &dd, QObject *parent = nullptr);
     void childEvent(QChildEvent *event) override;
-    bool isComplete();
 
 private:
     Q_DECLARE_PRIVATE(QNativeBase)
     Q_DISABLE_COPY(QNativeBase)
-
-    QList<QObject *> m_data;
 };
 
 QT_END_NAMESPACE

@@ -68,6 +68,29 @@ void QNativeBasePrivate::syncPlatformParent()
     m_platformBase->setPlatformParent(parent ? parent->d_func()->m_platformBase : nullptr);
 }
 
+void QNativeBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *objectChild)
+{
+    QNativeBase *parent = qobject_cast<QNativeBase *>(list->object);
+    QNativeBase *child = qobject_cast<QNativeBase *>(objectChild);
+    child->setParent(parent);
+    // Upon construction, the parent (self) might have be set from QObject private
+    // constructor, which means that the QChildEvent was sendt before the child
+    // was fully constructed (as is correct, according to childEvent docs). So
+    // we sync here an extra time to work around that case.
+    child->d_func()->syncPlatformParent();
+}
+
+QQmlListProperty<QObject> QNativeBasePrivate::data()
+{
+    return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
+}
+
+bool QNativeBasePrivate::isComplete()
+{
+    // todo: hook up to QQmlParserStatus
+   return true;
+}
+
 QNativeBase::QNativeBase(QNativeBase *parent)
     : QObject(parent)
 {
@@ -94,29 +117,6 @@ void QNativeBase::childEvent(QChildEvent *event)
         child->d_func()->syncPlatformParent();
 }
 
-void QNativeBase::appendChild(QQmlListProperty<QObject> *list, QObject *objectChild)
-{
-    QNativeBase *self = qobject_cast<QNativeBase *>(list->object);
-    QNativeBase *child = qobject_cast<QNativeBase *>(objectChild);
-
-    self->m_data.append(child);
-    child->setParent(self);
-    // Upon construction, the parent (self) might have be set from QObject private
-    // constructor, which means that the QChildEvent was sendt before the child
-    // was fully constructed (as is correct, according to childEvent docs). So
-    // we sync here an extra time to work around that case.
-    child->d_func()->syncPlatformParent();
-}
-
-QQmlListProperty<QObject> QNativeBase::data()
-{
-    return QQmlListProperty<QObject>(this, 0, appendChild, 0, 0, 0);
-}
-
-bool QNativeBase::isComplete()
-{
-    // todo: hook up to QQmlParserStatus
-   return true;
-}
+#include "moc_qnativebase.cpp"
 
 QT_END_NAMESPACE
