@@ -87,13 +87,6 @@ protected:
     void classBegin() override;
     void componentComplete() override;
 
-private Q_SLOTS:
-    void setupWindow();
-    void setupActionBar();
-    void updateOptionsMenu();
-    void invalidateOptionsMenu();
-    void updateContentView();
-
 private:
     Q_DISABLE_COPY(QNativeAndroidActivity)
     Q_DECLARE_PRIVATE(QNativeAndroidActivity)
