@@ -77,14 +77,11 @@ protected:
 
     void componentComplete() override;
 
-private Q_SLOTS:
-    bool initContext(QNativeAndroidContext *context = nullptr);
-    void resolveContext();
-    void propagateContext();
-
 private:
     Q_DISABLE_COPY(QNativeAndroidContextual)
     Q_DECLARE_PRIVATE(QNativeAndroidContextual)
+
+    Q_PRIVATE_SLOT(d_func(), void _q_resolveContext())
 };
 
 QT_END_NAMESPACE

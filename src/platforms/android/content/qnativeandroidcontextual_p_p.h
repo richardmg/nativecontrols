@@ -56,7 +56,14 @@ class QNativeAndroidContext;
 
 class QNativeAndroidContextualPrivate : public QNativeAndroidObjectPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidContextual)
+
 public:
+    bool initContext(QNativeAndroidContext *context = nullptr);
+    void propagateContext();
+
+    void _q_resolveContext();
+
     QNativeAndroidContext *context = nullptr;
 };
 
