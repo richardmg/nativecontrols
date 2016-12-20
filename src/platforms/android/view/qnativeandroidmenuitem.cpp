@@ -42,6 +42,54 @@
 
 QT_BEGIN_NAMESPACE
 
+static bool native_onClick(JNIEnv *env, jobject object, jlong instance)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
+    if (item) {
+        QMetaObject::invokeMethod(item, "click", Qt::QueuedConnection);
+        return true;
+    }
+    return false;
+}
+
+static bool native_onMenuItemActionCollapse(JNIEnv *env, jobject object, jlong instance)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
+    if (item) {
+        // TODO
+        return true;
+    }
+    return false;
+}
+
+static bool native_onMenuItemActionExpand(JNIEnv *env, jobject object, jlong instance)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
+    if (item) {
+        // TODO
+        return true;
+    }
+    return false;
+}
+
+static void registerNativeMenuItemMethods(jobject item)
+{
+    JNINativeMethod methods[] {{"onClick", "(J)Z", reinterpret_cast<void *>(native_onClick)},
+                               {"onMenuItemActionCollapse", "(J)Z", reinterpret_cast<void *>(native_onMenuItemActionCollapse)},
+                               {"onMenuItemActionExpand", "(J)Z", reinterpret_cast<void *>(native_onMenuItemActionExpand)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(item);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 class QNativeAndroidMenuItemPrivate : public QNativeAndroidContextualPrivate
 {
 public:
@@ -200,58 +248,9 @@ void QNativeAndroidMenuItem::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(instance.object());
+        registerNativeMenuItemMethods(instance.object());
         nativeMethodsRegistered = true;
     }
-}
-
-void QNativeAndroidMenuItem::onRegisterNativeMethods(jobject item)
-{
-    JNINativeMethod methods[] {{"onClick", "(J)Z", reinterpret_cast<void *>(onClick)},
-                               {"onMenuItemActionCollapse", "(J)Z", reinterpret_cast<void *>(onMenuItemActionCollapse)},
-                               {"onMenuItemActionExpand", "(J)Z", reinterpret_cast<void *>(onMenuItemActionExpand)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(item);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-bool QNativeAndroidMenuItem::onClick(JNIEnv *env, jobject object, jlong instance)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
-    if (item) {
-        QMetaObject::invokeMethod(item, "click", Qt::QueuedConnection);
-        return true;
-    }
-    return false;
-}
-
-bool QNativeAndroidMenuItem::onMenuItemActionCollapse(JNIEnv *env, jobject object, jlong instance)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
-    if (item) {
-        // TODO
-        return true;
-    }
-    return false;
-}
-
-bool QNativeAndroidMenuItem::onMenuItemActionExpand(JNIEnv *env, jobject object, jlong instance)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
-    if (item) {
-        // TODO
-        return true;
-    }
-    return false;
-
 }
 
 void QNativeAndroidMenuItem::objectChange(ObjectChange change)

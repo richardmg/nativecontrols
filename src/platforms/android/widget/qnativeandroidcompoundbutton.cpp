@@ -40,6 +40,25 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onCheckedChanged(JNIEnv *env, jobject object, jlong instance, jboolean isChecked)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidCompoundButton *button = reinterpret_cast<QNativeAndroidCompoundButton *>(instance);
+    if (button)
+        QMetaObject::invokeMethod(button, "updateChecked", Qt::QueuedConnection, Q_ARG(bool, isChecked));
+}
+
+static void registerNativeCompoundButtonMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onCheckedChanged", "(JZ)V", reinterpret_cast<void *>(native_onCheckedChanged)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 QNativeAndroidCompoundButton::QNativeAndroidCompoundButton(QNativeAndroidContext *context)
     : QNativeAndroidButton(*(new QNativeAndroidCompoundButtonPrivate), context)
 {
@@ -97,30 +116,11 @@ void QNativeAndroidCompoundButton::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeCompoundButtonMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
 
     instance.callMethod<void>("setChecked", "(Z)V", d->checked);
-}
-
-void QNativeAndroidCompoundButton::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onCheckedChanged", "(JZ)V", reinterpret_cast<void *>(onCheckedChanged)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidCompoundButton::onCheckedChanged(JNIEnv *env, jobject object, jlong instance, jboolean isChecked)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidCompoundButton *button = reinterpret_cast<QNativeAndroidCompoundButton *>(instance);
-    if (button)
-        QMetaObject::invokeMethod(button, "updateChecked", Qt::QueuedConnection, Q_ARG(bool, isChecked));
 }
 
 QT_END_NAMESPACE

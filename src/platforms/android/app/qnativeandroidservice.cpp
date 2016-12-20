@@ -40,39 +40,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidServicePrivate : public QNativeAndroidContextWrapperPrivate
-{
-public:
-    bool _q_startCommand(int flags, int startId);
-
-    static void onRegisterNativeMethods(jobject service);
-    static void onCreated(JNIEnv *env, jobject object, jlong instance);
-    static void onDestroyed(JNIEnv *env, jobject object, jlong instance);
-    static jboolean onStartCommand(JNIEnv *env, jobject object, jlong instance, jint flags, jint startId);
-
-    bool sticky = true;
-};
-
-bool QNativeAndroidServicePrivate::_q_startCommand(int flags, int startId)
-{
-    Q_UNUSED(flags);
-    Q_UNUSED(startId);
-    return sticky;
-}
-
-void QNativeAndroidServicePrivate::onRegisterNativeMethods(jobject service)
-{
-    JNINativeMethod methods[] {{"onCreated", "(J)V", reinterpret_cast<void *>(onCreated)},
-                               {"onDestroyed", "(J)V", reinterpret_cast<void *>(onDestroyed)},
-                               {"onStartCommand", "(JII)Z", reinterpret_cast<void *>(onStartCommand)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(service);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidServicePrivate::onCreated(JNIEnv *env, jobject object, jlong instance)
+static void native_onCreated(JNIEnv *env, jobject object, jlong instance)
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
@@ -82,7 +50,7 @@ void QNativeAndroidServicePrivate::onCreated(JNIEnv *env, jobject object, jlong 
 //        QMetaObject::invokeMethod(service, "created", Qt::QueuedConnection);
 }
 
-void QNativeAndroidServicePrivate::onDestroyed(JNIEnv *env, jobject object, jlong instance)
+static void native_onDestroyed(JNIEnv *env, jobject object, jlong instance)
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
@@ -91,7 +59,7 @@ void QNativeAndroidServicePrivate::onDestroyed(JNIEnv *env, jobject object, jlon
         QMetaObject::invokeMethod(service, "stopped", Qt::QueuedConnection);
 }
 
-jboolean QNativeAndroidServicePrivate::onStartCommand(JNIEnv *env, jobject object, jlong instance, jint flags, jint startId)
+static jboolean native_onStartCommand(JNIEnv *env, jobject object, jlong instance, jint flags, jint startId)
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
@@ -102,6 +70,33 @@ jboolean QNativeAndroidServicePrivate::onStartCommand(JNIEnv *env, jobject objec
         QMetaObject::invokeMethod(service, "started", Qt::QueuedConnection);
     }
     return ret;
+}
+
+static void registerNativeServiceMethods(jobject service)
+{
+    JNINativeMethod methods[] {{"onCreated", "(J)V", reinterpret_cast<void *>(native_onCreated)},
+                               {"onDestroyed", "(J)V", reinterpret_cast<void *>(native_onDestroyed)},
+                               {"onStartCommand", "(JII)Z", reinterpret_cast<void *>(native_onStartCommand)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(service);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
+class QNativeAndroidServicePrivate : public QNativeAndroidContextWrapperPrivate
+{
+public:
+    bool _q_startCommand(int flags, int startId);
+
+    bool sticky = true;
+};
+
+bool QNativeAndroidServicePrivate::_q_startCommand(int flags, int startId)
+{
+    Q_UNUSED(flags);
+    Q_UNUSED(startId);
+    return sticky;
 }
 
 QNativeAndroidService::QNativeAndroidService(QObject *parent)
@@ -184,7 +179,7 @@ void QNativeAndroidService::onInflate(QAndroidJniObject& instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        QNativeAndroidServicePrivate::onRegisterNativeMethods(instance.object());
+        registerNativeServiceMethods(instance.object());
         nativeMethodsRegistered = true;
     }
 }

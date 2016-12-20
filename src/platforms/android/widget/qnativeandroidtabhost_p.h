@@ -68,9 +68,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-    static void onRegisterNativeMethods(jobject listener);
-    static void onTabChanged(JNIEnv *env, jobject object, jlong instance, jstring tabId);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidTabHost)
     Q_DECLARE_PRIVATE(QNativeAndroidTabHost)

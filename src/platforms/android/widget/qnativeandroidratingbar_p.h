@@ -72,9 +72,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-    static void onRegisterNativeMethods(jobject listener);
-    static void onRatingChanged(JNIEnv *env, jobject object, jlong instance, jfloat rating, jboolean fromUser);
-
 private Q_SLOTS:
     bool updateRating(qreal rating);
 

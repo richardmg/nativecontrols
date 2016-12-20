@@ -65,9 +65,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-    static void onRegisterNativeMethods(jobject listener);
-    static void onProgressChanged(JNIEnv *env, jobject object, jlong instance, jint progress, jboolean fromUser);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidSeekBar)
     Q_DECLARE_PRIVATE(QNativeAndroidSeekBar)

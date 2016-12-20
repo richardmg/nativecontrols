@@ -46,10 +46,60 @@ QT_BEGIN_NAMESPACE
 class QNativeAndroidRecyclerAdapterPrivate : public QNativeAndroidContextualPrivate
 {
 public:
+    static QNativeAndroidRecyclerAdapterPrivate *get(QNativeAndroidRecyclerAdapter *adapter)
+    {
+        return adapter->d_func();
+    }
+
     int count = 0;
     QQmlComponent *delegate = nullptr;
     QList<QAndroidJniObject> holders;
 };
+
+static jobject native_onCreateViewHolder(JNIEnv *env, jobject object, jlong instance, jobject parent, jint viewType)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    Q_UNUSED(parent);
+    Q_UNUSED(viewType);
+    QNativeAndroidRecyclerAdapter *adapter = reinterpret_cast<QNativeAndroidRecyclerAdapter *>(instance);
+    if (adapter) {
+        QNativeAndroidView *item = nullptr;
+        QMetaObject::invokeMethod(adapter, "createItem", Qt::BlockingQueuedConnection, Q_RETURN_ARG(QNativeAndroidView *, item));
+        item->construct();
+        QNativeAndroidRecyclerAdapterPrivate *p = QNativeAndroidRecyclerAdapterPrivate::get(adapter);
+        p->holders += QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder",
+                                        "(Landroid/view/View;J)V",
+                                        item->instance().object(),
+                                        reinterpret_cast<jlong>(item));
+        return p->holders.last().object();
+    }
+    return 0;
+}
+
+static void native_onBindViewHolder(JNIEnv *env, jobject object, jlong instance, jobject holder, jint position)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidRecyclerAdapter *adapter = reinterpret_cast<QNativeAndroidRecyclerAdapter *>(instance);
+    if (adapter) {
+        jlong vi = QAndroidJniObject(holder).callMethod<jlong>("getInstance");
+        QNativeAndroidView *item = reinterpret_cast<QNativeAndroidView *>(vi);
+        if (item)
+            QMetaObject::invokeMethod(adapter, "setItemPosition", Qt::BlockingQueuedConnection, Q_ARG(QNativeAndroidView *, item), Q_ARG(int, position));
+    }
+}
+
+static void registerNativeRecyclerAdapterMethods(jobject adapter)
+{
+    JNINativeMethod methods[] {{"onCreateViewHolder", "(JLandroid/view/ViewGroup;I)Lorg/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder;", reinterpret_cast<void *>(native_onCreateViewHolder)},
+                               {"onBindViewHolder", "(JLorg/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder;I)V", reinterpret_cast<void *>(native_onBindViewHolder)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(adapter);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
 
 QNativeAndroidRecyclerAdapter::QNativeAndroidRecyclerAdapter(QObject *parent)
     : QNativeAndroidContextual(*(new QNativeAndroidRecyclerAdapterPrivate), parent)
@@ -104,56 +154,12 @@ void QNativeAndroidRecyclerAdapter::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(instance.object());
+        registerNativeRecyclerAdapterMethods(instance.object());
         nativeMethodsRegistered = true;
     }
 
     if (d->count > 0)
         instance.callMethod<void>("setItemCount", "(I)V", d->count);
-}
-
-void QNativeAndroidRecyclerAdapter::onRegisterNativeMethods(jobject adapter)
-{
-    JNINativeMethod methods[] {{"onCreateViewHolder", "(JLandroid/view/ViewGroup;I)Lorg/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder;", reinterpret_cast<void *>(onCreateViewHolder)},
-                               {"onBindViewHolder", "(JLorg/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder;I)V", reinterpret_cast<void *>(onBindViewHolder)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(adapter);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-jobject QNativeAndroidRecyclerAdapter::onCreateViewHolder(JNIEnv *env, jobject object, jlong instance, jobject parent, jint viewType)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    Q_UNUSED(parent);
-    Q_UNUSED(viewType);
-    QNativeAndroidRecyclerAdapter *adapter = reinterpret_cast<QNativeAndroidRecyclerAdapter *>(instance);
-    if (adapter) {
-        QNativeAndroidView *item = nullptr;
-        QMetaObject::invokeMethod(adapter, "createItem", Qt::BlockingQueuedConnection, Q_RETURN_ARG(QNativeAndroidView *, item));
-        item->construct();
-        adapter->d_func()->holders += QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder",
-                                                "(Landroid/view/View;J)V",
-                                                item->instance().object(),
-                                                reinterpret_cast<jlong>(item));
-        return adapter->d_func()->holders.last().object();
-    }
-    return 0;
-}
-
-void QNativeAndroidRecyclerAdapter::onBindViewHolder(JNIEnv *env, jobject object, jlong instance, jobject holder, jint position)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidRecyclerAdapter *adapter = reinterpret_cast<QNativeAndroidRecyclerAdapter *>(instance);
-    if (adapter) {
-        jlong vi = QAndroidJniObject(holder).callMethod<jlong>("getInstance");
-        QNativeAndroidView *item = reinterpret_cast<QNativeAndroidView *>(vi);
-        if (item)
-            QMetaObject::invokeMethod(adapter, "setItemPosition", Qt::BlockingQueuedConnection, Q_ARG(QNativeAndroidView *, item), Q_ARG(int, position));
-    }
 }
 
 QNativeAndroidView *QNativeAndroidRecyclerAdapter::createItem()

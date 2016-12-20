@@ -79,10 +79,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-    static void onRegisterNativeMethods(jobject adapter);
-    static jobject onCreateViewHolder(JNIEnv *env, jobject object, jlong instance, jobject parent, jint viewType);
-    static void onBindViewHolder(JNIEnv *env, jobject object, jlong instance, jobject holder, jint position);
-
 private Q_SLOTS:
     QNativeAndroidView *createItem();
     void setItemPosition(QNativeAndroidView *item, int position);

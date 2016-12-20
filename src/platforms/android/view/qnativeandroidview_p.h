@@ -282,12 +282,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-    static void onRegisterNativeMethods(jobject listener);
-    static void onClick(JNIEnv *env, jobject object, jlong instance);
-    static void onFocusChange(JNIEnv *env, jobject object, jlong instance, jboolean hasFocus);
-    static void onLayoutChange(JNIEnv *env, jobject object, jlong instance, jint left, jint top, jint right, jint bottom);
-    static bool onLongClick(JNIEnv *env, jobject object, jlong instance);
-
     bool event(QEvent *event) override;
 
     void objectChange(ObjectChange change) override;

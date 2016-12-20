@@ -40,6 +40,25 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onRefresh(JNIEnv *env, jobject object, jlong instance)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidSwipeRefreshLayout *layout = reinterpret_cast<QNativeAndroidSwipeRefreshLayout *>(instance);
+    if (layout)
+        QMetaObject::invokeMethod(layout, "updateRefreshing", Qt::QueuedConnection, Q_ARG(bool, true));
+}
+
+static void registerNativeSwipeRefreshLayoutMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onRefresh", "(J)V", reinterpret_cast<void *>(native_onRefresh)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 class QNativeAndroidSwipeRefreshLayoutPrivate : public QNativeAndroidViewGroupPrivate
 {
 public:
@@ -94,28 +113,9 @@ void QNativeAndroidSwipeRefreshLayout::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeSwipeRefreshLayoutMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
-}
-
-void QNativeAndroidSwipeRefreshLayout::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onRefresh", "(J)V", reinterpret_cast<void *>(onRefresh)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidSwipeRefreshLayout::onRefresh(JNIEnv *env, jobject object, jlong instance)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidSwipeRefreshLayout *layout = reinterpret_cast<QNativeAndroidSwipeRefreshLayout *>(instance);
-    if (layout)
-        QMetaObject::invokeMethod(layout, "updateRefreshing", Qt::QueuedConnection, Q_ARG(bool, true));
 }
 
 QT_END_NAMESPACE

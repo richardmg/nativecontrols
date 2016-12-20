@@ -41,6 +41,25 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onItemClick(JNIEnv *env, jobject object, jlong instance, jint position)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidAdapterView *view = reinterpret_cast<QNativeAndroidAdapterView *>(instance);
+    if (view)
+        QMetaObject::invokeMethod(view, "click", Qt::QueuedConnection, Q_ARG(int, position));
+}
+
+static void registerNativeAdapterViewMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onItemClick", "(JI)V", reinterpret_cast<void *>(native_onItemClick)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 QNativeAndroidAdapterView::QNativeAndroidAdapterView(QNativeAndroidContext *context)
     : QNativeAndroidViewGroup(*(new QNativeAndroidAdapterViewPrivate), context)
 {
@@ -96,28 +115,9 @@ void QNativeAndroidAdapterView::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeAdapterViewMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
-}
-
-void QNativeAndroidAdapterView::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onItemClick", "(JI)V", reinterpret_cast<void *>(onItemClick)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidAdapterView::onItemClick(JNIEnv *env, jobject object, jlong instance, jint position)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidAdapterView *view = reinterpret_cast<QNativeAndroidAdapterView *>(instance);
-    if (view)
-        QMetaObject::invokeMethod(view, "click", Qt::QueuedConnection, Q_ARG(int, position));
 }
 
 void QNativeAndroidAdapterView::objectChange(ObjectChange change)

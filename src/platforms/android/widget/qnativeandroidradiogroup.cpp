@@ -41,6 +41,25 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onCheckedChanged(JNIEnv *env, jobject object, jlong instance, jint checkedId)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidRadioGroup *group = reinterpret_cast<QNativeAndroidRadioGroup *>(instance);
+    if (group)
+        QMetaObject::invokeMethod(group, "updateCheckedButtonId", Qt::QueuedConnection, Q_ARG(int, checkedId));
+}
+
+static void registerNativeRadioGroupMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onCheckedChanged", "(JI)V", reinterpret_cast<void *>(native_onCheckedChanged)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 class QNativeAndroidRadioGroupPrivate : public QNativeAndroidLinearLayoutPrivate
 {
 public:
@@ -89,31 +108,12 @@ void QNativeAndroidRadioGroup::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeRadioGroupMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
 
     int checkedId = instance.callMethod<int>("getCheckedRadioButtonId", "()I");
     QMetaObject::invokeMethod(this, "updateCheckedButtonId", Qt::QueuedConnection, Q_ARG(int, checkedId));
-}
-
-void QNativeAndroidRadioGroup::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onCheckedChanged", "(JI)V", reinterpret_cast<void *>(onCheckedChanged)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidRadioGroup::onCheckedChanged(JNIEnv *env, jobject object, jlong instance, jint checkedId)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidRadioGroup *group = reinterpret_cast<QNativeAndroidRadioGroup *>(instance);
-    if (group)
-        QMetaObject::invokeMethod(group, "updateCheckedButtonId", Qt::QueuedConnection, Q_ARG(int, checkedId));
 }
 
 void QNativeAndroidRadioGroup::updateCheckedButtonId(int checkedId)

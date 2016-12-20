@@ -40,6 +40,25 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onRatingChanged(JNIEnv *env, jobject object, jlong instance, jfloat rating, jboolean fromUser)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidRatingBar *bar = reinterpret_cast<QNativeAndroidRatingBar *>(instance);
+    if (bar && fromUser)
+        QMetaObject::invokeMethod(bar, "updateRating", Qt::QueuedConnection, Q_ARG(qreal, rating));
+}
+
+static void registerNativeRatingBarMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onRatingChanged", "(JFZ)V", reinterpret_cast<void *>(native_onRatingChanged)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 class QNativeAndroidRatingBarPrivate : public QNativeAndroidAbsSeekBarPrivate
 {
 public:
@@ -94,30 +113,11 @@ void QNativeAndroidRatingBar::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeRatingBarMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
 
     instance.callMethod<void>("setRating", "(F)V", d->rating);
-}
-
-void QNativeAndroidRatingBar::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onRatingChanged", "(JFZ)V", reinterpret_cast<void *>(onRatingChanged)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidRatingBar::onRatingChanged(JNIEnv *env, jobject object, jlong instance, jfloat rating, jboolean fromUser)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidRatingBar *bar = reinterpret_cast<QNativeAndroidRatingBar *>(instance);
-    if (bar && fromUser)
-        QMetaObject::invokeMethod(bar, "updateRating", Qt::QueuedConnection, Q_ARG(qreal, rating));
 }
 
 QT_END_NAMESPACE

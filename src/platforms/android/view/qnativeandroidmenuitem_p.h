@@ -113,11 +113,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-    static void onRegisterNativeMethods(jobject item);
-    static bool onClick(JNIEnv *env, jobject object, jlong instance);
-    static bool onMenuItemActionCollapse(JNIEnv *env, jobject object, jlong instance);
-    static bool onMenuItemActionExpand(JNIEnv *env, jobject object, jlong instance);
-
     void objectChange(ObjectChange change) override;
 
 private Q_SLOTS:

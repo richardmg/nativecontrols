@@ -40,6 +40,25 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onValueChange(JNIEnv *env, jobject object, jlong instance, jint value)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidNumberPicker *picker = reinterpret_cast<QNativeAndroidNumberPicker *>(instance);
+    if (picker)
+        QMetaObject::invokeMethod(picker, "updateValue", Qt::QueuedConnection, Q_ARG(int, value));
+}
+
+static void registerNativeNumberPickerMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onValueChange", "(JI)V", reinterpret_cast<void *>(native_onValueChange)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 class QNativeAndroidNumberPickerPrivate : public QNativeAndroidLinearLayoutPrivate
 {
 public:
@@ -94,30 +113,11 @@ void QNativeAndroidNumberPicker::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeNumberPickerMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
 
     instance.callMethod<void>("setValue", "(I)V", d->value);
-}
-
-void QNativeAndroidNumberPicker::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onValueChange", "(JI)V", reinterpret_cast<void *>(onValueChange)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidNumberPicker::onValueChange(JNIEnv *env, jobject object, jlong instance, jint value)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidNumberPicker *picker = reinterpret_cast<QNativeAndroidNumberPicker *>(instance);
-    if (picker)
-        QMetaObject::invokeMethod(picker, "updateValue", Qt::QueuedConnection, Q_ARG(int, value));
 }
 
 QT_END_NAMESPACE

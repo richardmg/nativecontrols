@@ -47,6 +47,58 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onClick(JNIEnv *env, jobject object, jlong instance)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
+    if (view)
+        QMetaObject::invokeMethod(view, "click", Qt::QueuedConnection);
+}
+
+static void native_onFocusChange(JNIEnv *env, jobject object, jlong instance, jboolean hasFocus)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
+    if (view)
+        QMetaObject::invokeMethod(view, "_q_updateFocus", Qt::QueuedConnection, Q_ARG(bool, hasFocus));
+}
+
+static void native_onLayoutChange(JNIEnv *env, jobject object, jlong instance, jint left, jint top, jint right, jint bottom)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
+    if (view)
+        QMetaObject::invokeMethod(view, "_q_updateGeometry", Qt::QueuedConnection, Q_ARG(int, top), Q_ARG(int, left), Q_ARG(int, right), Q_ARG(int, bottom));
+}
+
+static bool native_onLongClick(JNIEnv *env, jobject object, jlong instance)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
+    if (view) {
+        //qDebug() << "onLongClick:" << view;
+        QMetaObject::invokeMethod(view, "longClick", Qt::QueuedConnection);
+    }
+    return true; // TODO: accept
+}
+
+static void registerNativeViewMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onClick", "(J)V", reinterpret_cast<void *>(native_onClick)},
+                               {"onFocusChange", "(JZ)V", reinterpret_cast<void *>(native_onFocusChange)},
+                               {"onLayoutChange", "(JIIII)V", reinterpret_cast<void *>(native_onLayoutChange)}
+                               /*{"onLongClick", "(J)V", reinterpret_cast<void *>(native_onLongClick)}*/};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 void QNativeAndroidViewPrivate::init()
 {
     Q_Q(QNativeAndroidView);
@@ -850,7 +902,7 @@ void QNativeAndroidView::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeViewMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
 
@@ -895,58 +947,6 @@ void QNativeAndroidView::onInflate(QAndroidJniObject &instance)
         QAndroidJniObject background = ctx().callObjectMethod("getDrawable", "(I)Landroid/graphics/drawable/Drawable;", d->backgroundResource);
         d->background->inflate(background);
     }
-}
-
-void QNativeAndroidView::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onClick", "(J)V", reinterpret_cast<void *>(onClick)},
-                               {"onFocusChange", "(JZ)V", reinterpret_cast<void *>(onFocusChange)},
-                               {"onLayoutChange", "(JIIII)V", reinterpret_cast<void *>(onLayoutChange)}
-                               /*{"onLongClick", "(J)V", reinterpret_cast<void *>(onLongClick)}*/};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidView::onClick(JNIEnv *env, jobject object, jlong instance)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
-    if (view)
-        QMetaObject::invokeMethod(view, "click", Qt::QueuedConnection);
-}
-
-void QNativeAndroidView::onFocusChange(JNIEnv *env, jobject object, jlong instance, jboolean hasFocus)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
-    if (view)
-        QMetaObject::invokeMethod(view, "_q_updateFocus", Qt::QueuedConnection, Q_ARG(bool, hasFocus));
-}
-
-void QNativeAndroidView::onLayoutChange(JNIEnv *env, jobject object, jlong instance, jint left, jint top, jint right, jint bottom)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
-    if (view)
-        QMetaObject::invokeMethod(view, "_q_updateGeometry", Qt::QueuedConnection, Q_ARG(int, top), Q_ARG(int, left), Q_ARG(int, right), Q_ARG(int, bottom));
-}
-
-bool QNativeAndroidView::onLongClick(JNIEnv *env, jobject object, jlong instance)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
-    if (view) {
-        //qDebug() << "onLongClick:" << view;
-        QMetaObject::invokeMethod(view, "longClick", Qt::QueuedConnection);
-    }
-    return true; // TODO: accept
 }
 
 void QNativeAndroidView::requestPolish()

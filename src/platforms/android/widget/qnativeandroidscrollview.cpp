@@ -41,6 +41,27 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onScrollChanged(JNIEnv *env, jobject object, jlong instance, jint left, jint top)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidScrollView *view = reinterpret_cast<QNativeAndroidScrollView *>(instance);
+    if (view) {
+        QMetaObject::invokeMethod(view, "updateScrollX", Qt::QueuedConnection, Q_ARG(int, left));
+        QMetaObject::invokeMethod(view, "updateScrollY", Qt::QueuedConnection, Q_ARG(int, top));
+    }
+}
+
+static void registerNativeScrollViewMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onScrollChanged", "(JII)V", reinterpret_cast<void *>(native_onScrollChanged)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 class QNativeAndroidScrollViewPrivate : public QNativeAndroidFrameLayoutPrivate
 {
 public:
@@ -115,29 +136,8 @@ void QNativeAndroidScrollView::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(instance.object());
+        registerNativeScrollViewMethods(instance.object());
         nativeMethodsRegistered = true;
-    }
-}
-
-void QNativeAndroidScrollView::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onScrollChanged", "(JII)V", reinterpret_cast<void *>(onScrollChanged)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidScrollView::onScrollChanged(JNIEnv *env, jobject object, jlong instance, jint left, jint top)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidScrollView *view = reinterpret_cast<QNativeAndroidScrollView *>(instance);
-    if (view) {
-        QMetaObject::invokeMethod(view, "updateScrollX", Qt::QueuedConnection, Q_ARG(int, left));
-        QMetaObject::invokeMethod(view, "updateScrollY", Qt::QueuedConnection, Q_ARG(int, top));
     }
 }
 

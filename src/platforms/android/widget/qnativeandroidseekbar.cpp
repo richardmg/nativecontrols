@@ -39,6 +39,25 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onProgressChanged(JNIEnv *env, jobject object, jlong instance, jint progress, jboolean fromUser)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidSeekBar *bar = reinterpret_cast<QNativeAndroidSeekBar *>(instance);
+    if (bar && fromUser)
+        QMetaObject::invokeMethod(bar, "updateProgress", Qt::QueuedConnection, Q_ARG(int, progress));
+}
+
+static void registerNativeSeekBarMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onProgressChanged", "(JIZ)V", reinterpret_cast<void *>(native_onProgressChanged)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 class QNativeAndroidSeekBarPrivate : public QNativeAndroidAbsSeekBarPrivate
 {
 public:
@@ -69,28 +88,9 @@ void QNativeAndroidSeekBar::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeSeekBarMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
-}
-
-void QNativeAndroidSeekBar::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onProgressChanged", "(JIZ)V", reinterpret_cast<void *>(onProgressChanged)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidSeekBar::onProgressChanged(JNIEnv *env, jobject object, jlong instance, jint progress, jboolean fromUser)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidSeekBar *bar = reinterpret_cast<QNativeAndroidSeekBar *>(instance);
-    if (bar && fromUser)
-        QMetaObject::invokeMethod(bar, "updateProgress", Qt::QueuedConnection, Q_ARG(int, progress));
 }
 
 QT_END_NAMESPACE

@@ -72,9 +72,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-    static void onRegisterNativeMethods(jobject listener);
-    static void onValueChange(JNIEnv *env, jobject object, jlong instance, jint value);
-
 private Q_SLOTS:
     bool updateValue(int value);
 

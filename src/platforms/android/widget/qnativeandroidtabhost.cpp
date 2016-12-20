@@ -40,6 +40,25 @@
 
 QT_BEGIN_NAMESPACE
 
+static void native_onTabChanged(JNIEnv *env, jobject object, jlong instance, jstring tabId)
+{
+    Q_UNUSED(env);
+    Q_UNUSED(object);
+    QNativeAndroidTabHost *host = reinterpret_cast<QNativeAndroidTabHost *>(instance);
+    if (host)
+        QMetaObject::invokeMethod(host, "tabChanged", Qt::QueuedConnection, Q_ARG(QString, QAndroidJniObject(tabId).toString()));
+}
+
+static void registerNativeTabHostMethods(jobject listener)
+{
+    JNINativeMethod methods[] {{"onTabChanged", "(JLjava/lang/String;)V", reinterpret_cast<void *>(native_onTabChanged)}};
+
+    QAndroidJniEnvironment env;
+    jclass cls = env->GetObjectClass(listener);
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+    env->DeleteLocalRef(cls);
+}
+
 class QNativeAndroidTabHostPrivate : public QNativeAndroidFrameLayoutPrivate
 {
 public:
@@ -70,7 +89,7 @@ void QNativeAndroidTabHost::onInflate(QAndroidJniObject &instance)
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
-        onRegisterNativeMethods(d->listener.object());
+        registerNativeTabHostMethods(d->listener.object());
         nativeMethodsRegistered = true;
     }
 
@@ -80,25 +99,6 @@ void QNativeAndroidTabHost::onInflate(QAndroidJniObject &instance)
     QList<QNativeAndroidTabSpec *> tabs = findChildren<QNativeAndroidTabSpec *>();
     foreach (QNativeAndroidTabSpec *tab, tabs)
         tab->setup(instance, index++);
-}
-
-void QNativeAndroidTabHost::onRegisterNativeMethods(jobject listener)
-{
-    JNINativeMethod methods[] {{"onTabChanged", "(JLjava/lang/String;)V", reinterpret_cast<void *>(onTabChanged)}};
-
-    QAndroidJniEnvironment env;
-    jclass cls = env->GetObjectClass(listener);
-    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
-    env->DeleteLocalRef(cls);
-}
-
-void QNativeAndroidTabHost::onTabChanged(JNIEnv *env, jobject object, jlong instance, jstring tabId)
-{
-    Q_UNUSED(env);
-    Q_UNUSED(object);
-    QNativeAndroidTabHost *host = reinterpret_cast<QNativeAndroidTabHost *>(instance);
-    if (host)
-        QMetaObject::invokeMethod(host, "tabChanged", Qt::QueuedConnection, Q_ARG(QString, QAndroidJniObject(tabId).toString()));
 }
 
 QT_END_NAMESPACE
