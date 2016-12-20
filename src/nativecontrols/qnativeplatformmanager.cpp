@@ -48,7 +48,7 @@ QNativePlatformPluginInterface *QNativePlatformManager::s_platformPlugin = nullp
 QNativePlatformBase *QNativePlatformManager::create(QNativeBase *control)
 {
     if (!s_platformPlugin) {
-        s_loader = new QFactoryLoader(QNativePlatformPluginInterface_iid, QLatin1String("/nativecontrolsplatforms"));
+        s_loader = new QFactoryLoader(QNativePlatformPluginInterface_iid, QLatin1String("/nativecontrols"));
         if (!s_loader->metaData().isEmpty()) {
             // Always use first available plugin for now. Todo: make this configurable.
             s_platformPlugin = qobject_cast<QNativePlatformPluginInterface *>(s_loader->instance(0));
