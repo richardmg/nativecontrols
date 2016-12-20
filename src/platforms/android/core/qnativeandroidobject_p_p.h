@@ -73,7 +73,7 @@ public:
 
     void setInstance(const QAndroidJniObject &instance);
 
-    void changeInstance();
+    void _q_changeInstance();
 
     bool complete = false;
     QAndroidJniObject instance;

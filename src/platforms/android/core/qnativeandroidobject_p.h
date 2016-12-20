@@ -102,7 +102,7 @@ private:
     Q_DISABLE_COPY(QNativeAndroidObject)
     Q_DECLARE_PRIVATE(QNativeAndroidObject)
 
-    Q_PRIVATE_SLOT(d_func(), void changeInstance())
+    Q_PRIVATE_SLOT(d_func(), void _q_changeInstance())
 };
 
 QT_END_NAMESPACE

@@ -83,11 +83,11 @@ void QNativeAndroidObjectPrivate::setInstance(const QAndroidJniObject &newInstan
     if (instance != newInstance) {
         instance = newInstance;
         // queue to Qt thread if necessary
-        QMetaObject::invokeMethod(q, "changeInstance", Qt::AutoConnection);
+        QMetaObject::invokeMethod(q, "_q_changeInstance", Qt::AutoConnection);
     }
 }
 
-void QNativeAndroidObjectPrivate::changeInstance()
+void QNativeAndroidObjectPrivate::_q_changeInstance()
 {
     Q_Q(QNativeAndroidObject);
     Q_ASSERT(QtNativeAndroid::isMainQtThread());
