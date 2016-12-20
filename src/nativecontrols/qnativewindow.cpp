@@ -81,5 +81,7 @@ void QNativeWindow::showFullScreen()
     PLATFORM_WINDOW->showFullScreen();
 }
 
+#include "moc_qnativewindow.cpp"
+
 QT_END_NAMESPACE
 

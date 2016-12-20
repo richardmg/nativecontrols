@@ -83,5 +83,7 @@ void QNativeButton::setText(const QString &newText)
     PLATFORM_BUTTON->setText(newText);
 }
 
+#include "moc_qnativebutton.cpp"
+
 QT_END_NAMESPACE
 
