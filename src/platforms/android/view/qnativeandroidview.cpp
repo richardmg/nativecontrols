@@ -60,6 +60,83 @@ void QNativeAndroidViewPrivate::init()
     q->requestPolish();
 }
 
+void QNativeAndroidViewPrivate::_q_updateBackground()
+{
+    Q_Q(QNativeAndroidView);
+    if (!q->isValid() || !background)
+        return;
+
+    QAndroidJniObject view = q->instance();
+    QAndroidJniObject bg = background->instance();
+    QtNativeAndroid::callFunction([=]() {
+        view.callMethod<void>("setBackground", "(Landroid/graphics/drawable/Drawable;)V", bg.object());
+    });
+}
+
+void QNativeAndroidViewPrivate::_q_updateAnimation()
+{
+    Q_Q(QNativeAndroidView);
+    if (!q->isValid() || !animation || !animation->isValid())
+        return;
+
+    QAndroidJniObject view = q->instance();
+    QAndroidJniObject anim = animation->instance();
+    QtNativeAndroid::callFunction([=]() {
+        view.callMethod<void>("startAnimation", "(Landroid/view/animation/Animation;)V", anim.object());
+    });
+}
+
+bool QNativeAndroidViewPrivate::_q_updateFocus(bool arg)
+{
+    Q_Q(QNativeAndroidView);
+    if (arg != q->hasFocus()) {
+        focus = arg;
+        emit q->focusChanged(arg);
+        return true;
+    }
+    return false;
+}
+
+void QNativeAndroidViewPrivate::_q_updateLayoutParams()
+{
+    Q_Q(QNativeAndroidView);
+    if (!q->isValid() || !layoutParams)
+        return;
+
+    QAndroidJniObject view = q->instance();
+    QAndroidJniObject params = layoutParams->instance();
+    QtNativeAndroid::callFunction([=]() {
+        view.callMethod<void>("setLayoutParams",
+                              "(Landroid/view/ViewGroup$LayoutParams;)V",
+                              params.object());
+    });
+}
+
+void QNativeAndroidViewPrivate::_q_updateGeometry(int t, int l, int r, int b)
+{
+    Q_Q(QNativeAndroidView);
+    if (t != q->top()) {
+        top = t;
+        emit q->topChanged(t);
+        emit q->yChanged(q->y());
+    }
+    if (l != q->left()) {
+        left = l;
+        emit q->leftChanged(l);
+        emit q->xChanged(q->x());
+    }
+    if (r != q->right()) {
+        right = r;
+        emit q->rightChanged(r);
+        emit q->widthChanged(q->width());
+    }
+    if (b != q->bottom()) {
+        bottom = b;
+        emit q->bottomChanged(b);
+        emit q->heightChanged(q->height());
+    }
+}
+
 QNativeAndroidView::QNativeAndroidView(QNativeAndroidContext *context)
     : QNativeAndroidContextual(*(new QNativeAndroidViewPrivate), context)
 {
@@ -139,12 +216,12 @@ void QNativeAndroidView::setLayoutParams(QNativeAndroidLayoutParams *params)
     Q_D(QNativeAndroidView);
     if (d->layoutParams != params) {
         if (d->layoutParams) {
-            disconnect(d->layoutParams, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidView::updateLayoutParams);
+            QObjectPrivate::disconnect(d->layoutParams, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidViewPrivate::_q_updateLayoutParams);
             d->layoutParams->destruct();
         }
         d->layoutParams = params;
         if (d->layoutParams) {
-            connect(d->layoutParams, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidView::updateLayoutParams);
+            QObjectPrivate::connect(d->layoutParams, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidViewPrivate::_q_updateLayoutParams);
             if (isValid())
                 d->layoutParams->construct();
         }
@@ -162,13 +239,13 @@ void QNativeAndroidView::setBackground(QNativeAndroidDrawable *background, int r
     Q_D(QNativeAndroidView);
     if (d->background != background) {
         if (d->background) {
-            disconnect(d->background, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidView::updateBackground);
+            QObjectPrivate::disconnect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidViewPrivate::_q_updateBackground);
             d->background->destruct();
         }
         d->background = background;
         d->backgroundResource = resource;
         if (d->background) {
-            connect(d->background, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidView::updateBackground);
+            QObjectPrivate::connect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidViewPrivate::_q_updateBackground);
             if (!resource)
                 d->background->construct();
         }
@@ -187,12 +264,12 @@ void QNativeAndroidView::setAnimation(QNativeAndroidAnimation *animation)
     Q_D(QNativeAndroidView);
     if (d->animation != animation) {
         if (d->animation) {
-            disconnect(d->animation, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidView::updateAnimation);
+            QObjectPrivate::disconnect(d->animation, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidViewPrivate::_q_updateAnimation);
             d->animation->destruct();
         }
         d->animation = animation;
         if (d->animation) {
-            connect(d->animation, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidView::updateAnimation);
+            QObjectPrivate::connect(d->animation, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidViewPrivate::_q_updateAnimation);
             if (isValid())
                 d->animation->construct();
         }
@@ -252,17 +329,6 @@ bool QNativeAndroidView::hasFocus() const
     if (d->focus.isNull())
         return false;
     return d->focus;
-}
-
-bool QNativeAndroidView::updateFocus(bool arg)
-{
-    Q_D(QNativeAndroidView);
-    if (arg != hasFocus()) {
-        d->focus = arg;
-        emit focusChanged(arg);
-        return true;
-    }
-    return false;
 }
 
 qreal QNativeAndroidView::x() const
@@ -389,31 +455,6 @@ int QNativeAndroidView::height() const
 void QNativeAndroidView::setHeight(int height)
 {
     setBottom(top() + height);
-}
-
-void QNativeAndroidView::updateGeometry(int t, int l, int r, int b)
-{
-    Q_D(QNativeAndroidView);
-    if (t != top()) {
-        d->top = t;
-        emit topChanged(t);
-        emit yChanged(y());
-    }
-    if (l != left()) {
-        d->left = l;
-        emit leftChanged(l);
-        emit xChanged(x());
-    }
-    if (r != right()) {
-        d->right = r;
-        emit rightChanged(r);
-        emit widthChanged(width());
-    }
-    if (b != bottom()) {
-        d->bottom = b;
-        emit bottomChanged(b);
-        emit heightChanged(height());
-    }
 }
 
 int QNativeAndroidView::padding() const
@@ -881,7 +922,7 @@ void QNativeAndroidView::onFocusChange(JNIEnv *env, jobject object, jlong instan
     Q_UNUSED(object);
     QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
     if (view)
-        QMetaObject::invokeMethod(view, "updateFocus", Qt::QueuedConnection, Q_ARG(bool, hasFocus));
+        QMetaObject::invokeMethod(view, "_q_updateFocus", Qt::QueuedConnection, Q_ARG(bool, hasFocus));
 }
 
 void QNativeAndroidView::onLayoutChange(JNIEnv *env, jobject object, jlong instance, jint left, jint top, jint right, jint bottom)
@@ -890,7 +931,7 @@ void QNativeAndroidView::onLayoutChange(JNIEnv *env, jobject object, jlong insta
     Q_UNUSED(object);
     QNativeAndroidView *view = reinterpret_cast<QNativeAndroidView *>(instance);
     if (view)
-        QMetaObject::invokeMethod(view, "updateGeometry", Qt::QueuedConnection, Q_ARG(int, top), Q_ARG(int, left), Q_ARG(int, right), Q_ARG(int, bottom));
+        QMetaObject::invokeMethod(view, "_q_updateGeometry", Qt::QueuedConnection, Q_ARG(int, top), Q_ARG(int, left), Q_ARG(int, right), Q_ARG(int, bottom));
 }
 
 bool QNativeAndroidView::onLongClick(JNIEnv *env, jobject object, jlong instance)
@@ -933,53 +974,15 @@ bool QNativeAndroidView::event(QEvent *event)
 
 void QNativeAndroidView::objectChange(ObjectChange change)
 {
+    Q_D(QNativeAndroidView);
     QNativeAndroidContextual::objectChange(change);
     if (change == InstanceChange) {
-        updateLayoutParams();
-        updateBackground();
-        updateAnimation();
+        d->_q_updateLayoutParams();
+        d->_q_updateBackground();
+        d->_q_updateAnimation();
     }
 }
 
-void QNativeAndroidView::updateBackground()
-{
-    Q_D(QNativeAndroidView);
-    if (!isValid() || !d->background)
-        return;
-
-    QAndroidJniObject view = instance();
-    QAndroidJniObject background = d->background->instance();
-    QtNativeAndroid::callFunction([=]() {
-        view.callMethod<void>("setBackground", "(Landroid/graphics/drawable/Drawable;)V", background.object());
-    });
-}
-
-void QNativeAndroidView::updateAnimation()
-{
-    Q_D(QNativeAndroidView);
-    if (!isValid() || !d->animation || !d->animation->isValid())
-        return;
-
-    QAndroidJniObject view = instance();
-    QAndroidJniObject animation = d->animation->instance();
-    QtNativeAndroid::callFunction([=]() {
-        view.callMethod<void>("startAnimation", "(Landroid/view/animation/Animation;)V", animation.object());
-    });
-}
-
-void QNativeAndroidView::updateLayoutParams()
-{
-    Q_D(QNativeAndroidView);
-    if (!isValid() || !d->layoutParams)
-        return;
-
-    QAndroidJniObject view = instance();
-    QAndroidJniObject params = d->layoutParams->instance();
-    QtNativeAndroid::callFunction([=]() {
-        view.callMethod<void>("setLayoutParams",
-                              "(Landroid/view/ViewGroup$LayoutParams;)V",
-                              params.object());
-    });
-}
-
 QT_END_NAMESPACE
+
+#include "moc_qnativeandroidview_p.cpp"

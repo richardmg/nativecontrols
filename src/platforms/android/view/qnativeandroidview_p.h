@@ -298,16 +298,15 @@ protected:
 
     void objectChange(ObjectChange change) override;
 
-private Q_SLOTS:
-    void updateBackground();
-    void updateAnimation();
-    bool updateFocus(bool focus);
-    void updateLayoutParams();
-    void updateGeometry(int top, int left, int right, int bottom);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidView)
     Q_DECLARE_PRIVATE(QNativeAndroidView)
+
+    Q_PRIVATE_SLOT(d_func(), void _q_updateBackground())
+    Q_PRIVATE_SLOT(d_func(), void _q_updateAnimation())
+    Q_PRIVATE_SLOT(d_func(), bool _q_updateFocus(bool focus))
+    Q_PRIVATE_SLOT(d_func(), void _q_updateLayoutParams())
+    Q_PRIVATE_SLOT(d_func(), void _q_updateGeometry(int top, int left, int right, int bottom))
 };
 
 QT_END_NAMESPACE

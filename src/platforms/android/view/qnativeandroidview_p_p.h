@@ -59,7 +59,18 @@ class QNativeAndroidViewPrivate : public QNativeAndroidContextualPrivate
     Q_DECLARE_PUBLIC(QNativeAndroidView)
 
 public:
+    static QNativeAndroidViewPrivate *get(QNativeAndroidView *view)
+    {
+        return view->d_func();
+    }
+
     void init();
+
+    void _q_updateBackground();
+    void _q_updateAnimation();
+    bool _q_updateFocus(bool focus);
+    void _q_updateLayoutParams();
+    void _q_updateGeometry(int top, int left, int right, int bottom);
 
     int id = 0;
     QNativeAndroidView *parent = nullptr;
