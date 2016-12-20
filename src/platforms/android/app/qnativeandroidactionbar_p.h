@@ -94,9 +94,6 @@ protected:
 
     void objectChange(ObjectChange change) override;
 
-private Q_SLOTS:
-    void updateBackground();
-
 private:
     Q_DISABLE_COPY(QNativeAndroidActionBar)
     Q_DECLARE_PRIVATE(QNativeAndroidActionBar)

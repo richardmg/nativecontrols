@@ -43,13 +43,30 @@ QT_BEGIN_NAMESPACE
 
 class QNativeAndroidActionBarPrivate : public QNativeAndroidObjectPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidActionBar)
+
 public:
+    void updateBackground();
+
     bool visible = true;
     qreal elevation = 0.0;
     QString title;
     QString subtitle;
     QNativeAndroidDrawable *background = nullptr;
 };
+
+void QNativeAndroidActionBarPrivate::updateBackground()
+{
+    Q_Q(QNativeAndroidActionBar);
+    if (!q->isValid() || !background)
+        return;
+
+    QAndroidJniObject bar = q->instance();
+    QAndroidJniObject bg = background->instance();
+    QtNativeAndroid::callFunction([=]() {
+        bar.callMethod<void>("setBackgroundDrawable", "(Landroid/graphics/drawable/Drawable;)V", bg.object());
+    });
+}
 
 QNativeAndroidActionBar::QNativeAndroidActionBar(QObject *parent)
     : QNativeAndroidObject(*(new QNativeAndroidActionBarPrivate), parent)
@@ -134,12 +151,12 @@ void QNativeAndroidActionBar::setBackground(QNativeAndroidDrawable *background)
     Q_D(QNativeAndroidActionBar);
     if (d->background != background) {
         if (d->background) {
-            disconnect(d->background, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidActionBar::updateBackground);
+            QObjectPrivate::disconnect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActionBarPrivate::updateBackground);
             d->background->destruct();
         }
         d->background = background;
         if (d->background) {
-            connect(d->background, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidActionBar::updateBackground);
+            QObjectPrivate::connect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActionBarPrivate::updateBackground);
             d->background->construct();
         }
         emit backgroundChanged();
@@ -164,22 +181,10 @@ void QNativeAndroidActionBar::onInflate(QAndroidJniObject &instance)
 
 void QNativeAndroidActionBar::objectChange(ObjectChange change)
 {
+    Q_D(QNativeAndroidActionBar);
     QNativeAndroidObject::objectChange(change);
     if (change == InstanceChange)
-        updateBackground();
-}
-
-void QNativeAndroidActionBar::updateBackground()
-{
-    Q_D(QNativeAndroidActionBar);
-    if (!isValid() || !d->background)
-        return;
-
-    QAndroidJniObject bar = instance();
-    QAndroidJniObject background = d->background->instance();
-    QtNativeAndroid::callFunction([=]() {
-        bar.callMethod<void>("setBackgroundDrawable", "(Landroid/graphics/drawable/Drawable;)V", background.object());
-    });
+        d->updateBackground();
 }
 
 QT_END_NAMESPACE
