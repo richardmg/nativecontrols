@@ -74,7 +74,7 @@ public:
 
     int id = 0;
     QNativeAndroidView *parent = nullptr;
-    QList<QNativeAndroidView *> children;
+    QList<QNativeAndroidView *> childViews;
     QNativeAndroidDrawable *background = nullptr;
     int backgroundResource = 0;
     QNativeAndroidAnimation *animation = nullptr;

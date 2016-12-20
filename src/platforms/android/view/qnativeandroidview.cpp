@@ -154,7 +154,7 @@ QNativeAndroidView::QNativeAndroidView(QNativeAndroidViewPrivate &dd, QNativeAnd
 QNativeAndroidView::~QNativeAndroidView()
 {
     Q_D(QNativeAndroidView);
-    foreach (QNativeAndroidView *child, d->children)
+    foreach (QNativeAndroidView *child, d->childViews)
         child->setParentView(0);
     if (d->parent)
         setParentView(0);
@@ -195,7 +195,7 @@ void QNativeAndroidView::setParentView(QNativeAndroidView *parent)
 QList<QNativeAndroidView *> QNativeAndroidView::childViews() const
 {
     Q_D(const QNativeAndroidView);
-    return d->children;
+    return d->childViews;
 }
 
 QQmlListProperty<QNativeAndroidView> QNativeAndroidView::children()
@@ -778,19 +778,19 @@ void QNativeAndroidView::viewChange(ViewChange change, const ViewChangeData &dat
 void QNativeAndroidView::addChild(QNativeAndroidView *child)
 {
     Q_D(QNativeAndroidView);
-    if (!d->children.contains(child)) {
-        d->children.append(child);
+    if (!d->childViews.contains(child)) {
+        d->childViews.append(child);
         viewChange(ViewChildAddedChange, child);
-        emit childrenChanged(d->children);
+        emit childrenChanged(d->childViews);
     }
 }
 
 void QNativeAndroidView::removeChild(QNativeAndroidView *child)
 {
     Q_D(QNativeAndroidView);
-    if (d->children.removeOne(child)) {
+    if (d->childViews.removeOne(child)) {
         viewChange(ViewChildRemovedChange, child);
-        emit childrenChanged(d->children);
+        emit childrenChanged(d->childViews);
     }
 }
 
@@ -803,22 +803,22 @@ void QNativeAndroidView::children_append(QQmlListProperty<QNativeAndroidView> *l
 int QNativeAndroidView::children_count(QQmlListProperty<QNativeAndroidView> *list)
 {
     if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data))
-        return d->children.count();
+        return d->childViews.count();
     return 0;
 }
 
 QNativeAndroidView *QNativeAndroidView::children_at(QQmlListProperty<QNativeAndroidView> *list, int index)
 {
     if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data))
-        return d->children.at(index);
+        return d->childViews.at(index);
     return nullptr;
 }
 
 void QNativeAndroidView::children_clear(QQmlListProperty<QNativeAndroidView> *list)
 {
     if (QNativeAndroidViewPrivate *d = static_cast<QNativeAndroidViewPrivate *>(list->data)) {
-        while (!d->children.isEmpty())
-            d->children.first()->setParentView(0);
+        while (!d->childViews.isEmpty())
+            d->childViews.first()->setParentView(0);
     }
 }
 
