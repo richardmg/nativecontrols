@@ -22,6 +22,9 @@ int main(int argc, char *argv[])
         UIButton *uiButton = nativeUIKitButton->uiButtonHandle();
         [uiButton setTitle:@"Click me" forState:UIControlStateNormal];
         uiButton.tintColor = [UIColor redColor];
+
+        UIWindow *uiWindow = nativeUIKitWindow->uiWindowHandle();
+        uiWindow.backgroundColor = [UIColor blueColor];
     }
 
     window.showFullScreen();
