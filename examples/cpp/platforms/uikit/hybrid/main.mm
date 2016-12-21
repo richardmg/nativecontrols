@@ -8,17 +8,18 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QNativeWindow window;
-    QNativeButton button1(QStringLiteral("QNativeButton"), &window);
-    button1.setGeometry(10, 10, 100, 30);
-    QObject::connect(&button1, &QNativeButton::clicked, [&button1](){ button1.setText(QStringLiteral("Clicked!")); });
+    QNativeButton nativeButton(QStringLiteral("QNativeButton"), &window);
+    nativeButton.setGeometry(10, 10, 100, 30);
+    QObject::connect(&nativeButton, &QNativeButton::clicked, [&nativeButton](){ nativeButton.setText(QStringLiteral("Clicked!")); });
 
-    QNativeUIKitWindow *platformWindow = dynamic_cast<QNativeUIKitWindow *>(window.platformHandle());
-    QNativeUIKitButton button2(QStringLiteral("QNativeUIKitButton"), platformWindow);
-    button2.setGeometry(10, 50, 100, 30);
-    QObject::connect(&button2, &QNativeUIKitButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
+    QNativeUIKitWindow *nativeUIKitWindow = dynamic_cast<QNativeUIKitWindow *>(window.platformHandle());
+    QNativeUIKitButton nativeUIKitButton(QStringLiteral("QNativeUIKitButton"), nativeUIKitWindow);
+    nativeUIKitButton.setGeometry(10, 50, 100, 30);
+    QObject::connect(&nativeUIKitButton, &QNativeUIKitButton::clicked, [&nativeUIKitButton](){ nativeUIKitButton.setText(QStringLiteral("Clicked!")); });
 
-    UIButton *uiButton = reinterpret_cast<UIButton *>(button2.controlHandle());
-    uiButton.tintColor = [UIColor blueColor];
+    UIButton *uiButton = nativeUIKitButton.uiButtonHandle();
+    uiButton.tintColor = [UIColor redColor];
+    [uiButton setTitle:@"Yup" forState:UIControlStateNormal];
 
     window.showFullScreen();
     return app.exec();

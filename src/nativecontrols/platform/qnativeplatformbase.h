@@ -48,7 +48,6 @@ class Q_NATIVECONTROLS_EXPORT QNativePlatformBase
 public:
     virtual ~QNativePlatformBase() {}
     virtual void setPlatformParent(QNativePlatformBase *parent) = 0;
-    virtual void *controlHandle() = 0;
 };
 
 QT_END_NAMESPACE

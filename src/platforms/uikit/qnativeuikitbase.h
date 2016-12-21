@@ -17,8 +17,6 @@ public:
     QNativeUIKitBase(QObject *parent = nullptr);
     virtual ~QNativeUIKitBase();
 
-    virtual void *controlHandle() override;
-
 protected:
     QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QObject *parent = nullptr);
     virtual void setPlatformParent(QNativePlatformBase *parent) override;

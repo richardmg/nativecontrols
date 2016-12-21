@@ -89,11 +89,6 @@ QNativeUIKitBase::~QNativeUIKitBase()
 {
 }
 
-void *QNativeUIKitBase::controlHandle()
-{
-    return d_func()->view();
-}
-
 void QNativeUIKitBase::setPlatformParent(QNativePlatformBase *parent)
 {
     setParent(dynamic_cast<QNativeUIKitBase *>(parent));

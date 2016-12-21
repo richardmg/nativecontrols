@@ -42,8 +42,6 @@
 #include <QtNativeUIKitControls/qnativeuikitbutton.h>
 #include <QtNativeUIKitControls/private/qnativeuikitbutton_p.h>
 
-#define CASTEDBUTTON static_cast<UIButton *>(d_func()->view())
-
 @interface QNativeUIKitButtonDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QNativeUIKitButtonPrivate) *_button;
 }
@@ -113,9 +111,14 @@ QNativeUIKitButton::~QNativeUIKitButton()
     [d->m_delegate release];
 }
 
+UIButton *QNativeUIKitButton::uiButtonHandle()
+{
+    return static_cast<UIButton *>(d_func()->view());
+}
+
 QString QNativeUIKitButton::text()
 {
-    return QString::fromNSString([CASTEDBUTTON titleForState:UIControlStateNormal]);
+    return QString::fromNSString([uiButtonHandle() titleForState:UIControlStateNormal]);
 }
 
 void QNativeUIKitButton::setText(const QString &newText)
@@ -123,7 +126,7 @@ void QNativeUIKitButton::setText(const QString &newText)
     if (newText == text())
         return;
 
-    [CASTEDBUTTON setTitle:newText.toNSString() forState:UIControlStateNormal];
+    [uiButtonHandle() setTitle:newText.toNSString() forState:UIControlStateNormal];
 
     emit textChanged(newText);
 }

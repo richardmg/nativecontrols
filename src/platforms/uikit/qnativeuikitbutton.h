@@ -43,6 +43,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeUIKitButtonPrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(UIButton);
 
 class Q_NATIVECONTROLS_EXPORT QNativeUIKitButton : public QNativeUIKitControl, public virtual QNativePlatformButton
 {
@@ -53,6 +54,8 @@ public:
     QNativeUIKitButton(QNativeUIKitBase *parent = nullptr);
     QNativeUIKitButton(const QString &text, QNativeUIKitBase *parent = nullptr);
     virtual ~QNativeUIKitButton();
+
+    UIButton *uiButtonHandle();
 
     virtual QString text() override;
     virtual void setText(const QString &text) override;
