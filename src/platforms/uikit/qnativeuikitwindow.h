@@ -44,6 +44,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeUIKitWindowPrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 
 class Q_NATIVECONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitBase, public virtual QNativePlatformWindow
 {
@@ -52,6 +53,8 @@ class Q_NATIVECONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitBase, publ
 public:
     QNativeUIKitWindow(QObject *parent = nullptr);
     virtual ~QNativeUIKitWindow();
+
+    UIWindow *uiWindowHandle();
 
     virtual bool isVisible() const override;
     virtual void setVisible(bool isVisible) override;

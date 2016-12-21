@@ -79,6 +79,11 @@ QNativeUIKitWindow::~QNativeUIKitWindow()
 {
 }
 
+UIWindow *QNativeUIKitWindow::uiWindowHandle()
+{
+    return static_cast<UIWindow *>(d_func()->view());
+}
+
 bool QNativeUIKitWindow::isVisible() const
 {
     return d_func()->m_window->isVisible();
