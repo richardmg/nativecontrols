@@ -72,12 +72,11 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-private Q_SLOTS:
-    bool updateValue(int value);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidNumberPicker)
     Q_DECLARE_PRIVATE(QNativeAndroidNumberPicker)
+
+    Q_PRIVATE_SLOT(d_func(), bool _q_updateValue(int value))
 };
 
 QT_END_NAMESPACE

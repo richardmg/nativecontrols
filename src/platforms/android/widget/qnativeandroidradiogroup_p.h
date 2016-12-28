@@ -76,13 +76,12 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-private Q_SLOTS:
-    void updateCheckedButtonId(int checkedId);
-    bool updateCheckedButton(QNativeAndroidRadioButton *button);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidRadioGroup)
     Q_DECLARE_PRIVATE(QNativeAndroidRadioGroup)
+
+    Q_PRIVATE_SLOT(d_func(), void _q_updateCheckedButtonId(int checkedId))
+    Q_PRIVATE_SLOT(d_func(), bool _q_updateCheckedButton(QNativeAndroidRadioButton *button))
 };
 
 QT_END_NAMESPACE

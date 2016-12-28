@@ -46,7 +46,7 @@ static void native_onCheckedChanged(JNIEnv *env, jobject object, jlong instance,
     Q_UNUSED(object);
     QNativeAndroidCompoundButton *button = reinterpret_cast<QNativeAndroidCompoundButton *>(instance);
     if (button)
-        QMetaObject::invokeMethod(button, "updateChecked", Qt::QueuedConnection, Q_ARG(bool, isChecked));
+        QMetaObject::invokeMethod(button, "_q_updateChecked", Qt::QueuedConnection, Q_ARG(bool, isChecked));
 }
 
 static void registerNativeCompoundButtonMethods(jobject listener)
@@ -57,6 +57,17 @@ static void registerNativeCompoundButtonMethods(jobject listener)
     jclass cls = env->GetObjectClass(listener);
     env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
     env->DeleteLocalRef(cls);
+}
+
+bool QNativeAndroidCompoundButtonPrivate::_q_updateChecked(bool arg)
+{
+    Q_Q(QNativeAndroidCompoundButton);
+    if (arg != q->isChecked()) {
+        checked = arg;
+        emit q->checkedChanged();
+        return true;
+    }
+    return false;
 }
 
 QNativeAndroidCompoundButton::QNativeAndroidCompoundButton(QNativeAndroidContext *context)
@@ -77,19 +88,9 @@ bool QNativeAndroidCompoundButton::isChecked() const
 
 void QNativeAndroidCompoundButton::setChecked(bool checked)
 {
-    if (updateChecked(checked))
-        QtNativeAndroid::callBoolMethod(instance(), "setChecked", checked);
-}
-
-bool QNativeAndroidCompoundButton::updateChecked(bool arg)
-{
     Q_D(QNativeAndroidCompoundButton);
-    if (arg != isChecked()) {
-        d->checked = arg;
-        emit checkedChanged();
-        return true;
-    }
-    return false;
+    if (d->_q_updateChecked(checked))
+        QtNativeAndroid::callBoolMethod(instance(), "setChecked", checked);
 }
 
 void QNativeAndroidCompoundButton::toggle()
@@ -124,3 +125,5 @@ void QNativeAndroidCompoundButton::onInflate(QAndroidJniObject &instance)
 }
 
 QT_END_NAMESPACE
+
+#include "moc_qnativeandroidcompoundbutton_p.cpp"

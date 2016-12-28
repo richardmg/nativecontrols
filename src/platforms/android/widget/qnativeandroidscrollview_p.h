@@ -77,13 +77,12 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-private Q_SLOTS:
-    bool updateScrollX(int x);
-    bool updateScrollY(int y);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidScrollView)
     Q_DECLARE_PRIVATE(QNativeAndroidScrollView)
+
+    Q_PRIVATE_SLOT(d_func(), bool _q_updateScrollX(int x))
+    Q_PRIVATE_SLOT(d_func(), bool _q_updateScrollY(int y))
 };
 
 QT_END_NAMESPACE

@@ -105,9 +105,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-private Q_SLOTS:
-    bool updateProgress(int progress);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidProgressBar)
     Q_DECLARE_PRIVATE(QNativeAndroidProgressBar)

@@ -55,7 +55,11 @@ QT_BEGIN_NAMESPACE
 
 class QNativeAndroidCompoundButtonPrivate : public QNativeAndroidButtonPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidCompoundButton)
+
 public:
+    bool _q_updateChecked(bool checked);
+
     bool checked = false;
     QAndroidJniObject listener;
 };

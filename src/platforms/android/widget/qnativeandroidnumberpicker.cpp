@@ -46,7 +46,7 @@ static void native_onValueChange(JNIEnv *env, jobject object, jlong instance, ji
     Q_UNUSED(object);
     QNativeAndroidNumberPicker *picker = reinterpret_cast<QNativeAndroidNumberPicker *>(instance);
     if (picker)
-        QMetaObject::invokeMethod(picker, "updateValue", Qt::QueuedConnection, Q_ARG(int, value));
+        QMetaObject::invokeMethod(picker, "_q_updateValue", Qt::QueuedConnection, Q_ARG(int, value));
 }
 
 static void registerNativeNumberPickerMethods(jobject listener)
@@ -61,10 +61,25 @@ static void registerNativeNumberPickerMethods(jobject listener)
 
 class QNativeAndroidNumberPickerPrivate : public QNativeAndroidLinearLayoutPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidNumberPicker)
+
 public:
+    bool _q_updateValue(int value);
+
     int value = 0;
     QAndroidJniObject listener;
 };
+
+bool QNativeAndroidNumberPickerPrivate::_q_updateValue(int arg)
+{
+    Q_Q(QNativeAndroidNumberPicker);
+    if (value != arg) {
+        value = arg;
+        emit q->valueChanged();
+        return true;
+    }
+    return false;
+}
 
 QNativeAndroidNumberPicker::QNativeAndroidNumberPicker(QNativeAndroidContext *context)
     : QNativeAndroidLinearLayout(*(new QNativeAndroidNumberPickerPrivate), context)
@@ -79,19 +94,9 @@ int QNativeAndroidNumberPicker::value() const
 
 void QNativeAndroidNumberPicker::setValue(int value)
 {
-    if (updateValue(value))
-        QtNativeAndroid::callIntMethod(instance(), "setValue", value);
-}
-
-bool QNativeAndroidNumberPicker::updateValue(int value)
-{
     Q_D(QNativeAndroidNumberPicker);
-    if (d->value != value) {
-        d->value = value;
-        emit valueChanged();
-        return true;
-    }
-    return false;
+    if (d->_q_updateValue(value))
+        QtNativeAndroid::callIntMethod(instance(), "setValue", value);
 }
 
 QAndroidJniObject QNativeAndroidNumberPicker::onCreate()
@@ -121,3 +126,5 @@ void QNativeAndroidNumberPicker::onInflate(QAndroidJniObject &instance)
 }
 
 QT_END_NAMESPACE
+
+#include "moc_qnativeandroidnumberpicker_p.cpp"

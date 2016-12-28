@@ -60,6 +60,22 @@ static void registerNativeAdapterViewMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
+void QNativeAndroidAdapterViewPrivate::updateAdapter()
+{
+    Q_Q(QNativeAndroidAdapterView);
+    if (!q->isValid())
+        return;
+
+    QAndroidJniObject ad;
+    if (adapter)
+        ad = adapter->instance();
+
+    QAndroidJniObject view = q->instance();
+    QtNativeAndroid::callFunction([=]() {
+        view.callMethod<void>("setAdapter", "(Landroid/widget/Adapter;)V", ad.object());
+    });
+}
+
 QNativeAndroidAdapterView::QNativeAndroidAdapterView(QNativeAndroidContext *context)
     : QNativeAndroidViewGroup(*(new QNativeAndroidAdapterViewPrivate), context)
 {
@@ -77,13 +93,13 @@ void QNativeAndroidAdapterView::setAdapter(QNativeAndroidBaseAdapter *adapter)
     if (d->adapter != adapter) {
         if (d->adapter) {
             d->adapter->setContext(0);
-            disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidAdapterView::updateAdapter);
+            QObjectPrivate::disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAdapterViewPrivate::updateAdapter);
             d->adapter->destruct();
         }
         d->adapter = adapter;
         if (d->adapter) {
             d->adapter->setContext(context());
-            connect(d->adapter, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidAdapterView::updateAdapter);
+            QObjectPrivate::connect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAdapterViewPrivate::updateAdapter);
             if (isValid())
                 d->adapter->construct();
         }
@@ -122,25 +138,10 @@ void QNativeAndroidAdapterView::onInflate(QAndroidJniObject &instance)
 
 void QNativeAndroidAdapterView::objectChange(ObjectChange change)
 {
+    Q_D(QNativeAndroidAdapterView);
     QNativeAndroidViewGroup::objectChange(change);
     if (change == InstanceChange)
-        updateAdapter();
-}
-
-void QNativeAndroidAdapterView::updateAdapter()
-{
-    Q_D(QNativeAndroidAdapterView);
-    if (!isValid())
-        return;
-
-    QAndroidJniObject adapter;
-    if (d->adapter)
-        adapter = d->adapter->instance();
-
-    QAndroidJniObject view = instance();
-    QtNativeAndroid::callFunction([=]() {
-        view.callMethod<void>("setAdapter", "(Landroid/widget/Adapter;)V", adapter.object());
-    });
+        d->updateAdapter();
 }
 
 QT_END_NAMESPACE

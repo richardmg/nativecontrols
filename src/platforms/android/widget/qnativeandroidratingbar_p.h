@@ -72,9 +72,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-private Q_SLOTS:
-    bool updateRating(qreal rating);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidRatingBar)
     Q_DECLARE_PRIVATE(QNativeAndroidRatingBar)

@@ -56,7 +56,11 @@ class QNativeAndroidBaseAdapter;
 
 class QNativeAndroidAdapterViewPrivate : public QNativeAndroidViewGroupPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidAdapterView)
+
 public:
+    void updateAdapter();
+
     QAndroidJniObject listener;
     QNativeAndroidBaseAdapter *adapter = nullptr;
 };

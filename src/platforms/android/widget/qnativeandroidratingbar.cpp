@@ -79,19 +79,12 @@ qreal QNativeAndroidRatingBar::rating() const
 
 void QNativeAndroidRatingBar::setRating(qreal rating)
 {
-    if (updateRating(rating))
-        QtNativeAndroid::callRealMethod(instance(), "setRating", rating);
-}
-
-bool QNativeAndroidRatingBar::updateRating(qreal rating)
-{
     Q_D(QNativeAndroidRatingBar);
     if (!qFuzzyCompare(d->rating, rating)) {
         d->rating = rating;
+        QtNativeAndroid::callRealMethod(instance(), "setRating", rating);
         emit ratingChanged();
-        return true;
     }
-    return false;
 }
 
 QAndroidJniObject QNativeAndroidRatingBar::onCreate()

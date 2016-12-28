@@ -79,9 +79,6 @@ protected:
 
     void objectChange(ObjectChange change) override;
 
-private Q_SLOTS:
-    void updateAdapter();
-
 private:
     Q_DISABLE_COPY(QNativeAndroidAdapterView)
     Q_DECLARE_PRIVATE(QNativeAndroidAdapterView)

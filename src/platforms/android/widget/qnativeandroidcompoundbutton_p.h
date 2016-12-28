@@ -77,12 +77,11 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-private Q_SLOTS:
-    bool updateChecked(bool checked);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidCompoundButton)
     Q_DECLARE_PRIVATE(QNativeAndroidCompoundButton)
+
+    Q_PRIVATE_SLOT(d_func(), bool _q_updateChecked(bool checked))
 };
 
 QT_END_NAMESPACE

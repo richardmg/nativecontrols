@@ -74,19 +74,12 @@ int QNativeAndroidProgressBar::progress() const
 
 void QNativeAndroidProgressBar::setProgress(int progress)
 {
-    if (updateProgress(progress))
-        QtNativeAndroid::callIntMethod(instance(), "setProgress", progress);
-}
-
-bool QNativeAndroidProgressBar::updateProgress(int progress)
-{
     Q_D(QNativeAndroidProgressBar);
-    if (d->progress != progress) {
-        d->progress = progress;
+    if (d->secondary != progress) {
+        d->secondary = progress;
+        QtNativeAndroid::callIntMethod(instance(), "setProgress", progress);
         emit progressChanged();
-        return true;
     }
-    return false;
 }
 
 int QNativeAndroidProgressBar::secondaryProgress() const
