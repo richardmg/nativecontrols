@@ -115,9 +115,6 @@ protected:
 
     void objectChange(ObjectChange change) override;
 
-private Q_SLOTS:
-    void updateActionView();
-
 private:
     Q_DISABLE_COPY(QNativeAndroidMenuItem)
     Q_DECLARE_PRIVATE(QNativeAndroidMenuItem)

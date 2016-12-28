@@ -149,9 +149,6 @@ protected:
 
     void objectChange(ObjectChange change) override;
 
-private Q_SLOTS:
-    void updateInterpolator();
-
 private:
     Q_DISABLE_COPY(QNativeAndroidAnimation)
     Q_DECLARE_PRIVATE(QNativeAndroidAnimation)

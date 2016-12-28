@@ -56,7 +56,11 @@ QT_BEGIN_NAMESPACE
 
 class QNativeAndroidAnimationPrivate : public QNativeAndroidContextualPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidAnimation)
+
 public:
+    void updateInterpolator();
+
     QNativeAndroidOptional<int> resource;
     QNativeAndroidOptional<int> duration;
     QNativeAndroidOptional<bool> fillAfter;

@@ -92,7 +92,11 @@ static void registerNativeMenuItemMethods(jobject item)
 
 class QNativeAndroidMenuItemPrivate : public QNativeAndroidContextualPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidMenuItem)
+
 public:
+    void updateActionView();
+
     QString title;
     bool enabled = true;
     bool visible = true;
@@ -101,6 +105,19 @@ public:
     int showAs = 0; // TODO: SHOW_AS_ACTION_NEVER
     QNativeAndroidView *actionView = nullptr;
 };
+
+void QNativeAndroidMenuItemPrivate::updateActionView()
+{
+    Q_Q(QNativeAndroidMenuItem);
+    if (!q->isValid() || !actionView)
+        return;
+
+    QAndroidJniObject item = q->instance();
+    QAndroidJniObject view = actionView->instance();
+    QtNativeAndroid::callFunction([=]() {
+        item.callMethod<void>("setActionView", "(Landroid/view/View;)V", view.object());
+    });
+}
 
 QNativeAndroidMenuItem::QNativeAndroidMenuItem(QObject *parent)
     : QNativeAndroidContextual(*(new QNativeAndroidMenuItemPrivate), parent)
@@ -216,12 +233,12 @@ void QNativeAndroidMenuItem::setActionView(QNativeAndroidView *view)
     Q_D(QNativeAndroidMenuItem);
     if (d->actionView != view) {
         if (d->actionView) {
-            disconnect(d->actionView, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidMenuItem::updateActionView);
+            QObjectPrivate::disconnect(d->actionView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidMenuItemPrivate::updateActionView);
             d->actionView->destruct();
         }
         d->actionView = view;
         if (d->actionView) {
-            connect(d->actionView, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidMenuItem::updateActionView);
+            QObjectPrivate::connect(d->actionView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidMenuItemPrivate::updateActionView);
             if (isValid())
                 d->actionView->construct();
         }
@@ -255,22 +272,10 @@ void QNativeAndroidMenuItem::onInflate(QAndroidJniObject &instance)
 
 void QNativeAndroidMenuItem::objectChange(ObjectChange change)
 {
+    Q_D(QNativeAndroidMenuItem);
     QNativeAndroidContextual::objectChange(change);
     if (change == InstanceChange)
-        updateActionView();
-}
-
-void QNativeAndroidMenuItem::updateActionView()
-{
-    Q_D(QNativeAndroidMenuItem);
-    if (!isValid() || !d->actionView)
-        return;
-
-    QAndroidJniObject item = instance();
-    QAndroidJniObject view = d->actionView->instance();
-    QtNativeAndroid::callFunction([=]() {
-        item.callMethod<void>("setActionView", "(Landroid/view/View;)V", view.object());
-    });
+        d->updateActionView();
 }
 
 QT_END_NAMESPACE

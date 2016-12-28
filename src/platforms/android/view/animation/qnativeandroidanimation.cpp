@@ -41,6 +41,19 @@
 
 QT_BEGIN_NAMESPACE
 
+void QNativeAndroidAnimationPrivate::updateInterpolator()
+{
+    Q_Q(QNativeAndroidAnimation);
+    if (!q->isValid() || !interpolator || !interpolator->isValid())
+        return;
+
+    QAndroidJniObject animation = q->instance();
+    QAndroidJniObject ipolator = interpolator->instance();
+    QtNativeAndroid::callFunction([=]() {
+        animation.callMethod<void>("setInterpolator", "(Landroid/view/animation/Interpolator;)V", ipolator.object());
+    });
+}
+
 QNativeAndroidAnimation::QNativeAndroidAnimation(QObject *parent)
     : QNativeAndroidContextual(*(new QNativeAndroidAnimationPrivate), parent)
 {
@@ -151,12 +164,12 @@ void QNativeAndroidAnimation::setInterpolator(QNativeAndroidInterpolator *interp
     Q_D(QNativeAndroidAnimation);
     if (d->interpolator != interpolator) {
         if (d->interpolator) {
-            disconnect(d->interpolator, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidAnimation::updateInterpolator);
+            QObjectPrivate::disconnect(d->interpolator, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAnimationPrivate::updateInterpolator);
             d->interpolator->destruct();
         }
         d->interpolator = interpolator;
         if (d->interpolator) {
-            connect(d->interpolator, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidAnimation::updateInterpolator);
+            QObjectPrivate::connect(d->interpolator, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAnimationPrivate::updateInterpolator);
             if (isValid())
                 d->interpolator->construct();
         }
@@ -290,21 +303,9 @@ void QNativeAndroidAnimation::onInflate(QAndroidJniObject &instance)
 
 void QNativeAndroidAnimation::objectChange(ObjectChange change)
 {
-    if (change == InstanceChange)
-        updateInterpolator();
-}
-
-void QNativeAndroidAnimation::updateInterpolator()
-{
     Q_D(QNativeAndroidAnimation);
-    if (!isValid() || !d->interpolator || !d->interpolator->isValid())
-        return;
-
-    QAndroidJniObject animation = instance();
-    QAndroidJniObject interpolator = d->interpolator->instance();
-    QtNativeAndroid::callFunction([=]() {
-        animation.callMethod<void>("setInterpolator", "(Landroid/view/animation/Interpolator;)V", interpolator.object());
-    });
+    if (change == InstanceChange)
+        d->updateInterpolator();
 }
 
 QT_END_NAMESPACE
