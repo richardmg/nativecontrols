@@ -51,10 +51,9 @@ public:
     }
 
     // QNativePlatformBase
-    void *controlHandle() override { return this; }
     void setPlatformParent(QNativePlatformBase *parent) override
     {
-        QNativeAndroidObject *nativeParent = static_cast<QNativeAndroidObject *>(parent->controlHandle());
+        QNativeAndroidObject *nativeParent = reinterpret_cast<QNativeAndroidObject *>(parent);
         if (QNativeAndroidActivity *nativeActivity = qobject_cast<QNativeAndroidActivity *>(nativeParent))
             nativeActivity->setContentView(this);
         else if (QNativeAndroidView *nativeView = qobject_cast<QNativeAndroidView *>(nativeParent))
@@ -91,7 +90,6 @@ public:
     }
 
     // QNativePlatformBase
-    void *controlHandle() override { return this; }
     void setPlatformParent(QNativePlatformBase *parent) override { Q_UNUSED(parent); }
 
     // QNativePlatformWindow ### TODO: how does this map to Activity?
