@@ -72,9 +72,6 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-private Q_SLOTS:
-    bool updateRefreshing(bool refreshing);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidSwipeRefreshLayout)
     Q_DECLARE_PRIVATE(QNativeAndroidSwipeRefreshLayout)

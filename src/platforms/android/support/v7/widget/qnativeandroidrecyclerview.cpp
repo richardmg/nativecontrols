@@ -43,10 +43,27 @@ QT_BEGIN_NAMESPACE
 
 class QNativeAndroidRecyclerViewPrivate : public QNativeAndroidViewGroupPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidRecyclerView)
+
 public:
+    void updateAdapter();
+
     QNativeAndroidRecyclerAdapter *adapter = nullptr;
     QAndroidJniObject layoutManager;
 };
+
+void QNativeAndroidRecyclerViewPrivate::updateAdapter()
+{
+    Q_Q(QNativeAndroidRecyclerView);
+    if (!q->isValid() || !adapter)
+        return;
+
+    QAndroidJniObject view = q->instance();
+    QAndroidJniObject ad = adapter->instance();
+    QtNativeAndroid::callFunction([=]() {
+        view.callMethod<void>("setAdapter", "(Landroid/support/v7/widget/RecyclerView$Adapter;)V", ad.object());
+    });
+}
 
 QNativeAndroidRecyclerView::QNativeAndroidRecyclerView(QNativeAndroidContext *context)
     : QNativeAndroidViewGroup(*(new QNativeAndroidRecyclerViewPrivate), context)
@@ -65,13 +82,13 @@ void QNativeAndroidRecyclerView::setAdapter(QNativeAndroidRecyclerAdapter *adapt
     if (d->adapter != adapter) {
         if (d->adapter) {
             d->adapter->setContext(0);
-            disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidRecyclerView::updateAdapter);
+            QObjectPrivate::disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidRecyclerViewPrivate::updateAdapter);
             d->adapter->destruct();
         }
         d->adapter = adapter;
         if (d->adapter) {
             d->adapter->setContext(context());
-            connect(d->adapter, &QNativeAndroidObject::instanceChanged, this, &QNativeAndroidRecyclerView::updateAdapter);
+            QObjectPrivate::connect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidRecyclerViewPrivate::updateAdapter);
             if (isValid())
                 d->adapter->construct();
         }
@@ -101,22 +118,10 @@ void QNativeAndroidRecyclerView::onInflate(QAndroidJniObject& instance)
 
 void QNativeAndroidRecyclerView::objectChange(ObjectChange change)
 {
+    Q_D(QNativeAndroidRecyclerView);
     QNativeAndroidViewGroup::objectChange(change);
     if (change == InstanceChange)
-        updateAdapter();
-}
-
-void QNativeAndroidRecyclerView::updateAdapter()
-{
-    Q_D(QNativeAndroidRecyclerView);
-    if (!isValid() || !d->adapter)
-        return;
-
-    QAndroidJniObject view = instance();
-    QAndroidJniObject adapter = d->adapter->instance();
-    QtNativeAndroid::callFunction([=]() {
-        view.callMethod<void>("setAdapter", "(Landroid/support/v7/widget/RecyclerView$Adapter;)V", adapter.object());
-    });
+        d->updateAdapter();
 }
 
 QT_END_NAMESPACE

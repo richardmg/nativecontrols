@@ -79,13 +79,12 @@ protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
-private Q_SLOTS:
-    QNativeAndroidView *createItem();
-    void setItemPosition(QNativeAndroidView *item, int position);
-
 private:
     Q_DISABLE_COPY(QNativeAndroidRecyclerAdapter)
     Q_DECLARE_PRIVATE(QNativeAndroidRecyclerAdapter)
+
+    Q_PRIVATE_SLOT(d_func(), QNativeAndroidView *_q_createItem())
+    Q_PRIVATE_SLOT(d_func(), void _q_setItemPosition(QNativeAndroidView *item, int position))
 };
 
 QT_END_NAMESPACE

@@ -45,16 +45,59 @@ QT_BEGIN_NAMESPACE
 
 class QNativeAndroidRecyclerAdapterPrivate : public QNativeAndroidContextualPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidRecyclerAdapter)
+
 public:
     static QNativeAndroidRecyclerAdapterPrivate *get(QNativeAndroidRecyclerAdapter *adapter)
     {
         return adapter->d_func();
     }
 
+    QNativeAndroidView *_q_createItem();
+    void _q_setItemPosition(QNativeAndroidView *item, int position);
+
     int count = 0;
     QQmlComponent *delegate = nullptr;
     QList<QAndroidJniObject> holders;
 };
+
+QNativeAndroidView *QNativeAndroidRecyclerAdapterPrivate::_q_createItem()
+{
+    Q_Q(QNativeAndroidRecyclerAdapter);
+    QNativeAndroidView *item = nullptr;
+    if (delegate) {
+        QQmlContext *creationContext = delegate->creationContext();
+        QQmlContext *context = new QQmlContext(creationContext ? creationContext : qmlContext(q));
+        QObject *object = delegate->beginCreate(context);
+        if (object) {
+            context->setParent(object);
+            item = qobject_cast<QNativeAndroidView *>(object);
+            if (!item)
+                delete object;
+        } else {
+            delete context;
+        }
+    } else {
+        item = new QNativeAndroidView;
+    }
+    if (item) {
+        item->setContext(q->context());
+        item->setParentView(qobject_cast<QNativeAndroidView *>(q->parent())); // TODO
+        _q_setItemPosition(item, -1);
+    }
+    if (delegate)
+        delegate->completeCreate();
+    return item;
+}
+
+void QNativeAndroidRecyclerAdapterPrivate::_q_setItemPosition(QNativeAndroidView *item, int position)
+{
+    QQmlContext *context = qmlContext(item);
+    if (context)
+        context = context->parentContext();
+    if (context)
+        context->setContextProperty(QStringLiteral("position"), position);
+}
 
 static jobject native_onCreateViewHolder(JNIEnv *env, jobject object, jlong instance, jobject parent, jint viewType)
 {
@@ -65,7 +108,7 @@ static jobject native_onCreateViewHolder(JNIEnv *env, jobject object, jlong inst
     QNativeAndroidRecyclerAdapter *adapter = reinterpret_cast<QNativeAndroidRecyclerAdapter *>(instance);
     if (adapter) {
         QNativeAndroidView *item = nullptr;
-        QMetaObject::invokeMethod(adapter, "createItem", Qt::BlockingQueuedConnection, Q_RETURN_ARG(QNativeAndroidView *, item));
+        QMetaObject::invokeMethod(adapter, "_q_createItem", Qt::BlockingQueuedConnection, Q_RETURN_ARG(QNativeAndroidView *, item));
         item->construct();
         QNativeAndroidRecyclerAdapterPrivate *p = QNativeAndroidRecyclerAdapterPrivate::get(adapter);
         p->holders += QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder",
@@ -86,7 +129,7 @@ static void native_onBindViewHolder(JNIEnv *env, jobject object, jlong instance,
         jlong vi = QAndroidJniObject(holder).callMethod<jlong>("getInstance");
         QNativeAndroidView *item = reinterpret_cast<QNativeAndroidView *>(vi);
         if (item)
-            QMetaObject::invokeMethod(adapter, "setItemPosition", Qt::BlockingQueuedConnection, Q_ARG(QNativeAndroidView *, item), Q_ARG(int, position));
+            QMetaObject::invokeMethod(adapter, "_q_setItemPosition", Qt::BlockingQueuedConnection, Q_ARG(QNativeAndroidView *, item), Q_ARG(int, position));
     }
 }
 
@@ -162,42 +205,6 @@ void QNativeAndroidRecyclerAdapter::onInflate(QAndroidJniObject &instance)
         instance.callMethod<void>("setItemCount", "(I)V", d->count);
 }
 
-QNativeAndroidView *QNativeAndroidRecyclerAdapter::createItem()
-{
-    Q_D(QNativeAndroidRecyclerAdapter);
-    QNativeAndroidView *item = nullptr;
-    if (d->delegate) {
-        QQmlContext *creationContext = d->delegate->creationContext();
-        QQmlContext *context = new QQmlContext(creationContext ? creationContext : qmlContext(this));
-        QObject *object = d->delegate->beginCreate(context);
-        if (object) {
-            context->setParent(object);
-            item = qobject_cast<QNativeAndroidView *>(object);
-            if (!item)
-                delete object;
-        } else {
-            delete context;
-        }
-    } else {
-        item = new QNativeAndroidView;
-    }
-    if (item) {
-        item->setContext(context());
-        item->setParentView(qobject_cast<QNativeAndroidView *>(parent())); // TODO
-        setItemPosition(item, -1);
-    }
-    if (d->delegate)
-        d->delegate->completeCreate();
-    return item;
-}
-
-void QNativeAndroidRecyclerAdapter::setItemPosition(QNativeAndroidView *item, int position)
-{
-    QQmlContext *context = qmlContext(item);
-    if (context)
-        context = context->parentContext();
-    if (context)
-        context->setContextProperty(QStringLiteral("position"), position);
-}
-
 QT_END_NAMESPACE
+
+#include "moc_qnativeandroidrecycleradapter_p.cpp"

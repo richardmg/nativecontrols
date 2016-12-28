@@ -46,7 +46,7 @@ static void native_onRefresh(JNIEnv *env, jobject object, jlong instance)
     Q_UNUSED(object);
     QNativeAndroidSwipeRefreshLayout *layout = reinterpret_cast<QNativeAndroidSwipeRefreshLayout *>(instance);
     if (layout)
-        QMetaObject::invokeMethod(layout, "updateRefreshing", Qt::QueuedConnection, Q_ARG(bool, true));
+        QMetaObject::invokeMethod(layout, "_q_updateRefreshing", Qt::QueuedConnection, Q_ARG(bool, true));
 }
 
 static void registerNativeSwipeRefreshLayoutMethods(jobject listener)
@@ -61,10 +61,25 @@ static void registerNativeSwipeRefreshLayoutMethods(jobject listener)
 
 class QNativeAndroidSwipeRefreshLayoutPrivate : public QNativeAndroidViewGroupPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAndroidSwipeRefreshLayout)
+
 public:
+    bool _q_updateRefreshing(bool refreshing);
+
     bool refreshing = false;
     QAndroidJniObject listener;
 };
+
+bool QNativeAndroidSwipeRefreshLayoutPrivate::_q_updateRefreshing(bool arg)
+{
+    Q_Q(QNativeAndroidSwipeRefreshLayout);
+    if (refreshing != arg) {
+        refreshing = arg;
+        emit q->refreshingChanged();
+        return true;
+    }
+    return false;
+}
 
 QNativeAndroidSwipeRefreshLayout::QNativeAndroidSwipeRefreshLayout(QNativeAndroidContext *context)
     : QNativeAndroidViewGroup(*(new QNativeAndroidSwipeRefreshLayoutPrivate), context)
@@ -79,19 +94,9 @@ bool QNativeAndroidSwipeRefreshLayout::isRefreshing() const
 
 void QNativeAndroidSwipeRefreshLayout::setRefreshing(bool refreshing)
 {
-    if (updateRefreshing(refreshing))
-        QtNativeAndroid::callBoolMethod(instance(), "setRefreshing", refreshing);
-}
-
-bool QNativeAndroidSwipeRefreshLayout::updateRefreshing(bool refreshing)
-{
     Q_D(QNativeAndroidSwipeRefreshLayout);
-    if (d->refreshing != refreshing) {
-        d->refreshing = refreshing;
-        emit refreshingChanged();
-        return true;
-    }
-    return false;
+    if (d->_q_updateRefreshing(refreshing))
+        QtNativeAndroid::callBoolMethod(instance(), "setRefreshing", refreshing);
 }
 
 QAndroidJniObject QNativeAndroidSwipeRefreshLayout::onCreate()
