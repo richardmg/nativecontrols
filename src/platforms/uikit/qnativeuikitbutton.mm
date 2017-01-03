@@ -72,9 +72,12 @@ QNativeUIKitButtonPrivate::QNativeUIKitButtonPrivate(int version)
     : QNativeUIKitControlPrivate(version)
 {
     UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    setView(uiButton);
+    [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
+
     m_delegate = [[QNativeUIKitButtonDelegate alloc] initWithQNativeUIKitButtonPrivate:this];
     [uiButton addTarget:m_delegate action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
+
+    setView(uiButton);
 }
 
 QNativeUIKitButtonPrivate::~QNativeUIKitButtonPrivate()
