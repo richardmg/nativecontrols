@@ -45,17 +45,21 @@ QT_BEGIN_NAMESPACE
 QNativeUIKitWindowPrivate::QNativeUIKitWindowPrivate(int version)
     : QNativeUIKitBasePrivate(version)
 {
-    // Note: using QWindow insteadof UIWindow directly means that it will be
-    // registered in QtGuiApplication (e.g QtGuiApplication::topLevelWindows()).
-    // Not sure if this is wanted or not, expecially if this needs to be
-    // cross platform behaviour.
-    m_window = new QWindow();
-    setView(reinterpret_cast<UIView *>(m_window->winId()));
+    m_window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIViewController *viewController = [[UIViewController new] autorelease];
+    UIView *view = [[[UIView alloc] initWithFrame:m_window.bounds] autorelease];
+
+    m_window.rootViewController = viewController;
+    viewController.view = view;
+
+    view.backgroundColor = [UIColor whiteColor];
+
+    setView(view);
 }
 
 QNativeUIKitWindowPrivate::~QNativeUIKitWindowPrivate()
 {
-    delete m_window;
+    [m_window release];
 }
 
 void QNativeUIKitWindowPrivate::connectSignals(QNativeBase *base)
@@ -81,12 +85,12 @@ QNativeUIKitWindow::~QNativeUIKitWindow()
 
 UIWindow *QNativeUIKitWindow::uiWindowHandle()
 {
-    return static_cast<UIWindow *>(d_func()->view());
+    return d_func()->m_window;
 }
 
 bool QNativeUIKitWindow::isVisible() const
 {
-    return d_func()->m_window->isVisible();
+    return !d_func()->m_window.hidden;
 }
 
 void QNativeUIKitWindow::setVisible(bool newVisible)
@@ -94,19 +98,18 @@ void QNativeUIKitWindow::setVisible(bool newVisible)
     if (newVisible == isVisible())
         return;
 
-    Q_D(QNativeUIKitWindow);
-    d->m_window->setVisible(newVisible);
+    if (newVisible)
+        [d_func()->m_window makeKeyAndVisible];
+    else
+        qWarning("not implemented");
+    //d_func()->m_window.hidden = !newVisible;
 
     emit visibleChanged(newVisible);
 }
 
 void QNativeUIKitWindow::showFullScreen()
 {
-    Q_D(QNativeUIKitWindow);
-    bool wasVisible = d->m_window->isVisible();
-    d->m_window->showFullScreen();
-    if (!wasVisible)
-        emit visibleChanged(true);
+    setVisible(true);
 }
 
 #include "moc_qnativeuikitwindow.cpp"
