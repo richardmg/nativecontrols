@@ -73,6 +73,25 @@ public:
 
     Q_DECLARE_PUBLIC(QNativeUIKitBase)
 
+protected:
+    enum Attribute {
+        Finalized		= 0x00000001,
+        Moved			= 0x00000002,
+        Resized			= 0x00000004
+    };
+
+    uint m_attributes;
+
+    inline void setAttribute(Attribute attribute, bool on = true)
+    {
+        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
+    }
+
+    inline bool testAttribute(Attribute attribute)
+    {
+        return bool(m_attributes & attribute);
+    }
+
 private:
     UIView *m_view;
 };

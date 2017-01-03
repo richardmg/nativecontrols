@@ -46,6 +46,7 @@ QT_BEGIN_NAMESPACE
 
 QNativeUIKitBasePrivate::QNativeUIKitBasePrivate(int version)
     : QObjectPrivate(version)
+    , m_attributes(0)
     , m_view(nil)
 {
 }
