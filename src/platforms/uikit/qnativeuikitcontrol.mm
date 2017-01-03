@@ -137,6 +137,7 @@ void QNativeUIKitControl::setX(qreal newX)
     CGRect frame = d->view().frame;
     frame.origin.x = newX;
     d->view().frame = frame;
+    d->setAttribute(QNativeUIKitControlPrivate::Moved);
 
     emit xChanged(newX);
 }
@@ -155,6 +156,7 @@ void QNativeUIKitControl::setY(qreal newY)
     CGRect frame = d->view().frame;
     frame.origin.y = newY;
     d->view().frame = frame;
+    d->setAttribute(QNativeUIKitControlPrivate::Moved);
 
     emit yChanged(newY);
 }
@@ -173,6 +175,7 @@ void QNativeUIKitControl::setWidth(qreal newWidth)
     CGRect frame = d->view().frame;
     frame.size.width = newWidth;
     d->view().frame = frame;
+    d->setAttribute(QNativeUIKitControlPrivate::Resized);
 
     emit widthChanged(newWidth);
 }
@@ -191,6 +194,7 @@ void QNativeUIKitControl::setHeight(qreal newHeight)
     CGRect frame = d->view().frame;
     frame.size.height = newHeight;
     d->view().frame = frame;
+    d->setAttribute(QNativeUIKitControlPrivate::Resized);
 
     emit heightChanged(newHeight);
 }
