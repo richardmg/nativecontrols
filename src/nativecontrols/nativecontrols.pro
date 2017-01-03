@@ -22,7 +22,8 @@ for(c,NATIVE_CONTROLS) {
 
 HEADERS += \
     qnativecontrolsglobal.h \
-    qnativeplatformmanager_p.h
+    qnativeplatformmanager_p.h \
+    platform/qnativecontrolsplatformplugin.h
 
 SOURCES += \
     qnativeplatformmanager.cpp
