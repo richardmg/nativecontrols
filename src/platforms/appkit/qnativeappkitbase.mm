@@ -72,6 +72,16 @@ void QNativeAppKitBasePrivate::setView(NSView *view)
     m_view = [view retain];
 }
 
+NSRect QNativeAppKitBasePrivate::alignmentRect() const
+{
+    return [m_view alignmentRectForFrame:m_view.frame];
+}
+
+void QNativeAppKitBasePrivate::setAlignmentRect(NSRect rect)
+{
+    m_view.frame = [m_view frameForAlignmentRect:rect];
+}
+
 QNativeAppKitBase::QNativeAppKitBase(QObject *parent)
     : QObject(*new QNativeAppKitBasePrivate(), parent)
 {
@@ -102,6 +112,21 @@ static void qt_mac_removeFromSuperview(NSView *view)
         view.frame = NSMakeRect(rect.x(), rect.y(), rect.width(), rect.height());
 }
 
+static void qt_mac_addSubview(NSView *superview, NSView *view)
+{
+    if (view.superview)
+        qt_mac_removeFromSuperview(view);
+    NSRect alignmentRect = [view alignmentRectForFrame:view.frame];
+    [superview addSubview:view];
+    // Ratio between frame and alignment rect can change depending on whether the view is attached
+    // to a superview, so reset it after reparenting
+    view.frame = [view frameForAlignmentRect:alignmentRect];
+    const QRectF rect = qt_mac_flipRect(view.frame, view);
+    view.frame = NSMakeRect(rect.x(), rect.y(), rect.width(), rect.height());
+    view.autoresizingMask = NSViewMaxXMargin
+            | (view.superview.isFlipped ? NSViewMaxYMargin : NSViewMinYMargin);
+}
+
 void QNativeAppKitBase::childEvent(QChildEvent *event)
 {
     Q_D(QNativeAppKitBase);
@@ -119,11 +144,7 @@ void QNativeAppKitBase::childEvent(QChildEvent *event)
     // autoresizing will still interfere with top-left origins so we give fixed-size controls
     // the default AppKit autoresizing mask (NSViewMaxXMargin | NSViewMinYMargin) to compensate.
     if (event->added()) {
-        if (dptr_child->view().superview)
-            qt_mac_removeFromSuperview(dptr_child->view());
-        [d->view() addSubview:dptr_child->view()];
-        const QRectF rect = qt_mac_flipRect(dptr_child->view().frame, dptr_child->view());
-        dptr_child->view().frame = NSMakeRect(rect.x(), rect.y(), rect.width(), rect.height());
+        qt_mac_addSubview(d->view(), dptr_child->view());
     } else if (event->removed()) {
         qt_mac_removeFromSuperview(dptr_child->view());
     }

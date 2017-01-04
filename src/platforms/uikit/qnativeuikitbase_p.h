@@ -53,6 +53,8 @@
 
 #include <QtNativeUIKitControls/qnativeuikitbase.h>
 
+typedef struct CGRect CGRect;
+
 QT_BEGIN_NAMESPACE
 
 class QNativeBase;
@@ -68,6 +70,9 @@ public:
     UIView *view();
     UIView *view() const;
     void setView(UIView *view);
+
+    CGRect alignmentRect() const;
+    void setAlignmentRect(CGRect rect);
 
     virtual void updateLayout(bool recursive) { Q_UNUSED(recursive); }
 

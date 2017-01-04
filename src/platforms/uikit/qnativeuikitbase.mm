@@ -72,6 +72,16 @@ void QNativeUIKitBasePrivate::setView(UIView *view)
     m_view = [view retain];
 }
 
+CGRect QNativeUIKitBasePrivate::alignmentRect() const
+{
+    return [m_view alignmentRectForFrame:m_view.frame];
+}
+
+void QNativeUIKitBasePrivate::setAlignmentRect(CGRect rect)
+{
+    m_view.frame = [m_view frameForAlignmentRect:rect];
+}
+
 QNativeUIKitBase::QNativeUIKitBase(QObject *parent)
     : QObject(*new QNativeUIKitBasePrivate(), parent)
 {
@@ -100,10 +110,17 @@ void QNativeUIKitBase::childEvent(QChildEvent *event)
     if (!dptr_child)
         return;
 
-    if (event->added())
+    if (event->added()) {
+        CGRect alignmentRect = [d->view() alignmentRectForFrame:d->view().frame];
         [d->view() addSubview:dptr_child->view()];
-    else if (event->removed())
+        // Ratio between frame and alignment rect can change depending on whether the view is
+        // attached to a superview, so reset it after reparenting
+        d->view().frame = [d->view() frameForAlignmentRect:alignmentRect];
+        d->view().autoresizingMask =
+                UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    } else if (event->removed()) {
         [dptr_child->view() removeFromSuperview];
+    }
 }
 
 #include "moc_qnativeuikitbase.cpp"

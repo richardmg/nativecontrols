@@ -53,6 +53,9 @@
 
 #include <QtNativeAppKitControls/qnativeappkitbase.h>
 
+typedef struct CGRect CGRect;
+typedef CGRect NSRect;
+
 QT_BEGIN_NAMESPACE
 
 class QNativeBase;
@@ -68,6 +71,9 @@ public:
     NSView *view();
     NSView *view() const;
     void setView(NSView *view);
+
+    NSRect alignmentRect() const;
+    void setAlignmentRect(NSRect rect);
 
     virtual void updateLayout(bool recursive) { Q_UNUSED(recursive); }
 

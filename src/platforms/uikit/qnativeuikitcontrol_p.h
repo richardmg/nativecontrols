@@ -63,6 +63,8 @@ public:
     explicit QNativeUIKitControlPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeUIKitControlPrivate();
 
+    void setGeometry(const QRectF &rect);
+
     virtual void connectSignals(QNativeBase *base) override;
     virtual void updateLayout(bool recursive) override;
 

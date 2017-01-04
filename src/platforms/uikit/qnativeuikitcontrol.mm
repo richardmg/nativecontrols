@@ -164,7 +164,7 @@ void QNativeUIKitControl::resize(const QSizeF size)
 
 QRectF QNativeUIKitControl::geometry() const
 {
-    return QRectF::fromCGRect(d_func()->view().frame);
+    return QRectF::fromCGRect(d_func()->alignmentRect());
 }
 
 QRectF QNativeUIKitControl::frameGeometry() const
@@ -172,9 +172,14 @@ QRectF QNativeUIKitControl::frameGeometry() const
     return QRectF::fromCGRect(d_func()->view().frame);
 }
 
+void QNativeUIKitControlPrivate::setGeometry(const QRectF &rect)
+{
+    setAlignmentRect(rect.toCGRect());
+}
+
 qreal QNativeUIKitControl::x() const
 {
-    return d_func()->view().frame.origin.x;
+    return geometry().x();
 }
 
 void QNativeUIKitControl::setX(qreal newX)
@@ -183,9 +188,9 @@ void QNativeUIKitControl::setX(qreal newX)
         return;
 
     Q_D(QNativeUIKitControl);
-    CGRect frame = d->view().frame;
-    frame.origin.x = newX;
-    d->view().frame = frame;
+    QRectF g = geometry();
+    g.moveLeft(newX);
+    d_func()->setGeometry(g);
     d->setAttribute(QNativeUIKitControlPrivate::Moved);
 
     emit xChanged(newX);
@@ -193,7 +198,7 @@ void QNativeUIKitControl::setX(qreal newX)
 
 qreal QNativeUIKitControl::y() const
 {
-    return d_func()->view().frame.origin.y;
+    return geometry().y();
 }
 
 void QNativeUIKitControl::setY(qreal newY)
@@ -202,9 +207,9 @@ void QNativeUIKitControl::setY(qreal newY)
         return;
 
     Q_D(QNativeUIKitControl);
-    CGRect frame = d->view().frame;
-    frame.origin.y = newY;
-    d->view().frame = frame;
+    QRectF g = geometry();
+    g.moveTop(newY);
+    d_func()->setGeometry(g);
     d->setAttribute(QNativeUIKitControlPrivate::Moved);
 
     emit yChanged(newY);
@@ -212,7 +217,7 @@ void QNativeUIKitControl::setY(qreal newY)
 
 qreal QNativeUIKitControl::width() const
 {
-    return d_func()->view().frame.size.width;
+    return geometry().width();
 }
 
 void QNativeUIKitControl::setWidth(qreal newWidth)
@@ -221,9 +226,9 @@ void QNativeUIKitControl::setWidth(qreal newWidth)
         return;
 
     Q_D(QNativeUIKitControl);
-    CGRect frame = d->view().frame;
-    frame.size.width = newWidth;
-    d->view().frame = frame;
+    QRectF g = geometry();
+    g.setWidth(newWidth);
+    d_func()->setGeometry(g);
     d->setAttribute(QNativeUIKitControlPrivate::Resized);
 
     emit widthChanged(newWidth);
@@ -231,7 +236,7 @@ void QNativeUIKitControl::setWidth(qreal newWidth)
 
 qreal QNativeUIKitControl::height() const
 {
-    return d_func()->view().frame.size.height;
+    return geometry().height();
 }
 
 void QNativeUIKitControl::setHeight(qreal newHeight)
@@ -240,9 +245,9 @@ void QNativeUIKitControl::setHeight(qreal newHeight)
         return;
 
     Q_D(QNativeUIKitControl);
-    CGRect frame = d->view().frame;
-    frame.size.height = newHeight;
-    d->view().frame = frame;
+    QRectF g = geometry();
+    g.setHeight(newHeight);
+    d_func()->setGeometry(g);
     d->setAttribute(QNativeUIKitControlPrivate::Resized);
 
     emit heightChanged(newHeight);

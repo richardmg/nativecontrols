@@ -69,8 +69,7 @@ QNativeUIKitTextFieldPrivate::QNativeUIKitTextFieldPrivate(int version)
     m_delegate = [[QNativeUIKitTextFieldDelegate alloc] initWithQNativeUIKitTextFieldPrivate:this];
 
     UITextField *uiTextField = [[UITextField alloc] init];
-//    uiTextField.autoresizingMask = NSViewMaxXMargin | NSViewMinYMargin;
-//    [uiTextField sizeToFit];
+    [uiTextField sizeToFit];
 
     setView(uiTextField);
 }

@@ -44,18 +44,16 @@
 
 QT_BEGIN_NAMESPACE
 
-qreal qt_mac_flipYCoordinate(qreal y, qreal height, NSView *view);
-NSRect qt_mac_flipRect(const QRectF &rect, NSView *view);
 QRectF qt_mac_flipRect(const NSRect &rect, NSView *view);
 
-qreal qt_mac_flipYCoordinate(qreal y, qreal height, NSView *view)
+static qreal qt_mac_flipYCoordinate(qreal y, qreal height, NSView *view)
 {
     if (view.superview && !view.superview.isFlipped)
         return view.superview.frame.size.height - (y + height);
     return y;
 }
 
-NSRect qt_mac_flipRect(const QRectF &rect, NSView *view)
+static NSRect qt_mac_flipRect(const QRectF &rect, NSView *view)
 {
     return NSMakeRect(rect.x(),
                       qt_mac_flipYCoordinate(rect.y(), rect.height(), view),
@@ -203,7 +201,7 @@ void QNativeAppKitControl::resize(const QSizeF size)
 
 QRectF QNativeAppKitControl::geometry() const
 {
-    return qt_mac_flipRect(d_func()->view().frame, d_func()->view());
+    return qt_mac_flipRect(d_func()->alignmentRect(), d_func()->view());
 }
 
 QRectF QNativeAppKitControl::frameGeometry() const
@@ -211,9 +209,14 @@ QRectF QNativeAppKitControl::frameGeometry() const
     return qt_mac_flipRect(d_func()->view().frame, d_func()->view());
 }
 
+void QNativeAppKitControlPrivate::setGeometry(const QRectF &rect)
+{
+    setAlignmentRect(qt_mac_flipRect(rect, view()));
+}
+
 qreal QNativeAppKitControl::x() const
 {
-    return d_func()->view().frame.origin.x;
+    return geometry().x();
 }
 
 void QNativeAppKitControl::setX(qreal newX)
@@ -222,9 +225,9 @@ void QNativeAppKitControl::setX(qreal newX)
         return;
 
     Q_D(QNativeAppKitControl);
-    CGRect frame = d->view().frame;
-    frame.origin.x = newX;
-    d->view().frame = frame;
+    QRectF g = geometry();
+    g.moveLeft(newX);
+    d_func()->setGeometry(g);
     d->setAttribute(QNativeAppKitControlPrivate::Moved);
 
     emit xChanged(newX);
@@ -232,11 +235,7 @@ void QNativeAppKitControl::setX(qreal newX)
 
 qreal QNativeAppKitControl::y() const
 {
-    NSView *view = d_func()->view();
-    return qt_mac_flipYCoordinate(
-                view.frame.origin.y,
-                view.frame.size.height,
-                view);
+    return geometry().y();
 }
 
 void QNativeAppKitControl::setY(qreal newY)
@@ -246,8 +245,8 @@ void QNativeAppKitControl::setY(qreal newY)
 
     Q_D(QNativeAppKitControl);
     QRectF g = geometry();
-    g.setY(newY);
-    d->view().frame = qt_mac_flipRect(g, d_func()->view());
+    g.moveTop(newY);
+    d_func()->setGeometry(g);
     d->setAttribute(QNativeAppKitControlPrivate::Moved);
 
     emit yChanged(newY);
@@ -255,7 +254,7 @@ void QNativeAppKitControl::setY(qreal newY)
 
 qreal QNativeAppKitControl::width() const
 {
-    return d_func()->view().frame.size.width;
+    return geometry().width();
 }
 
 void QNativeAppKitControl::setWidth(qreal newWidth)
@@ -264,9 +263,9 @@ void QNativeAppKitControl::setWidth(qreal newWidth)
         return;
 
     Q_D(QNativeAppKitControl);
-    CGRect frame = d->view().frame;
-    frame.size.width = newWidth;
-    d->view().frame = frame;
+    QRectF g = geometry();
+    g.setWidth(newWidth);
+    d_func()->setGeometry(g);
     d->setAttribute(QNativeAppKitControlPrivate::Resized);
 
     emit widthChanged(newWidth);
@@ -274,7 +273,7 @@ void QNativeAppKitControl::setWidth(qreal newWidth)
 
 qreal QNativeAppKitControl::height() const
 {
-    return d_func()->view().frame.size.height;
+    return geometry().height();
 }
 
 void QNativeAppKitControl::setHeight(qreal newHeight)
@@ -285,7 +284,7 @@ void QNativeAppKitControl::setHeight(qreal newHeight)
     Q_D(QNativeAppKitControl);
     QRectF g = geometry();
     g.setHeight(newHeight);
-    d->view().frame = qt_mac_flipRect(g, d_func()->view());
+    d_func()->setGeometry(g);
     d->setAttribute(QNativeAppKitControlPrivate::Resized);
 
     emit heightChanged(newHeight);
