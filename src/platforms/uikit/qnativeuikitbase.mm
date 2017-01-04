@@ -72,10 +72,6 @@ void QNativeUIKitBasePrivate::setView(UIView *view)
     m_view = [view retain];
 }
 
-void QNativeUIKitBasePrivate::connectSignals(QNativeBase *)
-{
-}
-
 QNativeUIKitBase::QNativeUIKitBase(QObject *parent)
     : QObject(*new QNativeUIKitBasePrivate(), parent)
 {

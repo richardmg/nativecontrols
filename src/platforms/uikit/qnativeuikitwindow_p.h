@@ -65,10 +65,12 @@ public:
     virtual ~QNativeUIKitWindowPrivate();
 
     virtual void connectSignals(QNativeBase *base) override;
-
-    UIWindow *m_window;
+    virtual void updateLayout(bool recursive) override;
 
     Q_DECLARE_PUBLIC(QNativeUIKitWindow)
+
+private:
+    UIWindow *m_window;
 };
 
 QT_END_NAMESPACE

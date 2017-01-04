@@ -69,13 +69,16 @@ public:
     UIView *view() const;
     void setView(UIView *view);
 
-    virtual void connectSignals(QNativeBase *base);
+    virtual void updateLayout(bool recursive) { Q_UNUSED(recursive); }
+
+    // Used by QNativeUIKitPlatformPlugin
+    virtual void connectSignals(QNativeBase *) {}
 
     Q_DECLARE_PUBLIC(QNativeUIKitBase)
 
 protected:
     enum Attribute {
-        Finalized		= 0x00000001,
+        LayedOut		= 0x00000001,
         Moved			= 0x00000002,
         Resized			= 0x00000004
     };

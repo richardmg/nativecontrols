@@ -37,6 +37,7 @@
 #include <UIKit/UIKit.h>
 
 #include <QtGui/qwindow.h>
+#include <QtCore/private/qobject_p.h>
 #include <QtNativeUIKitControls/qnativeuikitwindow.h>
 #include <QtNativeUIKitControls/private/qnativeuikitwindow_p.h>
 
@@ -69,6 +70,18 @@ void QNativeUIKitWindowPrivate::connectSignals(QNativeBase *base)
     q->connect(q, SIGNAL(visibleChanged(bool)), base, SIGNAL(visibleChanged(bool)));
 }
 
+void QNativeUIKitWindowPrivate::updateLayout(bool recursive)
+{
+    if (testAttribute(LayedOut))
+        return;
+    setAttribute(LayedOut);
+
+    if (recursive) {
+        for (QObject *child : q_func()->children())
+            static_cast<QNativeUIKitBasePrivate *>(QObjectPrivate::get(child))->updateLayout(recursive);
+    }
+}
+
 QNativeUIKitWindow::QNativeUIKitWindow(QObject *parent)
     : QNativeUIKitBase(*new QNativeUIKitWindowPrivate(), parent)
 {
@@ -98,11 +111,14 @@ void QNativeUIKitWindow::setVisible(bool newVisible)
     if (newVisible == isVisible())
         return;
 
-    if (newVisible)
-        [d_func()->m_window makeKeyAndVisible];
-    else
+    Q_D(QNativeUIKitWindow);
+
+    if (newVisible) {
+        d->updateLayout(true);
+        [d->m_window makeKeyAndVisible];
+    } else {
         qWarning("not implemented");
-    //d_func()->m_window.hidden = !newVisible;
+    }
 
     emit visibleChanged(newVisible);
 }

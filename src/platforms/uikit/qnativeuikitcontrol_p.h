@@ -64,6 +64,7 @@ public:
     virtual ~QNativeUIKitControlPrivate();
 
     virtual void connectSignals(QNativeBase *base) override;
+    virtual void updateLayout(bool recursive) override;
 
     Q_DECLARE_PUBLIC(QNativeUIKitControl)
 };
