@@ -53,6 +53,8 @@ public:
     virtual QRectF geometry() const = 0;
     virtual void setGeometry(const QRectF &rect) = 0;
 
+    virtual QRectF frameGeometry() const = 0;
+
     virtual void move(const QPointF &pos) = 0;
     virtual void resize(const QSizeF size) = 0;
 };

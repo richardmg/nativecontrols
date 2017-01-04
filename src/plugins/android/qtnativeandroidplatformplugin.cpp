@@ -74,6 +74,8 @@ public:
         QNativeAndroidView::setHeight(rect.height());
     }
 
+    QRectF frameGeometry() const override { return geometry(); }
+
     void move(const QPointF &pos) override
     {
         Q_UNIMPLEMENTED();

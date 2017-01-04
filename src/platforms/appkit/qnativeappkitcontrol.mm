@@ -206,6 +206,11 @@ QRectF QNativeAppKitControl::geometry() const
     return qt_mac_flipRect(d_func()->view().frame, d_func()->view());
 }
 
+QRectF QNativeAppKitControl::frameGeometry() const
+{
+    return qt_mac_flipRect(d_func()->view().frame, d_func()->view());
+}
+
 qreal QNativeAppKitControl::x() const
 {
     return d_func()->view().frame.origin.x;

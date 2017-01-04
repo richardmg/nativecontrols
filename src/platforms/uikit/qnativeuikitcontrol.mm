@@ -167,6 +167,11 @@ QRectF QNativeUIKitControl::geometry() const
     return QRectF::fromCGRect(d_func()->view().frame);
 }
 
+QRectF QNativeUIKitControl::frameGeometry() const
+{
+    return QRectF::fromCGRect(d_func()->view().frame);
+}
+
 qreal QNativeUIKitControl::x() const
 {
     return d_func()->view().frame.origin.x;

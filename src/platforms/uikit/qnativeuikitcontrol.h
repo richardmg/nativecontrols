@@ -28,6 +28,9 @@ public:
 
     virtual QRectF geometry() const override;
     virtual void setGeometry(const QRectF &rect) override;
+
+    virtual QRectF frameGeometry() const override;
+
     virtual void move(const QPointF &pos) override;
     virtual void resize(const QSizeF size) override;
 
