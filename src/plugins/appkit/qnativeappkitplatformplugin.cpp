@@ -54,6 +54,8 @@ public:
             appkitBase = new QNativeAppKitWindow(nullptr);
         else if (dynamic_cast<QNativeButton *>(nativeBase))
             appkitBase = new QNativeAppKitButton(nullptr);
+        else if (dynamic_cast<QNativeTextField *>(nativeBase))
+            appkitBase = new QNativeAppKitTextField(nullptr);
         else
             Q_UNREACHABLE();
 

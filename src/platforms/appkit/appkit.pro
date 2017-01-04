@@ -12,7 +12,8 @@ APPKIT_CONTROLS = \
     base \
     window \
     control \
-    button
+    button \
+    textfield
 
 for(c,APPKIT_CONTROLS) {
     HEADERS += qnativeappkit$${c}.h

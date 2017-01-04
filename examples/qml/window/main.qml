@@ -17,6 +17,18 @@ NativeWindow {
 //        Ios.subLabel: "subLabel"
     }
 
+    TextField {
+        x: 10
+        y: 100
+        width: 200
+    }
+
+    TextField {
+        x: 220
+        y: 100
+        width: 200
+    }
+
     Component.onCompleted: print("Application window completed")
 
 //	+ios {
