@@ -84,7 +84,7 @@ qreal QNativeControl::x() const
 void QNativeControl::setX(qreal x)
 {
     QRectF g = PLATFORM_CONTROL->geometry();
-    g.setX(x);
+    g.moveLeft(x);
     PLATFORM_CONTROL->setGeometry(g);
 }
 
@@ -96,7 +96,7 @@ qreal QNativeControl::y() const
 void QNativeControl::setY(qreal y)
 {
     QRectF g = PLATFORM_CONTROL->geometry();
-    g.setY(y);
+    g.moveTop(y);
     PLATFORM_CONTROL->setGeometry(g);
 }
 
