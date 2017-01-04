@@ -124,6 +124,26 @@ void QNativeControl::setHeight(qreal h)
     PLATFORM_CONTROL->setGeometry(g);
 }
 
+qreal QNativeControl::left() const
+{
+    return PLATFORM_CONTROL->geometry().left();
+}
+
+qreal QNativeControl::top() const
+{
+    return PLATFORM_CONTROL->geometry().top();
+}
+
+qreal QNativeControl::right() const
+{
+    return PLATFORM_CONTROL->geometry().right();
+}
+
+qreal QNativeControl::bottom() const
+{
+    return PLATFORM_CONTROL->geometry().bottom();
+}
+
 void QNativeControl::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
 {
     PLATFORM_CONTROL->setGeometry(QRectF(posx, posy, w, h));

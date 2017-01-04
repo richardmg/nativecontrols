@@ -87,9 +87,13 @@ void QNativeAppKitControlPrivate::connectSignals(QNativeBase *base)
     const auto b = static_cast<QNativeControl *>(base);
     q->connect(q, &QNativeAppKitControl::visibleChanged, b, &QNativeControl::visibleChanged);
     q->connect(q, &QNativeAppKitControl::xChanged, b, &QNativeControl::xChanged);
+    q->connect(q, &QNativeAppKitControl::xChanged, b, &QNativeControl::rightChanged);
     q->connect(q, &QNativeAppKitControl::yChanged, b, &QNativeControl::yChanged);
+    q->connect(q, &QNativeAppKitControl::yChanged, b, &QNativeControl::bottomChanged);
     q->connect(q, &QNativeAppKitControl::widthChanged, b, &QNativeControl::widthChanged);
+    q->connect(q, &QNativeAppKitControl::widthChanged, b, &QNativeControl::rightChanged);
     q->connect(q, &QNativeAppKitControl::heightChanged, b, &QNativeControl::heightChanged);
+    q->connect(q, &QNativeAppKitControl::heightChanged, b, &QNativeControl::bottomChanged);
 }
 
 void QNativeAppKitControlPrivate::updateLayout(bool recursive)

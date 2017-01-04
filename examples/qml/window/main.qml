@@ -7,10 +7,11 @@ NativeWindow {
     visible: true
 
     Button {
-        x: 10
-        y: 50
+        id: theButton
+        x: 20
+        y: 20
         width: 100
-        height: 30
+        height: 21
         text: "Click me"
         onClicked: text = "You clicked me!"
 //        Android.bgStyle: Android.bgBlue
@@ -18,16 +19,19 @@ NativeWindow {
     }
 
     TextField {
-        x: 10
-        y: 100
+        id: theTextField1
+        x: 20
+        y: theButton.bottom + 8
         width: 200
+        height: 22
         placeholderText: "Enter some text..."
     }
 
     TextField {
-        x: 220
-        y: 100
+        x: theTextField1.right + 8
+        y: theButton.bottom + 8
         width: 200
+        height: 22
     }
 
     Component.onCompleted: print("Application window completed")
