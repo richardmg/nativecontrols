@@ -145,6 +145,18 @@ void QNativeUIKitControl::move(const QPointF &pos)
     setY(pos.y());
 }
 
+void QNativeUIKitControl::resize(qreal width, qreal height)
+{
+    setWidth(width);
+    setHeight(height);
+}
+
+void QNativeUIKitControl::resize(const QSizeF size)
+{
+    setWidth(size.width());
+    setHeight(size.height());
+}
+
 QRectF QNativeUIKitControl::geometry() const
 {
     return QRectF::fromCGRect(d_func()->view().frame);

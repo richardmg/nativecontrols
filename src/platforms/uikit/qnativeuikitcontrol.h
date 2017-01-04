@@ -33,6 +33,8 @@ public:
     void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
     void move(qreal posx, qreal posy);
     void move(const QPointF &pos);
+    void resize(qreal width, qreal height);
+    void resize(const QSizeF size);
 
     qreal x() const;
     void setX(qreal);
