@@ -7,8 +7,13 @@ int main(int argc, char **argv)
 
     QNativeWindow window;
     QNativeButton button(QStringLiteral("Click me"), &window);
-    button.setGeometry(10, 10, 100, 30);
+    button.move(50, 100);
     QObject::connect(&button, &QNativeButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
+
+    QNativeTextField textField(&window);
+    textField.setPlaceholderText(QStringLiteral("TextField"));
+    textField.move(50, 150);
+
     window.showFullScreen();
 
     return app.exec();
