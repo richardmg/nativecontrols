@@ -129,6 +129,26 @@ void QNativeControl::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
     PLATFORM_CONTROL->setGeometry(QRectF(posx, posy, w, h));
 }
 
+void QNativeControl::move(const QPointF &pos)
+{
+    PLATFORM_CONTROL->move(pos);
+}
+
+void QNativeControl::move(qreal posx, qreal posy)
+{
+    PLATFORM_CONTROL->move(QPointF(posx, posy));
+}
+
+void QNativeControl::resize(const QSizeF size)
+{
+    PLATFORM_CONTROL->resize(size);
+}
+
+void QNativeControl::resize(qreal width, qreal height)
+{
+    PLATFORM_CONTROL->resize(QSizeF(width, height));
+}
+
 void QNativeControl::setGeometry(const QRectF &rect)
 {
     PLATFORM_CONTROL->setGeometry(rect);

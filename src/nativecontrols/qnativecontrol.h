@@ -68,8 +68,13 @@ public:
 
     void setGeometry(const QRectF &rect);
     QRectF geometry() const;
-
     void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
+
+    void move(const QPointF &pos);
+    void move(qreal posx, qreal posy);
+
+    void resize(const QSizeF size);
+    void resize(qreal width, qreal height);
 
     qreal x() const;
     void setX(qreal);

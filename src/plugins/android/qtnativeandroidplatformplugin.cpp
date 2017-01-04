@@ -74,6 +74,16 @@ public:
         QNativeAndroidView::setHeight(rect.height());
     }
 
+    void move(const QPointF &pos) override
+    {
+        Q_UNIMPLEMENTED();
+    }
+
+    void resize(const QSizeF size) override
+    {
+        Q_UNIMPLEMENTED();
+    }
+
     // QNativePlatformButton
     QString text() override { return QNativeAndroidButton::text(); }
     void setText(const QString &text) override { QNativeAndroidButton::setText(text); }
