@@ -41,6 +41,20 @@
 #include <QtNativeAppKitControls/qnativeappkitwindow.h>
 #include <QtNativeAppKitControls/private/qnativeappkitwindow_p.h>
 
+@interface QtNativeNSView : NSView
+
+@end
+
+@implementation QtNativeNSView
+
+- (BOOL)isFlipped
+{
+    static const bool useFlippedViews = qEnvironmentVariableIsSet("QT_NATIVE_MAC_USE_FLIPPED_NSVIEWS");
+    return useFlippedViews ? YES : NO;
+}
+
+@end
+
 QT_BEGIN_NAMESPACE
 
 QNativeAppKitWindowPrivate::QNativeAppKitWindowPrivate(int version)
@@ -51,7 +65,7 @@ QNativeAppKitWindowPrivate::QNativeAppKitWindowPrivate(int version)
                                     (NSInteger)(NSWidth(screenFrame) / 3),
                                     (NSInteger)(NSHeight(screenFrame) / 3));
 
-    NSView *view = [[[NSView alloc] initWithFrame:windowFrame] autorelease];
+    NSView *view = [[[QtNativeNSView alloc] initWithFrame:windowFrame] autorelease];
 
     NSViewController *viewController = [[NSViewController new] autorelease];
     viewController.view = view;
