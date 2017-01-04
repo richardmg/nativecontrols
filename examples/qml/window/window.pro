@@ -7,6 +7,7 @@ TARGET = window
 QT += gui qml quick
 RESOURCES += main.qrc
 
+macos: QTPLUGIN += qnativeappkit
 uikit:!watchos: QTPLUGIN += qnativeuikit
 
 # Input
