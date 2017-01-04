@@ -34,39 +34,23 @@
 **
 ****************************************************************************/
 
-#include <QtQml>
-#include <QQmlEngine>
-#include <QtNativeControls>
+#ifndef QNATIVEPLATFORMTEXTFIELD_H
+#define QNATIVEPLATFORMTEXTFIELD_H
+
+#include <QtCore>
+#include <QtNativeControls/qnativeplatformcontrol.h>
 
 QT_BEGIN_NAMESPACE
 
-class QmlNativeControlsPlugin: public QQmlExtensionPlugin
+class Q_NATIVECONTROLS_EXPORT QNativePlatformTextField : public virtual QNativePlatformControl
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
-
 public:
+    virtual ~QNativePlatformTextField() {}
 
-QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
-{
-}
-
-void registerTypes(const char *uri) override
-{
-    qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "NativeWindow");
-    qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
-}
-
-void initializeEngine(QQmlEngine *engine, const char *uri) override
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(uri);
-}
-
+    virtual QString text() = 0;
+    virtual void setText(const QString &text) = 0;
 };
 
 QT_END_NAMESPACE
 
-#include "qmlnativecontrolsplugin.moc"
+#endif // QNATIVEPLATFORMTEXTFIELD_H

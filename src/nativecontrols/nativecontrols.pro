@@ -11,7 +11,8 @@ NATIVE_CONTROLS = \
     base \
     window \
     control \
-    button
+    button \
+    textfield
 
 for(c,NATIVE_CONTROLS) {
     HEADERS += qnative$${c}.h

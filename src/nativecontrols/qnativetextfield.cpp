@@ -34,39 +34,57 @@
 **
 ****************************************************************************/
 
-#include <QtQml>
-#include <QQmlEngine>
-#include <QtNativeControls>
+
+#include <QtNativeControls/qnativetextfield.h>
+#include <QtNativeControls/private/qnativetextfield_p.h>
+#include <QtNativeControls/qnativeplatformtextfield.h>
 
 QT_BEGIN_NAMESPACE
 
-class QmlNativeControlsPlugin: public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+#define PLATFORM_TEXT_FIELD dynamic_cast<QNativePlatformTextField *>(d_func()->m_platformBase)
 
-public:
-
-QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
+QNativeTextFieldPrivate::QNativeTextFieldPrivate(int version)
+    : QNativeControlPrivate(version)
 {
 }
 
-void registerTypes(const char *uri) override
+QNativeTextFieldPrivate::~QNativeTextFieldPrivate()
 {
-    qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "NativeWindow");
-    qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
 }
 
-void initializeEngine(QQmlEngine *engine, const char *uri) override
+QNativeTextField::QNativeTextField(QNativeBase *parent)
+    : QNativeControl(*new QNativeTextFieldPrivate(), parent)
 {
-    Q_UNUSED(engine);
-    Q_UNUSED(uri);
+    d_func()->connectToPlatform();
 }
 
-};
+QNativeTextField::QNativeTextField(const QString &text, QNativeBase *parent)
+    : QNativeControl(*new QNativeTextFieldPrivate(), parent)
+{
+    d_func()->connectToPlatform();
+    setText(text);
+}
+
+QNativeTextField::QNativeTextField(QNativeTextFieldPrivate &dd, QObject *parent)
+    : QNativeControl(dd, parent)
+{
+}
+
+QNativeTextField::~QNativeTextField()
+{
+}
+
+QString QNativeTextField::text()
+{
+    return PLATFORM_TEXT_FIELD->text();
+}
+
+void QNativeTextField::setText(const QString &newText)
+{
+    PLATFORM_TEXT_FIELD->setText(newText);
+}
+
+#include "moc_qnativetextfield.cpp"
 
 QT_END_NAMESPACE
 
-#include "qmlnativecontrolsplugin.moc"

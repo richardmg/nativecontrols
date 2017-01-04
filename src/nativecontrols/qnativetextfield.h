@@ -34,39 +34,41 @@
 **
 ****************************************************************************/
 
-#include <QtQml>
-#include <QQmlEngine>
-#include <QtNativeControls>
+#ifndef QNATIVETEXTFIELD_H
+#define QNATIVETEXTFIELD_H
+
+#include <QtNativeControls/qnativecontrol.h>
+#include <QtNativeControls/qnativecontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class QmlNativeControlsPlugin: public QQmlExtensionPlugin
+class QNativeTextFieldPrivate;
+class QNativePlatformTextField;
+
+class Q_NATIVECONTROLS_EXPORT QNativeTextField : public QNativeControl
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
 
 public:
+    explicit QNativeTextField(QNativeBase *parent = nullptr);
+    explicit QNativeTextField(const QString &text, QNativeBase *parent = nullptr);
+    virtual ~QNativeTextField();
 
-QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
-{
-}
+    QString text();
+    void setText(const QString &text);
 
-void registerTypes(const char *uri) override
-{
-    qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "NativeWindow");
-    qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
-}
+Q_SIGNALS:
+    void textChanged(const QString &text);
 
-void initializeEngine(QQmlEngine *engine, const char *uri) override
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(uri);
-}
+protected:
+    QNativeTextField(QNativeTextFieldPrivate &dd, QObject *parent = nullptr);
 
+private:
+    Q_DECLARE_PRIVATE(QNativeTextField)
+    Q_DISABLE_COPY(QNativeTextField)
 };
 
 QT_END_NAMESPACE
 
-#include "qmlnativecontrolsplugin.moc"
+#endif // QNATIVETEXTFIELD_H
