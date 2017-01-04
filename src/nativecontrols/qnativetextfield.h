@@ -49,6 +49,7 @@ class Q_NATIVECONTROLS_EXPORT QNativeTextField : public QNativeControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
     explicit QNativeTextField(QNativeBase *parent = nullptr);
@@ -58,8 +59,12 @@ public:
     QString text();
     void setText(const QString &text);
 
+    QString placeholderText();
+    void setPlaceholderText(const QString &placeholderText);
+
 Q_SIGNALS:
     void textChanged(const QString &text);
+    void placeholderTextChanged(const QString &placeholderText);
 
 protected:
     QNativeTextField(QNativeTextFieldPrivate &dd, QObject *parent = nullptr);

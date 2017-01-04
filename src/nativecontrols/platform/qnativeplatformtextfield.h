@@ -49,6 +49,9 @@ public:
 
     virtual QString text() = 0;
     virtual void setText(const QString &text) = 0;
+
+    virtual QString placeholderText() = 0;
+    virtual void setPlaceholderText(const QString &placeholderText) = 0;
 };
 
 QT_END_NAMESPACE

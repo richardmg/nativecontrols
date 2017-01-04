@@ -21,6 +21,7 @@ NativeWindow {
         x: 10
         y: 100
         width: 200
+        placeholderText: "Enter some text..."
     }
 
     TextField {

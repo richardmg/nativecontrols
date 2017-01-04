@@ -129,4 +129,19 @@ void QNativeAppKitTextField::setText(const QString &newText)
     emit textChanged(newText);
 }
 
+QString QNativeAppKitTextField::placeholderText()
+{
+    return QString::fromNSString(nsTextFieldHandle().placeholderString);
+}
+
+void QNativeAppKitTextField::setPlaceholderText(const QString &newPlaceholderText)
+{
+    if (newPlaceholderText == placeholderText())
+        return;
+
+    nsTextFieldHandle().placeholderString = newPlaceholderText.toNSString();
+
+    emit placeholderTextChanged(newPlaceholderText);
+}
+
 #include "moc_qnativeappkittextfield.cpp"

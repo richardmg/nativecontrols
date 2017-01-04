@@ -49,6 +49,7 @@ class Q_NATIVECONTROLS_EXPORT QNativeAppKitTextField : public QNativeAppKitContr
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
     QNativeAppKitTextField(QNativeAppKitBase *parent = nullptr);
@@ -60,8 +61,12 @@ public:
     virtual QString text() override;
     virtual void setText(const QString &text) override;
 
+    virtual QString placeholderText() override;
+    virtual void setPlaceholderText(const QString &placeholderText) override;
+
 Q_SIGNALS:
     void textChanged(const QString &text);
+    void placeholderTextChanged(const QString &placeholderText);
 
 protected:
     QNativeAppKitTextField(QNativeAppKitTextFieldPrivate &dd, QNativeAppKitBase *parent = nullptr);

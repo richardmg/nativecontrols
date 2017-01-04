@@ -84,6 +84,16 @@ void QNativeTextField::setText(const QString &newText)
     PLATFORM_TEXT_FIELD->setText(newText);
 }
 
+QString QNativeTextField::placeholderText()
+{
+    return PLATFORM_TEXT_FIELD->placeholderText();
+}
+
+void QNativeTextField::setPlaceholderText(const QString &placeholderText)
+{
+    PLATFORM_TEXT_FIELD->setPlaceholderText(placeholderText);
+}
+
 #include "moc_qnativetextfield.cpp"
 
 QT_END_NAMESPACE
