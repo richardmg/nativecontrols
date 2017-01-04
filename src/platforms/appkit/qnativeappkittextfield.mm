@@ -83,8 +83,11 @@ void QNativeAppKitTextFieldPrivate::connectSignals(QNativeBase *base)
 {
     Q_Q(QNativeAppKitTextField);
     QNativeAppKitControlPrivate::connectSignals(base);
-    q->connect(q, SIGNAL(textChanged(QString)), base, SIGNAL(textChanged(QString)));
-    q->connect(q, SIGNAL(clicked()), base, SIGNAL(clicked()));
+    const auto b = static_cast<QNativeTextField *>(base);
+    q->connect(q, &QNativeAppKitTextField::textChanged,
+               b, &QNativeTextField::textChanged);
+    q->connect(q, &QNativeAppKitTextField::placeholderTextChanged,
+               b, &QNativeTextField::placeholderTextChanged);
 }
 
 QNativeAppKitTextField::QNativeAppKitTextField(QNativeAppKitBase *parent)

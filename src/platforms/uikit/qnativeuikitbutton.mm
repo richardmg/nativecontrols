@@ -88,8 +88,9 @@ void QNativeUIKitButtonPrivate::connectSignals(QNativeBase *base)
 {
     Q_Q(QNativeUIKitButton);
     QNativeUIKitControlPrivate::connectSignals(base);
-    q->connect(q, SIGNAL(textChanged(QString)), base, SIGNAL(textChanged(QString)));
-    q->connect(q, SIGNAL(clicked()), base, SIGNAL(clicked()));
+    const auto b = static_cast<QNativeButton *>(base);
+    q->connect(q, &QNativeUIKitButton::textChanged, b, &QNativeButton::textChanged);
+    q->connect(q, &QNativeUIKitButton::clicked, b, &QNativeButton::clicked);
 }
 
 QNativeUIKitButton::QNativeUIKitButton(QNativeUIKitBase *parent)

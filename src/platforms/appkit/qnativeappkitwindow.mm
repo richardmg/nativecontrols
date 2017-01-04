@@ -71,7 +71,8 @@ void QNativeAppKitWindowPrivate::connectSignals(QNativeBase *base)
 {
     Q_Q(QNativeAppKitWindow);
     QNativeAppKitBasePrivate::connectSignals(base);
-    q->connect(q, SIGNAL(visibleChanged(bool)), base, SIGNAL(visibleChanged(bool)));
+    const auto b = static_cast<QNativeWindow *>(base);
+    q->connect(q, &QNativeAppKitWindow::visibleChanged, b, &QNativeWindow::visibleChanged);
 }
 
 void QNativeAppKitWindowPrivate::updateLayout(bool recursive)
