@@ -84,7 +84,7 @@ void QNativeUIKitTextFieldPrivate::connectSignals(QNativeBase *base)
     Q_Q(QNativeUIKitTextField);
     QNativeUIKitControlPrivate::connectSignals(base);
     q->connect(q, SIGNAL(textChanged(QString)), base, SIGNAL(textChanged(QString)));
-    q->connect(q, SIGNAL(clicked()), base, SIGNAL(clicked()));
+    q->connect(q, SIGNAL(placeholderTextChanged(QString)), base, SIGNAL(placeholderTextChanged(QString)));
 }
 
 QNativeUIKitTextField::QNativeUIKitTextField(QNativeUIKitBase *parent)
