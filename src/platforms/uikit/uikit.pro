@@ -12,7 +12,8 @@ IOS_CONTROLS = \
     base \
     window \
     control \
-    button
+    button \
+    textfield
 
 for(c,IOS_CONTROLS) {
     HEADERS += qnativeuikit$${c}.h
