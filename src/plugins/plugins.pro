@@ -1,4 +1,4 @@
 TEMPLATE = subdirs
 
 android: SUBDIRS += android
-uikit: SUBDIRS += uikit
+uikit:!watchos: SUBDIRS += uikit

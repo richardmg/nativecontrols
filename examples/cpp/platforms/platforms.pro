@@ -1,3 +1,3 @@
 TEMPLATE = subdirs
 
-uikit: SUBDIRS += uikit
+uikit:!watchos: SUBDIRS += uikit
