@@ -71,7 +71,7 @@ QT_BEGIN_NAMESPACE
 QNativeUIKitButtonPrivate::QNativeUIKitButtonPrivate(int version)
     : QNativeUIKitControlPrivate(version)
 {
-    UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    UIButton *uiButton = [[[UIButton alloc] initWithFrame:CGRectZero] autorelease];
     [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
     [uiButton sizeToFit];
 
@@ -83,6 +83,7 @@ QNativeUIKitButtonPrivate::QNativeUIKitButtonPrivate(int version)
 
 QNativeUIKitButtonPrivate::~QNativeUIKitButtonPrivate()
 {
+    [m_delegate release];
 }
 
 void QNativeUIKitButtonPrivate::connectSignals(QNativeBase *base)

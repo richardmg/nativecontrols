@@ -68,7 +68,7 @@ QNativeUIKitTextFieldPrivate::QNativeUIKitTextFieldPrivate(int version)
 {
     m_delegate = [[QNativeUIKitTextFieldDelegate alloc] initWithQNativeUIKitTextFieldPrivate:this];
 
-    UITextField *uiTextField = [[UITextField alloc] init];
+    UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
     [uiTextField sizeToFit];
 
     setView(uiTextField);
@@ -76,6 +76,7 @@ QNativeUIKitTextFieldPrivate::QNativeUIKitTextFieldPrivate(int version)
 
 QNativeUIKitTextFieldPrivate::~QNativeUIKitTextFieldPrivate()
 {
+    [m_delegate release];
 }
 
 void QNativeUIKitTextFieldPrivate::connectSignals(QNativeBase *base)
