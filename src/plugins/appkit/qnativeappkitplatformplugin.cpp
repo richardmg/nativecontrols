@@ -56,6 +56,8 @@ public:
             appkitBase = new QNativeAppKitButton(nullptr);
         else if (dynamic_cast<QNativeTextField *>(nativeBase))
             appkitBase = new QNativeAppKitTextField(nullptr);
+        else if (dynamic_cast<QNativeSearchField *>(nativeBase))
+            appkitBase = new QNativeAppKitSearchField(nullptr);
         else
             Q_UNREACHABLE();
 

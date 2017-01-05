@@ -34,40 +34,44 @@
 **
 ****************************************************************************/
 
-#include <QtQml>
-#include <QQmlEngine>
-#include <QtNativeControls>
+#ifndef QNATIVEAPPKITSEARCHFIELD_P_H
+#define QNATIVEAPPKITSEARCHFIELD_P_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+#include <QtCore>
+#include <QtCore/private/qobject_p.h>
+
+#include <QtNativeAppKitControls/private/qnativeappkitcontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QmlNativeControlsPlugin: public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+class QNativeSearchField;
+class QNativeAppKitSearchField;
+Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitSearchFieldDelegate);
 
+class QNativeAppKitSearchFieldPrivate : public QNativeAppKitControlPrivate
+{
 public:
+    explicit QNativeAppKitSearchFieldPrivate(int version = QObjectPrivateVersion);
+    virtual ~QNativeAppKitSearchFieldPrivate();
 
-QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
-{
-}
+    virtual void connectSignals(QNativeBase *base) override;
 
-void registerTypes(const char *uri) override
-{
-    qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "NativeWindow");
-    qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
-    qmlRegisterType<QNativeSearchField>(uri, 1, 0, "SearchField");
-}
+    QNativeAppKitSearchFieldDelegate *m_delegate;
 
-void initializeEngine(QQmlEngine *engine, const char *uri) override
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(uri);
-}
-
+    Q_DECLARE_PUBLIC(QNativeAppKitSearchField)
 };
 
 QT_END_NAMESPACE
 
-#include "qmlnativecontrolsplugin.moc"
+#endif // QNATIVEAPPKITSEARCHFIELD_P_H

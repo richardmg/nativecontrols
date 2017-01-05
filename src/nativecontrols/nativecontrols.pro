@@ -12,7 +12,8 @@ NATIVE_CONTROLS = \
     window \
     control \
     button \
-    textfield
+    textfield \
+    searchfield
 
 for(c,NATIVE_CONTROLS) {
     HEADERS += qnative$${c}.h

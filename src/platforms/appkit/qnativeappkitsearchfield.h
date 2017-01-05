@@ -34,40 +34,47 @@
 **
 ****************************************************************************/
 
-#include <QtQml>
-#include <QQmlEngine>
-#include <QtNativeControls>
+#ifndef QNATIVEAPPKITSEARCHFIELD_H
+#define QNATIVEAPPKITSEARCHFIELD_H
+
+#include <QtNativeControls/qnativeplatformtextfield.h>
+#include <QtNativeAppKitControls/qnativeappkitcontrol.h>
 
 QT_BEGIN_NAMESPACE
 
-class QmlNativeControlsPlugin: public QQmlExtensionPlugin
+class QNativeAppKitSearchFieldPrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(NSSearchField);
+
+class Q_NATIVECONTROLS_EXPORT QNativeAppKitSearchField : public QNativeAppKitControl, public virtual QNativePlatformSearchField
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
+    QNativeAppKitSearchField(QNativeAppKitBase *parent = nullptr);
+    QNativeAppKitSearchField(const QString &text, QNativeAppKitBase *parent = nullptr);
+    virtual ~QNativeAppKitSearchField();
 
-QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
-{
-}
+    NSSearchField *nsSearchFieldHandle();
 
-void registerTypes(const char *uri) override
-{
-    qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "NativeWindow");
-    qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
-    qmlRegisterType<QNativeSearchField>(uri, 1, 0, "SearchField");
-}
+    virtual QString text() override;
+    virtual void setText(const QString &text) override;
 
-void initializeEngine(QQmlEngine *engine, const char *uri) override
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(uri);
-}
+    virtual QString placeholderText() override;
+    virtual void setPlaceholderText(const QString &placeholderText) override;
 
+Q_SIGNALS:
+    void textChanged(const QString &text);
+    void placeholderTextChanged(const QString &placeholderText);
+
+protected:
+    QNativeAppKitSearchField(QNativeAppKitSearchFieldPrivate &dd, QNativeAppKitBase *parent = nullptr);
+
+private:
+    Q_DECLARE_PRIVATE(QNativeAppKitSearchField)
+    Q_DISABLE_COPY(QNativeAppKitSearchField)
 };
 
 QT_END_NAMESPACE
-
-#include "qmlnativecontrolsplugin.moc"
+#endif // QNATIVEAPPKITSEARCHFIELD_H

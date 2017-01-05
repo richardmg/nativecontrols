@@ -34,40 +34,46 @@
 **
 ****************************************************************************/
 
-#include <QtQml>
-#include <QQmlEngine>
-#include <QtNativeControls>
+#ifndef QNATIVESEARCHFIELD_H
+#define QNATIVESEARCHFIELD_H
+
+#include <QtNativeControls/qnativecontrol.h>
+#include <QtNativeControls/qnativecontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class QmlNativeControlsPlugin: public QQmlExtensionPlugin
+class QNativeSearchFieldPrivate;
+class QNativePlatformSearchField;
+
+class Q_NATIVECONTROLS_EXPORT QNativeSearchField : public QNativeControl
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
+    explicit QNativeSearchField(QNativeBase *parent = nullptr);
+    explicit QNativeSearchField(const QString &text, QNativeBase *parent = nullptr);
+    virtual ~QNativeSearchField();
 
-QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
-{
-}
+    QString text();
+    void setText(const QString &text);
 
-void registerTypes(const char *uri) override
-{
-    qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "NativeWindow");
-    qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
-    qmlRegisterType<QNativeSearchField>(uri, 1, 0, "SearchField");
-}
+    QString placeholderText();
+    void setPlaceholderText(const QString &placeholderText);
 
-void initializeEngine(QQmlEngine *engine, const char *uri) override
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(uri);
-}
+Q_SIGNALS:
+    void textChanged(const QString &text);
+    void placeholderTextChanged(const QString &placeholderText);
 
+protected:
+    QNativeSearchField(QNativeSearchFieldPrivate &dd, QObject *parent = nullptr);
+
+private:
+    Q_DECLARE_PRIVATE(QNativeSearchField)
+    Q_DISABLE_COPY(QNativeSearchField)
 };
 
 QT_END_NAMESPACE
 
-#include "qmlnativecontrolsplugin.moc"
+#endif // QNATIVESEARCHFIELD_H

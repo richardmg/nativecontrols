@@ -54,7 +54,8 @@ public:
             uikitBase = new QNativeUIKitWindow(nullptr);
         else if (dynamic_cast<QNativeButton *>(nativeBase))
             uikitBase = new QNativeUIKitButton(nullptr);
-        else if (dynamic_cast<QNativeTextField *>(nativeBase))
+        else if (dynamic_cast<QNativeTextField *>(nativeBase)
+                 || dynamic_cast<QNativeSearchField *>(nativeBase))
             uikitBase = new QNativeUIKitTextField(nullptr);
         else
             Q_UNREACHABLE();

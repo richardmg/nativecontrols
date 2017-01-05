@@ -34,40 +34,67 @@
 **
 ****************************************************************************/
 
-#include <QtQml>
-#include <QQmlEngine>
-#include <QtNativeControls>
+
+#include <QtNativeControls/qnativesearchfield.h>
+#include <QtNativeControls/private/qnativesearchfield_p.h>
+#include <QtNativeControls/qnativeplatformsearchfield.h>
 
 QT_BEGIN_NAMESPACE
 
-class QmlNativeControlsPlugin: public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+#define PLATFORM_SEARCH_FIELD dynamic_cast<QNativePlatformSearchField *>(d_func()->m_platformBase)
 
-public:
-
-QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
+QNativeSearchFieldPrivate::QNativeSearchFieldPrivate(int version)
+    : QNativeControlPrivate(version)
 {
 }
 
-void registerTypes(const char *uri) override
+QNativeSearchFieldPrivate::~QNativeSearchFieldPrivate()
 {
-    qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "NativeWindow");
-    qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
-    qmlRegisterType<QNativeSearchField>(uri, 1, 0, "SearchField");
 }
 
-void initializeEngine(QQmlEngine *engine, const char *uri) override
+QNativeSearchField::QNativeSearchField(QNativeBase *parent)
+    : QNativeControl(*new QNativeSearchFieldPrivate(), parent)
 {
-    Q_UNUSED(engine);
-    Q_UNUSED(uri);
+    d_func()->connectToPlatform();
 }
 
-};
+QNativeSearchField::QNativeSearchField(const QString &text, QNativeBase *parent)
+    : QNativeControl(*new QNativeSearchFieldPrivate(), parent)
+{
+    d_func()->connectToPlatform();
+    setText(text);
+}
+
+QNativeSearchField::QNativeSearchField(QNativeSearchFieldPrivate &dd, QObject *parent)
+    : QNativeControl(dd, parent)
+{
+}
+
+QNativeSearchField::~QNativeSearchField()
+{
+}
+
+QString QNativeSearchField::text()
+{
+    return PLATFORM_SEARCH_FIELD->text();
+}
+
+void QNativeSearchField::setText(const QString &newText)
+{
+    PLATFORM_SEARCH_FIELD->setText(newText);
+}
+
+QString QNativeSearchField::placeholderText()
+{
+    return PLATFORM_SEARCH_FIELD->placeholderText();
+}
+
+void QNativeSearchField::setPlaceholderText(const QString &placeholderText)
+{
+    PLATFORM_SEARCH_FIELD->setPlaceholderText(placeholderText);
+}
+
+#include "moc_qnativesearchfield.cpp"
 
 QT_END_NAMESPACE
 
-#include "qmlnativecontrolsplugin.moc"

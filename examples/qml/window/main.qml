@@ -30,7 +30,7 @@ NativeWindow {
         placeholderText: "Enter some text..."
     }
 
-    TextField {
+    SearchField {
         x: theTextField1.right + 8
         y: theButton.bottom + 8
         width: windowAvailableWidth / 2
