@@ -68,7 +68,7 @@ QNativeAppKitSearchFieldPrivate::QNativeAppKitSearchFieldPrivate(int version)
 {
     m_delegate = [[QNativeAppKitSearchFieldDelegate alloc] initWithQNativeAppKitSearchFieldPrivate:this];
 
-    NSSearchField *nsSearchField = [[NSSearchField alloc] init];
+    NSSearchField *nsSearchField = [[[NSSearchField alloc] init] autorelease];
     [nsSearchField sizeToFit];
 
     setView(nsSearchField);

@@ -73,7 +73,7 @@ QNativeAppKitButtonPrivate::QNativeAppKitButtonPrivate(int version)
 {
     m_delegate = [[QNativeAppKitButtonDelegate alloc] initWithQNativeAppKitButtonPrivate:this];
 
-    NSButton *nsButton = [[NSButton alloc] init];
+    NSButton *nsButton = [[[NSButton alloc] init] autorelease];
     nsButton.bezelStyle = NSRoundedBezelStyle;
     nsButton.buttonType = NSMomentaryPushInButton;
     nsButton.target = m_delegate;

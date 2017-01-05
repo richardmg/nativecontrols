@@ -145,6 +145,8 @@ QNativeAppKitWindow::QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd, QObject
 
 QNativeAppKitWindow::~QNativeAppKitWindow()
 {
+    Q_D(QNativeAppKitWindow);
+    [d->m_delegate release];
 }
 
 NSWindow *QNativeAppKitWindow::nsWindowHandle() const
