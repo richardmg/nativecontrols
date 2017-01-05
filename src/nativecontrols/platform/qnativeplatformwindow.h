@@ -46,6 +46,8 @@ class Q_NATIVECONTROLS_EXPORT QNativePlatformWindow : public virtual QNativePlat
 {
 public:
     virtual ~QNativePlatformWindow() {}
+    virtual qreal width() const = 0;
+    virtual qreal height() const = 0;
     virtual bool isVisible() const = 0;
     virtual void setVisible(bool visible) = 0;
     virtual void showFullScreen() = 0;

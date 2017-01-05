@@ -66,6 +66,16 @@ QNativeWindow::~QNativeWindow()
 {
 }
 
+qreal QNativeWindow::width() const
+{
+    return PLATFORM_WINDOW->width();
+}
+
+qreal QNativeWindow::height() const
+{
+    return PLATFORM_WINDOW->height();
+}
+
 bool QNativeWindow::isVisible() const
 {
     return PLATFORM_WINDOW->isVisible();

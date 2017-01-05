@@ -54,7 +54,10 @@ public:
     QNativeUIKitWindow(QObject *parent = nullptr);
     virtual ~QNativeUIKitWindow();
 
-    UIWindow *uiWindowHandle();
+    UIWindow *uiWindowHandle() const;
+
+    qreal width() const override;
+    qreal height() const override;
 
     virtual bool isVisible() const override;
     virtual void setVisible(bool isVisible) override;

@@ -2,9 +2,12 @@ import QtQml 2.0
 import Qt.NativeControls 1.0
 
 NativeWindow {
+    id: theWindow
 //    width: 480
 //    height: 640
     visible: true
+
+    property int windowAvailableWidth: theWindow.width - 48
 
     Button {
         id: theButton
@@ -22,7 +25,7 @@ NativeWindow {
         id: theTextField1
         x: 20
         y: theButton.bottom + 8
-        width: 200
+        width: windowAvailableWidth / 2
         height: 22
         placeholderText: "Enter some text..."
     }
@@ -30,7 +33,7 @@ NativeWindow {
     TextField {
         x: theTextField1.right + 8
         y: theButton.bottom + 8
-        width: 200
+        width: windowAvailableWidth / 2
         height: 22
     }
 

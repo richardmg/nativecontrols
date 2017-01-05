@@ -54,13 +54,18 @@ public:
     QNativeAppKitWindow(QObject *parent = nullptr);
     virtual ~QNativeAppKitWindow();
 
-    NSWindow *nsWindowHandle();
+    NSWindow *nsWindowHandle() const;
+
+    virtual qreal width() const override;
+    virtual qreal height() const override;
 
     virtual bool isVisible() const override;
     virtual void setVisible(bool isVisible) override;
     virtual void showFullScreen() override;
 
 Q_SIGNALS:
+    void widthChanged(qreal w);
+    void heightChanged(qreal h);
     void visibleChanged(bool isVisible);
 
 protected:

@@ -49,16 +49,23 @@ class Q_NATIVECONTROLS_EXPORT QNativeWindow : public QNativeBase
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
+    Q_PROPERTY(qreal width READ width NOTIFY widthChanged)
+    Q_PROPERTY(qreal height READ height NOTIFY heightChanged)
 
 public:
     explicit QNativeWindow();
     virtual ~QNativeWindow();
+
+    qreal width() const;
+    qreal height() const;
 
     bool isVisible() const;
     void setVisible(bool visible);
     void showFullScreen();
 
 Q_SIGNALS:
+    void widthChanged(qreal w);
+    void heightChanged(qreal h);
     void visibleChanged(bool visible);
 
 protected:

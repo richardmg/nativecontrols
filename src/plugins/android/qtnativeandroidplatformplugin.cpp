@@ -104,6 +104,9 @@ public:
     // QNativePlatformBase
     void setPlatformParent(QNativePlatformBase *parent) override { Q_UNUSED(parent); }
 
+    qreal width() const override { return NAN; }
+    qreal height() const override { return NAN; }
+
     // QNativePlatformWindow ### TODO: how does this map to Activity?
     bool isVisible() const override { return true; }
     void setVisible(bool visible) override { Q_UNUSED(visible); }

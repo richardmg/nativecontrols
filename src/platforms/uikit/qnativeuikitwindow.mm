@@ -97,9 +97,19 @@ QNativeUIKitWindow::~QNativeUIKitWindow()
 {
 }
 
-UIWindow *QNativeUIKitWindow::uiWindowHandle()
+UIWindow *QNativeUIKitWindow::uiWindowHandle() const
 {
     return d_func()->m_window;
+}
+
+qreal QNativeUIKitWindow::width() const
+{
+    return uiWindowHandle().frame.size.width;
+}
+
+qreal QNativeUIKitWindow::height() const
+{
+    return uiWindowHandle().frame.size.height;
 }
 
 bool QNativeUIKitWindow::isVisible() const

@@ -57,6 +57,7 @@ QT_BEGIN_NAMESPACE
 class QNativeWindow;
 class QNativeIosWindow;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
+Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
 
 class QNativeAppKitWindowPrivate : public QNativeAppKitBasePrivate
 {
@@ -66,6 +67,8 @@ public:
 
     virtual void connectSignals(QNativeBase *base) override;
     virtual void updateLayout(bool recursive) override;
+
+    QNativeAppKitWindowDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QNativeAppKitWindow)
 

@@ -55,11 +55,40 @@
 
 @end
 
+@interface QNativeAppKitWindowDelegate : NSObject <NSWindowDelegate> {
+    QT_PREPEND_NAMESPACE(QNativeAppKitWindowPrivate) *_window;
+}
+
+@end
+
+@implementation QNativeAppKitWindowDelegate
+
+- (instancetype)initWithQNativeAppKitWindowPrivate:(QT_PREPEND_NAMESPACE(QNativeAppKitWindowPrivate) *)window
+{
+    self = [self init];
+    if (self) {
+        _window = window;
+    }
+
+    return self;
+}
+
+- (void)windowDidResize:(NSNotification *)notification
+{
+    NSWindow *window = (NSWindow *)notification.object;
+    emit _window->q_func()->widthChanged(window.contentView.frame.size.width);
+    emit _window->q_func()->heightChanged(window.contentView.frame.size.height);
+}
+
+@end
+
 QT_BEGIN_NAMESPACE
 
 QNativeAppKitWindowPrivate::QNativeAppKitWindowPrivate(int version)
     : QNativeAppKitBasePrivate(version)
 {
+    m_delegate = [[QNativeAppKitWindowDelegate alloc] initWithQNativeAppKitWindowPrivate:this];
+
     NSRect screenFrame = NSScreen.mainScreen.visibleFrame;
     NSRect windowFrame = NSMakeRect(0, 0,
                                     (NSInteger)(NSWidth(screenFrame) / 3),
@@ -71,6 +100,7 @@ QNativeAppKitWindowPrivate::QNativeAppKitWindowPrivate(int version)
     viewController.view = view;
 
     m_window = [NSWindow windowWithContentViewController:viewController];
+    m_window.delegate = m_delegate;
     m_window.contentViewController = viewController;
 
     setView(view);
@@ -86,6 +116,8 @@ void QNativeAppKitWindowPrivate::connectSignals(QNativeBase *base)
     Q_Q(QNativeAppKitWindow);
     QNativeAppKitBasePrivate::connectSignals(base);
     const auto b = static_cast<QNativeWindow *>(base);
+    q->connect(q, &QNativeAppKitWindow::widthChanged, b, &QNativeWindow::widthChanged);
+    q->connect(q, &QNativeAppKitWindow::heightChanged, b, &QNativeWindow::heightChanged);
     q->connect(q, &QNativeAppKitWindow::visibleChanged, b, &QNativeWindow::visibleChanged);
 }
 
@@ -115,9 +147,19 @@ QNativeAppKitWindow::~QNativeAppKitWindow()
 {
 }
 
-NSWindow *QNativeAppKitWindow::nsWindowHandle()
+NSWindow *QNativeAppKitWindow::nsWindowHandle() const
 {
     return d_func()->m_window;
+}
+
+qreal QNativeAppKitWindow::width() const
+{
+    return nsWindowHandle().contentView.frame.size.width;
+}
+
+qreal QNativeAppKitWindow::height() const
+{
+    return nsWindowHandle().contentView.frame.size.height;
 }
 
 bool QNativeAppKitWindow::isVisible() const
