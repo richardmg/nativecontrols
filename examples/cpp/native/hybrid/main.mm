@@ -30,7 +30,10 @@ int main(int argc, char *argv[])
 
         NSButton *nsButton = nativeAppKitButton->nsButtonHandle();
         nsButton.title = @"Click me";
-        nsButton.bezelColor = [NSColor redColor];
+#if QT_OSX_PLATFORM_SDK_EQUAL_OR_ABOVE(101202)
+        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10, 12, 2}])
+            nsButton.bezelColor = [NSColor redColor];
+#endif
 
         NSWindow *nsWindow = nativeAppKitWindow->nsWindowHandle();
         nsWindow.backgroundColor = [NSColor blueColor];
