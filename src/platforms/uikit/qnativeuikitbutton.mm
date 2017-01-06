@@ -133,6 +133,7 @@ void QNativeUIKitButton::setText(const QString &newText)
         return;
 
     [uiButtonHandle() setTitle:newText.toNSString() forState:UIControlStateNormal];
+    d_func()->updateImplicitSize();
 
     emit textChanged(newText);
 }

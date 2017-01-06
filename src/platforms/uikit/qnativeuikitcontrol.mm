@@ -73,16 +73,33 @@ void QNativeUIKitControlPrivate::connectSignals(QNativeBase *base)
 
 void QNativeUIKitControlPrivate::updateLayout(bool recursive)
 {
-    if (testAttribute(LayedOut))
-        return;
-    setAttribute(LayedOut);
+    Q_Q(QNativeUIKitControl);
 
-    if (!testAttribute(Resized))
-        [view() sizeToFit];
+    if (!testAttribute(Resized)) {
+        q->resize(m_implicitSize);
+        setAttribute(Resized, false);
+    }
 
     if (recursive) {
-        for (QObject *child : q_func()->children())
+        for (QObject *child : q->children())
             static_cast<QNativeUIKitBasePrivate *>(QObjectPrivate::get(child))->updateLayout(recursive);
+    }
+}
+
+void QNativeUIKitControlPrivate::updateImplicitSize()
+{
+    Q_Q(QNativeUIKitControl);
+    QSizeF oldSize = m_implicitSize;
+    m_implicitSize = QSizeF::fromCGSize([view() sizeThatFits:CGSizeZero]);
+
+    if (m_implicitSize.width() != oldSize.width()) {
+        updateLayout(false);
+        emit q->implicitWidthChanged(m_implicitSize.width());
+    }
+
+    if (m_implicitSize.height() != oldSize.height()) {
+        updateLayout(false);
+        emit q->implicitHeightChanged(m_implicitSize.height());
     }
 }
 
