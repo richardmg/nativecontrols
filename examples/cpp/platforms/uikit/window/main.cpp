@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     QNativeUIKitTextField textField(&window);
     textField.setPlaceholderText(QStringLiteral("TextField"));
     textField.move(50, 150);
+    textField.resize(200, textField.implicitSize().height());
 
     window.showFullScreen();
 

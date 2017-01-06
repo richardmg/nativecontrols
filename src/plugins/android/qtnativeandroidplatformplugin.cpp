@@ -86,6 +86,12 @@ public:
         Q_UNIMPLEMENTED();
     }
 
+    QSizeF implicitSize() const
+    {
+        Q_UNIMPLEMENTED();
+        return QSizeF();
+    }
+
     // QNativePlatformButton
     QString text() override { return QNativeAndroidButton::text(); }
     void setText(const QString &text) override { QNativeAndroidButton::setText(text); }

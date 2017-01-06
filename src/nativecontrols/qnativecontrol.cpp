@@ -144,6 +144,21 @@ qreal QNativeControl::bottom() const
     return PLATFORM_CONTROL->geometry().bottom();
 }
 
+QSizeF QNativeControl::implicitSize() const
+{
+    return PLATFORM_CONTROL->implicitSize();
+}
+
+qreal QNativeControl::implicitWidth() const
+{
+    return PLATFORM_CONTROL->implicitSize().width();
+}
+
+qreal QNativeControl::implicitHeight() const
+{
+    return PLATFORM_CONTROL->implicitSize().height();
+}
+
 void QNativeControl::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
 {
     PLATFORM_CONTROL->setGeometry(QRectF(posx, posy, w, h));

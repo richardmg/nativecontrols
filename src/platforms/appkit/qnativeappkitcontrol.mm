@@ -92,6 +92,8 @@ void QNativeAppKitControlPrivate::connectSignals(QNativeBase *base)
     q->connect(q, &QNativeAppKitControl::widthChanged, b, &QNativeControl::rightChanged);
     q->connect(q, &QNativeAppKitControl::heightChanged, b, &QNativeControl::heightChanged);
     q->connect(q, &QNativeAppKitControl::heightChanged, b, &QNativeControl::bottomChanged);
+    q->connect(q, &QNativeAppKitControl::implicitWidthChanged, b, &QNativeControl::implicitWidthChanged);
+    q->connect(q, &QNativeAppKitControl::implicitHeightChanged, b, &QNativeControl::implicitHeightChanged);
 }
 
 void QNativeAppKitControlPrivate::updateLayout(bool recursive)
@@ -197,6 +199,22 @@ void QNativeAppKitControl::resize(const QSizeF size)
 {
     setWidth(size.width());
     setHeight(size.height());
+}
+
+QSizeF QNativeAppKitControl::implicitSize()
+{
+    Q_UNIMPLEMENTED();
+    return QSizeF();
+}
+
+qreal QNativeAppKitControl::implicitWidth() const
+{
+    return implicitSize().width();
+}
+
+qreal QNativeAppKitControl::implicitHeight() const
+{
+    return implicitSize().height();
 }
 
 QRectF QNativeAppKitControl::geometry() const

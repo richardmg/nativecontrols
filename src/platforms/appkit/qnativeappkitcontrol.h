@@ -18,6 +18,8 @@ class Q_NATIVECONTROLS_EXPORT QNativeAppKitControl : public QNativeAppKitBase, p
     Q_PROPERTY(qreal y READ y WRITE setY NOTIFY yChanged FINAL)
     Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY widthChanged FINAL)
     Q_PROPERTY(qreal height READ height WRITE setHeight NOTIFY heightChanged FINAL)
+    Q_PROPERTY(qreal implicitWidth READ implicitWidth NOTIFY implicitWidthChanged FINAL)
+    Q_PROPERTY(qreal implicitHeight READ implicitHeight NOTIFY implicitHeightChanged FINAL)
 
 public:
     QNativeAppKitControl(QNativeAppKitBase *parent = nullptr);
@@ -34,10 +36,15 @@ public:
     virtual void move(const QPointF &pos) override;
     virtual void resize(const QSizeF size) override;
 
+    virtual QSizeF implicitSize() const override;
+
     void setParent(QNativeAppKitBase *parent = nullptr);
     void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
     void move(qreal posx, qreal posy);
     void resize(qreal width, qreal height);
+
+    qreal implicitWidth() const;
+    qreal implicitHeight() const;
 
     qreal x() const;
     void setX(qreal);
@@ -57,6 +64,8 @@ Q_SIGNALS:
     void yChanged(qreal y);
     void widthChanged(qreal w);
     void heightChanged(qreal h);
+    void implicitWidthChanged(qreal w);
+    void implicitHeightChanged(qreal h);
 
 protected:
     QNativeAppKitControl(QNativeAppKitControlPrivate &dd, QNativeAppKitBase *parent = nullptr);

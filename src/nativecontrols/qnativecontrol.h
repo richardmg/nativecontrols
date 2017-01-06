@@ -62,6 +62,8 @@ class Q_NATIVECONTROLS_EXPORT QNativeControl : public QNativeBase
     Q_PROPERTY(qreal top READ top NOTIFY yChanged FINAL)
     Q_PROPERTY(qreal right READ right NOTIFY rightChanged FINAL)
     Q_PROPERTY(qreal bottom READ bottom NOTIFY bottomChanged FINAL)
+    Q_PROPERTY(qreal implicitWidth READ implicitWidth NOTIFY implicitWidthChanged FINAL)
+    Q_PROPERTY(qreal implicitHeight READ implicitHeight NOTIFY implicitHeightChanged FINAL)
 
 public:
     explicit QNativeControl(QNativeBase *parentControl = nullptr);
@@ -97,6 +99,10 @@ public:
     qreal right() const;
     qreal bottom() const;
 
+    QSizeF implicitSize() const;
+    qreal implicitWidth() const;
+    qreal implicitHeight() const;
+
 Q_SIGNALS:
     void visibleChanged(bool visible);
     void xChanged(qreal x);
@@ -105,6 +111,8 @@ Q_SIGNALS:
     void heightChanged(qreal h);
     void rightChanged(qreal right);
     void bottomChanged(qreal bottom);
+    void implicitWidthChanged(qreal w);
+    void implicitHeightChanged(qreal h);
 
 protected:
     QNativeControl(QNativeControlPrivate &dd, QObject *parent = nullptr);
