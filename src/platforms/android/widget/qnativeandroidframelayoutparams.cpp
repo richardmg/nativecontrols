@@ -62,11 +62,12 @@ int QNativeAndroidFrameLayoutParams::gravity() const
 void QNativeAndroidFrameLayoutParams::setGravity(int value)
 {
     Q_D(QNativeAndroidFrameLayoutParams);
-    if (value != gravity()) {
-        d->gravity = value;
-        invalidate();
-        emit gravityChanged();
-    }
+    if (value == gravity())
+        return;
+
+    d->gravity = value;
+    invalidate();
+    emit gravityChanged();
 }
 
 QAndroidJniObject QNativeAndroidFrameLayoutParams::onCreate()

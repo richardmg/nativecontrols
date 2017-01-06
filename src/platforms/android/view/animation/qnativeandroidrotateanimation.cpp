@@ -64,10 +64,11 @@ qreal QNativeAndroidRotateAnimation::fromDegrees() const
 void QNativeAndroidRotateAnimation::setFromDegrees(qreal degrees)
 {
     Q_D(QNativeAndroidRotateAnimation);
-    if (d->from != degrees) {
-        d->from = degrees;
-        emit fromDegreesChanged();
-    }
+    if (qFuzzyCompare(d->from, degrees))
+        return;
+
+    d->from = degrees;
+    emit fromDegreesChanged();
 }
 
 qreal QNativeAndroidRotateAnimation::toDegrees() const
@@ -79,10 +80,11 @@ qreal QNativeAndroidRotateAnimation::toDegrees() const
 void QNativeAndroidRotateAnimation::setToDegrees(qreal degrees)
 {
     Q_D(QNativeAndroidRotateAnimation);
-    if (d->to != degrees) {
-        d->to = degrees;
-        emit toDegreesChanged();
-    }
+    if (qFuzzyCompare(d->to, degrees))
+        return;
+
+    d->to = degrees;
+    emit toDegreesChanged();
 }
 
 qreal QNativeAndroidRotateAnimation::pivotX() const
@@ -94,10 +96,11 @@ qreal QNativeAndroidRotateAnimation::pivotX() const
 void QNativeAndroidRotateAnimation::setPivotX(qreal pivotX)
 {
     Q_D(QNativeAndroidRotateAnimation);
-    if (d->pivotX != pivotX) {
-        d->pivotX = pivotX;
-        emit pivotXChanged();
-    }
+    if (qFuzzyCompare(d->pivotX, pivotX))
+        return;
+
+    d->pivotX = pivotX;
+    emit pivotXChanged();
 }
 
 qreal QNativeAndroidRotateAnimation::pivotY() const
@@ -109,10 +112,11 @@ qreal QNativeAndroidRotateAnimation::pivotY() const
 void QNativeAndroidRotateAnimation::setPivotY(qreal pivotY)
 {
     Q_D(QNativeAndroidRotateAnimation);
-    if (d->pivotY != pivotY) {
-        d->pivotY = pivotY;
-        emit pivotYChanged();
-    }
+    if (qFuzzyCompare(d->pivotY, pivotY))
+        return;
+
+    d->pivotY = pivotY;
+    emit pivotYChanged();
 }
 
 QNativeAndroidRotateAnimation::Relation QNativeAndroidRotateAnimation::pivotXType() const
@@ -124,10 +128,11 @@ QNativeAndroidRotateAnimation::Relation QNativeAndroidRotateAnimation::pivotXTyp
 void QNativeAndroidRotateAnimation::setPivotXType(Relation type)
 {
     Q_D(QNativeAndroidRotateAnimation);
-    if (d->pivotXType != type) {
-        d->pivotXType = type;
-        emit pivotXTypeChanged();
-    }
+    if (d->pivotXType == type)
+        return;
+
+    d->pivotXType = type;
+    emit pivotXTypeChanged();
 }
 
 QNativeAndroidRotateAnimation::Relation QNativeAndroidRotateAnimation::pivotYType() const
@@ -139,10 +144,11 @@ QNativeAndroidRotateAnimation::Relation QNativeAndroidRotateAnimation::pivotYTyp
 void QNativeAndroidRotateAnimation::setPivotYType(Relation type)
 {
     Q_D(QNativeAndroidRotateAnimation);
-    if (d->pivotYType != type) {
-        d->pivotYType = type;
-        emit pivotYTypeChanged();
-    }
+    if (d->pivotYType == type)
+        return;
+
+    d->pivotYType = type;
+    emit pivotYTypeChanged();
 }
 
 QAndroidJniObject QNativeAndroidRotateAnimation::onCreate()

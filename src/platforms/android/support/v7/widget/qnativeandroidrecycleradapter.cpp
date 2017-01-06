@@ -158,11 +158,12 @@ int QNativeAndroidRecyclerAdapter::count() const
 void QNativeAndroidRecyclerAdapter::setCount(int count)
 {
     Q_D(QNativeAndroidRecyclerAdapter);
-    if (d->count != count) {
-        d->count = count;
-        QtNativeAndroid::callIntMethod(instance(), "setItemCount", count);
-        emit countChanged();
-    }
+    if (d->count == count)
+        return;
+
+    d->count = count;
+    QtNativeAndroid::callIntMethod(instance(), "setItemCount", count);
+    emit countChanged();
 }
 
 QQmlComponent *QNativeAndroidRecyclerAdapter::delegate() const
@@ -174,11 +175,12 @@ QQmlComponent *QNativeAndroidRecyclerAdapter::delegate() const
 void QNativeAndroidRecyclerAdapter::setDelegate(QQmlComponent *delegate)
 {
     Q_D(QNativeAndroidRecyclerAdapter);
-    if (d->delegate != delegate) {
-        d->delegate = delegate;
-        QtNativeAndroid::callVoidMethod(instance(), "notifyDataSetChanged");
-        emit delegateChanged();
-    }
+    if (d->delegate == delegate)
+        return;
+
+    d->delegate = delegate;
+    QtNativeAndroid::callVoidMethod(instance(), "notifyDataSetChanged");
+    emit delegateChanged();
 }
 
 QAndroidJniObject QNativeAndroidRecyclerAdapter::onCreate()

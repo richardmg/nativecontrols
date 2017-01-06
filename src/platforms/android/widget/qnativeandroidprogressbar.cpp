@@ -59,11 +59,12 @@ bool QNativeAndroidProgressBar::isIndeterminate() const
 void QNativeAndroidProgressBar::setIndeterminate(bool indeterminate)
 {
     Q_D(QNativeAndroidProgressBar);
-    if (d->indeterminate != indeterminate) {
-        d->indeterminate = indeterminate;
-        QtNativeAndroid::callBoolMethod(instance(), "setIndeterminate", indeterminate);
-        emit indeterminateChanged();
-    }
+    if (d->indeterminate == indeterminate)
+        return;
+
+    d->indeterminate = indeterminate;
+    QtNativeAndroid::callBoolMethod(instance(), "setIndeterminate", indeterminate);
+    emit indeterminateChanged();
 }
 
 int QNativeAndroidProgressBar::progress() const
@@ -75,11 +76,12 @@ int QNativeAndroidProgressBar::progress() const
 void QNativeAndroidProgressBar::setProgress(int progress)
 {
     Q_D(QNativeAndroidProgressBar);
-    if (d->secondary != progress) {
-        d->secondary = progress;
-        QtNativeAndroid::callIntMethod(instance(), "setProgress", progress);
-        emit progressChanged();
-    }
+    if (d->secondary == progress)
+        return;
+
+    d->secondary = progress;
+    QtNativeAndroid::callIntMethod(instance(), "setProgress", progress);
+    emit progressChanged();
 }
 
 int QNativeAndroidProgressBar::secondaryProgress() const
@@ -91,11 +93,12 @@ int QNativeAndroidProgressBar::secondaryProgress() const
 void QNativeAndroidProgressBar::setSecondaryProgress(int progress)
 {
     Q_D(QNativeAndroidProgressBar);
-    if (d->secondary != progress) {
-        d->secondary = progress;
-        QtNativeAndroid::callIntMethod(instance(), "setSecondaryProgress", progress);
-        emit secondaryProgressChanged();
-    }
+    if (d->secondary == progress)
+        return;
+
+    d->secondary = progress;
+    QtNativeAndroid::callIntMethod(instance(), "setSecondaryProgress", progress);
+    emit secondaryProgressChanged();
 }
 
 int QNativeAndroidProgressBar::max() const
@@ -107,11 +110,12 @@ int QNativeAndroidProgressBar::max() const
 void QNativeAndroidProgressBar::setMax(int max)
 {
     Q_D(QNativeAndroidProgressBar);
-    if (d->max != max) {
-        d->max = max;
-        QtNativeAndroid::callIntMethod(instance(), "setMax", max);
-        emit maxChanged();
-    }
+    if (d->max == max)
+        return;
+
+    d->max = max;
+    QtNativeAndroid::callIntMethod(instance(), "setMax", max);
+    emit maxChanged();
 }
 
 QNativeAndroidProgressBar::Style QNativeAndroidProgressBar::style() const

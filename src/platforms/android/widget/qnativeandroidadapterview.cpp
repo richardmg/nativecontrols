@@ -90,21 +90,22 @@ QNativeAndroidBaseAdapter *QNativeAndroidAdapterView::adapter() const
 void QNativeAndroidAdapterView::setAdapter(QNativeAndroidBaseAdapter *adapter)
 {
     Q_D(QNativeAndroidAdapterView);
-    if (d->adapter != adapter) {
-        if (d->adapter) {
-            d->adapter->setContext(0);
-            QObjectPrivate::disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAdapterViewPrivate::updateAdapter);
-            d->adapter->destruct();
-        }
-        d->adapter = adapter;
-        if (d->adapter) {
-            d->adapter->setContext(context());
-            QObjectPrivate::connect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAdapterViewPrivate::updateAdapter);
-            if (isValid())
-                d->adapter->construct();
-        }
-        emit adapterChanged();
+    if (d->adapter == adapter)
+        return;
+
+    if (d->adapter) {
+        d->adapter->setContext(0);
+        QObjectPrivate::disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAdapterViewPrivate::updateAdapter);
+        d->adapter->destruct();
     }
+    d->adapter = adapter;
+    if (d->adapter) {
+        d->adapter->setContext(context());
+        QObjectPrivate::connect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAdapterViewPrivate::updateAdapter);
+        if (isValid())
+            d->adapter->construct();
+    }
+    emit adapterChanged();
 }
 
 void QNativeAndroidAdapterView::setSelection(int position)

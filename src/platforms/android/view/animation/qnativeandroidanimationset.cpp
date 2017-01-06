@@ -59,10 +59,11 @@ bool QNativeAndroidAnimationSet::shareInterpolator() const
 void QNativeAndroidAnimationSet::setShareInterpolator(bool share)
 {
     Q_D(QNativeAndroidAnimationSet);
-    if (d->shareInterpolator != share) {
-        d->shareInterpolator = share;
-        emit shareInterpolatorChanged();
-    }
+    if (d->shareInterpolator == share)
+        return;
+
+    d->shareInterpolator = share;
+    emit shareInterpolatorChanged();
 }
 
 QAndroidJniObject QNativeAndroidAnimationSet::onCreate()

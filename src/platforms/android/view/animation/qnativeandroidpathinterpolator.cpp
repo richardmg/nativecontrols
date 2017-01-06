@@ -65,10 +65,11 @@ qreal QNativeAndroidPathInterpolator::controlX() const
 void QNativeAndroidPathInterpolator::setControlX(qreal x)
 {
     Q_D(QNativeAndroidPathInterpolator);
-    if (d->controlX.isNull() || d->controlX != x) {
-        d->controlX = x;
-        emit controlXChanged();
-    }
+    if (!d->controlX.isNull() && qFuzzyCompare(d->controlX, x))
+        return;
+
+    d->controlX = x;
+    emit controlXChanged();
 }
 
 qreal QNativeAndroidPathInterpolator::controlY() const
@@ -82,10 +83,11 @@ qreal QNativeAndroidPathInterpolator::controlY() const
 void QNativeAndroidPathInterpolator::setControlY(qreal y)
 {
     Q_D(QNativeAndroidPathInterpolator);
-    if (d->controlY.isNull() || d->controlY != y) {
-        d->controlY = y;
-        emit controlYChanged();
-    }
+    if (!d->controlY.isNull() && qFuzzyCompare(d->controlY, y))
+        return;
+
+    d->controlY = y;
+    emit controlYChanged();
 }
 
 qreal QNativeAndroidPathInterpolator::controlX2() const
@@ -99,10 +101,11 @@ qreal QNativeAndroidPathInterpolator::controlX2() const
 void QNativeAndroidPathInterpolator::setControlX2(qreal x)
 {
     Q_D(QNativeAndroidPathInterpolator);
-    if (d->controlX2.isNull() || d->controlX2 != x) {
-        d->controlX2 = x;
-        emit controlX2Changed();
-    }
+    if (!d->controlX2.isNull() && qFuzzyCompare(d->controlX2, x))
+        return;
+
+    d->controlX2 = x;
+    emit controlX2Changed();
 }
 
 qreal QNativeAndroidPathInterpolator::controlY2() const
@@ -116,10 +119,11 @@ qreal QNativeAndroidPathInterpolator::controlY2() const
 void QNativeAndroidPathInterpolator::setControlY2(qreal y)
 {
     Q_D(QNativeAndroidPathInterpolator);
-    if (d->controlY2.isNull() || d->controlY2 != y) {
-        d->controlY2 = y;
-        emit controlY2Changed();
-    }
+    if (!d->controlY2.isNull() && qFuzzyCompare(d->controlY2, y))
+        return;
+
+    d->controlY2 = y;
+    emit controlY2Changed();
 }
 
 QAndroidJniObject QNativeAndroidPathInterpolator::onCreate()

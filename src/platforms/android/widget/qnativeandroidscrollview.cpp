@@ -77,21 +77,23 @@ public:
 bool QNativeAndroidScrollViewPrivate::_q_updateScrollX(int x)
 {
     Q_Q(QNativeAndroidScrollView);
-    if (scrollX.isNull() || scrollX != x) {
-        scrollX = x;
-        emit q->scrollXChanged();
-    }
-    return false;
+    if (!scrollX.isNull() && scrollX == x)
+        return false;
+
+    scrollX = x;
+    emit q->scrollXChanged();
+    return true;
 }
 
 bool QNativeAndroidScrollViewPrivate::_q_updateScrollY(int y)
 {
     Q_Q(QNativeAndroidScrollView);
-    if (scrollY.isNull() || scrollY != y) {
-        scrollY = y;
-        emit q->scrollYChanged();
-    }
-    return false;
+    if (!scrollY.isNull() && scrollY == y)
+        return false;
+
+    scrollY = y;
+    emit q->scrollYChanged();
+    return true;
 }
 
 QNativeAndroidScrollView::QNativeAndroidScrollView(QNativeAndroidContext *context)

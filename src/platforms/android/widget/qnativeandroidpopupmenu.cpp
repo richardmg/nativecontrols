@@ -78,10 +78,11 @@ QNativeAndroidView *QNativeAndroidPopupMenu::anchor() const
 void QNativeAndroidPopupMenu::setAnchor(QNativeAndroidView *anchor)
 {
     Q_D(QNativeAndroidPopupMenu);
-    if (d->anchor != anchor) {
-        d->anchor = anchor;
-        emit anchorChanged();
-    }
+    if (d->anchor == anchor)
+        return;
+
+    d->anchor = anchor;
+    emit anchorChanged();
 }
 
 int QNativeAndroidPopupMenu::gravity() const
@@ -95,10 +96,11 @@ int QNativeAndroidPopupMenu::gravity() const
 void QNativeAndroidPopupMenu::setGravity(int value)
 {
     Q_D(QNativeAndroidPopupMenu);
-    if (value != gravity()) {
-        d->gravity = value;
-        emit gravityChanged();
-    }
+    if (value == gravity())
+        return;
+
+    d->gravity = value;
+    emit gravityChanged();
 }
 
 void QNativeAndroidPopupMenu::show()

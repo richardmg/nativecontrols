@@ -113,10 +113,11 @@ bool QNativeAndroidService::isSticky() const
 void QNativeAndroidService::setSticky(bool sticky)
 {
     Q_D(QNativeAndroidService);
-    if (d->sticky != sticky) {
-        d->sticky = sticky;
-        emit stickyChanged();
-    }
+    if (d->sticky == sticky)
+        return;
+
+    d->sticky = sticky;
+    emit stickyChanged();
 }
 
 void QNativeAndroidService::start()

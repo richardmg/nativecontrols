@@ -79,21 +79,23 @@ QNativeAndroidRecyclerAdapter *QNativeAndroidRecyclerView::adapter() const
 void QNativeAndroidRecyclerView::setAdapter(QNativeAndroidRecyclerAdapter *adapter)
 {
     Q_D(QNativeAndroidRecyclerView);
-    if (d->adapter != adapter) {
-        if (d->adapter) {
-            d->adapter->setContext(0);
-            QObjectPrivate::disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidRecyclerViewPrivate::updateAdapter);
-            d->adapter->destruct();
-        }
-        d->adapter = adapter;
-        if (d->adapter) {
-            d->adapter->setContext(context());
-            QObjectPrivate::connect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidRecyclerViewPrivate::updateAdapter);
-            if (isValid())
-                d->adapter->construct();
-        }
-        emit adapterChanged();
-    }}
+    if (d->adapter == adapter)
+        return;
+
+    if (d->adapter) {
+        d->adapter->setContext(0);
+        QObjectPrivate::disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidRecyclerViewPrivate::updateAdapter);
+        d->adapter->destruct();
+    }
+    d->adapter = adapter;
+    if (d->adapter) {
+        d->adapter->setContext(context());
+        QObjectPrivate::connect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidRecyclerViewPrivate::updateAdapter);
+        if (isValid())
+            d->adapter->construct();
+    }
+    emit adapterChanged();
+}
 
 QAndroidJniObject QNativeAndroidRecyclerView::onCreate()
 {

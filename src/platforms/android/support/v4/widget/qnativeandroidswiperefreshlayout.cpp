@@ -73,12 +73,12 @@ public:
 bool QNativeAndroidSwipeRefreshLayoutPrivate::_q_updateRefreshing(bool arg)
 {
     Q_Q(QNativeAndroidSwipeRefreshLayout);
-    if (refreshing != arg) {
-        refreshing = arg;
-        emit q->refreshingChanged();
-        return true;
-    }
-    return false;
+    if (refreshing == arg)
+        return false;
+
+    refreshing = arg;
+    emit q->refreshingChanged();
+    return true;
 }
 
 QNativeAndroidSwipeRefreshLayout::QNativeAndroidSwipeRefreshLayout(QNativeAndroidContext *context)

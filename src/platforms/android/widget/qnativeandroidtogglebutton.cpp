@@ -61,11 +61,12 @@ QString QNativeAndroidToggleButton::textOn() const
 void QNativeAndroidToggleButton::setTextOn(const QString &text)
 {
     Q_D(QNativeAndroidToggleButton);
-    if (d->textOn != text) {
-        d->textOn = text;
-        QtNativeAndroid::callTextMethod(instance(), "setTextOn", text);
-        emit textOnChanged();
-    }
+    if (d->textOn == text)
+        return;
+
+    d->textOn = text;
+    QtNativeAndroid::callTextMethod(instance(), "setTextOn", text);
+    emit textOnChanged();
 }
 
 QString QNativeAndroidToggleButton::textOff() const
@@ -77,11 +78,12 @@ QString QNativeAndroidToggleButton::textOff() const
 void QNativeAndroidToggleButton::setTextOff(const QString &text)
 {
     Q_D(QNativeAndroidToggleButton);
-    if (d->textOff != text) {
-        d->textOff = text;
-        QtNativeAndroid::callTextMethod(instance(), "setTextOff", text);
-        emit textOffChanged();
-    }
+    if (d->textOff == text)
+        return;
+
+    d->textOff = text;
+    QtNativeAndroid::callTextMethod(instance(), "setTextOff", text);
+    emit textOffChanged();
 }
 
 QAndroidJniObject QNativeAndroidToggleButton::onCreate()

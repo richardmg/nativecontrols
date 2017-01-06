@@ -62,12 +62,12 @@ static void registerNativeCompoundButtonMethods(jobject listener)
 bool QNativeAndroidCompoundButtonPrivate::_q_updateChecked(bool arg)
 {
     Q_Q(QNativeAndroidCompoundButton);
-    if (arg != q->isChecked()) {
-        checked = arg;
-        emit q->checkedChanged();
-        return true;
-    }
-    return false;
+    if (arg == q->isChecked())
+        return false;
+
+    checked = arg;
+    emit q->checkedChanged();
+    return true;
 }
 
 QNativeAndroidCompoundButton::QNativeAndroidCompoundButton(QNativeAndroidContext *context)

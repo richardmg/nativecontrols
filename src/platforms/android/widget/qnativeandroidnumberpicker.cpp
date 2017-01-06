@@ -73,12 +73,12 @@ public:
 bool QNativeAndroidNumberPickerPrivate::_q_updateValue(int arg)
 {
     Q_Q(QNativeAndroidNumberPicker);
-    if (value != arg) {
-        value = arg;
-        emit q->valueChanged();
-        return true;
-    }
-    return false;
+    if (value == arg)
+        return false;
+
+    value = arg;
+    emit q->valueChanged();
+    return true;
 }
 
 QNativeAndroidNumberPicker::QNativeAndroidNumberPicker(QNativeAndroidContext *context)

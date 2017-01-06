@@ -67,11 +67,12 @@ int QNativeAndroidColorDrawable::color() const
 void QNativeAndroidColorDrawable::setColor(int color)
 {
     Q_D(QNativeAndroidColorDrawable);
-    if (d->color != color) {
-        d->color = color;
-        QtNativeAndroid::callIntMethod(instance(), "setColor", color);
-        emit colorChanged();
-    }
+    if (d->color == color)
+        return;
+
+    d->color = color;
+    QtNativeAndroid::callIntMethod(instance(), "setColor", color);
+    emit colorChanged();
 }
 
 QAndroidJniObject QNativeAndroidColorDrawable::onCreate()

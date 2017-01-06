@@ -60,10 +60,11 @@ qreal QNativeAndroidAlphaAnimation::fromAlpha() const
 void QNativeAndroidAlphaAnimation::setFromAlpha(qreal alpha)
 {
     Q_D(QNativeAndroidAlphaAnimation);
-    if (d->fromAlpha != alpha) {
-        d->fromAlpha = alpha;
-        emit fromAlphaChanged();
-    }
+    if (qFuzzyCompare(d->fromAlpha, alpha))
+        return;
+
+    d->fromAlpha = alpha;
+    emit fromAlphaChanged();
 }
 
 qreal QNativeAndroidAlphaAnimation::toAlpha() const
@@ -75,10 +76,11 @@ qreal QNativeAndroidAlphaAnimation::toAlpha() const
 void QNativeAndroidAlphaAnimation::setToAlpha(qreal alpha)
 {
     Q_D(QNativeAndroidAlphaAnimation);
-    if (d->toAlpha != alpha) {
-        d->toAlpha = alpha;
-        emit toAlphaChanged();
-    }
+    if (qFuzzyCompare(d->toAlpha, alpha))
+        return;
+
+    d->toAlpha = alpha;
+    emit toAlphaChanged();
 }
 
 QAndroidJniObject QNativeAndroidAlphaAnimation::onCreate()

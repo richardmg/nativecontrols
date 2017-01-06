@@ -84,11 +84,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::above() const
 void QNativeAndroidRelativeLayoutParams::setAbove(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->above) {
-        d->above = view;
-        invalidate();
-        emit aboveChanged();
-    }
+    if (view == d->above)
+        return;
+
+    d->above = view;
+    invalidate();
+    emit aboveChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::below() const
@@ -100,11 +101,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::below() const
 void QNativeAndroidRelativeLayoutParams::setBelow(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->below) {
-        d->below = view;
-        invalidate();
-        emit belowChanged();
-    }
+    if (view == d->below)
+        return;
+
+    d->below = view;
+    invalidate();
+    emit belowChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignTop() const
@@ -116,11 +118,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignTop() const
 void QNativeAndroidRelativeLayoutParams::setAlignTop(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->alignTop) {
-        d->alignTop = view;
-        invalidate();
-        emit alignTopChanged();
-    }
+    if (view == d->alignTop)
+        return;
+
+    d->alignTop = view;
+    invalidate();
+    emit alignTopChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignLeft() const
@@ -132,11 +135,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignLeft() const
 void QNativeAndroidRelativeLayoutParams::setAlignLeft(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->alignLeft) {
-        d->alignLeft = view;
-        invalidate();
-        emit alignLeftChanged();
-    }
+    if (view == d->alignLeft)
+        return;
+
+    d->alignLeft = view;
+    invalidate();
+    emit alignLeftChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignRight() const
@@ -148,11 +152,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignRight() const
 void QNativeAndroidRelativeLayoutParams::setAlignRight(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->alignRight) {
-        d->alignRight = view;
-        invalidate();
-        emit alignRightChanged();
-    }
+    if (view == d->alignRight)
+        return;
+
+    d->alignRight = view;
+    invalidate();
+    emit alignRightChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignBottom() const
@@ -164,11 +169,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignBottom() const
 void QNativeAndroidRelativeLayoutParams::setAlignBottom(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->alignBottom) {
-        d->alignBottom = view;
-        invalidate();
-        emit alignBottomChanged();
-    }
+    if (view == d->alignBottom)
+        return;
+
+    d->alignBottom = view;
+    invalidate();
+    emit alignBottomChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignStart() const
@@ -180,11 +186,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignStart() const
 void QNativeAndroidRelativeLayoutParams::setAlignStart(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->alignStart) {
-        d->alignStart = view;
-        invalidate();
-        emit alignStartChanged();
-    }
+    if (view == d->alignStart)
+        return;
+
+    d->alignStart = view;
+    invalidate();
+    emit alignStartChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignEnd() const
@@ -196,11 +203,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignEnd() const
 void QNativeAndroidRelativeLayoutParams::setAlignEnd(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->alignEnd) {
-        d->alignEnd = view;
-        invalidate();
-        emit alignEndChanged();
-    }
+    if (view == d->alignEnd)
+        return;
+
+    d->alignEnd = view;
+    invalidate();
+    emit alignEndChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignBaseline() const
@@ -212,11 +220,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::alignBaseline() const
 void QNativeAndroidRelativeLayoutParams::setAlignBaseline(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->alignBaseline) {
-        d->alignBaseline = view;
-        invalidate();
-        emit alignBaselineChanged();
-    }
+    if (view == d->alignBaseline)
+        return;
+
+    d->alignBaseline = view;
+    invalidate();
+    emit alignBaselineChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::toLeftOf() const
@@ -228,11 +237,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::toLeftOf() const
 void QNativeAndroidRelativeLayoutParams::setToLeftOf(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->toLeftOf) {
-        d->toLeftOf = view;
-        invalidate();
-        emit toLeftOfChanged();
-    }
+    if (view == d->toLeftOf)
+        return;
+
+    d->toLeftOf = view;
+    invalidate();
+    emit toLeftOfChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::toRightOf() const
@@ -244,11 +254,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::toRightOf() const
 void QNativeAndroidRelativeLayoutParams::setToRightOf(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->toRightOf) {
-        d->toRightOf = view;
-        invalidate();
-        emit toRightOfChanged();
-    }
+    if (view == d->toRightOf)
+        return;
+
+    d->toRightOf = view;
+    invalidate();
+    emit toRightOfChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::toStartOf() const
@@ -260,11 +271,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::toStartOf() const
 void QNativeAndroidRelativeLayoutParams::setToStartOf(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->toStartOf) {
-        d->toStartOf = view;
-        invalidate();
-        emit toStartOfChanged();
-    }
+    if (view == d->toStartOf)
+        return;
+
+    d->toStartOf = view;
+    invalidate();
+    emit toStartOfChanged();
 }
 
 QNativeAndroidView *QNativeAndroidRelativeLayoutParams::toEndOf() const
@@ -276,11 +288,12 @@ QNativeAndroidView *QNativeAndroidRelativeLayoutParams::toEndOf() const
 void QNativeAndroidRelativeLayoutParams::setToEndOf(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (view != d->toEndOf) {
-        d->toEndOf = view;
-        invalidate();
-        emit toEndOfChanged();
-    }
+    if (view == d->toEndOf)
+        return;
+
+    d->toEndOf = view;
+    invalidate();
+    emit toEndOfChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::alignParentTop() const
@@ -292,11 +305,12 @@ bool QNativeAndroidRelativeLayoutParams::alignParentTop() const
 void QNativeAndroidRelativeLayoutParams::setAlignParentTop(bool align)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (align != alignParentTop()) {
-        d->alignParentTop = align;
-        invalidate();
-        emit alignParentTopChanged();
-    }
+    if (align == alignParentTop())
+        return;
+
+    d->alignParentTop = align;
+    invalidate();
+    emit alignParentTopChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::alignParentLeft() const
@@ -308,11 +322,12 @@ bool QNativeAndroidRelativeLayoutParams::alignParentLeft() const
 void QNativeAndroidRelativeLayoutParams::setAlignParentLeft(bool align)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (align != alignParentLeft()) {
-        d->alignParentLeft = align;
-        invalidate();
-        emit alignParentLeftChanged();
-    }
+    if (align == alignParentLeft())
+        return;
+
+    d->alignParentLeft = align;
+    invalidate();
+    emit alignParentLeftChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::alignParentRight() const
@@ -324,11 +339,12 @@ bool QNativeAndroidRelativeLayoutParams::alignParentRight() const
 void QNativeAndroidRelativeLayoutParams::setAlignParentRight(bool align)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (align != alignParentRight()) {
-        d->alignParentRight = align;
-        invalidate();
-        emit alignParentRightChanged();
-    }
+    if (align == alignParentRight())
+        return;
+
+    d->alignParentRight = align;
+    invalidate();
+    emit alignParentRightChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::alignParentBottom() const
@@ -340,11 +356,12 @@ bool QNativeAndroidRelativeLayoutParams::alignParentBottom() const
 void QNativeAndroidRelativeLayoutParams::setAlignParentBottom(bool align)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (align != alignParentBottom()) {
-        d->alignParentBottom = align;
-        invalidate();
-        emit alignParentBottomChanged();
-    }
+    if (align == alignParentBottom())
+        return;
+
+    d->alignParentBottom = align;
+    invalidate();
+    emit alignParentBottomChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::alignParentStart() const
@@ -356,11 +373,12 @@ bool QNativeAndroidRelativeLayoutParams::alignParentStart() const
 void QNativeAndroidRelativeLayoutParams::setAlignParentStart(bool align)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (align != alignParentStart()) {
-        d->alignParentStart = align;
-        invalidate();
-        emit alignParentStartChanged();
-    }
+    if (align == alignParentStart())
+        return;
+
+    d->alignParentStart = align;
+    invalidate();
+    emit alignParentStartChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::alignParentEnd() const
@@ -372,11 +390,12 @@ bool QNativeAndroidRelativeLayoutParams::alignParentEnd() const
 void QNativeAndroidRelativeLayoutParams::setAlignParentEnd(bool align)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (align != alignParentEnd()) {
-        d->alignParentEnd = align;
-        invalidate();
-        emit alignParentEndChanged();
-    }
+    if (align == alignParentEnd())
+        return;
+
+    d->alignParentEnd = align;
+    invalidate();
+    emit alignParentEndChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::alignWithParent() const
@@ -388,11 +407,12 @@ bool QNativeAndroidRelativeLayoutParams::alignWithParent() const
 void QNativeAndroidRelativeLayoutParams::setAlignWithParent(bool align)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (align != alignWithParent()) {
-        d->alignWithParent = align;
-        invalidate();
-        emit alignWithParentChanged();
-    }
+    if (align == alignWithParent())
+        return;
+
+    d->alignWithParent = align;
+    invalidate();
+    emit alignWithParentChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::centerHorizontal() const
@@ -404,11 +424,12 @@ bool QNativeAndroidRelativeLayoutParams::centerHorizontal() const
 void QNativeAndroidRelativeLayoutParams::setCenterHorizontal(bool center)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (center != centerHorizontal()) {
-        d->centerHorizontal = center;
-        invalidate();
-        emit centerHorizontalChanged();
-    }
+    if (center == centerHorizontal())
+        return;
+
+    d->centerHorizontal = center;
+    invalidate();
+    emit centerHorizontalChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::centerVertical() const
@@ -420,11 +441,12 @@ bool QNativeAndroidRelativeLayoutParams::centerVertical() const
 void QNativeAndroidRelativeLayoutParams::setCenterVertical(bool center)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (center != centerVertical()) {
-        d->centerVertical = center;
-        invalidate();
-        emit centerVerticalChanged();
-    }
+    if (center == centerVertical())
+        return;
+
+    d->centerVertical = center;
+    invalidate();
+    emit centerVerticalChanged();
 }
 
 bool QNativeAndroidRelativeLayoutParams::centerInParent() const
@@ -436,11 +458,12 @@ bool QNativeAndroidRelativeLayoutParams::centerInParent() const
 void QNativeAndroidRelativeLayoutParams::setCenterInParent(bool center)
 {
     Q_D(QNativeAndroidRelativeLayoutParams);
-    if (center != centerInParent()) {
-        d->centerInParent = center;
-        invalidate();
-        emit centerInParentChanged();
-    }
+    if (center == centerInParent())
+        return;
+
+    d->centerInParent = center;
+    invalidate();
+    emit centerInParentChanged();
 }
 
 QAndroidJniObject QNativeAndroidRelativeLayoutParams::onCreate()

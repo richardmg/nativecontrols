@@ -56,11 +56,12 @@ int QNativeAndroidViewAnimator::displayedChild() const
 void QNativeAndroidViewAnimator::setDisplayedChild(int child)
 {
     Q_D(QNativeAndroidViewAnimator);
-    if (child != displayedChild()) {
-        d->displayedChild = child;
-        QtNativeAndroid::callIntMethod(instance(), "setDisplayedChild", child);
-        emit displayedChildChanged();
-    }
+    if (child == displayedChild())
+        return;
+
+    d->displayedChild = child;
+    QtNativeAndroid::callIntMethod(instance(), "setDisplayedChild", child);
+    emit displayedChildChanged();
 }
 
 int QNativeAndroidViewAnimator::inAnimation() const
@@ -74,16 +75,17 @@ int QNativeAndroidViewAnimator::inAnimation() const
 void QNativeAndroidViewAnimator::setInAnimation(int animation)
 {
     Q_D(QNativeAndroidViewAnimator);
-    if (animation != inAnimation()) {
-        d->inAnimation = animation;
-        if (instance().isValid()) {
-            QtNativeAndroid::callFunction([=]() {
-                instance().callMethod<void>("setInAnimation", "(Landroid/content/Context;I)V", ctx().object(), animation);
-            });
-        }
-        QtNativeAndroid::callIntMethod(instance(), "setInAnimation", animation);
-        emit inAnimationChanged();
+    if (animation == inAnimation())
+        return;
+
+    d->inAnimation = animation;
+    if (instance().isValid()) {
+        QtNativeAndroid::callFunction([=]() {
+            instance().callMethod<void>("setInAnimation", "(Landroid/content/Context;I)V", ctx().object(), animation);
+        });
     }
+    QtNativeAndroid::callIntMethod(instance(), "setInAnimation", animation);
+    emit inAnimationChanged();
 }
 
 int QNativeAndroidViewAnimator::outAnimation() const
@@ -97,16 +99,17 @@ int QNativeAndroidViewAnimator::outAnimation() const
 void QNativeAndroidViewAnimator::setOutAnimation(int animation)
 {
     Q_D(QNativeAndroidViewAnimator);
-    if (animation != outAnimation()) {
-        d->outAnimation = animation;
-        if (instance().isValid()) {
-            QtNativeAndroid::callFunction([=]() {
-                instance().callMethod<void>("setOutAnimation", "(Landroid/content/Context;I)V", ctx().object(), animation);
-            });
-        }
-        QtNativeAndroid::callIntMethod(instance(), "setInAnimation", animation);
-        emit inAnimationChanged();
+    if (animation == outAnimation())
+        return;
+
+    d->outAnimation = animation;
+    if (instance().isValid()) {
+        QtNativeAndroid::callFunction([=]() {
+            instance().callMethod<void>("setOutAnimation", "(Landroid/content/Context;I)V", ctx().object(), animation);
+        });
     }
+    QtNativeAndroid::callIntMethod(instance(), "setInAnimation", animation);
+    emit inAnimationChanged();
 }
 
 void QNativeAndroidViewAnimator::showNext()

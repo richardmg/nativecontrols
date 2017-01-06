@@ -63,17 +63,18 @@ QUrl QNativeAndroidImageView::imageURI() const
 void QNativeAndroidImageView::setImageURI(const QUrl &uri)
 {
     Q_D(QNativeAndroidImageView);
-    if (d->uri != uri) {
-        d->uri = uri;
-        if (isValid()) {
-            QAndroidJniObject v = instance();
-            QAndroidJniObject u = getUri();
-            QtNativeAndroid::callFunction([=]() {
-                v.callMethod<void>("setImageURI", "(Landroid/net/Uri;)V", u.object());
-            });
-        }
-        emit imageURIChanged();
+    if (d->uri == uri)
+        return;
+
+    d->uri = uri;
+    if (isValid()) {
+        QAndroidJniObject v = instance();
+        QAndroidJniObject u = getUri();
+        QtNativeAndroid::callFunction([=]() {
+            v.callMethod<void>("setImageURI", "(Landroid/net/Uri;)V", u.object());
+        });
     }
+    emit imageURIChanged();
 }
 
 int QNativeAndroidImageView::imageResource() const
@@ -85,11 +86,12 @@ int QNativeAndroidImageView::imageResource() const
 void QNativeAndroidImageView::setImageResource(int resource)
 {
     Q_D(QNativeAndroidImageView);
-    if (d->resource != resource) {
-        d->resource = resource;
-        QtNativeAndroid::callIntMethod(instance(), "setImageResource", resource);
-        emit imageResourceChanged();
-    }
+    if (d->resource == resource)
+        return;
+
+    d->resource = resource;
+    QtNativeAndroid::callIntMethod(instance(), "setImageResource", resource);
+    emit imageResourceChanged();
 }
 
 int QNativeAndroidImageView::imageTintColor() const
@@ -103,20 +105,21 @@ int QNativeAndroidImageView::imageTintColor() const
 void QNativeAndroidImageView::setImageTintColor(int color)
 {
     Q_D(QNativeAndroidImageView);
-    if (d->tint.isNull() || d->tint != color) {
-        d->tint = color;
-        if (isValid()) {
-            QAndroidJniObject view = instance();
-            QtNativeAndroid::callFunction([=]() {
-                QAndroidJniObject tint = QAndroidJniObject::callStaticObjectMethod("android/content/res/ColorStateList",
-                                                                                   "valueOf",
-                                                                                   "(I)Landroid/content/res/ColorStateList;",
-                                                                                   color);
-                view.callMethod<void>("setImageTintList", "(Landroid/content/res/ColorStateList;)v", tint.object());
-            });
-        }
-        emit imageTintColorChanged();
+    if (!d->tint.isNull() && d->tint == color)
+        return;
+
+    d->tint = color;
+    if (isValid()) {
+        QAndroidJniObject view = instance();
+        QtNativeAndroid::callFunction([=]() {
+            QAndroidJniObject tint = QAndroidJniObject::callStaticObjectMethod("android/content/res/ColorStateList",
+                                                                               "valueOf",
+                                                                               "(I)Landroid/content/res/ColorStateList;",
+                                                                               color);
+            view.callMethod<void>("setImageTintList", "(Landroid/content/res/ColorStateList;)v", tint.object());
+        });
     }
+    emit imageTintColorChanged();
 }
 
 QAndroidJniObject QNativeAndroidImageView::onCreate()

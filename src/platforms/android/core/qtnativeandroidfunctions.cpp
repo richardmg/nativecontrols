@@ -55,47 +55,52 @@ void callFunction(std::function<void()> method)
 
 void callTextMethod(const QAndroidJniObject &obj, const char *method, const QString &text)
 {
-    if (obj.isValid()) {
-        callFunction([=]() {
-            obj.callMethod<void>(method, "(Ljava/lang/CharSequence;)V", QAndroidJniObject::fromString(text).object());
-        });
-    }
+    if (!obj.isValid())
+        return;
+
+    callFunction([=]() {
+        obj.callMethod<void>(method, "(Ljava/lang/CharSequence;)V", QAndroidJniObject::fromString(text).object());
+    });
 }
 
 void callRealMethod(const QAndroidJniObject &obj, const char *method, qreal value)
 {
-    if (obj.isValid()) {
-        callFunction([=]() {
-            obj.callMethod<void>(method, "(F)V", value);
-        });
-    }
+    if (!obj.isValid())
+        return;
+
+    callFunction([=]() {
+        obj.callMethod<void>(method, "(F)V", value);
+    });
 }
 
 void callIntMethod(const QAndroidJniObject &obj, const char *method, int value)
 {
-    if (obj.isValid()) {
-        callFunction([=]() {
-            obj.callMethod<void>(method, "(I)V", value);
-        });
-    }
+    if (!obj.isValid())
+        return;
+
+    callFunction([=]() {
+        obj.callMethod<void>(method, "(I)V", value);
+    });
 }
 
 void callBoolMethod(const QAndroidJniObject &obj, const char *method, bool value)
 {
-    if (obj.isValid()) {
-        callFunction([=]() {
-            obj.callMethod<void>(method, "(Z)V", value);
-        });
-    }
+    if (!obj.isValid())
+        return;
+
+    callFunction([=]() {
+        obj.callMethod<void>(method, "(Z)V", value);
+    });
 }
 
 void callVoidMethod(const QAndroidJniObject &obj, const char *method)
 {
-    if (obj.isValid()) {
-        callFunction([=]() {
-            obj.callMethod<void>(method);
-        });
-    }
+    if (!obj.isValid())
+        return;
+
+    callFunction([=]() {
+        obj.callMethod<void>(method);
+    });
 }
 
 }

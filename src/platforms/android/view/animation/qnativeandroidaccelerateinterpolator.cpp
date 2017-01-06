@@ -62,10 +62,11 @@ qreal QNativeAndroidAccelerateInterpolator::factor() const
 void QNativeAndroidAccelerateInterpolator::setFactor(qreal factor)
 {
     Q_D(QNativeAndroidAccelerateInterpolator);
-    if (d->factor.isNull() || d->factor != factor) {
-        d->factor = factor;
-        emit factorChanged();
-    }
+    if (!d->factor.isNull() && qFuzzyCompare(d->factor, factor))
+        return;
+
+    d->factor = factor;
+    emit factorChanged();
 }
 
 QAndroidJniObject QNativeAndroidAccelerateInterpolator::onCreate()

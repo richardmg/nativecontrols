@@ -76,11 +76,12 @@ int QNativeAndroidLayoutParams::width() const
 void QNativeAndroidLayoutParams::setWidth(int value)
 {
     Q_D(QNativeAndroidLayoutParams);
-    if (value != width()) {
-        d->width = value;
-        invalidate();
-        emit widthChanged();
-    }
+    if (value == width())
+        return;
+
+    d->width = value;
+    invalidate();
+    emit widthChanged();
 }
 
 int QNativeAndroidLayoutParams::height() const
@@ -94,11 +95,12 @@ int QNativeAndroidLayoutParams::height() const
 void QNativeAndroidLayoutParams::setHeight(int value)
 {
     Q_D(QNativeAndroidLayoutParams);
-    if (value != height()) {
-        d->height = value;
-        invalidate();
-        emit heightChanged();
-    }
+    if (value == height())
+        return;
+
+    d->height = value;
+    invalidate();
+    emit heightChanged();
 }
 
 void QNativeAndroidLayoutParams::invalidate()

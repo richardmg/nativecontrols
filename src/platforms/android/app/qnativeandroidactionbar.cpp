@@ -79,17 +79,18 @@ bool QNativeAndroidActionBar::isVisible() const
     return d->visible;
 }
 
-void QNativeAndroidActionBar::setVisible(bool arg)
+void QNativeAndroidActionBar::setVisible(bool visible)
 {
     Q_D(QNativeAndroidActionBar);
-    if (arg != isVisible()) {
-        d->visible = arg;
-        if (arg)
-            QtNativeAndroid::callVoidMethod(instance(), "show");
-        else
-            QtNativeAndroid::callVoidMethod(instance(), "hide");
-        emit visibleChanged();
-    }
+    if (visible == isVisible())
+        return;
+
+    d->visible = visible;
+    if (visible)
+        QtNativeAndroid::callVoidMethod(instance(), "show");
+    else
+        QtNativeAndroid::callVoidMethod(instance(), "hide");
+    emit visibleChanged();
 }
 
 qreal QNativeAndroidActionBar::elevation() const
@@ -101,11 +102,12 @@ qreal QNativeAndroidActionBar::elevation() const
 void QNativeAndroidActionBar::setElevation(qreal elevation)
 {
     Q_D(QNativeAndroidActionBar);
-    if (d->elevation != elevation) {
-        d->elevation = elevation;
-        QtNativeAndroid::callRealMethod(instance(), "setElevation", elevation);
-        emit elevationChanged();
-    }
+    if (qFuzzyCompare(d->elevation, elevation))
+        return;
+
+    d->elevation = elevation;
+    QtNativeAndroid::callRealMethod(instance(), "setElevation", elevation);
+    emit elevationChanged();
 }
 
 QString QNativeAndroidActionBar::title() const
@@ -117,11 +119,12 @@ QString QNativeAndroidActionBar::title() const
 void QNativeAndroidActionBar::setTitle(const QString &title)
 {
     Q_D(QNativeAndroidActionBar);
-    if (d->title != title) {
-        d->title = title;
-        QtNativeAndroid::callTextMethod(instance(), "setTitle", title);
-        emit titleChanged();
-    }
+    if (d->title == title)
+        return;
+
+    d->title = title;
+    QtNativeAndroid::callTextMethod(instance(), "setTitle", title);
+    emit titleChanged();
 }
 
 QString QNativeAndroidActionBar::subtitle() const
@@ -133,11 +136,12 @@ QString QNativeAndroidActionBar::subtitle() const
 void QNativeAndroidActionBar::setSubtitle(const QString &subtitle)
 {
     Q_D(QNativeAndroidActionBar);
-    if (d->subtitle != subtitle) {
-        d->subtitle = subtitle;
-        QtNativeAndroid::callTextMethod(instance(), "setSubtitle", subtitle);
-        emit subtitleChanged();
-    }
+    if (d->subtitle == subtitle)
+        return;
+
+    d->subtitle = subtitle;
+    QtNativeAndroid::callTextMethod(instance(), "setSubtitle", subtitle);
+    emit subtitleChanged();
 }
 
 QNativeAndroidDrawable *QNativeAndroidActionBar::background() const
@@ -149,18 +153,19 @@ QNativeAndroidDrawable *QNativeAndroidActionBar::background() const
 void QNativeAndroidActionBar::setBackground(QNativeAndroidDrawable *background)
 {
     Q_D(QNativeAndroidActionBar);
-    if (d->background != background) {
-        if (d->background) {
-            QObjectPrivate::disconnect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActionBarPrivate::updateBackground);
-            d->background->destruct();
-        }
-        d->background = background;
-        if (d->background) {
-            QObjectPrivate::connect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActionBarPrivate::updateBackground);
-            d->background->construct();
-        }
-        emit backgroundChanged();
+    if (d->background == background)
+        return;
+
+    if (d->background) {
+        QObjectPrivate::disconnect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActionBarPrivate::updateBackground);
+        d->background->destruct();
     }
+    d->background = background;
+    if (d->background) {
+        QObjectPrivate::connect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActionBarPrivate::updateBackground);
+        d->background->construct();
+    }
+    emit backgroundChanged();
 }
 
 void QNativeAndroidActionBar::onInflate(QAndroidJniObject &instance)

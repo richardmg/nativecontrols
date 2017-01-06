@@ -62,10 +62,11 @@ int QNativeAndroidArrayAdapter::style() const
 void QNativeAndroidArrayAdapter::setStyle(int style)
 {
     Q_D(QNativeAndroidArrayAdapter);
-    if (d->style != style) {
-        d->style = style;
-        emit styleChanged();
-    }
+    if (d->style == style)
+        return;
+
+    d->style = style;
+    emit styleChanged();
 }
 
 QStringList QNativeAndroidArrayAdapter::array() const
@@ -77,11 +78,12 @@ QStringList QNativeAndroidArrayAdapter::array() const
 void QNativeAndroidArrayAdapter::setArray(const QStringList &array)
 {
     Q_D(QNativeAndroidArrayAdapter);
-    if (d->array != array) {
-        d->array = array; // TODO: sync
-        emit countChanged();
-        emit arrayChanged();
-    }
+    if (d->array == array)
+        return;
+
+    d->array = array; // TODO: sync
+    emit countChanged();
+    emit arrayChanged();
 }
 
 int QNativeAndroidArrayAdapter::count() const
@@ -99,11 +101,12 @@ QString QNativeAndroidArrayAdapter::getItem(int position) const
 void QNativeAndroidArrayAdapter::clear()
 {
     Q_D(QNativeAndroidArrayAdapter);
-    if (!d->array.isEmpty()) {
-        d->array.clear(); // TODO: sync
-        emit countChanged();
-        emit arrayChanged();
-    }
+    if (d->array.isEmpty())
+        return;
+
+    d->array.clear(); // TODO: sync
+    emit countChanged();
+    emit arrayChanged();
 }
 
 QAndroidJniObject QNativeAndroidArrayAdapter::onCreate()

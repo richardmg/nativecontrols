@@ -63,11 +63,12 @@ int QNativeAndroidLinearLayoutParams::gravity() const
 void QNativeAndroidLinearLayoutParams::setGravity(int value)
 {
     Q_D(QNativeAndroidLinearLayoutParams);
-    if (value != gravity()) {
-        d->gravity = value;
-        invalidate();
-        emit gravityChanged();
-    }
+    if (value == gravity())
+        return;
+
+    d->gravity = value;
+    invalidate();
+    emit gravityChanged();
 }
 
 qreal QNativeAndroidLinearLayoutParams::weight() const
@@ -81,11 +82,12 @@ qreal QNativeAndroidLinearLayoutParams::weight() const
 void QNativeAndroidLinearLayoutParams::setWeight(qreal value)
 {
     Q_D(QNativeAndroidLinearLayoutParams);
-    if (value != weight()) {
-        d->weight = value;
-        invalidate();
-        emit weightChanged();
-    }
+    if (value == weight())
+        return;
+
+    d->weight = value;
+    invalidate();
+    emit weightChanged();
 }
 
 QAndroidJniObject QNativeAndroidLinearLayoutParams::onCreate()

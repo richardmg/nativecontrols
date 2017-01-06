@@ -65,11 +65,12 @@ int QNativeAndroidWindow::statusBarColor() const
 void QNativeAndroidWindow::setStatusBarColor(int color)
 {
     Q_D(QNativeAndroidWindow);
-    if (d->statusBarColor.isNull() || d->statusBarColor != color) {
-        d->statusBarColor = color;
-        QtNativeAndroid::callIntMethod(instance(), "setStatusBarColor", color);
-        emit statusBarColorChanged();
-    }
+    if (!d->statusBarColor.isNull() && d->statusBarColor == color)
+        return;
+
+    d->statusBarColor = color;
+    QtNativeAndroid::callIntMethod(instance(), "setStatusBarColor", color);
+    emit statusBarColorChanged();
 }
 
 void QNativeAndroidWindow::onInflate(QAndroidJniObject &instance)

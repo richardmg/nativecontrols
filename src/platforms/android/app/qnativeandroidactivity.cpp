@@ -154,13 +154,14 @@ QNativeAndroidActionBar *QNativeAndroidActivity::actionBar() const
 void QNativeAndroidActivity::setActionBar(QNativeAndroidActionBar *bar)
 {
     Q_D(QNativeAndroidActivity);
-    if (d->actionBar != bar) {
-        if (d->actionBar)
-            d->actionBar->destruct();
-        d->actionBar = bar;
-        if (d->actionBar)
-            d->setupActionBar();
-    }
+    if (d->actionBar == bar)
+        return;
+
+    if (d->actionBar)
+        d->actionBar->destruct();
+    d->actionBar = bar;
+    if (d->actionBar)
+        d->setupActionBar();
 }
 
 QNativeAndroidMenu *QNativeAndroidActivity::optionsMenu() const
@@ -172,17 +173,18 @@ QNativeAndroidMenu *QNativeAndroidActivity::optionsMenu() const
 void QNativeAndroidActivity::setOptionsMenu(QNativeAndroidMenu *menu)
 {
     Q_D(QNativeAndroidActivity);
-    if (d->optionsMenu != menu) {
-        if (d->optionsMenu) {
-            QObjectPrivate::disconnect(d->optionsMenu, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateOptionsMenu);
-            d->optionsMenu->destruct();
-        }
-        d->optionsMenu = menu;
-        if (d->optionsMenu) {
-            QObjectPrivate::connect(d->optionsMenu, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateOptionsMenu);
-            if (isComponentComplete())
-                d->optionsMenu->construct();
-        }
+    if (d->optionsMenu == menu)
+        return;
+
+    if (d->optionsMenu) {
+        QObjectPrivate::disconnect(d->optionsMenu, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateOptionsMenu);
+        d->optionsMenu->destruct();
+    }
+    d->optionsMenu = menu;
+    if (d->optionsMenu) {
+        QObjectPrivate::connect(d->optionsMenu, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateOptionsMenu);
+        if (isComponentComplete())
+            d->optionsMenu->construct();
     }
 }
 
@@ -195,19 +197,19 @@ QNativeAndroidView *QNativeAndroidActivity::contentView() const
 void QNativeAndroidActivity::setContentView(QNativeAndroidView *view)
 {
     Q_D(QNativeAndroidActivity);
-    if (d->contentView != view) {
-        if (d->contentView) {
-            QObjectPrivate::disconnect(d->contentView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateContentView);
-            d->contentView->destruct();
-        }
-        d->contentView = view;
-        if (d->contentView) {
-            view->setParent(this);
-            view->setContext(this);
-            QObjectPrivate::connect(d->contentView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateContentView);
-            if (isComponentComplete())
-                d->contentView->construct();
-        }
+    if (d->contentView == view)
+        return;
+    if (d->contentView) {
+        QObjectPrivate::disconnect(d->contentView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateContentView);
+        d->contentView->destruct();
+    }
+    d->contentView = view;
+    if (d->contentView) {
+        view->setParent(this);
+        view->setContext(this);
+        QObjectPrivate::connect(d->contentView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateContentView);
+        if (isComponentComplete())
+            d->contentView->construct();
     }
 }
 

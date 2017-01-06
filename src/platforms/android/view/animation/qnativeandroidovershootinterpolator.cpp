@@ -62,10 +62,11 @@ qreal QNativeAndroidOvershootInterpolator::tension() const
 void QNativeAndroidOvershootInterpolator::setTension(qreal tension)
 {
     Q_D(QNativeAndroidOvershootInterpolator);
-    if (d->tension.isNull() || d->tension != tension) {
-        d->tension = tension;
-        emit tensionChanged();
-    }
+    if (!d->tension.isNull() && qFuzzyCompare(d->tension, tension))
+        return;
+
+    d->tension = tension;
+    emit tensionChanged();
 }
 
 QAndroidJniObject QNativeAndroidOvershootInterpolator::onCreate()

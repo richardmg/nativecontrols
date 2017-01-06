@@ -88,12 +88,12 @@ void QNativeAndroidRadioGroupPrivate::_q_updateCheckedButtonId(int checkedId)
 bool QNativeAndroidRadioGroupPrivate::_q_updateCheckedButton(QNativeAndroidRadioButton *button)
 {
     Q_Q(QNativeAndroidRadioGroup);
-    if (checkedButton != button) {
-        checkedButton = button;
-        emit q->checkedButtonChanged();
-        return true;
-    }
-    return false;
+    if (checkedButton == button)
+        return false;
+
+    checkedButton = button;
+    emit q->checkedButtonChanged();
+    return true;
 }
 
 QNativeAndroidRadioGroup::QNativeAndroidRadioGroup(QNativeAndroidContext *context)

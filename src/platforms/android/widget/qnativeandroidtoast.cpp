@@ -64,10 +64,11 @@ QString QNativeAndroidToast::text() const
 void QNativeAndroidToast::setText(const QString &text)
 {
     Q_D(QNativeAndroidToast);
-    if (d->text != text) {
-        d->text = text;
-        emit textChanged();
-    }
+    if (d->text == text)
+        return;
+
+    d->text = text;
+    emit textChanged();
 }
 
 int QNativeAndroidToast::gravity() const
@@ -81,10 +82,11 @@ int QNativeAndroidToast::gravity() const
 void QNativeAndroidToast::setGravity(int value)
 {
     Q_D(QNativeAndroidToast);
-    if (value != gravity()) {
-        d->gravity = value;
-        emit gravityChanged();
-    }
+    if (value == gravity())
+        return;
+
+    d->gravity = value;
+    emit gravityChanged();
 }
 
 void QNativeAndroidToast::show()

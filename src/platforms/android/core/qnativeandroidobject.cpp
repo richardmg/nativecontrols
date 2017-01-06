@@ -80,11 +80,11 @@ void QNativeAndroidObjectPrivate::setInstance(const QAndroidJniObject &newInstan
 {
     Q_Q(QNativeAndroidObject);
     QWriteLocker locker(instanceLock());
-    if (instance != newInstance) {
-        instance = newInstance;
-        // queue to Qt thread if necessary
-        QMetaObject::invokeMethod(q, "_q_changeInstance", Qt::AutoConnection);
-    }
+    if (instance == newInstance)
+        return;
+    instance = newInstance;
+    // queue to Qt thread if necessary
+    QMetaObject::invokeMethod(q, "_q_changeInstance", Qt::AutoConnection);
 }
 
 void QNativeAndroidObjectPrivate::_q_changeInstance()

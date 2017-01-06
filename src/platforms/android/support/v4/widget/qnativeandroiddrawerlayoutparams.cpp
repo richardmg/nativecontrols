@@ -58,14 +58,15 @@ int QNativeAndroidDrawerLayoutParams::gravity() const
     return d->gravity;
 }
 
-void QNativeAndroidDrawerLayoutParams::setGravity(int value)
+void QNativeAndroidDrawerLayoutParams::setGravity(int gravity)
 {
     Q_D(QNativeAndroidDrawerLayoutParams);
-    if (d->gravity != value) {
-        d->gravity = value;
-        invalidate();
-        emit gravityChanged();
-    }
+    if (d->gravity == gravity)
+        return;
+
+    d->gravity = gravity;
+    invalidate();
+    emit gravityChanged();
 }
 
 QAndroidJniObject QNativeAndroidDrawerLayoutParams::onCreate()

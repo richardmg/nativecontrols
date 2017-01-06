@@ -62,10 +62,11 @@ qreal QNativeAndroidAnticipateInterpolator::tension() const
 void QNativeAndroidAnticipateInterpolator::setTension(qreal tension)
 {
     Q_D(QNativeAndroidAnticipateInterpolator);
-    if (d->tension.isNull() || d->tension != tension) {
-        d->tension = tension;
-        emit tensionChanged();
-    }
+    if (!d->tension.isNull() && qFuzzyCompare(d->tension, tension))
+        return;
+
+    d->tension = tension;
+    emit tensionChanged();
 }
 
 QAndroidJniObject QNativeAndroidAnticipateInterpolator::onCreate()

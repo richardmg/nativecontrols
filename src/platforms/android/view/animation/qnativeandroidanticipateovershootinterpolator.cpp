@@ -63,10 +63,11 @@ qreal QNativeAndroidAnticipateOvershootInterpolator::tension() const
 void QNativeAndroidAnticipateOvershootInterpolator::setTension(qreal tension)
 {
     Q_D(QNativeAndroidAnticipateOvershootInterpolator);
-    if (d->tension.isNull() || d->tension != tension) {
-        d->tension = tension;
-        emit tensionChanged();
-    }
+    if (!d->tension.isNull() && qFuzzyCompare(d->tension, tension))
+        return;
+
+    d->tension = tension;
+    emit tensionChanged();
 }
 
 qreal QNativeAndroidAnticipateOvershootInterpolator::extraTension() const
@@ -80,10 +81,11 @@ qreal QNativeAndroidAnticipateOvershootInterpolator::extraTension() const
 void QNativeAndroidAnticipateOvershootInterpolator::setExtraTension(qreal tension)
 {
     Q_D(QNativeAndroidAnticipateOvershootInterpolator);
-    if (d->extraTension.isNull() || d->extraTension != tension) {
-        d->extraTension = tension;
-        emit extraTensionChanged();
-    }
+    if (!d->extraTension.isNull() && qFuzzyCompare(d->extraTension, tension))
+        return;
+
+    d->extraTension = tension;
+    emit extraTensionChanged();
 }
 
 QAndroidJniObject QNativeAndroidAnticipateOvershootInterpolator::onCreate()

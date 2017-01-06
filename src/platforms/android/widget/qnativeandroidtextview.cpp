@@ -60,11 +60,12 @@ QString QNativeAndroidTextView::text() const
 void QNativeAndroidTextView::setText(const QString &text)
 {
     Q_D(QNativeAndroidTextView);
-    if (d->text != text) {
-        d->text = text;
-        QtNativeAndroid::callTextMethod(instance(), "setText", text);
-        emit textChanged();
-    }
+    if (d->text == text)
+        return;
+
+    d->text = text;
+    QtNativeAndroid::callTextMethod(instance(), "setText", text);
+    emit textChanged();
 }
 
 int QNativeAndroidTextView::textColor() const
@@ -78,11 +79,12 @@ int QNativeAndroidTextView::textColor() const
 void QNativeAndroidTextView::setTextColor(int color)
 {
     Q_D(QNativeAndroidTextView);
-    if (color != textColor()) {
-        d->textColor = color;
-        QtNativeAndroid::callIntMethod(instance(), "setTextColor", color);
-        emit textColorChanged();
-    }
+    if (color == textColor())
+        return;
+
+    d->textColor = color;
+    QtNativeAndroid::callIntMethod(instance(), "setTextColor", color);
+    emit textColorChanged();
 }
 
 qreal QNativeAndroidTextView::textSize() const
@@ -96,11 +98,12 @@ qreal QNativeAndroidTextView::textSize() const
 void QNativeAndroidTextView::setTextSize(qreal size)
 {
     Q_D(QNativeAndroidTextView);
-    if (size != textSize()) {
-        d->textSize = size;
-        QtNativeAndroid::callRealMethod(instance(), "setTextSize", size);
-        emit textSizeChanged();
-    }
+    if (qFuzzyCompare(size, textSize()))
+        return;
+
+    d->textSize = size;
+    QtNativeAndroid::callRealMethod(instance(), "setTextSize", size);
+    emit textSizeChanged();
 }
 
 QString QNativeAndroidTextView::hint() const
@@ -112,11 +115,12 @@ QString QNativeAndroidTextView::hint() const
 void QNativeAndroidTextView::setHint(const QString &hint)
 {
     Q_D(QNativeAndroidTextView);
-    if (d->hint != hint) {
-        d->hint = hint;
-        QtNativeAndroid::callTextMethod(instance(), "setHint", hint);
-        emit hintChanged();
-    }
+    if (d->hint == hint)
+        return;
+
+    d->hint = hint;
+    QtNativeAndroid::callTextMethod(instance(), "setHint", hint);
+    emit hintChanged();
 }
 
 bool QNativeAndroidTextView::isSingleLine() const
@@ -128,11 +132,12 @@ bool QNativeAndroidTextView::isSingleLine() const
 void QNativeAndroidTextView::setSingleLine(bool singleLine)
 {
     Q_D(QNativeAndroidTextView);
-    if (d->singleLine != singleLine) {
-        d->singleLine = singleLine;
-        QtNativeAndroid::callBoolMethod(instance(), "setSingleLine", singleLine);
-        emit singleLineChanged();
-    }
+    if (d->singleLine == singleLine)
+        return;
+
+    d->singleLine = singleLine;
+    QtNativeAndroid::callBoolMethod(instance(), "setSingleLine", singleLine);
+    emit singleLineChanged();
 }
 
 int QNativeAndroidTextView::inputType() const
@@ -146,11 +151,12 @@ int QNativeAndroidTextView::inputType() const
 void QNativeAndroidTextView::setInputType(int type)
 {
     Q_D(QNativeAndroidTextView);
-    if (d->inputType.isNull() || d->inputType != type) {
-        d->inputType = type;
-        QtNativeAndroid::callIntMethod(instance(), "setInputType", type);
-        emit inputTypeChanged();
-    }
+    if (!d->inputType.isNull() && d->inputType == type)
+        return;
+
+    d->inputType = type;
+    QtNativeAndroid::callIntMethod(instance(), "setInputType", type);
+    emit inputTypeChanged();
 }
 
 QAndroidJniObject QNativeAndroidTextView::onCreate()

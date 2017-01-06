@@ -74,11 +74,12 @@ QString QNativeAndroidTabSpec::label() const
 void QNativeAndroidTabSpec::setLabel(const QString &label)
 {
     Q_D(QNativeAndroidTabSpec);
-    if (d->label != label) {
-        d->label = label;
-        // TODO: invalidate
-        emit labelChanged();
-    }
+    if (d->label == label)
+        return;
+
+    d->label = label;
+    // TODO: invalidate
+    emit labelChanged();
 }
 
 void QNativeAndroidTabSpec::setup(QAndroidJniObject &host, int index)

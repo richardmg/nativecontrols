@@ -61,11 +61,12 @@ QString QNativeAndroidAlertDialog::title() const
 void QNativeAndroidAlertDialog::setTitle(const QString &title)
 {
     Q_D(QNativeAndroidAlertDialog);
-    if (d->title != title) {
-        d->title = title;
-        QtNativeAndroid::callTextMethod(instance(), "setTitle", title);
-        emit titleChanged();
-    }
+    if (d->title == title)
+        return;
+
+    d->title = title;
+    QtNativeAndroid::callTextMethod(instance(), "setTitle", title);
+    emit titleChanged();
 }
 
 QString QNativeAndroidAlertDialog::message() const
@@ -77,11 +78,12 @@ QString QNativeAndroidAlertDialog::message() const
 void QNativeAndroidAlertDialog::setMessage(const QString &message)
 {
     Q_D(QNativeAndroidAlertDialog);
-    if (d->message != message) {
-        d->message = message;
-        QtNativeAndroid::callTextMethod(instance(), "setMessage", message);
-        emit messageChanged();
-    }
+    if (d->message != message)
+        return;
+
+    d->message = message;
+    QtNativeAndroid::callTextMethod(instance(), "setMessage", message);
+    emit messageChanged();
 }
 
 QAndroidJniObject QNativeAndroidAlertDialog::onCreate()

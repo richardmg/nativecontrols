@@ -68,12 +68,13 @@ bool QNativeAndroidLinearLayout::isBaselineAligned() const
 void QNativeAndroidLinearLayout::setBaselineAligned(bool aligned)
 {
     Q_D(QNativeAndroidLinearLayout);
-    if (aligned != isBaselineAligned()) {
-        d->baselineAligned = aligned;
-//        if (isValid())
-//            jniObject().callMethod<void>("setBaselineAligned", "(Z)V", aligned);
-        emit baselineAlignedChanged();
-    }
+    if (aligned == isBaselineAligned())
+        return;
+
+    d->baselineAligned = aligned;
+//    if (isValid())
+//        jniObject().callMethod<void>("setBaselineAligned", "(Z)V", aligned);
+    emit baselineAlignedChanged();
 }
 
 int QNativeAndroidLinearLayout::baselineAlignedChildIndex() const
@@ -87,12 +88,13 @@ int QNativeAndroidLinearLayout::baselineAlignedChildIndex() const
 void QNativeAndroidLinearLayout::setBaselineAlignedChildIndex(int index)
 {
     Q_D(QNativeAndroidLinearLayout);
-    if (index != baselineAlignedChildIndex()) {
-        d->baselineAlignedChildIndex = index;
-//        if (isValid())
-//            jniObject().callMethod<void>("setBaselineAlignedChildIndex", "(I)V", index);
-        emit baselineAlignedChildIndexChanged();
-    }
+    if (index == baselineAlignedChildIndex())
+        return;
+
+    d->baselineAlignedChildIndex = index;
+//    if (isValid())
+//        jniObject().callMethod<void>("setBaselineAlignedChildIndex", "(I)V", index);
+    emit baselineAlignedChildIndexChanged();
 }
 
 bool QNativeAndroidLinearLayout::isMeasureWithLargestChildEnabled() const
@@ -106,12 +108,13 @@ bool QNativeAndroidLinearLayout::isMeasureWithLargestChildEnabled() const
 void QNativeAndroidLinearLayout::setMeasureWithLargestChildEnabled(bool enabled)
 {
     Q_D(QNativeAndroidLinearLayout);
-    if (enabled != isMeasureWithLargestChildEnabled()) {
-        d->measureWithLargestChild = enabled;
-//        if (isValid())
-//            jniObject().callMethod<void>("setMeasureWithLargestChildEnabled", "(Z)V", enabled);
-        emit measureWithLargestChildEnabledChanged();
-    }
+    if (enabled == isMeasureWithLargestChildEnabled())
+        return;
+
+    d->measureWithLargestChild = enabled;
+//    if (isValid())
+//        jniObject().callMethod<void>("setMeasureWithLargestChildEnabled", "(Z)V", enabled);
+    emit measureWithLargestChildEnabledChanged();
 }
 
 QNativeAndroidLinearLayout::Orientation QNativeAndroidLinearLayout::orientation() const
@@ -125,12 +128,13 @@ QNativeAndroidLinearLayout::Orientation QNativeAndroidLinearLayout::orientation(
 void QNativeAndroidLinearLayout::setOrientation(Orientation value)
 {
     Q_D(QNativeAndroidLinearLayout);
-    if (value != orientation()) {
-        d->orientation = value;
-//        if (isValid())
-//            jniObject().callMethod<void>("setOrientation", "(I)V", value);
-        emit orientationChanged();
-    }
+    if (value == orientation())
+        return;
+
+    d->orientation = value;
+//    if (isValid())
+//        jniObject().callMethod<void>("setOrientation", "(I)V", value);
+    emit orientationChanged();
 }
 
 qreal QNativeAndroidLinearLayout::weightSum() const
@@ -144,12 +148,13 @@ qreal QNativeAndroidLinearLayout::weightSum() const
 void QNativeAndroidLinearLayout::setWeightSum(qreal sum)
 {
     Q_D(QNativeAndroidLinearLayout);
-    if (sum != weightSum()) {
-        d->weightSum = sum;
-//        if (isValid())
-//            jniObject().callMethod<void>("setWeightSum", "(J)V", sum);
-        emit weightSumChanged();
-    }
+    if (sum == weightSum())
+        return;
+
+    d->weightSum = sum;
+//    if (isValid())
+//        jniObject().callMethod<void>("setWeightSum", "(J)V", sum);
+    emit weightSumChanged();
 }
 
 QAndroidJniObject QNativeAndroidLinearLayout::onCreate()

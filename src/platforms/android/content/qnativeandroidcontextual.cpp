@@ -132,11 +132,12 @@ QNativeAndroidContext *QNativeAndroidContextual::context() const
 void QNativeAndroidContextual::setContext(QNativeAndroidContext *context)
 {
     Q_D(QNativeAndroidContextual);
-    if (d->context != context) {
-        d->context = context;
-        d->propagateContext();
-        emit contextChanged();
-    }
+    if (d->context == context)
+        return;
+
+    d->context = context;
+    d->propagateContext();
+    emit contextChanged();
 }
 
 void QNativeAndroidContextual::componentComplete()

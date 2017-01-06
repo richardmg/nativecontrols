@@ -62,10 +62,11 @@ qreal QNativeAndroidCycleInterpolator::cycles() const
 void QNativeAndroidCycleInterpolator::setCycles(qreal cycles)
 {
     Q_D(QNativeAndroidCycleInterpolator);
-    if (d->cycles.isNull() || d->cycles != cycles) {
-        d->cycles = cycles;
-        emit cyclesChanged();
-    }
+    if (!d->cycles.isNull() && qFuzzyCompare(d->cycles, cycles))
+        return;
+
+    d->cycles = cycles;
+    emit cyclesChanged();
 }
 
 QAndroidJniObject QNativeAndroidCycleInterpolator::onCreate()
