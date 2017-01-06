@@ -13,10 +13,12 @@ NativeWindow {
         id: theButton
         x: 20
         y: 20
-        width: 100
-        height: 21
         text: "Click me"
-        onClicked: text = "You clicked me!"
+        onClicked: text ="You clicked me!"
+        onWidthChanged: print("theButton width:" + width)
+        onHeightChanged: print("theButton height:" + height)
+        onImplicitWidthChanged: print("theButton implicit width:" + implicitWidth)
+        onImplicitHeightChanged: print("theButton implicit height:" + implicitHeight)
 //        Android.bgStyle: Android.bgBlue
 //        Ios.subLabel: "subLabel"
     }
@@ -28,6 +30,10 @@ NativeWindow {
         width: windowAvailableWidth / 2
         height: 22
         placeholderText: "Enter some text..."
+        onWidthChanged: print("theTextField1 width:" + width)
+        onHeightChanged: print("theTextField1 height:" + height)
+        onImplicitWidthChanged: print("theTextField1 implicit width:" + implicitWidth)
+        onImplicitHeightChanged: print("theTextField1 implicit height:" + implicitHeight)
     }
 
     SearchField {
