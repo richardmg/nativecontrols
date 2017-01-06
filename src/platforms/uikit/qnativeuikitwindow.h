@@ -63,6 +63,8 @@ public:
     virtual void setVisible(bool isVisible) override;
     virtual void showFullScreen() override;
 
+    virtual bool event(QEvent *e) override;
+
 Q_SIGNALS:
     void visibleChanged(bool isVisible);
 

@@ -125,7 +125,11 @@ void QNativeUIKitWindow::setVisible(bool newVisible)
     Q_D(QNativeUIKitWindow);
 
     if (newVisible) {
-        d->updateLayout(true);
+        // Now that the window becomes visible, we should check if any of its
+        // children needs to be resized to implicit size. Since children
+        // are added after the call to setVisible when using QML, we need to
+        // post the update request.
+        qApp->postEvent(this, new QEvent(QEvent::LayoutRequest));
         [d->m_window makeKeyAndVisible];
     } else {
         qWarning("not implemented");
@@ -137,6 +141,18 @@ void QNativeUIKitWindow::setVisible(bool newVisible)
 void QNativeUIKitWindow::showFullScreen()
 {
     setVisible(true);
+}
+
+bool QNativeUIKitWindow::event(QEvent *e)
+{
+    Q_D(QNativeUIKitWindow);
+    switch (e->type()) {
+    case QEvent::LayoutRequest:
+        d->updateLayout(true);
+    default:
+        return QNativeUIKitBase::event(e);
+    }
+    return true;
 }
 
 #include "moc_qnativeuikitwindow.cpp"
