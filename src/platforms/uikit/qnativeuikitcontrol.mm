@@ -90,7 +90,7 @@ void QNativeUIKitControlPrivate::updateImplicitSize()
 {
     Q_Q(QNativeUIKitControl);
     QSizeF oldSize = m_implicitSize;
-    m_implicitSize = QSizeF::fromCGSize([view() sizeThatFits:CGSizeZero]);
+    m_implicitSize = q->implicitSize();
 
     if (m_implicitSize.width() != oldSize.width()) {
         updateLayout(false);

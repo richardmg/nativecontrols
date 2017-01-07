@@ -111,20 +111,11 @@ void QNativeAppKitControlPrivate::updateLayout(bool recursive)
     }
 }
 
-static QSizeF implicitSize(NSView *view)
-{
-    NSControl *control = static_cast<NSControl *>(view);
-    const NSSize size = [control isKindOfClass:[NSControl class]]
-            ? [control sizeThatFits:NSZeroSize]
-            : view.intrinsicContentSize;
-    return QSizeF(size.width, size.height);
-}
-
 void QNativeAppKitControlPrivate::updateImplicitSize()
 {
     Q_Q(QNativeAppKitControl);
     QSizeF oldSize = m_implicitSize;
-    m_implicitSize = implicitSize(view());
+    m_implicitSize = q->implicitSize();
 
     if (m_implicitSize.width() != oldSize.width()) {
         updateLayout(false);
@@ -217,7 +208,12 @@ void QNativeAppKitControl::resize(const QSizeF size)
 
 QSizeF QNativeAppKitControl::implicitSize() const
 {
-    return ::implicitSize(d_func()->view());
+    Q_D(const QNativeAppKitControl);
+    NSControl *control = static_cast<NSControl *>(d->view());
+    const NSSize size = [control isKindOfClass:[NSControl class]]
+            ? [control sizeThatFits:NSZeroSize]
+            : d->view().intrinsicContentSize;
+    return QSizeF(size.width, size.height);
 }
 
 qreal QNativeAppKitControl::implicitWidth() const
