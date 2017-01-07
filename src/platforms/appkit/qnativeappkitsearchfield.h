@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QNativeAppKitSearchFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSSearchField);
 
-class Q_NATIVECONTROLS_EXPORT QNativeAppKitSearchField : public QNativeAppKitControl, public virtual QNativePlatformSearchField
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitSearchField : public QNativeAppKitControl, public virtual QNativePlatformSearchField
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)

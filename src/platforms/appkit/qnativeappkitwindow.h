@@ -46,7 +46,7 @@ QT_BEGIN_NAMESPACE
 class QNativeAppKitWindowPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
 
-class Q_NATIVECONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitBase, public virtual QNativePlatformWindow
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitBase, public virtual QNativePlatformWindow
 {
     Q_OBJECT
 

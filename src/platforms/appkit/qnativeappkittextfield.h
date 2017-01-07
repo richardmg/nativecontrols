@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QNativeAppKitTextFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSTextField);
 
-class Q_NATIVECONTROLS_EXPORT QNativeAppKitTextField : public QNativeAppKitControl, public virtual QNativePlatformTextField
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitTextField : public QNativeAppKitControl, public virtual QNativePlatformTextField
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)

@@ -46,7 +46,7 @@ QT_BEGIN_NAMESPACE
 class QNativeUIKitWindowPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 
-class Q_NATIVECONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitBase, public virtual QNativePlatformWindow
+class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitBase, public virtual QNativePlatformWindow
 {
     Q_OBJECT
 

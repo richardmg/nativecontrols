@@ -3,7 +3,7 @@
 ** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Quick Controls 2 module of the Qt Toolkit.
+** This file is part of the Qt Quick Templates 2 module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,47 +34,34 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITTEXTFIELD_H
-#define QNATIVEUIKITTEXTFIELD_H
+#ifndef QNATIVEUIKITCONTROLSGLOBAL_H
+#define QNATIVEUIKITCONTROLSGLOBAL_H
 
-#include <QtNativeControls/qnativeplatformtextfield.h>
-#include <QtNativeUIKitControls/qnativeuikitcontrol.h>
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+#include <QtCore/qglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitTextFieldPrivate;
-Q_FORWARD_DECLARE_OBJC_CLASS(UITextField);
-
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitTextField : public QNativeUIKitControl, public virtual QNativePlatformTextField
-{
-    Q_OBJECT
-    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
-    Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
-
-public:
-    QNativeUIKitTextField(QNativeUIKitBase *parent = nullptr);
-    QNativeUIKitTextField(const QString &text, QNativeUIKitBase *parent = nullptr);
-    virtual ~QNativeUIKitTextField();
-
-    UITextField *uiTextFieldHandle();
-
-    virtual QString text() override;
-    virtual void setText(const QString &text) override;
-
-    virtual QString placeholderText() override;
-    virtual void setPlaceholderText(const QString &placeholderText) override;
-
-Q_SIGNALS:
-    void textChanged(const QString &text);
-    void placeholderTextChanged(const QString &placeholderText);
-
-protected:
-    QNativeUIKitTextField(QNativeUIKitTextFieldPrivate &dd, QNativeUIKitBase *parent = nullptr);
-
-private:
-    Q_DECLARE_PRIVATE(QNativeUIKitTextField)
-    Q_DISABLE_COPY(QNativeUIKitTextField)
-};
+#ifndef QT_STATIC
+#  if defined(QT_BUILD_NATIVEUIKITCONTROLS_LIB)
+#    define Q_NATIVEUIKITCONTROLS_EXPORT Q_DECL_EXPORT
+#  else
+#    define Q_NATIVEUIKITCONTROLS_EXPORT Q_DECL_IMPORT
+#  endif
+#else
+#  define Q_NATIVEUIKITCONTROLS_EXPORT
+#endif
 
 QT_END_NAMESPACE
-#endif // QNATIVEUIKITTEXTFIELD_H
+
+#endif // QNATIVEUIKITCONTROLSGLOBAL_H

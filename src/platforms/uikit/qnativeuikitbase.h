@@ -4,12 +4,13 @@
 #include <QObject>
 
 #include <QtNativeControls/qnativeplatformbase.h>
+#include <QtNativeUIKitControls/qnativeuikitcontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativeUIKitBasePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeUIKitBase : public QObject, public virtual QNativePlatformBase
+class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitBase : public QObject, public virtual QNativePlatformBase
 {
     Q_OBJECT
 

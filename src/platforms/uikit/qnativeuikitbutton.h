@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QNativeUIKitButtonPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIButton);
 
-class Q_NATIVECONTROLS_EXPORT QNativeUIKitButton : public QNativeUIKitControl, public virtual QNativePlatformButton
+class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitButton : public QNativeUIKitControl, public virtual QNativePlatformButton
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)

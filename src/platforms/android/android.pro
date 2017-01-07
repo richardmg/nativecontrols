@@ -4,6 +4,8 @@ MODULE = nativeandroid
 QT += androidextras qml
 QT += core-private # qjnihelpers
 
+DEFINES += QT_BUILD_NATIVEANDROID_LIB
+
 CONFIG += c++11
 CONFIG -= create_cmake
 

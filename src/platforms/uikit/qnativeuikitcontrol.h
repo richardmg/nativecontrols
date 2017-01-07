@@ -10,7 +10,7 @@ QT_BEGIN_NAMESPACE
 
 class QNativeUIKitControlPrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeUIKitControl : public QNativeUIKitBase, public virtual QNativePlatformControl
+class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitControl : public QNativeUIKitBase, public virtual QNativePlatformControl
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)

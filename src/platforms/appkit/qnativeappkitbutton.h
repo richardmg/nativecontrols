@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QNativeAppKitButtonPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSButton);
 
-class Q_NATIVECONTROLS_EXPORT QNativeAppKitButton : public QNativeAppKitControl, public virtual QNativePlatformButton
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitButton : public QNativeAppKitControl, public virtual QNativePlatformButton
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
