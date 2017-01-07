@@ -28,7 +28,6 @@ NativeWindow {
         x: 20
         y: theButton.bottom + 8
         width: windowAvailableWidth / 2
-        height: 22
         placeholderText: "Enter some text..."
         onWidthChanged: print("theTextField1 width:" + width)
         onHeightChanged: print("theTextField1 height:" + height)
@@ -37,13 +36,17 @@ NativeWindow {
     }
 
     SearchField {
+        id: theSearchField1
         x: theTextField1.right + 8
         y: theButton.bottom + 8
         width: windowAvailableWidth / 2
-        height: 22
+        onWidthChanged: print("theSearchField1 width:" + width)
+        onHeightChanged: print("theSearchField1 height:" + height)
+        onImplicitWidthChanged: print("theSearchField1 implicit width:" + implicitWidth)
+        onImplicitHeightChanged: print("theSearchField1 implicit height:" + implicitHeight)
     }
 
-    Component.onCompleted: print("Application window completed")
+    Component.onCompleted: print("Application window completed" + theTextField1.height + " " + theSearchField1.height)
 
 //	+ios {
 //
