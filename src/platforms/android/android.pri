@@ -1,7 +1,7 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativeandroidr_p.h
+    $$PWD/qnativeandroidr_p.h \
     $$PWD/qtnativeandroidglobal_p.h
 
 SOURCES += \
