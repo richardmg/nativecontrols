@@ -127,6 +127,7 @@ void QNativeAppKitSearchField::setText(const QString &newText)
         return;
 
     nsSearchFieldHandle().stringValue = newText.toNSString();
+    d_func()->updateImplicitSize();
 
     emit textChanged(newText);
 }
@@ -142,6 +143,7 @@ void QNativeAppKitSearchField::setPlaceholderText(const QString &newPlaceholderT
         return;
 
     nsSearchFieldHandle().placeholderString = newPlaceholderText.toNSString();
+    d_func()->updateImplicitSize();
 
     emit placeholderTextChanged(newPlaceholderText);
 }

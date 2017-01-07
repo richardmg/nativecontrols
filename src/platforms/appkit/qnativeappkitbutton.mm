@@ -134,6 +134,7 @@ void QNativeAppKitButton::setText(const QString &newText)
         return;
 
     nsButtonHandle().title = newText.toNSString();
+    d_func()->updateImplicitSize();
 
     emit textChanged(newText);
 }

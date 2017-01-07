@@ -68,7 +68,12 @@ public:
     virtual void connectSignals(QNativeBase *base) override;
     virtual void updateLayout(bool recursive) override;
 
+    void updateImplicitSize();
+
     Q_DECLARE_PUBLIC(QNativeAppKitControl)
+
+private:
+    QSizeF m_implicitSize;
 };
 
 QT_END_NAMESPACE

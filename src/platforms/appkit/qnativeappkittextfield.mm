@@ -127,6 +127,7 @@ void QNativeAppKitTextField::setText(const QString &newText)
         return;
 
     nsTextFieldHandle().stringValue = newText.toNSString();
+    d_func()->updateImplicitSize();
 
     emit textChanged(newText);
 }
@@ -142,6 +143,7 @@ void QNativeAppKitTextField::setPlaceholderText(const QString &newPlaceholderTex
         return;
 
     nsTextFieldHandle().placeholderString = newPlaceholderText.toNSString();
+    d_func()->updateImplicitSize();
 
     emit placeholderTextChanged(newPlaceholderText);
 }

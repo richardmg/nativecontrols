@@ -176,7 +176,11 @@ void QNativeAppKitWindow::setVisible(bool newVisible)
 
     [d_func()->m_window setIsVisible:newVisible];
     if (newVisible) {
-        d_func()->updateLayout(true);
+        // Now that the window becomes visible, we should check if any of its
+        // children needs to be resized to implicit size. Since children
+        // are added after the call to setVisible when using QML, we need to
+        // post the update request.
+        qApp->postEvent(this, new QEvent(QEvent::LayoutRequest));
         [d_func()->m_window makeKeyAndOrderFront:d_func()->m_window];
     }
 
@@ -190,6 +194,19 @@ void QNativeAppKitWindow::showFullScreen()
 
     if (([d_func()->m_window styleMask] & NSFullScreenWindowMask) != NSFullScreenWindowMask)
         [d_func()->m_window toggleFullScreen:d_func()->m_window];
+
+}
+
+bool QNativeAppKitWindow::event(QEvent *e)
+{
+    Q_D(QNativeAppKitWindow);
+    switch (e->type()) {
+    case QEvent::LayoutRequest:
+        d->updateLayout(true);
+    default:
+        return QNativeAppKitBase::event(e);
+    }
+    return true;
 
 }
 
