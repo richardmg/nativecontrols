@@ -13,8 +13,11 @@ uikit:!watchos {
     LIBS += -framework UIKit
 }
 
-OBJECTIVE_SOURCES += \
-    main.mm
+SOURCES += \
+    main.cpp
+
+darwin: OBJECTIVE_SOURCES += \
+    main_objc.mm
 
 target.path = $$[QT_INSTALL_EXAMPLES]/cpp/native/$$TARGET
 INSTALLS += target

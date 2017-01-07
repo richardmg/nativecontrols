@@ -11,16 +11,8 @@
 #include <UIKit/UIKit.h>
 #endif
 
-int main(int argc, char *argv[])
+void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
 {
-    QGuiApplication app(argc, argv);
-
-    QNativeWindow window;
-    QNativeButton nativeButton(QStringLiteral("QNativeButton"), &window);
-    nativeButton.setGeometry(10, 10, 100, 30);
-    QObject::connect(&nativeButton, &QNativeButton::clicked,
-                     [&nativeButton](){ nativeButton.setText(QStringLiteral("Clicked!")); });
-
 #if defined(Q_OS_MACOS)
     if (QNativeAppKitWindow *nativeAppKitWindow = dynamic_cast<QNativeAppKitWindow *>(window.platformHandle())) {
         QNativeAppKitButton *nativeAppKitButton = new QNativeAppKitButton(nativeAppKitWindow);
@@ -55,7 +47,4 @@ int main(int argc, char *argv[])
         uiWindow.backgroundColor = [UIColor blueColor];
     }
 #endif
-
-    window.showFullScreen();
-    return app.exec();
 }
