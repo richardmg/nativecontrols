@@ -65,7 +65,7 @@ void QNativeBasePrivate::connectToPlatform()
 void QNativeBasePrivate::syncPlatformParent()
 {
     QNativeBase *parent = qobject_cast<QNativeBase *>(q_func()->parent());
-    m_platformBase->setPlatformParent(parent ? parent->d_func()->m_platformBase : nullptr);
+    m_platformBase->setPlatformParent(parent ? parent->platformHandle() : nullptr);
 }
 
 void QNativeBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *objectChild)
