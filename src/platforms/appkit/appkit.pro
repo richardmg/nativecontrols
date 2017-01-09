@@ -4,7 +4,7 @@ MODULE = nativeappkitcontrols
 QT += nativecontrols
 QT_PRIVATE += core-private gui-private qml-private
 
-DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII QT_BUILD_NATIVEAPPKITCONTROLS_LIB
+DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 
 LIBS += -framework AppKit
 
