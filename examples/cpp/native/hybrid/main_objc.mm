@@ -33,18 +33,36 @@ void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
 #endif
 
 #if defined(Q_OS_IOS) || defined(Q_OS_TVOS)
-    if (QNativeUIKitWindow *nativeUIKitWindow = dynamic_cast<QNativeUIKitWindow *>(window.platformHandle())) {
-        QNativeUIKitButton *nativeUIKitButton = new QNativeUIKitButton(nativeUIKitWindow);
-        nativeUIKitButton->setGeometry(10, 50, 100, 30);
-        QObject::connect(nativeUIKitButton, &QNativeUIKitButton::clicked,
-                         [&nativeUIKitButton](){ nativeUIKitButton->setText(QStringLiteral("Clicked!")); });
 
-        UIButton *uiButton = nativeUIKitButton->uiButtonHandle();
-        [uiButton setTitle:@"Click me" forState:UIControlStateNormal];
+    // Add QNativeUIKitButton as a direct child of QNativeWindow
+    QNativeUIKitButton *nativeUIKitButton1 = new QNativeUIKitButton();
+    nativeUIKitButton1->setParent(&window);
+    nativeUIKitButton1->move(nativeButton.left(), nativeButton.bottom());
+    [nativeUIKitButton1->uiButtonHandle() setTitle:@"QNativeUIKitButton 1" forState:UIControlStateNormal];
+    QObject::connect(nativeUIKitButton1, &QNativeUIKitButton::clicked,
+                     [nativeUIKitButton1](){ nativeUIKitButton1->setText(QStringLiteral("Clicked!")); });
+
+    // You can also go the other way, creating a QNativeButton as a direct child of QNativeUIKitWindow
+    QNativeButton *nativeButton2 = new QNativeButton("QNativeButton 2");
+    nativeButton2->setParent(window.platformHandle());
+    nativeButton2->move(nativeUIKitButton1->geometry().left(), nativeUIKitButton1->geometry().bottom());
+    QObject::connect(nativeButton2, &QNativeButton::clicked,
+                     [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
+
+    // Add another QNativeUIKitButton as a child of QNativeUIKitWindow, but this time more explicit
+    if (QNativeUIKitWindow *nativeUIKitWindow = dynamic_cast<QNativeUIKitWindow *>(window.platformHandle())) {
+        QNativeUIKitButton *nativeUIKitButton2 = new QNativeUIKitButton(nativeUIKitWindow);
+        nativeUIKitButton2->move(nativeButton2->geometry().left(), nativeButton2->geometry().bottom());
+        QObject::connect(nativeUIKitButton2, &QNativeUIKitButton::clicked,
+                         [nativeUIKitButton2](){ nativeUIKitButton2->setText(QStringLiteral("Clicked!")); });
+
+        UIButton *uiButton = nativeUIKitButton2->uiButtonHandle();
+        [uiButton setTitle:@"QNativeUIKitButton 2" forState:UIControlStateNormal];
         uiButton.tintColor = [UIColor redColor];
 
         UIWindow *uiWindow = nativeUIKitWindow->uiWindowHandle();
         uiWindow.backgroundColor = [UIColor blueColor];
     }
+
 #endif
 }

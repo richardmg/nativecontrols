@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     QNativeWindow window;
     QNativeButton nativeButton(QStringLiteral("QNativeButton"), &window);
-    nativeButton.setGeometry(10, 10, 100, 30);
+    nativeButton.move(10, 20);
     QObject::connect(&nativeButton, &QNativeButton::clicked,
                      [&nativeButton](){ nativeButton.setText(QStringLiteral("Clicked!")); });
 
