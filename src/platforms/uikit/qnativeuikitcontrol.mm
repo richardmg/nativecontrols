@@ -106,7 +106,6 @@ void QNativeUIKitControlPrivate::updateImplicitSize()
 QNativeUIKitControl::QNativeUIKitControl(QNativeUIKitBase *parent)
     : QNativeUIKitBase(*new QNativeUIKitControlPrivate(), parent)
 {
-    setParent(parent);
 }
 
 QNativeUIKitControl::QNativeUIKitControl(QNativeUIKitControlPrivate &dd, QNativeUIKitBase *parent)
