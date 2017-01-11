@@ -76,7 +76,7 @@ void QNativeUIKitControlPrivate::updateLayout(bool recursive)
     Q_Q(QNativeUIKitControl);
 
     if (!testAttribute(Resized)) {
-        q->resize(m_implicitSize);
+        q->resize(q->implicitSize());
         setAttribute(Resized, false);
     }
 
@@ -90,7 +90,7 @@ void QNativeUIKitControlPrivate::updateImplicitSize()
 {
     Q_Q(QNativeUIKitControl);
     QSizeF oldSize = m_implicitSize;
-    m_implicitSize = q->implicitSize();
+    m_implicitSize = QSizeF::fromCGSize([view() sizeThatFits:CGSizeZero]);
 
     if (m_implicitSize.width() != oldSize.width()) {
         updateLayout(false);
@@ -182,7 +182,10 @@ void QNativeUIKitControl::resize(const QSizeF size)
 
 QSizeF QNativeUIKitControl::implicitSize() const
 {
-    return QSizeF::fromCGSize([d_func()->view() sizeThatFits:CGSizeZero]);
+    Q_D(const QNativeUIKitControl);
+    if (!d->m_implicitSize.isValid())
+        const_cast<QNativeUIKitControlPrivate *>(d)->updateImplicitSize();
+    return d->m_implicitSize;
 }
 
 qreal QNativeUIKitControl::implicitWidth() const
