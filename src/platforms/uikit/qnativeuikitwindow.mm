@@ -83,13 +83,13 @@ void QNativeUIKitWindowPrivate::updateLayout(bool recursive)
     }
 }
 
-QNativeUIKitWindow::QNativeUIKitWindow(QObject *parent)
-    : QNativeUIKitBase(*new QNativeUIKitWindowPrivate(), parent)
+QNativeUIKitWindow::QNativeUIKitWindow()
+    : QNativeUIKitBase(*new QNativeUIKitWindowPrivate(), nullptr)
 {
 }
 
-QNativeUIKitWindow::QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd, QObject *parent)
-    : QNativeUIKitBase(dd, parent)
+QNativeUIKitWindow::QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd)
+    : QNativeUIKitBase(dd, nullptr)
 {
 }
 

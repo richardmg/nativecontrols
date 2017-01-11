@@ -15,11 +15,11 @@ class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitBase : public QObject, public vir
     Q_OBJECT
 
 public:
-    QNativeUIKitBase(QObject *parent = nullptr);
+    QNativeUIKitBase(QNativeUIKitBase *parent = nullptr);
     virtual ~QNativeUIKitBase();
 
 protected:
-    QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QObject *parent = nullptr);
+    QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent = nullptr);
     virtual void setPlatformParent(QNativePlatformBase *parent) override;
     void childEvent(QChildEvent *event) override;
 

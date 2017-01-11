@@ -82,12 +82,12 @@ void QNativeUIKitBasePrivate::setAlignmentRect(CGRect rect)
     m_view.frame = [m_view frameForAlignmentRect:rect];
 }
 
-QNativeUIKitBase::QNativeUIKitBase(QObject *parent)
+QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBase *parent)
     : QObject(*new QNativeUIKitBasePrivate(), parent)
 {
 }
 
-QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QObject *parent)
+QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent)
     : QObject(dd, parent)
 {
 }

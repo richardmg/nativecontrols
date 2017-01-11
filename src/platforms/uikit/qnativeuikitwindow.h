@@ -51,7 +51,7 @@ class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitBase,
     Q_OBJECT
 
 public:
-    QNativeUIKitWindow(QObject *parent = nullptr);
+    QNativeUIKitWindow();
     virtual ~QNativeUIKitWindow();
 
     UIWindow *uiWindowHandle() const;
@@ -69,7 +69,7 @@ Q_SIGNALS:
     void visibleChanged(bool isVisible);
 
 protected:
-    QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd, QObject *parent = nullptr);
+    QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd);
 
 private:
     Q_DECLARE_PRIVATE(QNativeUIKitWindow)
