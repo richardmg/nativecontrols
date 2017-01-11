@@ -96,7 +96,7 @@ QNativeBase::QNativeBase(QNativeBase *parent)
 {
 }
 
-QNativeBase::QNativeBase(QNativeBasePrivate &dd, QObject *parent)
+QNativeBase::QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent)
     : QObject(dd, parent)
 {
 }

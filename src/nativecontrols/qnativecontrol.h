@@ -115,7 +115,7 @@ Q_SIGNALS:
     void implicitHeightChanged(qreal h);
 
 protected:
-    QNativeControl(QNativeControlPrivate &dd, QObject *parent = nullptr);
+    QNativeControl(QNativeControlPrivate &dd, QNativeBase *parent = nullptr);
 
 private:
     Q_DECLARE_PRIVATE(QNativeControl)

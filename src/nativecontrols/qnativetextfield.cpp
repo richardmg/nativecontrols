@@ -65,7 +65,7 @@ QNativeTextField::QNativeTextField(const QString &text, QNativeBase *parent)
     setText(text);
 }
 
-QNativeTextField::QNativeTextField(QNativeTextFieldPrivate &dd, QObject *parent)
+QNativeTextField::QNativeTextField(QNativeTextFieldPrivate &dd, QNativeBase *parent)
     : QNativeControl(dd, parent)
 {
 }

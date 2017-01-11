@@ -63,7 +63,7 @@ Q_SIGNALS:
     void clicked();
 
 protected:
-    QNativeButton(QNativeButtonPrivate &dd, QObject *parent = nullptr);
+    QNativeButton(QNativeButtonPrivate &dd, QNativeBase *parent = nullptr);
 
 private:
     Q_DECLARE_PRIVATE(QNativeButton)

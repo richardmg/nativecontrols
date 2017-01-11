@@ -59,7 +59,7 @@ public:
     QNativePlatformBase *platformHandle();
 
 protected:
-    QNativeBase(QNativeBasePrivate &dd, QObject *parent = nullptr);
+    QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent = nullptr);
     void childEvent(QChildEvent *event) override;
 
 private:

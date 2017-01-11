@@ -67,7 +67,7 @@ Q_SIGNALS:
     void placeholderTextChanged(const QString &placeholderText);
 
 protected:
-    QNativeTextField(QNativeTextFieldPrivate &dd, QObject *parent = nullptr);
+    QNativeTextField(QNativeTextFieldPrivate &dd, QNativeBase *parent = nullptr);
 
 private:
     Q_DECLARE_PRIVATE(QNativeTextField)

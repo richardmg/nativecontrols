@@ -57,7 +57,7 @@ QNativeWindow::QNativeWindow()
     d_func()->connectToPlatform();
 }
 
-QNativeWindow::QNativeWindow(QNativeWindowPrivate &dd, QObject *parent)
+QNativeWindow::QNativeWindow(QNativeWindowPrivate &dd, QNativeBase *parent)
     : QNativeBase(dd, parent)
 {
 }

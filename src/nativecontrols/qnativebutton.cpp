@@ -64,7 +64,7 @@ QNativeButton::QNativeButton(const QString &text, QNativeBase *parent)
     setText(text);
 }
 
-QNativeButton::QNativeButton(QNativeButtonPrivate &dd, QObject *parent)
+QNativeButton::QNativeButton(QNativeButtonPrivate &dd, QNativeBase *parent)
     : QNativeControl(dd, parent)
 {
 }

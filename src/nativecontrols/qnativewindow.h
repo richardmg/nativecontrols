@@ -69,7 +69,7 @@ Q_SIGNALS:
     void visibleChanged(bool visible);
 
 protected:
-    QNativeWindow(QNativeWindowPrivate &dd, QObject *parent = nullptr);
+    QNativeWindow(QNativeWindowPrivate &dd, QNativeBase *parent = nullptr);
 
 private:
     Q_DECLARE_PRIVATE(QNativeWindow)

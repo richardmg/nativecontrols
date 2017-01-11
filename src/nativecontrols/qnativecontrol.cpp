@@ -57,7 +57,7 @@ QNativeControl::QNativeControl(QNativeBase *parent)
     d_func()->connectToPlatform();
 }
 
-QNativeControl::QNativeControl(QNativeControlPrivate &dd, QObject *parent)
+QNativeControl::QNativeControl(QNativeControlPrivate &dd, QNativeBase *parent)
     : QNativeBase(dd, parent)
 {
 }

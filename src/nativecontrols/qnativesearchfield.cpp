@@ -65,7 +65,7 @@ QNativeSearchField::QNativeSearchField(const QString &text, QNativeBase *parent)
     setText(text);
 }
 
-QNativeSearchField::QNativeSearchField(QNativeSearchFieldPrivate &dd, QObject *parent)
+QNativeSearchField::QNativeSearchField(QNativeSearchFieldPrivate &dd, QNativeBase *parent)
     : QNativeControl(dd, parent)
 {
 }

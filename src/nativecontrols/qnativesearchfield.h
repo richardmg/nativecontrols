@@ -67,7 +67,7 @@ Q_SIGNALS:
     void placeholderTextChanged(const QString &placeholderText);
 
 protected:
-    QNativeSearchField(QNativeSearchFieldPrivate &dd, QObject *parent = nullptr);
+    QNativeSearchField(QNativeSearchFieldPrivate &dd, QNativeBase *parent = nullptr);
 
 private:
     Q_DECLARE_PRIVATE(QNativeSearchField)
