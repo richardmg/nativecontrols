@@ -97,6 +97,11 @@ void QNativeUIKitBase::setParent(QNativeBase *parent)
     setParent(dynamic_cast<QNativeUIKitBase *>(parent->platformHandle()));
 }
 
+UIView *QNativeUIKitBase::uiViewHandle()
+{
+   return d_func()->view();
+}
+
 QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent)
     : QObject(dd, parent)
 {

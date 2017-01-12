@@ -9,6 +9,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeUIKitBasePrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
 
 class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitBase : public QObject, public virtual QNativePlatformBase
 {
@@ -19,6 +20,8 @@ public:
 
     void setParent(QNativeUIKitBase *parent);
     void setParent(QNativeBase *parent);
+
+    UIView *uiViewHandle();
 
     virtual ~QNativeUIKitBase();
 
