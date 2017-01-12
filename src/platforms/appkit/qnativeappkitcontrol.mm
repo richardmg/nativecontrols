@@ -135,7 +135,6 @@ void QNativeAppKitControlPrivate::updateImplicitSize()
 QNativeAppKitControl::QNativeAppKitControl(QNativeAppKitBase *parent)
     : QNativeAppKitBase(*new QNativeAppKitControlPrivate(), parent)
 {
-    setParent(parent);
 }
 
 QNativeAppKitControl::QNativeAppKitControl(QNativeAppKitControlPrivate &dd, QNativeAppKitBase *parent)
