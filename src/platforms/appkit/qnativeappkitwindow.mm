@@ -135,13 +135,13 @@ void QNativeAppKitWindowPrivate::updateLayout(bool recursive)
     }
 }
 
-QNativeAppKitWindow::QNativeAppKitWindow(QObject *parent)
-    : QNativeAppKitBase(*new QNativeAppKitWindowPrivate(), parent)
+QNativeAppKitWindow::QNativeAppKitWindow()
+    : QNativeAppKitBase(*new QNativeAppKitWindowPrivate(), nullptr)
 {
 }
 
-QNativeAppKitWindow::QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd, QObject *parent)
-    : QNativeAppKitBase(dd, parent)
+QNativeAppKitWindow::QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd)
+    : QNativeAppKitBase(dd, nullptr)
 {
 }
 

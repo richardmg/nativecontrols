@@ -51,7 +51,7 @@ public:
     {
         QNativeAppKitBase *appkitBase = nullptr;
         if (dynamic_cast<QNativeWindow *>(nativeBase))
-            appkitBase = new QNativeAppKitWindow(nullptr);
+            appkitBase = new QNativeAppKitWindow();
         else if (dynamic_cast<QNativeButton *>(nativeBase))
             appkitBase = new QNativeAppKitButton(nullptr);
         else if (dynamic_cast<QNativeTextField *>(nativeBase))

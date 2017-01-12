@@ -51,7 +51,7 @@ class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitBa
     Q_OBJECT
 
 public:
-    QNativeAppKitWindow(QObject *parent = nullptr);
+    QNativeAppKitWindow();
     virtual ~QNativeAppKitWindow();
 
     NSWindow *nsWindowHandle() const;
@@ -71,7 +71,7 @@ Q_SIGNALS:
     void visibleChanged(bool isVisible);
 
 protected:
-    QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd, QObject *parent = nullptr);
+    QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd);
 
 private:
     Q_DECLARE_PRIVATE(QNativeAppKitWindow)

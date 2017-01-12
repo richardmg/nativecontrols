@@ -15,14 +15,14 @@ class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitBase : public QObject, public v
     Q_OBJECT
 
 public:
-    QNativeAppKitBase(QObject *parent = nullptr);
+    QNativeAppKitBase(QNativeAppKitBase *parent = nullptr);
     virtual ~QNativeAppKitBase();
 
     void setParent(QNativeAppKitBase *parent);
     void setParent(QNativeBase *parent);
 
 protected:
-    QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QObject *parent = nullptr);
+    QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent = nullptr);
     virtual void setPlatformParent(QNativePlatformBase *parent) override;
     void childEvent(QChildEvent *event) override;
 
