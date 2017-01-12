@@ -14,13 +14,28 @@
 void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
 {
 #if defined(Q_OS_MACOS)
-    if (QNativeAppKitWindow *nativeAppKitWindow = dynamic_cast<QNativeAppKitWindow *>(window.platformHandle())) {
-        QNativeAppKitButton *nativeAppKitButton = new QNativeAppKitButton(nativeAppKitWindow);
-        nativeAppKitButton->setGeometry(10, 50, 100, 30);
-        QObject::connect(nativeAppKitButton, &QNativeAppKitButton::clicked,
-                         [&nativeAppKitButton](){ nativeAppKitButton->setText(QStringLiteral("Clicked!")); });
+    // Add QNativeAppKitButton as a direct child of QNativeWindow
+    QNativeAppKitButton *nativeAppKitButton1 = new QNativeAppKitButton();
+    nativeAppKitButton1->setParent(&window);
+    nativeAppKitButton1->move(nativeButton.left(), nativeButton.bottom());
+    nativeAppKitButton1->nsButtonHandle().title = @"QNativeAppKitButton 1";
+    QObject::connect(nativeAppKitButton1, &QNativeAppKitButton::clicked,
+                     [nativeAppKitButton1](){ nativeAppKitButton1->setText(QStringLiteral("Clicked!")); });
 
-        NSButton *nsButton = nativeAppKitButton->nsButtonHandle();
+    // You can also go the other way, creating a QNativeButton as a direct child of QNativeAppKitWindow
+    QNativeButton *nativeButton2 = new QNativeButton("QNativeButton 2");
+    nativeButton2->setParent(window.platformHandle());
+    nativeButton2->move(nativeAppKitButton1->geometry().left(), nativeAppKitButton1->geometry().bottom());
+    QObject::connect(nativeButton2, &QNativeButton::clicked,
+                     [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
+
+    if (QNativeAppKitWindow *nativeAppKitWindow = dynamic_cast<QNativeAppKitWindow *>(window.platformHandle())) {
+        QNativeAppKitButton *nativeAppKitButton2 = new QNativeAppKitButton(nativeAppKitWindow);
+        nativeAppKitButton2->move(nativeButton2->geometry().left(), nativeButton2->geometry().bottom());
+        QObject::connect(nativeAppKitButton2, &QNativeAppKitButton::clicked,
+                         [nativeAppKitButton2](){ nativeAppKitButton2->setText(QStringLiteral("Clicked!")); });
+
+        NSButton *nsButton = nativeAppKitButton2->nsButtonHandle();
         nsButton.title = @"Click me";
 #if QT_OSX_PLATFORM_SDK_EQUAL_OR_ABOVE(101202)
         if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10, 12, 2}])
