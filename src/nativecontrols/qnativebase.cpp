@@ -64,8 +64,12 @@ void QNativeBasePrivate::connectToPlatform()
 
 void QNativeBasePrivate::syncPlatformParent()
 {
-    QNativeBase *parent = qobject_cast<QNativeBase *>(q_func()->parent());
-    m_platformBase->setPlatformParent(parent ? parent->platformHandle() : nullptr);
+    if (QNativeBase *parent = dynamic_cast<QNativeBase *>(q_func()->parent()))
+        m_platformBase->setPlatformParent(parent ? parent->platformHandle() : nullptr);
+    else if (QNativePlatformBase *parent = dynamic_cast<QNativePlatformBase *>(q_func()->parent()))
+        m_platformBase->setPlatformParent(parent);
+    else
+        m_platformBase->setPlatformParent(nullptr);
 }
 
 void QNativeBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *objectChild)
@@ -104,6 +108,23 @@ QNativeBase::QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent)
 QNativeBase::~QNativeBase()
 {
     // delete children in m_data?
+}
+
+void QNativeBase::setParent(QNativeBase *parent)
+{
+    QObject::setParent(parent);
+    d_func()->syncPlatformParent();
+}
+
+void QNativeBase::setParent(QNativePlatformBase *parent)
+{
+    // Setting QNativePlatformBase as a direct parent of a QNativeBase will
+    // result in the QNativeBase and its QNativePlatformBase backend to have
+    // the same QNativePlatformBase as parent. This also means that platform
+    // implementations need to be prepared to encounter children that are not
+    // descendants of QNativePlatformBase. Such children can just be ignored.
+    QObject::setParent(dynamic_cast<QObject *>(parent));
+    d_func()->syncPlatformParent();
 }
 
 QNativePlatformBase *QNativeBase::platformHandle()
