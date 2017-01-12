@@ -37,7 +37,7 @@
 #ifndef QNATIVEAPPKITSEARCHFIELD_H
 #define QNATIVEAPPKITSEARCHFIELD_H
 
-#include <QtNativeControls/qnativeplatformtextfield.h>
+#include <QtNativeControls/qnativeplatformsearchfield.h>
 #include <QtNativeAppKitControls/qnativeappkitcontrol.h>
 
 QT_BEGIN_NAMESPACE

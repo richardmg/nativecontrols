@@ -18,6 +18,9 @@ public:
     QNativeAppKitBase(QObject *parent = nullptr);
     virtual ~QNativeAppKitBase();
 
+    void setParent(QNativeAppKitBase *parent);
+    void setParent(QNativeBase *parent);
+
 protected:
     QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QObject *parent = nullptr);
     virtual void setPlatformParent(QNativePlatformBase *parent) override;

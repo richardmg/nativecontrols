@@ -147,13 +147,6 @@ QNativeAppKitControl::~QNativeAppKitControl()
 {
 }
 
-void QNativeAppKitControl::setParent(QNativeAppKitBase *parent)
-{
-    // Overloading setParent to force client to use
-    // QNativeAppKitBase as parent for QNativeAppKitControls
-    QNativeAppKitBase::setParent(parent);
-}
-
 bool QNativeAppKitControl::visible() const
 {
     return !d_func()->view().hidden;
