@@ -106,6 +106,11 @@ void QNativeAppKitBase::setParent(QNativeBase *parent)
     setParent(dynamic_cast<QNativeAppKitBase *>(parent->platformHandle()));
 }
 
+NSView *QNativeAppKitBase::nsViewHandle()
+{
+    return d_func()->view();
+}
+
 void QNativeAppKitBase::setPlatformParent(QNativePlatformBase *parent)
 {
     setParent(dynamic_cast<QNativeAppKitBase *>(parent));

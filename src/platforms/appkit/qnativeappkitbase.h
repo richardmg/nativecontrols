@@ -9,6 +9,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeAppKitBasePrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(NSView);
 
 class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitBase : public QObject, public virtual QNativePlatformBase
 {
@@ -20,6 +21,8 @@ public:
 
     void setParent(QNativeAppKitBase *parent);
     void setParent(QNativeBase *parent);
+
+    NSView *nsViewHandle();
 
 protected:
     QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent = nullptr);
