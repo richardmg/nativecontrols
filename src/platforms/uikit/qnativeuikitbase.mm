@@ -87,6 +87,16 @@ QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBase *parent)
 {
 }
 
+void QNativeUIKitBase::setParent(QNativeUIKitBase *parent)
+{
+    QObject::setParent(parent);
+}
+
+void QNativeUIKitBase::setParent(QNativeBase *parent)
+{
+    setParent(dynamic_cast<QNativeUIKitBase *>(parent->platformHandle()));
+}
+
 QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent)
     : QObject(dd, parent)
 {

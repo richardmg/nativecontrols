@@ -38,7 +38,6 @@ public:
 
     virtual QSizeF implicitSize() const override;
 
-    void setParent(QNativeUIKitBase *parent = nullptr);
     void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
     void move(qreal posx, qreal posy);
     void resize(qreal width, qreal height);

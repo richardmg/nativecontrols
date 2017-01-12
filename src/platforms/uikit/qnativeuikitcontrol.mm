@@ -117,13 +117,6 @@ QNativeUIKitControl::~QNativeUIKitControl()
 {
 }
 
-void QNativeUIKitControl::setParent(QNativeUIKitBase *parent)
-{
-    // Overloading setParent to force client to use
-    // QNativeUIKitBase as parent for QNativeUIKitControls
-    QNativeUIKitBase::setParent(parent);
-}
-
 bool QNativeUIKitControl::visible() const
 {
     return !d_func()->view().hidden;

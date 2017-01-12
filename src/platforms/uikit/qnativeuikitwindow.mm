@@ -78,8 +78,10 @@ void QNativeUIKitWindowPrivate::updateLayout(bool recursive)
     setAttribute(LayedOut);
 
     if (recursive) {
-        for (QObject *child : q_func()->children())
-            static_cast<QNativeUIKitBasePrivate *>(QObjectPrivate::get(child))->updateLayout(recursive);
+        for (QObject *child : q_func()->children()) {
+            if (QNativeUIKitBasePrivate *basePrivate = dynamic_cast<QNativeUIKitBasePrivate *>(QObjectPrivate::get(child)))
+                basePrivate->updateLayout(recursive);
+        }
     }
 }
 

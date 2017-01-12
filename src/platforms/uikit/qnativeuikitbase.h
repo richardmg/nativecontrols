@@ -16,6 +16,10 @@ class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitBase : public QObject, public vir
 
 public:
     QNativeUIKitBase(QNativeUIKitBase *parent = nullptr);
+
+    void setParent(QNativeUIKitBase *parent);
+    void setParent(QNativeBase *parent);
+
     virtual ~QNativeUIKitBase();
 
 protected:
