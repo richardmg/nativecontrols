@@ -48,14 +48,15 @@
 // We mean it.
 //
 
-#include <QtCore/private/qobject_p.h>
+#include <QtNativeControls/qnativebase.h>
+#include <QtNativeControls/private/qnativeqobjectbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativeBase;
 class QNativePlatformBase;
 
-class QNativeBasePrivate : public QObjectPrivate
+class QNativeBasePrivate : public QNativeQObjectBasePrivate
 {
     Q_DECLARE_PUBLIC(QNativeBase)
 
@@ -65,10 +66,6 @@ public:
 
     void connectToPlatform();
     void syncPlatformParent();
-
-    static void appendChild(QQmlListProperty<QObject> *list, QObject *obj);
-    QQmlListProperty<QObject> data();
-    bool isComplete();
 
     QNativePlatformBase *m_platformBase;
 };

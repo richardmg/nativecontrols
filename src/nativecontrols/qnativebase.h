@@ -40,17 +40,16 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include <QtNativeControls/qnativecontrolsglobal.h>
+#include <QtNativeControls/qnativeqobjectbase.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativePlatformBase;
 class QNativeBasePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeBase : public QObject
+class Q_NATIVECONTROLS_EXPORT QNativeBase : public QNativeQObjectBase
 {
     Q_OBJECT
-    Q_PRIVATE_PROPERTY(QNativeBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
-    Q_CLASSINFO("DefaultProperty", "data")
 
 public:
     explicit QNativeBase(QNativeBase *parent = nullptr);

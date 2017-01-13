@@ -36,14 +36,14 @@
 
 #include <QtNativeControls/qnativebase.h>
 #include <QtNativeControls/private/qnativebase_p.h>
-#include <QtNativeControls/qnativeplatformbase.h>
 
+#include <QtNativeControls/qnativeplatformbase.h>
 #include <QtNativeControls/private/qnativeplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
 QNativeBasePrivate::QNativeBasePrivate(int version)
-    : QObjectPrivate(version)
+    : QNativeQObjectBasePrivate(version)
     , m_platformBase(nullptr)
 {
 }
@@ -72,36 +72,13 @@ void QNativeBasePrivate::syncPlatformParent()
         m_platformBase->setPlatformParent(nullptr);
 }
 
-void QNativeBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *objectChild)
-{
-    QNativeBase *parent = qobject_cast<QNativeBase *>(list->object);
-    QNativeBase *child = qobject_cast<QNativeBase *>(objectChild);
-    child->setParent(parent);
-    // Upon construction, the parent (self) might have be set from QObject private
-    // constructor, which means that the QChildEvent was sendt before the child
-    // was fully constructed (as is correct, according to childEvent docs). So
-    // we sync here an extra time to work around that case.
-    child->d_func()->syncPlatformParent();
-}
-
-QQmlListProperty<QObject> QNativeBasePrivate::data()
-{
-    return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
-}
-
-bool QNativeBasePrivate::isComplete()
-{
-    // todo: hook up to QQmlParserStatus
-   return true;
-}
-
 QNativeBase::QNativeBase(QNativeBase *parent)
-    : QObject(parent)
+    : QNativeQObjectBase(parent)
 {
 }
 
 QNativeBase::QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent)
-    : QObject(dd, parent)
+    : QNativeQObjectBase(dd, parent)
 {
 }
 

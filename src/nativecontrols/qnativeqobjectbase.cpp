@@ -36,6 +36,7 @@
 
 #include <QtNativeControls/qnativeqobjectbase.h>
 #include <QtNativeControls/private/qnativeqobjectbase_p.h>
+#include <QtNativeControls/private/qnativebase_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -53,11 +54,15 @@ void QNativeQObjectBasePrivate::appendChild(QQmlListProperty<QObject> *list, QOb
     QNativeQObjectBase *parent = qobject_cast<QNativeQObjectBase *>(list->object);
     QNativeQObjectBase *child = qobject_cast<QNativeQObjectBase *>(objectChild);
     child->setParent(parent);
-    // Upon construction, the parent (self) might have be set from QObject private
-    // constructor, which means that the QChildEvent was sendt before the child
-    // was fully constructed (as is correct, according to childEvent docs). So
-    // we sync here an extra time to work around that case.
-    //child->d_func()->syncPlatformParent();
+
+    if (QNativeBasePrivate *nativeBasePrivate = dynamic_cast<QNativeBasePrivate *>(QObjectPrivate::get(child))) {
+        // QtDeclarative undermines QObject::setParent, meaning that we
+        // don't get a QChildEvent when a qml object becomes a parent of another
+        // qml object. This is the only callback we get when the parent changes.
+        // Since QNativeBase needs to sync the platform parent whenever its parent
+        // changes, we need to do this work-around.
+        nativeBasePrivate->syncPlatformParent();
+    }
 }
 
 QQmlListProperty<QObject> QNativeQObjectBasePrivate::data()
