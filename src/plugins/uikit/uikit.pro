@@ -1,7 +1,7 @@
 TARGET = qnativeuikit
 
 QT += nativecontrols nativeuikitcontrols
-QT_PRIVATE += core-private nativeuikitcontrols-private
+QT_PRIVATE += core-private nativecontrols-private nativeuikitcontrols-private
 
 SOURCES += \
     qnativeuikitplatformplugin.cpp

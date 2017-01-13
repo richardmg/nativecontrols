@@ -38,14 +38,16 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativebase.h>
 #include <QtNativeUIKitControls/qnativeuikitbase.h>
 #include <QtNativeUIKitControls/private/qnativeuikitbase_p.h>
+
+#include <QtNativeControls/qnativebase.h>
+#include <QtNativeControls/private/qnativeplatformbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
 QNativeUIKitBasePrivate::QNativeUIKitBasePrivate(int version)
-    : QObjectPrivate(version)
+    : QNativePlatformBasePrivate(version)
     , m_attributes(0)
     , m_view(nil)
 {
@@ -83,13 +85,13 @@ void QNativeUIKitBasePrivate::setAlignmentRect(CGRect rect)
 }
 
 QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBase *parent)
-    : QObject(*new QNativeUIKitBasePrivate(), parent)
+    : QNativePlatformBase(*new QNativeUIKitBasePrivate(), parent)
 {
 }
 
 void QNativeUIKitBase::setParent(QNativeUIKitBase *parent)
 {
-    QObject::setParent(parent);
+    QNativePlatformBase::setParent(parent);
 }
 
 void QNativeUIKitBase::setParent(QNativeBase *parent)
@@ -103,17 +105,12 @@ UIView *QNativeUIKitBase::uiViewHandle()
 }
 
 QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent)
-    : QObject(dd, parent)
+    : QNativePlatformBase(dd, parent)
 {
 }
 
 QNativeUIKitBase::~QNativeUIKitBase()
 {
-}
-
-void QNativeUIKitBase::setPlatformParent(QNativePlatformBase *parent)
-{
-    setParent(dynamic_cast<QNativeUIKitBase *>(parent));
 }
 
 void QNativeUIKitBase::childEvent(QChildEvent *event)

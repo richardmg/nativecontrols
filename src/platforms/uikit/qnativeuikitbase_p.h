@@ -49,9 +49,10 @@
 //
 
 #include <QtCore>
-#include <QtCore/private/qobject_p.h>
 
 #include <QtNativeUIKitControls/qnativeuikitbase.h>
+
+#include <QtNativeControls/private/qnativeplatformbase_p.h>
 
 typedef struct CGRect CGRect;
 
@@ -61,7 +62,7 @@ class QNativeBase;
 class QNativeUIKitBase;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
 
-class QNativeUIKitBasePrivate : public QObjectPrivate
+class QNativeUIKitBasePrivate : public QNativePlatformBasePrivate
 {
 public:
     explicit QNativeUIKitBasePrivate(int version = QObjectPrivateVersion);
