@@ -1,9 +1,9 @@
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Native Controls module of the Qt Toolkit.
+** This file is part of the Qt Quick Controls 2 module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,25 +34,34 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMWINDOW_H
-#define QNATIVEPLATFORMWINDOW_H
-
-#include <QtCore>
+#include <QtNativeControls/private/qnativeplatformbase_p.h>
 #include <QtNativeControls/qnativeplatformbase.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformWindow
+QNativePlatformBasePrivate::QNativePlatformBasePrivate(int version)
+    : QNativeQObjectBasePrivate(version)
 {
-public:
-    virtual ~QNativePlatformWindow() {}
-    virtual qreal width() const = 0;
-    virtual qreal height() const = 0;
-    virtual bool isVisible() const = 0;
-    virtual void setVisible(bool visible) = 0;
-    virtual void showFullScreen() = 0;
-};
+}
+
+QNativePlatformBasePrivate::~QNativePlatformBasePrivate()
+{
+}
+
+QNativePlatformBase::QNativePlatformBase(QNativePlatformBase *parent)
+    : QNativeQObjectBase(*new QNativePlatformBasePrivate(), parent)
+{
+}
+
+QNativePlatformBase::QNativePlatformBase(QNativePlatformBasePrivate &dd, QNativePlatformBase *parent)
+    : QNativeQObjectBase(dd, parent)
+{
+}
+
+QNativePlatformBase::~QNativePlatformBase()
+{
+}
+
+#include "moc_qnativeplatformbase.cpp"
 
 QT_END_NAMESPACE
-
-#endif // QNATIVEPLATFORMWINDOW_H

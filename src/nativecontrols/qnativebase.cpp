@@ -65,11 +65,9 @@ void QNativeBasePrivate::connectToPlatform()
 void QNativeBasePrivate::syncPlatformParent()
 {
     if (QNativeBase *parent = dynamic_cast<QNativeBase *>(q_func()->parent()))
-        m_platformBase->setPlatformParent(parent ? parent->platformHandle() : nullptr);
-    else if (QNativePlatformBase *parent = dynamic_cast<QNativePlatformBase *>(q_func()->parent()))
-        m_platformBase->setPlatformParent(parent);
+        m_platformBase->setParent(parent ? parent->platformHandle() : nullptr);
     else
-        m_platformBase->setPlatformParent(nullptr);
+        m_platformBase->setParent(dynamic_cast<QNativePlatformBase *>(q_func()->parent()));
 }
 
 QNativeBase::QNativeBase(QNativeBase *parent)

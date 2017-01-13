@@ -1,9 +1,9 @@
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Native Controls module of the Qt Toolkit.
+** This file is part of the Qt Quick Controls 2 module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,25 +34,34 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMWINDOW_H
-#define QNATIVEPLATFORMWINDOW_H
+#ifndef QNATIVEPLATFORMBASE_P_H
+#define QNATIVEPLATFORMBASE_P_H
 
-#include <QtCore>
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+#include <QtNativeControls/private/qnativeqobjectbase_p.h>
 #include <QtNativeControls/qnativeplatformbase.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformWindow
+class QNativePlatformBasePrivate : public QNativeQObjectBasePrivate
 {
+    Q_DECLARE_PUBLIC(QNativePlatformBase)
+
 public:
-    virtual ~QNativePlatformWindow() {}
-    virtual qreal width() const = 0;
-    virtual qreal height() const = 0;
-    virtual bool isVisible() const = 0;
-    virtual void setVisible(bool visible) = 0;
-    virtual void showFullScreen() = 0;
+    explicit QNativePlatformBasePrivate(int version = QObjectPrivateVersion);
+    virtual ~QNativePlatformBasePrivate();
 };
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMWINDOW_H
+#endif // QNATIVEPLATFORMBASE_P_H
