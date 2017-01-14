@@ -7,9 +7,6 @@ TARGET = window
 
 QT += nativecontrols
 
-android: QT += nativeandroid
-uikit:!watchos: QT += nativeuikitcontrols
-
 # Input
 SOURCES += main.cpp
 
