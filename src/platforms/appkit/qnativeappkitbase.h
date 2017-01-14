@@ -3,7 +3,9 @@
 
 #include <QObject>
 
+#include <QtNativeControls/qnativebase.h>
 #include <QtNativeControls/qnativeplatformbase.h>
+
 #include <QtNativeAppKitControls/qnativeappkitcontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
@@ -11,7 +13,7 @@ QT_BEGIN_NAMESPACE
 class QNativeAppKitBasePrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSView);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitBase : public QObject, public virtual QNativePlatformBase
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitBase : public QNativePlatformBase
 {
     Q_OBJECT
 
@@ -26,7 +28,6 @@ public:
 
 protected:
     QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent = nullptr);
-    virtual void setPlatformParent(QNativePlatformBase *parent) override;
     void childEvent(QChildEvent *event) override;
 
 private:

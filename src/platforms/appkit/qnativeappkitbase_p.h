@@ -49,9 +49,10 @@
 //
 
 #include <QtCore>
-#include <QtCore/private/qobject_p.h>
 
 #include <QtNativeAppKitControls/qnativeappkitbase.h>
+
+#include <QtNativeControls/private/qnativeplatformbase_p.h>
 
 typedef struct CGRect CGRect;
 typedef CGRect NSRect;
@@ -62,7 +63,7 @@ class QNativeBase;
 class QNativeAppKitBase;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSView);
 
-class QNativeAppKitBasePrivate : public QObjectPrivate
+class QNativeAppKitBasePrivate : public QNativePlatformBasePrivate
 {
 public:
     explicit QNativeAppKitBasePrivate(int version = QObjectPrivateVersion);

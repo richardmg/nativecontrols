@@ -38,14 +38,16 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativebase.h>
 #include <QtNativeAppKitControls/qnativeappkitbase.h>
 #include <QtNativeAppKitControls/private/qnativeappkitbase_p.h>
+
+#include <QtNativeControls/qnativebase.h>
+#include <QtNativeControls/private/qnativeplatformbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
 QNativeAppKitBasePrivate::QNativeAppKitBasePrivate(int version)
-    : QObjectPrivate(version)
+    : QNativePlatformBasePrivate(version)
     , m_attributes(0)
     , m_view(nil)
 {
@@ -83,12 +85,12 @@ void QNativeAppKitBasePrivate::setAlignmentRect(NSRect rect)
 }
 
 QNativeAppKitBase::QNativeAppKitBase(QNativeAppKitBase *parent)
-    : QObject(*new QNativeAppKitBasePrivate(), parent)
+    : QNativePlatformBase(*new QNativeAppKitBasePrivate(), parent)
 {
 }
 
 QNativeAppKitBase::QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent)
-    : QObject(dd, parent)
+    : QNativePlatformBase(dd, parent)
 {
 }
 
@@ -98,7 +100,7 @@ QNativeAppKitBase::~QNativeAppKitBase()
 
 void QNativeAppKitBase::setParent(QNativeAppKitBase *parent)
 {
-    QObject::setParent(parent);
+    QNativePlatformBase::setParent(parent);
 }
 
 void QNativeAppKitBase::setParent(QNativeBase *parent)
@@ -109,11 +111,6 @@ void QNativeAppKitBase::setParent(QNativeBase *parent)
 NSView *QNativeAppKitBase::nsViewHandle()
 {
     return d_func()->view();
-}
-
-void QNativeAppKitBase::setPlatformParent(QNativePlatformBase *parent)
-{
-    setParent(dynamic_cast<QNativeAppKitBase *>(parent));
 }
 
 QRectF qt_mac_flipRect(const NSRect &rect, NSView *view);

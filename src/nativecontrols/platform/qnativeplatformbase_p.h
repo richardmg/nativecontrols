@@ -53,7 +53,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativePlatformBasePrivate : public QNativeQObjectBasePrivate
+class Q_NATIVECONTROLS_EXPORT QNativePlatformBasePrivate : public QNativeQObjectBasePrivate
 {
     Q_DECLARE_PUBLIC(QNativePlatformBase)
 
