@@ -26,6 +26,7 @@ HEADERS += \
     qnativecontrolsglobal.h \
     qnativeplatformmanager_p.h \
     qnativeqobjectbase.h \
+    qnativeqobjectbase_p.h \
     platform/qnativecontrolsplatformplugin.h \
     platform/qnativeplatformbase_p.h
 
