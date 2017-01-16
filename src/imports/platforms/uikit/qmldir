@@ -1,0 +1,3 @@
+module Qt.NativeUIKitControls
+plugin qmlnativeuikitcontrols
+classname QmlNativeUIKitControlsPlugin

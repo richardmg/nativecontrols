@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    controls
+    controls \
+    platforms
 
 android: SUBDIRS += android
