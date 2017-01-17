@@ -4,11 +4,11 @@
 
 TEMPLATE = app
 TARGET = window
-QT += gui qml quick
+QT += gui qml quick nativecontrols
 RESOURCES += main.qrc
 
-macos: QTPLUGIN += qnativeappkit
-uikit:!watchos: QTPLUGIN += qnativeuikit
+uikit:!watchos: QT += nativeuikitcontrols
+macos: QT += nativeappkitcontrols
 
 # Input
 SOURCES += main.cpp
