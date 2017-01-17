@@ -36,6 +36,7 @@
 
 #include <QtNativeControls/qnativeqobjectbase.h>
 #include <QtNativeControls/private/qnativeqobjectbase_p.h>
+#include <QtNativeControls/private/qnativeplatformbase_p.h>
 #include <QtNativeControls/private/qnativebase_p.h>
 
 QT_BEGIN_NAMESPACE
@@ -49,19 +50,27 @@ QNativeQObjectBasePrivate::~QNativeQObjectBasePrivate()
 {
 }
 
-void QNativeQObjectBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *objectChild)
+void QNativeQObjectBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
 {
-    QNativeQObjectBase *parent = qobject_cast<QNativeQObjectBase *>(list->object);
-    QNativeQObjectBase *child = qobject_cast<QNativeQObjectBase *>(objectChild);
-    child->setParent(parent);
+    QObject *newParent = list->object;
 
-    if (QNativeBasePrivate *nativeBasePrivate = dynamic_cast<QNativeBasePrivate *>(QObjectPrivate::get(child))) {
-        // QtDeclarative undermines QObject::setParent, meaning that we
-        // don't get a QChildEvent when a qml object becomes a parent of another
-        // qml object. This is the only callback we get when the parent changes.
-        // Since QNativeBase needs to sync the platform parent whenever its parent
-        // changes, we need to do this work-around.
-        nativeBasePrivate->syncPlatformParent();
+    // Ensure to use the overriden setParent functions in order to correctly
+    // handle mixed QNativeBase/QNativePlatformBase parent-child relationships
+    // Also note that QtDeclarative undermines QObject::setParent, meaning that we
+    // don't get a QChildEvent when a qml object becomes a parent of another
+    // qml object. 'appendChild' is the only callback we get when the parent changes.
+    if (QNativeBase *nativeBaseChild = dynamic_cast<QNativeBase *>(child)) {
+        if (QNativeBase *nativeBaseParent = qobject_cast<QNativeBase *>(newParent))
+            nativeBaseChild->setParent(nativeBaseParent);
+        else if (QNativePlatformBase *nativePlatformBaseParent = qobject_cast<QNativePlatformBase *>(newParent))
+            nativeBaseChild->setParent(nativePlatformBaseParent);
+    } else if (QNativePlatformBase *nativePlatformBaseChild = dynamic_cast<QNativePlatformBase *>(child)) {
+        if (QNativePlatformBase *nativePlatformBaseParent = dynamic_cast<QNativePlatformBase *>(newParent))
+            nativePlatformBaseChild->setParent(nativePlatformBaseParent);
+        else if (QNativeBase *nativeBaseParent = qobject_cast<QNativeBase *>(newParent))
+            nativePlatformBaseChild->setParent(nativeBaseParent);
+    } else {
+        child->setParent(newParent);
     }
 }
 

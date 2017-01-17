@@ -39,6 +39,7 @@
 
 #include <QtNativeControls/qnativecontrolsglobal.h>
 #include <QtNativeControls/qnativeqobjectbase.h>
+#include <QtNativeControls/qnativebase.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -51,6 +52,9 @@ class Q_NATIVECONTROLS_EXPORT QNativePlatformBase : public QNativeQObjectBase
 public:
     explicit QNativePlatformBase(QNativePlatformBase *parent = nullptr);
     virtual ~QNativePlatformBase();
+
+    void setParent(QNativePlatformBase *parent);
+    void setParent(QNativeBase *parent);
 
 protected:
     QNativePlatformBase(QNativePlatformBasePrivate &dd, QNativePlatformBase *parent = nullptr);

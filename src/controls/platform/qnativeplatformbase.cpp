@@ -62,6 +62,19 @@ QNativePlatformBase::~QNativePlatformBase()
 {
 }
 
+void QNativePlatformBase::setParent(QNativePlatformBase *parent)
+{
+    QNativeQObjectBase::setParent(parent);
+}
+
+void QNativePlatformBase::setParent(QNativeBase *parent)
+{
+    // For API simplicity, we allow setting a QNativeBase as a child
+    // of a QNativePlatformBase. But for it to work, we need to use
+    // the QNativePlatformBase that backs the QNativeBase as the actual parent.
+    setParent(dynamic_cast<QNativePlatformBase *>(parent->platformHandle()));
+}
+
 #include "moc_qnativeplatformbase.cpp"
 
 QT_END_NAMESPACE
