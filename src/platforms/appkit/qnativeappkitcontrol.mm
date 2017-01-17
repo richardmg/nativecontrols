@@ -106,8 +106,10 @@ void QNativeAppKitControlPrivate::updateLayout(bool recursive)
     }
 
     if (recursive) {
-        for (QObject *child : q->children())
-            static_cast<QNativeAppKitBasePrivate *>(QObjectPrivate::get(child))->updateLayout(recursive);
+        for (QObject *child : q->children()) {
+            if (QNativeAppKitBasePrivate *basePrivate = dynamic_cast<QNativeAppKitBasePrivate *>(QObjectPrivate::get(child)))
+                basePrivate->updateLayout(recursive);
+        }
     }
 }
 
