@@ -1,5 +1,5 @@
 %modules = ( # path to module name map
-    "QtNativeControls" => "$basedir/src/nativecontrols",
+    "QtNativeControls" => "$basedir/src/controls",
     "QtNativeAndroid" => "$basedir/src/platforms/android",
     "QtNativeAppKitControls" => "$basedir/src/platforms/appkit",
     "QtNativeUIKitControls" => "$basedir/src/platforms/uikit",
