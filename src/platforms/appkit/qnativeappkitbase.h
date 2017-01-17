@@ -21,9 +21,6 @@ public:
     QNativeAppKitBase(QNativeAppKitBase *parent = nullptr);
     virtual ~QNativeAppKitBase();
 
-    void setParent(QNativeAppKitBase *parent);
-    void setParent(QNativeBase *parent);
-
     NSView *nsViewHandle();
 
 protected:
