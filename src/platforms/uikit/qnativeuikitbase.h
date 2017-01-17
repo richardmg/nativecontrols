@@ -20,9 +20,6 @@ class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitBase : public QNativePlatformBase
 public:
     QNativeUIKitBase(QNativeUIKitBase *parent = nullptr);
 
-    void setParent(QNativeUIKitBase *parent);
-    void setParent(QNativeBase *parent);
-
     UIView *uiViewHandle();
 
     virtual ~QNativeUIKitBase();
