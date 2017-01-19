@@ -66,6 +66,11 @@ QNativeControl::~QNativeControl()
 {
 }
 
+QNativeControl *QNativeControl::parentControl()
+{
+    return qobject_cast<QNativeControl *>(parent());
+}
+
 bool QNativeControl::visible() const
 {
     return PLATFORM_CONTROL->visible();
