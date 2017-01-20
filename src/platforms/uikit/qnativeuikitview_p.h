@@ -66,6 +66,7 @@ public:
     UIView *view();
     UIView *view() const;
     void setView(UIView *view);
+    void addSubView(UIView *subView);
 
     CGRect alignmentRect() const;
     void setAlignmentRect(CGRect rect);
