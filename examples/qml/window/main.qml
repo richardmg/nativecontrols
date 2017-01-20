@@ -95,7 +95,7 @@ NativeWindow {
     View {
         id: view
         x: 20
-        y: theSearchField1.bottom + 50 // get NaN if binding to theSearchField1
+        y: theSearchField1.bottom + 50 // get NaN if binding to platformStyledButton
         width: 200
         height: 100
         Button {
