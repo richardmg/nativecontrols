@@ -1,0 +1,4 @@
+module Qt.NativeAppKitControls
+plugin qmlnativeappkitcontrols
+classname QmlNativeAppKitControlsPlugin
+
