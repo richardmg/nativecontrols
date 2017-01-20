@@ -153,6 +153,14 @@ void QNativeUIKitViewPrivate::setGeometry(const QRectF &rect)
 QNativeUIKitView::QNativeUIKitView(QNativeUIKitBase *parent)
     : QNativeUIKitBase(*new QNativeUIKitViewPrivate(), parent)
 {
+    Q_D(QNativeUIKitView);
+    if (!d->view()) {
+        // Since no UIView was set during private construction, we assume that this
+        // is just a standalone view. In that case, we create the missing view now.
+        d->setView([[UIView new] autorelease]);
+        if (QNativeUIKitView *parent = parentView())
+            static_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(parent))->addSubView(d->view());
+    }
 }
 
 QNativeUIKitView::QNativeUIKitView(QNativeUIKitViewPrivate &dd, QNativeUIKitBase *parent)
