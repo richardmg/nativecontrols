@@ -48,50 +48,16 @@ QT_BEGIN_NAMESPACE
 
 QNativeUIKitBasePrivate::QNativeUIKitBasePrivate(int version)
     : QNativePlatformBasePrivate(version)
-    , m_attributes(0)
-    , m_view(nil)
 {
 }
 
 QNativeUIKitBasePrivate::~QNativeUIKitBasePrivate()
 {
-    [m_view release];
-}
-
-UIView *QNativeUIKitBasePrivate::view()
-{
-    return m_view;
-}
-
-UIView *QNativeUIKitBasePrivate::view() const
-{
-    return m_view;
-}
-
-void QNativeUIKitBasePrivate::setView(UIView *view)
-{
-    [m_view release];
-    m_view = [view retain];
-}
-
-CGRect QNativeUIKitBasePrivate::alignmentRect() const
-{
-    return [m_view alignmentRectForFrame:m_view.frame];
-}
-
-void QNativeUIKitBasePrivate::setAlignmentRect(CGRect rect)
-{
-    m_view.frame = [m_view frameForAlignmentRect:rect];
 }
 
 QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBase *parent)
     : QNativePlatformBase(*new QNativeUIKitBasePrivate(), parent)
 {
-}
-
-UIView *QNativeUIKitBase::uiViewHandle()
-{
-   return d_func()->view();
 }
 
 QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent)
@@ -101,28 +67,6 @@ QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase
 
 QNativeUIKitBase::~QNativeUIKitBase()
 {
-}
-
-void QNativeUIKitBase::childEvent(QChildEvent *event)
-{
-    Q_D(QNativeUIKitBase);
-    // Note that event->child() might not be fully constructed at this point, if
-    // called from its constructor chain. But the private part will.
-    QNativeUIKitBasePrivate *dptr_child = dynamic_cast<QNativeUIKitBasePrivate *>(QObjectPrivate::get(event->child()));
-    if (!dptr_child)
-        return;
-
-    if (event->added()) {
-        CGRect alignmentRect = [d->view() alignmentRectForFrame:d->view().frame];
-        [d->view() addSubview:dptr_child->view()];
-        // Ratio between frame and alignment rect can change depending on whether the view is
-        // attached to a superview, so reset it after reparenting
-        d->view().frame = [d->view() frameForAlignmentRect:alignmentRect];
-        d->view().autoresizingMask =
-                UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-    } else if (event->removed()) {
-        [dptr_child->view() removeFromSuperview];
-    }
 }
 
 #include "moc_qnativeuikitbase.cpp"

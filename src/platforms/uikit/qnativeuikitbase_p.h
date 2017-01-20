@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEIOSBASE_P_H
-#define QNATIVEIOSBASE_P_H
+#ifndef QNATIVEUIKITBASE_P_H
+#define QNATIVEUIKITBASE_P_H
 
 //
 //  W A R N I N G
@@ -60,7 +60,6 @@ QT_BEGIN_NAMESPACE
 
 class QNativeBase;
 class QNativeUIKitBase;
-Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
 
 class QNativeUIKitBasePrivate : public QNativePlatformBasePrivate
 {
@@ -68,43 +67,12 @@ public:
     explicit QNativeUIKitBasePrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeUIKitBasePrivate();
 
-    UIView *view();
-    UIView *view() const;
-    void setView(UIView *view);
-
-    CGRect alignmentRect() const;
-    void setAlignmentRect(CGRect rect);
-
-    virtual void updateLayout(bool recursive) { Q_UNUSED(recursive); }
-
     // Used by QNativeUIKitPlatformPlugin
     virtual void connectSignals(QNativeBase *) {}
 
     Q_DECLARE_PUBLIC(QNativeUIKitBase)
-
-protected:
-    enum Attribute {
-        LayedOut		= 0x00000001,
-        Moved			= 0x00000002,
-        Resized			= 0x00000004
-    };
-
-    uint m_attributes;
-
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
-
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
-
-private:
-    UIView *m_view;
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEIOSBASE_P_H
+#endif //QNATIVEUIKITBASE_P_H

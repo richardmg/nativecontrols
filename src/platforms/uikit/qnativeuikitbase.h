@@ -1,5 +1,5 @@
-#ifndef QNATIVEIOSBASE_H
-#define QNATIVEIOSBASE_H
+#ifndef QNATIVEUIKITBASE_H
+#define QNATIVEUIKITBASE_H
 
 #include <QObject>
 
@@ -20,13 +20,10 @@ class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitBase : public QNativePlatformBase
 public:
     QNativeUIKitBase(QNativeUIKitBase *parent = nullptr);
 
-    UIView *uiViewHandle();
-
     virtual ~QNativeUIKitBase();
 
 protected:
     QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent = nullptr);
-    void childEvent(QChildEvent *event) override;
 
 private:
     Q_DECLARE_PRIVATE(QNativeUIKitBase)
@@ -37,4 +34,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEIOSBASE_H
+#endif // QNATIVEUIKITBASE_H
