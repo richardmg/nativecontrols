@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEIOSCONTROL_P_H
-#define QNATIVEIOSCONTROL_P_H
+#ifndef QNATIVEUIKITCONTROL_P_H
+#define QNATIVEUIKITCONTROL_P_H
 
 //
 //  W A R N I N G
@@ -50,32 +50,23 @@
 
 #include <QtCore>
 
-#include <QtNativeUIKitControls/private/qnativeuikitbase_p.h>
+#include <QtNativeUIKitControls/private/qnativeuikitview_p.h>
+#include <QtNativeUIKitControls/qnativeuikitcontrol.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativeControl;
 class QNativeUIKitControl;
 
-class QNativeUIKitControlPrivate : public QNativeUIKitBasePrivate
+class QNativeUIKitControlPrivate : public QNativeUIKitViewPrivate
 {
 public:
     explicit QNativeUIKitControlPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeUIKitControlPrivate();
 
-    void setGeometry(const QRectF &rect);
-
-    virtual void connectSignals(QNativeBase *base) override;
-    virtual void updateLayout(bool recursive) override;
-
-    void updateImplicitSize();
-
     Q_DECLARE_PUBLIC(QNativeUIKitControl)
-
-private:
-    QSizeF m_implicitSize;
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEIOSCONTROL_P_H
+#endif //QNATIVEUIKITCONTROL_P_H

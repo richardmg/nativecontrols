@@ -45,7 +45,7 @@
 QT_BEGIN_NAMESPACE
 
 QNativeUIKitControlPrivate::QNativeUIKitControlPrivate(int version)
-    : QNativeUIKitBasePrivate(version)
+    : QNativeUIKitViewPrivate(version)
 {
 }
 
@@ -53,235 +53,18 @@ QNativeUIKitControlPrivate::~QNativeUIKitControlPrivate()
 {
 }
 
-void QNativeUIKitControlPrivate::connectSignals(QNativeBase *base)
-{
-    Q_Q(QNativeUIKitControl);
-    QNativeUIKitBasePrivate::connectSignals(base);
-    const auto b = static_cast<QNativeControl *>(base);
-    q->connect(q, &QNativeUIKitControl::visibleChanged, b, &QNativeControl::visibleChanged);
-    q->connect(q, &QNativeUIKitControl::xChanged, b, &QNativeControl::xChanged);
-    q->connect(q, &QNativeUIKitControl::xChanged, b, &QNativeControl::rightChanged);
-    q->connect(q, &QNativeUIKitControl::yChanged, b, &QNativeControl::yChanged);
-    q->connect(q, &QNativeUIKitControl::yChanged, b, &QNativeControl::bottomChanged);
-    q->connect(q, &QNativeUIKitControl::widthChanged, b, &QNativeControl::widthChanged);
-    q->connect(q, &QNativeUIKitControl::widthChanged, b, &QNativeControl::rightChanged);
-    q->connect(q, &QNativeUIKitControl::heightChanged, b, &QNativeControl::heightChanged);
-    q->connect(q, &QNativeUIKitControl::heightChanged, b, &QNativeControl::bottomChanged);
-    q->connect(q, &QNativeUIKitControl::implicitWidthChanged, b, &QNativeControl::implicitWidthChanged);
-    q->connect(q, &QNativeUIKitControl::implicitHeightChanged, b, &QNativeControl::implicitHeightChanged);
-}
-
-void QNativeUIKitControlPrivate::updateLayout(bool recursive)
-{
-    Q_Q(QNativeUIKitControl);
-
-    if (!testAttribute(Resized)) {
-        q->resize(q->implicitSize());
-        setAttribute(Resized, false);
-    }
-
-    if (recursive) {
-        for (QObject *child : q->children()) {
-            if (QNativeUIKitBasePrivate *basePrivate = dynamic_cast<QNativeUIKitBasePrivate *>(QObjectPrivate::get(child)))
-                basePrivate->updateLayout(recursive);
-        }
-    }
-}
-
-void QNativeUIKitControlPrivate::updateImplicitSize()
-{
-    Q_Q(QNativeUIKitControl);
-    QSizeF oldSize = m_implicitSize;
-    m_implicitSize = QSizeF::fromCGSize([view() sizeThatFits:CGSizeZero]);
-
-    if (m_implicitSize.width() != oldSize.width()) {
-        updateLayout(false);
-        emit q->implicitWidthChanged(m_implicitSize.width());
-    }
-
-    if (m_implicitSize.height() != oldSize.height()) {
-        updateLayout(false);
-        emit q->implicitHeightChanged(m_implicitSize.height());
-    }
-}
-
 QNativeUIKitControl::QNativeUIKitControl(QNativeUIKitBase *parent)
-    : QNativeUIKitBase(*new QNativeUIKitControlPrivate(), parent)
+    : QNativeUIKitView(*new QNativeUIKitControlPrivate(), parent)
 {
 }
 
 QNativeUIKitControl::QNativeUIKitControl(QNativeUIKitControlPrivate &dd, QNativeUIKitBase *parent)
-    : QNativeUIKitBase(dd, parent)
+    : QNativeUIKitView(dd, parent)
 {
 }
 
 QNativeUIKitControl::~QNativeUIKitControl()
 {
-}
-
-bool QNativeUIKitControl::visible() const
-{
-    return !d_func()->view().hidden;
-}
-
-void QNativeUIKitControl::setVisible(bool newVisible)
-{
-    if (newVisible == visible())
-        return;
-
-    Q_D(QNativeUIKitControl);
-    d->view().hidden = !newVisible;
-
-    emit visibleChanged(newVisible);
-}
-
-void QNativeUIKitControl::setGeometry(const QRectF &rect)
-{
-    setX(rect.x());
-    setY(rect.y());
-    setWidth(rect.width());
-    setHeight(rect.height());
-}
-
-void QNativeUIKitControl::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
-{
-    setX(posx);
-    setY(posy);
-    setWidth(w);
-    setHeight(h);
-}
-
-void QNativeUIKitControl::move(qreal posx, qreal posy)
-{
-    setX(posx);
-    setY(posy);
-}
-
-void QNativeUIKitControl::move(const QPointF &pos)
-{
-    setX(pos.x());
-    setY(pos.y());
-}
-
-void QNativeUIKitControl::resize(qreal width, qreal height)
-{
-    setWidth(width);
-    setHeight(height);
-}
-
-void QNativeUIKitControl::resize(const QSizeF size)
-{
-    setWidth(size.width());
-    setHeight(size.height());
-}
-
-QSizeF QNativeUIKitControl::implicitSize() const
-{
-    Q_D(const QNativeUIKitControl);
-    if (!d->m_implicitSize.isValid())
-        const_cast<QNativeUIKitControlPrivate *>(d)->updateImplicitSize();
-    return d->m_implicitSize;
-}
-
-qreal QNativeUIKitControl::implicitWidth() const
-{
-    return implicitSize().width();
-}
-
-qreal QNativeUIKitControl::implicitHeight() const
-{
-    return implicitSize().height();
-}
-
-QRectF QNativeUIKitControl::geometry() const
-{
-    return QRectF::fromCGRect(d_func()->alignmentRect());
-}
-
-QRectF QNativeUIKitControl::frameGeometry() const
-{
-    return QRectF::fromCGRect(d_func()->view().frame);
-}
-
-void QNativeUIKitControlPrivate::setGeometry(const QRectF &rect)
-{
-    setAlignmentRect(rect.toCGRect());
-}
-
-qreal QNativeUIKitControl::x() const
-{
-    return geometry().x();
-}
-
-void QNativeUIKitControl::setX(qreal newX)
-{
-    if (newX == x())
-        return;
-
-    Q_D(QNativeUIKitControl);
-    QRectF g = geometry();
-    g.moveLeft(newX);
-    d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitControlPrivate::Moved);
-
-    emit xChanged(newX);
-}
-
-qreal QNativeUIKitControl::y() const
-{
-    return geometry().y();
-}
-
-void QNativeUIKitControl::setY(qreal newY)
-{
-    if (newY == y())
-        return;
-
-    Q_D(QNativeUIKitControl);
-    QRectF g = geometry();
-    g.moveTop(newY);
-    d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitControlPrivate::Moved);
-
-    emit yChanged(newY);
-}
-
-qreal QNativeUIKitControl::width() const
-{
-    return geometry().width();
-}
-
-void QNativeUIKitControl::setWidth(qreal newWidth)
-{
-    if (newWidth == width())
-        return;
-
-    Q_D(QNativeUIKitControl);
-    QRectF g = geometry();
-    g.setWidth(newWidth);
-    d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitControlPrivate::Resized);
-
-    emit widthChanged(newWidth);
-}
-
-qreal QNativeUIKitControl::height() const
-{
-    return geometry().height();
-}
-
-void QNativeUIKitControl::setHeight(qreal newHeight)
-{
-    if (newHeight == height())
-        return;
-
-    Q_D(QNativeUIKitControl);
-    QRectF g = geometry();
-    g.setHeight(newHeight);
-    d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitControlPrivate::Resized);
-
-    emit heightChanged(newHeight);
 }
 
 #include "moc_qnativeuikitcontrol.cpp"
