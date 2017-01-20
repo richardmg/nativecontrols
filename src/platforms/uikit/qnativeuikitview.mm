@@ -313,6 +313,11 @@ void QNativeUIKitView::setHeight(qreal newHeight)
     emit heightChanged(newHeight);
 }
 
+QNativeUIKitView *QNativeUIKitView::parentView()
+{
+   return dynamic_cast<QNativeUIKitView *>(parent());
+}
+
 UIView *QNativeUIKitView::uiViewHandle()
 {
    return d_func()->view();

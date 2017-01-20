@@ -57,6 +57,8 @@ public:
     qreal height() const;
     void setHeight(qreal);
 
+    QNativeUIKitView *parentView();
+
     UIView *uiViewHandle();
 
 Q_SIGNALS:
