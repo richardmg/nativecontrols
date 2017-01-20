@@ -60,6 +60,8 @@ public:
         else if (dynamic_cast<QNativeTextField *>(nativeBase)
                  || dynamic_cast<QNativeSearchField *>(nativeBase))
             uikitBase = new QNativeUIKitTextField(nullptr);
+        else if (dynamic_cast<QNativeView *>(nativeBase))
+            uikitBase = new QNativeUIKitView(nullptr);
         else
             Q_UNREACHABLE();
 
