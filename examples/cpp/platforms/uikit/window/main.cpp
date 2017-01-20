@@ -55,6 +55,13 @@ int main(int argc, char *argv[])
     textField.move(50, 150);
     textField.resize(200, textField.implicitSize().height());
 
+    QNativeUIKitView view(&window);
+    view.setGeometry(50, textField.geometry().bottom(), 200, 200);
+
+    QNativeUIKitButton button2("Child button", &view);
+    button2.move(10, 0);
+    QObject::connect(&button2, &QNativeUIKitButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
+
     window.showFullScreen();
 
     return app.exec();
