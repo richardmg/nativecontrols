@@ -39,14 +39,14 @@
 
 #include <QtNativeControls/qnativeplatformwindow.h>
 
-#include <QtNativeUIKitControls/qnativeuikitbase.h>
+#include <QtNativeUIKitControls/qnativeuikitview.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativeUIKitWindowPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitBase, public virtual QNativePlatformWindow
+class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitView, public virtual QNativePlatformWindow
 {
     Q_OBJECT
 

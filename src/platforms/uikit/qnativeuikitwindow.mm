@@ -40,11 +40,12 @@
 #include <QtCore/private/qobject_p.h>
 #include <QtNativeUIKitControls/qnativeuikitwindow.h>
 #include <QtNativeUIKitControls/private/qnativeuikitwindow_p.h>
+#include <QtNativeUIKitControls/private/qnativeuikitview_p.h>
 
 QT_BEGIN_NAMESPACE
 
 QNativeUIKitWindowPrivate::QNativeUIKitWindowPrivate(int version)
-    : QNativeUIKitBasePrivate(version)
+    : QNativeUIKitViewPrivate(version)
 {
     m_window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIViewController *viewController = [[UIViewController new] autorelease];
@@ -79,19 +80,19 @@ void QNativeUIKitWindowPrivate::updateLayout(bool recursive)
 
     if (recursive) {
         for (QObject *child : q_func()->children()) {
-            if (QNativeUIKitBasePrivate *basePrivate = dynamic_cast<QNativeUIKitBasePrivate *>(QObjectPrivate::get(child)))
+            if (QNativeUIKitViewPrivate *basePrivate = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(child)))
                 basePrivate->updateLayout(recursive);
         }
     }
 }
 
 QNativeUIKitWindow::QNativeUIKitWindow()
-    : QNativeUIKitBase(*new QNativeUIKitWindowPrivate(), nullptr)
+    : QNativeUIKitView(*new QNativeUIKitWindowPrivate(), nullptr)
 {
 }
 
 QNativeUIKitWindow::QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd)
-    : QNativeUIKitBase(dd, nullptr)
+    : QNativeUIKitView(dd, nullptr)
 {
 }
 
