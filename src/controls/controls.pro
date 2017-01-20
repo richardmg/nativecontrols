@@ -10,6 +10,7 @@ DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 NATIVE_CONTROLS = \
     base \
     window \
+    view \
     control \
     button \
     textfield \
