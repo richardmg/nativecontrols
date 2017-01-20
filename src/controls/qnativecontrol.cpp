@@ -37,13 +37,14 @@
 #include <QtNativeControls/qnativecontrol.h>
 #include <QtNativeControls/private/qnativecontrol_p.h>
 #include <QtNativeControls/qnativeplatformcontrol.h>
+#include <QtNativeControls/qnativeview.h>
 
 QT_BEGIN_NAMESPACE
 
 #define PLATFORM_CONTROL dynamic_cast<QNativePlatformControl *>(d_func()->m_platformBase)
 
 QNativeControlPrivate::QNativeControlPrivate(int version)
-    : QNativeBasePrivate(version)
+    : QNativeViewPrivate(version)
 {
 }
 
@@ -52,13 +53,13 @@ QNativeControlPrivate::~QNativeControlPrivate()
 }
 
 QNativeControl::QNativeControl(QNativeBase *parent)
-    : QNativeBase(parent)
+    : QNativeView(parent)
 {
     d_func()->connectToPlatform();
 }
 
 QNativeControl::QNativeControl(QNativeControlPrivate &dd, QNativeBase *parent)
-    : QNativeBase(dd, parent)
+    : QNativeView(dd, parent)
 {
 }
 

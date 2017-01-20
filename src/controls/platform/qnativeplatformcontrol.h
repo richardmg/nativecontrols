@@ -39,10 +39,11 @@
 
 #include <QtCore>
 #include <QtNativeControls/qnativeplatformbase.h>
+#include <QtNativeControls/qnativeplatformview.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformControl
+class Q_NATIVECONTROLS_EXPORT QNativePlatformControl : public virtual QNativePlatformView
 {
 public:
     virtual ~QNativePlatformControl() {}

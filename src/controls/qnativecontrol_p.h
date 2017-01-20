@@ -48,14 +48,14 @@
 // We mean it.
 //
 
-#include "qnativebase_p.h"
+#include <QtNativeControls/private/qnativeview_p.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativeControl;
 class QNativePlatformControl;
 
-class QNativeControlPrivate : public QNativeBasePrivate
+class QNativeControlPrivate : public QNativeViewPrivate
 {
     Q_DECLARE_PUBLIC(QNativeControl)
 

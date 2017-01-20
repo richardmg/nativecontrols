@@ -42,7 +42,7 @@
 
 #include <QtQml/qqml.h>
 
-#include <QtNativeControls/qnativebase.h>
+#include <QtNativeControls/qnativeview.h>
 #include <QtNativeControls/qnativecontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
@@ -50,7 +50,7 @@ QT_BEGIN_NAMESPACE
 class QNativePlatformControl;
 class QNativeControlPrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeControl : public QNativeBase
+class Q_NATIVECONTROLS_EXPORT QNativeControl : public QNativeView
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
