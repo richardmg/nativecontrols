@@ -48,10 +48,68 @@ class QNativePlatformView;
 class Q_NATIVECONTROLS_EXPORT QNativeView : public QNativeBase
 {
     Q_OBJECT
+    Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
+    Q_PROPERTY(qreal x READ x WRITE setX NOTIFY xChanged FINAL)
+    Q_PROPERTY(qreal y READ y WRITE setY NOTIFY yChanged FINAL)
+    Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY widthChanged FINAL)
+    Q_PROPERTY(qreal height READ height WRITE setHeight NOTIFY heightChanged FINAL)
+    Q_PROPERTY(qreal left READ left NOTIFY xChanged FINAL)
+    Q_PROPERTY(qreal top READ top NOTIFY yChanged FINAL)
+    Q_PROPERTY(qreal right READ right NOTIFY rightChanged FINAL)
+    Q_PROPERTY(qreal bottom READ bottom NOTIFY bottomChanged FINAL)
+    Q_PROPERTY(qreal implicitWidth READ implicitWidth NOTIFY implicitWidthChanged FINAL)
+    Q_PROPERTY(qreal implicitHeight READ implicitHeight NOTIFY implicitHeightChanged FINAL)
 
 public:
     explicit QNativeView(QNativeBase *parent = nullptr);
     virtual ~QNativeView();
+
+    QNativeView *parentView();
+
+    bool visible() const;
+    void setVisible(bool visible);
+
+    void setGeometry(const QRectF &rect);
+    QRectF geometry() const;
+    void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
+
+    void move(const QPointF &pos);
+    void move(qreal posx, qreal posy);
+
+    void resize(const QSizeF size);
+    void resize(qreal width, qreal height);
+
+    qreal x() const;
+    void setX(qreal);
+
+    qreal y() const;
+    void setY(qreal);
+
+    qreal width() const;
+    void setWidth(qreal);
+
+    qreal height() const;
+    void setHeight(qreal);
+
+    qreal left() const;
+    qreal top() const;
+    qreal right() const;
+    qreal bottom() const;
+
+    QSizeF implicitSize() const;
+    qreal implicitWidth() const;
+    qreal implicitHeight() const;
+
+Q_SIGNALS:
+    void visibleChanged(bool visible);
+    void xChanged(qreal x);
+    void yChanged(qreal y);
+    void widthChanged(qreal w);
+    void heightChanged(qreal h);
+    void rightChanged(qreal right);
+    void bottomChanged(qreal bottom);
+    void implicitWidthChanged(qreal w);
+    void implicitHeightChanged(qreal h);
 
 protected:
     QNativeView(QNativeViewPrivate &dd, QNativeBase *parent = nullptr);

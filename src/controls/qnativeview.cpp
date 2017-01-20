@@ -37,10 +37,11 @@
 #include <QtNativeControls/qnativeview.h>
 #include <QtNativeControls/private/qnativeview_p.h>
 #include <QtNativeControls/qnativeplatformview.h>
+#include <QtNativeControls/qnativeplatformbase.h>
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_BUTTON dynamic_cast<QNativePlatformView *>(d_func()->m_platformBase)
+#define PLATFORM_VIEW dynamic_cast<QNativePlatformView *>(d_func()->m_platformBase)
 
 QNativeViewPrivate::QNativeViewPrivate(int version)
     : QNativeBasePrivate(version)
@@ -64,6 +65,139 @@ QNativeView::QNativeView(QNativeViewPrivate &dd, QNativeBase *parent)
 
 QNativeView::~QNativeView()
 {
+}
+
+QNativeView *QNativeView::parentView()
+{
+    return qobject_cast<QNativeView *>(parent());
+}
+
+bool QNativeView::visible() const
+{
+    return PLATFORM_VIEW->visible();
+}
+
+void QNativeView::setVisible(bool v)
+{
+    PLATFORM_VIEW->setVisible(v);
+}
+
+qreal QNativeView::x() const
+{
+    return PLATFORM_VIEW->geometry().x();
+}
+
+void QNativeView::setX(qreal x)
+{
+    QRectF g = PLATFORM_VIEW->geometry();
+    g.moveLeft(x);
+    PLATFORM_VIEW->setGeometry(g);
+}
+
+qreal QNativeView::y() const
+{
+    return PLATFORM_VIEW->geometry().y();
+}
+
+void QNativeView::setY(qreal y)
+{
+    QRectF g = PLATFORM_VIEW->geometry();
+    g.moveTop(y);
+    PLATFORM_VIEW->setGeometry(g);
+}
+
+qreal QNativeView::width() const
+{
+    return PLATFORM_VIEW->geometry().width();
+}
+
+void QNativeView::setWidth(qreal w)
+{
+    QRectF g = PLATFORM_VIEW->geometry();
+    g.setWidth(w);
+    PLATFORM_VIEW->setGeometry(g);
+}
+
+qreal QNativeView::height() const
+{
+    return PLATFORM_VIEW->geometry().height();
+}
+
+void QNativeView::setHeight(qreal h)
+{
+    QRectF g = PLATFORM_VIEW->geometry();
+    g.setHeight(h);
+    PLATFORM_VIEW->setGeometry(g);
+}
+
+qreal QNativeView::left() const
+{
+    return PLATFORM_VIEW->geometry().left();
+}
+
+qreal QNativeView::top() const
+{
+    return PLATFORM_VIEW->geometry().top();
+}
+
+qreal QNativeView::right() const
+{
+    return PLATFORM_VIEW->geometry().right();
+}
+
+qreal QNativeView::bottom() const
+{
+    return PLATFORM_VIEW->geometry().bottom();
+}
+
+QSizeF QNativeView::implicitSize() const
+{
+    return PLATFORM_VIEW->implicitSize();
+}
+
+qreal QNativeView::implicitWidth() const
+{
+    return PLATFORM_VIEW->implicitSize().width();
+}
+
+qreal QNativeView::implicitHeight() const
+{
+    return PLATFORM_VIEW->implicitSize().height();
+}
+
+void QNativeView::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
+{
+    PLATFORM_VIEW->setGeometry(QRectF(posx, posy, w, h));
+}
+
+void QNativeView::move(const QPointF &pos)
+{
+    PLATFORM_VIEW->move(pos);
+}
+
+void QNativeView::move(qreal posx, qreal posy)
+{
+    PLATFORM_VIEW->move(QPointF(posx, posy));
+}
+
+void QNativeView::resize(const QSizeF size)
+{
+    PLATFORM_VIEW->resize(size);
+}
+
+void QNativeView::resize(qreal width, qreal height)
+{
+    PLATFORM_VIEW->resize(QSizeF(width, height));
+}
+
+void QNativeView::setGeometry(const QRectF &rect)
+{
+    PLATFORM_VIEW->setGeometry(rect);
+}
+
+QRectF QNativeView::geometry() const
+{
+    return PLATFORM_VIEW->geometry();
 }
 
 #include "moc_qnativeview.cpp"

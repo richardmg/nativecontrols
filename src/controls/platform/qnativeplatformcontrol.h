@@ -47,19 +47,6 @@ class Q_NATIVECONTROLS_EXPORT QNativePlatformControl : public virtual QNativePla
 {
 public:
     virtual ~QNativePlatformControl() {}
-
-    virtual bool visible() const = 0;
-    virtual void setVisible(bool visible) = 0;
-
-    virtual QRectF geometry() const = 0;
-    virtual void setGeometry(const QRectF &rect) = 0;
-
-    virtual QRectF frameGeometry() const = 0;
-
-    virtual void move(const QPointF &pos) = 0;
-    virtual void resize(const QSizeF size) = 0;
-
-    virtual QSizeF implicitSize() const = 0;
 };
 
 QT_END_NAMESPACE
