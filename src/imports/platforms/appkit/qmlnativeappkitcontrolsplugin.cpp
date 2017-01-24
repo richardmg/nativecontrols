@@ -56,7 +56,9 @@ void registerTypes(const char *uri) override
     qmlRegisterType<QNativeAppKitControl>();
     qmlRegisterType<QNativeAppKitWindow>(uri, 1, 0, "NativeWindow");
     qmlRegisterType<QNativeAppKitButton>(uri, 1, 0, "Button");
+    qmlRegisterType<QNativeAppKitSearchField>(uri, 1, 0, "SearchField");
     qmlRegisterType<QNativeAppKitTextField>(uri, 1, 0, "TextField");
+    qmlRegisterType<QNativeAppKitView>(uri, 1, 0, "View");
 }
 
 void initializeEngine(QQmlEngine *engine, const char *uri) override

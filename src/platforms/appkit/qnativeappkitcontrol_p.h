@@ -50,30 +50,21 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/private/qnativeappkitbase_p.h>
+#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QtNativeAppKitControls/qnativeappkitcontrol.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativeControl;
 class QNativeAppKitControl;
 
-class QNativeAppKitControlPrivate : public QNativeAppKitBasePrivate
+class QNativeAppKitControlPrivate : public QNativeAppKitViewPrivate
 {
 public:
     explicit QNativeAppKitControlPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeAppKitControlPrivate();
 
-    void setGeometry(const QRectF &rect);
-
-    virtual void connectSignals(QNativeBase *base) override;
-    virtual void updateLayout(bool recursive) override;
-
-    void updateImplicitSize();
-
     Q_DECLARE_PUBLIC(QNativeAppKitControl)
-
-private:
-    QSizeF m_implicitSize;
 };
 
 QT_END_NAMESPACE

@@ -34,41 +34,75 @@
 **
 ****************************************************************************/
 
-#include <AppKit/AppKit.h>
+#ifndef QNATIVAPPKITVIEW_P_H
+#define QNATIVAPPKITVIEW_P_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/qnativeappkitbase.h>
 #include <QtNativeAppKitControls/private/qnativeappkitbase_p.h>
-
-#include <QtNativeControls/qnativebase.h>
-#include <QtNativeControls/private/qnativeplatformbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
-QNativeAppKitBasePrivate::QNativeAppKitBasePrivate(int version)
-    : QNativePlatformBasePrivate(version)
-{
-}
+class QNativeAppKitView;
+Q_FORWARD_DECLARE_OBJC_CLASS(NSView);
 
-QNativeAppKitBasePrivate::~QNativeAppKitBasePrivate()
+class QNativeAppKitViewPrivate : public QNativeAppKitBasePrivate
 {
-}
+public:
+    explicit QNativeAppKitViewPrivate(int version = QObjectPrivateVersion);
+    virtual ~QNativeAppKitViewPrivate();
 
-QNativeAppKitBase::QNativeAppKitBase(QNativeAppKitBase *parent)
-    : QNativePlatformBase(*new QNativeAppKitBasePrivate(), parent)
-{
-}
+    NSView *view();
+    NSView *view() const;
+    void setView(NSView *view);
+    void addSubView(NSView *subView);
 
-QNativeAppKitBase::QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent)
-    : QNativePlatformBase(dd, parent)
-{
-}
+    NSRect alignmentRect() const;
+    void setAlignmentRect(NSRect rect);
+    void setGeometry(const QRectF &rect);
 
-QNativeAppKitBase::~QNativeAppKitBase()
-{
-}
+    virtual void connectSignals(QNativeBase *base) override;
+    virtual void updateLayout(bool recursive);
 
-#include "moc_qnativeappkitbase.cpp"
+    void updateImplicitSize();
+
+    Q_DECLARE_PUBLIC(QNativeAppKitView)
+
+protected:
+    enum Attribute {
+        LayedOut		= 0x00000001,
+        Moved			= 0x00000002,
+        Resized			= 0x00000004
+    };
+
+    uint m_attributes;
+
+    inline void setAttribute(Attribute attribute, bool on = true)
+    {
+        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
+    }
+
+    inline bool testAttribute(Attribute attribute)
+    {
+        return bool(m_attributes & attribute);
+    }
+
+private:
+    NSView *m_view;
+    QSizeF m_implicitSize;
+};
 
 QT_END_NAMESPACE
+
+#endif //QNATIVAPPKITVIEW_P_H

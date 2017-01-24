@@ -61,7 +61,6 @@ QT_BEGIN_NAMESPACE
 
 class QNativeBase;
 class QNativeAppKitBase;
-Q_FORWARD_DECLARE_OBJC_CLASS(NSView);
 
 class QNativeAppKitBasePrivate : public QNativePlatformBasePrivate
 {
@@ -69,41 +68,10 @@ public:
     explicit QNativeAppKitBasePrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeAppKitBasePrivate();
 
-    NSView *view();
-    NSView *view() const;
-    void setView(NSView *view);
-
-    NSRect alignmentRect() const;
-    void setAlignmentRect(NSRect rect);
-
-    virtual void updateLayout(bool recursive) { Q_UNUSED(recursive); }
-
     // Used by QNativeAppKitPlatformPlugin
     virtual void connectSignals(QNativeBase *) {}
 
     Q_DECLARE_PUBLIC(QNativeAppKitBase)
-
-protected:
-    enum Attribute {
-        LayedOut		= 0x00000001,
-        Moved			= 0x00000002,
-        Resized			= 0x00000004
-    };
-
-    uint m_attributes;
-
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
-
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
-
-private:
-    NSView *m_view;
 };
 
 QT_END_NAMESPACE

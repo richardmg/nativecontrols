@@ -21,11 +21,8 @@ public:
     QNativeAppKitBase(QNativeAppKitBase *parent = nullptr);
     virtual ~QNativeAppKitBase();
 
-    NSView *nsViewHandle();
-
 protected:
     QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent = nullptr);
-    void childEvent(QChildEvent *event) override;
 
 private:
     Q_DECLARE_PRIVATE(QNativeAppKitBase)

@@ -61,6 +61,8 @@ public:
             appkitBase = new QNativeAppKitTextField(nullptr);
         else if (dynamic_cast<QNativeSearchField *>(nativeBase))
             appkitBase = new QNativeAppKitSearchField(nullptr);
+        else if (dynamic_cast<QNativeView *>(nativeBase))
+            appkitBase = new QNativeAppKitView(nullptr);
         else
             Q_UNREACHABLE();
 

@@ -50,7 +50,7 @@
 
 #include <QObject>
 
-#include <QtNativeAppKitControls/private/qnativeappkitbase_p.h>
+#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -59,7 +59,7 @@ class QNativeIosWindow;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
 Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
 
-class QNativeAppKitWindowPrivate : public QNativeAppKitBasePrivate
+class QNativeAppKitWindowPrivate : public QNativeAppKitViewPrivate
 {
 public:
     explicit QNativeAppKitWindowPrivate(int version = QObjectPrivateVersion);

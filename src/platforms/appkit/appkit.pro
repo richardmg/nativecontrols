@@ -11,6 +11,7 @@ LIBS += -framework AppKit
 APPKIT_CONTROLS = \
     base \
     window \
+    view \
     control \
     button \
     textfield \

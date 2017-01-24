@@ -39,14 +39,14 @@
 
 #include <QtNativeControls/qnativeplatformwindow.h>
 
-#include <QtNativeAppKitControls/qnativeappkitbase.h>
+#include <QtNativeAppKitControls/qnativeappkitview.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativeAppKitWindowPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitBase, public virtual QNativePlatformWindow
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitView, public virtual QNativePlatformWindow
 {
     Q_OBJECT
 
@@ -55,6 +55,11 @@ public:
     virtual ~QNativeAppKitWindow();
 
     NSWindow *nsWindowHandle() const;
+
+    virtual QRectF geometry() const override;
+    virtual void setGeometry(const QRectF &rect) override;
+
+    virtual QRectF frameGeometry() const override;
 
     virtual qreal width() const override;
     virtual qreal height() const override;

@@ -40,6 +40,7 @@
 #include <QtCore/private/qobject_p.h>
 #include <QtNativeAppKitControls/qnativeappkitwindow.h>
 #include <QtNativeAppKitControls/private/qnativeappkitwindow_p.h>
+#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
 
 @interface QtNativeNSView : NSView
 
@@ -85,7 +86,7 @@
 QT_BEGIN_NAMESPACE
 
 QNativeAppKitWindowPrivate::QNativeAppKitWindowPrivate(int version)
-    : QNativeAppKitBasePrivate(version)
+    : QNativeAppKitViewPrivate(version)
 {
     m_delegate = [[QNativeAppKitWindowDelegate alloc] initWithQNativeAppKitWindowPrivate:this];
 
@@ -129,19 +130,19 @@ void QNativeAppKitWindowPrivate::updateLayout(bool recursive)
 
     if (recursive) {
         for (QObject *child : q_func()->children()) {
-            if (QNativeAppKitBasePrivate *basePrivate = dynamic_cast<QNativeAppKitBasePrivate *>(QObjectPrivate::get(child)))
+            if (QNativeAppKitViewPrivate *basePrivate = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(child)))
                 basePrivate->updateLayout(recursive);
         }
     }
 }
 
 QNativeAppKitWindow::QNativeAppKitWindow()
-    : QNativeAppKitBase(*new QNativeAppKitWindowPrivate(), nullptr)
+    : QNativeAppKitView(*new QNativeAppKitWindowPrivate(), nullptr)
 {
 }
 
 QNativeAppKitWindow::QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd)
-    : QNativeAppKitBase(dd, nullptr)
+    : QNativeAppKitView(dd, nullptr)
 {
 }
 
@@ -156,14 +157,34 @@ NSWindow *QNativeAppKitWindow::nsWindowHandle() const
     return d_func()->m_window;
 }
 
+QRectF QNativeAppKitWindow::geometry() const
+{
+    const NSRect r = [nsWindowHandle() contentRectForFrameRect:nsWindowHandle().frame];
+    return QRectF(r.origin.x, r.origin.y, r.size.width, r.size.height);
+}
+
+NSRect qt_mac_flipRect(const QRectF &rect, NSView *view);
+
+void QNativeAppKitWindow::setGeometry(const QRectF &rect)
+{
+    [nsWindowHandle() setFrame:[nsWindowHandle() frameRectForContentRect:
+      NSMakeRect(rect.x(), rect.y(), rect.width(), rect.height())] display:YES];
+}
+
+QRectF QNativeAppKitWindow::frameGeometry() const
+{
+    const NSRect frame = nsWindowHandle().frame;
+    return QRectF(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+}
+
 qreal QNativeAppKitWindow::width() const
 {
-    return nsWindowHandle().contentView.frame.size.width;
+    return QNativeAppKitView::width();
 }
 
 qreal QNativeAppKitWindow::height() const
 {
-    return nsWindowHandle().contentView.frame.size.height;
+    return QNativeAppKitView::height();
 }
 
 bool QNativeAppKitWindow::isVisible() const
