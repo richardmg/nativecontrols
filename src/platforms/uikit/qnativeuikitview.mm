@@ -126,12 +126,12 @@ void QNativeUIKitViewPrivate::setView(UIView *view)
 
 void QNativeUIKitViewPrivate::addSubView(UIView *subView)
 {
-    CGRect alignmentRect = [view() alignmentRectForFrame:view().frame];
+    CGRect alignmentRect = [subView alignmentRectForFrame:subView.frame];
     [view() addSubview:subView];
     // Ratio between frame and alignment rect can change depending on whether the view is
     // attached to a superview, so reset it after reparenting
-    view().frame = [view() frameForAlignmentRect:alignmentRect];
-    view().autoresizingMask =
+    subView.frame = [subView frameForAlignmentRect:alignmentRect];
+    subView.autoresizingMask =
             UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
 }
 
