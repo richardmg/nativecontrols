@@ -46,16 +46,18 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QNativeUIKitWindow window;
-    QNativeUIKitButton button(QStringLiteral("Click me"), &window);
+    QNativeUIKitView *contentView = window.rootViewController()->view();
+
+    QNativeUIKitButton button(QStringLiteral("Click me"), contentView);
     button.move(50, 100);
     QObject::connect(&button, &QNativeUIKitButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
 
-    QNativeUIKitTextField textField(&window);
+    QNativeUIKitTextField textField(contentView);
     textField.setPlaceholderText(QStringLiteral("TextField"));
     textField.move(50, 150);
     textField.resize(200, textField.implicitSize().height());
 
-    QNativeUIKitView view(&window);
+    QNativeUIKitView view(contentView);
     view.setGeometry(50, textField.geometry().bottom(), 200, 200);
 
     QNativeUIKitButton button2("Child button", &view);
