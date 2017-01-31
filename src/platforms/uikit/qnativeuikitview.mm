@@ -158,6 +158,7 @@ QNativeUIKitView::QNativeUIKitView(QNativeUIKitBase *parent)
         // Since no UIView was set during private construction, we assume that this
         // is just a standalone view. In that case, we create the missing view now.
         d->setView([[UIView new] autorelease]);
+        d->view().backgroundColor = [UIColor whiteColor];
         if (QNativeUIKitView *parent = parentView())
             static_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(parent))->addSubView(d->view());
     }
