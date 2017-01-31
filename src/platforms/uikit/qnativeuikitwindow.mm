@@ -39,6 +39,7 @@
 #include <QtGui/qwindow.h>
 #include <QtCore/private/qobject_p.h>
 #include <QtNativeUIKitControls/qnativeuikitwindow.h>
+#include <QtNativeUIKitControls/qnativeuikitviewcontroller.h>
 #include <QtNativeUIKitControls/private/qnativeuikitwindow_p.h>
 #include <QtNativeUIKitControls/private/qnativeuikitview_p.h>
 
@@ -46,17 +47,10 @@ QT_BEGIN_NAMESPACE
 
 QNativeUIKitWindowPrivate::QNativeUIKitWindowPrivate(int version)
     : QNativeUIKitViewPrivate(version)
+    , m_viewController(nullptr)
 {
     m_window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UIViewController *viewController = [[UIViewController new] autorelease];
-    UIView *view = [[[UIView alloc] initWithFrame:m_window.bounds] autorelease];
-
-    m_window.rootViewController = viewController;
-    viewController.view = view;
-
-    view.backgroundColor = [UIColor whiteColor];
-
-    setView(view);
+    setView(m_window);
 }
 
 QNativeUIKitWindowPrivate::~QNativeUIKitWindowPrivate()
@@ -103,6 +97,27 @@ QNativeUIKitWindow::~QNativeUIKitWindow()
 UIWindow *QNativeUIKitWindow::uiWindowHandle() const
 {
     return d_func()->m_window;
+}
+
+void QNativeUIKitWindow::setRootViewController(QNativeUIKitViewController *controller)
+{
+    Q_D(QNativeUIKitWindow);
+    if (d->m_viewController == controller)
+        return;
+
+    d->m_viewController = dynamic_cast<QNativeUIKitViewController *>(controller);
+    d->m_window.rootViewController = d->m_viewController->uiViewControllerHandle();
+    emit rootViewControllerChanged(controller);
+}
+
+QNativeUIKitViewController *QNativeUIKitWindow::rootViewController() const
+{
+    Q_D(const QNativeUIKitWindow);
+    if (!d->m_viewController) {
+        QNativeUIKitWindow *self = const_cast<QNativeUIKitWindow *>(this);
+        self->setRootViewController(new QNativeUIKitViewController(self));
+    }
+    return d->m_viewController;
 }
 
 qreal QNativeUIKitWindow::width() const

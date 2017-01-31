@@ -55,7 +55,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeWindow;
-class QNativeIosWindow;
+class QNativeUIKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 
 class QNativeUIKitWindowPrivate : public QNativeUIKitViewPrivate
@@ -71,6 +71,7 @@ public:
 
 private:
     UIWindow *m_window;
+    QNativeUIKitViewController *m_viewController;
 };
 
 QT_END_NAMESPACE

@@ -44,6 +44,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeUIKitWindowPrivate;
+class QNativeUIKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 
 class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitView, public virtual QNativePlatformWindow
@@ -56,6 +57,9 @@ public:
 
     UIWindow *uiWindowHandle() const;
 
+    void setRootViewController(QNativeUIKitViewController *rootViewController);
+    QNativeUIKitViewController *rootViewController() const;
+
     qreal width() const override;
     qreal height() const override;
 
@@ -67,6 +71,7 @@ public:
 
 Q_SIGNALS:
     void visibleChanged(bool isVisible);
+    void rootViewControllerChanged(QNativeUIKitViewController *controller);
 
 protected:
     QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd);
