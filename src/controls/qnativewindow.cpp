@@ -52,7 +52,7 @@ QNativeWindowPrivate::~QNativeWindowPrivate()
 }
 
 QNativeWindow::QNativeWindow()
-    : QNativeBase(nullptr)
+    : QNativeBase(*new QNativeWindowPrivate(), nullptr)
 {
     d_func()->connectToPlatform();
 }
