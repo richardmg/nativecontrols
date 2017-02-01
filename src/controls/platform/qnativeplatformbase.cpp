@@ -69,9 +69,9 @@ void QNativePlatformBase::setParent(QNativePlatformBase *parent)
 
 void QNativePlatformBase::setParent(QNativeBase *parent)
 {
-    // For API simplicity, we allow setting a QNativeBase as a child
-    // of a QNativePlatformBase. But for it to work, we need to use
-    // the QNativePlatformBase that backs the QNativeBase as the actual parent.
+    // For API convenience, we allow setting a QNativePlatformBase as a child
+    // of a QNativeBase. But for it to work, we need to use the QNativePlatformBase
+    // that backs the QNativeBase as the actual parent.
     setParent(dynamic_cast<QNativePlatformBase *>(parent->platformHandle()));
 }
 
