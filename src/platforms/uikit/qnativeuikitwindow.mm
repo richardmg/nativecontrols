@@ -41,6 +41,7 @@
 #include <QtNativeUIKitControls/qnativeuikitwindow.h>
 #include <QtNativeUIKitControls/qnativeuikitviewcontroller.h>
 #include <QtNativeUIKitControls/private/qnativeuikitwindow_p.h>
+#include <QtNativeUIKitControls/private/qnativeuikitviewcontroller_p.h>
 #include <QtNativeUIKitControls/private/qnativeuikitview_p.h>
 
 QT_BEGIN_NAMESPACE
@@ -175,18 +176,32 @@ bool QNativeUIKitWindow::event(QEvent *e)
 
 void QNativeUIKitWindow::childEvent(QChildEvent *event)
 {
+    Q_D(QNativeUIKitWindow);
     // Note that event->child() might not be fully constructed at this point, if
     // called from its constructor chain. But the private part will.
-    QNativeUIKitViewPrivate *dptr_child = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(event->child()));
-    if (!dptr_child)
-        return;
+    QObject *child = event->child();
 
-    if (event->added()) {
-        QNativeUIKitView *contentView = rootViewController()->view();
-        QNativeUIKitViewPrivate *dptr_contentView = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(contentView));
-        dptr_contentView->addSubView(dptr_child->view());
-    } else if (event->removed()) {
-        [dptr_child->view() removeFromSuperview];
+    if (QNativeUIKitViewPrivate *dptr_child = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(child))) {
+        if (event->added()) {
+            // QNativeUIKitView added as children of the window will have their UIViews
+            // added as children of the windows view controller view instead.
+            QNativeUIKitView *contentView = rootViewController()->view();
+            QNativeUIKitViewPrivate *dptr_contentView = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(contentView));
+            dptr_contentView->addSubView(dptr_child->view());
+        } else if (event->removed()) {
+            [dptr_child->view() removeFromSuperview];
+        }
+    } else if (QNativeUIKitViewControllerPrivate *dptr_child = dynamic_cast<QNativeUIKitViewControllerPrivate *>(QObjectPrivate::get(child))) {
+        if (event->added()) {
+            if (!d->m_viewController) {
+                // If no view controller is set from before, we let the first set
+                // child controller become the root view controller.
+                setRootViewController(dptr_child->q_func());
+            }
+        } else if (event->removed()) {
+            if (dptr_child->q_func() == d->m_viewController)
+                setRootViewController(nullptr);
+        }
     }
 }
 
