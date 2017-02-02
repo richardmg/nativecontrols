@@ -173,6 +173,23 @@ bool QNativeUIKitWindow::event(QEvent *e)
     return true;
 }
 
+void QNativeUIKitWindow::childEvent(QChildEvent *event)
+{
+    // Note that event->child() might not be fully constructed at this point, if
+    // called from its constructor chain. But the private part will.
+    QNativeUIKitViewPrivate *dptr_child = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(event->child()));
+    if (!dptr_child)
+        return;
+
+    if (event->added()) {
+        QNativeUIKitView *contentView = rootViewController()->view();
+        QNativeUIKitViewPrivate *dptr_contentView = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(contentView));
+        dptr_contentView->addSubView(dptr_child->view());
+    } else if (event->removed()) {
+        [dptr_child->view() removeFromSuperview];
+    }
+}
+
 #include "moc_qnativeuikitwindow.cpp"
 
 QT_END_NAMESPACE

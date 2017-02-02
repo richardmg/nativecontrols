@@ -75,6 +75,7 @@ Q_SIGNALS:
 
 protected:
     QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd);
+    void childEvent(QChildEvent *event) override;
 
 private:
     Q_DECLARE_PRIVATE(QNativeUIKitWindow)
