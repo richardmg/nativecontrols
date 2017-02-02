@@ -62,6 +62,10 @@ public:
             uikitBase = new QNativeUIKitTextField(nullptr);
         else if (dynamic_cast<QNativeView *>(nativeBase))
             uikitBase = new QNativeUIKitView(nullptr);
+        else if (dynamic_cast<QNativePage *>(nativeBase))
+            uikitBase = new QNativeUIKitViewController(nullptr);
+        else if (dynamic_cast<QNativeTabsPage *>(nativeBase))
+            uikitBase = new QNativeUIKitTabBarController(nullptr);
         else
             Q_UNREACHABLE();
 
