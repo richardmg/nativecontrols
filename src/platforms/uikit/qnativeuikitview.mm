@@ -110,12 +110,20 @@ void QNativeUIKitViewPrivate::updateImplicitSize()
 
 UIView *QNativeUIKitViewPrivate::view()
 {
+    if (!m_view) {
+        // Since no UIView has been set (during private construction), we assume that this
+        // object represents a plain UIView. In that case, we create the missing view now.
+        setView([[UIView new] autorelease]);
+        m_view.backgroundColor = [UIColor whiteColor];
+        if (QNativeUIKitView *parent = q_func()->parentView())
+            static_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(parent))->addSubView(m_view);
+    }
     return m_view;
 }
 
 UIView *QNativeUIKitViewPrivate::view() const
 {
-    return m_view;
+    return const_cast<QNativeUIKitViewPrivate *>(this)->view();
 }
 
 void QNativeUIKitViewPrivate::setView(UIView *view)
@@ -153,15 +161,6 @@ void QNativeUIKitViewPrivate::setGeometry(const QRectF &rect)
 QNativeUIKitView::QNativeUIKitView(QNativeUIKitBase *parent)
     : QNativeUIKitBase(*new QNativeUIKitViewPrivate(), parent)
 {
-    Q_D(QNativeUIKitView);
-    if (!d->view()) {
-        // Since no UIView was set during private construction, we assume that this
-        // is just a standalone view. In that case, we create the missing view now.
-        d->setView([[UIView new] autorelease]);
-        d->view().backgroundColor = [UIColor whiteColor];
-        if (QNativeUIKitView *parent = parentView())
-            static_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(parent))->addSubView(d->view());
-    }
 }
 
 QNativeUIKitView::QNativeUIKitView(QNativeUIKitViewPrivate &dd, QNativeUIKitBase *parent)
