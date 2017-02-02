@@ -15,7 +15,8 @@ NATIVE_CONTROLS = \
     button \
     textfield \
     searchfield \
-    page
+    page \
+    tabspage \
 
 for(c,NATIVE_CONTROLS) {
     HEADERS += qnative$${c}.h
