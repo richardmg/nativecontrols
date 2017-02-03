@@ -23,6 +23,8 @@ public:
     QNativeUIKitView *view() const;
     void setView(QNativeUIKitView *platformContentView);
 
+    QNativeUIKitViewController *parentViewController();
+
     UIViewController *uiViewControllerHandle();
 
 Q_SIGNALS:

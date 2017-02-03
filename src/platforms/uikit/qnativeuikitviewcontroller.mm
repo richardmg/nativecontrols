@@ -91,6 +91,11 @@ void QNativeUIKitViewControllerPrivate::addChildViewController(UIViewController 
     [viewController() addChildViewController:child];
 }
 
+QNativeUIKitViewController *QNativeUIKitViewController::parentViewController()
+{
+    return dynamic_cast<QNativeUIKitViewController *>(parent());
+}
+
 QNativeUIKitView *QNativeUIKitViewController::view() const
 {
     Q_D(const QNativeUIKitViewController);
