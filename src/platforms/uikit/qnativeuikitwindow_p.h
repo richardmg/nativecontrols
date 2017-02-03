@@ -69,8 +69,10 @@ public:
 
     Q_DECLARE_PUBLIC(QNativeUIKitWindow)
 
+protected:
+    UIView *createView() override;
+
 private:
-    UIWindow *m_window;
     QNativeUIKitViewController *m_viewController;
 };
 

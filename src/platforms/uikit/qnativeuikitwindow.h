@@ -55,7 +55,7 @@ public:
     QNativeUIKitWindow();
     virtual ~QNativeUIKitWindow();
 
-    UIWindow *uiWindowHandle() const;
+    UIWindow *uiWindowHandle();
 
     void setRootViewController(QNativeUIKitViewController *rootViewController);
     QNativeUIKitViewController *rootViewController() const;

@@ -70,6 +70,10 @@ public:
     QNativeUIKitButtonDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QNativeUIKitButton)
+
+protected:
+    UIView *createView() override;
+
 };
 
 QT_END_NAMESPACE

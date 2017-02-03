@@ -71,14 +71,6 @@ QT_BEGIN_NAMESPACE
 QNativeUIKitButtonPrivate::QNativeUIKitButtonPrivate(int version)
     : QNativeUIKitControlPrivate(version)
 {
-    UIButton *uiButton = [[[UIButton alloc] initWithFrame:CGRectZero] autorelease];
-    [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
-    [uiButton sizeToFit];
-
-    m_delegate = [[QNativeUIKitButtonDelegate alloc] initWithQNativeUIKitButtonPrivate:this];
-    [uiButton addTarget:m_delegate action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
-
-    setView(uiButton);
 }
 
 QNativeUIKitButtonPrivate::~QNativeUIKitButtonPrivate()
@@ -93,6 +85,17 @@ void QNativeUIKitButtonPrivate::connectSignals(QNativeBase *base)
     const auto b = static_cast<QNativeButton *>(base);
     q->connect(q, &QNativeUIKitButton::textChanged, b, &QNativeButton::textChanged);
     q->connect(q, &QNativeUIKitButton::clicked, b, &QNativeButton::clicked);
+}
+
+UIView *QNativeUIKitButtonPrivate::createView()
+{
+    UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
+    [uiButton sizeToFit];
+
+    m_delegate = [[QNativeUIKitButtonDelegate alloc] initWithQNativeUIKitButtonPrivate:this];
+    [uiButton addTarget:m_delegate action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
+    return uiButton;
 }
 
 QNativeUIKitButton::QNativeUIKitButton(QNativeUIKitBase *parent)

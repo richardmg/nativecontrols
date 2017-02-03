@@ -70,6 +70,10 @@ public:
     QNativeUIKitTextFieldDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QNativeUIKitTextField)
+
+protected:
+    UIView *createView() override;
+
 };
 
 QT_END_NAMESPACE

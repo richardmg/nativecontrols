@@ -65,7 +65,6 @@ public:
 
     UIView *view();
     UIView *view() const;
-    void setView(UIView *view);
     void addSubView(UIView *subView);
 
     CGRect alignmentRect() const;
@@ -97,6 +96,8 @@ protected:
     {
         return bool(m_attributes & attribute);
     }
+
+    virtual UIView*createView();
 
 private:
     UIView *m_view;

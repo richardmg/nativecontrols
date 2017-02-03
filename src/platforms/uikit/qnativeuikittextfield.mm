@@ -65,13 +65,8 @@ QT_BEGIN_NAMESPACE
 
 QNativeUIKitTextFieldPrivate::QNativeUIKitTextFieldPrivate(int version)
     : QNativeUIKitControlPrivate(version)
+    , m_delegate(nullptr)
 {
-    m_delegate = [[QNativeUIKitTextFieldDelegate alloc] initWithQNativeUIKitTextFieldPrivate:this];
-
-    UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
-    [uiTextField sizeToFit];
-
-    setView(uiTextField);
 }
 
 QNativeUIKitTextFieldPrivate::~QNativeUIKitTextFieldPrivate()
@@ -88,6 +83,16 @@ void QNativeUIKitTextFieldPrivate::connectSignals(QNativeBase *base)
                b, &QNativeTextField::textChanged);
     q->connect(q, &QNativeUIKitTextField::placeholderTextChanged,
                b, &QNativeTextField::placeholderTextChanged);
+}
+
+UIView *QNativeUIKitTextFieldPrivate::createView()
+{
+    m_delegate = [[QNativeUIKitTextFieldDelegate alloc] initWithQNativeUIKitTextFieldPrivate:this];
+
+    UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
+    [uiTextField sizeToFit];
+
+    return uiTextField;
 }
 
 QNativeUIKitTextField::QNativeUIKitTextField(QNativeUIKitBase *parent)

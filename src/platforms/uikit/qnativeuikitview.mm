@@ -111,10 +111,7 @@ void QNativeUIKitViewPrivate::updateImplicitSize()
 UIView *QNativeUIKitViewPrivate::view()
 {
     if (!m_view) {
-        // Since no UIView has been set (during private construction), we assume that this
-        // object represents a plain UIView. In that case, we create the missing view now.
-        setView([[UIView new] autorelease]);
-        m_view.backgroundColor = [UIColor whiteColor];
+        m_view = createView();
         if (QNativeUIKitView *parent = q_func()->parentView())
             static_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(parent))->addSubView(m_view);
     }
@@ -126,10 +123,11 @@ UIView *QNativeUIKitViewPrivate::view() const
     return const_cast<QNativeUIKitViewPrivate *>(this)->view();
 }
 
-void QNativeUIKitViewPrivate::setView(UIView *view)
+UIView *QNativeUIKitViewPrivate::createView()
 {
-    [m_view release];
-    m_view = [view retain];
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor whiteColor];
+    return view;
 }
 
 void QNativeUIKitViewPrivate::addSubView(UIView *subView)

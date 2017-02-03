@@ -50,13 +50,10 @@ QNativeUIKitWindowPrivate::QNativeUIKitWindowPrivate(int version)
     : QNativeUIKitViewPrivate(version)
     , m_viewController(nullptr)
 {
-    m_window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    setView(m_window);
 }
 
 QNativeUIKitWindowPrivate::~QNativeUIKitWindowPrivate()
 {
-    [m_window release];
 }
 
 void QNativeUIKitWindowPrivate::connectSignals(QNativeBase *base)
@@ -81,6 +78,11 @@ void QNativeUIKitWindowPrivate::updateLayout(bool recursive)
     }
 }
 
+UIView *QNativeUIKitWindowPrivate::createView()
+{
+    return [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+}
+
 QNativeUIKitWindow::QNativeUIKitWindow()
     : QNativeUIKitView(*new QNativeUIKitWindowPrivate(), nullptr)
 {
@@ -95,9 +97,9 @@ QNativeUIKitWindow::~QNativeUIKitWindow()
 {
 }
 
-UIWindow *QNativeUIKitWindow::uiWindowHandle() const
+UIWindow *QNativeUIKitWindow::uiWindowHandle()
 {
-    return d_func()->m_window;
+    return static_cast<UIWindow *>(d_func()->view());
 }
 
 void QNativeUIKitWindow::setRootViewController(QNativeUIKitViewController *controller)
@@ -107,7 +109,7 @@ void QNativeUIKitWindow::setRootViewController(QNativeUIKitViewController *contr
         return;
 
     d->m_viewController = dynamic_cast<QNativeUIKitViewController *>(controller);
-    d->m_window.rootViewController = d->m_viewController->uiViewControllerHandle();
+    uiWindowHandle().rootViewController = d->m_viewController->uiViewControllerHandle();
     emit rootViewControllerChanged(controller);
 }
 
@@ -123,17 +125,17 @@ QNativeUIKitViewController *QNativeUIKitWindow::rootViewController() const
 
 qreal QNativeUIKitWindow::width() const
 {
-    return uiWindowHandle().frame.size.width;
+    return d_func()->view().frame.size.width;
 }
 
 qreal QNativeUIKitWindow::height() const
 {
-    return uiWindowHandle().frame.size.height;
+    return d_func()->view().frame.size.height;
 }
 
 bool QNativeUIKitWindow::isVisible() const
 {
-    return !d_func()->m_window.hidden;
+    return !d_func()->view().hidden;
 }
 
 void QNativeUIKitWindow::setVisible(bool newVisible)
@@ -141,15 +143,13 @@ void QNativeUIKitWindow::setVisible(bool newVisible)
     if (newVisible == isVisible())
         return;
 
-    Q_D(QNativeUIKitWindow);
-
     if (newVisible) {
         // Now that the window becomes visible, we should check if any of its
         // children needs to be resized to implicit size. Since children
         // are added after the call to setVisible when using QML, we need to
         // post the update request.
         qApp->postEvent(this, new QEvent(QEvent::LayoutRequest));
-        [d->m_window makeKeyAndVisible];
+        [uiWindowHandle() makeKeyAndVisible];
     } else {
         qWarning("not implemented");
     }
