@@ -66,6 +66,12 @@ public:
 
     Q_DECLARE_PUBLIC(QNativeUIKitViewController)
 
+    UIViewController *viewController();
+    void addChildViewController(UIViewController *child);
+
+protected:
+    virtual UIViewController *createViewController();
+
 private:
     UIViewController *m_viewController;
     QNativeUIKitView *m_view;

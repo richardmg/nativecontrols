@@ -50,7 +50,6 @@ QNativeUIKitViewControllerPrivate::QNativeUIKitViewControllerPrivate(int version
     , m_viewController(nullptr)
     , m_view(nullptr)
 {
-    m_viewController = [UIViewController new];
 }
 
 QNativeUIKitViewControllerPrivate::~QNativeUIKitViewControllerPrivate()
@@ -70,6 +69,26 @@ QNativeUIKitViewController::QNativeUIKitViewController(QNativeUIKitViewControlle
 
 QNativeUIKitViewController::~QNativeUIKitViewController()
 {
+}
+
+UIViewController *QNativeUIKitViewControllerPrivate::viewController()
+{
+    if (!m_viewController) {
+        m_viewController = createViewController();
+        if (QNativeUIKitViewController *parent = q_func()->parentViewController())
+            static_cast<QNativeUIKitViewControllerPrivate *>(QObjectPrivate::get(parent))->addChildViewController(m_viewController);
+    }
+    return m_viewController;
+}
+
+UIViewController *QNativeUIKitViewControllerPrivate::createViewController()
+{
+    return [UIViewController new];
+}
+
+void QNativeUIKitViewControllerPrivate::addChildViewController(UIViewController *child)
+{
+    [viewController() addChildViewController:child];
 }
 
 QNativeUIKitView *QNativeUIKitViewController::view() const
@@ -92,13 +111,13 @@ void QNativeUIKitViewController::setView(QNativeUIKitView *view)
         return;
 
     d->m_view = view;
-    d->m_viewController.view = d->m_view->uiViewHandle();
+    uiViewControllerHandle().view = d->m_view->uiViewHandle();
     emit viewChanged(view);
 }
 
 UIViewController *QNativeUIKitViewController::uiViewControllerHandle()
 {
-    return d_func()->m_viewController;
+    return d_func()->viewController();
 }
 
 void QNativeUIKitViewController::childEvent(QChildEvent *event)
