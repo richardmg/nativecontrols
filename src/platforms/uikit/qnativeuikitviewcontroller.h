@@ -30,6 +30,7 @@ Q_SIGNALS:
 
 protected:
     QNativeUIKitViewController(QNativeUIKitViewControllerPrivate &dd, QNativeUIKitBase *parent = nullptr);
+    void childEvent(QChildEvent *event);
 
 private:
     Q_DECLARE_PRIVATE(QNativeUIKitViewController)
