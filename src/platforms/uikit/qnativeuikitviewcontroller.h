@@ -4,6 +4,7 @@
 #include <QObject>
 
 #include <QtNativeUIKitControls/qnativeuikitbase.h>
+#include <QtNativeControls/qnativeplatformpage.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -11,7 +12,7 @@ class QNativeUIKitView;
 class QNativeUIKitViewControllerPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIViewController);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitViewController : public QNativeUIKitBase
+class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitViewController : public QNativeUIKitBase, public virtual QNativePlatformPage
 {
     Q_OBJECT
     Q_PROPERTY(QNativeUIKitView *view READ view WRITE setView NOTIFY viewChanged)
