@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QNativeUIKitWindow window;
+    QNativeUIKitTabBarController tabBarController(&window);
     QNativeUIKitView *contentView = window.rootViewController()->view();
 
     QNativeUIKitButton button(QStringLiteral("Click me"), contentView);

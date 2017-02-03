@@ -15,7 +15,8 @@ IOS_CONTROLS = \
     control \
     button \
     textfield \
-    viewcontroller
+    viewcontroller \
+    tabbarcontroller
 
 for(c,IOS_CONTROLS) {
     HEADERS += qnativeuikit$${c}.h
