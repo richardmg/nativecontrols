@@ -63,6 +63,8 @@ public:
     explicit QNativeUIKitTabBarControllerPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeUIKitTabBarControllerPrivate();
 
+    QList<QNativeUIKitViewController *> m_viewControllers;
+
     Q_DECLARE_PUBLIC(QNativeUIKitTabBarController)
 
 protected:

@@ -56,7 +56,7 @@ QNativeUIKitTabBarItemPrivate::~QNativeUIKitTabBarItemPrivate()
 UITabBarItem *QNativeUIKitTabBarItemPrivate::tabBarItem()
 {
     if (!m_tabBarItem)
-        m_tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Tab" image:nil tag:1];
+        m_tabBarItem = [[UITabBarItem alloc] initWithTitle:@"" image:nil tag:1];
     return m_tabBarItem;
 }
 

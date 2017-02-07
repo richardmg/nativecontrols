@@ -19,6 +19,9 @@ public:
     QNativeUIKitTabBarController(QNativeUIKitBase *parent = nullptr);
     virtual ~QNativeUIKitTabBarController();
 
+    void setViewControllers(QList<QNativeUIKitViewController *> list);
+    QList<QNativeUIKitViewController *> viewControllers() const;
+
     UITabBarController *uiTabBarControllerHandle();
 
 protected:

@@ -56,6 +56,7 @@ QT_BEGIN_NAMESPACE
 
 class QNativeUIKitView;
 class QNativeUIKitViewController;
+class QNativeUIKitTabBarItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIViewController);
 
 class QNativeUIKitViewControllerPrivate : public QNativeUIKitBasePrivate
@@ -68,6 +69,8 @@ public:
 
     UIViewController *viewController();
     void addChildViewController(UIViewController *child);
+
+    QNativeUIKitTabBarItem *m_tabBarItem;
 
 protected:
     virtual UIViewController *createViewController();

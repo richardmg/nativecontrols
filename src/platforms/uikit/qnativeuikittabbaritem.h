@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include <QtNativeControls/qnativeplatformtab.h>
+#include <QtNativeControls/qnativeplatformtabspagetab.h>
 #include <QtNativeUIKitControls/qnativeuikitview.h>
 
 QT_BEGIN_NAMESPACE
@@ -11,7 +11,7 @@ QT_BEGIN_NAMESPACE
 class QNativeUIKitTabBarItemPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarItem);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitTabBarItem : public QNativeUIKitBase, public virtual QNativePlatformTab
+class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitTabBarItem : public QNativeUIKitBase, public virtual QNativePlatformTabsPageTab
 {
     Q_OBJECT
 

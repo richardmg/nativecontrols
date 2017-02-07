@@ -40,6 +40,7 @@
 
 #include <QtNativeUIKitControls/qnativeuikitviewcontroller.h>
 #include <QtNativeUIKitControls/qnativeuikitview.h>
+#include <QtNativeUIKitControls/qnativeuikittabbaritem.h>
 #include <QtNativeUIKitControls/private/qnativeuikitview_p.h>
 #include <QtNativeUIKitControls/private/qnativeuikitviewcontroller_p.h>
 
@@ -47,6 +48,7 @@ QT_BEGIN_NAMESPACE
 
 QNativeUIKitViewControllerPrivate::QNativeUIKitViewControllerPrivate(int version)
     : QNativeUIKitBasePrivate(version)
+    , m_tabBarItem(nullptr)
     , m_viewController(nullptr)
     , m_view(nullptr)
 {
@@ -94,6 +96,17 @@ void QNativeUIKitViewControllerPrivate::addChildViewController(UIViewController 
 QNativeUIKitViewController *QNativeUIKitViewController::parentViewController()
 {
     return dynamic_cast<QNativeUIKitViewController *>(parent());
+}
+
+void QNativeUIKitViewController::setTabBarItem(QNativeUIKitTabBarItem *tabBarItem)
+{
+    d_func()->m_tabBarItem = tabBarItem;
+    uiViewControllerHandle().tabBarItem = tabBarItem->uiTabBarItemHandle();
+}
+
+QNativeUIKitTabBarItem *QNativeUIKitViewController::tabBarItem() const
+{
+    return d_func()->m_tabBarItem;
 }
 
 QNativeUIKitView *QNativeUIKitViewController::view() const

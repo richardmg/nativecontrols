@@ -10,6 +10,7 @@ QT_BEGIN_NAMESPACE
 
 class QNativeUIKitView;
 class QNativeUIKitViewControllerPrivate;
+class QNativeUIKitTabBarItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIViewController);
 
 class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitViewController : public QNativeUIKitBase, public virtual QNativePlatformPage
@@ -26,6 +27,9 @@ public:
 
     QNativeUIKitViewController *parentViewController();
 
+    void setTabBarItem(QNativeUIKitTabBarItem *tabBarItem);
+    QNativeUIKitTabBarItem *tabBarItem() const;
+
     UIViewController *uiViewControllerHandle();
 
 Q_SIGNALS:
@@ -33,7 +37,7 @@ Q_SIGNALS:
 
 protected:
     QNativeUIKitViewController(QNativeUIKitViewControllerPrivate &dd, QNativeUIKitBase *parent = nullptr);
-    void childEvent(QChildEvent *event);
+    void childEvent(QChildEvent *event) override;
 
 private:
     Q_DECLARE_PRIVATE(QNativeUIKitViewController)

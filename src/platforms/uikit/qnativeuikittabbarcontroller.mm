@@ -40,6 +40,8 @@
 
 #include <QtNativeUIKitControls/qnativeuikittabbarcontroller.h>
 #include <QtNativeUIKitControls/private/qnativeuikittabbarcontroller_p.h>
+#include <QtNativeUIKitControls/qnativeuikittabbaritem.h>
+#include <QtNativeUIKitControls/private/qnativeuikittabbaritem_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -69,6 +71,20 @@ QNativeUIKitTabBarController::QNativeUIKitTabBarController(QNativeUIKitTabBarCon
 
 QNativeUIKitTabBarController::~QNativeUIKitTabBarController()
 {
+}
+
+void QNativeUIKitTabBarController::setViewControllers(QList<QNativeUIKitViewController *> list)
+{
+    d_func()->m_viewControllers = list;
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:list.length()];
+    for (auto viewController : list)
+        [array addObject:viewController->uiViewControllerHandle()];
+    uiTabBarControllerHandle().viewControllers = array;
+}
+
+QList<QNativeUIKitViewController *> QNativeUIKitTabBarController::viewControllers() const
+{
+    return d_func()->m_viewControllers;
 }
 
 UITabBarController *QNativeUIKitTabBarController::uiTabBarControllerHandle()
