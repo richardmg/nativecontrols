@@ -38,6 +38,8 @@
 **
 ****************************************************************************/
 
+#include <UIKit/UIKit.h>
+
 #include <QtGui>
 #include <QtNativeUIKitControls>
 
@@ -47,7 +49,14 @@ int main(int argc, char *argv[])
 
     QNativeUIKitWindow window;
     QNativeUIKitTabBarController tabBarController(&window);
-    QNativeUIKitView *contentView = window.rootViewController()->view();
+
+    QNativeUIKitViewController tab1(&tabBarController);
+    QNativeUIKitViewController tab2(&tabBarController);
+    tab1.setTabBarItem(new QNativeUIKitTabBarItem(QStringLiteral("Tab1"), &tab1));
+    tab2.setTabBarItem(new QNativeUIKitTabBarItem(QStringLiteral("Tab2"), &tab2));
+    tabBarController.setViewControllers(QList<QNativeUIKitViewController *>() << &tab1 << &tab2);
+
+    QNativeUIKitView *contentView = tab1.view();
 
     QNativeUIKitButton button(QStringLiteral("Click me"), contentView);
     button.move(50, 100);
