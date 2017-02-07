@@ -17,6 +17,7 @@ NATIVE_CONTROLS = \
     searchfield \
     page \
     tabspage \
+    tabspagetab
 
 for(c,NATIVE_CONTROLS) {
     HEADERS += qnative$${c}.h
