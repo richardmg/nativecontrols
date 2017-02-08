@@ -40,6 +40,44 @@
 
 QT_BEGIN_NAMESPACE
 
+class QUIKitPluginTabsPageTab : public QNativeUIKitViewController, public virtual QNativePlatformTabsPageTab
+{
+public:
+    explicit QUIKitPluginTabsPageTab()
+        : QNativeUIKitViewController(nullptr)
+    {
+        // A QNativeUIKitTabBarItem doesn't map directy to a QNativePlatformTabsPageTab since
+        // a tab in uikit consist of a view controller with a tab bar item. So we create this
+        // helper class that puts together the composition.
+        setTabBarItem(new QNativeUIKitTabBarItem(this));
+    }
+
+    void setPlatformParent(QNativePlatformBase *platformParent) override
+    {
+        // If the new, or the old, parent is a tab bar controller, we need to
+        // add, or remove, ourselves from the list of tabs it contains.
+        if (!platformParent) {
+            if (QNativeUIKitTabBarController *prevTabBar = dynamic_cast<QNativeUIKitTabBarController *>(parent())) {
+                QList<QNativeUIKitViewController *> viewControllers = prevTabBar->viewControllers();
+                viewControllers.removeOne(this);
+                prevTabBar->setViewControllers(viewControllers);
+            }
+        } else if (QNativeUIKitTabBarController *tabBar = dynamic_cast<QNativeUIKitTabBarController *>(platformParent)) {
+            QList<QNativeUIKitViewController *> viewControllers = tabBar->viewControllers();
+            viewControllers.append(this);
+            tabBar->setViewControllers(viewControllers);
+        }
+
+        // We also need to update the QObject parent structure for memory management
+        QNativeUIKitViewController::setPlatformParent(platformParent);
+    }
+
+    QString title() const override { return tabBarItem()->title(); }
+    void setTitle(const QString &title) override { tabBarItem()->setTitle(title); }
+};
+
+// ----------------------------------------------------------------------------------
+
 class QNativeUIKitPlatformPlugin : public QObject, QNativePlatformPluginInterface
 {
     Q_OBJECT
@@ -62,10 +100,12 @@ public:
             uikitBase = new QNativeUIKitTextField(nullptr);
         else if (dynamic_cast<QNativeView *>(nativeBase))
             uikitBase = new QNativeUIKitView(nullptr);
+        else if (dynamic_cast<QNativeTabsPage *>(nativeBase))
+            uikitBase = new QNativeUIKitTabBarController;
+        else if (dynamic_cast<QNativeTabsPageTab *>(nativeBase))
+            uikitBase = new QUIKitPluginTabsPageTab;
         else if (dynamic_cast<QNativePage *>(nativeBase))
             uikitBase = new QNativeUIKitViewController(nullptr);
-        else if (dynamic_cast<QNativeTabsPage *>(nativeBase))
-            uikitBase = new QNativeUIKitTabBarController(nullptr);
         else
             Q_UNREACHABLE();
 
