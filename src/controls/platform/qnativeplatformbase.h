@@ -53,8 +53,7 @@ public:
     explicit QNativePlatformBase(QNativePlatformBase *parent = nullptr);
     virtual ~QNativePlatformBase();
 
-    void setParent(QNativePlatformBase *parent);
-    void setParent(QNativeBase *parent);
+    virtual void setPlatformParent(QNativePlatformBase *) {}
 
 protected:
     QNativePlatformBase(QNativePlatformBasePrivate &dd, QNativePlatformBase *parent = nullptr);
