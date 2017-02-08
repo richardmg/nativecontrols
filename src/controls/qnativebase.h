@@ -56,7 +56,6 @@ public:
     virtual ~QNativeBase();
 
     void setParent(QNativeBase *parent);
-    void setParent(QNativePlatformBase *parent);
 
     QNativePlatformBase *platformHandle();
 

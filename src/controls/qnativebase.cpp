@@ -89,17 +89,6 @@ void QNativeBase::setParent(QNativeBase *parent)
     d_func()->syncPlatformParent();
 }
 
-void QNativeBase::setParent(QNativePlatformBase *parent)
-{
-    // Setting QNativePlatformBase as a direct parent of a QNativeBase will
-    // result in the QNativeBase and its QNativePlatformBase backend to have
-    // the same QNativePlatformBase as parent. This also means that platform
-    // implementations need to be prepared to encounter children that are not
-    // descendants of QNativePlatformBase. Such children can just be ignored.
-    QObject::setParent(dynamic_cast<QObject *>(parent));
-    d_func()->syncPlatformParent();
-}
-
 QNativePlatformBase *QNativeBase::platformHandle()
 {
     return d_func()->m_platformBase;

@@ -52,26 +52,14 @@ QNativeQObjectBasePrivate::~QNativeQObjectBasePrivate()
 
 void QNativeQObjectBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
 {
-    QObject *newParent = list->object;
-
     // Ensure to use the overriden setParent functions in order to correctly
     // handle mixed QNativeBase/QNativePlatformBase parent-child relationships
     // Also note that QtDeclarative undermines QObject::setParent, meaning that we
     // don't get a QChildEvent when a qml object becomes a parent of another
     // qml object. 'appendChild' is the only callback we get when the parent changes.
-    if (QNativeBase *nativeBaseChild = dynamic_cast<QNativeBase *>(child)) {
-        if (QNativeBase *nativeBaseParent = qobject_cast<QNativeBase *>(newParent))
-            nativeBaseChild->setParent(nativeBaseParent);
-        else if (QNativePlatformBase *nativePlatformBaseParent = qobject_cast<QNativePlatformBase *>(newParent))
-            nativeBaseChild->setParent(nativePlatformBaseParent);
-    } else if (QNativePlatformBase *nativePlatformBaseChild = dynamic_cast<QNativePlatformBase *>(child)) {
-        if (QNativePlatformBase *nativePlatformBaseParent = dynamic_cast<QNativePlatformBase *>(newParent))
-            nativePlatformBaseChild->setParent(nativePlatformBaseParent);
-        else if (QNativeBase *nativeBaseParent = qobject_cast<QNativeBase *>(newParent))
-            nativePlatformBaseChild->setParent(nativeBaseParent);
-    } else {
-        child->setParent(newParent);
-    }
+    child->setParent(list->object);
+    if (QNativeBasePrivate *childPrivate = dynamic_cast<QNativeBasePrivate *>(QObjectPrivate::get(child)))
+        childPrivate->syncPlatformParent();
 }
 
 QQmlListProperty<QObject> QNativeQObjectBasePrivate::data()
