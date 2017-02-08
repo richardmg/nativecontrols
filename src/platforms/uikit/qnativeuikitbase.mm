@@ -69,6 +69,11 @@ QNativeUIKitBase::~QNativeUIKitBase()
 {
 }
 
+void QNativeUIKitBase::setPlatformParent(QNativePlatformBase *parent)
+{
+    setParent(static_cast<QNativeUIKitBase *>(parent));
+}
+
 #include "moc_qnativeuikitbase.cpp"
 
 QT_END_NAMESPACE

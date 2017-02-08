@@ -22,6 +22,8 @@ public:
 
     virtual ~QNativeUIKitBase();
 
+    void setPlatformParent(QNativePlatformBase *) override;
+
 protected:
     QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent = nullptr);
 
