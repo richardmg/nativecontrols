@@ -46,20 +46,30 @@ int main(int argc, char **argv)
     QGuiApplication app(argc, argv);
 
     QNativeWindow window;
-    QNativeButton button(QStringLiteral("Click me"), &window);
+    QNativeTabsPage tabsPage(&window);
+    QNativeTabsPageTab tab1(QStringLiteral("Tab 1"), &tabsPage);
+    QNativeTabsPageTab tab2(QStringLiteral("Tab 2"), &tabsPage);
+
+    QNativeButton button(QStringLiteral("Click me"), &tab1);
     button.move(50, 100);
     QObject::connect(&button, &QNativeButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
 
-    QNativeTextField textField(&window);
+    QNativeTextField textField(&tab1);
     textField.setPlaceholderText(QStringLiteral("TextField"));
     textField.move(50, 150);
 
-    QNativeView view(&window);
+    QNativeView view(&tab1);
     view.setGeometry(50, textField.geometry().bottom(), 200, 200);
 
     QNativeButton button2("Child button", &view);
     button2.move(10, 0);
     QObject::connect(&button2, &QNativeButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
+
+    QNativeButton buttonOnTab2(QStringLiteral("Button that moves"), &tab2);
+    buttonOnTab2.move(50, 100);
+    QObject::connect(&buttonOnTab2, &QNativeButton::clicked, [&buttonOnTab2](){
+        buttonOnTab2.setX(buttonOnTab2.geometry().x() + 10);
+    });
 
     window.showFullScreen();
 
