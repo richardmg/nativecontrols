@@ -59,6 +59,8 @@ void registerTypes(const char *uri) override
     qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
     qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
     qmlRegisterType<QNativeSearchField>(uri, 1, 0, "SearchField");
+    qmlRegisterType<QNativeTabsPage>(uri, 1, 0, "TabsPage");
+    qmlRegisterType<QNativeTabsPageTab>(uri, 1, 0, "TabsPageTab");
 }
 
 void initializeEngine(QQmlEngine *engine, const char *uri) override
