@@ -80,18 +80,12 @@ QNativeBase::QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent)
 
 QNativeBase::~QNativeBase()
 {
-    // delete children in m_data?
 }
 
 void QNativeBase::setParent(QNativeBase *parent)
 {
     QObject::setParent(parent);
     d_func()->syncPlatformParent();
-}
-
-QNativePlatformBase *QNativeBase::platformHandle()
-{
-    return d_func()->m_platformBase;
 }
 
 void QNativeBase::childEvent(QChildEvent *event)
