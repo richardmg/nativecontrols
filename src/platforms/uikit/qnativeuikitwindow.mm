@@ -149,6 +149,9 @@ void QNativeUIKitWindow::setVisible(bool newVisible)
         // are added after the call to setVisible when using QML, we need to
         // post the update request.
         qApp->postEvent(this, new QEvent(QEvent::LayoutRequest));
+        // Also, UIKit expects there to always be a root view controller
+        // in a UIWindow, so if hasn't been added yet, create one now.
+        rootViewController();
         [uiWindowHandle() makeKeyAndVisible];
     } else {
         qWarning("not implemented");
