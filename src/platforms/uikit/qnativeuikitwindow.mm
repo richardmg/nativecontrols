@@ -49,6 +49,7 @@ QT_BEGIN_NAMESPACE
 QNativeUIKitWindowPrivate::QNativeUIKitWindowPrivate(int version)
     : QNativeUIKitViewPrivate(version)
     , m_viewController(nullptr)
+    , m_viewControllerSetExplicit(false)
 {
 }
 
@@ -108,6 +109,7 @@ void QNativeUIKitWindow::setRootViewController(QNativeUIKitViewController *contr
     if (d->m_viewController == controller)
         return;
 
+    d->m_viewControllerSetExplicit = true;
     d->m_viewController = dynamic_cast<QNativeUIKitViewController *>(controller);
     uiWindowHandle().rootViewController = d->m_viewController->uiViewControllerHandle();
     emit rootViewControllerChanged(controller);
@@ -119,6 +121,10 @@ QNativeUIKitViewController *QNativeUIKitWindow::rootViewController() const
     if (!d->m_viewController) {
         QNativeUIKitWindow *self = const_cast<QNativeUIKitWindow *>(this);
         self->setRootViewController(new QNativeUIKitViewController(self));
+        // Keep track of whether or not the view controller was created
+        // by ourselves, in case we accidentally create one before
+        // the app gets around to add one as a child.
+        const_cast<QNativeUIKitWindowPrivate *>(d)->m_viewControllerSetExplicit = false;
     }
     return d->m_viewController;
 }
@@ -196,9 +202,9 @@ void QNativeUIKitWindow::childEvent(QChildEvent *event)
         }
     } else if (QNativeUIKitViewControllerPrivate *dptr_child = dynamic_cast<QNativeUIKitViewControllerPrivate *>(QObjectPrivate::get(child))) {
         if (event->added()) {
-            if (!d->m_viewController) {
-                // If no view controller is set from before, we let the first set
-                // child controller become the root view controller.
+            if (!d->m_viewController || !d->m_viewControllerSetExplicit) {
+                // If no view controller is set from before (other than the default
+                // one), we let the first set child controller become the root view controller.
                 setRootViewController(dptr_child->q_func());
             }
         } else if (event->removed()) {

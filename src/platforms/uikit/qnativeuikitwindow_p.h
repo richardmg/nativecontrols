@@ -74,6 +74,7 @@ protected:
 
 private:
     QNativeUIKitViewController *m_viewController;
+    bool m_viewControllerSetExplicit;
 };
 
 QT_END_NAMESPACE
