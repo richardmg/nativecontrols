@@ -3,7 +3,7 @@
 ** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Native UIKit Controls module of the Qt Toolkit.
+** This file is part of the Qt Native Controls module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,43 +34,35 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITBASE_P_H
-#define QNATIVEUIKITBASE_P_H
+#ifndef QNATIVEUIKITQMLBASE_H
+#define QNATIVEUIKITQMLBASE_H
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <QtCore>
-
-#include <QtNativeUIKitControls/private/qnativeuikitqmlbase_p.h>
-
-typedef struct CGRect CGRect;
+#include <QObject>
+#include <QQmlListProperty>
+#include <QtNativeUIKitControls/qnativeuikitcontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeBase;
-class QNativeUIKitBase;
+class QNativeUIKitQmlBasePrivate;
 
-class QNativeUIKitBasePrivate : public QNativeUIKitQmlBasePrivate
+class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitQmlBase : public QObject
 {
+    Q_OBJECT
+    Q_PRIVATE_PROPERTY(QNativeUIKitQmlBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
+    Q_CLASSINFO("DefaultProperty", "data")
+
 public:
-    explicit QNativeUIKitBasePrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitBasePrivate();
+    explicit QNativeUIKitQmlBase(QNativeUIKitQmlBase *parent = nullptr);
+    virtual ~QNativeUIKitQmlBase();
 
-    // Used by QNativeUIKitPlatformPlugin
-    virtual void connectSignals(QNativeBase *) {}
+protected:
+    QNativeUIKitQmlBase(QNativeUIKitQmlBasePrivate &dd, QNativeUIKitQmlBase *parent = nullptr);
 
-    Q_DECLARE_PUBLIC(QNativeUIKitBase)
+private:
+    Q_DECLARE_PRIVATE(QNativeUIKitQmlBase)
+    Q_DISABLE_COPY(QNativeUIKitQmlBase)
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEUIKITBASE_P_H
+#endif // QNATIVEUIKITQMLBASE_H

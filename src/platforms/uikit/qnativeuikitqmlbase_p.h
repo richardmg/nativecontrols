@@ -3,7 +3,7 @@
 ** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Native UIKit Controls module of the Qt Toolkit.
+** This file is part of the Qt Native Controls module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITBASE_P_H
-#define QNATIVEUIKITBASE_P_H
+#ifndef QNATIVEUIKITQMLBASE_P_H
+#define QNATIVEUIKITQMLBASE_P_H
 
 //
 //  W A R N I N G
@@ -48,29 +48,25 @@
 // We mean it.
 //
 
-#include <QtCore>
-
-#include <QtNativeUIKitControls/private/qnativeuikitqmlbase_p.h>
-
-typedef struct CGRect CGRect;
+#include <QtCore/private/qobject_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeBase;
-class QNativeUIKitBase;
+class QNativeUIKitQmlBase;
 
-class QNativeUIKitBasePrivate : public QNativeUIKitQmlBasePrivate
+class QNativeUIKitQmlBasePrivate : public QObjectPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeUIKitQmlBase)
+
 public:
-    explicit QNativeUIKitBasePrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitBasePrivate();
+    explicit QNativeUIKitQmlBasePrivate(int version = QObjectPrivateVersion);
+    virtual ~QNativeUIKitQmlBasePrivate();
 
-    // Used by QNativeUIKitPlatformPlugin
-    virtual void connectSignals(QNativeBase *) {}
-
-    Q_DECLARE_PUBLIC(QNativeUIKitBase)
+    static void appendChild(QQmlListProperty<QObject> *list, QObject *obj);
+    QQmlListProperty<QObject> data();
+    bool isComplete();
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEUIKITBASE_P_H
+#endif // QNATIVEUIKITQMLBASE_P_H

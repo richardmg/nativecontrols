@@ -3,7 +3,7 @@
 ** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Native UIKit Controls module of the Qt Toolkit.
+** This file is part of the Qt Native Controls module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,43 +34,51 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITBASE_P_H
-#define QNATIVEUIKITBASE_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <QtCore>
-
+#include <QtNativeUIKitControls/qnativeuikitqmlbase.h>
 #include <QtNativeUIKitControls/private/qnativeuikitqmlbase_p.h>
-
-typedef struct CGRect CGRect;
 
 QT_BEGIN_NAMESPACE
 
-class QNativeBase;
-class QNativeUIKitBase;
-
-class QNativeUIKitBasePrivate : public QNativeUIKitQmlBasePrivate
+QNativeUIKitQmlBasePrivate::QNativeUIKitQmlBasePrivate(int version)
+    : QObjectPrivate(version)
 {
-public:
-    explicit QNativeUIKitBasePrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitBasePrivate();
+}
 
-    // Used by QNativeUIKitPlatformPlugin
-    virtual void connectSignals(QNativeBase *) {}
+QNativeUIKitQmlBasePrivate::~QNativeUIKitQmlBasePrivate()
+{
+}
 
-    Q_DECLARE_PUBLIC(QNativeUIKitBase)
-};
+void QNativeUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
+{
+    child->setParent(list->object);
+}
+
+QQmlListProperty<QObject> QNativeUIKitQmlBasePrivate::data()
+{
+    return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
+}
+
+bool QNativeUIKitQmlBasePrivate::isComplete()
+{
+    // todo: hook up to QQmlParserStatus
+   return true;
+}
+
+QNativeUIKitQmlBase::QNativeUIKitQmlBase(QNativeUIKitQmlBase *parent)
+    : QObject(parent)
+{
+}
+
+QNativeUIKitQmlBase::QNativeUIKitQmlBase(QNativeUIKitQmlBasePrivate &dd, QNativeUIKitQmlBase *parent)
+    : QObject(dd, parent)
+{
+}
+
+QNativeUIKitQmlBase::~QNativeUIKitQmlBase()
+{
+    // delete children in m_data?
+}
+
+#include "moc_qnativeuikitqmlbase.cpp"
 
 QT_END_NAMESPACE
-
-#endif //QNATIVEUIKITBASE_P_H

@@ -42,12 +42,11 @@
 #include <QtNativeUIKitControls/private/qnativeuikitbase_p.h>
 
 #include <QtNativeControls/qnativebase.h>
-#include <QtNativeControls/private/qnativeplatformbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
 QNativeUIKitBasePrivate::QNativeUIKitBasePrivate(int version)
-    : QNativePlatformBasePrivate(version)
+    : QNativeUIKitQmlBasePrivate(version)
 {
 }
 
@@ -56,12 +55,12 @@ QNativeUIKitBasePrivate::~QNativeUIKitBasePrivate()
 }
 
 QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBase *parent)
-    : QNativePlatformBase(*new QNativeUIKitBasePrivate(), parent)
+    :  QNativeUIKitQmlBase(*new QNativeUIKitBasePrivate(), parent)
 {
 }
 
 QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent)
-    : QNativePlatformBase(dd, parent)
+    :  QNativeUIKitQmlBase(dd, parent)
 {
 }
 
@@ -71,7 +70,7 @@ QNativeUIKitBase::~QNativeUIKitBase()
 
 void QNativeUIKitBase::setPlatformParent(QNativePlatformBase *parent)
 {
-    setParent(static_cast<QNativeUIKitBase *>(parent));
+    setParent(dynamic_cast<QNativeUIKitBase *>(parent));
 }
 
 #include "moc_qnativeuikitbase.cpp"
