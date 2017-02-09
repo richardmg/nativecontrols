@@ -49,63 +49,77 @@ NativeWindow {
 
     property int windowAvailableWidth: theWindow.width - 48
 
-    Button {
-        id: theButton
-        x: 20
-        y: 20
-        text: "Click me"
-        onClicked: text ="You clicked me!"
-        onWidthChanged: print("theButton width:" + width)
-        onHeightChanged: print("theButton height:" + height)
-        onImplicitWidthChanged: print("theButton implicit width:" + implicitWidth)
-        onImplicitHeightChanged: print("theButton implicit height:" + implicitHeight)
-//        Android.bgStyle: Android.bgBlue
-//        Ios.subLabel: "subLabel"
-    }
+    TabsPage {
+        TabsPageTab {
+            title: "Tab 1"
+            Button {
+                id: theButton
+                x: 20
+                y: 20
+                text: "Click me"
+                onClicked: text ="You clicked me!"
+                onWidthChanged: print("theButton width:" + width)
+                onHeightChanged: print("theButton height:" + height)
+                onImplicitWidthChanged: print("theButton implicit width:" + implicitWidth)
+                onImplicitHeightChanged: print("theButton implicit height:" + implicitHeight)
+            }
 
-    TextField {
-        id: theTextField1
-        x: 20
-        y: theButton.bottom + 8
-        width: windowAvailableWidth / 2
-        placeholderText: "Enter some text..."
-        onWidthChanged: print("theTextField1 width:" + width)
-        onHeightChanged: print("theTextField1 height:" + height)
-        onImplicitWidthChanged: print("theTextField1 implicit width:" + implicitWidth)
-        onImplicitHeightChanged: print("theTextField1 implicit height:" + implicitHeight)
-    }
+            TextField {
+                id: theTextField1
+                x: 20
+                y: theButton.bottom + 8
+                width: windowAvailableWidth / 2
+                placeholderText: "Enter some text..."
+                onWidthChanged: print("theTextField1 width:" + width)
+                onHeightChanged: print("theTextField1 height:" + height)
+                onImplicitWidthChanged: print("theTextField1 implicit width:" + implicitWidth)
+                onImplicitHeightChanged: print("theTextField1 implicit height:" + implicitHeight)
+            }
 
-    SearchField {
-        id: theSearchField1
-        x: theTextField1.right + 8
-        y: theButton.bottom + 8
-        width: windowAvailableWidth / 2
-        onWidthChanged: print("theSearchField1 width:" + width)
-        onHeightChanged: print("theSearchField1 height:" + height)
-        onImplicitWidthChanged: print("theSearchField1 implicit width:" + implicitWidth)
-        onImplicitHeightChanged: print("theSearchField1 implicit height:" + implicitHeight)
-    }
+            SearchField {
+                id: theSearchField1
+                x: theTextField1.right + 8
+                y: theButton.bottom + 8
+                width: windowAvailableWidth / 2
+                onWidthChanged: print("theSearchField1 width:" + width)
+                onHeightChanged: print("theSearchField1 height:" + height)
+                onImplicitWidthChanged: print("theSearchField1 implicit width:" + implicitWidth)
+                onImplicitHeightChanged: print("theSearchField1 implicit height:" + implicitHeight)
+            }
 
-    StyledButton {
-        id: platformStyledButton
-        x: 20
-        y: theSearchField1.bottom + 8
-    }
+            StyledButton {
+                id: platformStyledButton
+                x: 20
+                y: theSearchField1.bottom + 8
+            }
 
-    View {
-        id: view
-        x: 20
-        y: theSearchField1.bottom + 50 // get NaN if binding to platformStyledButton
-        width: 200
-        height: 100
-        Button {
-            x: 20
-            text: "Child button"
-            onClicked: text = "Clicked!"
+            View {
+                id: view
+                x: 20
+                y: theSearchField1.bottom + 50 // get NaN if binding to platformStyledButton
+                width: 200
+                height: 100
+                Button {
+                    x: 20
+                    text: "Child button"
+                    onClicked: text = "Clicked!"
+                }
+            }
+        }
+        TabsPageTab {
+            title: "Tab 2"
+            Button {
+                id: button2
+                x: 20
+                y: 20
+                text: "Button that moves"
+                onClicked: x += 10
+            }
         }
     }
 
-    Component.onCompleted: print("Application window completed" + theTextField1.height + " " + theSearchField1.height)
+
+//    Component.onCompleted: print("Application window completed" + theTextField1.height + " " + theSearchField1.height)
 
 //	+ios {
 //
