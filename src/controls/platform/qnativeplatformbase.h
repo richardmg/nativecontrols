@@ -38,29 +38,15 @@
 #define QNATIVEPLATFORMBASE_H
 
 #include <QtNativeControls/qnativecontrolsglobal.h>
-#include <QtNativeControls/qnativeqobjectbase.h>
-#include <QtNativeControls/qnativebase.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativePlatformBasePrivate;
-
-class Q_NATIVECONTROLS_EXPORT QNativePlatformBase : public QNativeQObjectBase
+class Q_NATIVECONTROLS_EXPORT QNativePlatformBase
 {
-    Q_OBJECT
-
 public:
-    explicit QNativePlatformBase(QNativePlatformBase *parent = nullptr);
-    virtual ~QNativePlatformBase();
+    virtual ~QNativePlatformBase() {}
 
-    virtual void setPlatformParent(QNativePlatformBase *) {}
-
-protected:
-    QNativePlatformBase(QNativePlatformBasePrivate &dd, QNativePlatformBase *parent = nullptr);
-
-private:
-    Q_DECLARE_PRIVATE(QNativePlatformBase)
-    Q_DISABLE_COPY(QNativePlatformBase)
+    virtual void setPlatformParent(QNativePlatformBase *) = 0;
 };
 
 QT_END_NAMESPACE

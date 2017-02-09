@@ -32,11 +32,9 @@ HEADERS += \
     qnativeqobjectbase.h \
     qnativeqobjectbase_p.h \
     platform/qnativecontrolsplatformplugin.h \
-    platform/qnativeplatformbase_p.h
 
 SOURCES += \
     qnativeplatformmanager.cpp \
     qnativeqobjectbase.cpp \
-    platform/qnativeplatformbase.cpp
 
 load(qt_module)

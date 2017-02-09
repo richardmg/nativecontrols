@@ -36,7 +36,6 @@
 
 #include <QtNativeControls/qnativeqobjectbase.h>
 #include <QtNativeControls/private/qnativeqobjectbase_p.h>
-#include <QtNativeControls/private/qnativeplatformbase_p.h>
 #include <QtNativeControls/private/qnativebase_p.h>
 
 QT_BEGIN_NAMESPACE

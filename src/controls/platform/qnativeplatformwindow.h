@@ -42,7 +42,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformWindow
+class Q_NATIVECONTROLS_EXPORT QNativePlatformWindow : public virtual QNativePlatformBase
 {
 public:
     virtual ~QNativePlatformWindow() {}

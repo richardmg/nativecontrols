@@ -39,10 +39,11 @@
 
 #include <QtCore>
 #include <QtNativeControls/qnativecontrolsglobal.h>
+#include <QtNativeControls/qnativeplatformbase.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformTabsPageTab
+class Q_NATIVECONTROLS_EXPORT QNativePlatformTabsPageTab : public virtual QNativePlatformBase
 {
 public:
     virtual ~QNativePlatformTabsPageTab() {}
