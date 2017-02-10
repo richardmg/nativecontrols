@@ -3,7 +3,7 @@
 ** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Native AppKit Controls module of the Qt Toolkit.
+** This file is part of the Qt Native Controls module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,53 +34,51 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITWINDOW_P_H
-#define QNATIVEAPPKITWINDOW_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <QObject>
-
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QtNativeAppKitControls/qnativeappkitqmlbase.h>
+#include <QtNativeAppKitControls/private/qnativeappkitqmlbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindow;
-class QNativeAppKitViewController;
-Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
-
-class QNativeAppKitWindowPrivate : public QNativeAppKitViewPrivate
+QNativeAppKitQmlBasePrivate::QNativeAppKitQmlBasePrivate(int version)
+    : QObjectPrivate(version)
 {
-public:
-    explicit QNativeAppKitWindowPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitWindowPrivate();
+}
 
-    virtual void connectSignals(QNativeBase *base) override;
-    virtual void updateLayout(bool recursive) override;
+QNativeAppKitQmlBasePrivate::~QNativeAppKitQmlBasePrivate()
+{
+}
 
-    QNativeAppKitWindowDelegate *m_delegate;
+void QNativeAppKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
+{
+    child->setParent(list->object);
+}
 
-    Q_DECLARE_PUBLIC(QNativeAppKitWindow)
+QQmlListProperty<QObject> QNativeAppKitQmlBasePrivate::data()
+{
+    return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
+}
 
-protected:
-    NSView *createView() override;
+bool QNativeAppKitQmlBasePrivate::isComplete()
+{
+    // todo: hook up to QQmlParserStatus
+   return true;
+}
 
-private:
-    NSWindow *m_window;
-    QNativeAppKitViewController *m_viewController;
-    bool m_viewControllerSetExplicit;
-};
+QNativeAppKitQmlBase::QNativeAppKitQmlBase(QNativeAppKitQmlBase *parent)
+    : QObject(parent)
+{
+}
+
+QNativeAppKitQmlBase::QNativeAppKitQmlBase(QNativeAppKitQmlBasePrivate &dd, QNativeAppKitQmlBase *parent)
+    : QObject(dd, parent)
+{
+}
+
+QNativeAppKitQmlBase::~QNativeAppKitQmlBase()
+{
+    // delete children in m_data?
+}
+
+#include "moc_qnativeappkitqmlbase.cpp"
 
 QT_END_NAMESPACE
-
-#endif //QNATIVEAPPKITWINDOW_P_H

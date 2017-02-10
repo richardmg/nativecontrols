@@ -44,6 +44,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeAppKitWindowPrivate;
+class QNativeAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
 
 class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitView, public virtual QNativePlatformWindow
@@ -54,7 +55,10 @@ public:
     QNativeAppKitWindow();
     virtual ~QNativeAppKitWindow();
 
-    NSWindow *nsWindowHandle() const;
+    NSWindow *nsWindowHandle();
+
+    void setRootViewController(QNativeAppKitViewController *rootViewController);
+    QNativeAppKitViewController *rootViewController() const;
 
     virtual QRectF geometry() const override;
     virtual void setGeometry(const QRectF &rect) override;
@@ -74,9 +78,11 @@ Q_SIGNALS:
     void widthChanged(qreal w);
     void heightChanged(qreal h);
     void visibleChanged(bool isVisible);
+    void rootViewControllerChanged(QNativeAppKitViewController *controller);
 
 protected:
     QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd);
+    void childEvent(QChildEvent *event) override;
 
 private:
     Q_DECLARE_PRIVATE(QNativeAppKitWindow)

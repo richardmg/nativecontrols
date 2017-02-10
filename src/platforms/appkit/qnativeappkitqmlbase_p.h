@@ -3,7 +3,7 @@
 ** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Native AppKit Controls module of the Qt Toolkit.
+** This file is part of the Qt Native Controls module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITWINDOW_P_H
-#define QNATIVEAPPKITWINDOW_P_H
+#ifndef QNATIVEAPPKITQMLBASE_P_H
+#define QNATIVEAPPKITQMLBASE_P_H
 
 //
 //  W A R N I N G
@@ -48,39 +48,25 @@
 // We mean it.
 //
 
-#include <QObject>
-
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QtCore/private/qobject_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindow;
-class QNativeAppKitViewController;
-Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
+class QNativeAppKitQmlBase;
 
-class QNativeAppKitWindowPrivate : public QNativeAppKitViewPrivate
+class QNativeAppKitQmlBasePrivate : public QObjectPrivate
 {
+    Q_DECLARE_PUBLIC(QNativeAppKitQmlBase)
+
 public:
-    explicit QNativeAppKitWindowPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitWindowPrivate();
+    explicit QNativeAppKitQmlBasePrivate(int version = QObjectPrivateVersion);
+    virtual ~QNativeAppKitQmlBasePrivate();
 
-    virtual void connectSignals(QNativeBase *base) override;
-    virtual void updateLayout(bool recursive) override;
-
-    QNativeAppKitWindowDelegate *m_delegate;
-
-    Q_DECLARE_PUBLIC(QNativeAppKitWindow)
-
-protected:
-    NSView *createView() override;
-
-private:
-    NSWindow *m_window;
-    QNativeAppKitViewController *m_viewController;
-    bool m_viewControllerSetExplicit;
+    static void appendChild(QQmlListProperty<QObject> *list, QObject *obj);
+    QQmlListProperty<QObject> data();
+    bool isComplete();
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEAPPKITWINDOW_P_H
+#endif // QNATIVEAPPKITQMLBASE_P_H

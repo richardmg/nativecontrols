@@ -65,8 +65,8 @@ public:
 
     NSView *view();
     NSView *view() const;
-    void setView(NSView *view);
     void addSubView(NSView *subView);
+    void removeSubView(NSView *subView);
 
     NSRect alignmentRect() const;
     void setAlignmentRect(NSRect rect);
@@ -97,6 +97,8 @@ protected:
     {
         return bool(m_attributes & attribute);
     }
+
+    virtual NSView *createView();
 
 private:
     NSView *m_view;

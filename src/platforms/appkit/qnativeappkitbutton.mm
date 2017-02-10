@@ -70,17 +70,8 @@ QT_BEGIN_NAMESPACE
 
 QNativeAppKitButtonPrivate::QNativeAppKitButtonPrivate(int version)
     : QNativeAppKitControlPrivate(version)
+    , m_delegate(nullptr)
 {
-    m_delegate = [[QNativeAppKitButtonDelegate alloc] initWithQNativeAppKitButtonPrivate:this];
-
-    NSButton *nsButton = [[[NSButton alloc] init] autorelease];
-    nsButton.bezelStyle = NSRoundedBezelStyle;
-    nsButton.buttonType = NSMomentaryPushInButton;
-    nsButton.target = m_delegate;
-    nsButton.action = @selector(onClicked);
-    [nsButton sizeToFit];
-
-    setView(nsButton);
 }
 
 QNativeAppKitButtonPrivate::~QNativeAppKitButtonPrivate()
@@ -94,6 +85,19 @@ void QNativeAppKitButtonPrivate::connectSignals(QNativeBase *base)
     const auto b = static_cast<QNativeButton *>(base);
     q->connect(q, &QNativeAppKitButton::textChanged, b, &QNativeButton::textChanged);
     q->connect(q, &QNativeAppKitButton::clicked, b, &QNativeButton::clicked);
+}
+
+NSView *QNativeAppKitButtonPrivate::createView()
+{
+    m_delegate = [[QNativeAppKitButtonDelegate alloc] initWithQNativeAppKitButtonPrivate:this];
+
+    NSButton *nsButton = [[[NSButton alloc] init] autorelease];
+    nsButton.bezelStyle = NSRoundedBezelStyle;
+    nsButton.buttonType = NSMomentaryPushInButton;
+    nsButton.target = m_delegate;
+    nsButton.action = @selector(onClicked);
+    [nsButton sizeToFit];
+    return nsButton;
 }
 
 QNativeAppKitButton::QNativeAppKitButton(QNativeAppKitBase *parent)

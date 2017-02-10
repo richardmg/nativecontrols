@@ -38,6 +38,8 @@
 **
 ****************************************************************************/
 
+#include <AppKit/AppKit.h>
+
 #include <QtGui>
 #include <QtNativeAppKitControls>
 
@@ -46,16 +48,26 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QNativeAppKitWindow window;
-    QNativeAppKitButton button(QStringLiteral("Click me"), &window);
+    QNativeAppKitTabViewController tabViewController(&window);
+
+    QNativeAppKitViewController tab1(&tabViewController);
+    QNativeAppKitViewController tab2(&tabViewController);
+    tab1.setTabViewItem(new QNativeAppKitTabViewItem(QStringLiteral("Tab1"), &tab1));
+    tab2.setTabViewItem(new QNativeAppKitTabViewItem(QStringLiteral("Tab2"), &tab2));
+    tabViewController.setViewControllers(QList<QNativeAppKitViewController *>() << &tab1 << &tab2);
+
+    QNativeAppKitView *contentView = tab1.view();
+
+    QNativeAppKitButton button(QStringLiteral("Click me"), contentView);
     button.move(50, 100);
     QObject::connect(&button, &QNativeAppKitButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
 
-    QNativeAppKitTextField textField(&window);
+    QNativeAppKitTextField textField(contentView);
     textField.setPlaceholderText(QStringLiteral("TextField"));
     textField.move(50, 150);
     textField.resize(200, textField.implicitSize().height());
 
-    QNativeAppKitView view(&window);
+    QNativeAppKitView view(contentView);
     view.setGeometry(50, textField.geometry().bottom(), 200, 200);
 
     QNativeAppKitButton button2("Child button", &view);

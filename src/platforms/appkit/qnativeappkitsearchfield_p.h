@@ -70,6 +70,9 @@ public:
     QNativeAppKitSearchFieldDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QNativeAppKitSearchField)
+
+protected:
+    NSView *createView() override;
 };
 
 QT_END_NAMESPACE

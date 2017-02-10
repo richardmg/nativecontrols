@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativetab.h>
-#include <QtNativeControls/private/qnativetab_p.h>
+#include <QtNativeControls/qnativetabspagetab.h>
+#include <QtNativeControls/private/qnativetabspagetab_p.h>
 #include <QtNativeControls/qnativeplatformtabspagetab.h>
 #include <QtNativeControls/qnativeplatformbase.h>
 

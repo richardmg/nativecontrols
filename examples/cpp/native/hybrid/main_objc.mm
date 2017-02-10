@@ -64,12 +64,12 @@ void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
 
     // You can also go the other way, creating a QNativeButton as a direct child of QNativeAppKitWindow
     QNativeButton *nativeButton2 = new QNativeButton("QNativeButton 2");
-    nativeButton2->setParent(window.platformHandle());
+    nativeButton2->setParent(&window);
     nativeButton2->move(nativeAppKitButton1->geometry().left(), nativeAppKitButton1->geometry().bottom());
     QObject::connect(nativeButton2, &QNativeButton::clicked,
                      [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
 
-    if (QNativeAppKitWindow *nativeAppKitWindow = dynamic_cast<QNativeAppKitWindow *>(window.platformHandle())) {
+    if (QNativeAppKitWindow *nativeAppKitWindow = dynamic_cast<QNativeAppKitWindow *>(&window)) {
         QNativeAppKitButton *nativeAppKitButton2 = new QNativeAppKitButton(nativeAppKitWindow);
         nativeAppKitButton2->move(nativeButton2->geometry().left(), nativeButton2->geometry().bottom());
         QObject::connect(nativeAppKitButton2, &QNativeAppKitButton::clicked,

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITWINDOW_P_H
-#define QNATIVEAPPKITWINDOW_P_H
+#ifndef QNATIVEAPPKITTABVIEWCONTROLLER_P_H
+#define QNATIVEAPPKITTABVIEWCONTROLLER_P_H
 
 //
 //  W A R N I N G
@@ -48,39 +48,30 @@
 // We mean it.
 //
 
-#include <QObject>
+#include <QtCore>
 
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QtNativeAppKitControls/private/qnativeappkitviewcontroller_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindow;
-class QNativeAppKitViewController;
-Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
+class QNativeAppKitTabViewController;
+Q_FORWARD_DECLARE_OBJC_CLASS(NSTabViewController);
 
-class QNativeAppKitWindowPrivate : public QNativeAppKitViewPrivate
+class QNativeAppKitTabViewControllerPrivate : public QNativeAppKitViewControllerPrivate
 {
 public:
-    explicit QNativeAppKitWindowPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitWindowPrivate();
+    explicit QNativeAppKitTabViewControllerPrivate(int version = QObjectPrivateVersion);
+    virtual ~QNativeAppKitTabViewControllerPrivate();
 
-    virtual void connectSignals(QNativeBase *base) override;
-    virtual void updateLayout(bool recursive) override;
+    QList<QNativeAppKitViewController *> m_viewControllers;
 
-    QNativeAppKitWindowDelegate *m_delegate;
-
-    Q_DECLARE_PUBLIC(QNativeAppKitWindow)
+    Q_DECLARE_PUBLIC(QNativeAppKitTabViewController)
 
 protected:
-    NSView *createView() override;
+    virtual NSViewController *createViewController();
 
-private:
-    NSWindow *m_window;
-    QNativeAppKitViewController *m_viewController;
-    bool m_viewControllerSetExplicit;
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEAPPKITWINDOW_P_H
+#endif //QNATIVEAPPKITTABVIEWCONTROLLER_P_H

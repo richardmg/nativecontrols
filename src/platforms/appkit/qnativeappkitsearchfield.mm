@@ -65,13 +65,8 @@ QT_BEGIN_NAMESPACE
 
 QNativeAppKitSearchFieldPrivate::QNativeAppKitSearchFieldPrivate(int version)
     : QNativeAppKitControlPrivate(version)
+    , m_delegate(nullptr)
 {
-    m_delegate = [[QNativeAppKitSearchFieldDelegate alloc] initWithQNativeAppKitSearchFieldPrivate:this];
-
-    NSSearchField *nsSearchField = [[[NSSearchField alloc] init] autorelease];
-    [nsSearchField sizeToFit];
-
-    setView(nsSearchField);
 }
 
 QNativeAppKitSearchFieldPrivate::~QNativeAppKitSearchFieldPrivate()
@@ -87,6 +82,16 @@ void QNativeAppKitSearchFieldPrivate::connectSignals(QNativeBase *base)
                b, &QNativeSearchField::textChanged);
     q->connect(q, &QNativeAppKitSearchField::placeholderTextChanged,
                b, &QNativeSearchField::placeholderTextChanged);
+}
+
+NSView *QNativeAppKitSearchFieldPrivate::createView()
+{
+    m_delegate = [[QNativeAppKitSearchFieldDelegate alloc] initWithQNativeAppKitSearchFieldPrivate:this];
+
+    NSSearchField *nsSearchField = [[[NSSearchField alloc] init] autorelease];
+    [nsSearchField sizeToFit];
+
+    return nsSearchField;
 }
 
 QNativeAppKitSearchField::QNativeAppKitSearchField(QNativeAppKitBase *parent)

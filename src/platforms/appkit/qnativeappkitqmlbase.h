@@ -3,7 +3,7 @@
 ** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Native AppKit Controls module of the Qt Toolkit.
+** This file is part of the Qt Native Controls module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,53 +34,35 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITWINDOW_P_H
-#define QNATIVEAPPKITWINDOW_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
+#ifndef QNATIVEAPPKITQMLBASE_H
+#define QNATIVEAPPKITQMLBASE_H
 
 #include <QObject>
-
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QQmlListProperty>
+#include <QtNativeAppKitControls/qnativeappkitcontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindow;
-class QNativeAppKitViewController;
-Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
+class QNativeAppKitQmlBasePrivate;
 
-class QNativeAppKitWindowPrivate : public QNativeAppKitViewPrivate
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitQmlBase : public QObject
 {
+    Q_OBJECT
+    Q_PRIVATE_PROPERTY(QNativeAppKitQmlBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
+    Q_CLASSINFO("DefaultProperty", "data")
+
 public:
-    explicit QNativeAppKitWindowPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitWindowPrivate();
-
-    virtual void connectSignals(QNativeBase *base) override;
-    virtual void updateLayout(bool recursive) override;
-
-    QNativeAppKitWindowDelegate *m_delegate;
-
-    Q_DECLARE_PUBLIC(QNativeAppKitWindow)
+    explicit QNativeAppKitQmlBase(QNativeAppKitQmlBase *parent = nullptr);
+    virtual ~QNativeAppKitQmlBase();
 
 protected:
-    NSView *createView() override;
+    QNativeAppKitQmlBase(QNativeAppKitQmlBasePrivate &dd, QNativeAppKitQmlBase *parent = nullptr);
 
 private:
-    NSWindow *m_window;
-    QNativeAppKitViewController *m_viewController;
-    bool m_viewControllerSetExplicit;
+    Q_DECLARE_PRIVATE(QNativeAppKitQmlBase)
+    Q_DISABLE_COPY(QNativeAppKitQmlBase)
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEAPPKITWINDOW_P_H
+#endif // QNATIVEAPPKITQMLBASE_H

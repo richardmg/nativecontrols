@@ -40,6 +40,44 @@
 
 QT_BEGIN_NAMESPACE
 
+class QAppKitPluginTabsPageTab : public QNativeAppKitViewController, public virtual QNativePlatformTabsPageTab
+{
+public:
+    explicit QAppKitPluginTabsPageTab()
+        : QNativeAppKitViewController(nullptr)
+    {
+        // A QNativeAppKitTabViewItem doesn't map directy to a QNativePlatformTabsPageTab since
+        // a tab in uikit consist of a view controller with a tab bar item. So we create this
+        // helper class that puts together the composition.
+        setTabViewItem(new QNativeAppKitTabViewItem(this));
+    }
+
+    void setPlatformParent(QNativePlatformBase *platformParent) override
+    {
+        // If the new, or the old, parent is a tab bar controller, we need to
+        // add, or remove, ourselves from the list of tabs it contains.
+        if (!platformParent) {
+            if (QNativeAppKitTabViewController *prevTabView = dynamic_cast<QNativeAppKitTabViewController *>(parent())) {
+                QList<QNativeAppKitViewController *> viewControllers = prevTabView->viewControllers();
+                viewControllers.removeOne(this);
+                prevTabView->setViewControllers(viewControllers);
+            }
+        } else if (QNativeAppKitTabViewController *tabView = dynamic_cast<QNativeAppKitTabViewController *>(platformParent)) {
+            QList<QNativeAppKitViewController *> viewControllers = tabView->viewControllers();
+            viewControllers.append(this);
+            tabView->setViewControllers(viewControllers);
+        }
+
+        // We also need to update the QObject parent structure for memory management
+        QNativeAppKitViewController::setPlatformParent(platformParent);
+    }
+
+    QString title() const override { return tabViewItem()->title(); }
+    void setTitle(const QString &title) override { tabViewItem()->setTitle(title); }
+};
+
+// ----------------------------------------------------------------------------------
+
 class QNativeAppKitPlatformPlugin : public QObject, QNativePlatformPluginInterface
 {
     Q_OBJECT
@@ -63,6 +101,12 @@ public:
             appkitBase = new QNativeAppKitSearchField(nullptr);
         else if (dynamic_cast<QNativeView *>(nativeBase))
             appkitBase = new QNativeAppKitView(nullptr);
+        else if (dynamic_cast<QNativeTabsPage *>(nativeBase))
+            appkitBase = new QNativeAppKitTabViewController;
+        else if (dynamic_cast<QNativeTabsPageTab *>(nativeBase))
+            appkitBase = new QAppKitPluginTabsPageTab;
+        else if (dynamic_cast<QNativePage *>(nativeBase))
+            appkitBase = new QNativeAppKitViewController(nullptr);
         else
             Q_UNREACHABLE();
 

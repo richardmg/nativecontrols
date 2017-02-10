@@ -34,53 +34,52 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITWINDOW_P_H
-#define QNATIVEAPPKITWINDOW_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
+#ifndef QNATIVEAPPKITVIEWCONTROLLER_H
+#define QNATIVEAPPKITVIEWCONTROLLER_H
 
 #include <QObject>
 
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QtNativeAppKitControls/qnativeappkitbase.h>
+#include <QtNativeControls/qnativeplatformpage.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindow;
-class QNativeAppKitViewController;
-Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
+class QNativeAppKitView;
+class QNativeAppKitViewControllerPrivate;
+class QNativeAppKitTabViewItem;
+Q_FORWARD_DECLARE_OBJC_CLASS(NSViewController);
 
-class QNativeAppKitWindowPrivate : public QNativeAppKitViewPrivate
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitViewController : public QNativeAppKitBase, public virtual QNativePlatformPage
 {
+    Q_OBJECT
+    Q_PROPERTY(QNativeAppKitView *view READ view WRITE setView NOTIFY viewChanged)
+
 public:
-    explicit QNativeAppKitWindowPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitWindowPrivate();
+    QNativeAppKitViewController(QNativeAppKitBase *parent = nullptr);
+    ~QNativeAppKitViewController();
 
-    virtual void connectSignals(QNativeBase *base) override;
-    virtual void updateLayout(bool recursive) override;
+    QNativeAppKitView *view() const;
+    void setView(QNativeAppKitView *view);
 
-    QNativeAppKitWindowDelegate *m_delegate;
+    QNativeAppKitViewController *parentViewController();
 
-    Q_DECLARE_PUBLIC(QNativeAppKitWindow)
+    void setTabViewItem(QNativeAppKitTabViewItem *tabViewItem);
+    QNativeAppKitTabViewItem *tabViewItem() const;
+
+    NSViewController *nsViewControllerHandle();
+
+Q_SIGNALS:
+    void viewChanged(QNativeAppKitView *contentView);
 
 protected:
-    NSView *createView() override;
+    QNativeAppKitViewController(QNativeAppKitViewControllerPrivate &dd, QNativeAppKitBase *parent = nullptr);
+    void childEvent(QChildEvent *event) override;
 
 private:
-    NSWindow *m_window;
-    QNativeAppKitViewController *m_viewController;
-    bool m_viewControllerSetExplicit;
+    Q_DECLARE_PRIVATE(QNativeAppKitViewController)
+    Q_DISABLE_COPY(QNativeAppKitViewController)
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEAPPKITWINDOW_P_H
+#endif // QNATIVEAPPKITVIEWCONTROLLER_H

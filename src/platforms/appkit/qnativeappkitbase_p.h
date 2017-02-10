@@ -50,9 +50,7 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/qnativeappkitbase.h>
-
-#include <QtNativeControls/private/qnativeplatformbase_p.h>
+#include <QtNativeAppKitControls/private/qnativeappkitqmlbase_p.h>
 
 typedef struct CGRect CGRect;
 typedef CGRect NSRect;
@@ -62,7 +60,7 @@ QT_BEGIN_NAMESPACE
 class QNativeBase;
 class QNativeAppKitBase;
 
-class QNativeAppKitBasePrivate : public QNativePlatformBasePrivate
+class QNativeAppKitBasePrivate : public QNativeAppKitQmlBasePrivate
 {
 public:
     explicit QNativeAppKitBasePrivate(int version = QObjectPrivateVersion);

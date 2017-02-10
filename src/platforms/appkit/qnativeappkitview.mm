@@ -143,21 +143,25 @@ void QNativeAppKitViewPrivate::updateImplicitSize()
 
 NSView *QNativeAppKitViewPrivate::view()
 {
+    if (!m_view) {
+        m_view = createView();
+        if (QNativeAppKitView *parent = q_func()->parentView())
+            static_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(parent))->addSubView(m_view);
+    }
     return m_view;
 }
 
 NSView *QNativeAppKitViewPrivate::view() const
 {
-    return m_view;
+    return const_cast<QNativeAppKitViewPrivate *>(this)->view();
 }
 
-void QNativeAppKitViewPrivate::setView(NSView *view)
+NSView *QNativeAppKitViewPrivate::createView()
 {
-    [m_view release];
-    m_view = [view retain];
+    return [NSView new];
 }
 
-static void qt_mac_removeFromSuperview(NSView *view)
+void QNativeAppKitViewPrivate::removeSubView(NSView *view)
 {
     const BOOL hadSuperview = !!view.superview;
     const QRectF rect = qt_mac_flipRect(view.frame, view);
@@ -169,7 +173,7 @@ static void qt_mac_removeFromSuperview(NSView *view)
 void QNativeAppKitViewPrivate::addSubView(NSView *subView)
 {
     if (subView.superview)
-        qt_mac_removeFromSuperview(subView);
+        removeSubView(subView);
     NSRect alignmentRect = [subView alignmentRectForFrame:subView.frame];
     [view() addSubview:subView];
     // Ratio between frame and alignment rect can change depending on whether the view is attached
@@ -199,14 +203,6 @@ void QNativeAppKitViewPrivate::setGeometry(const QRectF &rect)
 QNativeAppKitView::QNativeAppKitView(QNativeAppKitBase *parent)
     : QNativeAppKitBase(*new QNativeAppKitViewPrivate(), parent)
 {
-    Q_D(QNativeAppKitView);
-    if (!d->view()) {
-        // Since no NSView was set during private construction, we assume that this
-        // is just a standalone view. In that case, we create the missing view now.
-        d->setView([[QtNativeNSView new] autorelease]);
-        if (QNativeAppKitView *parent = parentView())
-            static_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(parent))->addSubView(d->view());
-    }
 }
 
 QNativeAppKitView::QNativeAppKitView(QNativeAppKitViewPrivate &dd, QNativeAppKitBase *parent)
@@ -409,7 +405,7 @@ void QNativeAppKitView::childEvent(QChildEvent *event)
     if (event->added()) {
         d->addSubView(dptr_child->view());
     } else if (event->removed()) {
-        qt_mac_removeFromSuperview(dptr_child->view());
+        d->removeSubView(dptr_child->view());
     }
 }
 

@@ -34,53 +34,67 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITWINDOW_P_H
-#define QNATIVEAPPKITWINDOW_P_H
+#include <AppKit/AppKit.h>
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
+#include <QtCore>
 
-#include <QObject>
-
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QtNativeAppKitControls/qnativeappkittabviewitem.h>
+#include <QtNativeAppKitControls/private/qnativeappkittabviewitem_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindow;
-class QNativeAppKitViewController;
-Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
-
-class QNativeAppKitWindowPrivate : public QNativeAppKitViewPrivate
+QNativeAppKitTabViewItemPrivate::QNativeAppKitTabViewItemPrivate(int version)
+    : QNativeAppKitBasePrivate(version)
+    , m_tabViewItem(nullptr)
 {
-public:
-    explicit QNativeAppKitWindowPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitWindowPrivate();
+}
 
-    virtual void connectSignals(QNativeBase *base) override;
-    virtual void updateLayout(bool recursive) override;
+QNativeAppKitTabViewItemPrivate::~QNativeAppKitTabViewItemPrivate()
+{
+}
 
-    QNativeAppKitWindowDelegate *m_delegate;
+NSTabViewItem *QNativeAppKitTabViewItemPrivate::tabViewItem()
+{
+    if (!m_tabViewItem)
+        m_tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:nil];
+    return m_tabViewItem;
+}
 
-    Q_DECLARE_PUBLIC(QNativeAppKitWindow)
+NSTabViewItem *QNativeAppKitTabViewItem::nsTabViewItemHandle()
+{
+    return d_func()->tabViewItem();
+}
 
-protected:
-    NSView *createView() override;
+QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(QNativeAppKitBase *parent)
+    : QNativeAppKitBase(*new QNativeAppKitTabViewItemPrivate(), parent)
+{
+}
 
-private:
-    NSWindow *m_window;
-    QNativeAppKitViewController *m_viewController;
-    bool m_viewControllerSetExplicit;
-};
+QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(const QString &title, QNativeAppKitBase *parent)
+    : QNativeAppKitBase(*new QNativeAppKitTabViewItemPrivate(), parent)
+{
+    setTitle(title);
+}
+
+QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(QNativeAppKitTabViewItemPrivate &dd, QNativeAppKitBase *parent)
+    : QNativeAppKitBase(dd, parent)
+{
+}
+
+QNativeAppKitTabViewItem::~QNativeAppKitTabViewItem()
+{
+}
+
+QString QNativeAppKitTabViewItem::title() const
+{
+    return QString::fromNSString(const_cast<QNativeAppKitTabViewItem *>(this)->nsTabViewItemHandle().label);
+}
+
+void QNativeAppKitTabViewItem::setTitle(const QString &title)
+{
+    nsTabViewItemHandle().label = title.toNSString();
+}
+
+#include "moc_qnativeappkittabviewitem.cpp"
 
 QT_END_NAMESPACE
-
-#endif //QNATIVEAPPKITWINDOW_P_H

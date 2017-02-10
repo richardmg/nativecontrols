@@ -38,41 +38,60 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/qnativeappkitbase.h>
-#include <QtNativeAppKitControls/private/qnativeappkitbase_p.h>
-
-#include <QtNativeControls/qnativebase.h>
+#include <QtNativeAppKitControls/qnativeappkittabviewcontroller.h>
+#include <QtNativeAppKitControls/private/qnativeappkittabviewcontroller_p.h>
+#include <QtNativeAppKitControls/qnativeappkittabviewitem.h>
+#include <QtNativeAppKitControls/private/qnativeappkittabviewitem_p.h>
 
 QT_BEGIN_NAMESPACE
 
-QNativeAppKitBasePrivate::QNativeAppKitBasePrivate(int version)
-    : QNativeAppKitQmlBasePrivate(version)
+QNativeAppKitTabViewControllerPrivate::QNativeAppKitTabViewControllerPrivate(int version)
+    : QNativeAppKitViewControllerPrivate(version)
 {
 }
 
-QNativeAppKitBasePrivate::~QNativeAppKitBasePrivate()
+QNativeAppKitTabViewControllerPrivate::~QNativeAppKitTabViewControllerPrivate()
 {
 }
 
-QNativeAppKitBase::QNativeAppKitBase(QNativeAppKitBase *parent)
-    : QNativeAppKitQmlBase(*new QNativeAppKitBasePrivate(), parent)
+NSViewController *QNativeAppKitTabViewControllerPrivate::createViewController()
+{
+    return [NSTabViewController new];
+}
+
+QNativeAppKitTabViewController::QNativeAppKitTabViewController(QNativeAppKitBase *parent)
+    : QNativeAppKitViewController(*new QNativeAppKitTabViewControllerPrivate(), parent)
 {
 }
 
-QNativeAppKitBase::QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent)
-    : QNativeAppKitQmlBase(dd, parent)
+QNativeAppKitTabViewController::QNativeAppKitTabViewController(QNativeAppKitTabViewControllerPrivate &dd, QNativeAppKitBase *parent)
+    :QNativeAppKitViewController(dd, parent)
 {
 }
 
-QNativeAppKitBase::~QNativeAppKitBase()
+QNativeAppKitTabViewController::~QNativeAppKitTabViewController()
 {
 }
 
-void QNativeAppKitBase::setPlatformParent(QNativePlatformBase *parent)
+void QNativeAppKitTabViewController::setViewControllers(QList<QNativeAppKitViewController *> list)
 {
-    setParent(dynamic_cast<QNativeAppKitBase *>(parent));
+    d_func()->m_viewControllers = list;
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:list.length()];
+    for (auto viewController : list)
+        [array addObject:viewController->nsViewControllerHandle()];
+    nsTabViewControllerHandle().childViewControllers = array;
 }
 
-#include "moc_qnativeappkitbase.cpp"
+QList<QNativeAppKitViewController *> QNativeAppKitTabViewController::viewControllers() const
+{
+    return d_func()->m_viewControllers;
+}
+
+NSTabViewController *QNativeAppKitTabViewController::nsTabViewControllerHandle()
+{
+    return static_cast<NSTabViewController *>(nsViewControllerHandle());
+}
+
+#include "moc_qnativeappkittabviewcontroller.cpp"
 
 QT_END_NAMESPACE
