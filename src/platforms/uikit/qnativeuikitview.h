@@ -54,6 +54,10 @@ class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitView : public QNativeUIKitBase, p
     Q_PROPERTY(qreal y READ y WRITE setY NOTIFY yChanged FINAL)
     Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY widthChanged FINAL)
     Q_PROPERTY(qreal height READ height WRITE setHeight NOTIFY heightChanged FINAL)
+    Q_PROPERTY(qreal left READ left NOTIFY xChanged FINAL)
+    Q_PROPERTY(qreal top READ top NOTIFY yChanged FINAL)
+    Q_PROPERTY(qreal right READ right NOTIFY rightChanged FINAL)
+    Q_PROPERTY(qreal bottom READ bottom NOTIFY bottomChanged FINAL)
     Q_PROPERTY(qreal implicitWidth READ implicitWidth NOTIFY implicitWidthChanged FINAL)
     Q_PROPERTY(qreal implicitHeight READ implicitHeight NOTIFY implicitHeightChanged FINAL)
 
@@ -103,6 +107,8 @@ Q_SIGNALS:
     void yChanged(qreal y);
     void widthChanged(qreal w);
     void heightChanged(qreal h);
+    void rightChanged(qreal right);
+    void bottomChanged(qreal bottom);
     void implicitWidthChanged(qreal w);
     void implicitHeightChanged(qreal h);
 

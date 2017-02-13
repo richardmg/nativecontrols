@@ -63,15 +63,24 @@ void QNativeUIKitViewPrivate::connectSignals(QNativeBase *base)
     const auto b = static_cast<QNativeControl *>(base);
     q->connect(q, &QNativeUIKitView::visibleChanged, b, &QNativeControl::visibleChanged);
     q->connect(q, &QNativeUIKitView::xChanged, b, &QNativeControl::xChanged);
-    q->connect(q, &QNativeUIKitView::xChanged, b, &QNativeControl::rightChanged);
+    q->connect(q, &QNativeUIKitView::rightChanged, b, &QNativeControl::rightChanged);
     q->connect(q, &QNativeUIKitView::yChanged, b, &QNativeControl::yChanged);
-    q->connect(q, &QNativeUIKitView::yChanged, b, &QNativeControl::bottomChanged);
+    q->connect(q, &QNativeUIKitView::bottomChanged, b, &QNativeControl::bottomChanged);
     q->connect(q, &QNativeUIKitView::widthChanged, b, &QNativeControl::widthChanged);
-    q->connect(q, &QNativeUIKitView::widthChanged, b, &QNativeControl::rightChanged);
+    q->connect(q, &QNativeUIKitView::rightChanged, b, &QNativeControl::rightChanged);
     q->connect(q, &QNativeUIKitView::heightChanged, b, &QNativeControl::heightChanged);
-    q->connect(q, &QNativeUIKitView::heightChanged, b, &QNativeControl::bottomChanged);
+    q->connect(q, &QNativeUIKitView::bottomChanged, b, &QNativeControl::bottomChanged);
     q->connect(q, &QNativeUIKitView::implicitWidthChanged, b, &QNativeControl::implicitWidthChanged);
     q->connect(q, &QNativeUIKitView::implicitHeightChanged, b, &QNativeControl::implicitHeightChanged);
+}
+
+void QNativeUIKitViewPrivate::initConnections()
+{
+    Q_Q(QNativeUIKitView);
+    q->connect(q, &QNativeUIKitView::xChanged, q, &QNativeUIKitView::rightChanged);
+    q->connect(q, &QNativeUIKitView::yChanged, q, &QNativeUIKitView::bottomChanged);
+    q->connect(q, &QNativeUIKitView::widthChanged, q, &QNativeUIKitView::rightChanged);
+    q->connect(q, &QNativeUIKitView::heightChanged, q, &QNativeUIKitView::bottomChanged);
 }
 
 void QNativeUIKitViewPrivate::updateLayout(bool recursive)
@@ -159,11 +168,13 @@ void QNativeUIKitViewPrivate::setGeometry(const QRectF &rect)
 QNativeUIKitView::QNativeUIKitView(QNativeUIKitBase *parent)
     : QNativeUIKitBase(*new QNativeUIKitViewPrivate(), parent)
 {
+    d_func()->initConnections();
 }
 
 QNativeUIKitView::QNativeUIKitView(QNativeUIKitViewPrivate &dd, QNativeUIKitBase *parent)
     : QNativeUIKitBase(dd, parent)
 {
+    d_func()->initConnections();
 }
 
 QNativeUIKitView::~QNativeUIKitView()
@@ -328,6 +339,26 @@ void QNativeUIKitView::setHeight(qreal newHeight)
     d->setAttribute(QNativeUIKitViewPrivate::Resized);
 
     emit heightChanged(newHeight);
+}
+
+qreal QNativeUIKitView::left() const
+{
+    return geometry().left();
+}
+
+qreal QNativeUIKitView::top() const
+{
+    return geometry().top();
+}
+
+qreal QNativeUIKitView::right() const
+{
+    return geometry().right();
+}
+
+qreal QNativeUIKitView::bottom() const
+{
+    return geometry().bottom();
 }
 
 QNativeUIKitView *QNativeUIKitView::parentView()
