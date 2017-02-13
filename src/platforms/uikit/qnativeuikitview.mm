@@ -363,12 +363,58 @@ qreal QNativeUIKitView::bottom() const
 
 QNativeUIKitView *QNativeUIKitView::parentView()
 {
-   return dynamic_cast<QNativeUIKitView *>(parent());
+    return dynamic_cast<QNativeUIKitView *>(parent());
 }
 
 UIView *QNativeUIKitView::uiViewHandle()
 {
    return d_func()->view();
+}
+
+bool QNativeUIKitView::setNativeParent(QObject *parent)
+{
+    if (QNativeUIKitView *p = dynamic_cast<QNativeUIKitView *>(parent))
+        setParent(p);
+    else
+        return QNativeUIKitBase::setNativeParent(parent);
+    return true;
+}
+
+bool QNativeUIKitView::setNativeParent(const QByteArray &type, void *parent)
+{
+    if (type == "UIView")
+        [reinterpret_cast<UIView *>(parent) addSubview:uiViewHandle()];
+    else
+        return QNativeUIKitBase::setNativeParent(type, parent);
+    return true;
+}
+
+bool QNativeUIKitView::addNativeChild(QObject *child)
+{
+    if (QNativeUIKitView *c = dynamic_cast<QNativeUIKitView *>(child))
+        c->setParent(this);
+    else
+        return QNativeUIKitBase::addNativeChild(child);
+    return true;
+}
+
+bool QNativeUIKitView::addNativeChild(const QByteArray &type, void *child)
+{
+    if (type == "UIView")
+        d_func()->addSubView(reinterpret_cast<UIView *>(child));
+    else
+        return QNativeUIKitBase::addNativeChild(type, child);
+    return true;
+}
+
+QByteArrayList QNativeUIKitView::supportedNativeChildTypes()
+{
+    return QNativeUIKitBase::supportedNativeChildTypes() << "UIView";
+}
+
+QByteArrayList QNativeUIKitView::supportedNativeParentTypes()
+{
+    return supportedNativeChildTypes();
 }
 
 void QNativeUIKitView::childEvent(QChildEvent *event)

@@ -191,6 +191,27 @@ bool QNativeUIKitWindow::event(QEvent *e)
     return true;
 }
 
+bool QNativeUIKitWindow::addNativeChild(const QByteArray &type, void *child)
+{
+    if (type == "UIView")
+        d_func()->addSubViewToContentView(reinterpret_cast<UIView *>(child));
+    else if (type == "UIViewController")
+        uiWindowHandle().rootViewController = reinterpret_cast<UIViewController *>(child);
+    else
+        return QNativeUIKitView::addNativeChild(type, child);
+    return true;
+}
+
+QByteArrayList QNativeUIKitWindow::supportedNativeChildTypes()
+{
+    return QNativeUIKitView::supportedNativeChildTypes() << "UIViewController";
+}
+
+QByteArrayList QNativeUIKitWindow::supportedNativeParentTypes()
+{
+    return QByteArrayList();
+}
+
 void QNativeUIKitWindow::childEvent(QChildEvent *event)
 {
     Q_D(QNativeUIKitWindow);

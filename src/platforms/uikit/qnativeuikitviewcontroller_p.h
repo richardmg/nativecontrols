@@ -69,9 +69,9 @@ public:
 
     UIViewController *viewController();
     void addChildViewController(UIViewController *child);
+    void addSubViewToContentView(UIView *uiView);
 
     QNativeUIKitTabBarItem *m_tabBarItem;
-
 protected:
     virtual UIViewController *createViewController();
 
