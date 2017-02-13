@@ -56,6 +56,12 @@ public:
     virtual ~QNativeBase();
 
     void setParent(QNativeBase *parent);
+    bool setNativeParent(QObject *parent);
+    bool setNativeParent(const QByteArray &type, void *parent);
+    bool addNativeChild(QObject *child);
+    bool addNativeChild(const QByteArray &type, void *child);
+    QByteArrayList supportedNativeChildTypes();
+    QByteArrayList supportedNativeParentTypes();
 
 protected:
     QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent = nullptr);

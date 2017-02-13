@@ -42,6 +42,8 @@
 
 QT_BEGIN_NAMESPACE
 
+#define PLATFORM_BASE dynamic_cast<QNativePlatformBase *>(d_func()->m_platformBase)
+
 QNativeBasePrivate::QNativeBasePrivate(int version)
     : QNativeQObjectBasePrivate(version)
     , m_platformBase(nullptr)
@@ -86,6 +88,36 @@ void QNativeBase::setParent(QNativeBase *parent)
 {
     QObject::setParent(parent);
     d_func()->syncPlatformParent();
+}
+
+bool QNativeBase::setNativeParent(QObject *parent)
+{
+    return PLATFORM_BASE->setNativeParent(parent);
+}
+
+bool QNativeBase::setNativeParent(const QByteArray &type, void *parent)
+{
+    return PLATFORM_BASE->setNativeParent(type, parent);
+}
+
+bool QNativeBase::addNativeChild(QObject *child)
+{
+    return PLATFORM_BASE->addNativeChild(child);
+}
+
+bool QNativeBase::addNativeChild(const QByteArray &type, void *child)
+{
+    return PLATFORM_BASE->addNativeChild(type, child);
+}
+
+QByteArrayList QNativeBase::supportedNativeChildTypes()
+{
+    return PLATFORM_BASE->supportedNativeChildTypes();
+}
+
+QByteArrayList QNativeBase::supportedNativeParentTypes()
+{
+    return PLATFORM_BASE->supportedNativeParentTypes();
 }
 
 void QNativeBase::childEvent(QChildEvent *event)

@@ -37,6 +37,7 @@
 #ifndef QNATIVEPLATFORMBASE_H
 #define QNATIVEPLATFORMBASE_H
 
+#include <QtCore>
 #include <QtNativeControls/qnativecontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
@@ -47,6 +48,48 @@ public:
     virtual ~QNativePlatformBase() {}
 
     virtual void setPlatformParent(QNativePlatformBase *) = 0;
+
+    virtual bool setNativeParent(QObject *parent)
+    {
+        // Override to support mixing platform controls with QNative controls.
+        Q_UNUSED(parent);
+        return false;
+    }
+
+    virtual bool setNativeParent(const QByteArray &type, void *parent)
+    {
+        // Override to support mixing platform controls with QNative controls.
+        Q_UNUSED(type);
+        Q_UNUSED(parent);
+        return false;
+    }
+
+    virtual bool addNativeChild(QObject *child)
+    {
+        // Override to support mixing platform controls with QNative controls.
+        Q_UNUSED(child);
+        return false;
+    }
+
+    virtual bool addNativeChild(const QByteArray &type, void *child)
+    {
+        // Override to support mixing platform controls with QNative controls.
+        Q_UNUSED(type);
+        Q_UNUSED(child);
+        return false;
+    }
+
+    virtual QByteArrayList supportedNativeChildTypes()
+    {
+        // Override to support mixing platform controls with QNative controls.
+        return QByteArrayList();
+    }
+
+    virtual QByteArrayList supportedNativeParentTypes()
+    {
+        // Override to support mixing platform controls with QNative controls.
+        return QByteArrayList();
+    }
 };
 
 QT_END_NAMESPACE
