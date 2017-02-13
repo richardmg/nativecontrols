@@ -143,12 +143,12 @@ void QNativeUIKitViewPrivate::addSubView(UIView *subView)
 
 CGRect QNativeUIKitViewPrivate::alignmentRect() const
 {
-    return [m_view alignmentRectForFrame:m_view.frame];
+    return [view() alignmentRectForFrame:view().frame];
 }
 
 void QNativeUIKitViewPrivate::setAlignmentRect(CGRect rect)
 {
-    m_view.frame = [m_view frameForAlignmentRect:rect];
+    view().frame = [view() frameForAlignmentRect:rect];
 }
 
 void QNativeUIKitViewPrivate::setGeometry(const QRectF &rect)
