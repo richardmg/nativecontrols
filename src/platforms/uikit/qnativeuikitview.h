@@ -97,6 +97,11 @@ public:
     qreal height() const;
     void setHeight(qreal);
 
+    qreal left() const;
+    qreal top() const;
+    qreal right() const;
+    qreal bottom() const;
+
     QNativeUIKitView *parentView();
 
     UIView *uiViewHandle();

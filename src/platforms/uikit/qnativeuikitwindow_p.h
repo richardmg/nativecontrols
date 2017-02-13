@@ -67,6 +67,8 @@ public:
     virtual void connectSignals(QNativeBase *base) override;
     virtual void updateLayout(bool recursive) override;
 
+    void addSubViewToContentView(UIView *uiView);
+
     Q_DECLARE_PUBLIC(QNativeUIKitWindow)
 
 protected:

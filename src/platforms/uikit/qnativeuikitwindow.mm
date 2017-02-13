@@ -79,6 +79,14 @@ void QNativeUIKitWindowPrivate::updateLayout(bool recursive)
     }
 }
 
+void QNativeUIKitWindowPrivate::addSubViewToContentView(UIView *uiView)
+{
+    Q_Q(QNativeUIKitWindow);
+    QNativeUIKitView *contentView = q->rootViewController()->view();
+    QNativeUIKitViewPrivate *dptr_contentView = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(contentView));
+    dptr_contentView->addSubView(uiView);
+}
+
 UIView *QNativeUIKitWindowPrivate::createView()
 {
     return [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -192,11 +200,9 @@ void QNativeUIKitWindow::childEvent(QChildEvent *event)
 
     if (QNativeUIKitViewPrivate *dptr_child = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(child))) {
         if (event->added()) {
-            // QNativeUIKitView added as children of the window will have their UIViews
-            // added as children of the windows view controller view instead.
-            QNativeUIKitView *contentView = rootViewController()->view();
-            QNativeUIKitViewPrivate *dptr_contentView = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(contentView));
-            dptr_contentView->addSubView(dptr_child->view());
+            // QNativeUIKitView added as children of the window will have their
+            // UIViews added as children of the view controller view instead.
+            d->addSubViewToContentView(dptr_child->view());
         } else if (event->removed()) {
             [dptr_child->view() removeFromSuperview];
         }
