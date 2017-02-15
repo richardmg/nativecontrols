@@ -34,8 +34,11 @@
 **
 ****************************************************************************/
 
+#include <QtNativeControls/qnativebase.h>
+
 #include <QtNativeUIKitControls/qnativeuikitqmlbase.h>
 #include <QtNativeUIKitControls/private/qnativeuikitqmlbase_p.h>
+#include <QtNativeUIKitControls/qnativeuikitbase.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -50,7 +53,24 @@ QNativeUIKitQmlBasePrivate::~QNativeUIKitQmlBasePrivate()
 
 void QNativeUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
 {
-    child->setParent(list->object);
+    // Note that QtDeclarative undermines QObject::setParent, meaning that we
+    // don't get a QChildEvent when a qml object becomes a parent of another
+    // qml object. 'appendChild' is the only callback we get when the parent changes.
+    QObject *qparent = list->object;
+    QNativeUIKitBase *uikitParent = static_cast<QNativeUIKitBase *>(qparent);
+    QNativeUIKitBase *uikitChild = dynamic_cast<QNativeUIKitBase *>(child);
+
+    if (uikitChild) {
+        uikitChild->setParent(uikitParent);
+    } else {
+        // The child doesn't belong to QNativeUIKit. If it belongs
+        // to QNative, try to parent it using the childs cross-parenting API
+        QNativeBase *qnativeChild = dynamic_cast<QNativeBase *>(child);
+        if (!qnativeChild || !qnativeChild->setNativeParent(uikitParent)) {
+            // ...otherwise we fall back to normal QObject parenting
+            child->setParent(qparent);
+        }
+    }
 }
 
 QQmlListProperty<QObject> QNativeUIKitQmlBasePrivate::data()
