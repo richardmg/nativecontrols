@@ -87,8 +87,8 @@ NativeWindow {
                 onImplicitHeightChanged: print("theSearchField1 implicit height:" + implicitHeight)
             }
 
-            StyledButton {
-                id: platformStyledButton
+            PlatformSpecificControl {
+                id: platformSpecificControl
                 x: 20
                 y: theSearchField1.bottom + 8
             }
@@ -96,7 +96,7 @@ NativeWindow {
             View {
                 id: view
                 x: 20
-                y: theSearchField1.bottom + 50 // get NaN if binding to platformStyledButton
+                y: platformSpecificControl.bottom + 8
                 width: 200
                 height: 100
                 Button {
@@ -131,6 +131,7 @@ NativeWindow {
             x: 20
             y: button2.bottom + 8
             text: "Button parented in late"
+            onClicked: text = "Clicked"
         }
     }
 

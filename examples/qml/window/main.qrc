@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>StyledButton.qml</file>
-        <file>+ios/StyledButton.qml</file>
-        <file>+macos/StyledButton.qml</file>
+        <file>PlatformSpecificControl.qml</file>
+        <file>+ios/PlatformSpecificControl.qml</file>
+        <file>+macos/PlatformSpecificControl.qml</file>
     </qresource>
 </RCC>
