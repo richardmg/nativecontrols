@@ -40,14 +40,14 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include <QtNativeControls/qnativecontrolsglobal.h>
-#include <QtNativeControls/qnativeqobjectbase.h>
+#include <QtNativeControls/qnativeqmlbase.h>
 
 QT_BEGIN_NAMESPACE
 
 class QNativePlatformBase;
 class QNativeBasePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeBase : public QNativeQObjectBase
+class Q_NATIVECONTROLS_EXPORT QNativeBase : public QNativeQmlBase
 {
     Q_OBJECT
 

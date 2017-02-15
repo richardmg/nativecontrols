@@ -34,22 +34,22 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativeqobjectbase.h>
-#include <QtNativeControls/private/qnativeqobjectbase_p.h>
+#include <QtNativeControls/qnativeqmlbase.h>
+#include <QtNativeControls/private/qnativeqmlbase_p.h>
 #include <QtNativeControls/private/qnativebase_p.h>
 
 QT_BEGIN_NAMESPACE
 
-QNativeQObjectBasePrivate::QNativeQObjectBasePrivate(int version)
+QNativeQmlBasePrivate::QNativeQmlBasePrivate(int version)
     : QObjectPrivate(version)
 {
 }
 
-QNativeQObjectBasePrivate::~QNativeQObjectBasePrivate()
+QNativeQmlBasePrivate::~QNativeQmlBasePrivate()
 {
 }
 
-void QNativeQObjectBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
+void QNativeQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
 {
     // Note that QtDeclarative undermines QObject::setParent, meaning that we
     // don't get a QChildEvent when a qml object becomes a parent of another
@@ -71,32 +71,32 @@ void QNativeQObjectBasePrivate::appendChild(QQmlListProperty<QObject> *list, QOb
     }
 }
 
-QQmlListProperty<QObject> QNativeQObjectBasePrivate::data()
+QQmlListProperty<QObject> QNativeQmlBasePrivate::data()
 {
     return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
 }
 
-bool QNativeQObjectBasePrivate::isComplete()
+bool QNativeQmlBasePrivate::isComplete()
 {
     // todo: hook up to QQmlParserStatus
    return true;
 }
 
-QNativeQObjectBase::QNativeQObjectBase(QNativeQObjectBase *parent)
+QNativeQmlBase::QNativeQmlBase(QNativeQmlBase *parent)
     : QObject(parent)
 {
 }
 
-QNativeQObjectBase::QNativeQObjectBase(QNativeQObjectBasePrivate &dd, QNativeQObjectBase *parent)
+QNativeQmlBase::QNativeQmlBase(QNativeQmlBasePrivate &dd, QNativeQmlBase *parent)
     : QObject(dd, parent)
 {
 }
 
-QNativeQObjectBase::~QNativeQObjectBase()
+QNativeQmlBase::~QNativeQmlBase()
 {
     // delete children in m_data?
 }
 
-#include "moc_qnativeqobjectbase.cpp"
+#include "moc_qnativeqmlbase.cpp"
 
 QT_END_NAMESPACE

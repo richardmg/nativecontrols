@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEQOBJECTBASE_P_H
-#define QNATIVEQOBJECTBASE_P_H
+#ifndef QNATIVEQMLBASE_P_H
+#define QNATIVEQMLBASE_P_H
 
 //
 //  W A R N I N G
@@ -49,17 +49,16 @@
 //
 
 #include <QtCore/private/qobject_p.h>
-#include <QtNativeControls/qnativeqobjectbase.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeQObjectBasePrivate : public QObjectPrivate
+class QNativeQmlBasePrivate : public QObjectPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeQObjectBase)
+    Q_DECLARE_PUBLIC(QNativeQmlBase)
 
 public:
-    explicit QNativeQObjectBasePrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeQObjectBasePrivate();
+    explicit QNativeQmlBasePrivate(int version = QObjectPrivateVersion);
+    virtual ~QNativeQmlBasePrivate();
 
     static void appendChild(QQmlListProperty<QObject> *list, QObject *obj);
     QQmlListProperty<QObject> data();
@@ -68,4 +67,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEQOBJECTBASE_P_H
+#endif // QNATIVEQMLBASE_P_H

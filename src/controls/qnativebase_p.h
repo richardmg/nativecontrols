@@ -56,7 +56,7 @@ QT_BEGIN_NAMESPACE
 class QNativeBase;
 class QNativePlatformBase;
 
-class QNativeBasePrivate : public QNativeQObjectBasePrivate
+class QNativeBasePrivate : public QNativeQmlBasePrivate
 {
     Q_DECLARE_PUBLIC(QNativeBase)
 

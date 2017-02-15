@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 #define PLATFORM_BASE dynamic_cast<QNativePlatformBase *>(d_func()->m_platformBase)
 
 QNativeBasePrivate::QNativeBasePrivate(int version)
-    : QNativeQObjectBasePrivate(version)
+    : QNativeQmlBasePrivate(version)
     , m_platformBase(nullptr)
 {
 }
@@ -71,12 +71,12 @@ void QNativeBasePrivate::syncPlatformParent()
 }
 
 QNativeBase::QNativeBase(QNativeBase *parent)
-    : QNativeQObjectBase(parent)
+    : QNativeQmlBase(parent)
 {
 }
 
 QNativeBase::QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent)
-    : QNativeQObjectBase(dd, parent)
+    : QNativeQmlBase(dd, parent)
 {
 }
 

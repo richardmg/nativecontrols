@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEQOBJECTBASE_H
-#define QNATIVEQOBJECTBASE_H
+#ifndef QNATIVEQMLBASE_H
+#define QNATIVEQMLBASE_H
 
 #include <QObject>
 #include <QQmlListProperty>
@@ -43,26 +43,26 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeQObjectBasePrivate;
+class QNativeQmlBasePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeQObjectBase : public QObject
+class Q_NATIVECONTROLS_EXPORT QNativeQmlBase : public QObject
 {
     Q_OBJECT
-    Q_PRIVATE_PROPERTY(QNativeQObjectBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
+    Q_PRIVATE_PROPERTY(QNativeQmlBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
     Q_CLASSINFO("DefaultProperty", "data")
 
 public:
-    explicit QNativeQObjectBase(QNativeQObjectBase *parent = nullptr);
-    virtual ~QNativeQObjectBase();
+    explicit QNativeQmlBase(QNativeQmlBase *parent = nullptr);
+    virtual ~QNativeQmlBase();
 
 protected:
-    QNativeQObjectBase(QNativeQObjectBasePrivate &dd, QNativeQObjectBase *parent = nullptr);
+    QNativeQmlBase(QNativeQmlBasePrivate &dd, QNativeQmlBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeQObjectBase)
-    Q_DISABLE_COPY(QNativeQObjectBase)
+    Q_DECLARE_PRIVATE(QNativeQmlBase)
+    Q_DISABLE_COPY(QNativeQmlBase)
 };
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEQOBJECTBASE_H
+#endif // QNATIVEQMLBASE_H
