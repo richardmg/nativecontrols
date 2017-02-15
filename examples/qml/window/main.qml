@@ -105,6 +105,13 @@ NativeWindow {
                     onClicked: text = "Clicked!"
                 }
             }
+
+            Timer {
+                // Normal objects can exist anywhere, and will just be ignored by the controls
+                interval: 2000
+                running: true
+                onTriggered: print("Test-timer fired")
+            }
         }
         TabsPageTab {
             title: "Tab 2"
