@@ -202,9 +202,14 @@ void QNativeUIKitViewController::childEvent(QChildEvent *event)
     QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
 
     if (QNativeUIKitViewPrivate *dptr_child = dynamic_cast<QNativeUIKitViewPrivate *>(childPrivate)) {
+        // QNativeUIKitView added as children of a plain QNativeUIKitViewController will
+        // have their UIViews added as children of the content view instead as a convenience.
+        // But we only do this if the view controller is a plain QNativeUIKitViewController.
+        // Otherwise, if you e.g assign a UIView to UITabBarController.view, it will no longer
+        // behave like a tab bar, but instead fall back to act like a normal view controller.
+        if (![uiViewControllerHandle() isMemberOfClass:[UIViewController class]])
+            return;
         if (event->added()) {
-            // QNativeUIKitView added as children of the view controller will
-            // have their UIViews added as children of the content view instead.
             // Since you are allowed to set a parentless view explicit as a
             // content view, and then later do the reparenting, we need to ensure
             // that we don't try to make the content view a subview of itself.
