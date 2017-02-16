@@ -50,6 +50,7 @@ Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitView, public virtual QNativePlatformWindow
 {
     Q_OBJECT
+    Q_PROPERTY(QNativeUIKitViewController *rootViewController READ rootViewController WRITE setRootViewController NOTIFY rootViewControllerChanged)
 
 public:
     QNativeUIKitWindow();
