@@ -68,6 +68,20 @@ QNativeUIKitBase::~QNativeUIKitBase()
 {
 }
 
+void QNativeUIKitBase::setParent(QNativeUIKitBase *parentBase)
+{
+    if (parentBase == parent())
+        return;
+
+    QNativeUIKitQmlBase::setParent(parentBase);
+    emit parentChanged(parentBase);
+}
+
+QNativeUIKitBase *QNativeUIKitBase::parentBase()
+{
+    return dynamic_cast<QNativeUIKitBase *>(parent());
+}
+
 void QNativeUIKitBase::setPlatformParent(QNativePlatformBase *parent)
 {
     setParent(dynamic_cast<QNativeUIKitBase *>(parent));
