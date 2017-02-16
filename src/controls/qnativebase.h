@@ -50,18 +50,24 @@ class QNativeBasePrivate;
 class Q_NATIVECONTROLS_EXPORT QNativeBase : public QNativeQmlBase
 {
     Q_OBJECT
+    Q_PROPERTY(QNativeBase *parent READ parentBase WRITE setParent NOTIFY parentChanged DESIGNABLE false)
 
 public:
     explicit QNativeBase(QNativeBase *parent = nullptr);
     virtual ~QNativeBase();
 
     void setParent(QNativeBase *parent);
+    QNativeBase *parentBase();
+
     bool setNativeParent(QObject *parent);
     bool setNativeParent(const QByteArray &type, void *parent);
     bool addNativeChild(QObject *child);
     bool addNativeChild(const QByteArray &type, void *child);
     QByteArrayList supportedNativeChildTypes();
     QByteArrayList supportedNativeParentTypes();
+
+Q_SIGNALS:
+    void parentChanged(QNativeBase *parent);
 
 protected:
     QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent = nullptr);

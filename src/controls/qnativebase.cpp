@@ -84,10 +84,19 @@ QNativeBase::~QNativeBase()
 {
 }
 
-void QNativeBase::setParent(QNativeBase *parent)
+void QNativeBase::setParent(QNativeBase *parentBase)
 {
-    QObject::setParent(parent);
+    if (parentBase == parent())
+        return;
+
+    QObject::setParent(parentBase);
     d_func()->syncPlatformParent();
+    emit parentChanged(parentBase);
+}
+
+QNativeBase *QNativeBase::parentBase()
+{
+    return dynamic_cast<QNativeBase *>(parent());
 }
 
 bool QNativeBase::setNativeParent(QObject *parent)
