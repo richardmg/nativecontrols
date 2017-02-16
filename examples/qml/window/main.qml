@@ -114,6 +114,7 @@ NativeWindow {
             }
         }
         TabsPageTab {
+            id: tab2
             title: "Tab 2"
             Button {
                 id: button2
@@ -122,6 +123,14 @@ NativeWindow {
                 text: "Button that moves"
                 onClicked: x += 10
             }
+        }
+
+        Button {
+            id: buttonParentedLate
+            parent: tab2
+            x: 20
+            y: button2.bottom + 8
+            text: "Button parented in late"
         }
     }
 
