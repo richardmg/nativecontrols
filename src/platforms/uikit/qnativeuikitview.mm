@@ -87,9 +87,14 @@ void QNativeUIKitViewPrivate::updateLayout(bool recursive)
 {
     Q_Q(QNativeUIKitView);
 
-    if (!testAttribute(Resized)) {
-        q->resize(q->implicitSize());
-        setAttribute(Resized, false);
+    if (!testAttribute(ResizedWidth)) {
+        q->setWidth(q->implicitWidth());
+        setAttribute(ResizedWidth, false);
+    }
+
+    if (!testAttribute(ResizedHeight)) {
+        q->setHeight(q->implicitHeight());
+        setAttribute(ResizedHeight, false);
     }
 
     if (recursive) {
@@ -279,7 +284,7 @@ void QNativeUIKitView::setX(qreal newX)
     QRectF g = geometry();
     g.moveLeft(newX);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitViewPrivate::Moved);
+    d->setAttribute(QNativeUIKitViewPrivate::MovedX);
 
     emit xChanged(newX);
 }
@@ -298,7 +303,7 @@ void QNativeUIKitView::setY(qreal newY)
     QRectF g = geometry();
     g.moveTop(newY);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitViewPrivate::Moved);
+    d->setAttribute(QNativeUIKitViewPrivate::MovedY);
 
     emit yChanged(newY);
 }
@@ -317,7 +322,7 @@ void QNativeUIKitView::setWidth(qreal newWidth)
     QRectF g = geometry();
     g.setWidth(newWidth);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitViewPrivate::Resized);
+    d->setAttribute(QNativeUIKitViewPrivate::ResizedWidth);
 
     emit widthChanged(newWidth);
 }
@@ -336,7 +341,7 @@ void QNativeUIKitView::setHeight(qreal newHeight)
     QRectF g = geometry();
     g.setHeight(newHeight);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitViewPrivate::Resized);
+    d->setAttribute(QNativeUIKitViewPrivate::ResizedHeight);
 
     emit heightChanged(newHeight);
 }

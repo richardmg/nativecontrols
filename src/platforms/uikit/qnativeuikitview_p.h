@@ -80,10 +80,14 @@ public:
     Q_DECLARE_PUBLIC(QNativeUIKitView)
 
 protected:
+    // Attributes to keep track of explicit
+    // application assignments
     enum Attribute {
         LayedOut		= 0x00000001,
-        Moved			= 0x00000002,
-        Resized			= 0x00000004
+        MovedX			= 0x00000002,
+        MovedY			= 0x00000004,
+        ResizedWidth	= 0x00000008,
+        ResizedHeight	= 0x00000010,
     };
 
     uint m_attributes;
