@@ -49,7 +49,7 @@
 //
 
 #include <QtNativeControls/qnativebase.h>
-#include <QtNativeControls/private/qnativeqobjectbase_p.h>
+#include <QtNativeControls/private/qnativeqmlbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
