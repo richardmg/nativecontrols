@@ -60,6 +60,7 @@ public:
     virtual void resize(const QSizeF size) = 0;
 
     virtual QSizeF implicitSize() const = 0;
+    virtual void setImplicitSize(const QSizeF &size) = 0;
 };
 
 QT_END_NAMESPACE

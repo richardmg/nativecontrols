@@ -155,14 +155,33 @@ QSizeF QNativeView::implicitSize() const
     return PLATFORM_VIEW->implicitSize();
 }
 
+void QNativeView::setImplicitSize(const QSizeF &size)
+{
+    PLATFORM_VIEW->setImplicitSize(size);
+}
+
 qreal QNativeView::implicitWidth() const
 {
     return PLATFORM_VIEW->implicitSize().width();
 }
 
+void QNativeView::setImplicitWidth(qreal width)
+{
+    QSizeF size = implicitSize();
+    size.setWidth(width);
+    PLATFORM_VIEW->setImplicitSize(size);
+}
+
 qreal QNativeView::implicitHeight() const
 {
     return PLATFORM_VIEW->implicitSize().height();
+}
+
+void QNativeView::setImplicitHeight(qreal height)
+{
+    QSizeF size = implicitSize();
+    size.setHeight(height);
+    PLATFORM_VIEW->setImplicitSize(size);
 }
 
 void QNativeView::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
