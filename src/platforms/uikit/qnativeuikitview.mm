@@ -108,18 +108,33 @@ void QNativeUIKitViewPrivate::updateLayout(bool recursive)
 void QNativeUIKitViewPrivate::updateImplicitSize()
 {
     Q_Q(QNativeUIKitView);
+    // This function should be called whenever the view changes properties
+    // that can affect implicit size. But if the app has set an implicit
+    // size explicit, that size should always be kept, and if we can just return.
+    // Otherwise, we ask UIKit for the best size that fits the view.
+    const bool resizedImplicitWidth = testAttribute(ResizedImplicitWidth);
+    const bool resizedImplicitHeight = testAttribute(ResizedImplicitHeight);
+    if (resizedImplicitWidth && resizedImplicitHeight)
+        return;
+
     QSizeF oldSize = m_implicitSize;
-    m_implicitSize = QSizeF::fromCGSize([view() sizeThatFits:CGSizeZero]);
+    CGSize sizeThatFits = [view() sizeThatFits:CGSizeZero];
+    bool layoutNeeded = false;
 
-    if (m_implicitSize.width() != oldSize.width()) {
-        updateLayout(false);
-        emit q->implicitWidthChanged(m_implicitSize.width());
+    if (!resizedImplicitWidth && sizeThatFits.width != oldSize.width()) {
+        m_implicitSize.setWidth(sizeThatFits.width);
+        emit q->implicitWidthChanged(sizeThatFits.width);
+        layoutNeeded = true;
     }
 
-    if (m_implicitSize.height() != oldSize.height()) {
-        updateLayout(false);
-        emit q->implicitHeightChanged(m_implicitSize.height());
+    if (!resizedImplicitHeight && sizeThatFits.height != oldSize.height()) {
+        m_implicitSize.setHeight(sizeThatFits.height);
+        emit q->implicitHeightChanged(sizeThatFits.height);
+        layoutNeeded = true;
     }
+
+    if (layoutNeeded)
+        updateLayout(false);
 }
 
 UIView *QNativeUIKitViewPrivate::view()
@@ -250,14 +265,46 @@ QSizeF QNativeUIKitView::implicitSize() const
     return d->m_implicitSize;
 }
 
+void QNativeUIKitView::setImplicitSize(const QSizeF &size)
+{
+    setImplicitWidth(size.width());
+    setImplicitHeight(size.height());
+}
+
 qreal QNativeUIKitView::implicitWidth() const
 {
     return implicitSize().width();
 }
 
+void QNativeUIKitView::setImplicitWidth(qreal width)
+{
+    Q_D(QNativeUIKitView);
+    d->setAttribute(QNativeUIKitViewPrivate::ResizedImplicitWidth);
+
+    if (width == d->m_implicitSize.width())
+        return;
+
+    d->m_implicitSize.setWidth(width);
+    d->updateLayout(false);
+    emit implicitWidthChanged(width);
+}
+
 qreal QNativeUIKitView::implicitHeight() const
 {
     return implicitSize().height();
+}
+
+void QNativeUIKitView::setImplicitHeight(qreal height)
+{
+    Q_D(QNativeUIKitView);
+    d->setAttribute(QNativeUIKitViewPrivate::ResizedImplicitHeight);
+
+    if (height == d->m_implicitSize.height())
+        return;
+
+    d->m_implicitSize.setHeight(height);
+    d->updateLayout(false);
+    emit implicitHeightChanged(height);
 }
 
 QRectF QNativeUIKitView::geometry() const

@@ -58,8 +58,8 @@ class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitView : public QNativeUIKitBase, p
     Q_PROPERTY(qreal top READ top NOTIFY yChanged FINAL)
     Q_PROPERTY(qreal right READ right NOTIFY rightChanged FINAL)
     Q_PROPERTY(qreal bottom READ bottom NOTIFY bottomChanged FINAL)
-    Q_PROPERTY(qreal implicitWidth READ implicitWidth NOTIFY implicitWidthChanged FINAL)
-    Q_PROPERTY(qreal implicitHeight READ implicitHeight NOTIFY implicitHeightChanged FINAL)
+    Q_PROPERTY(qreal implicitWidth READ implicitWidth WRITE setImplicitWidth NOTIFY implicitWidthChanged FINAL)
+    Q_PROPERTY(qreal implicitHeight READ implicitHeight WRITE setImplicitHeight NOTIFY implicitHeightChanged FINAL)
 
 public:
     QNativeUIKitView(QNativeUIKitBase *parent = nullptr);
@@ -77,13 +77,11 @@ public:
     virtual void resize(const QSizeF size) override;
 
     virtual QSizeF implicitSize() const override;
+    virtual void setImplicitSize(const QSizeF &size) override;
 
     void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
     void move(qreal posx, qreal posy);
     void resize(qreal width, qreal height);
-
-    qreal implicitWidth() const;
-    qreal implicitHeight() const;
 
     qreal x() const;
     void setX(qreal);
@@ -101,6 +99,11 @@ public:
     qreal top() const;
     qreal right() const;
     qreal bottom() const;
+
+    qreal implicitWidth() const;
+    void setImplicitWidth(qreal width);
+    qreal implicitHeight() const;
+    void setImplicitHeight(qreal height);
 
     QNativeUIKitView *parentView();
 
