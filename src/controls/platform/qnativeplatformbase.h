@@ -49,6 +49,14 @@ public:
 
     virtual void setPlatformParent(QNativePlatformBase *) = 0;
 
+    /**
+     * @brief Override to support mixing platform controls with QNative controls.
+     * \a parent is expected to be a type / control specific to the platform, but
+     * unknown to QNative. What is means to use it as parent for this object is left
+     * for the plugin to decide. You would call this function whenever you need a
+     * QNative control to be a child of a QObject based platform control.
+     * @return Returns \c true if the plugin was able to use \a parent as parent.
+     */
     virtual bool setNativeParent(QObject *parent)
     {
         // Override to support mixing platform controls with QNative controls.
@@ -56,6 +64,16 @@ public:
         return false;
     }
 
+    /**
+     * @brief Override to support mixing platform controls with QNative controls.
+     * \a type is the type name of \a parent, and is expected to be a type / control
+     * specific to the platform, but unknown to QNative. Especially, this function
+     * accept types not deriving from QObject, like native OS controls.
+     * What is means to use it as parent for this object is left for the plugin
+     * to decide. You would call this function whenever you need a QNative control to be a
+     * child of a native OS control.
+     * @return Returns \c true if the plugin was able to use \a parent as parent.
+     */
     virtual bool setNativeParent(const QByteArray &type, void *parent)
     {
         // Override to support mixing platform controls with QNative controls.
@@ -64,6 +82,14 @@ public:
         return false;
     }
 
+    /**
+     * @brief Override to support mixing platform controls with QNative controls.
+     * \a child is expected to be a type / control specific to the platform, but
+     * unknown to QNative. What is means to add it as a child of this object is left
+     * for the plugin to decide. You would call this function whenever you need a
+     * QObject based platform control to be a child of a QNative control.
+     * @return Returns \c true if the plugin was able to add \a child as a child.
+     */
     virtual bool addNativeChild(QObject *child)
     {
         // Override to support mixing platform controls with QNative controls.
@@ -71,6 +97,16 @@ public:
         return false;
     }
 
+    /**
+     * @brief Override to support mixing platform controls with QNative controls.
+     * \a type is the type name of \a child, and is expected to be a type / control
+     * specific to the platform, but unknown to QNative. Especially, this function
+     * accept types not deriving from QObject, like native OS controls.
+     * What is means to add it as a child this object is left for the plugin
+     * to decide. You would call this function whenever you need a native OS
+     * control to be a child of a QNative control.
+     * @return Returns \c true if the plugin was able to add \a child as a child.
+     */
     virtual bool addNativeChild(const QByteArray &type, void *child)
     {
         // Override to support mixing platform controls with QNative controls.
@@ -79,12 +115,18 @@ public:
         return false;
     }
 
+    /**
+     * Query the type names supported by addNativeChild().
+     */
     virtual QByteArrayList supportedNativeChildTypes()
     {
         // Override to support mixing platform controls with QNative controls.
         return QByteArrayList();
     }
 
+    /**
+     * Query the type names supported by setNativeParent().
+     */
     virtual QByteArrayList supportedNativeParentTypes()
     {
         // Override to support mixing platform controls with QNative controls.
