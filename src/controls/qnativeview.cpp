@@ -41,15 +41,21 @@
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_VIEW dynamic_cast<QNativePlatformView *>(d_func()->m_platformBase)
-
 QNativeViewPrivate::QNativeViewPrivate(int version)
     : QNativeBasePrivate(version)
+    , m_platformView(nullptr)
 {
 }
 
 QNativeViewPrivate::~QNativeViewPrivate()
 {
+}
+
+void QNativeViewPrivate::connectToPlatform()
+{
+    QNativeBasePrivate::connectToPlatform();
+    m_platformView = dynamic_cast<QNativePlatformView *>(m_platformBase);
+    Q_ASSERT(m_platformView);
 }
 
 QNativeView::QNativeView(QNativeBase *parent)
@@ -74,149 +80,155 @@ QNativeView *QNativeView::parentView()
 
 bool QNativeView::visible() const
 {
-    return PLATFORM_VIEW->visible();
+    return d_func()->m_platformView->visible();
 }
 
 void QNativeView::setVisible(bool v)
 {
-    PLATFORM_VIEW->setVisible(v);
+    d_func()->m_platformView->setVisible(v);
 }
 
 qreal QNativeView::x() const
 {
-    return PLATFORM_VIEW->geometry().x();
+    return d_func()->m_platformView->geometry().x();
 }
 
 void QNativeView::setX(qreal x)
 {
-    QRectF g = PLATFORM_VIEW->geometry();
+    Q_D(QNativeView);
+    QRectF g = d->m_platformView->geometry();
     g.moveLeft(x);
-    PLATFORM_VIEW->setGeometry(g);
+    d->m_platformView->setGeometry(g);
 }
 
 qreal QNativeView::y() const
 {
-    return PLATFORM_VIEW->geometry().y();
+    return d_func()->m_platformView->geometry().y();
 }
 
 void QNativeView::setY(qreal y)
 {
-    QRectF g = PLATFORM_VIEW->geometry();
+    Q_D(QNativeView);
+    QRectF g = d->m_platformView->geometry();
     g.moveTop(y);
-    PLATFORM_VIEW->setGeometry(g);
+    d->m_platformView->setGeometry(g);
 }
 
 qreal QNativeView::width() const
 {
-    return PLATFORM_VIEW->geometry().width();
+    return d_func()->m_platformView->geometry().width();
 }
 
 void QNativeView::setWidth(qreal w)
 {
-    QRectF g = PLATFORM_VIEW->geometry();
+    Q_D(QNativeView);
+    QRectF g = d->m_platformView->geometry();
     g.setWidth(w);
-    PLATFORM_VIEW->setGeometry(g);
+    d->m_platformView->setGeometry(g);
 }
 
 qreal QNativeView::height() const
 {
-    return PLATFORM_VIEW->geometry().height();
+    return d_func()->m_platformView->geometry().height();
 }
 
 void QNativeView::setHeight(qreal h)
 {
-    QRectF g = PLATFORM_VIEW->geometry();
+    Q_D(QNativeView);
+    QRectF g = d->m_platformView->geometry();
     g.setHeight(h);
-    PLATFORM_VIEW->setGeometry(g);
+    d->m_platformView->setGeometry(g);
 }
 
 qreal QNativeView::left() const
 {
-    return PLATFORM_VIEW->geometry().left();
+    return d_func()->m_platformView->geometry().left();
 }
 
 qreal QNativeView::top() const
 {
-    return PLATFORM_VIEW->geometry().top();
+    return d_func()->m_platformView->geometry().top();
 }
 
 qreal QNativeView::right() const
 {
-    return PLATFORM_VIEW->geometry().right();
+    return d_func()->m_platformView->geometry().right();
 }
 
 qreal QNativeView::bottom() const
 {
-    return PLATFORM_VIEW->geometry().bottom();
+    return d_func()->m_platformView->geometry().bottom();
 }
 
 QSizeF QNativeView::implicitSize() const
 {
-    return PLATFORM_VIEW->implicitSize();
+    return d_func()->m_platformView->implicitSize();
 }
 
 void QNativeView::setImplicitSize(const QSizeF &size)
 {
-    PLATFORM_VIEW->setImplicitSize(size);
+    d_func()->m_platformView->setImplicitSize(size);
 }
 
 qreal QNativeView::implicitWidth() const
 {
-    return PLATFORM_VIEW->implicitSize().width();
+    return d_func()->m_platformView->implicitSize().width();
 }
 
 void QNativeView::setImplicitWidth(qreal width)
 {
+    Q_D(QNativeView);
     QSizeF size = implicitSize();
     size.setWidth(width);
-    PLATFORM_VIEW->setImplicitSize(size);
+    d->m_platformView->setImplicitSize(size);
 }
 
 qreal QNativeView::implicitHeight() const
 {
-    return PLATFORM_VIEW->implicitSize().height();
+    return d_func()->m_platformView->implicitSize().height();
 }
 
 void QNativeView::setImplicitHeight(qreal height)
 {
+    Q_D(QNativeView);
     QSizeF size = implicitSize();
     size.setHeight(height);
-    PLATFORM_VIEW->setImplicitSize(size);
+    d->m_platformView->setImplicitSize(size);
 }
 
 void QNativeView::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
 {
-    PLATFORM_VIEW->setGeometry(QRectF(posx, posy, w, h));
+    d_func()->m_platformView->setGeometry(QRectF(posx, posy, w, h));
 }
 
 void QNativeView::move(const QPointF &pos)
 {
-    PLATFORM_VIEW->move(pos);
+    d_func()->m_platformView->move(pos);
 }
 
 void QNativeView::move(qreal posx, qreal posy)
 {
-    PLATFORM_VIEW->move(QPointF(posx, posy));
+    d_func()->m_platformView->move(QPointF(posx, posy));
 }
 
 void QNativeView::resize(const QSizeF size)
 {
-    PLATFORM_VIEW->resize(size);
+    d_func()->m_platformView->resize(size);
 }
 
 void QNativeView::resize(qreal width, qreal height)
 {
-    PLATFORM_VIEW->resize(QSizeF(width, height));
+    d_func()->m_platformView->resize(QSizeF(width, height));
 }
 
 void QNativeView::setGeometry(const QRectF &rect)
 {
-    PLATFORM_VIEW->setGeometry(rect);
+    d_func()->m_platformView->setGeometry(rect);
 }
 
 QRectF QNativeView::geometry() const
 {
-    return PLATFORM_VIEW->geometry();
+    return d_func()->m_platformView->geometry();
 }
 
 #include "moc_qnativeview.cpp"

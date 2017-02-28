@@ -64,6 +64,9 @@ class QNativeTextFieldPrivate : public QNativeControlPrivate
 public:
     explicit QNativeTextFieldPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeTextFieldPrivate();
+
+    void connectToPlatform();
+    QNativePlatformTextField *m_platformTextField;
 };
 
 QT_END_NAMESPACE

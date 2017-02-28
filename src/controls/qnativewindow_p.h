@@ -53,7 +53,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeWindow;
-class QNativePlatformBase;
+class QNativePlatformWindow;
 
 class QNativeWindowPrivate : public QNativeBasePrivate
 {
@@ -62,6 +62,9 @@ class QNativeWindowPrivate : public QNativeBasePrivate
 public:
     explicit QNativeWindowPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeWindowPrivate();
+
+    void connectToPlatform();
+    QNativePlatformWindow *m_platformWindow;
 };
 
 QT_END_NAMESPACE

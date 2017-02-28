@@ -40,15 +40,21 @@
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_BUTTON dynamic_cast<QNativePlatformButton *>(d_func()->m_platformBase)
-
 QNativeButtonPrivate::QNativeButtonPrivate(int version)
     : QNativeControlPrivate(version)
+    , m_platformButton(nullptr)
 {
 }
 
 QNativeButtonPrivate::~QNativeButtonPrivate()
 {
+}
+
+void QNativeButtonPrivate::connectToPlatform()
+{
+    QNativeControlPrivate::connectToPlatform();
+    m_platformButton = dynamic_cast<QNativePlatformButton *>(m_platformBase);
+    Q_ASSERT(m_platformButton);
 }
 
 QNativeButton::QNativeButton(QNativeBase *parent)
@@ -75,12 +81,12 @@ QNativeButton::~QNativeButton()
 
 QString QNativeButton::text()
 {
-    return PLATFORM_BUTTON->text();
+    return d_func()->m_platformButton->text();
 }
 
 void QNativeButton::setText(const QString &newText)
 {
-    PLATFORM_BUTTON->setText(newText);
+    d_func()->m_platformButton->setText(newText);
 }
 
 #include "moc_qnativebutton.cpp"

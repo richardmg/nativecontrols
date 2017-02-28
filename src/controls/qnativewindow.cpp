@@ -38,17 +38,23 @@
 #include <QtNativeControls/private/qnativewindow_p.h>
 #include <QtNativeControls/qnativeplatformwindow.h>
 
-#define PLATFORM_WINDOW dynamic_cast<QNativePlatformWindow *>(d_func()->m_platformBase)
-
 QT_BEGIN_NAMESPACE
 
 QNativeWindowPrivate::QNativeWindowPrivate(int version)
     : QNativeBasePrivate(version)
+    , m_platformWindow(nullptr)
 {
 }
 
 QNativeWindowPrivate::~QNativeWindowPrivate()
 {
+}
+
+void QNativeWindowPrivate::connectToPlatform()
+{
+    QNativeBasePrivate::connectToPlatform();
+    m_platformWindow = dynamic_cast<QNativePlatformWindow *>(m_platformBase);
+    Q_ASSERT(m_platformWindow);
 }
 
 QNativeWindow::QNativeWindow()
@@ -68,27 +74,27 @@ QNativeWindow::~QNativeWindow()
 
 qreal QNativeWindow::width() const
 {
-    return PLATFORM_WINDOW->width();
+    return d_func()->m_platformWindow->width();
 }
 
 qreal QNativeWindow::height() const
 {
-    return PLATFORM_WINDOW->height();
+    return d_func()->m_platformWindow->height();
 }
 
 bool QNativeWindow::isVisible() const
 {
-    return PLATFORM_WINDOW->isVisible();
+    return d_func()->m_platformWindow->isVisible();
 }
 
 void QNativeWindow::setVisible(bool v)
 {
-    PLATFORM_WINDOW->setVisible(v);
+    d_func()->m_platformWindow->setVisible(v);
 }
 
 void QNativeWindow::showFullScreen()
 {
-    PLATFORM_WINDOW->showFullScreen();
+    d_func()->m_platformWindow->showFullScreen();
 }
 
 #include "moc_qnativewindow.cpp"

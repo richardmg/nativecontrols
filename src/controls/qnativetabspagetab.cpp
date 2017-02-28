@@ -41,15 +41,21 @@
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_TAB dynamic_cast<QNativePlatformTabsPageTab *>(d_func()->m_platformBase)
-
 QNativeTabsPageTabPrivate::QNativeTabsPageTabPrivate(int version)
     : QNativeBasePrivate(version)
+    , m_platformTabsPageTab(nullptr)
 {
 }
 
 QNativeTabsPageTabPrivate::~QNativeTabsPageTabPrivate()
 {
+}
+
+void QNativeTabsPageTabPrivate::connectToPlatform()
+{
+    QNativeBasePrivate::connectToPlatform();
+    m_platformTabsPageTab = dynamic_cast<QNativePlatformTabsPageTab *>(m_platformBase);
+    Q_ASSERT(m_platformTabsPageTab);
 }
 
 QNativeTabsPageTab::QNativeTabsPageTab(QNativeBase *parent)
@@ -76,12 +82,12 @@ QNativeTabsPageTab::~QNativeTabsPageTab()
 
 QString QNativeTabsPageTab::title() const
 {
-    return PLATFORM_TAB->title();
+    return d_func()->m_platformTabsPageTab->title();
 }
 
 void QNativeTabsPageTab::setTitle(const QString &title)
 {
-    PLATFORM_TAB->setTitle(title);
+    d_func()->m_platformTabsPageTab->setTitle(title);
 }
 
 #include "moc_qnativetabspagetab.cpp"

@@ -42,8 +42,6 @@
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_BASE dynamic_cast<QNativePlatformBase *>(d_func()->m_platformBase)
-
 QNativeBasePrivate::QNativeBasePrivate(int version)
     : QNativeQmlBasePrivate(version)
     , m_platformBase(nullptr)
@@ -109,7 +107,7 @@ QNativeBase *QNativeBase::parentBase()
  */
 bool QNativeBase::setNativeParent(QObject *parent)
 {
-    return PLATFORM_BASE->setNativeParent(parent);
+    return d_func()->m_platformBase->setNativeParent(parent);
 }
 
 /**
@@ -124,7 +122,7 @@ bool QNativeBase::setNativeParent(QObject *parent)
  */
 bool QNativeBase::setNativeParent(const QByteArray &type, void *parent)
 {
-    return PLATFORM_BASE->setNativeParent(type, parent);
+    return d_func()->m_platformBase->setNativeParent(type, parent);
 }
 
 /**
@@ -137,7 +135,7 @@ bool QNativeBase::setNativeParent(const QByteArray &type, void *parent)
  */
 bool QNativeBase::addNativeChild(QObject *child)
 {
-    return PLATFORM_BASE->addNativeChild(child);
+    return d_func()->m_platformBase->addNativeChild(child);
 }
 
 /**
@@ -152,7 +150,7 @@ bool QNativeBase::addNativeChild(QObject *child)
  */
 bool QNativeBase::addNativeChild(const QByteArray &type, void *child)
 {
-    return PLATFORM_BASE->addNativeChild(type, child);
+    return d_func()->m_platformBase->addNativeChild(type, child);
 }
 
 /**
@@ -160,7 +158,7 @@ bool QNativeBase::addNativeChild(const QByteArray &type, void *child)
  */
 QByteArrayList QNativeBase::supportedNativeChildTypes()
 {
-    return PLATFORM_BASE->supportedNativeChildTypes();
+    return d_func()->m_platformBase->supportedNativeChildTypes();
 }
 
 /**
@@ -168,7 +166,7 @@ QByteArrayList QNativeBase::supportedNativeChildTypes()
  */
 QByteArrayList QNativeBase::supportedNativeParentTypes()
 {
-    return PLATFORM_BASE->supportedNativeParentTypes();
+    return d_func()->m_platformBase->supportedNativeParentTypes();
 }
 
 void QNativeBase::childEvent(QChildEvent *event)

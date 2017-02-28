@@ -41,15 +41,21 @@
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_CONTROL dynamic_cast<QNativePlatformControl *>(d_func()->m_platformBase)
-
 QNativeControlPrivate::QNativeControlPrivate(int version)
     : QNativeViewPrivate(version)
+    , m_platformControl(nullptr)
 {
 }
 
 QNativeControlPrivate::~QNativeControlPrivate()
 {
+}
+
+void QNativeControlPrivate::connectToPlatform()
+{
+    QNativeViewPrivate::connectToPlatform();
+    m_platformControl = dynamic_cast<QNativePlatformControl *>(m_platformBase);
+    Q_ASSERT(m_platformControl);
 }
 
 QNativeControl::QNativeControl(QNativeBase *parent)

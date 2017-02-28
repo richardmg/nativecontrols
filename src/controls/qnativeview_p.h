@@ -64,6 +64,9 @@ class QNativeViewPrivate : public QNativeBasePrivate
 public:
     explicit QNativeViewPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeViewPrivate();
+
+    void connectToPlatform();
+    QNativePlatformView *m_platformView;
 };
 
 QT_END_NAMESPACE

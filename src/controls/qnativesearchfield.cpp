@@ -41,15 +41,21 @@
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_SEARCH_FIELD dynamic_cast<QNativePlatformSearchField *>(d_func()->m_platformBase)
-
 QNativeSearchFieldPrivate::QNativeSearchFieldPrivate(int version)
     : QNativeControlPrivate(version)
+    , m_platformSearchField(nullptr)
 {
 }
 
 QNativeSearchFieldPrivate::~QNativeSearchFieldPrivate()
 {
+}
+
+void QNativeSearchFieldPrivate::connectToPlatform()
+{
+    QNativeControlPrivate::connectToPlatform();
+    m_platformSearchField = dynamic_cast<QNativePlatformSearchField *>(m_platformBase);
+    Q_ASSERT(m_platformSearchField);
 }
 
 QNativeSearchField::QNativeSearchField(QNativeBase *parent)
@@ -76,22 +82,22 @@ QNativeSearchField::~QNativeSearchField()
 
 QString QNativeSearchField::text()
 {
-    return PLATFORM_SEARCH_FIELD->text();
+    return d_func()->m_platformSearchField->text();
 }
 
 void QNativeSearchField::setText(const QString &newText)
 {
-    PLATFORM_SEARCH_FIELD->setText(newText);
+    d_func()->m_platformSearchField->setText(newText);
 }
 
 QString QNativeSearchField::placeholderText()
 {
-    return PLATFORM_SEARCH_FIELD->placeholderText();
+    return d_func()->m_platformSearchField->placeholderText();
 }
 
 void QNativeSearchField::setPlaceholderText(const QString &placeholderText)
 {
-    PLATFORM_SEARCH_FIELD->setPlaceholderText(placeholderText);
+    d_func()->m_platformSearchField->setPlaceholderText(placeholderText);
 }
 
 #include "moc_qnativesearchfield.cpp"

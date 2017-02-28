@@ -41,15 +41,21 @@
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_TEXT_FIELD dynamic_cast<QNativePlatformTextField *>(d_func()->m_platformBase)
-
 QNativeTextFieldPrivate::QNativeTextFieldPrivate(int version)
     : QNativeControlPrivate(version)
+    , m_platformTextField(nullptr)
 {
 }
 
 QNativeTextFieldPrivate::~QNativeTextFieldPrivate()
 {
+}
+
+void QNativeTextFieldPrivate::connectToPlatform()
+{
+    QNativeControlPrivate::connectToPlatform();
+    m_platformTextField = dynamic_cast<QNativePlatformTextField *>(m_platformBase);
+    Q_ASSERT(m_platformTextField);
 }
 
 QNativeTextField::QNativeTextField(QNativeBase *parent)
@@ -76,22 +82,22 @@ QNativeTextField::~QNativeTextField()
 
 QString QNativeTextField::text()
 {
-    return PLATFORM_TEXT_FIELD->text();
+    return d_func()->m_platformTextField->text();
 }
 
 void QNativeTextField::setText(const QString &newText)
 {
-    PLATFORM_TEXT_FIELD->setText(newText);
+    d_func()->m_platformTextField->setText(newText);
 }
 
 QString QNativeTextField::placeholderText()
 {
-    return PLATFORM_TEXT_FIELD->placeholderText();
+    return d_func()->m_platformTextField->placeholderText();
 }
 
 void QNativeTextField::setPlaceholderText(const QString &placeholderText)
 {
-    PLATFORM_TEXT_FIELD->setPlaceholderText(placeholderText);
+    d_func()->m_platformTextField->setPlaceholderText(placeholderText);
 }
 
 #include "moc_qnativetextfield.cpp"

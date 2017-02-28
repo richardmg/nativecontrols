@@ -36,18 +36,25 @@
 
 #include <QtNativeControls/qnativepage.h>
 #include <QtNativeControls/private/qnativepage_p.h>
+#include <QtNativeControls/qnativeplatformpage.h>
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_PAGE dynamic_cast<QNativePlatformPage *>(d_func()->m_platformBase)
-
 QNativePagePrivate::QNativePagePrivate(int version)
     : QNativeBasePrivate(version)
+    , m_platformPage(nullptr)
 {
 }
 
 QNativePagePrivate::~QNativePagePrivate()
 {
+}
+
+void QNativePagePrivate::connectToPlatform()
+{
+    QNativeBasePrivate::connectToPlatform();
+    m_platformPage = dynamic_cast<QNativePlatformPage *>(m_platformBase);
+    Q_ASSERT(m_platformPage);
 }
 
 QNativePage::QNativePage(QNativeBase *parent)

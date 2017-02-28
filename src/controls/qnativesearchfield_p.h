@@ -64,6 +64,9 @@ class QNativeSearchFieldPrivate : public QNativeControlPrivate
 public:
     explicit QNativeSearchFieldPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeSearchFieldPrivate();
+
+    void connectToPlatform();
+    QNativePlatformSearchField *m_platformSearchField;
 };
 
 QT_END_NAMESPACE

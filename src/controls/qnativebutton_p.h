@@ -64,6 +64,9 @@ class QNativeButtonPrivate : public QNativeControlPrivate
 public:
     explicit QNativeButtonPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeButtonPrivate();
+
+    void connectToPlatform();
+    QNativePlatformButton *m_platformButton;
 };
 
 QT_END_NAMESPACE

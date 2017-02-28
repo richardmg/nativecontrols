@@ -40,15 +40,21 @@
 
 QT_BEGIN_NAMESPACE
 
-#define PLATFORM_TABSPAGE dynamic_cast<QNativePlatformTabsPage *>(d_func()->m_platformBase)
-
 QNativeTabsPagePrivate::QNativeTabsPagePrivate(int version)
     : QNativePagePrivate(version)
+    , m_platformTabsPage(nullptr)
 {
 }
 
 QNativeTabsPagePrivate::~QNativeTabsPagePrivate()
 {
+}
+
+void QNativeTabsPagePrivate::connectToPlatform()
+{
+    QNativeBasePrivate::connectToPlatform();
+    m_platformTabsPage = dynamic_cast<QNativePlatformTabsPage *>(m_platformBase);
+    Q_ASSERT(m_platformTabsPage);
 }
 
 QNativeTabsPage::QNativeTabsPage(QNativeBase *parent)

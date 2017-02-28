@@ -55,6 +55,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeTabsPage;
+class QNativePlatformTabsPage;
 
 class QNativeTabsPagePrivate : public QNativePagePrivate
 {
@@ -63,6 +64,9 @@ class QNativeTabsPagePrivate : public QNativePagePrivate
 public:
     explicit QNativeTabsPagePrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeTabsPagePrivate();
+
+    void connectToPlatform();
+    QNativePlatformTabsPage *m_platformTabsPage;
 };
 
 QT_END_NAMESPACE
