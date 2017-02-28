@@ -277,14 +277,15 @@ qreal QNativeUIKitView::x() const
 
 void QNativeUIKitView::setX(qreal newX)
 {
+    Q_D(QNativeUIKitView);
+    d->setAttribute(QNativeUIKitViewPrivate::MovedX);
+
     if (newX == x())
         return;
 
-    Q_D(QNativeUIKitView);
     QRectF g = geometry();
     g.moveLeft(newX);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitViewPrivate::MovedX);
 
     emit xChanged(newX);
 }
@@ -296,14 +297,15 @@ qreal QNativeUIKitView::y() const
 
 void QNativeUIKitView::setY(qreal newY)
 {
+    Q_D(QNativeUIKitView);
+    d->setAttribute(QNativeUIKitViewPrivate::MovedY);
+
     if (newY == y())
         return;
 
-    Q_D(QNativeUIKitView);
     QRectF g = geometry();
     g.moveTop(newY);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitViewPrivate::MovedY);
 
     emit yChanged(newY);
 }
@@ -315,14 +317,15 @@ qreal QNativeUIKitView::width() const
 
 void QNativeUIKitView::setWidth(qreal newWidth)
 {
+    Q_D(QNativeUIKitView);
+    d->setAttribute(QNativeUIKitViewPrivate::ResizedWidth);
+
     if (newWidth == width())
         return;
 
-    Q_D(QNativeUIKitView);
     QRectF g = geometry();
     g.setWidth(newWidth);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitViewPrivate::ResizedWidth);
 
     emit widthChanged(newWidth);
 }
@@ -334,14 +337,15 @@ qreal QNativeUIKitView::height() const
 
 void QNativeUIKitView::setHeight(qreal newHeight)
 {
+    Q_D(QNativeUIKitView);
+    d->setAttribute(QNativeUIKitViewPrivate::ResizedHeight);
+
     if (newHeight == height())
         return;
 
-    Q_D(QNativeUIKitView);
     QRectF g = geometry();
     g.setHeight(newHeight);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeUIKitViewPrivate::ResizedHeight);
 
     emit heightChanged(newHeight);
 }
