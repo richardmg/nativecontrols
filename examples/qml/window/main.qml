@@ -41,7 +41,7 @@
 import QtQml 2.0
 import Qt.NativeControls 1.0
 
-NativeWindow {
+Window {
     id: theWindow
 //    width: 480
 //    height: 640

@@ -54,7 +54,7 @@ QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
 void registerTypes(const char *uri) override
 {
     qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "NativeWindow");
+    qmlRegisterType<QNativeWindow>(uri, 1, 0, "Window");
     qmlRegisterType<QNativeView>(uri, 1, 0, "View");
     qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
     qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
