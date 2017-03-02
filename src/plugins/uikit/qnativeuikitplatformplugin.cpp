@@ -88,31 +88,69 @@ public:
     explicit QNativeUIKitPlatformPlugin(QObject* = 0) {}
     ~QNativeUIKitPlatformPlugin() {}
 
-    virtual QNativePlatformBase* create(QNativeBase *nativeBase) const override
+    virtual QNativePlatformWindow* createWindow(QNativeWindow *window) const override
     {
-        QNativeUIKitBase *uikitBase = nullptr;
-        if (dynamic_cast<QNativeWindow *>(nativeBase))
-            uikitBase = new QNativeUIKitWindow();
-        else if (dynamic_cast<QNativeButton *>(nativeBase))
-            uikitBase = new QNativeUIKitButton(nullptr);
-        else if (dynamic_cast<QNativeTextField *>(nativeBase))
-            uikitBase = new QNativeUIKitTextField(nullptr);
-        else if (dynamic_cast<QNativeSearchField *>(nativeBase))
-            uikitBase = new QNativeUIKitSearchField(nullptr);
-        else if (dynamic_cast<QNativeView *>(nativeBase))
-            uikitBase = new QNativeUIKitView(nullptr);
-        else if (dynamic_cast<QNativeTabsPage *>(nativeBase))
-            uikitBase = new QNativeUIKitTabBarController;
-        else if (dynamic_cast<QNativeTabsPageTab *>(nativeBase))
-            uikitBase = new QUIKitPluginTabsPageTab;
-        else if (dynamic_cast<QNativePage *>(nativeBase))
-            uikitBase = new QNativeUIKitViewController(nullptr);
-        else
-            Q_UNREACHABLE();
-
-        uikitBase->d_func()->connectSignals(nativeBase);
-        return uikitBase;
+        auto platform = new QNativeUIKitWindow();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(window);
+        return platform;
     }
+
+    virtual QNativePlatformView* createView(QNativeView *view) const override
+    {
+        auto platform = new QNativeUIKitView();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(view);
+        return platform;
+    }
+
+    virtual QNativePlatformControl* createControl(QNativeControl *control) const override
+    {
+        auto platform = new QNativeUIKitControl();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(control);
+        return platform;
+    }
+
+    virtual QNativePlatformButton* createButton(QNativeButton *button) const override
+    {
+        auto platform = new QNativeUIKitButton();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(button);
+        return platform;
+    }
+
+    virtual QNativePlatformTextField* createTextField(QNativeTextField *textField) const override
+    {
+        auto platform = new QNativeUIKitTextField();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(textField);
+        return platform;
+    }
+
+    virtual QNativePlatformSearchField* createSearchField(QNativeSearchField *searchField) const override
+    {
+        auto platform = new QNativeUIKitSearchField();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(searchField);
+        return platform;
+    }
+
+    virtual QNativePlatformPage* createPage(QNativePage *page) const override
+    {
+        auto platform = new QNativeUIKitViewController();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(page);
+        return platform;
+    }
+
+    virtual QNativePlatformTabsPage* createTabsPage(QNativeTabsPage *tabsPage) const override
+    {
+        auto platform = new QNativeUIKitTabBarController();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(tabsPage);
+        return platform;
+    }
+
+    virtual QNativePlatformTabsPageTab* createTabsPageTab(QNativeTabsPageTab *tabsPageTab) const override
+    {
+        auto platform = new QUIKitPluginTabsPageTab();
+        static_cast<QNativeUIKitBase *>(platform)->d_func()->connectSignals(tabsPageTab);
+        return platform;
+    }
+
 };
 
 QT_END_NAMESPACE
