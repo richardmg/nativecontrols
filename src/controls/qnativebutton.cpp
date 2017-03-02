@@ -37,6 +37,9 @@
 #include <QtNativeControls/qnativebutton.h>
 #include <QtNativeControls/private/qnativebutton_p.h>
 #include <QtNativeControls/qnativeplatformbutton.h>
+#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/qnativecontrolsplatformplugin.h>
+#include <QtNativeControls/private/qnativeplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -50,23 +53,30 @@ QNativeButtonPrivate::~QNativeButtonPrivate()
 {
 }
 
-void QNativeButtonPrivate::connectToPlatform()
+void QNativeButtonPrivate::createPlatformButton()
 {
-    QNativeControlPrivate::connectToPlatform();
-    m_platformButton = dynamic_cast<QNativePlatformButton *>(m_platformBase);
+    Q_ASSERT(!m_platformButton);
+    m_platformButton = QNativePlatformManager::platformPlugin()->createButton(q_func());
     Q_ASSERT(m_platformButton);
+    setPlatformButton(m_platformButton);
+}
+
+void QNativeButtonPrivate::setPlatformButton(QNativePlatformButton *platformButton)
+{
+    m_platformButton = platformButton;
+    setPlatformControl(platformButton);
 }
 
 QNativeButton::QNativeButton(QNativeBase *parent)
     : QNativeControl(*new QNativeButtonPrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformButton();
 }
 
 QNativeButton::QNativeButton(const QString &text, QNativeBase *parent)
     : QNativeControl(*new QNativeButtonPrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformButton();
     setText(text);
 }
 

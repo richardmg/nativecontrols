@@ -65,7 +65,8 @@ public:
     explicit QNativeTabsPageTabPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeTabsPageTabPrivate();
 
-    void connectToPlatform();
+    void createPlatformTabsPageTab();
+    void setPlatformTabsPageTab(QNativePlatformTabsPageTab *platformTabsPageTab);
     QNativePlatformTabsPageTab *m_platformTabsPageTab;
 };
 

@@ -63,7 +63,8 @@ public:
     explicit QNativeWindowPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeWindowPrivate();
 
-    void connectToPlatform();
+    void createPlatformWindow();
+    void setPlatformWindow(QNativePlatformWindow *platformWindow);
     QNativePlatformWindow *m_platformWindow;
 };
 

@@ -39,13 +39,14 @@
 
 #include <QtNativeControls/private/qnativeplatformmanager_p.h>
 #include <QtNativeControls/qnativecontrolsplatformplugin.h>
+#include <QtNativeControls/qnativecontrolsplatformplugin.h>
 
 QT_BEGIN_NAMESPACE
 
 QFactoryLoader *QNativePlatformManager::s_loader = nullptr;
 QNativePlatformPluginInterface *QNativePlatformManager::s_platformPlugin = nullptr;
 
-QNativePlatformBase *QNativePlatformManager::create(QNativeBase *control)
+QNativePlatformPluginInterface *QNativePlatformManager::platformPlugin()
 {
     if (!s_platformPlugin) {
         s_loader = new QFactoryLoader(QNativePlatformPluginInterface_iid, QLatin1String("/nativecontrols"));
@@ -58,10 +59,7 @@ QNativePlatformBase *QNativePlatformManager::create(QNativeBase *control)
         }
     }
 
-    QNativePlatformBase *platformControl = s_platformPlugin->create(control);
-    // Require the plugin to implement the control for now. Todo: perhaps allow it to return nullptr.
-    Q_ASSERT(platformControl);
-    return platformControl;
+    return s_platformPlugin;
 }
 
 QT_END_NAMESPACE

@@ -65,7 +65,8 @@ public:
     explicit QNativeButtonPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeButtonPrivate();
 
-    void connectToPlatform();
+    void createPlatformButton();
+    void setPlatformButton(QNativePlatformButton *platformButton);
     QNativePlatformButton *m_platformButton;
 };
 

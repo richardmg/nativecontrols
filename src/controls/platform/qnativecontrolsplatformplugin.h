@@ -41,8 +41,17 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeBase;
-class QNativePlatformBase;
+#define Q_NATIVE_FORWARD_DECLARE(TYPE) class QNative ## TYPE; class QNativePlatform ## TYPE;
+
+Q_NATIVE_FORWARD_DECLARE(Window)
+Q_NATIVE_FORWARD_DECLARE(View)
+Q_NATIVE_FORWARD_DECLARE(Control)
+Q_NATIVE_FORWARD_DECLARE(Button)
+Q_NATIVE_FORWARD_DECLARE(TextField)
+Q_NATIVE_FORWARD_DECLARE(SearchField)
+Q_NATIVE_FORWARD_DECLARE(Page)
+Q_NATIVE_FORWARD_DECLARE(TabsPage)
+Q_NATIVE_FORWARD_DECLARE(TabsPageTab)
 
 #define QNativePlatformPluginInterface_iid "org.qt-project.Qt.Native.Platform"
 
@@ -50,7 +59,16 @@ class QNativePlatformPluginInterface
 {
 public:
     virtual ~QNativePlatformPluginInterface() {}
-    virtual QNativePlatformBase* create(QNativeBase *nativeBase) const = 0;
+
+    virtual QNativePlatformWindow* createWindow(QNativeWindow *window) const = 0;
+    virtual QNativePlatformView* createView(QNativeView *view) const = 0;
+    virtual QNativePlatformControl* createControl(QNativeControl *control) const = 0;
+    virtual QNativePlatformButton* createButton(QNativeButton *button) const = 0;
+    virtual QNativePlatformTextField* createTextField(QNativeTextField *textField) const = 0;
+    virtual QNativePlatformSearchField* createSearchField(QNativeSearchField *searchField) const = 0;
+    virtual QNativePlatformPage* createPage(QNativePage *page) const = 0;
+    virtual QNativePlatformTabsPage* createTabsPage(QNativeTabsPage *tabsPage) const = 0;
+    virtual QNativePlatformTabsPageTab* createTabsPageTab(QNativeTabsPageTab *tabsPageTab) const = 0;
 };
 
 Q_DECLARE_INTERFACE(QNativePlatformPluginInterface, QNativePlatformPluginInterface_iid)

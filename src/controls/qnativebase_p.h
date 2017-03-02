@@ -64,7 +64,7 @@ public:
     explicit QNativeBasePrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeBasePrivate();
 
-    void connectToPlatform();
+    void setPlatformBase(QNativePlatformBase *platformBase);
     void syncPlatformParent();
 
     QNativePlatformBase *m_platformBase;

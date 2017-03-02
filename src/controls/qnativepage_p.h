@@ -65,7 +65,8 @@ public:
     explicit QNativePagePrivate(int version = QObjectPrivateVersion);
     virtual ~QNativePagePrivate();
 
-    void connectToPlatform();
+    void createPlatformPage();
+    void setPlatformPage(QNativePlatformPage *platformPage);
     QNativePlatformPage *m_platformPage;
 };
 

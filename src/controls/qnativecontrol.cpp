@@ -38,6 +38,7 @@
 #include <QtNativeControls/private/qnativecontrol_p.h>
 #include <QtNativeControls/qnativeplatformcontrol.h>
 #include <QtNativeControls/qnativeview.h>
+#include <QtNativeControls/private/qnativeplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -51,17 +52,24 @@ QNativeControlPrivate::~QNativeControlPrivate()
 {
 }
 
-void QNativeControlPrivate::connectToPlatform()
+void QNativeControlPrivate::createPlatformControl()
 {
-    QNativeViewPrivate::connectToPlatform();
-    m_platformControl = dynamic_cast<QNativePlatformControl *>(m_platformBase);
+    Q_ASSERT(!m_platformControl);
+    m_platformControl = QNativePlatformManager::platformPlugin()->createControl(q_func());
     Q_ASSERT(m_platformControl);
+    setPlatformControl(m_platformControl);
+}
+
+void QNativeControlPrivate::setPlatformControl(QNativePlatformControl *platformControl)
+{
+    m_platformControl = platformControl;
+    setPlatformView(platformControl);
 }
 
 QNativeControl::QNativeControl(QNativeBase *parent)
     : QNativeView(parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformControl();
 }
 
 QNativeControl::QNativeControl(QNativeControlPrivate &dd, QNativeBase *parent)

@@ -37,6 +37,7 @@
 #include <QtNativeControls/qnativepage.h>
 #include <QtNativeControls/private/qnativepage_p.h>
 #include <QtNativeControls/qnativeplatformpage.h>
+#include <QtNativeControls/private/qnativeplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -50,17 +51,24 @@ QNativePagePrivate::~QNativePagePrivate()
 {
 }
 
-void QNativePagePrivate::connectToPlatform()
+void QNativePagePrivate::createPlatformPage()
 {
-    QNativeBasePrivate::connectToPlatform();
-    m_platformPage = dynamic_cast<QNativePlatformPage *>(m_platformBase);
+    Q_ASSERT(!m_platformPage);
+    m_platformPage = QNativePlatformManager::platformPlugin()->createPage(q_func());
     Q_ASSERT(m_platformPage);
+    setPlatformPage(m_platformPage);
+}
+
+void QNativePagePrivate::setPlatformPage(QNativePlatformPage *platformPage)
+{
+    m_platformPage = platformPage;
+    setPlatformBase(platformPage);
 }
 
 QNativePage::QNativePage(QNativeBase *parent)
     : QNativeBase(*new QNativePagePrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformPage();
 }
 
 QNativePage::QNativePage(QNativePagePrivate &dd, QNativeBase *parent)

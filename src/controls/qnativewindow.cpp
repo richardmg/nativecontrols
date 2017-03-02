@@ -37,6 +37,7 @@
 #include <QtNativeControls/qnativewindow.h>
 #include <QtNativeControls/private/qnativewindow_p.h>
 #include <QtNativeControls/qnativeplatformwindow.h>
+#include <QtNativeControls/private/qnativeplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -50,17 +51,24 @@ QNativeWindowPrivate::~QNativeWindowPrivate()
 {
 }
 
-void QNativeWindowPrivate::connectToPlatform()
+void QNativeWindowPrivate::createPlatformWindow()
 {
-    QNativeBasePrivate::connectToPlatform();
-    m_platformWindow = dynamic_cast<QNativePlatformWindow *>(m_platformBase);
+    Q_ASSERT(!m_platformWindow);
+    m_platformWindow = QNativePlatformManager::platformPlugin()->createWindow(q_func());
     Q_ASSERT(m_platformWindow);
+    setPlatformWindow(m_platformWindow);
+}
+
+void QNativeWindowPrivate::setPlatformWindow(QNativePlatformWindow *platformWindow)
+{
+    m_platformWindow = platformWindow;
+    setPlatformBase(platformWindow);
 }
 
 QNativeWindow::QNativeWindow()
     : QNativeBase(*new QNativeWindowPrivate(), nullptr)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformWindow();
 }
 
 QNativeWindow::QNativeWindow(QNativeWindowPrivate &dd, QNativeBase *parent)

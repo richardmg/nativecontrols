@@ -49,18 +49,16 @@
 //
 
 #include <QtCore>
+#include <QtNativeControls/qnativecontrolsplatformplugin.h>
 
 QT_BEGIN_NAMESPACE
 
-class QNativeBase;
-class QNativePlatformBase;
-class QNativePlatformPluginInterface;
 class QFactoryLoader;
 
 class QNativePlatformManager
 {
 public:
-    static QNativePlatformBase *create(QNativeBase *control);
+    static QNativePlatformPluginInterface *platformPlugin();
 
 private:
     static QFactoryLoader *s_loader;

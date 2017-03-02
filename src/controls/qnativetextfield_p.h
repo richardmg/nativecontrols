@@ -65,7 +65,8 @@ public:
     explicit QNativeTextFieldPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeTextFieldPrivate();
 
-    void connectToPlatform();
+    void createPlatformTextField();
+    void setPlatformTextField(QNativePlatformTextField *platformTextField);
     QNativePlatformTextField *m_platformTextField;
 };
 

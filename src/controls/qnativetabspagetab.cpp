@@ -38,6 +38,7 @@
 #include <QtNativeControls/private/qnativetabspagetab_p.h>
 #include <QtNativeControls/qnativeplatformtabspagetab.h>
 #include <QtNativeControls/qnativeplatformbase.h>
+#include <QtNativeControls/private/qnativeplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -51,23 +52,30 @@ QNativeTabsPageTabPrivate::~QNativeTabsPageTabPrivate()
 {
 }
 
-void QNativeTabsPageTabPrivate::connectToPlatform()
+void QNativeTabsPageTabPrivate::createPlatformTabsPageTab()
 {
-    QNativeBasePrivate::connectToPlatform();
-    m_platformTabsPageTab = dynamic_cast<QNativePlatformTabsPageTab *>(m_platformBase);
+    Q_ASSERT(!m_platformTabsPageTab);
+    m_platformTabsPageTab = QNativePlatformManager::platformPlugin()->createTabsPageTab(q_func());
     Q_ASSERT(m_platformTabsPageTab);
+    setPlatformTabsPageTab(m_platformTabsPageTab);
+}
+
+void QNativeTabsPageTabPrivate::setPlatformTabsPageTab(QNativePlatformTabsPageTab *platformTabsPageTab)
+{
+    m_platformTabsPageTab = platformTabsPageTab;
+    setPlatformBase(platformTabsPageTab);
 }
 
 QNativeTabsPageTab::QNativeTabsPageTab(QNativeBase *parent)
     : QNativeBase(*new QNativeTabsPageTabPrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformTabsPageTab();
 }
 
 QNativeTabsPageTab::QNativeTabsPageTab(const QString &title, QNativeBase *parent)
     : QNativeBase(*new QNativeTabsPageTabPrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformTabsPageTab();
     setTitle(title);
 }
 

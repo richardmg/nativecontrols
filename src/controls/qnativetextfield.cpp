@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-
 #include <QtNativeControls/qnativetextfield.h>
 #include <QtNativeControls/private/qnativetextfield_p.h>
 #include <QtNativeControls/qnativeplatformtextfield.h>
+#include <QtNativeControls/private/qnativeplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -51,23 +51,30 @@ QNativeTextFieldPrivate::~QNativeTextFieldPrivate()
 {
 }
 
-void QNativeTextFieldPrivate::connectToPlatform()
+void QNativeTextFieldPrivate::createPlatformTextField()
 {
-    QNativeControlPrivate::connectToPlatform();
-    m_platformTextField = dynamic_cast<QNativePlatformTextField *>(m_platformBase);
+    Q_ASSERT(!m_platformTextField);
+    m_platformTextField = QNativePlatformManager::platformPlugin()->createTextField(q_func());
     Q_ASSERT(m_platformTextField);
+    setPlatformTextField(m_platformTextField);
+}
+
+void QNativeTextFieldPrivate::setPlatformTextField(QNativePlatformTextField *platformTextField)
+{
+    m_platformTextField = platformTextField;
+    setPlatformControl(platformTextField);
 }
 
 QNativeTextField::QNativeTextField(QNativeBase *parent)
     : QNativeControl(*new QNativeTextFieldPrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformTextField();
 }
 
 QNativeTextField::QNativeTextField(const QString &text, QNativeBase *parent)
     : QNativeControl(*new QNativeTextFieldPrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformTextField();
     setText(text);
 }
 

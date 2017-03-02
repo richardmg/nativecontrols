@@ -65,7 +65,8 @@ public:
     explicit QNativeViewPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeViewPrivate();
 
-    void connectToPlatform();
+    void createPlatformView();
+    void setPlatformView(QNativePlatformView *platformView);
     QNativePlatformView *m_platformView;
 };
 

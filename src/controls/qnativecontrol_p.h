@@ -63,7 +63,8 @@ public:
     explicit QNativeControlPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeControlPrivate();
 
-    void connectToPlatform();
+    void createPlatformControl();
+    void setPlatformControl(QNativePlatformControl *platformControl);
     QNativePlatformControl *m_platformControl;
 };
 

@@ -65,7 +65,8 @@ public:
     explicit QNativeSearchFieldPrivate(int version = QObjectPrivateVersion);
     virtual ~QNativeSearchFieldPrivate();
 
-    void connectToPlatform();
+    void createPlatformSearchField();
+    void setPlatformSearchField(QNativePlatformSearchField *platformSearchField);
     QNativePlatformSearchField *m_platformSearchField;
 };
 

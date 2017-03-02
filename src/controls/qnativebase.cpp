@@ -53,12 +53,10 @@ QNativeBasePrivate::~QNativeBasePrivate()
     delete m_platformBase;
 }
 
-void QNativeBasePrivate::connectToPlatform()
+void QNativeBasePrivate::setPlatformBase(QNativePlatformBase *platformBase)
 {
-    // Note: This function must be called after this instance
-    // has been fully constructed, so the plugins 'create' function
-    // can cast to the correct type and extract any needed information.
-    m_platformBase = QNativePlatformManager::create(q_func());
+    // QNativeBasePrivate will take ownership over platformBase.
+    m_platformBase = platformBase;
     syncPlatformParent();
 }
 

@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-
 #include <QtNativeControls/qnativesearchfield.h>
 #include <QtNativeControls/private/qnativesearchfield_p.h>
 #include <QtNativeControls/qnativeplatformsearchfield.h>
+#include <QtNativeControls/private/qnativeplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -51,23 +51,30 @@ QNativeSearchFieldPrivate::~QNativeSearchFieldPrivate()
 {
 }
 
-void QNativeSearchFieldPrivate::connectToPlatform()
+void QNativeSearchFieldPrivate::createPlatformSearchField()
 {
-    QNativeControlPrivate::connectToPlatform();
-    m_platformSearchField = dynamic_cast<QNativePlatformSearchField *>(m_platformBase);
+    Q_ASSERT(!m_platformSearchField);
+    m_platformSearchField = QNativePlatformManager::platformPlugin()->createSearchField(q_func());
     Q_ASSERT(m_platformSearchField);
+    setPlatformSearchField(m_platformSearchField);
+}
+
+void QNativeSearchFieldPrivate::setPlatformSearchField(QNativePlatformSearchField *platformSearchField)
+{
+    m_platformSearchField = platformSearchField;
+    setPlatformControl(platformSearchField);
 }
 
 QNativeSearchField::QNativeSearchField(QNativeBase *parent)
     : QNativeControl(*new QNativeSearchFieldPrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformSearchField();
 }
 
 QNativeSearchField::QNativeSearchField(const QString &text, QNativeBase *parent)
     : QNativeControl(*new QNativeSearchFieldPrivate(), parent)
 {
-    d_func()->connectToPlatform();
+    d_func()->createPlatformSearchField();
     setText(text);
 }
 
