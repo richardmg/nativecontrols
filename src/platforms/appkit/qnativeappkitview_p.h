@@ -75,6 +75,7 @@ public:
     virtual void connectSignals(QNativeBase *base) override;
     virtual void updateLayout(bool recursive);
 
+    void initConnections();
     void updateImplicitSize();
 
     Q_DECLARE_PUBLIC(QNativeAppKitView)
