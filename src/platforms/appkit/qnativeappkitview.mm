@@ -323,14 +323,15 @@ qreal QNativeAppKitView::x() const
 
 void QNativeAppKitView::setX(qreal newX)
 {
+    Q_D(QNativeAppKitView);
+    d->setAttribute(QNativeAppKitViewPrivate::MovedX);
+
     if (newX == x())
         return;
 
-    Q_D(QNativeAppKitView);
     QRectF g = geometry();
     g.moveLeft(newX);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeAppKitViewPrivate::MovedX);
 
     emit xChanged(newX);
 }
@@ -342,14 +343,15 @@ qreal QNativeAppKitView::y() const
 
 void QNativeAppKitView::setY(qreal newY)
 {
+    Q_D(QNativeAppKitView);
+    d->setAttribute(QNativeAppKitViewPrivate::MovedY);
+
     if (newY == y())
         return;
 
-    Q_D(QNativeAppKitView);
     QRectF g = geometry();
     g.moveTop(newY);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeAppKitViewPrivate::MovedY);
 
     emit yChanged(newY);
 }
@@ -361,14 +363,15 @@ qreal QNativeAppKitView::width() const
 
 void QNativeAppKitView::setWidth(qreal newWidth)
 {
+    Q_D(QNativeAppKitView);
+    d->setAttribute(QNativeAppKitViewPrivate::ResizedWidth);
+
     if (newWidth == width())
         return;
 
-    Q_D(QNativeAppKitView);
     QRectF g = geometry();
     g.setWidth(newWidth);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeAppKitViewPrivate::ResizedWidth);
 
     emit widthChanged(newWidth);
 }
@@ -380,14 +383,15 @@ qreal QNativeAppKitView::height() const
 
 void QNativeAppKitView::setHeight(qreal newHeight)
 {
+    Q_D(QNativeAppKitView);
+    d->setAttribute(QNativeAppKitViewPrivate::ResizedHeight);
+
     if (newHeight == height())
         return;
 
-    Q_D(QNativeAppKitView);
     QRectF g = geometry();
     g.setHeight(newHeight);
     d_func()->setGeometry(g);
-    d->setAttribute(QNativeAppKitViewPrivate::ResizedHeight);
 
     emit heightChanged(newHeight);
 }
