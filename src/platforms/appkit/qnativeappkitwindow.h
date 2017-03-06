@@ -50,7 +50,7 @@ Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
 class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitView, public virtual QNativePlatformWindow
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAppKitViewController *rootViewController READ rootViewController WRITE setRootViewController NOTIFY rootViewControllerChanged)
+    Q_PROPERTY(QNativeAppKitViewController *contentViewController READ contentViewController WRITE setContentViewController NOTIFY contentViewControllerChanged)
 
 public:
     QNativeAppKitWindow();
@@ -58,8 +58,8 @@ public:
 
     NSWindow *nsWindowHandle();
 
-    void setRootViewController(QNativeAppKitViewController *rootViewController);
-    QNativeAppKitViewController *rootViewController() const;
+    void setContentViewController(QNativeAppKitViewController *contentViewController);
+    QNativeAppKitViewController *contentViewController() const;
 
     virtual QRectF geometry() const override;
     virtual void setGeometry(const QRectF &rect) override;
@@ -83,7 +83,7 @@ Q_SIGNALS:
     void widthChanged(qreal w);
     void heightChanged(qreal h);
     void visibleChanged(bool isVisible);
-    void rootViewControllerChanged(QNativeAppKitViewController *controller);
+    void contentViewControllerChanged(QNativeAppKitViewController *controller);
 
 protected:
     QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd);

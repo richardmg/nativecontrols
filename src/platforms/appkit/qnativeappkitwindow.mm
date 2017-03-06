@@ -127,7 +127,7 @@ void QNativeAppKitWindowPrivate::updateLayout(bool recursive)
 void QNativeAppKitWindowPrivate::addSubViewToContentView(NSView *nsView)
 {
     Q_Q(QNativeAppKitWindow);
-    QNativeAppKitView *contentView = q->rootViewController()->view();
+    QNativeAppKitView *contentView = q->contentViewController()->view();
     QNativeAppKitViewPrivate *dptr_contentView = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(contentView));
     dptr_contentView->addSubView(nsView);
 }
@@ -176,7 +176,7 @@ NSWindow *QNativeAppKitWindow::nsWindowHandle()
     return d_func()->view().window;
 }
 
-void QNativeAppKitWindow::setRootViewController(QNativeAppKitViewController *controller)
+void QNativeAppKitWindow::setContentViewController(QNativeAppKitViewController *controller)
 {
     Q_D(QNativeAppKitWindow);
     if (d->m_viewController == controller)
@@ -186,15 +186,15 @@ void QNativeAppKitWindow::setRootViewController(QNativeAppKitViewController *con
     d->m_viewController = dynamic_cast<QNativeAppKitViewController *>(controller);
     [d->m_viewController->nsViewControllerHandle().view setFrame:nsWindowHandle().contentView.frame]; // TODO: Determine how to handle view controller resizing
     nsWindowHandle().contentViewController = d->m_viewController->nsViewControllerHandle();
-    emit rootViewControllerChanged(controller);
+    emit contentViewControllerChanged(controller);
 }
 
-QNativeAppKitViewController *QNativeAppKitWindow::rootViewController() const
+QNativeAppKitViewController *QNativeAppKitWindow::contentViewController() const
 {
     Q_D(const QNativeAppKitWindow);
     if (!d->m_viewController) {
         QNativeAppKitWindow *self = const_cast<QNativeAppKitWindow *>(this);
-        self->setRootViewController(new QNativeAppKitViewController(self));
+        self->setContentViewController(new QNativeAppKitViewController(self));
         // Keep track of whether or not the view controller was created
         // by ourselves, in case we accidentally create one before
         // the app gets around to add one as a child.
@@ -250,9 +250,9 @@ void QNativeAppKitWindow::setVisible(bool newVisible)
         // are added after the call to setVisible when using QML, we need to
         // post the update request.
         qApp->postEvent(this, new QEvent(QEvent::LayoutRequest));
-        // Also, AppKit expects there to always be a root view controller
+        // Also, AppKit expects there to always be a content view controller
         // in a NSWindow, so if hasn't been added yet, create one now.
-        rootViewController();
+        contentViewController();
         [d_func()->m_window makeKeyAndOrderFront:d_func()->m_window];
     }
 
@@ -323,11 +323,11 @@ void QNativeAppKitWindow::childEvent(QChildEvent *event)
             if (!d->m_viewController || !d->m_viewControllerSetExplicit) {
                 // If no view controller is set from before (other than the default
                 // one), we let the first set child controller become the root view controller.
-                setRootViewController(dptr_child->q_func());
+                setContentViewController(dptr_child->q_func());
             }
         } else if (event->removed()) {
             if (dptr_child->q_func() == d->m_viewController)
-                setRootViewController(nullptr);
+                setContentViewController(nullptr);
         }
     }
 }
