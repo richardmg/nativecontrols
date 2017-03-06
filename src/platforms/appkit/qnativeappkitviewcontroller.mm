@@ -203,6 +203,13 @@ void QNativeAppKitViewController::childEvent(QChildEvent *event)
      QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
 
      if (QNativeAppKitViewPrivate *dptr_child = dynamic_cast<QNativeAppKitViewPrivate *>(childPrivate)) {
+         // QNativeAppKitView added as children of a plain QNativeAppKitViewController will
+         // have their NSViews added as children of the content view instead as a convenience.
+         // But we only do this if the view controller is a plain QNativeAppKitViewController.
+         // Otherwise, if you e.g assign a NSView to UITabBarController.view, it will no longer
+         // behave like a tab bar, but instead fall back to act like a normal view controller.
+         if (![nsViewControllerHandle() isMemberOfClass:[NSViewController class]])
+             return;
          if (event->added()) {
              // QNativeAppKitView added as children of the view controller will
              // have their NSViews added as children of the content view instead.
