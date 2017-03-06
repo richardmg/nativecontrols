@@ -54,7 +54,7 @@ public:
 
     void setPlatformParent(QNativePlatformBase *platformParent) override
     {
-        // If the new, or the old, parent is a tab bar controller, we need to
+        // If the new, or the old, parent is a tab view controller, we need to
         // add, or remove, ourselves from the list of tabs it contains.
         if (!platformParent) {
             if (QNativeAppKitTabViewController *prevTabView = dynamic_cast<QNativeAppKitTabViewController *>(parent())) {
@@ -88,31 +88,69 @@ public:
     explicit QNativeAppKitPlatformPlugin(QObject* = 0) {}
     ~QNativeAppKitPlatformPlugin() {}
 
-    virtual QNativePlatformBase* create(QNativeBase *nativeBase) const override
-    {
-        QNativeAppKitBase *appkitBase = nullptr;
-        if (dynamic_cast<QNativeWindow *>(nativeBase))
-            appkitBase = new QNativeAppKitWindow();
-        else if (dynamic_cast<QNativeButton *>(nativeBase))
-            appkitBase = new QNativeAppKitButton(nullptr);
-        else if (dynamic_cast<QNativeTextField *>(nativeBase))
-            appkitBase = new QNativeAppKitTextField(nullptr);
-        else if (dynamic_cast<QNativeSearchField *>(nativeBase))
-            appkitBase = new QNativeAppKitSearchField(nullptr);
-        else if (dynamic_cast<QNativeView *>(nativeBase))
-            appkitBase = new QNativeAppKitView(nullptr);
-        else if (dynamic_cast<QNativeTabsPage *>(nativeBase))
-            appkitBase = new QNativeAppKitTabViewController;
-        else if (dynamic_cast<QNativeTabsPageTab *>(nativeBase))
-            appkitBase = new QAppKitPluginTabsPageTab;
-        else if (dynamic_cast<QNativePage *>(nativeBase))
-            appkitBase = new QNativeAppKitViewController(nullptr);
-        else
-            Q_UNREACHABLE();
+     virtual QNativePlatformWindow* createWindow(QNativeWindow *window) const override
+     {
+         auto platform = new QNativeAppKitWindow();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(window);
+         return platform;
+     }
 
-        appkitBase->d_func()->connectSignals(nativeBase);
-        return appkitBase;
-    }
+     virtual QNativePlatformView* createView(QNativeView *view) const override
+     {
+         auto platform = new QNativeAppKitView();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(view);
+         return platform;
+     }
+
+     virtual QNativePlatformControl* createControl(QNativeControl *control) const override
+     {
+         auto platform = new QNativeAppKitControl();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(control);
+         return platform;
+     }
+
+     virtual QNativePlatformButton* createButton(QNativeButton *button) const override
+     {
+         auto platform = new QNativeAppKitButton();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(button);
+         return platform;
+     }
+
+     virtual QNativePlatformTextField* createTextField(QNativeTextField *textField) const override
+     {
+         auto platform = new QNativeAppKitTextField();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(textField);
+         return platform;
+     }
+
+     virtual QNativePlatformSearchField* createSearchField(QNativeSearchField *searchField) const override
+     {
+         auto platform = new QNativeAppKitSearchField();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(searchField);
+         return platform;
+     }
+
+     virtual QNativePlatformPage* createPage(QNativePage *page) const override
+     {
+         auto platform = new QNativeAppKitViewController();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(page);
+         return platform;
+     }
+
+     virtual QNativePlatformTabsPage* createTabsPage(QNativeTabsPage *tabsPage) const override
+     {
+         auto platform = new QNativeAppKitTabViewController();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(tabsPage);
+         return platform;
+     }
+
+     virtual QNativePlatformTabsPageTab* createTabsPageTab(QNativeTabsPageTab *tabsPageTab) const override
+     {
+         auto platform = new QAppKitPluginTabsPageTab();
+         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(tabsPageTab);
+         return platform;
+     }
+
 };
 
 QT_END_NAMESPACE
