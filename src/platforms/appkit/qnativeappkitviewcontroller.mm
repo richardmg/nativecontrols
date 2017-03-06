@@ -197,6 +197,7 @@ QByteArrayList QNativeAppKitViewController::supportedNativeParentTypes()
 
 void QNativeAppKitViewController::childEvent(QChildEvent *event)
 {
+    Q_D(QNativeAppKitViewController);
     // Note that event->child() might not be fully constructed at this point, if
     // called from its constructor chain. But the private part will.
      QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
@@ -208,20 +209,21 @@ void QNativeAppKitViewController::childEvent(QChildEvent *event)
              // Since you are allowed to set a parentless view explicit as a
              // content view, and then later do the reparenting, we need to ensure
              // that we don't try to make the content view a subview of itself.
-             QNativeAppKitView *contentView = d_func()->m_view;
+             QNativeAppKitView *contentView = d->m_view;
              QNativeAppKitView *subView = dptr_child->q_func();
              if (subView != contentView) {
                  // Note: the next call might lazy create the content view, in
                  // which case we'll get a recursive call back to childEvent.
-                 d_func()->addSubViewToContentView(subView->uiViewHandle());
+                 d->addSubViewToContentView(subView->nsViewHandle());
              }
          } else if (event->removed()) {
              [dptr_child->view() removeFromSuperview];
          }
      } else if (QNativeAppKitViewControllerPrivate *dptr_child = dynamic_cast<QNativeAppKitViewControllerPrivate *>(childPrivate)) {
-         // Todo: add API to QNativeAppKitViewController that wraps the NSViewController.childViewControllers API
-         Q_UNUSED(dptr_child);
-         Q_UNIMPLEMENTED();
+         if (event->added())
+             d->addChildViewController(dptr_child->q_func()->nsViewControllerHandle());
+         else
+             [dptr_child->m_viewController removeFromParentViewController];
      }
 }
 
