@@ -124,6 +124,14 @@ void QNativeAppKitWindowPrivate::updateLayout(bool recursive)
     }
 }
 
+void QNativeAppKitWindowPrivate::addSubViewToContentView(NSView *nsView)
+{
+    Q_Q(QNativeAppKitWindow);
+    QNativeAppKitView *contentView = q->rootViewController()->view();
+    QNativeAppKitViewPrivate *dptr_contentView = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(contentView));
+    dptr_contentView->addSubView(nsView);
+}
+
 NSView *QNativeAppKitWindowPrivate::createView()
 {
     m_delegate = [[QNativeAppKitWindowDelegate alloc] initWithQNativeAppKitWindowPrivate:this];
@@ -283,11 +291,9 @@ void QNativeAppKitWindow::childEvent(QChildEvent *event)
 
     if (QNativeAppKitViewPrivate *dptr_child = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(event->child()))) {
         if (event->added()) {
-            // QNativeAppKitView added as children of the window will have their NSViews
-            // added as children of the windows view controller view instead.
-            QNativeAppKitView *contentView = rootViewController()->view();
-            QNativeAppKitViewPrivate *dptr_contentView = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(contentView));
-            dptr_contentView->addSubView(dptr_child->view());
+            // QNativeAppKitView added as children of the window will have their
+            // NSViews added as children of the view controller view instead.
+            d->addSubViewToContentView(dptr_child->view());
         } else if (event->removed()) {
             d->removeSubView(dptr_child->view());
         }

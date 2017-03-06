@@ -68,6 +68,8 @@ public:
     virtual void connectSignals(QNativeBase *base) override;
     virtual void updateLayout(bool recursive) override;
 
+    void addSubViewToContentView(NSView *nsView);
+
     QNativeAppKitWindowDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QNativeAppKitWindow)
