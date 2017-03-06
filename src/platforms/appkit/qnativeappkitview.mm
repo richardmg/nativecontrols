@@ -187,12 +187,12 @@ void QNativeAppKitViewPrivate::addSubView(NSView *subView)
 
 NSRect QNativeAppKitViewPrivate::alignmentRect() const
 {
-    return [m_view alignmentRectForFrame:m_view.frame];
+    return [view() alignmentRectForFrame:view().frame];
 }
 
 void QNativeAppKitViewPrivate::setAlignmentRect(NSRect rect)
 {
-    m_view.frame = [m_view frameForAlignmentRect:rect];
+    view().frame = [view() frameForAlignmentRect:rect];
 }
 
 void QNativeAppKitViewPrivate::setGeometry(const QRectF &rect)
