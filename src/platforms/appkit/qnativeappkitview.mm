@@ -409,12 +409,58 @@ qreal QNativeAppKitView::bottom() const
 
 QNativeAppKitView *QNativeAppKitView::parentView()
 {
-   return dynamic_cast<QNativeAppKitView *>(parent());
+    return dynamic_cast<QNativeAppKitView *>(parent());
 }
 
 NSView *QNativeAppKitView::nsViewHandle()
 {
    return d_func()->view();
+}
+
+bool QNativeAppKitView::setNativeParent(QObject *parent)
+{
+    if (QNativeAppKitView *p = dynamic_cast<QNativeAppKitView *>(parent))
+        setParent(p);
+    else
+        return QNativeAppKitBase::setNativeParent(parent);
+    return true;
+}
+
+bool QNativeAppKitView::setNativeParent(const QByteArray &type, void *parent)
+{
+    if (type == "NSView")
+        [reinterpret_cast<NSView *>(parent) addSubview:nsViewHandle()];
+    else
+        return QNativeAppKitBase::setNativeParent(type, parent);
+    return true;
+}
+
+bool QNativeAppKitView::addNativeChild(QObject *child)
+{
+    if (QNativeAppKitView *c = dynamic_cast<QNativeAppKitView *>(child))
+        c->setParent(this);
+    else
+        return QNativeAppKitBase::addNativeChild(child);
+    return true;
+}
+
+bool QNativeAppKitView::addNativeChild(const QByteArray &type, void *child)
+{
+    if (type == "NSView")
+        d_func()->addSubView(reinterpret_cast<NSView *>(child));
+    else
+        return QNativeAppKitBase::addNativeChild(type, child);
+    return true;
+}
+
+QByteArrayList QNativeAppKitView::supportedNativeChildTypes()
+{
+    return QNativeAppKitBase::supportedNativeChildTypes() << "NSView";
+}
+
+QByteArrayList QNativeAppKitView::supportedNativeParentTypes()
+{
+    return supportedNativeChildTypes();
 }
 
 void QNativeAppKitView::childEvent(QChildEvent *event)

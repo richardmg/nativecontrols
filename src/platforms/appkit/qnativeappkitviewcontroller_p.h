@@ -69,6 +69,7 @@ public:
 
     NSViewController *viewController();
     void addChildViewController(NSViewController *child);
+    void addSubViewToContentView(NSView *uiView);
 
     QNativeAppKitTabViewItem *m_tabViewItem;
 

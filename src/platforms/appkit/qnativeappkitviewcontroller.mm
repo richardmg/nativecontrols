@@ -95,6 +95,12 @@ void QNativeAppKitViewControllerPrivate::addChildViewController(NSViewController
     [viewController() addChildViewController:child];
 }
 
+void QNativeAppKitViewControllerPrivate::addSubViewToContentView(NSView *uiView)
+{
+    QNativeAppKitViewPrivate *dptr_contentView = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(q_func()->view()));
+    dptr_contentView->addSubView(uiView);
+}
+
 QNativeAppKitViewController *QNativeAppKitViewController::parentViewController()
 {
     return dynamic_cast<QNativeAppKitViewController *>(parent());
@@ -139,31 +145,84 @@ NSViewController *QNativeAppKitViewController::nsViewControllerHandle()
     return d_func()->viewController();
 }
 
+bool QNativeAppKitViewController::setNativeParent(QObject *parent)
+{
+    if (QNativeAppKitViewController *p = dynamic_cast<QNativeAppKitViewController *>(parent))
+        setParent(p);
+    else
+        return QNativeAppKitBase::setNativeParent(parent);
+    return true;
+}
+
+bool QNativeAppKitViewController::setNativeParent(const QByteArray &type, void *parent)
+{
+    if (type == "NSViewController")
+        [reinterpret_cast<NSViewController *>(parent) addChildViewController:nsViewControllerHandle()];
+    else
+        return QNativeAppKitBase::setNativeParent(type, parent);
+    return true;
+}
+
+bool QNativeAppKitViewController::addNativeChild(QObject *child)
+{
+    if (QNativeAppKitView *c = dynamic_cast<QNativeAppKitView *>(child))
+        c->setParent(this);
+    else if (QNativeAppKitViewController *c = dynamic_cast<QNativeAppKitViewController *>(child))
+        c->setParent(this);
+    else
+        return QNativeAppKitBase::addNativeChild(child);
+    return true;
+}
+
+bool QNativeAppKitViewController::addNativeChild(const QByteArray &type, void *child)
+{
+    if (type == "NSView")
+        d_func()->addSubViewToContentView(reinterpret_cast<NSView *>(child));
+    else if (type == "NSViewController")
+        [nsViewControllerHandle() addChildViewController:reinterpret_cast<NSViewController *>(child)];
+    else
+        return QNativeAppKitBase::addNativeChild(type, child);
+    return true;
+}
+
+QByteArrayList QNativeAppKitViewController::supportedNativeChildTypes()
+{
+    return QNativeAppKitBase::supportedNativeChildTypes() << "NSView" << "NSViewController";
+}
+
+QByteArrayList QNativeAppKitViewController::supportedNativeParentTypes()
+{
+    return QNativeAppKitBase::supportedNativeChildTypes() << "NSViewController";
+}
+
 void QNativeAppKitViewController::childEvent(QChildEvent *event)
 {
     // Note that event->child() might not be fully constructed at this point, if
     // called from its constructor chain. But the private part will.
-    QNativeAppKitViewPrivate *dptr_child = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(event->child()));
-    if (!dptr_child)
-        return;
+     QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
 
-    QNativeAppKitViewPrivate *dptr_contentView = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(view()));
-    if (event->added()) {
-        // QNativeUIKitView added as children of the view controller will
-        // have their UIViews added as children of the content view instead.
-        // Since you are allowed to set a parentless view explicit as a
-        // content view, and then later do the reparenting, we need to ensure
-        // that we don't try to make the content view a subview of itself.
-        QNativeAppKitView *contentView = d_func()->m_view;
-        QNativeAppKitView *subView = dptr_child->q_func();
-        if (subView != contentView) {
-            // Note: the next call might lazy create the content view, in
-            // which case we'll get a recursive call back to childEvent.
-            dptr_contentView->addSubView(subView->nsViewHandle());
-        }
-    } else if (event->removed()) {
-        dptr_contentView->removeSubView(dptr_child->view());
-    }
+     if (QNativeAppKitViewPrivate *dptr_child = dynamic_cast<QNativeAppKitViewPrivate *>(childPrivate)) {
+         if (event->added()) {
+             // QNativeAppKitView added as children of the view controller will
+             // have their NSViews added as children of the content view instead.
+             // Since you are allowed to set a parentless view explicit as a
+             // content view, and then later do the reparenting, we need to ensure
+             // that we don't try to make the content view a subview of itself.
+             QNativeAppKitView *contentView = d_func()->m_view;
+             QNativeAppKitView *subView = dptr_child->q_func();
+             if (subView != contentView) {
+                 // Note: the next call might lazy create the content view, in
+                 // which case we'll get a recursive call back to childEvent.
+                 d_func()->addSubViewToContentView(subView->uiViewHandle());
+             }
+         } else if (event->removed()) {
+             [dptr_child->view() removeFromSuperview];
+         }
+     } else if (QNativeAppKitViewControllerPrivate *dptr_child = dynamic_cast<QNativeAppKitViewControllerPrivate *>(childPrivate)) {
+         // Todo: add API to QNativeAppKitViewController that wraps the NSViewController.childViewControllers API
+         Q_UNUSED(dptr_child);
+         Q_UNIMPLEMENTED();
+     }
 }
 
 #include "moc_qnativeappkitviewcontroller.cpp"

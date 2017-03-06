@@ -68,6 +68,13 @@ public:
 
     NSViewController *nsViewControllerHandle();
 
+    bool setNativeParent(QObject *parent) override;
+    bool setNativeParent(const QByteArray &type, void *parent) override;
+    bool addNativeChild(QObject *child) override;
+    bool addNativeChild(const QByteArray &type, void *child) override;
+    QByteArrayList supportedNativeChildTypes() override;
+    QByteArrayList supportedNativeParentTypes() override;
+
 Q_SIGNALS:
     void viewChanged(QNativeAppKitView *contentView);
 

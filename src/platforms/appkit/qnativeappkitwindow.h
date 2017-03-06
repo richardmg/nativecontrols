@@ -74,6 +74,10 @@ public:
 
     virtual bool event(QEvent *e) override;
 
+    bool addNativeChild(const QByteArray &type, void *child) override;
+    QByteArrayList supportedNativeChildTypes() override;
+    QByteArrayList supportedNativeParentTypes() override;
+
 Q_SIGNALS:
     void widthChanged(qreal w);
     void heightChanged(qreal h);

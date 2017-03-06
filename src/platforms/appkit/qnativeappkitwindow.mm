@@ -282,6 +282,27 @@ bool QNativeAppKitWindow::event(QEvent *e)
 
 }
 
+bool QNativeAppKitWindow::addNativeChild(const QByteArray &type, void *child)
+{
+    if (type == "NSView")
+        d_func()->addSubViewToContentView(reinterpret_cast<NSView *>(child));
+    else if (type == "NSViewController")
+        nsWindowHandle().contentViewController = reinterpret_cast<NSViewController *>(child);
+    else
+        return QNativeAppKitView::addNativeChild(type, child);
+    return true;
+}
+
+QByteArrayList QNativeAppKitWindow::supportedNativeChildTypes()
+{
+    return QNativeAppKitView::supportedNativeChildTypes() << "NSViewController";
+}
+
+QByteArrayList QNativeAppKitWindow::supportedNativeParentTypes()
+{
+    return QByteArrayList();
+}
+
 void QNativeAppKitWindow::childEvent(QChildEvent *event)
 {
     Q_D(QNativeAppKitWindow);
