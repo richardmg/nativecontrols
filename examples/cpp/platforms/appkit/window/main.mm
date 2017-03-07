@@ -48,13 +48,13 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QNativeAppKitWindow window;
-    QNativeAppKitTabViewController tabViewController(&window);
 
+    QNativeAppKitTabViewController tabViewController(&window);
     QNativeAppKitViewController tab1(&tabViewController);
     QNativeAppKitViewController tab2(&tabViewController);
-    tab1.setTabViewItem(new QNativeAppKitTabViewItem(QStringLiteral("Tab1"), &tab1));
-    tab2.setTabViewItem(new QNativeAppKitTabViewItem(QStringLiteral("Tab2"), &tab2));
-    tabViewController.setViewControllers(QList<QNativeAppKitViewController *>() << &tab1 << &tab2);
+    QNativeAppKitTabViewItem tabItem1(QStringLiteral("Tab1"), &tab1);
+    QNativeAppKitTabViewItem tabItem2(QStringLiteral("Tab2"), &tab2);
+    tabViewController.setTabViewItems(QList<QNativeAppKitTabViewItem *>() << &tabItem1 << &tabItem2);
 
     QNativeAppKitView *contentView = tab1.view();
 
