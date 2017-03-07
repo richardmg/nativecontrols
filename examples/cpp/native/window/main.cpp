@@ -56,19 +56,19 @@ int main(int argc, char **argv)
 
     QNativeTextField textField(&tab1);
     textField.setPlaceholderText(QStringLiteral("TextField"));
-    textField.move(50, 150);
+    textField.move(button.left(), button.bottom() + 8);
 
     QNativeView view(&tab1);
-    view.setGeometry(50, textField.geometry().bottom(), 200, 200);
+    view.setGeometry(textField.left(), textField.bottom() + 8, 200, 200);
 
-    QNativeButton button2("Child button", &view);
-    button2.move(10, 0);
+    QNativeButton button2("Button inside view", &view);
+    button2.move(8, 0);
     QObject::connect(&button2, &QNativeButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
 
     QNativeButton buttonOnTab2(QStringLiteral("Button that moves"), &tab2);
     buttonOnTab2.move(50, 100);
     QObject::connect(&buttonOnTab2, &QNativeButton::clicked, [&buttonOnTab2](){
-        buttonOnTab2.setX(buttonOnTab2.geometry().x() + 10);
+        buttonOnTab2.setX(buttonOnTab2.x() + 10);
     });
 
     window.showFullScreen();
