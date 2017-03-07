@@ -64,6 +64,7 @@ public:
     virtual ~QNativeAppKitTabViewControllerPrivate();
 
     QList<QNativeAppKitViewController *> m_viewControllers;
+    QList<QNativeAppKitTabViewItem *> m_tabViewItems;
 
     Q_DECLARE_PUBLIC(QNativeAppKitTabViewController)
 

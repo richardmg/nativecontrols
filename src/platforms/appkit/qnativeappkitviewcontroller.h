@@ -63,9 +63,6 @@ public:
 
     QNativeAppKitViewController *parentViewController();
 
-    void setTabViewItem(QNativeAppKitTabViewItem *tabViewItem);
-    QNativeAppKitTabViewItem *tabViewItem() const;
-
     NSViewController *nsViewControllerHandle();
 
     bool setNativeParent(QObject *parent) override;

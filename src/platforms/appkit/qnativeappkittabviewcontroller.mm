@@ -87,6 +87,20 @@ QList<QNativeAppKitViewController *> QNativeAppKitTabViewController::viewControl
     return d_func()->m_viewControllers;
 }
 
+void QNativeAppKitTabViewController::setTabViewItems(QList<QNativeAppKitTabViewItem *> list)
+{
+    d_func()->m_tabViewItems = list;
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:list.length()];
+    for (auto tabViewItem : list)
+        [array addObject:tabViewItem->nsTabViewItemHandle()];
+    nsTabViewControllerHandle().tabViewItems = array;
+}
+
+QList<QNativeAppKitTabViewItem *> QNativeAppKitTabViewController::tabViewItems() const
+{
+    return d_func()->m_tabViewItems;
+}
+
 NSTabViewController *QNativeAppKitTabViewController::nsTabViewControllerHandle()
 {
     return static_cast<NSTabViewController *>(nsViewControllerHandle());

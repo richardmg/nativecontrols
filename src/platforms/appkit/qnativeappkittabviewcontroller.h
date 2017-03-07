@@ -58,8 +58,10 @@ public:
     void setViewControllers(QList<QNativeAppKitViewController *> list);
     QList<QNativeAppKitViewController *> viewControllers() const;
 
-    NSTabViewController *nsTabViewControllerHandle();
+    void setTabViewItems(QList<QNativeAppKitTabViewItem *> list);
+    QList<QNativeAppKitTabViewItem *> tabViewItems() const;
 
+    NSTabViewController *nsTabViewControllerHandle();
 protected:
     QNativeAppKitTabViewController(QNativeAppKitTabViewControllerPrivate &dd, QNativeAppKitBase *parent = nullptr);
 

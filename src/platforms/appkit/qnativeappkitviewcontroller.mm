@@ -48,7 +48,6 @@ QT_BEGIN_NAMESPACE
 
 QNativeAppKitViewControllerPrivate::QNativeAppKitViewControllerPrivate(int version)
     : QNativeAppKitBasePrivate(version)
-    , m_tabViewItem(nullptr)
     , m_viewController(nullptr)
     , m_view(nullptr)
 {
@@ -104,16 +103,6 @@ void QNativeAppKitViewControllerPrivate::addSubViewToContentView(NSView *uiView)
 QNativeAppKitViewController *QNativeAppKitViewController::parentViewController()
 {
     return dynamic_cast<QNativeAppKitViewController *>(parent());
-}
-
-void QNativeAppKitViewController::setTabViewItem(QNativeAppKitTabViewItem *tabViewItem)
-{
-    d_func()->m_tabViewItem = tabViewItem;
-}
-
-QNativeAppKitTabViewItem *QNativeAppKitViewController::tabViewItem() const
-{
-    return d_func()->m_tabViewItem;
 }
 
 QNativeAppKitView *QNativeAppKitViewController::view() const
