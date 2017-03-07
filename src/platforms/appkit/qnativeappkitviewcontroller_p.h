@@ -71,6 +71,8 @@ public:
     void addChildViewController(NSViewController *child);
     void addSubViewToContentView(NSView *uiView);
 
+    QList<QNativeAppKitViewController *> m_childViewControllers;
+
 protected:
     virtual NSViewController *createViewController();
 

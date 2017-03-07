@@ -61,6 +61,9 @@ public:
     QNativeAppKitView *view() const;
     void setView(QNativeAppKitView *view);
 
+    void setChildViewControllers(QList<QNativeAppKitViewController *> list);
+    QList<QNativeAppKitViewController *> childViewControllers() const;
+
     QNativeAppKitViewController *parentViewController();
 
     NSViewController *nsViewControllerHandle();

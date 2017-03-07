@@ -55,8 +55,8 @@ public:
     QNativeAppKitTabViewController(QNativeAppKitBase *parent = nullptr);
     virtual ~QNativeAppKitTabViewController();
 
-    void setViewControllers(QList<QNativeAppKitViewController *> list);
-    QList<QNativeAppKitViewController *> viewControllers() const;
+    void setChildViewControllers(QList<QNativeAppKitViewController *> list);
+    QList<QNativeAppKitViewController *> childViewControllers() const;
 
     void setTabViewItems(QList<QNativeAppKitTabViewItem *> list);
     QList<QNativeAppKitTabViewItem *> tabViewItems() const;

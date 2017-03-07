@@ -129,6 +129,20 @@ void QNativeAppKitViewController::setView(QNativeAppKitView *view)
     emit viewChanged(view);
 }
 
+void QNativeAppKitViewController::setChildViewControllers(QList<QNativeAppKitViewController *> list)
+{
+    d_func()->m_childViewControllers = list;
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:list.length()];
+    for (auto viewController : list)
+        [array addObject:viewController->nsViewControllerHandle()];
+    nsViewControllerHandle().childViewControllers = array;
+}
+
+QList<QNativeAppKitViewController *> QNativeAppKitViewController::childViewControllers() const
+{
+    return d_func()->m_childViewControllers;
+}
+
 NSViewController *QNativeAppKitViewController::nsViewControllerHandle()
 {
     return d_func()->viewController();
