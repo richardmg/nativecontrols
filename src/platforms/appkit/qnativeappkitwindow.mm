@@ -184,9 +184,16 @@ void QNativeAppKitWindow::setContentViewController(QNativeAppKitViewController *
 
     d->m_viewControllerSetExplicit = true;
     d->m_viewController = dynamic_cast<QNativeAppKitViewController *>(controller);
-    [d->m_viewController->nsViewControllerHandle().view setFrame:nsWindowHandle().contentView.frame]; // TODO: Determine how to handle view controller resizing
-    nsWindowHandle().contentViewController = d->m_viewController->nsViewControllerHandle();
-    emit contentViewControllerChanged(controller);
+
+    if (d->m_viewController) {
+        // TODO: Determine how to handle view controller resizing
+        [d->m_viewController->nsViewControllerHandle().view setFrame:nsWindowHandle().contentView.frame];
+        nsWindowHandle().contentViewController = d->m_viewController->nsViewControllerHandle();
+    } else {
+        nsWindowHandle().contentViewController = nil;
+    }
+
+    emit contentViewControllerChanged(d->m_viewController);
 }
 
 QNativeAppKitViewController *QNativeAppKitWindow::contentViewController() const
