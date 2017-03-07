@@ -40,12 +40,14 @@
 
 #include <QtNativeAppKitControls/qnativeappkittabviewitem.h>
 #include <QtNativeAppKitControls/private/qnativeappkittabviewitem_p.h>
+#include <QtNativeAppKitControls/qnativeappkitviewcontroller.h>
 
 QT_BEGIN_NAMESPACE
 
 QNativeAppKitTabViewItemPrivate::QNativeAppKitTabViewItemPrivate(int version)
     : QNativeAppKitBasePrivate(version)
     , m_tabViewItem(nullptr)
+    , m_viewController(nullptr)
 {
 }
 
@@ -68,11 +70,15 @@ NSTabViewItem *QNativeAppKitTabViewItem::nsTabViewItemHandle()
 QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(QNativeAppKitBase *parent)
     : QNativeAppKitBase(*new QNativeAppKitTabViewItemPrivate(), parent)
 {
+    if (QNativeAppKitViewController *vc = dynamic_cast<QNativeAppKitViewController *>(parent))
+        setViewController(vc);
 }
 
 QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(const QString &title, QNativeAppKitBase *parent)
     : QNativeAppKitBase(*new QNativeAppKitTabViewItemPrivate(), parent)
 {
+    if (QNativeAppKitViewController *vc = dynamic_cast<QNativeAppKitViewController *>(parent))
+        setViewController(vc);
     setTitle(title);
 }
 
@@ -93,6 +99,17 @@ QString QNativeAppKitTabViewItem::title() const
 void QNativeAppKitTabViewItem::setTitle(const QString &title)
 {
     nsTabViewItemHandle().label = title.toNSString();
+}
+
+void QNativeAppKitTabViewItem::setViewController(QNativeAppKitViewController *viewController)
+{
+    d_func()->m_viewController = viewController;
+    nsTabViewItemHandle().viewController = viewController->nsViewControllerHandle();
+}
+
+QNativeAppKitViewController *QNativeAppKitTabViewItem::viewController() const
+{
+    return d_func()->m_viewController;
 }
 
 #include "moc_qnativeappkittabviewitem.cpp"

@@ -45,6 +45,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeAppKitTabViewItemPrivate;
+class QNativeAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSTabViewItem);
 
 class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitTabViewItem : public QNativeAppKitBase, public virtual QNativePlatformTabsPageTab
@@ -58,6 +59,9 @@ public:
 
     virtual QString title() const override;
     virtual void setTitle(const QString &title) override;
+
+    void setViewController(QNativeAppKitViewController *viewController);
+    QNativeAppKitViewController *viewController() const;
 
     NSTabViewItem *nsTabViewItemHandle();
 

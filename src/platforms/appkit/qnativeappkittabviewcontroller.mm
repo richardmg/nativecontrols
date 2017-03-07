@@ -90,10 +90,14 @@ QList<QNativeAppKitViewController *> QNativeAppKitTabViewController::childViewCo
 void QNativeAppKitTabViewController::setTabViewItems(QList<QNativeAppKitTabViewItem *> list)
 {
     d_func()->m_tabViewItems = list;
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:list.length()];
-    for (auto tabViewItem : list)
-        [array addObject:tabViewItem->nsTabViewItemHandle()];
-    nsTabViewControllerHandle().tabViewItems = array;
+    nsTabViewControllerHandle().tabViewItems = @[];
+    for (auto tabViewItem : list) {
+        NSTabViewItem *item = tabViewItem->nsTabViewItemHandle();
+        if (item.viewController)
+            [nsTabViewControllerHandle() addTabViewItem:item];
+        else
+            qWarning() << "A QNativeAppKitTabViewItem needs a QNativeAppKitViewController set before used with a QNativeAppKitTabViewController";
+    }
 }
 
 QList<QNativeAppKitTabViewItem *> QNativeAppKitTabViewController::tabViewItems() const

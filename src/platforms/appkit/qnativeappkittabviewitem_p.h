@@ -55,6 +55,7 @@
 QT_BEGIN_NAMESPACE
 
 class QNativeAppKitTabViewItem;
+class QNativeAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSTabViewItem);
 
 class QNativeAppKitTabViewItemPrivate : public QNativeAppKitBasePrivate
@@ -69,6 +70,7 @@ public:
 
 private:
     NSTabViewItem *m_tabViewItem;
+    QNativeAppKitViewController *m_viewController;
 };
 
 QT_END_NAMESPACE
