@@ -49,31 +49,39 @@ public:
         // A QNativeAppKitTabViewItem doesn't map directy to a QNativePlatformTabsPageTab since
         // a tab in uikit consist of a view controller with a tab bar item. So we create this
         // helper class that puts together the composition.
-        setTabViewItem(new QNativeAppKitTabViewItem(this));
+        m_tabViewItem = new QNativeAppKitTabViewItem(this);
     }
 
     void setPlatformParent(QNativePlatformBase *platformParent) override
     {
-        // If the new, or the old, parent is a tab view controller, we need to
-        // add, or remove, ourselves from the list of tabs it contains.
+        // If the new, or the old, parent is a viewcontroller, we need to
+        // add, or remove, ourselves from the list of child controllers it contains.
         if (!platformParent) {
-            if (QNativeAppKitTabViewController *prevTabView = dynamic_cast<QNativeAppKitTabViewController *>(parent())) {
-                QList<QNativeAppKitViewController *> viewControllers = prevTabView->viewControllers();
+            if (QNativeAppKitTabViewController *prevParent = dynamic_cast<QNativeAppKitTabViewController *>(parent())) {
+                QList<QNativeAppKitViewController *> viewControllers = prevParent->childViewControllers();
                 viewControllers.removeOne(this);
-                prevTabView->setViewControllers(viewControllers);
+                prevParent->setChildViewControllers(viewControllers);
+                QList<QNativeAppKitTabViewItem *> tabItems = prevParent->tabViewItems();
+                tabItems.removeOne(m_tabViewItem);
+                prevParent->setTabViewItems(tabItems);
             }
-        } else if (QNativeAppKitTabViewController *tabView = dynamic_cast<QNativeAppKitTabViewController *>(platformParent)) {
-            QList<QNativeAppKitViewController *> viewControllers = tabView->viewControllers();
+        } else if (QNativeAppKitTabViewController *newParent = dynamic_cast<QNativeAppKitTabViewController *>(platformParent)) {
+            QList<QNativeAppKitViewController *> viewControllers = newParent->childViewControllers();
             viewControllers.append(this);
-            tabView->setViewControllers(viewControllers);
+            newParent->setChildViewControllers(viewControllers);
+            QList<QNativeAppKitTabViewItem *> tabItems = newParent->tabViewItems();
+            tabItems.append(m_tabViewItem);
+            newParent->setTabViewItems(tabItems);
         }
 
         // We also need to update the QObject parent structure for memory management
         QNativeAppKitViewController::setPlatformParent(platformParent);
     }
 
-    QString title() const override { return tabViewItem()->title(); }
-    void setTitle(const QString &title) override { tabViewItem()->setTitle(title); }
+    QString title() const override { return m_tabViewItem->title(); }
+    void setTitle(const QString &title) override { m_tabViewItem->setTitle(title); }
+
+    QNativeAppKitTabViewItem *m_tabViewItem;
 };
 
 // ----------------------------------------------------------------------------------
