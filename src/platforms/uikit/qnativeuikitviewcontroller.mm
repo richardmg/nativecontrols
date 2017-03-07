@@ -225,7 +225,7 @@ void QNativeUIKitViewController::childEvent(QChildEvent *event)
         }
     } else if (QNativeUIKitViewControllerPrivate *dptr_child = dynamic_cast<QNativeUIKitViewControllerPrivate *>(childPrivate)) {
         if (event->added())
-            d->addChildViewController(dptr_child->m_viewController);
+            d->addChildViewController(dptr_child->q_func()->uiViewControllerHandle());
         else
             [dptr_child->m_viewController removeFromParentViewController];
     }
