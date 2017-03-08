@@ -118,7 +118,14 @@ QNativeUIKitTabBarItem *QNativeUIKitViewController::tabBarItem() const
 
 QNativeUIKitView *QNativeUIKitViewController::view() const
 {
-    return d_func()->m_view;
+    Q_D(const QNativeUIKitViewController);
+    if (!d->m_view) {
+        QNativeUIKitViewController *self = const_cast<QNativeUIKitViewController *>(this);
+        if (![self->uiViewControllerHandle() isMemberOfClass:[UIViewController class]])
+            qWarning("Creating a view for a view controller that is not member of class UIViewController. This can make it act as a normal view controller!");
+        self->setView(new QNativeUIKitView(self));
+    }
+    return d->m_view;
 }
 
 void QNativeUIKitViewController::setView(QNativeUIKitView *view)
