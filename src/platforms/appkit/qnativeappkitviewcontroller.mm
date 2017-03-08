@@ -108,7 +108,14 @@ QNativeAppKitViewController *QNativeAppKitViewController::parentViewController()
 
 QNativeAppKitView *QNativeAppKitViewController::view() const
 {
-    return d_func()->m_view;
+    Q_D(const QNativeAppKitViewController);
+    if (!d->m_view) {
+        QNativeAppKitViewController *self = const_cast<QNativeAppKitViewController *>(this);
+        if (![self->nsViewControllerHandle() isMemberOfClass:[NSViewController class]])
+            qWarning("Creating a view for a view controller that is not member of class NSViewController. This can make it act as a normal view controller!");
+        self->setView(new QNativeAppKitView(self));
+    }
+    return d->m_view;
 }
 
 void QNativeAppKitViewController::setView(QNativeAppKitView *view)
