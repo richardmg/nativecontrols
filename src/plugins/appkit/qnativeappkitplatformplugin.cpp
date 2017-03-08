@@ -58,17 +58,11 @@ public:
         // add, or remove, ourselves from the list of child controllers it contains.
         if (!platformParent) {
             if (QNativeAppKitTabViewController *prevParent = dynamic_cast<QNativeAppKitTabViewController *>(parent())) {
-                QList<QNativeAppKitViewController *> viewControllers = prevParent->childViewControllers();
-                viewControllers.removeOne(this);
-                prevParent->setChildViewControllers(viewControllers);
                 QList<QNativeAppKitTabViewItem *> tabItems = prevParent->tabViewItems();
                 tabItems.removeOne(m_tabViewItem);
                 prevParent->setTabViewItems(tabItems);
             }
         } else if (QNativeAppKitTabViewController *newParent = dynamic_cast<QNativeAppKitTabViewController *>(platformParent)) {
-            QList<QNativeAppKitViewController *> viewControllers = newParent->childViewControllers();
-            viewControllers.append(this);
-            newParent->setChildViewControllers(viewControllers);
             QList<QNativeAppKitTabViewItem *> tabItems = newParent->tabViewItems();
             tabItems.append(m_tabViewItem);
             newParent->setTabViewItems(tabItems);
