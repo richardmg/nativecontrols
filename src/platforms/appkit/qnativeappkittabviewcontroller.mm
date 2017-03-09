@@ -82,6 +82,7 @@ QNativeAppKitView *QNativeAppKitTabViewController::view() const
 void QNativeAppKitTabViewController::setTabViewItems(QList<QNativeAppKitTabViewItem *> list)
 {
     d_func()->m_tabViewItems = list;
+    nsTabViewControllerHandle().childViewControllers = @[];
     nsTabViewControllerHandle().tabViewItems = @[];
     for (auto tabViewItem : list) {
         NSTabViewItem *item = tabViewItem->nsTabViewItemHandle();
