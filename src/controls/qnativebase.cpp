@@ -98,7 +98,7 @@ QNativeBase *QNativeBase::parentBase()
 /**
  * @brief Set platform object as parent of this object.
  * \a parent is expected to be a type / control specific to the platform, but
- * unknown to QNative. What is means to use it as parent for this object is left
+ * unknown to QNative. What it means to use it as parent for this object is left
  * for the plugin to decide. You would call this function whenever you need a
  * QNative control to be a child of a QObject based platform control.
  * @return Returns \c true if the plugin was able to use \a parent as parent.
@@ -113,7 +113,7 @@ bool QNativeBase::setNativeParent(QObject *parent)
  * \a type is the type name of \a parent, and is expected to be a type / control
  * specific to the platform, but unknown to QNative. Especially, this function
  * accept types not deriving from QObject, like native OS controls.
- * What is means to use it as parent for this object is left for the plugin
+ * What it means to use it as parent for this object is left for the plugin
  * to decide. You would call this function whenever you need a QNative control to be a
  * child of a native OS control.
  * @return Returns \c true if the plugin was able to use \a parent as parent.
@@ -126,7 +126,7 @@ bool QNativeBase::setNativeParent(const QByteArray &type, void *parent)
 /**
  * @brief Add platform object as child of this object.
  * \a child is expected to be a type / control specific to the platform, but
- * unknown to QNative. What is means to add it as a child of this object is left
+ * unknown to QNative. What it means to add it as a child of this object is left
  * for the plugin to decide. You would call this function whenever you need a
  * QObject based platform control to be a child of a QNative control.
  * @return Returns \c true if the plugin was able to add \a child as a child.
@@ -141,7 +141,7 @@ bool QNativeBase::addNativeChild(QObject *child)
  * \a type is the type name of \a child, and is expected to be a type / control
  * specific to the platform, but unknown to QNative. Especially, this function
  * accept types not deriving from QObject, like native OS controls.
- * What is means to add it as a child this object is left for the plugin
+ * What it means to add it as a child this object is left for the plugin
  * to decide. You would call this function whenever you need a native OS
  * control to be a child of a QNative control.
  * @return Returns \c true if the plugin was able to add \a child as a child.
