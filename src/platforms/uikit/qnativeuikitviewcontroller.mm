@@ -76,11 +76,8 @@ QNativeUIKitViewController::~QNativeUIKitViewController()
 
 UIViewController *QNativeUIKitViewControllerPrivate::viewController()
 {
-    if (!m_viewController) {
+    if (!m_viewController)
         m_viewController = createViewController();
-        if (QNativeUIKitViewController *parent = q_func()->parentViewController())
-            static_cast<QNativeUIKitViewControllerPrivate *>(QObjectPrivate::get(parent))->addChildViewController(m_viewController);
-    }
     return m_viewController;
 }
 
