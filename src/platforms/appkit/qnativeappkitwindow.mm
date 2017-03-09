@@ -91,6 +91,7 @@ QNativeAppKitWindowPrivate::QNativeAppKitWindowPrivate(int version)
     : QNativeAppKitViewPrivate(version)
     , m_window(nullptr)
     , m_viewController(nullptr)
+    , m_delegate(nullptr)
     , m_viewControllerSetExplicit(false)
 {
 }
@@ -132,8 +133,11 @@ void QNativeAppKitWindowPrivate::addSubViewToContentView(NSView *nsView)
     dptr_contentView->addSubView(nsView);
 }
 
-NSView *QNativeAppKitWindowPrivate::createView()
+NSWindow *QNativeAppKitWindowPrivate::window()
 {
+    if (m_window)
+        return m_window;
+
     m_delegate = [[QNativeAppKitWindowDelegate alloc] initWithQNativeAppKitWindowPrivate:this];
 
     NSRect screenFrame = NSScreen.mainScreen.visibleFrame;
@@ -152,16 +156,16 @@ NSView *QNativeAppKitWindowPrivate::createView()
                                                defer:YES];
     m_window.delegate = m_delegate;
 
-    return m_window.contentView;
+    return m_window;
 }
 
 QNativeAppKitWindow::QNativeAppKitWindow()
-    : QNativeAppKitView(*new QNativeAppKitWindowPrivate(), nullptr)
+    : QNativeAppKitBase(*new QNativeAppKitWindowPrivate(), nullptr)
 {
 }
 
 QNativeAppKitWindow::QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd)
-    : QNativeAppKitView(dd, nullptr)
+    : QNativeAppKitBase(dd, nullptr)
 {
 }
 
@@ -173,7 +177,7 @@ QNativeAppKitWindow::~QNativeAppKitWindow()
 
 NSWindow *QNativeAppKitWindow::nsWindowHandle()
 {
-    return d_func()->view().window;
+    return d_func()->window();
 }
 
 void QNativeAppKitWindow::setContentViewController(QNativeAppKitViewController *controller)
@@ -183,17 +187,17 @@ void QNativeAppKitWindow::setContentViewController(QNativeAppKitViewController *
         return;
 
     d->m_viewControllerSetExplicit = true;
-    d->m_viewController = dynamic_cast<QNativeAppKitViewController *>(controller);
+    d->m_viewController = controller;
 
-    if (d->m_viewController) {
-        // TODO: Determine how to handle view controller resizing
-        [d->m_viewController->nsViewControllerHandle().view setFrame:nsWindowHandle().contentView.frame];
-        nsWindowHandle().contentViewController = d->m_viewController->nsViewControllerHandle();
+    if (controller) {
+        QRectF windowFrame = frame();
+        nsWindowHandle().contentViewController = controller->nsViewControllerHandle();
+        setFrame(windowFrame);
     } else {
         nsWindowHandle().contentViewController = nil;
     }
 
-    emit contentViewControllerChanged(d->m_viewController);
+    emit contentViewControllerChanged(controller);
 }
 
 QNativeAppKitViewController *QNativeAppKitWindow::contentViewController() const
@@ -210,35 +214,41 @@ QNativeAppKitViewController *QNativeAppKitWindow::contentViewController() const
     return d->m_viewController;
 }
 
-QRectF QNativeAppKitWindow::geometry() const
+QRectF QNativeAppKitWindow::frame() const
+{
+    return QRectF::fromCGRect(const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle().frame);
+}
+
+void QNativeAppKitWindow::setFrame(const QRectF &frame)
+{
+    [nsWindowHandle() setFrame:frame.toCGRect() display:YES];
+}
+
+QRectF QNativeAppKitWindow::contentRect() const
+{
+    return contentRectForFrameRect(frame());
+}
+
+QRectF QNativeAppKitWindow::contentRectForFrameRect(const QRectF &rect) const
 {
     NSWindow *window = const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle();
-    const NSRect r = [window contentRectForFrameRect:window.frame];
-    return QRectF(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    return QRectF::fromCGRect([window contentRectForFrameRect:rect.toCGRect()]);
 }
 
-NSRect qt_mac_flipRect(const QRectF &rect, NSView *view);
-
-void QNativeAppKitWindow::setGeometry(const QRectF &rect)
+QRectF QNativeAppKitWindow::frameRectForContentRect(const QRectF &rect) const
 {
-    [nsWindowHandle() setFrame:[nsWindowHandle() frameRectForContentRect:
-      NSMakeRect(rect.x(), rect.y(), rect.width(), rect.height())] display:YES];
-}
-
-QRectF QNativeAppKitWindow::frameGeometry() const
-{
-    const NSRect frame = const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle().frame;
-    return QRectF(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+    NSWindow *window = const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle();
+    return QRectF::fromCGRect([window frameRectForContentRect:rect.toCGRect()]);
 }
 
 qreal QNativeAppKitWindow::width() const
 {
-    return QNativeAppKitView::width();
+    return frame().width();
 }
 
 qreal QNativeAppKitWindow::height() const
 {
-    return QNativeAppKitView::height();
+    return frame().height();
 }
 
 bool QNativeAppKitWindow::isVisible() const
@@ -274,7 +284,6 @@ void QNativeAppKitWindow::showFullScreen()
 
     if (([nsWindowHandle() styleMask] & NSFullScreenWindowMask) != NSFullScreenWindowMask)
         [nsWindowHandle() toggleFullScreen:nsWindowHandle()];
-
 }
 
 bool QNativeAppKitWindow::event(QEvent *e)
@@ -287,7 +296,6 @@ bool QNativeAppKitWindow::event(QEvent *e)
         return QNativeAppKitBase::event(e);
     }
     return true;
-
 }
 
 bool QNativeAppKitWindow::addNativeChild(const QByteArray &type, void *child)
@@ -297,13 +305,13 @@ bool QNativeAppKitWindow::addNativeChild(const QByteArray &type, void *child)
     else if (type == "NSViewController")
         nsWindowHandle().contentViewController = reinterpret_cast<NSViewController *>(child);
     else
-        return QNativeAppKitView::addNativeChild(type, child);
+        return QNativeAppKitBase::addNativeChild(type, child);
     return true;
 }
 
 QByteArrayList QNativeAppKitWindow::supportedNativeChildTypes()
 {
-    return QNativeAppKitView::supportedNativeChildTypes() << "NSViewController";
+    return QNativeAppKitBase::supportedNativeChildTypes() << "NSView" << "NSViewController";
 }
 
 QByteArrayList QNativeAppKitWindow::supportedNativeParentTypes()

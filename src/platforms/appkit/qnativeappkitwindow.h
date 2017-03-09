@@ -47,7 +47,7 @@ class QNativeAppKitWindowPrivate;
 class QNativeAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitView, public virtual QNativePlatformWindow
+class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitBase, public virtual QNativePlatformWindow
 {
     Q_OBJECT
     Q_PROPERTY(QNativeAppKitViewController *contentViewController READ contentViewController WRITE setContentViewController NOTIFY contentViewControllerChanged)
@@ -55,16 +55,6 @@ class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitVi
 public:
     QNativeAppKitWindow();
     virtual ~QNativeAppKitWindow();
-
-    NSWindow *nsWindowHandle();
-
-    void setContentViewController(QNativeAppKitViewController *contentViewController);
-    QNativeAppKitViewController *contentViewController() const;
-
-    virtual QRectF geometry() const override;
-    virtual void setGeometry(const QRectF &rect) override;
-
-    virtual QRectF frameGeometry() const override;
 
     virtual qreal width() const override;
     virtual qreal height() const override;
@@ -74,6 +64,18 @@ public:
     virtual void showFullScreen() override;
 
     virtual bool event(QEvent *e) override;
+
+    NSWindow *nsWindowHandle();
+
+    void setContentViewController(QNativeAppKitViewController *contentViewController);
+    QNativeAppKitViewController *contentViewController() const;
+
+    QRectF frame() const;
+    void setFrame(const QRectF &rect);
+
+    QRectF contentRect() const;
+    QRectF contentRectForFrameRect(const QRectF &rect) const;
+    QRectF frameRectForContentRect(const QRectF &rect) const;
 
     bool addNativeChild(const QByteArray &type, void *child) override;
     QByteArrayList supportedNativeChildTypes() override;

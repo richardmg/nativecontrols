@@ -70,16 +70,14 @@ public:
 
     void addSubViewToContentView(NSView *nsView);
 
-    QNativeAppKitWindowDelegate *m_delegate;
+    NSWindow *window();
 
     Q_DECLARE_PUBLIC(QNativeAppKitWindow)
-
-protected:
-    NSView *createView() override;
 
 private:
     NSWindow *m_window;
     QNativeAppKitViewController *m_viewController;
+    QNativeAppKitWindowDelegate *m_delegate;
     bool m_viewControllerSetExplicit;
 };
 
