@@ -39,9 +39,22 @@
 ****************************************************************************/
 
 import QtQml 2.0
+import Qt.NativeControls 1.0 as Native
 import Qt.NativeAppKitControls 1.0 as AppKit
 
-AppKit.Button {
-    text: "AppKit platform button"
-    onClicked: text ="You clicked me!"
+AppKit.View {
+    width: 200
+    implicitHeight: 100
+
+    AppKit.Button {
+        id: uikitButton
+        text: "UIKit button"
+        onClicked: text = "You clicked me!"
+    }
+
+    Native.Button {
+        y: uikitButton.bottom + 8
+        text: "Cross parented button"
+        onClicked: text = "You clicked me!"
+    }
 }
