@@ -54,37 +54,30 @@
 void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
 {
 #if defined(Q_OS_MACOS)
-    // Add QNativeAppKitButton as a direct child of QNativeWindow
-    QNativeAppKitButton *nativeAppKitButton1 = new QNativeAppKitButton();
-    nativeAppKitButton1->setParent(&window);
+    // Create a platform specific button, and add it as a child of the
+    // window using the QNativeWindow::addNativeChild() function.
+    QNativeAppKitButton *nativeAppKitButton1 = new QNativeAppKitButton;
     nativeAppKitButton1->move(nativeButton.left(), nativeButton.bottom());
-    nativeAppKitButton1->nsButtonHandle().title = @"QNativeAppKitButton 1";
+    nativeAppKitButton1->nsButtonHandle().title = @"QNativeAppKitButton";
+
     QObject::connect(nativeAppKitButton1, &QNativeAppKitButton::clicked,
                      [nativeAppKitButton1](){ nativeAppKitButton1->setText(QStringLiteral("Clicked!")); });
+    window.addNativeChild(nativeAppKitButton1);
 
-    // You can also go the other way, creating a QNativeButton as a direct child of QNativeAppKitWindow
+    // Add a native switch as well
+    NSButton *switchButton = [[[NSButton alloc] initWithFrame:CGRectZero] autorelease];
+    [switchButton setButtonType:NSSwitchButton];
+    switchButton.frame = CGRectMake(nativeAppKitButton1->left(), nativeAppKitButton1->bottom(), 0, 0);
+    [switchButton sizeToFit];
+    window.addNativeChild("NSView", switchButton);
+
+    // You can also go the other way, creating a QNativeButton
+    // as a direct child of another NSView.
     QNativeButton *nativeButton2 = new QNativeButton("QNativeButton 2");
-    nativeButton2->setParent(&window);
-    nativeButton2->move(nativeAppKitButton1->geometry().left(), nativeAppKitButton1->geometry().bottom());
+    nativeButton2->move(switchButton.frame.origin.x, switchButton.frame.origin.y + switchButton.bounds.size.height);
     QObject::connect(nativeButton2, &QNativeButton::clicked,
                      [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
-
-    if (QNativeAppKitWindow *nativeAppKitWindow = dynamic_cast<QNativeAppKitWindow *>(&window)) {
-        QNativeAppKitButton *nativeAppKitButton2 = new QNativeAppKitButton(nativeAppKitWindow);
-        nativeAppKitButton2->move(nativeButton2->geometry().left(), nativeButton2->geometry().bottom());
-        QObject::connect(nativeAppKitButton2, &QNativeAppKitButton::clicked,
-                         [nativeAppKitButton2](){ nativeAppKitButton2->setText(QStringLiteral("Clicked!")); });
-
-        NSButton *nsButton = nativeAppKitButton2->nsButtonHandle();
-        nsButton.title = @"Click me";
-#if QT_OSX_PLATFORM_SDK_EQUAL_OR_ABOVE(101202)
-        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10, 12, 2}])
-            nsButton.bezelColor = [NSColor redColor];
-#endif
-
-        NSWindow *nsWindow = nativeAppKitWindow->nsWindowHandle();
-        nsWindow.backgroundColor = [NSColor blueColor];
-    }
+    nativeButton2->setNativeParent("NSView", switchButton.superview);
 #endif
 
 #if defined(Q_OS_IOS) || defined(Q_OS_TVOS)
