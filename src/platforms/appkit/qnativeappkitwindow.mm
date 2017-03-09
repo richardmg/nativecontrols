@@ -212,7 +212,8 @@ QNativeAppKitViewController *QNativeAppKitWindow::contentViewController() const
 
 QRectF QNativeAppKitWindow::geometry() const
 {
-    const NSRect r = [d_func()->m_window contentRectForFrameRect:d_func()->m_window.frame];
+    NSWindow *window = const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle();
+    const NSRect r = [window contentRectForFrameRect:window.frame];
     return QRectF(r.origin.x, r.origin.y, r.size.width, r.size.height);
 }
 
@@ -226,7 +227,7 @@ void QNativeAppKitWindow::setGeometry(const QRectF &rect)
 
 QRectF QNativeAppKitWindow::frameGeometry() const
 {
-    const NSRect frame = d_func()->m_window.frame;
+    const NSRect frame = const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle().frame;
     return QRectF(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
@@ -242,7 +243,7 @@ qreal QNativeAppKitWindow::height() const
 
 bool QNativeAppKitWindow::isVisible() const
 {
-    return d_func()->m_window.visible;
+    return const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle().visible;
 }
 
 void QNativeAppKitWindow::setVisible(bool newVisible)
@@ -250,7 +251,7 @@ void QNativeAppKitWindow::setVisible(bool newVisible)
     if (newVisible == isVisible())
         return;
 
-    [d_func()->m_window setIsVisible:newVisible];
+    [nsWindowHandle() setIsVisible:newVisible];
     if (newVisible) {
         // Now that the window becomes visible, we should check if any of its
         // children needs to be resized to implicit size. Since children
@@ -260,7 +261,7 @@ void QNativeAppKitWindow::setVisible(bool newVisible)
         // Also, AppKit expects there to always be a content view controller
         // in a NSWindow, so if hasn't been added yet, create one now.
         contentViewController();
-        [d_func()->m_window makeKeyAndOrderFront:d_func()->m_window];
+        [nsWindowHandle() makeKeyAndOrderFront:nsWindowHandle()];
     }
 
     emit visibleChanged(newVisible);
@@ -271,8 +272,8 @@ void QNativeAppKitWindow::showFullScreen()
     if (!isVisible())
         setVisible(true);
 
-    if (([d_func()->m_window styleMask] & NSFullScreenWindowMask) != NSFullScreenWindowMask)
-        [d_func()->m_window toggleFullScreen:d_func()->m_window];
+    if (([nsWindowHandle() styleMask] & NSFullScreenWindowMask) != NSFullScreenWindowMask)
+        [nsWindowHandle() toggleFullScreen:nsWindowHandle()];
 
 }
 
