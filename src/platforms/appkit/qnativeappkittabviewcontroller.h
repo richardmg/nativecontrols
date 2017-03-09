@@ -59,6 +59,8 @@ public:
     QList<QNativeAppKitTabViewItem *> tabViewItems() const;
 
     NSTabViewController *nsTabViewControllerHandle();
+    QNativeAppKitView *view() const;
+
 protected:
     QNativeAppKitTabViewController(QNativeAppKitTabViewControllerPrivate &dd, QNativeAppKitBase *parent = nullptr);
 

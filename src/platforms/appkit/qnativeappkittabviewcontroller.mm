@@ -73,6 +73,12 @@ QNativeAppKitTabViewController::~QNativeAppKitTabViewController()
 {
 }
 
+QNativeAppKitView *QNativeAppKitTabViewController::view() const
+{
+    qWarning("NSTabViewController doesn't use a view. Calling QNativeAppKitTabViewController::view() will not work for a NSTabViewController!");
+    return QNativeAppKitViewController::view();
+}
+
 void QNativeAppKitTabViewController::setTabViewItems(QList<QNativeAppKitTabViewItem *> list)
 {
     d_func()->m_tabViewItems = list;
