@@ -73,6 +73,12 @@ QNativeUIKitTabBarController::~QNativeUIKitTabBarController()
 {
 }
 
+QNativeUIKitView *QNativeUIKitTabBarController::view() const
+{
+    qWarning("Creating a view for a view controller that is not member of class UIViewController. This can make it act as a normal view controller!");
+    return QNativeUIKitViewController::view();
+}
+
 void QNativeUIKitTabBarController::setViewControllers(QList<QNativeUIKitViewController *> list)
 {
     d_func()->m_viewControllers = list;

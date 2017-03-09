@@ -23,6 +23,7 @@ public:
     QList<QNativeUIKitViewController *> viewControllers() const;
 
     UITabBarController *uiTabBarControllerHandle();
+    QNativeUIKitView *view() const;
 
 protected:
     QNativeUIKitTabBarController(QNativeUIKitTabBarControllerPrivate &dd, QNativeUIKitBase *parent = nullptr);
