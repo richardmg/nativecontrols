@@ -61,7 +61,6 @@ QNativeAppKitViewControllerPrivate::~QNativeAppKitViewControllerPrivate()
 QNativeAppKitViewController::QNativeAppKitViewController(QNativeAppKitBase *parent)
     : QNativeAppKitBase(*new QNativeAppKitViewControllerPrivate(), parent)
 {
-    setView(new QNativeAppKitView(this));
 }
 
 QNativeAppKitViewController::QNativeAppKitViewController(QNativeAppKitViewControllerPrivate &dd, QNativeAppKitBase *parent)
@@ -82,9 +81,10 @@ NSViewController *QNativeAppKitViewControllerPrivate::viewController()
 
 NSViewController *QNativeAppKitViewControllerPrivate::createViewController()
 {
-    NSViewController *viewController = [NSViewController new];
-    viewController.view = [NSView new];
-    return viewController;
+    m_viewController = [NSViewController new];
+    m_view = new QNativeAppKitView(q_func());
+    m_viewController.view = m_view->nsViewHandle();
+    return m_viewController;
 }
 
 void QNativeAppKitViewControllerPrivate::addChildViewController(NSViewController *child)
@@ -94,7 +94,12 @@ void QNativeAppKitViewControllerPrivate::addChildViewController(NSViewController
 
 void QNativeAppKitViewControllerPrivate::addSubViewToContentView(NSView *uiView)
 {
-    QNativeAppKitViewPrivate *dptr_contentView = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(q_func()->view()));
+    QNativeAppKitView *view = q_func()->view();
+    if (!view) {
+        qWarning("The view controller doesn't have a content view");
+        return;
+    }
+    QNativeAppKitViewPrivate *dptr_contentView = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(view));
     dptr_contentView->addSubView(uiView);
 }
 
@@ -105,12 +110,10 @@ QNativeAppKitViewController *QNativeAppKitViewController::parentViewController()
 
 QNativeAppKitView *QNativeAppKitViewController::view() const
 {
-    Q_D(const QNativeAppKitViewController);
-    if (!d->m_view) {
-        QNativeAppKitViewController *self = const_cast<QNativeAppKitViewController *>(this);
-        self->setView(new QNativeAppKitView(self));
-    }
-    return d->m_view;
+    // Note that a decendant view controller might not use a view
+    // (e.g QNativeAppKitTabsViewController). In that case, we return nil
+    const_cast<QNativeAppKitViewController *>(this)->nsViewControllerHandle();
+    return d_func()->m_view;
 }
 
 void QNativeAppKitViewController::setView(QNativeAppKitView *view)
@@ -120,7 +123,7 @@ void QNativeAppKitViewController::setView(QNativeAppKitView *view)
         return;
 
     d->m_view = view;
-    nsViewControllerHandle().view = d->m_view->nsViewHandle();
+    nsViewControllerHandle().view = view->nsViewHandle();
     emit viewChanged(view);
 }
 
