@@ -77,6 +77,7 @@ public:
     QRectF contentRectForFrameRect(const QRectF &rect) const;
     QRectF frameRectForContentRect(const QRectF &rect) const;
 
+    bool addNativeChild(QObject *child) override;
     bool addNativeChild(const QByteArray &type, void *child) override;
     QByteArrayList supportedNativeChildTypes() override;
     QByteArrayList supportedNativeParentTypes() override;

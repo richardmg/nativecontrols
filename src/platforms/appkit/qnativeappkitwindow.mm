@@ -298,6 +298,17 @@ bool QNativeAppKitWindow::event(QEvent *e)
     return true;
 }
 
+bool QNativeAppKitWindow::addNativeChild(QObject *child)
+{
+    if (QNativeAppKitView *c = dynamic_cast<QNativeAppKitView *>(child))
+        c->setParent(this);
+    else if (QNativeAppKitViewController *c = dynamic_cast<QNativeAppKitViewController *>(child))
+        c->setParent(this);
+    else
+        return QNativeAppKitBase::addNativeChild(child);
+    return true;
+}
+
 bool QNativeAppKitWindow::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "NSView")
