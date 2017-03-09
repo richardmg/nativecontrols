@@ -70,6 +70,7 @@ public:
 
     virtual bool event(QEvent *e) override;
 
+    bool addNativeChild(QObject *child) override;
     bool addNativeChild(const QByteArray &type, void *child) override;
     QByteArrayList supportedNativeChildTypes() override;
     QByteArrayList supportedNativeParentTypes() override;

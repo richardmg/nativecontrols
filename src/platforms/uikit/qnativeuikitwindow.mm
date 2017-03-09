@@ -191,6 +191,17 @@ bool QNativeUIKitWindow::event(QEvent *e)
     return true;
 }
 
+bool QNativeUIKitWindow::addNativeChild(QObject *child)
+{
+    if (QNativeUIKitView *c = dynamic_cast<QNativeUIKitView *>(child))
+        c->setParent(this);
+    else if (QNativeUIKitViewController *c = dynamic_cast<QNativeUIKitViewController *>(child))
+        c->setParent(this);
+    else
+        return QNativeUIKitBase::addNativeChild(child);
+    return true;
+}
+
 bool QNativeUIKitWindow::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "UIView")
