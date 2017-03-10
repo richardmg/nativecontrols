@@ -202,6 +202,14 @@ void QNativeAppKitViewPrivate::addSubView(NSView *subView)
 {
     if (subView.superview)
         removeSubView(subView);
+
+    // The flipping machinery here is designed to interop with Cocoa's flipped coordinate system:
+    // before we deparent a view, we flip its frame to a top-left origin and then set that as the
+    // frame after the control is deparented. Then, when we parent a view, we flip its top-left
+    // frame to a bottom-left (AppKit) frame after parenting it. This allows views to always use
+    // top-left (Qt) origins while parenting to either flipped or non-flipped views. Note that
+    // autoresizing will still interfere with top-left origins so we give fixed-size controls
+    // the default AppKit autoresizing mask (NSViewMaxXMargin | NSViewMinYMargin) to compensate.
     NSRect alignmentRect = [subView alignmentRectForFrame:subView.frame];
     [view() addSubview:subView];
     // Ratio between frame and alignment rect can change depending on whether the view is attached
@@ -527,18 +535,10 @@ void QNativeAppKitView::childEvent(QChildEvent *event)
     if (!dptr_child)
         return;
 
-    // The flipping machinery here is designed to interop with Cocoa's flipped coordinate system:
-    // before we deparent a view, we flip its frame to a top-left origin and then set that as the
-    // frame after the control is deparented. Then, when we parent a view, we flip its top-left
-    // frame to a bottom-left (AppKit) frame after parenting it. This allows views to always use
-    // top-left (Qt) origins while parenting to either flipped or non-flipped views. Note that
-    // autoresizing will still interfere with top-left origins so we give fixed-size controls
-    // the default AppKit autoresizing mask (NSViewMaxXMargin | NSViewMinYMargin) to compensate.
-    if (event->added()) {
+    if (event->added())
         d->addSubView(dptr_child->view());
-    } else if (event->removed()) {
+    else if (event->removed())
         d->removeSubView(dptr_child->view());
-    }
 }
 
 #include "moc_qnativeappkitview.cpp"
