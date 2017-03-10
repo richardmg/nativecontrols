@@ -61,7 +61,13 @@ void QNativeUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QO
     QNativeUIKitBase *uikitChild = dynamic_cast<QNativeUIKitBase *>(child);
 
     if (uikitChild) {
-        uikitChild->setParent(uikitParent);
+        if (uikitChild->parent() != uikitParent) {
+            uikitChild->setParent(uikitParent);
+        } else {
+            // Force a child event, since we depend on it
+            QChildEvent e(QEvent::ChildAdded, uikitChild);
+            QCoreApplication::sendEvent(uikitParent, &e);
+        }
     } else {
         // The child doesn't belong to QNativeUIKit. If it belongs
         // to QNative, try to parent it using the childs cross-parenting API
