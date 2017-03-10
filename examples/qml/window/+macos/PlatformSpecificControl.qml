@@ -48,7 +48,7 @@ AppKit.View {
 
     AppKit.Button {
         id: uikitButton
-        text: "UIKit button"
+        text: "AppKit button"
         onClicked: text = "You clicked me!"
     }
 
