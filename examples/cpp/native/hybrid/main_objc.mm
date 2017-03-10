@@ -81,7 +81,6 @@ void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
 #endif
 
 #if defined(Q_OS_IOS) || defined(Q_OS_TVOS)
-
     // Create a platform specific button, and add it as a child of the
     // window using the QNativeWindow::addNativeChild() function.
     QNativeUIKitButton *nativeUIKitButton1 = new QNativeUIKitButton;
@@ -104,6 +103,5 @@ void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
     QObject::connect(nativeButton2, &QNativeButton::clicked,
                      [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
     nativeButton2->setNativeParent("UIView", uiSwitch.superview);
-
 #endif
 }
