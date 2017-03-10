@@ -97,10 +97,12 @@ QNativeBase *QNativeBase::parentBase()
 
 /**
  * @brief Set platform object as parent of this object.
- * \a parent is expected to be a type / control specific to the platform, but
+ * \a parent is expected to be a subtype / control specific to the platform, but
  * unknown to QNative. What it means to use it as parent for this object is left
- * for the plugin to decide. You would call this function whenever you need a
- * QNative control to be a child of a QObject based platform control.
+ * for the plugin to decide. Normal QObject parent-child ownership will apply, so
+ * if \a parent is deleted, \c this will be deleted as well. You would call this
+ * function whenever you need a QNative control to be a child of a QObject based
+ * platform control.
  * @return Returns \c true if the plugin was able to use \a parent as parent.
  */
 bool QNativeBase::setNativeParent(QObject *parent)
@@ -112,9 +114,13 @@ bool QNativeBase::setNativeParent(QObject *parent)
  * @brief Set native OS object as parent of this object.
  * \a type is the type name of \a parent, and is expected to be a type / control
  * specific to the platform, but unknown to QNative. Especially, this function
- * accept types not deriving from QObject, like native OS controls.
- * What it means to use it as parent for this object is left for the plugin
- * to decide. You would call this function whenever you need a QNative control to be a
+ * accept types not deriving from QObject, like native OS controls. What it means
+ * to use it as parent for this object is left for the plugin to decide.
+ * The platform will not take ownership of \c this, so you should consider
+ * assigning a normal QObject parent as well for automatic destruction.
+ * The platform will not take ownership of \a parent, but depending on the
+ * platform, it might keep a strong reference to it for as long as it needs it.
+ * You would call this function whenever you need a QNative control to be a
  * child of a native OS control.
  * @return Returns \c true if the plugin was able to use \a parent as parent.
  */
@@ -125,10 +131,12 @@ bool QNativeBase::setNativeParent(const QByteArray &type, void *parent)
 
 /**
  * @brief Add platform object as child of this object.
- * \a child is expected to be a type / control specific to the platform, but
+ * \a child is expected to be a subtype / control specific to the platform, but
  * unknown to QNative. What it means to add it as a child of this object is left
- * for the plugin to decide. You would call this function whenever you need a
- * QObject based platform control to be a child of a QNative control.
+ * for the plugin to decide. Normal QObject parent-child ownership will apply, so
+ * if \a this is deleted, \a child will be deleted as well. You would call
+ * this function whenever you need a QObject based platform control to be a child
+ * of a QNative control.
  * @return Returns \c true if the plugin was able to add \a child as a child.
  */
 bool QNativeBase::addNativeChild(QObject *child)
@@ -142,7 +150,11 @@ bool QNativeBase::addNativeChild(QObject *child)
  * specific to the platform, but unknown to QNative. Especially, this function
  * accept types not deriving from QObject, like native OS controls.
  * What it means to add it as a child this object is left for the plugin
- * to decide. You would call this function whenever you need a native OS
+ * to decide. The platform will not take ownership of \c this, so you should consider
+ * assigning a normal QObject parent as well for automatic destruction.
+ * The platform will not take ownership of \a child, but depending on the
+ * platform, it might keep a strong reference to it for as long as it needs it.
+ * You would call this function whenever you need a native OS
  * control to be a child of a QNative control.
  * @return Returns \c true if the plugin was able to add \a child as a child.
  */

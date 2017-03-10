@@ -50,12 +50,7 @@ public:
     virtual void setPlatformParent(QNativePlatformBase *) = 0;
 
     /**
-     * @brief Override to support mixing platform controls with QNative controls.
-     * \a parent is expected to be a type / control specific to the platform, but
-     * unknown to QNative. What it means to use it as parent for this object is left
-     * for the plugin to decide. You would call this function whenever you need a
-     * QNative control to be a child of a QObject based platform control.
-     * @return Returns \c true if the plugin was able to use \a parent as parent.
+     * \sa QNativeBase::setNativeParent(QObject *parent)
      */
     virtual bool setNativeParent(QObject *parent)
     {
@@ -65,14 +60,7 @@ public:
     }
 
     /**
-     * @brief Override to support mixing platform controls with QNative controls.
-     * \a type is the type name of \a parent, and is expected to be a type / control
-     * specific to the platform, but unknown to QNative. Especially, this function
-     * accept types not deriving from QObject, like native OS controls.
-     * What it means to use it as parent for this object is left for the plugin
-     * to decide. You would call this function whenever you need a QNative control to be a
-     * child of a native OS control.
-     * @return Returns \c true if the plugin was able to use \a parent as parent.
+     * \sa QNativeBase::setNativeParent(const QByteArray &type, void *parent)
      */
     virtual bool setNativeParent(const QByteArray &type, void *parent)
     {
@@ -83,12 +71,7 @@ public:
     }
 
     /**
-     * @brief Override to support mixing platform controls with QNative controls.
-     * \a child is expected to be a type / control specific to the platform, but
-     * unknown to QNative. What it means to add it as a child of this object is left
-     * for the plugin to decide. You would call this function whenever you need a
-     * QObject based platform control to be a child of a QNative control.
-     * @return Returns \c true if the plugin was able to add \a child as a child.
+     * \sa QNativeBase::addNativeChild(QObject *child)
      */
     virtual bool addNativeChild(QObject *child)
     {
@@ -98,14 +81,7 @@ public:
     }
 
     /**
-     * @brief Override to support mixing platform controls with QNative controls.
-     * \a type is the type name of \a child, and is expected to be a type / control
-     * specific to the platform, but unknown to QNative. Especially, this function
-     * accept types not deriving from QObject, like native OS controls.
-     * What it means to add it as a child this object is left for the plugin
-     * to decide. You would call this function whenever you need a native OS
-     * control to be a child of a QNative control.
-     * @return Returns \c true if the plugin was able to add \a child as a child.
+     * \sa QNativeBase::addNativeChild(const QByteArray &type, void *child)
      */
     virtual bool addNativeChild(const QByteArray &type, void *child)
     {
