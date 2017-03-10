@@ -192,7 +192,7 @@ void QNativeAppKitViewPrivate::removeSubView(NSView *view)
     const QRectF rect = qt_mac_flipRect(view.frame, view);
     [view removeFromSuperview];
     if (hadSuperview)
-        view.frame = NSMakeRect(rect.x(), rect.y(), rect.width(), rect.height());
+        view.frame = rect.toCGRect();
 }
 
 void QNativeAppKitViewPrivate::addSubView(NSView *subView)
@@ -213,7 +213,7 @@ void QNativeAppKitViewPrivate::addSubView(NSView *subView)
     // to a superview, so reset it after reparenting
     subView.frame = [subView frameForAlignmentRect:alignmentRect];
     const QRectF rect = qt_mac_flipRect(subView.frame, subView);
-    subView.frame = NSMakeRect(rect.x(), rect.y(), rect.width(), rect.height());
+    subView.frame = rect.toCGRect();
     subView.autoresizingMask = NSViewMaxXMargin
             | (subView.superview.isFlipped ? NSViewMaxYMargin : NSViewMinYMargin);
 }
