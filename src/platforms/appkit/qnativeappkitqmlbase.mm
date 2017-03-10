@@ -61,7 +61,13 @@ void QNativeAppKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, Q
     QNativeAppKitBase *appkitChild = dynamic_cast<QNativeAppKitBase *>(child);
 
     if (appkitChild) {
-        appkitChild->setParent(appkitParent);
+        if (appkitChild->parent() != appkitParent) {
+            appkitChild->setParent(appkitParent);
+        } else {
+            // Force a child event, since we depend on it
+            QChildEvent e(QEvent::ChildAdded, appkitChild);
+            QCoreApplication::sendEvent(appkitParent, &e);
+        }
     } else {
         // The child doesn't belong to QNativeAppKit. If it belongs
         // to QNative, try to parent it using the childs cross-parenting API
