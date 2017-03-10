@@ -139,11 +139,8 @@ void QNativeUIKitViewPrivate::updateImplicitSize()
 
 UIView *QNativeUIKitViewPrivate::view()
 {
-    if (!m_view) {
+    if (!m_view)
         m_view = createView();
-        if (QNativeUIKitView *parent = q_func()->parentView())
-            static_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(parent))->addSubView(m_view);
-    }
     return m_view;
 }
 
