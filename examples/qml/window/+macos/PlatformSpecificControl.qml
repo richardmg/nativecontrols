@@ -47,13 +47,13 @@ AppKit.View {
     implicitHeight: 100
 
     AppKit.Button {
-        id: uikitButton
+        id: appkitButton
         text: "AppKit button"
         onClicked: text = "You clicked me!"
     }
 
     Native.Button {
-        y: uikitButton.bottom + 8
+        y: appkitButton.bottom + 8
         text: "Cross parented button"
         onClicked: text = "You clicked me!"
     }
