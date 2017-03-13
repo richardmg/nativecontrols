@@ -158,7 +158,7 @@ bool QNativeAppKitViewController::setNativeParent(QObject *parent)
 bool QNativeAppKitViewController::setNativeParent(const QByteArray &type, void *parent)
 {
     if (type == "NSViewController")
-        [reinterpret_cast<NSViewController *>(parent) addChildViewController:nsViewControllerHandle()];
+        [static_cast<NSViewController *>(parent) addChildViewController:nsViewControllerHandle()];
     else
         return QNativeAppKitBase::setNativeParent(type, parent);
     return true;
@@ -178,9 +178,9 @@ bool QNativeAppKitViewController::addNativeChild(QObject *child)
 bool QNativeAppKitViewController::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "NSView")
-        d_func()->addSubViewToContentView(reinterpret_cast<NSView *>(child));
+        d_func()->addSubViewToContentView(static_cast<NSView *>(child));
     else if (type == "NSViewController")
-        [nsViewControllerHandle() addChildViewController:reinterpret_cast<NSViewController *>(child)];
+        [nsViewControllerHandle() addChildViewController:static_cast<NSViewController *>(child)];
     else
         return QNativeAppKitBase::addNativeChild(type, child);
     return true;

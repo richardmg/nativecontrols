@@ -498,7 +498,7 @@ bool QNativeAppKitView::setNativeParent(QObject *parent)
 bool QNativeAppKitView::setNativeParent(const QByteArray &type, void *parent)
 {
     if (type == "NSView") {
-        d_func()->addSubViewToSuperView(nsViewHandle(), reinterpret_cast<NSView *>(parent));
+        d_func()->addSubViewToSuperView(nsViewHandle(), static_cast<NSView *>(parent));
     } else {
         return QNativeAppKitBase::setNativeParent(type, parent);
     }
@@ -517,7 +517,7 @@ bool QNativeAppKitView::addNativeChild(QObject *child)
 bool QNativeAppKitView::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "NSView")
-        d_func()->addSubView(reinterpret_cast<NSView *>(child));
+        d_func()->addSubView(static_cast<NSView *>(child));
     else
         return QNativeAppKitBase::addNativeChild(type, child);
     return true;

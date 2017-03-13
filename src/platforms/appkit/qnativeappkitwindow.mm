@@ -312,9 +312,9 @@ bool QNativeAppKitWindow::addNativeChild(QObject *child)
 bool QNativeAppKitWindow::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "NSView")
-        d_func()->addSubViewToContentView(reinterpret_cast<NSView *>(child));
+        d_func()->addSubViewToContentView(static_cast<NSView *>(child));
     else if (type == "NSViewController")
-        nsWindowHandle().contentViewController = reinterpret_cast<NSViewController *>(child);
+        nsWindowHandle().contentViewController = static_cast<NSViewController *>(child);
     else
         return QNativeAppKitBase::addNativeChild(type, child);
     return true;
