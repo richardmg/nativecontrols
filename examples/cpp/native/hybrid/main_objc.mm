@@ -71,10 +71,12 @@ void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
     [switchButton sizeToFit];
     window.addNativeChild("NSView", switchButton);
 
-    // You can also go the other way, creating a QNativeButton
-    // as a direct child of another NSView.
+    // You can also go the other way, creating a QNativeButton as a direct child of another NSView.
+    // Note that switchButton.frame is specified with origo bottom-left, as opposed to
+    // Qt geometry, which is specified with origo top-left
     QNativeButton *nativeButton2 = new QNativeButton("QNativeButton 2");
-    nativeButton2->move(switchButton.frame.origin.x, switchButton.frame.origin.y + switchButton.bounds.size.height);
+    float y = window.height() - switchButton.frame.origin.y - switchButton.frame.size.height;
+    nativeButton2->move(switchButton.frame.origin.x, y);
     QObject::connect(nativeButton2, &QNativeButton::clicked,
                      [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
     nativeButton2->setNativeParent("NSView", switchButton.superview);
