@@ -492,10 +492,22 @@ bool QNativeAppKitView::setNativeParent(QObject *parent)
 
 bool QNativeAppKitView::setNativeParent(const QByteArray &type, void *parent)
 {
-    if (type == "NSView")
-        [reinterpret_cast<NSView *>(parent) addSubview:nsViewHandle()];
-    else
+    if (type == "NSView") {
+        NSView *subView = nsViewHandle();
+        NSView *superView = reinterpret_cast<NSView *>(parent);
+        NSRect alignmentRect = [subView alignmentRectForFrame:subView.frame];
+
+        [superView addSubview:subView];
+
+        // If the height of the new superview differs from the previous, we need to recalculate
+        // the subview's frame to keep the same top-left distance.
+        NSRect frame = [subView frameForAlignmentRect:alignmentRect];
+        subView.frame = qt_mac_flipRect(frame, subView).toCGRect();
+        subView.autoresizingMask = NSViewMaxXMargin
+                | (subView.superview.isFlipped ? NSViewMaxYMargin : NSViewMinYMargin);
+    } else {
         return QNativeAppKitBase::setNativeParent(type, parent);
+    }
     return true;
 }
 
