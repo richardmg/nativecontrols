@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
     tabBarController.setViewControllers(QList<QNativeUIKitViewController *>() << &tab1 << &tab2);
 
     QNativeUIKitView *contentView = tab1.view();
+    float margin = 0;
 
     QNativeUIKitButton button(QStringLiteral("Click me"), contentView);
     button.move(50, 100);
@@ -64,17 +65,21 @@ int main(int argc, char *argv[])
 
     QNativeUIKitTextField textField(contentView);
     textField.setPlaceholderText(QStringLiteral("TextField"));
-    textField.move(50, 150);
+    textField.move(button.left(), button.bottom() + margin);
     textField.resize(200, textField.implicitSize().height());
 
     QNativeUIKitView view(contentView);
-    view.setGeometry(50, textField.geometry().bottom(), 200, 200);
+    view.setGeometry(button.left(), textField.geometry().bottom() + margin, 200, 200);
 
     QNativeUIKitButton button2("Child button", &view);
-    button2.move(10, 0);
+    button2.move(0, 0);
     QObject::connect(&button2, &QNativeUIKitButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
 
-    window.showFullScreen();
+    QNativeUIKitTextField textField2(contentView);
+    textField2.setPlaceholderText(QStringLiteral("TextField 2"));
+    textField2.move(button.left(), 300);
+//    textField2.resize(200, textField.implicitSize().height());
 
+    window.showFullScreen();
     return app.exec();
 }
