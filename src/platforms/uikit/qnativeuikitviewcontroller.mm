@@ -62,6 +62,7 @@ QNativeUIKitViewControllerPrivate::~QNativeUIKitViewControllerPrivate()
 QNativeUIKitViewController::QNativeUIKitViewController(QNativeUIKitBase *parent)
     : QNativeUIKitBase(*new QNativeUIKitViewControllerPrivate(), parent)
 {
+    setView(new QNativeUIKitView(this));
 }
 
 QNativeUIKitViewController::QNativeUIKitViewController(QNativeUIKitViewControllerPrivate &dd, QNativeUIKitBase *parent)
@@ -117,15 +118,7 @@ QNativeUIKitTabBarItem *QNativeUIKitViewController::tabBarItem() const
 
 QNativeUIKitView *QNativeUIKitViewController::view() const
 {
-    Q_D(const QNativeUIKitViewController);
-    if (!d->m_view) {
-        QNativeUIKitViewController *self = const_cast<QNativeUIKitViewController *>(this);
-        self->setView(new QNativeUIKitView());
-        // Set parent in the end to ensure we don't get confused when
-        // getting a childEvent before having a d->m_view assigned.
-        d->m_view->setParent(self);
-    }
-    return d->m_view;
+    return d_func()->m_view;
 }
 
 void QNativeUIKitViewController::setView(QNativeUIKitView *view)
@@ -215,11 +208,8 @@ void QNativeUIKitViewController::childEvent(QChildEvent *event)
             // that we don't try to make the content view a subview of itself.
             QNativeUIKitView *contentView = d->m_view;
             QNativeUIKitView *subView = dptr_child->q_func();
-            if (subView != contentView) {
-                // Note: the next call might lazy create the content view, in
-                // which case we'll get a recursive call back to childEvent.
+            if (contentView && subView != contentView)
                 d->addSubViewToContentView(subView->uiViewHandle());
-            }
         } else if (event->removed()) {
             [dptr_child->view() removeFromSuperview];
         }
