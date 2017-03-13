@@ -56,7 +56,7 @@ void QNativeQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject
     // qml object. 'appendChild' is the only callback we get when the parent changes.
     QObject *qparent = list->object;
     QNativeBase *qnativeParent = static_cast<QNativeBase *>(qparent);
-    QNativeBase *qnativeChild = dynamic_cast<QNativeBase *>(child);
+    QNativeBase *qnativeChild = qobject_cast<QNativeBase *>(child);
 
     if (qnativeChild) {
         qnativeChild->setParent(qnativeParent);

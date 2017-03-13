@@ -62,7 +62,7 @@ void QNativeBasePrivate::setPlatformBase(QNativePlatformBase *platformBase)
 
 void QNativeBasePrivate::syncPlatformParent()
 {
-    QNativeBase *p = dynamic_cast<QNativeBase *>(q_func()->parent());
+    QNativeBase *p = qobject_cast<QNativeBase *>(q_func()->parent());
     m_platformBase->setPlatformParent(p ? static_cast<QNativeBasePrivate *>(QObjectPrivate::get(p))->m_platformBase : nullptr);
 }
 
@@ -92,7 +92,7 @@ void QNativeBase::setParent(QNativeBase *parentBase)
 
 QNativeBase *QNativeBase::parentBase()
 {
-    return dynamic_cast<QNativeBase *>(parent());
+    return qobject_cast<QNativeBase *>(parent());
 }
 
 /**
