@@ -79,7 +79,6 @@ public:
     void updateImplicitSize();
 
     Q_DECLARE_PUBLIC(QNativeAppKitView)
-
 protected:
     // Attributes to keep track of explicit
     // application assignments
@@ -110,6 +109,8 @@ protected:
 private:
     NSView *m_view;
     QSizeF m_implicitSize;
+
+    void addSubViewToSuperView(NSView *subView, NSView *superView);
 };
 
 QT_END_NAMESPACE

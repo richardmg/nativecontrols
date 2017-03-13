@@ -195,11 +195,8 @@ void QNativeAppKitViewPrivate::removeSubView(NSView *view)
         view.frame = rect.toCGRect();
 }
 
-void QNativeAppKitViewPrivate::addSubView(NSView *subView)
+void QNativeAppKitViewPrivate::addSubViewToSuperView(NSView *subView, NSView *superView)
 {
-    if (subView.superview)
-        removeSubView(subView);
-
     // The flipping machinery here is designed to interop with Cocoa's flipped coordinate system:
     // before we deparent a view, we flip its frame to a top-left origin and then set that as the
     // frame after the control is deparented. Then, when we parent a view, we flip its top-left
@@ -208,18 +205,26 @@ void QNativeAppKitViewPrivate::addSubView(NSView *subView)
     // autoresizing will still interfere with top-left origins so we give fixed-size controls
     // the default AppKit autoresizing mask (NSViewMaxXMargin | NSViewMinYMargin) to compensate.
 
-    // Ratio between frame and alignment rect can change depending on whether the view is attached
-    // to a superview, so reset it after reparenting.
+    if (subView.superview)
+        removeSubView(subView);
+
+    // Ratio between frame and alignment rect can change depending on whether the
+    // view is attached to a superview, so reset it after reparenting.
     NSRect alignmentRect = [subView alignmentRectForFrame:subView.frame];
-    [view() addSubview:subView];
-    NSRect frame = [subView frameForAlignmentRect:alignmentRect];
+
+    [superView addSubview:subView];
 
     // If the height of the new superview differs from the previous, we need to recalculate
     // the subview's frame to keep the same top-left distance.
+    NSRect frame = [subView frameForAlignmentRect:alignmentRect];
     subView.frame = qt_mac_flipRect(frame, subView).toCGRect();
-
     subView.autoresizingMask = NSViewMaxXMargin
             | (subView.superview.isFlipped ? NSViewMaxYMargin : NSViewMinYMargin);
+}
+
+void QNativeAppKitViewPrivate::addSubView(NSView *subView)
+{
+    addSubViewToSuperView(subView, view());
 }
 
 NSRect QNativeAppKitViewPrivate::alignmentRect() const
@@ -493,18 +498,7 @@ bool QNativeAppKitView::setNativeParent(QObject *parent)
 bool QNativeAppKitView::setNativeParent(const QByteArray &type, void *parent)
 {
     if (type == "NSView") {
-        NSView *subView = nsViewHandle();
-        NSView *superView = reinterpret_cast<NSView *>(parent);
-        NSRect alignmentRect = [subView alignmentRectForFrame:subView.frame];
-
-        [superView addSubview:subView];
-
-        // If the height of the new superview differs from the previous, we need to recalculate
-        // the subview's frame to keep the same top-left distance.
-        NSRect frame = [subView frameForAlignmentRect:alignmentRect];
-        subView.frame = qt_mac_flipRect(frame, subView).toCGRect();
-        subView.autoresizingMask = NSViewMaxXMargin
-                | (subView.superview.isFlipped ? NSViewMaxYMargin : NSViewMinYMargin);
+        d_func()->addSubViewToSuperView(nsViewHandle(), reinterpret_cast<NSView *>(parent));
     } else {
         return QNativeAppKitBase::setNativeParent(type, parent);
     }
