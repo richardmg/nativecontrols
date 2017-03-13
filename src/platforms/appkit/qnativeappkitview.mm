@@ -207,13 +207,17 @@ void QNativeAppKitViewPrivate::addSubView(NSView *subView)
     // top-left (Qt) origins while parenting to either flipped or non-flipped views. Note that
     // autoresizing will still interfere with top-left origins so we give fixed-size controls
     // the default AppKit autoresizing mask (NSViewMaxXMargin | NSViewMinYMargin) to compensate.
+
+    // Ratio between frame and alignment rect can change depending on whether the view is attached
+    // to a superview, so reset it after reparenting.
     NSRect alignmentRect = [subView alignmentRectForFrame:subView.frame];
     [view() addSubview:subView];
-    // Ratio between frame and alignment rect can change depending on whether the view is attached
-    // to a superview, so reset it after reparenting
-    subView.frame = [subView frameForAlignmentRect:alignmentRect];
-    const QRectF rect = qt_mac_flipRect(subView.frame, subView);
-    subView.frame = rect.toCGRect();
+    NSRect frame = [subView frameForAlignmentRect:alignmentRect];
+
+    // If the height of the new superview differs from the previous, we need to recalculate
+    // the subview's frame to keep the same top-left distance.
+    subView.frame = qt_mac_flipRect(frame, subView).toCGRect();
+
     subView.autoresizingMask = NSViewMaxXMargin
             | (subView.superview.isFlipped ? NSViewMaxYMargin : NSViewMinYMargin);
 }
