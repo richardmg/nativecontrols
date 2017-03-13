@@ -205,9 +205,9 @@ bool QNativeUIKitWindow::addNativeChild(QObject *child)
 bool QNativeUIKitWindow::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "UIView")
-        d_func()->addSubViewToContentView(reinterpret_cast<UIView *>(child));
+        d_func()->addSubViewToContentView(static_cast<UIView *>(child));
     else if (type == "UIViewController")
-        uiWindowHandle().rootViewController = reinterpret_cast<UIViewController *>(child);
+        uiWindowHandle().rootViewController = static_cast<UIViewController *>(child);
     else
         return QNativeUIKitView::addNativeChild(type, child);
     return true;

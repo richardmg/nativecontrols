@@ -156,7 +156,7 @@ bool QNativeUIKitViewController::setNativeParent(QObject *parent)
 bool QNativeUIKitViewController::setNativeParent(const QByteArray &type, void *parent)
 {
     if (type == "UIViewController")
-        [reinterpret_cast<UIViewController *>(parent) addChildViewController:uiViewControllerHandle()];
+        [static_cast<UIViewController *>(parent) addChildViewController:uiViewControllerHandle()];
     else
         return QNativeUIKitBase::setNativeParent(type, parent);
     return true;
@@ -176,9 +176,9 @@ bool QNativeUIKitViewController::addNativeChild(QObject *child)
 bool QNativeUIKitViewController::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "UIView")
-        d_func()->addSubViewToContentView(reinterpret_cast<UIView *>(child));
+        d_func()->addSubViewToContentView(static_cast<UIView *>(child));
     else if (type == "UIViewController")
-        [uiViewControllerHandle() addChildViewController:reinterpret_cast<UIViewController *>(child)];
+        [uiViewControllerHandle() addChildViewController:static_cast<UIViewController *>(child)];
     else
         return QNativeUIKitBase::addNativeChild(type, child);
     return true;

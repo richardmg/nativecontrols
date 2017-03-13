@@ -438,7 +438,7 @@ bool QNativeUIKitView::setNativeParent(QObject *parent)
 bool QNativeUIKitView::setNativeParent(const QByteArray &type, void *parent)
 {
     if (type == "UIView")
-        [reinterpret_cast<UIView *>(parent) addSubview:uiViewHandle()];
+        [static_cast<UIView *>(parent) addSubview:uiViewHandle()];
     else
         return QNativeUIKitBase::setNativeParent(type, parent);
     return true;
@@ -456,7 +456,7 @@ bool QNativeUIKitView::addNativeChild(QObject *child)
 bool QNativeUIKitView::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "UIView")
-        d_func()->addSubView(reinterpret_cast<UIView *>(child));
+        d_func()->addSubView(static_cast<UIView *>(child));
     else
         return QNativeUIKitBase::addNativeChild(type, child);
     return true;
