@@ -478,7 +478,7 @@ qreal QNativeAppKitView::bottom() const
 
 QNativeAppKitView *QNativeAppKitView::parentView()
 {
-    return dynamic_cast<QNativeAppKitView *>(parent());
+    return qobject_cast<QNativeAppKitView *>(parent());
 }
 
 NSView *QNativeAppKitView::nsViewHandle()
@@ -488,7 +488,7 @@ NSView *QNativeAppKitView::nsViewHandle()
 
 bool QNativeAppKitView::setNativeParent(QObject *parent)
 {
-    if (QNativeAppKitView *p = dynamic_cast<QNativeAppKitView *>(parent))
+    if (QNativeAppKitView *p = qobject_cast<QNativeAppKitView *>(parent))
         setParent(p);
     else
         return QNativeAppKitBase::setNativeParent(parent);
@@ -507,7 +507,7 @@ bool QNativeAppKitView::setNativeParent(const QByteArray &type, void *parent)
 
 bool QNativeAppKitView::addNativeChild(QObject *child)
 {
-    if (QNativeAppKitView *c = dynamic_cast<QNativeAppKitView *>(child))
+    if (QNativeAppKitView *c = qobject_cast<QNativeAppKitView *>(child))
         c->setParent(this);
     else
         return QNativeAppKitBase::addNativeChild(child);

@@ -300,9 +300,9 @@ bool QNativeAppKitWindow::event(QEvent *e)
 
 bool QNativeAppKitWindow::addNativeChild(QObject *child)
 {
-    if (QNativeAppKitView *c = dynamic_cast<QNativeAppKitView *>(child))
+    if (QNativeAppKitView *c = qobject_cast<QNativeAppKitView *>(child))
         c->setParent(this);
-    else if (QNativeAppKitViewController *c = dynamic_cast<QNativeAppKitViewController *>(child))
+    else if (QNativeAppKitViewController *c = qobject_cast<QNativeAppKitViewController *>(child))
         c->setParent(this);
     else
         return QNativeAppKitBase::addNativeChild(child);

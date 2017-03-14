@@ -58,7 +58,7 @@ void QNativeAppKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, Q
     // qml object. 'appendChild' is the only callback we get when the parent changes.
     QObject *qparent = list->object;
     QNativeAppKitBase *appkitParent = static_cast<QNativeAppKitBase *>(qparent);
-    QNativeAppKitBase *appkitChild = dynamic_cast<QNativeAppKitBase *>(child);
+    QNativeAppKitBase *appkitChild = qobject_cast<QNativeAppKitBase *>(child);
 
     if (appkitChild) {
         if (appkitChild->parent() != appkitParent) {
@@ -71,7 +71,7 @@ void QNativeAppKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, Q
     } else {
         // The child doesn't belong to QNativeAppKit. If it belongs
         // to QNative, try to parent it using the childs cross-parenting API
-        QNativeBase *qnativeChild = dynamic_cast<QNativeBase *>(child);
+        QNativeBase *qnativeChild = qobject_cast<QNativeBase *>(child);
         if (!qnativeChild || !qnativeChild->setNativeParent(appkitParent)) {
             // ...otherwise we fall back to normal QObject parenting
             child->setParent(qparent);

@@ -79,7 +79,7 @@ void QNativeAppKitBase::setParent(QNativeAppKitBase *parentBase)
 
 QNativeAppKitBase *QNativeAppKitBase::parentBase()
 {
-    return dynamic_cast<QNativeAppKitBase *>(parent());
+    return qobject_cast<QNativeAppKitBase *>(parent());
 }
 
 void QNativeAppKitBase::setPlatformParent(QNativePlatformBase *parent)

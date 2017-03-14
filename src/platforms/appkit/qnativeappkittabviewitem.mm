@@ -70,14 +70,14 @@ NSTabViewItem *QNativeAppKitTabViewItem::nsTabViewItemHandle()
 QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(QNativeAppKitBase *parent)
     : QNativeAppKitBase(*new QNativeAppKitTabViewItemPrivate(), parent)
 {
-    if (QNativeAppKitViewController *vc = dynamic_cast<QNativeAppKitViewController *>(parent))
+    if (QNativeAppKitViewController *vc = qobject_cast<QNativeAppKitViewController *>(parent))
         setViewController(vc);
 }
 
 QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(const QString &title, QNativeAppKitBase *parent)
     : QNativeAppKitBase(*new QNativeAppKitTabViewItemPrivate(), parent)
 {
-    if (QNativeAppKitViewController *vc = dynamic_cast<QNativeAppKitViewController *>(parent))
+    if (QNativeAppKitViewController *vc = qobject_cast<QNativeAppKitViewController *>(parent))
         setViewController(vc);
     setTitle(title);
 }

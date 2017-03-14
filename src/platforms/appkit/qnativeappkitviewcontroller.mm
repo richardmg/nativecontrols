@@ -105,7 +105,7 @@ void QNativeAppKitViewControllerPrivate::addSubViewToContentView(NSView *uiView)
 
 QNativeAppKitViewController *QNativeAppKitViewController::parentViewController()
 {
-    return dynamic_cast<QNativeAppKitViewController *>(parent());
+    return qobject_cast<QNativeAppKitViewController *>(parent());
 }
 
 QNativeAppKitView *QNativeAppKitViewController::view() const
@@ -148,7 +148,7 @@ NSViewController *QNativeAppKitViewController::nsViewControllerHandle()
 
 bool QNativeAppKitViewController::setNativeParent(QObject *parent)
 {
-    if (QNativeAppKitViewController *p = dynamic_cast<QNativeAppKitViewController *>(parent))
+    if (QNativeAppKitViewController *p = qobject_cast<QNativeAppKitViewController *>(parent))
         setParent(p);
     else
         return QNativeAppKitBase::setNativeParent(parent);
@@ -166,9 +166,9 @@ bool QNativeAppKitViewController::setNativeParent(const QByteArray &type, void *
 
 bool QNativeAppKitViewController::addNativeChild(QObject *child)
 {
-    if (QNativeAppKitView *c = dynamic_cast<QNativeAppKitView *>(child))
+    if (QNativeAppKitView *c = qobject_cast<QNativeAppKitView *>(child))
         c->setParent(this);
-    else if (QNativeAppKitViewController *c = dynamic_cast<QNativeAppKitViewController *>(child))
+    else if (QNativeAppKitViewController *c = qobject_cast<QNativeAppKitViewController *>(child))
         c->setParent(this);
     else
         return QNativeAppKitBase::addNativeChild(child);
