@@ -106,7 +106,7 @@ void QNativeUIKitViewControllerPrivate::addSubViewToContentView(UIView *uiView)
 
 QNativeUIKitViewController *QNativeUIKitViewController::parentViewController()
 {
-    return dynamic_cast<QNativeUIKitViewController *>(parent());
+    return qobject_cast<QNativeUIKitViewController *>(parent());
 }
 
 void QNativeUIKitViewController::setTabBarItem(QNativeUIKitTabBarItem *tabBarItem)
@@ -146,7 +146,7 @@ UIViewController *QNativeUIKitViewController::uiViewControllerHandle()
 
 bool QNativeUIKitViewController::setNativeParent(QObject *parent)
 {
-    if (QNativeUIKitViewController *p = dynamic_cast<QNativeUIKitViewController *>(parent))
+    if (QNativeUIKitViewController *p = qobject_cast<QNativeUIKitViewController *>(parent))
         setParent(p);
     else
         return QNativeUIKitBase::setNativeParent(parent);
@@ -164,9 +164,9 @@ bool QNativeUIKitViewController::setNativeParent(const QByteArray &type, void *p
 
 bool QNativeUIKitViewController::addNativeChild(QObject *child)
 {
-    if (QNativeUIKitView *c = dynamic_cast<QNativeUIKitView *>(child))
+    if (QNativeUIKitView *c = qobject_cast<QNativeUIKitView *>(child))
         c->setParent(this);
-    else if (QNativeUIKitViewController *c = dynamic_cast<QNativeUIKitViewController *>(child))
+    else if (QNativeUIKitViewController *c = qobject_cast<QNativeUIKitViewController *>(child))
         c->setParent(this);
     else
         return QNativeUIKitBase::addNativeChild(child);

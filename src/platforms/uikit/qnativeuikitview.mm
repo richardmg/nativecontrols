@@ -418,7 +418,7 @@ qreal QNativeUIKitView::bottom() const
 
 QNativeUIKitView *QNativeUIKitView::parentView()
 {
-    return dynamic_cast<QNativeUIKitView *>(parent());
+    return qobject_cast<QNativeUIKitView *>(parent());
 }
 
 UIView *QNativeUIKitView::uiViewHandle()
@@ -428,7 +428,7 @@ UIView *QNativeUIKitView::uiViewHandle()
 
 bool QNativeUIKitView::setNativeParent(QObject *parent)
 {
-    if (QNativeUIKitView *p = dynamic_cast<QNativeUIKitView *>(parent))
+    if (QNativeUIKitView *p = qobject_cast<QNativeUIKitView *>(parent))
         setParent(p);
     else
         return QNativeUIKitBase::setNativeParent(parent);
@@ -446,7 +446,7 @@ bool QNativeUIKitView::setNativeParent(const QByteArray &type, void *parent)
 
 bool QNativeUIKitView::addNativeChild(QObject *child)
 {
-    if (QNativeUIKitView *c = dynamic_cast<QNativeUIKitView *>(child))
+    if (QNativeUIKitView *c = qobject_cast<QNativeUIKitView *>(child))
         c->setParent(this);
     else
         return QNativeUIKitBase::addNativeChild(child);
