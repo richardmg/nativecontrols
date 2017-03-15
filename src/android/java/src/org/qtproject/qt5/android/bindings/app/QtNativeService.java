@@ -40,54 +40,54 @@ import android.app.Service;
 import android.os.IBinder;
 import android.content.Intent;
 
-public class QtNativeService extends Service
+public class QtUniService extends Service
 {
-    public QtNativeService() {
+    public QtUniService() {
     }
 
     @Override
     public void onCreate() {
-        System.out.println("### QtNativeService.onCreate");
+        System.out.println("### QtUniService.onCreate");
         onCreated(0);
     }
 
     @Override
     public void onDestroy() {
-        System.out.println("### QtNativeService.onDestroy");
+        System.out.println("### QtUniService.onDestroy");
         onDestroyed(0);
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        long instance = intent.getLongExtra("QtNativeService", 0);
-        System.out.println("### TODO: QtNativeService.onBind " + instance);
+        long instance = intent.getLongExtra("QtUniService", 0);
+        System.out.println("### TODO: QtUniService.onBind " + instance);
         return null;
     }
 
     @Override
     public void onRebind(Intent intent) {
-        long instance = intent.getLongExtra("QtNativeService", 0);
-        System.out.println("### TODO: QtNativeService.onRebind " + instance);
+        long instance = intent.getLongExtra("QtUniService", 0);
+        System.out.println("### TODO: QtUniService.onRebind " + instance);
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        long instance = intent.getLongExtra("QtNativeService", 0);
-        System.out.println("### TODO: QtNativeService.onUnbind " + instance);
+        long instance = intent.getLongExtra("QtUniService", 0);
+        System.out.println("### TODO: QtUniService.onUnbind " + instance);
         return false;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        long instance = intent.getLongExtra("QtNativeService", 0);
-        System.out.println("### QtNativeService.onStartCommand " + instance);
+        long instance = intent.getLongExtra("QtUniService", 0);
+        System.out.println("### QtUniService.onStartCommand " + instance);
         return onStartCommand(instance, flags, startId) ? START_STICKY : START_NOT_STICKY;
     }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        long instance = rootIntent.getLongExtra("QtNativeService", 0);
-        System.out.println("### QtNativeService.onTaskRemoved " + instance);
+        long instance = rootIntent.getLongExtra("QtUniService", 0);
+        System.out.println("### QtUniService.onTaskRemoved " + instance);
     }
 
     private static native void onCreated(long instance);

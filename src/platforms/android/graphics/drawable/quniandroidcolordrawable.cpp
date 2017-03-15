@@ -71,7 +71,7 @@ void QUniAndroidColorDrawable::setColor(int color)
         return;
 
     d->color = color;
-    QtNativeAndroid::callIntMethod(instance(), "setColor", color);
+    QtUniAndroid::callIntMethod(instance(), "setColor", color);
     emit colorChanged();
 }
 

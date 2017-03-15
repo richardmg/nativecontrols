@@ -38,11 +38,11 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qunicontrol.h>
-#include <QtNativeAppKitControls/quniappkitview.h>
-#include <QtNativeAppKitControls/private/quniappkitview_p.h>
+#include <QtUniControls/qunicontrol.h>
+#include <QtUniAppKitControls/quniappkitview.h>
+#include <QtUniAppKitControls/private/quniappkitview_p.h>
 
-@interface QtNativeNSView : NSView
+@interface QtUniNSView : NSView
 
 @end
 

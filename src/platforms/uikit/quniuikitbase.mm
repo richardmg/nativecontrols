@@ -38,10 +38,10 @@
 
 #include <QtCore>
 
-#include <QtNativeUIKitControls/quniuikitbase.h>
-#include <QtNativeUIKitControls/private/quniuikitbase_p.h>
+#include <QtUniUIKitControls/quniuikitbase.h>
+#include <QtUniUIKitControls/private/quniuikitbase_p.h>
 
-#include <QtNativeControls/qunibase.h>
+#include <QtUniControls/qunibase.h>
 
 QT_BEGIN_NAMESPACE
 

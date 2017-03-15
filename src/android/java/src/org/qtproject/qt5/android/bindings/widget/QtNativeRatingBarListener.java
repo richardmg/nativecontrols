@@ -38,9 +38,9 @@ package org.qtproject.qt5.android.bindings.widget;
 
 import android.widget.RatingBar;
 
-public class QtNativeRatingBarListener implements RatingBar.OnRatingBarChangeListener
+public class QtUniRatingBarListener implements RatingBar.OnRatingBarChangeListener
 {
-    public QtNativeRatingBarListener(RatingBar ratingBar, long instance) {
+    public QtUniRatingBarListener(RatingBar ratingBar, long instance) {
         m_instance = instance;
         ratingBar.setOnRatingBarChangeListener(this);
     }

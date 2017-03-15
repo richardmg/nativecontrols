@@ -37,8 +37,8 @@
 #include <QtQml/qqmlextensionplugin.h>
 #include <QtQml/qqml.h>
 
-#include <QtNativeAndroid/private/quniandroidcolordrawable_p.h>
-#include <QtNativeAndroid/private/quniandroiddrawable_p.h>
+#include <QtUniAndroid/private/quniandroidcolordrawable_p.h>
+#include <QtUniAndroid/private/quniandroiddrawable_p.h>
 
 QT_BEGIN_NAMESPACE
 

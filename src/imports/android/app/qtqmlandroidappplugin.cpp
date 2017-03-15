@@ -37,11 +37,11 @@
 #include <QtQml/qqmlextensionplugin.h>
 #include <QtQml/qqml.h>
 
-#include <QtNativeAndroid/private/quniandroidactionbar_p.h>
-#include <QtNativeAndroid/private/quniandroidactivity_p.h>
-#include <QtNativeAndroid/private/quniandroidalertdialog_p.h>
-#include <QtNativeAndroid/private/quniandroiddialog_p.h>
-#include <QtNativeAndroid/private/quniandroidservice_p.h>
+#include <QtUniAndroid/private/quniandroidactionbar_p.h>
+#include <QtUniAndroid/private/quniandroidactivity_p.h>
+#include <QtUniAndroid/private/quniandroidalertdialog_p.h>
+#include <QtUniAndroid/private/quniandroiddialog_p.h>
+#include <QtUniAndroid/private/quniandroidservice_p.h>
 
 QT_BEGIN_NAMESPACE
 

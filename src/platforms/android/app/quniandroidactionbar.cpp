@@ -63,7 +63,7 @@ void QUniAndroidActionBarPrivate::updateBackground()
 
     QAndroidJniObject bar = q->instance();
     QAndroidJniObject bg = background->instance();
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         bar.callMethod<void>("setBackgroundDrawable", "(Landroid/graphics/drawable/Drawable;)V", bg.object());
     });
 }
@@ -87,9 +87,9 @@ void QUniAndroidActionBar::setVisible(bool visible)
 
     d->visible = visible;
     if (visible)
-        QtNativeAndroid::callVoidMethod(instance(), "show");
+        QtUniAndroid::callVoidMethod(instance(), "show");
     else
-        QtNativeAndroid::callVoidMethod(instance(), "hide");
+        QtUniAndroid::callVoidMethod(instance(), "hide");
     emit visibleChanged();
 }
 
@@ -106,7 +106,7 @@ void QUniAndroidActionBar::setElevation(qreal elevation)
         return;
 
     d->elevation = elevation;
-    QtNativeAndroid::callRealMethod(instance(), "setElevation", elevation);
+    QtUniAndroid::callRealMethod(instance(), "setElevation", elevation);
     emit elevationChanged();
 }
 
@@ -123,7 +123,7 @@ void QUniAndroidActionBar::setTitle(const QString &title)
         return;
 
     d->title = title;
-    QtNativeAndroid::callTextMethod(instance(), "setTitle", title);
+    QtUniAndroid::callTextMethod(instance(), "setTitle", title);
     emit titleChanged();
 }
 
@@ -140,7 +140,7 @@ void QUniAndroidActionBar::setSubtitle(const QString &subtitle)
         return;
 
     d->subtitle = subtitle;
-    QtNativeAndroid::callTextMethod(instance(), "setSubtitle", subtitle);
+    QtUniAndroid::callTextMethod(instance(), "setSubtitle", subtitle);
     emit subtitleChanged();
 }
 

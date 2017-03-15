@@ -37,7 +37,7 @@
 #include <QtQml/qqmlextensionplugin.h>
 #include <QtQml/qqml.h>
 
-#include <QtNativeAndroid/private/quniandroidcontext_p.h>
+#include <QtUniAndroid/private/quniandroidcontext_p.h>
 
 QT_BEGIN_NAMESPACE
 

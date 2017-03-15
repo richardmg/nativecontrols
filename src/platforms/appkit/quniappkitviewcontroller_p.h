@@ -50,7 +50,7 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/private/quniappkitbase_p.h>
+#include <QtUniAppKitControls/private/quniappkitbase_p.h>
 
 QT_BEGIN_NAMESPACE
 

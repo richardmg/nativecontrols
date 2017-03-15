@@ -38,9 +38,9 @@ package org.qtproject.qt5.android.bindings.widget;
 
 import android.widget.SeekBar;
 
-public class QtNativeSeekBarListener implements SeekBar.OnSeekBarChangeListener
+public class QtUniSeekBarListener implements SeekBar.OnSeekBarChangeListener
 {
-    public QtNativeSeekBarListener(SeekBar seekBar, long instance) {
+    public QtUniSeekBarListener(SeekBar seekBar, long instance) {
         m_instance = instance;
         seekBar.setOnSeekBarChangeListener(this);
     }

@@ -113,7 +113,7 @@ void QUniAndroidScrollView::setScrollX(int x)
 {
     Q_D(QUniAndroidScrollView);
     if (d->_q_updateScrollX(x))
-        QtNativeAndroid::callIntMethod(instance(), "setScrollX", x);
+        QtUniAndroid::callIntMethod(instance(), "setScrollX", x);
 }
 
 int QUniAndroidScrollView::scrollY() const
@@ -128,12 +128,12 @@ void QUniAndroidScrollView::setScrollY(int y)
 {
     Q_D(QUniAndroidScrollView);
     if (d->_q_updateScrollY(y))
-        QtNativeAndroid::callIntMethod(instance(), "setScrollY", y);
+        QtUniAndroid::callIntMethod(instance(), "setScrollY", y);
 }
 
 QAndroidJniObject QUniAndroidScrollView::onCreate()
 {
-    return QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeScrollView",
+    return QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtUniScrollView",
                              "(Landroid/content/Context;J)V",
                              ctx().object(),
                              reinterpret_cast<jlong>(this));

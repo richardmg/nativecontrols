@@ -37,13 +37,13 @@
 #include <QtQml/qqmlextensionplugin.h>
 #include <QtQml/qqml.h>
 
-#include <QtNativeAndroid/private/quniandroidgravity_p.h>
-#include <QtNativeAndroid/private/quniandroidlayoutparams_p.h>
-#include <QtNativeAndroid/private/quniandroidmenu_p.h>
-#include <QtNativeAndroid/private/quniandroidmenuitem_p.h>
-#include <QtNativeAndroid/private/quniandroidview_p.h>
-#include <QtNativeAndroid/private/quniandroidviewgroup_p.h>
-#include <QtNativeAndroid/private/quniandroidwindow_p.h>
+#include <QtUniAndroid/private/quniandroidgravity_p.h>
+#include <QtUniAndroid/private/quniandroidlayoutparams_p.h>
+#include <QtUniAndroid/private/quniandroidmenu_p.h>
+#include <QtUniAndroid/private/quniandroidmenuitem_p.h>
+#include <QtUniAndroid/private/quniandroidview_p.h>
+#include <QtUniAndroid/private/quniandroidviewgroup_p.h>
+#include <QtUniAndroid/private/quniandroidwindow_p.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -84,7 +84,7 @@ void QUniAndroidRatingBar::setRating(qreal rating)
         return;
 
     d->rating = rating;
-    QtNativeAndroid::callRealMethod(instance(), "setRating", rating);
+    QtUniAndroid::callRealMethod(instance(), "setRating", rating);
     emit ratingChanged();
 }
 
@@ -100,7 +100,7 @@ void QUniAndroidRatingBar::onInflate(QAndroidJniObject &instance)
     Q_D(QUniAndroidRatingBar);
     QUniAndroidAbsSeekBar::onInflate(instance);
 
-    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeRatingBarListener",
+    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtUniRatingBarListener",
                                    "(Landroid/widget/RatingBar;J)V",
                                    instance.object(),
                                    reinterpret_cast<jlong>(this));

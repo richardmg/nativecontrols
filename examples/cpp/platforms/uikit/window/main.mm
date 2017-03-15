@@ -41,7 +41,7 @@
 #include <UIKit/UIKit.h>
 
 #include <QtGui>
-#include <QtNativeUIKitControls>
+#include <QtUniUIKitControls>
 
 int main(int argc, char *argv[])
 {

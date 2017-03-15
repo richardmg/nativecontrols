@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qunitextfield.h>
-#include <QtNativeControls/private/qunitextfield_p.h>
-#include <QtNativeControls/quniplatformtextfield.h>
-#include <QtNativeControls/private/quniplatformmanager_p.h>
+#include <QtUniControls/qunitextfield.h>
+#include <QtUniControls/private/qunitextfield_p.h>
+#include <QtUniControls/quniplatformtextfield.h>
+#include <QtUniControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 

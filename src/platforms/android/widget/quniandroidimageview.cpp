@@ -70,7 +70,7 @@ void QUniAndroidImageView::setImageURI(const QUrl &uri)
     if (isValid()) {
         QAndroidJniObject v = instance();
         QAndroidJniObject u = getUri();
-        QtNativeAndroid::callFunction([=]() {
+        QtUniAndroid::callFunction([=]() {
             v.callMethod<void>("setImageURI", "(Landroid/net/Uri;)V", u.object());
         });
     }
@@ -90,7 +90,7 @@ void QUniAndroidImageView::setImageResource(int resource)
         return;
 
     d->resource = resource;
-    QtNativeAndroid::callIntMethod(instance(), "setImageResource", resource);
+    QtUniAndroid::callIntMethod(instance(), "setImageResource", resource);
     emit imageResourceChanged();
 }
 
@@ -111,7 +111,7 @@ void QUniAndroidImageView::setImageTintColor(int color)
     d->tint = color;
     if (isValid()) {
         QAndroidJniObject view = instance();
-        QtNativeAndroid::callFunction([=]() {
+        QtUniAndroid::callFunction([=]() {
             QAndroidJniObject tint = QAndroidJniObject::callStaticObjectMethod("android/content/res/ColorStateList",
                                                                                "valueOf",
                                                                                "(I)Landroid/content/res/ColorStateList;",

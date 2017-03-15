@@ -72,7 +72,7 @@ void QUniAndroidActivityPrivate::setupWindow()
         return;
 
     QAndroidJniObject activity = q->instance();
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         QAndroidJniObject wnd = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
         window->inflate(wnd);
     });
@@ -85,7 +85,7 @@ void QUniAndroidActivityPrivate::setupActionBar()
         return;
 
     QAndroidJniObject activity = q->instance();
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         QAndroidJniObject bar = activity.callObjectMethod("getActionBar", "()Landroid/app/ActionBar;");
         actionBar->inflate(bar);
     });
@@ -102,15 +102,15 @@ void QUniAndroidActivityPrivate::updateOptionsMenu()
         menu = optionsMenu->instance();
 
     QAndroidJniObject activity = q->instance();
-    QtNativeAndroid::callFunction([=]() {
-        activity.callMethod<void>("setOptionsMenu", "(Lorg/qtproject/qt5/android/bindings/view/QtNativeMenu;)V", menu.object());
+    QtUniAndroid::callFunction([=]() {
+        activity.callMethod<void>("setOptionsMenu", "(Lorg/qtproject/qt5/android/bindings/view/QtUniMenu;)V", menu.object());
     });
 }
 
 void QUniAndroidActivityPrivate::invalidateOptionsMenu()
 {
     Q_Q(QUniAndroidActivity);
-    QtNativeAndroid::callVoidMethod(q->instance(), "invalidateOptionsMenu");
+    QtUniAndroid::callVoidMethod(q->instance(), "invalidateOptionsMenu");
 }
 
 void QUniAndroidActivityPrivate::updateContentView()
@@ -124,7 +124,7 @@ void QUniAndroidActivityPrivate::updateContentView()
         content = contentView->instance();
 
     QAndroidJniObject activity = q->instance();
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         activity.callMethod<void>("setContentView", "(Landroid/view/View;)V", content.object());
     });
 }

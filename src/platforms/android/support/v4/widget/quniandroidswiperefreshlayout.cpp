@@ -96,7 +96,7 @@ void QUniAndroidSwipeRefreshLayout::setRefreshing(bool refreshing)
 {
     Q_D(QUniAndroidSwipeRefreshLayout);
     if (d->_q_updateRefreshing(refreshing))
-        QtNativeAndroid::callBoolMethod(instance(), "setRefreshing", refreshing);
+        QtUniAndroid::callBoolMethod(instance(), "setRefreshing", refreshing);
 }
 
 QAndroidJniObject QUniAndroidSwipeRefreshLayout::onCreate()
@@ -111,7 +111,7 @@ void QUniAndroidSwipeRefreshLayout::onInflate(QAndroidJniObject &instance)
     Q_D(QUniAndroidSwipeRefreshLayout);
     QUniAndroidViewGroup::onInflate(instance);
 
-    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v4/widget/QtNativeSwipeRefreshLayoutListener",
+    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v4/widget/QtUniSwipeRefreshLayoutListener",
                                    "(Landroid/support/v4/widget/SwipeRefreshLayout;J)V",
                                    instance.object(),
                                    reinterpret_cast<jlong>(this));

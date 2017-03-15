@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroidinterpolator_p.h>
+#include <QtUniAndroid/private/quniandroidinterpolator_p.h>
 
 QT_BEGIN_NAMESPACE
 

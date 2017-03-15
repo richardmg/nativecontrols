@@ -128,7 +128,7 @@ void QUniAndroidService::start()
     if (!context.isValid() || !service.isValid())
         return; // TODO: warn
 
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         QAndroidJniObject cls = service.callObjectMethod("getClass", "()Ljava/lang/Class;");
         QAndroidJniObject intent = QAndroidJniObject("android/content/Intent",
                                                      "(Landroid/content/Context;Ljava/lang/Class;)V",
@@ -136,7 +136,7 @@ void QUniAndroidService::start()
                                                      cls.object());
         intent.callObjectMethod("putExtra",
                                 "(Ljava/lang/String;J)Landroid/content/Intent;",
-                                QAndroidJniObject::fromString(QStringLiteral("QtNativeService")).object(),
+                                QAndroidJniObject::fromString(QStringLiteral("QtUniService")).object(),
                                 reinterpret_cast<jlong>(this));
         QAndroidJniObject component = context.callObjectMethod("startService",
                                                                "(Landroid/content/Intent;)Landroid/content/ComponentName;",
@@ -153,7 +153,7 @@ void QUniAndroidService::stop()
     if (!context.isValid() || !service.isValid())
         return; // TODO: warn
 
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         QAndroidJniObject cls = service.callObjectMethod("getClass", "()Ljava/lang/Class;");
         QAndroidJniObject intent = QAndroidJniObject("android/content/Intent",
                                                      "(Landroid/content/Context;Ljava/lang/Class;)V",
@@ -161,7 +161,7 @@ void QUniAndroidService::stop()
                                                      cls.object());
         intent.callObjectMethod("putExtra",
                                 "(Ljava/lang/String;J)Landroid/content/Intent;",
-                                QAndroidJniObject::fromString(QStringLiteral("QtNativeService")).object(),
+                                QAndroidJniObject::fromString(QStringLiteral("QtUniService")).object(),
                                 reinterpret_cast<jlong>(this));
         context.callMethod<jboolean>("stopService",
                                      "(Landroid/content/Intent;)Z",
@@ -171,7 +171,7 @@ void QUniAndroidService::stop()
 
 QAndroidJniObject QUniAndroidService::onCreate()
 {
-    return QAndroidJniObject("org/qtproject/qt5/android/bindings/app/QtNativeService");
+    return QAndroidJniObject("org/qtproject/qt5/android/bindings/app/QtUniService");
 }
 
 void QUniAndroidService::onInflate(QAndroidJniObject& instance)

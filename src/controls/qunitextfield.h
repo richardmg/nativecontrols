@@ -37,8 +37,8 @@
 #ifndef QNATIVETEXTFIELD_H
 #define QNATIVETEXTFIELD_H
 
-#include <QtNativeControls/qunicontrol.h>
-#include <QtNativeControls/qunicontrolsglobal.h>
+#include <QtUniControls/qunicontrol.h>
+#include <QtUniControls/qunicontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 

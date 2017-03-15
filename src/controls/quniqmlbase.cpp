@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/quniqmlbase.h>
-#include <QtNativeControls/private/quniqmlbase_p.h>
-#include <QtNativeControls/private/qunibase_p.h>
+#include <QtUniControls/quniqmlbase.h>
+#include <QtUniControls/private/quniqmlbase_p.h>
+#include <QtUniControls/private/qunibase_p.h>
 
 QT_BEGIN_NAMESPACE
 

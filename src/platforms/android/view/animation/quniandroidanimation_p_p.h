@@ -48,9 +48,9 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroidcontextual_p_p.h>
-#include <QtNativeAndroid/private/quniandroidoptional_p.h>
-#include <QtNativeAndroid/private/quniandroidanimation_p.h>
+#include <QtUniAndroid/private/quniandroidcontextual_p_p.h>
+#include <QtUniAndroid/private/quniandroidoptional_p.h>
+#include <QtUniAndroid/private/quniandroidanimation_p.h>
 
 QT_BEGIN_NAMESPACE
 

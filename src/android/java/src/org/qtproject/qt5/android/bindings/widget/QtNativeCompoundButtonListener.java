@@ -38,9 +38,9 @@ package org.qtproject.qt5.android.bindings.widget;
 
 import android.widget.CompoundButton;
 
-public class QtNativeCompoundButtonListener implements CompoundButton.OnCheckedChangeListener
+public class QtUniCompoundButtonListener implements CompoundButton.OnCheckedChangeListener
 {
-    public QtNativeCompoundButtonListener(CompoundButton button, long instance) {
+    public QtUniCompoundButtonListener(CompoundButton button, long instance) {
         m_instance = instance;
         button.setOnCheckedChangeListener(this);
     }

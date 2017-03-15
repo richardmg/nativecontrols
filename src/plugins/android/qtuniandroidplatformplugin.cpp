@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls>
-#include <QtNativeAndroid/private/quniandroidbutton_p.h>
-#include <QtNativeAndroid/private/quniandroidactivity_p.h>
+#include <QtUniControls>
+#include <QtUniAndroid/private/quniandroidbutton_p.h>
+#include <QtUniAndroid/private/quniandroidactivity_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -122,7 +122,7 @@ public:
     void showFullScreen() override { QUniAndroidActivity::start(); }
 };
 
-class QtNativeAndroidPlatformPlugin : public QObject, QUniPlatformPluginInterface
+class QtUniAndroidPlatformPlugin : public QObject, QUniPlatformPluginInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID QUniPlatformPluginInterface_iid FILE "plugin.json")

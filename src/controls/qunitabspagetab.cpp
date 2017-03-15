@@ -34,11 +34,11 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qunitabspagetab.h>
-#include <QtNativeControls/private/qunitabspagetab_p.h>
-#include <QtNativeControls/quniplatformtabspagetab.h>
-#include <QtNativeControls/quniplatformbase.h>
-#include <QtNativeControls/private/quniplatformmanager_p.h>
+#include <QtUniControls/qunitabspagetab.h>
+#include <QtUniControls/private/qunitabspagetab_p.h>
+#include <QtUniControls/quniplatformtabspagetab.h>
+#include <QtUniControls/quniplatformbase.h>
+#include <QtUniControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 

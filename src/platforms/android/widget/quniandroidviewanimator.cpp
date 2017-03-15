@@ -60,7 +60,7 @@ void QUniAndroidViewAnimator::setDisplayedChild(int child)
         return;
 
     d->displayedChild = child;
-    QtNativeAndroid::callIntMethod(instance(), "setDisplayedChild", child);
+    QtUniAndroid::callIntMethod(instance(), "setDisplayedChild", child);
     emit displayedChildChanged();
 }
 
@@ -80,11 +80,11 @@ void QUniAndroidViewAnimator::setInAnimation(int animation)
 
     d->inAnimation = animation;
     if (instance().isValid()) {
-        QtNativeAndroid::callFunction([=]() {
+        QtUniAndroid::callFunction([=]() {
             instance().callMethod<void>("setInAnimation", "(Landroid/content/Context;I)V", ctx().object(), animation);
         });
     }
-    QtNativeAndroid::callIntMethod(instance(), "setInAnimation", animation);
+    QtUniAndroid::callIntMethod(instance(), "setInAnimation", animation);
     emit inAnimationChanged();
 }
 
@@ -104,22 +104,22 @@ void QUniAndroidViewAnimator::setOutAnimation(int animation)
 
     d->outAnimation = animation;
     if (instance().isValid()) {
-        QtNativeAndroid::callFunction([=]() {
+        QtUniAndroid::callFunction([=]() {
             instance().callMethod<void>("setOutAnimation", "(Landroid/content/Context;I)V", ctx().object(), animation);
         });
     }
-    QtNativeAndroid::callIntMethod(instance(), "setInAnimation", animation);
+    QtUniAndroid::callIntMethod(instance(), "setInAnimation", animation);
     emit inAnimationChanged();
 }
 
 void QUniAndroidViewAnimator::showNext()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "showNext");
+    QtUniAndroid::callVoidMethod(instance(), "showNext");
 }
 
 void QUniAndroidViewAnimator::showPrevious()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "showPrevious");
+    QtUniAndroid::callVoidMethod(instance(), "showPrevious");
 }
 
 QAndroidJniObject QUniAndroidViewAnimator::onCreate()

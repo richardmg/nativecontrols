@@ -38,9 +38,9 @@ package org.qtproject.qt5.android.bindings.widget;
 
 import android.widget.TabHost;
 
-public class QtNativeTabHostListener implements TabHost.OnTabChangeListener
+public class QtUniTabHostListener implements TabHost.OnTabChangeListener
 {
-    public QtNativeTabHostListener(TabHost host, long instance) {
+    public QtUniTabHostListener(TabHost host, long instance) {
         m_instance = instance;
         host.setOnTabChangedListener(this);
     }

@@ -49,7 +49,7 @@ void QUniAndroidAnimationPrivate::updateInterpolator()
 
     QAndroidJniObject animation = q->instance();
     QAndroidJniObject ipolator = interpolator->instance();
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         animation.callMethod<void>("setInterpolator", "(Landroid/view/animation/Interpolator;)V", ipolator.object());
     });
 }
@@ -97,7 +97,7 @@ void QUniAndroidAnimation::setDuration(int duration)
         return;
 
     d->duration = duration;
-    QtNativeAndroid::callIntMethod(instance(), "setDuration", duration);
+    QtUniAndroid::callIntMethod(instance(), "setDuration", duration);
     emit durationChanged();
 }
 
@@ -116,7 +116,7 @@ void QUniAndroidAnimation::setFillAfter(bool fill)
         return;
 
     d->fillAfter = fill;
-    QtNativeAndroid::callBoolMethod(instance(), "setFillAfter", fill);
+    QtUniAndroid::callBoolMethod(instance(), "setFillAfter", fill);
     emit fillAfterChanged();
 }
 
@@ -135,7 +135,7 @@ void QUniAndroidAnimation::setFillBefore(bool fill)
         return;
 
     d->fillBefore = fill;
-    QtNativeAndroid::callBoolMethod(instance(), "setFillBefore", fill);
+    QtUniAndroid::callBoolMethod(instance(), "setFillBefore", fill);
     emit fillBeforeChanged();
 }
 
@@ -154,7 +154,7 @@ void QUniAndroidAnimation::setFillEnabled(bool fill)
         return;
 
     d->fillEnabled = fill;
-    QtNativeAndroid::callBoolMethod(instance(), "setFillEnabled", fill);
+    QtUniAndroid::callBoolMethod(instance(), "setFillEnabled", fill);
     emit fillEnabledChanged();
 }
 
@@ -197,7 +197,7 @@ void QUniAndroidAnimation::setRepeatCount(int count)
         return;
 
     d->repeatCount = count;
-    QtNativeAndroid::callIntMethod(instance(), "setRepeatCount", count);
+    QtUniAndroid::callIntMethod(instance(), "setRepeatCount", count);
     emit repeatCountChanged();
 }
 
@@ -216,7 +216,7 @@ void QUniAndroidAnimation::setRepeatMode(RepeatMode mode)
         return;
 
     d->repeatMode = mode;
-    QtNativeAndroid::callIntMethod(instance(), "setRepeatMode", mode);
+    QtUniAndroid::callIntMethod(instance(), "setRepeatMode", mode);
     emit repeatModeChanged();
 }
 
@@ -235,7 +235,7 @@ void QUniAndroidAnimation::setStartOffset(int offset)
         return;
 
     d->startOffset = offset;
-    QtNativeAndroid::callIntMethod(instance(), "setStartOffset", offset);
+    QtUniAndroid::callIntMethod(instance(), "setStartOffset", offset);
     emit startOffsetChanged();
 }
 
@@ -254,23 +254,23 @@ void QUniAndroidAnimation::setZAdjustment(ZAdjustment adjustment)
         return;
 
     d->zAdjustment = adjustment;
-    QtNativeAndroid::callIntMethod(instance(), "setZAdjustment", adjustment);
+    QtUniAndroid::callIntMethod(instance(), "setZAdjustment", adjustment);
     emit zAdjustmentChanged();
 }
 
 void QUniAndroidAnimation::cancel()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "cancel");
+    QtUniAndroid::callVoidMethod(instance(), "cancel");
 }
 
 void QUniAndroidAnimation::start()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "start");
+    QtUniAndroid::callVoidMethod(instance(), "start");
 }
 
 void QUniAndroidAnimation::startNow()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "startNow");
+    QtUniAndroid::callVoidMethod(instance(), "startNow");
 }
 
 QAndroidJniObject QUniAndroidAnimation::onCreate()

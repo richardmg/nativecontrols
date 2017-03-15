@@ -1,8 +1,8 @@
 %modules = ( # path to module name map
-    "QtNativeControls" => "$basedir/src/controls",
-    "QtNativeAndroid" => "$basedir/src/platforms/android",
-    "QtNativeAppKitControls" => "$basedir/src/platforms/appkit",
-    "QtNativeUIKitControls" => "$basedir/src/platforms/uikit",
+    "QtUniControls" => "$basedir/src/controls",
+    "QtUniAndroid" => "$basedir/src/platforms/android",
+    "QtUniAppKitControls" => "$basedir/src/platforms/appkit",
+    "QtUniUIKitControls" => "$basedir/src/platforms/uikit",
 );
 %moduleheaders = ( # restrict the module headers to those found in relative path
 );

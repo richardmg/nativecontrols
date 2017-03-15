@@ -37,8 +37,8 @@
 #ifndef QNATIVEBUTTON_H
 #define QNATIVEBUTTON_H
 
-#include <QtNativeControls/qunicontrol.h>
-#include <QtNativeControls/qunicontrolsglobal.h>
+#include <QtUniControls/qunicontrol.h>
+#include <QtUniControls/qunicontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -63,7 +63,7 @@ void QUniAndroidProgressBar::setIndeterminate(bool indeterminate)
         return;
 
     d->indeterminate = indeterminate;
-    QtNativeAndroid::callBoolMethod(instance(), "setIndeterminate", indeterminate);
+    QtUniAndroid::callBoolMethod(instance(), "setIndeterminate", indeterminate);
     emit indeterminateChanged();
 }
 
@@ -80,7 +80,7 @@ void QUniAndroidProgressBar::setProgress(int progress)
         return;
 
     d->secondary = progress;
-    QtNativeAndroid::callIntMethod(instance(), "setProgress", progress);
+    QtUniAndroid::callIntMethod(instance(), "setProgress", progress);
     emit progressChanged();
 }
 
@@ -97,7 +97,7 @@ void QUniAndroidProgressBar::setSecondaryProgress(int progress)
         return;
 
     d->secondary = progress;
-    QtNativeAndroid::callIntMethod(instance(), "setSecondaryProgress", progress);
+    QtUniAndroid::callIntMethod(instance(), "setSecondaryProgress", progress);
     emit secondaryProgressChanged();
 }
 
@@ -114,7 +114,7 @@ void QUniAndroidProgressBar::setMax(int max)
         return;
 
     d->max = max;
-    QtNativeAndroid::callIntMethod(instance(), "setMax", max);
+    QtUniAndroid::callIntMethod(instance(), "setMax", max);
     emit maxChanged();
 }
 

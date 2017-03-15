@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qunicontrol.h>
-#include <QtNativeAppKitControls/quniappkitcontrol.h>
-#include <QtNativeAppKitControls/private/quniappkitcontrol_p.h>
+#include <QtUniControls/qunicontrol.h>
+#include <QtUniAppKitControls/quniappkitcontrol.h>
+#include <QtUniAppKitControls/private/quniappkitcontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 

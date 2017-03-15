@@ -52,22 +52,22 @@ QUniAndroidDialog::QUniAndroidDialog(QUniAndroidDialogPrivate &dd, QObject *pare
 
 void QUniAndroidDialog::cancel()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "cancel");
+    QtUniAndroid::callVoidMethod(instance(), "cancel");
 }
 
 void QUniAndroidDialog::dismiss()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "dismiss");
+    QtUniAndroid::callVoidMethod(instance(), "dismiss");
 }
 
 void QUniAndroidDialog::hide()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "hide");
+    QtUniAndroid::callVoidMethod(instance(), "hide");
 }
 
 void QUniAndroidDialog::show()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "show");
+    QtUniAndroid::callVoidMethod(instance(), "show");
 }
 
 QAndroidJniObject QUniAndroidDialog::onCreate()

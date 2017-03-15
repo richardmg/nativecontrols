@@ -114,7 +114,7 @@ void QUniAndroidMenuItemPrivate::updateActionView()
 
     QAndroidJniObject item = q->instance();
     QAndroidJniObject view = actionView->instance();
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         item.callMethod<void>("setActionView", "(Landroid/view/View;)V", view.object());
     });
 }
@@ -137,7 +137,7 @@ void QUniAndroidMenuItem::setTitle(const QString &title)
         return;
 
     d->title = title;
-    QtNativeAndroid::callTextMethod(instance(), "setTitle", title);
+    QtUniAndroid::callTextMethod(instance(), "setTitle", title);
     emit titleChanged();
 }
 
@@ -154,7 +154,7 @@ void QUniAndroidMenuItem::setEnabled(bool enabled)
         return;
 
     d->enabled = enabled;
-    QtNativeAndroid::callBoolMethod(instance(), "setEnabled", enabled);
+    QtUniAndroid::callBoolMethod(instance(), "setEnabled", enabled);
     emit enabledChanged();
 }
 
@@ -171,7 +171,7 @@ void QUniAndroidMenuItem::setVisible(bool visible)
         return;
 
     d->visible = visible;
-    QtNativeAndroid::callBoolMethod(instance(), "setVisible", visible);
+    QtUniAndroid::callBoolMethod(instance(), "setVisible", visible);
     if (isValid() && context())
         QMetaObject::invokeMethod(context(), "invalidateOptionsMenu");
     emit visibleChanged();
@@ -190,7 +190,7 @@ void QUniAndroidMenuItem::setCheckable(bool checkable)
         return;
 
     d->checkable = checkable;
-    QtNativeAndroid::callBoolMethod(instance(), "setCheckable", checkable);
+    QtUniAndroid::callBoolMethod(instance(), "setCheckable", checkable);
     emit checkableChanged();
 }
 
@@ -207,7 +207,7 @@ void QUniAndroidMenuItem::setChecked(bool checked)
         return;
 
     d->checked = checked;
-    QtNativeAndroid::callBoolMethod(instance(), "setChecked", checked);
+    QtUniAndroid::callBoolMethod(instance(), "setChecked", checked);
     emit checkedChanged();
 }
 
@@ -224,7 +224,7 @@ void QUniAndroidMenuItem::setShowAs(int showAs)
         return;
 
     d->showAs = showAs;
-    QtNativeAndroid::callIntMethod(instance(), "setShowAs", showAs);
+    QtUniAndroid::callIntMethod(instance(), "setShowAs", showAs);
     emit showAsChanged();
 }
 
@@ -255,7 +255,7 @@ void QUniAndroidMenuItem::setActionView(QUniAndroidView *view)
 
 QAndroidJniObject QUniAndroidMenuItem::onCreate()
 {
-    return QAndroidJniObject("org/qtproject/qt5/android/bindings/view/QtNativeMenuItem",
+    return QAndroidJniObject("org/qtproject/qt5/android/bindings/view/QtUniMenuItem",
                              "(J)V",
                              reinterpret_cast<jlong>(this));
 }

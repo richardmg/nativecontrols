@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroidlayoutparams_p.h>
+#include <QtUniAndroid/private/quniandroidlayoutparams_p.h>
 
 QT_BEGIN_NAMESPACE
 

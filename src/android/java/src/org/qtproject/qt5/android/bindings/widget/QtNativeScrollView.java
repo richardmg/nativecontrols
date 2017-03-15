@@ -39,9 +39,9 @@ package org.qtproject.qt5.android.bindings.widget;
 import android.content.Context;
 import android.widget.ScrollView;
 
-public class QtNativeScrollView extends ScrollView
+public class QtUniScrollView extends ScrollView
 {
-    public QtNativeScrollView(Context context, long instance) {
+    public QtUniScrollView(Context context, long instance) {
         super(context);
         m_instance = instance;
     }

@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeControls/private/quniview_p.h>
+#include <QtUniControls/private/quniview_p.h>
 
 QT_BEGIN_NAMESPACE
 

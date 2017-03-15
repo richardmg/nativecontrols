@@ -56,7 +56,7 @@ QT_BEGIN_NAMESPACE
 class QString;
 class QAndroidJniObject;
 
-namespace QtNativeAndroid
+namespace QtUniAndroid
 {
     void callFunction(std::function<void()> method);
     void callTextMethod(const QAndroidJniObject &obj, const char *method, const QString &text);

@@ -37,8 +37,8 @@
 #ifndef QNATIVEUIKITSEARCHFIELD_H
 #define QNATIVEUIKITSEARCHFIELD_H
 
-#include <QtNativeControls/quniplatformsearchfield.h>
-#include <QtNativeUIKitControls/quniuikitcontrol.h>
+#include <QtUniControls/quniplatformsearchfield.h>
+#include <QtUniUIKitControls/quniuikitcontrol.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -10,5 +10,5 @@ OTHER_FILES = \
     plugin.json
 
 PLUGIN_TYPE = nativecontrols
-PLUGIN_CLASS_NAME = QtNativeAndroidPlatformPlugin
+PLUGIN_CLASS_NAME = QtUniAndroidPlatformPlugin
 load(qt_plugin)

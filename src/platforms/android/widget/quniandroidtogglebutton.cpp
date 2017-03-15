@@ -65,7 +65,7 @@ void QUniAndroidToggleButton::setTextOn(const QString &text)
         return;
 
     d->textOn = text;
-    QtNativeAndroid::callTextMethod(instance(), "setTextOn", text);
+    QtUniAndroid::callTextMethod(instance(), "setTextOn", text);
     emit textOnChanged();
 }
 
@@ -82,7 +82,7 @@ void QUniAndroidToggleButton::setTextOff(const QString &text)
         return;
 
     d->textOff = text;
-    QtNativeAndroid::callTextMethod(instance(), "setTextOff", text);
+    QtUniAndroid::callTextMethod(instance(), "setTextOff", text);
     emit textOffChanged();
 }
 

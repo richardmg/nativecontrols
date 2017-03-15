@@ -48,8 +48,8 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroidviewgroup_p.h>
-#include <QtNativeAndroid/private/quniandroidframelayoutparams_p.h>
+#include <QtUniAndroid/private/quniandroidviewgroup_p.h>
+#include <QtUniAndroid/private/quniandroidframelayoutparams_p.h>
 
 QT_BEGIN_NAMESPACE
 

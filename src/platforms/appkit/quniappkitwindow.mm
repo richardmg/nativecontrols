@@ -38,17 +38,17 @@
 
 #include <QtGui/qwindow.h>
 #include <QtCore/private/qobject_p.h>
-#include <QtNativeAppKitControls/quniappkitwindow.h>
-#include <QtNativeAppKitControls/quniappkitviewcontroller.h>
-#include <QtNativeAppKitControls/private/quniappkitwindow_p.h>
-#include <QtNativeAppKitControls/private/quniappkitviewcontroller_p.h>
-#include <QtNativeAppKitControls/private/quniappkitview_p.h>
+#include <QtUniAppKitControls/quniappkitwindow.h>
+#include <QtUniAppKitControls/quniappkitviewcontroller.h>
+#include <QtUniAppKitControls/private/quniappkitwindow_p.h>
+#include <QtUniAppKitControls/private/quniappkitviewcontroller_p.h>
+#include <QtUniAppKitControls/private/quniappkitview_p.h>
 
-@interface QtNativeNSView : NSView
+@interface QtUniNSView : NSView
 
 @end
 
-@implementation QtNativeNSView
+@implementation QtUniNSView
 
 - (BOOL)isFlipped
 {

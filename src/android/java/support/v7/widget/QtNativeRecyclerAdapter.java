@@ -42,9 +42,9 @@ import android.support.v7.widget.RecyclerView;
 
 import java.lang.Integer;
 
-public class QtNativeRecyclerAdapter extends RecyclerView.Adapter<QtNativeRecyclerAdapter.ViewHolder>
+public class QtUniRecyclerAdapter extends RecyclerView.Adapter<QtUniRecyclerAdapter.ViewHolder>
 {
-    public QtNativeRecyclerAdapter(int count, long instance) {
+    public QtUniRecyclerAdapter(int count, long instance) {
         m_count = count;
         m_instance = instance;
     }

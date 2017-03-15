@@ -55,12 +55,12 @@ QUniAndroidDrawerLayoutParams *QUniAndroidDrawerLayout::qmlAttachedProperties(QO
 
 void QUniAndroidDrawerLayout::closeDrawers()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "closeDrawers");
+    QtUniAndroid::callVoidMethod(instance(), "closeDrawers");
 }
 
 void QUniAndroidDrawerLayout::closeDrawer(int gravity)
 {
-    QtNativeAndroid::callIntMethod(instance(), "closeDrawer", gravity);
+    QtUniAndroid::callIntMethod(instance(), "closeDrawer", gravity);
 }
 
 QAndroidJniObject QUniAndroidDrawerLayout::onCreate()

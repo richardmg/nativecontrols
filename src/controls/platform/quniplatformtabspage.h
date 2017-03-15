@@ -38,8 +38,8 @@
 #define QNATIVEPLATFORMTABSPAGE_H
 
 #include <QtCore>
-#include <QtNativeControls/quniplatformpage.h>
-#include <QtNativeControls/qunicontrolsglobal.h>
+#include <QtUniControls/quniplatformpage.h>
+#include <QtUniControls/qunicontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 

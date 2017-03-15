@@ -63,7 +63,7 @@ QList<QUniAndroidMenuItem *> QUniAndroidMenu::items() const
 
 QAndroidJniObject QUniAndroidMenu::onCreate()
 {
-    return QAndroidJniObject("org/qtproject/qt5/android/bindings/view/QtNativeMenu");
+    return QAndroidJniObject("org/qtproject/qt5/android/bindings/view/QtUniMenu");
 }
 
 void QUniAndroidMenu::onInflate(QAndroidJniObject &instance)
@@ -71,7 +71,7 @@ void QUniAndroidMenu::onInflate(QAndroidJniObject &instance)
     foreach (QUniAndroidMenuItem *item, items()) {
         item->construct();
         if (item->isValid())
-            instance.callMethod<void>("add", "(Lorg/qtproject/qt5/android/bindings/view/QtNativeMenuItem;)V", item->instance().object());
+            instance.callMethod<void>("add", "(Lorg/qtproject/qt5/android/bindings/view/QtUniMenuItem;)V", item->instance().object());
     }
 }
 

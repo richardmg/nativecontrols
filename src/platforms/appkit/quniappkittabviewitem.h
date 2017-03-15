@@ -39,8 +39,8 @@
 
 #include <QObject>
 
-#include <QtNativeControls/quniplatformtabspagetab.h>
-#include <QtNativeAppKitControls/quniappkitview.h>
+#include <QtUniControls/quniplatformtabspagetab.h>
+#include <QtUniAppKitControls/quniappkitview.h>
 
 QT_BEGIN_NAMESPACE
 

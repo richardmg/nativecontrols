@@ -1,4 +1,4 @@
-TARGET = QtNativeAndroid
+TARGET = QtUniAndroid
 MODULE = nativeandroid
 
 QT += androidextras qml

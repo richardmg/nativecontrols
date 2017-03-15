@@ -90,7 +90,7 @@ void QUniAndroidTabSpec::setup(QAndroidJniObject &host, int index)
     if (content)
         id = content->identifier();
 
-    QtNativeAndroid::callFunction([=]() {
+    QtUniAndroid::callFunction([=]() {
         QAndroidJniObject spec = host.callObjectMethod("newTabSpec",
                                                        "(Ljava/lang/String;)Landroid/widget/TabHost$TabSpec;",
                                                        QAndroidJniObject::fromString(QString::number(index)).object());

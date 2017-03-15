@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qunitextfield.h>
-#include <QtNativeAppKitControls/quniappkittextfield.h>
-#include <QtNativeAppKitControls/private/quniappkittextfield_p.h>
+#include <QtUniControls/qunitextfield.h>
+#include <QtUniAppKitControls/quniappkittextfield.h>
+#include <QtUniAppKitControls/private/quniappkittextfield_p.h>
 
 @interface QUniAppKitTextFieldDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QUniAppKitTextFieldPrivate) *_textField;

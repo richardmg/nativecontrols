@@ -64,7 +64,7 @@ void QUniAndroidTextView::setText(const QString &text)
         return;
 
     d->text = text;
-    QtNativeAndroid::callTextMethod(instance(), "setText", text);
+    QtUniAndroid::callTextMethod(instance(), "setText", text);
     emit textChanged();
 }
 
@@ -83,7 +83,7 @@ void QUniAndroidTextView::setTextColor(int color)
         return;
 
     d->textColor = color;
-    QtNativeAndroid::callIntMethod(instance(), "setTextColor", color);
+    QtUniAndroid::callIntMethod(instance(), "setTextColor", color);
     emit textColorChanged();
 }
 
@@ -102,7 +102,7 @@ void QUniAndroidTextView::setTextSize(qreal size)
         return;
 
     d->textSize = size;
-    QtNativeAndroid::callRealMethod(instance(), "setTextSize", size);
+    QtUniAndroid::callRealMethod(instance(), "setTextSize", size);
     emit textSizeChanged();
 }
 
@@ -119,7 +119,7 @@ void QUniAndroidTextView::setHint(const QString &hint)
         return;
 
     d->hint = hint;
-    QtNativeAndroid::callTextMethod(instance(), "setHint", hint);
+    QtUniAndroid::callTextMethod(instance(), "setHint", hint);
     emit hintChanged();
 }
 
@@ -136,7 +136,7 @@ void QUniAndroidTextView::setSingleLine(bool singleLine)
         return;
 
     d->singleLine = singleLine;
-    QtNativeAndroid::callBoolMethod(instance(), "setSingleLine", singleLine);
+    QtUniAndroid::callBoolMethod(instance(), "setSingleLine", singleLine);
     emit singleLineChanged();
 }
 
@@ -155,7 +155,7 @@ void QUniAndroidTextView::setInputType(int type)
         return;
 
     d->inputType = type;
-    QtNativeAndroid::callIntMethod(instance(), "setInputType", type);
+    QtUniAndroid::callIntMethod(instance(), "setInputType", type);
     emit inputTypeChanged();
 }
 

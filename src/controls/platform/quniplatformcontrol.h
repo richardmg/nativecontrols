@@ -38,8 +38,8 @@
 #define QNATIVEPLATFORMCONTROL_H
 
 #include <QtCore>
-#include <QtNativeControls/quniplatformbase.h>
-#include <QtNativeControls/quniplatformview.h>
+#include <QtUniControls/quniplatformbase.h>
+#include <QtUniControls/quniplatformview.h>
 
 QT_BEGIN_NAMESPACE
 

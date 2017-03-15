@@ -37,8 +37,8 @@
 #ifndef QNATIVETABSPAGE_H
 #define QNATIVETABSPAGE_H
 
-#include <QtNativeControls/qunicontrolsglobal.h>
-#include <QtNativeControls/qunipage.h>
+#include <QtUniControls/qunicontrolsglobal.h>
+#include <QtUniControls/qunipage.h>
 
 QT_BEGIN_NAMESPACE
 

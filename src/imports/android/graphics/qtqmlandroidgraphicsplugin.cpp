@@ -37,7 +37,7 @@
 #include <QtQml/qqmlextensionplugin.h>
 #include <QtQml/qqml.h>
 
-#include <QtNativeAndroid/private/quniandroidcolor_p.h>
+#include <QtUniAndroid/private/quniandroidcolor_p.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 #include <QtGui>
-#include <QtNativeControls>
+#include <QtUniControls>
 
 int main(int argc, char **argv)
 {

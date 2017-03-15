@@ -41,20 +41,20 @@ import java.util.ArrayList;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.qtproject.qt5.android.bindings.view.QtNativeMenuItem;
+import org.qtproject.qt5.android.bindings.view.QtUniMenuItem;
 
-public class QtNativeMenu
+public class QtUniMenu
 {
-    public QtNativeMenu() {
-        m_items = new ArrayList<QtNativeMenuItem>();
+    public QtUniMenu() {
+        m_items = new ArrayList<QtUniMenuItem>();
     }
 
-    public void add(QtNativeMenuItem item) {
+    public void add(QtUniMenuItem item) {
         m_items.add(item);
     }
 
     public boolean create(Menu menu) {
-        for (QtNativeMenuItem item : m_items) {
+        for (QtUniMenuItem item : m_items) {
             MenuItem mi = menu.add(item.getTitle());
             item.create(mi);
         }
@@ -68,5 +68,5 @@ public class QtNativeMenu
     public void closed(Menu menu) {
     }
 
-    private ArrayList<QtNativeMenuItem> m_items;
+    private ArrayList<QtUniMenuItem> m_items;
 }

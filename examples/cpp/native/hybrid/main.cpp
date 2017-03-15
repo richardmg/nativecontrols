@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 #include <QtGui>
-#include <QtNativeControls>
+#include <QtUniControls>
 
 #ifdef Q_OS_DARWIN
 extern void main_objc(QUniWindow &window, QUniButton &nativeButton);

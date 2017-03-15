@@ -39,9 +39,9 @@ package org.qtproject.qt5.android.bindings.widget;
 import android.widget.RadioGroup;
 import android.widget.RadioButton;
 
-public class QtNativeRadioGroupListener implements RadioGroup.OnCheckedChangeListener
+public class QtUniRadioGroupListener implements RadioGroup.OnCheckedChangeListener
 {
-    public QtNativeRadioGroupListener(RadioGroup group, long instance) {
+    public QtUniRadioGroupListener(RadioGroup group, long instance) {
         m_instance = instance;
         group.setOnCheckedChangeListener(this);
     }

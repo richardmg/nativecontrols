@@ -50,7 +50,7 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/private/qunipage_p.h>
+#include <QtUniControls/private/qunipage_p.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -38,10 +38,10 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/quniappkittabviewcontroller.h>
-#include <QtNativeAppKitControls/private/quniappkittabviewcontroller_p.h>
-#include <QtNativeAppKitControls/quniappkittabviewitem.h>
-#include <QtNativeAppKitControls/private/quniappkittabviewitem_p.h>
+#include <QtUniAppKitControls/quniappkittabviewcontroller.h>
+#include <QtUniAppKitControls/private/quniappkittabviewcontroller_p.h>
+#include <QtUniAppKitControls/quniappkittabviewitem.h>
+#include <QtUniAppKitControls/private/quniappkittabviewitem_p.h>
 
 QT_BEGIN_NAMESPACE
 

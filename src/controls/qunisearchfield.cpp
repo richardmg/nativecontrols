@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qunisearchfield.h>
-#include <QtNativeControls/private/qunisearchfield_p.h>
-#include <QtNativeControls/quniplatformsearchfield.h>
-#include <QtNativeControls/private/quniplatformmanager_p.h>
+#include <QtUniControls/qunisearchfield.h>
+#include <QtUniControls/private/qunisearchfield_p.h>
+#include <QtUniControls/quniplatformsearchfield.h>
+#include <QtUniControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 

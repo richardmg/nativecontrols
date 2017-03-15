@@ -39,15 +39,15 @@
 ****************************************************************************/
 
 #include <QtGui>
-#include <QtNativeControls>
+#include <QtUniControls>
 
 #if defined(Q_OS_MACOS)
-#include <QtNativeAppKitControls>
+#include <QtUniAppKitControls>
 #include <AppKit/AppKit.h>
 #endif
 
 #if defined(Q_OS_IOS) || defined(Q_OS_TVOS)
-#include <QtNativeUIKitControls>
+#include <QtUniUIKitControls>
 #include <UIKit/UIKit.h>
 #endif
 

@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls>
-#include <QtNativeUIKitControls>
-#include <QtNativeUIKitControls/private/quniuikitbase_p.h>
+#include <QtUniControls>
+#include <QtUniUIKitControls>
+#include <QtUniUIKitControls/private/quniuikitbase_p.h>
 
 QT_BEGIN_NAMESPACE
 

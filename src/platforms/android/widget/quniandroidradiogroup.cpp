@@ -111,12 +111,12 @@ void QUniAndroidRadioGroup::setCheckedButton(QUniAndroidRadioButton *button)
 {
     Q_D(QUniAndroidRadioGroup);
     if (d->_q_updateCheckedButton(button))
-        QtNativeAndroid::callIntMethod(instance(), "check", button ? button->identifier() : -1);
+        QtUniAndroid::callIntMethod(instance(), "check", button ? button->identifier() : -1);
 }
 
 void QUniAndroidRadioGroup::clearCheck()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "clearCheck");
+    QtUniAndroid::callVoidMethod(instance(), "clearCheck");
 }
 
 QAndroidJniObject QUniAndroidRadioGroup::onCreate()
@@ -131,7 +131,7 @@ void QUniAndroidRadioGroup::onInflate(QAndroidJniObject &instance)
     Q_D(QUniAndroidRadioGroup);
     QUniAndroidLinearLayout::onInflate(instance);
 
-    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeRadioGroupListener",
+    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtUniRadioGroupListener",
                                    "(Landroid/widget/RadioGroup;J)V",
                                    instance.object(),
                                    reinterpret_cast<jlong>(this));

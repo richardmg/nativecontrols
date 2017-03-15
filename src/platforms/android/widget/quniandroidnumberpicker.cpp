@@ -96,7 +96,7 @@ void QUniAndroidNumberPicker::setValue(int value)
 {
     Q_D(QUniAndroidNumberPicker);
     if (d->_q_updateValue(value))
-        QtNativeAndroid::callIntMethod(instance(), "setValue", value);
+        QtUniAndroid::callIntMethod(instance(), "setValue", value);
 }
 
 QAndroidJniObject QUniAndroidNumberPicker::onCreate()
@@ -111,7 +111,7 @@ void QUniAndroidNumberPicker::onInflate(QAndroidJniObject &instance)
     Q_D(QUniAndroidNumberPicker);
     QUniAndroidLinearLayout::onInflate(instance);
 
-    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeNumberPickerListener",
+    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtUniNumberPickerListener",
                                    "(Landroid/widget/NumberPicker;J)V",
                                    instance.object(),
                                    reinterpret_cast<jlong>(this));

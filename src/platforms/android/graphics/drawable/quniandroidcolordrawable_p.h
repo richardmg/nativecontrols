@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroiddrawable_p.h>
+#include <QtUniAndroid/private/quniandroiddrawable_p.h>
 
 QT_BEGIN_NAMESPACE
 

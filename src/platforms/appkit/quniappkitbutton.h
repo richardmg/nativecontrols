@@ -37,8 +37,8 @@
 #ifndef QNATIVEAPPKITBUTTON_H
 #define QNATIVEAPPKITBUTTON_H
 
-#include <QtNativeControls/quniplatformbutton.h>
-#include <QtNativeAppKitControls/quniappkitcontrol.h>
+#include <QtUniControls/quniplatformbutton.h>
+#include <QtUniAppKitControls/quniappkitcontrol.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qunitextfield.h>
-#include <QtNativeUIKitControls/quniuikitsearchfield.h>
-#include <QtNativeUIKitControls/private/quniuikitsearchfield_p.h>
+#include <QtUniControls/qunitextfield.h>
+#include <QtUniUIKitControls/quniuikitsearchfield.h>
+#include <QtUniUIKitControls/private/quniuikitsearchfield_p.h>
 
 @interface QUniUIKitSearchFieldDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QUniUIKitSearchFieldPrivate) *_searchField;

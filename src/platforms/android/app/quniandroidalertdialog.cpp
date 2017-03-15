@@ -65,7 +65,7 @@ void QUniAndroidAlertDialog::setTitle(const QString &title)
         return;
 
     d->title = title;
-    QtNativeAndroid::callTextMethod(instance(), "setTitle", title);
+    QtUniAndroid::callTextMethod(instance(), "setTitle", title);
     emit titleChanged();
 }
 
@@ -82,7 +82,7 @@ void QUniAndroidAlertDialog::setMessage(const QString &message)
         return;
 
     d->message = message;
-    QtNativeAndroid::callTextMethod(instance(), "setMessage", message);
+    QtUniAndroid::callTextMethod(instance(), "setMessage", message);
     emit messageChanged();
 }
 

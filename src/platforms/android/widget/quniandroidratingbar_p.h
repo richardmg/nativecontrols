@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroidabsseekbar_p.h>
+#include <QtUniAndroid/private/quniandroidabsseekbar_p.h>
 
 QT_BEGIN_NAMESPACE
 

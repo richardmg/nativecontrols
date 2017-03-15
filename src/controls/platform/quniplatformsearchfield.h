@@ -38,7 +38,7 @@
 #define QNATIVEPLATFORMSEARCHFIELD_H
 
 #include <QtCore>
-#include <QtNativeControls/quniplatformcontrol.h>
+#include <QtUniControls/quniplatformcontrol.h>
 
 QT_BEGIN_NAMESPACE
 

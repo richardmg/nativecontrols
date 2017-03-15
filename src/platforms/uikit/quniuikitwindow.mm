@@ -38,11 +38,11 @@
 
 #include <QtGui/qwindow.h>
 #include <QtCore/private/qobject_p.h>
-#include <QtNativeUIKitControls/quniuikitwindow.h>
-#include <QtNativeUIKitControls/quniuikitviewcontroller.h>
-#include <QtNativeUIKitControls/private/quniuikitwindow_p.h>
-#include <QtNativeUIKitControls/private/quniuikitviewcontroller_p.h>
-#include <QtNativeUIKitControls/private/quniuikitview_p.h>
+#include <QtUniUIKitControls/quniuikitwindow.h>
+#include <QtUniUIKitControls/quniuikitviewcontroller.h>
+#include <QtUniUIKitControls/private/quniuikitwindow_p.h>
+#include <QtUniUIKitControls/private/quniuikitviewcontroller_p.h>
+#include <QtUniUIKitControls/private/quniuikitview_p.h>
 
 QT_BEGIN_NAMESPACE
 

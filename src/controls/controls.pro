@@ -1,4 +1,4 @@
-TARGET = QtNativeControls
+TARGET = QtUniControls
 MODULE = nativecontrols
 MODULE_PLUGIN_TYPES = nativecontrols
 

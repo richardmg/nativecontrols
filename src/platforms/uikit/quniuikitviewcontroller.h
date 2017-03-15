@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include <QtNativeUIKitControls/quniuikitbase.h>
-#include <QtNativeControls/quniplatformpage.h>
+#include <QtUniUIKitControls/quniuikitbase.h>
+#include <QtUniControls/quniplatformpage.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -36,7 +36,7 @@
 
 #include <QtQml>
 #include <QQmlEngine>
-#include <QtNativeUIKitControls>
+#include <QtUniUIKitControls>
 
 QT_BEGIN_NAMESPACE
 

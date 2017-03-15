@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroidcompoundbutton_p.h>
+#include <QtUniAndroid/private/quniandroidcompoundbutton_p.h>
 
 QT_BEGIN_NAMESPACE
 

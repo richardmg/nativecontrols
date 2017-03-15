@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/qtnativeandroidglobal_p.h>
+#include <QtUniAndroid/private/qtnativeandroidglobal_p.h>
 
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlparserstatus.h>

@@ -90,12 +90,12 @@ void QUniAndroidCompoundButton::setChecked(bool checked)
 {
     Q_D(QUniAndroidCompoundButton);
     if (d->_q_updateChecked(checked))
-        QtNativeAndroid::callBoolMethod(instance(), "setChecked", checked);
+        QtUniAndroid::callBoolMethod(instance(), "setChecked", checked);
 }
 
 void QUniAndroidCompoundButton::toggle()
 {
-    QtNativeAndroid::callVoidMethod(instance(), "toggle");
+    QtUniAndroid::callVoidMethod(instance(), "toggle");
 }
 
 QAndroidJniObject QUniAndroidCompoundButton::onCreate()
@@ -110,7 +110,7 @@ void QUniAndroidCompoundButton::onInflate(QAndroidJniObject &instance)
     Q_D(QUniAndroidCompoundButton);
     QUniAndroidButton::onInflate(instance);
 
-    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeCompoundButtonListener",
+    d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtUniCompoundButtonListener",
                                    "(Landroid/widget/CompoundButton;J)V",
                                    instance.object(),
                                    reinterpret_cast<jlong>(this));

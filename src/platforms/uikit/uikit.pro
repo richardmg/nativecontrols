@@ -1,4 +1,4 @@
-TARGET = QtNativeUIKitControls
+TARGET = QtUniUIKitControls
 MODULE = nativeuikitcontrols
 
 QT += nativecontrols

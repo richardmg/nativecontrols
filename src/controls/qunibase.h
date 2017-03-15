@@ -39,8 +39,8 @@
 
 #include <QObject>
 #include <QQmlListProperty>
-#include <QtNativeControls/qunicontrolsglobal.h>
-#include <QtNativeControls/quniqmlbase.h>
+#include <QtUniControls/qunicontrolsglobal.h>
+#include <QtUniControls/quniqmlbase.h>
 
 QT_BEGIN_NAMESPACE
 

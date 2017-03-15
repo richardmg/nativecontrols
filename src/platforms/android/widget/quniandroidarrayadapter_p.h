@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroidbaseadapter_p.h>
+#include <QtUniAndroid/private/quniandroidbaseadapter_p.h>
 #include <QtCore/qstringlist.h>
 
 QT_BEGIN_NAMESPACE

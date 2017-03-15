@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qunibutton.h>
-#include <QtNativeAppKitControls/quniappkitbutton.h>
-#include <QtNativeAppKitControls/private/quniappkitbutton_p.h>
+#include <QtUniControls/qunibutton.h>
+#include <QtUniAppKitControls/quniappkitbutton.h>
+#include <QtUniAppKitControls/private/quniappkitbutton_p.h>
 
 @interface QUniAppKitButtonDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QUniAppKitButtonPrivate) *_button;

@@ -40,10 +40,10 @@ import java.lang.CharSequence;
 import android.view.MenuItem;
 import android.view.View;
 
-public class QtNativeMenuItem implements MenuItem.OnMenuItemClickListener,
+public class QtUniMenuItem implements MenuItem.OnMenuItemClickListener,
                                     MenuItem.OnActionExpandListener
 {
-    public QtNativeMenuItem(long instance) {
+    public QtUniMenuItem(long instance) {
         m_instance = instance;
         m_enabled = true;
         m_visible = true;

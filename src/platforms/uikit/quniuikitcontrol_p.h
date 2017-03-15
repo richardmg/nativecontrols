@@ -50,8 +50,8 @@
 
 #include <QtCore>
 
-#include <QtNativeUIKitControls/private/quniuikitview_p.h>
-#include <QtNativeUIKitControls/quniuikitcontrol.h>
+#include <QtUniUIKitControls/private/quniuikitview_p.h>
+#include <QtUniUIKitControls/quniuikitcontrol.h>
 
 QT_BEGIN_NAMESPACE
 

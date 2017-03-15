@@ -34,12 +34,12 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qunibutton.h>
-#include <QtNativeControls/private/qunibutton_p.h>
-#include <QtNativeControls/quniplatformbutton.h>
-#include <QtNativeControls/private/quniplatformmanager_p.h>
-#include <QtNativeControls/qunicontrolsplatformplugin.h>
-#include <QtNativeControls/private/quniplatformmanager_p.h>
+#include <QtUniControls/qunibutton.h>
+#include <QtUniControls/private/qunibutton_p.h>
+#include <QtUniControls/quniplatformbutton.h>
+#include <QtUniControls/private/quniplatformmanager_p.h>
+#include <QtUniControls/qunicontrolsplatformplugin.h>
+#include <QtUniControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 

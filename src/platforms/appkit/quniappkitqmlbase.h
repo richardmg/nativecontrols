@@ -39,7 +39,7 @@
 
 #include <QObject>
 #include <QQmlListProperty>
-#include <QtNativeAppKitControls/quniappkitcontrolsglobal.h>
+#include <QtUniAppKitControls/quniappkitcontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 

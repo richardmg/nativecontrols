@@ -39,12 +39,12 @@ package org.qtproject.qt5.android.bindings.view;
 import android.view.View;
 import android.widget.AdapterView;
 
-public class QtNativeViewListener implements View.OnClickListener,
+public class QtUniViewListener implements View.OnClickListener,
                                         View.OnFocusChangeListener,
                                         View.OnLayoutChangeListener,
                                         View.OnLongClickListener
 {
-    public QtNativeViewListener(View view, long instance) {
+    public QtUniViewListener(View view, long instance) {
         m_instance = instance;
         if (!(view instanceof AdapterView)) {
             view.setOnClickListener(this);

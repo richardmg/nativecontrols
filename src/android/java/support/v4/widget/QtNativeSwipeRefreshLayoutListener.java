@@ -38,9 +38,9 @@ package org.qtproject.qt5.android.bindings.support.v4.widget;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
-public class QtNativeSwipeRefreshLayoutListener implements SwipeRefreshLayout.OnRefreshListener
+public class QtUniSwipeRefreshLayoutListener implements SwipeRefreshLayout.OnRefreshListener
 {
-    public QtNativeSwipeRefreshLayoutListener(SwipeRefreshLayout layout, long instance) {
+    public QtUniSwipeRefreshLayoutListener(SwipeRefreshLayout layout, long instance) {
         m_instance = instance;
         layout.setOnRefreshListener(this);
     }

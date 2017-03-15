@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/quniandroiddialog_p.h>
+#include <QtUniAndroid/private/quniandroiddialog_p.h>
 
 QT_BEGIN_NAMESPACE
 

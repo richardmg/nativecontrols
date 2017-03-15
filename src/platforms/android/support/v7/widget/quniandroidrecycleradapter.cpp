@@ -111,7 +111,7 @@ static jobject native_onCreateViewHolder(JNIEnv *env, jobject object, jlong inst
         QMetaObject::invokeMethod(adapter, "_q_createItem", Qt::BlockingQueuedConnection, Q_RETURN_ARG(QUniAndroidView *, item));
         item->construct();
         QUniAndroidRecyclerAdapterPrivate *p = QUniAndroidRecyclerAdapterPrivate::get(adapter);
-        p->holders += QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder",
+        p->holders += QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v7/widget/QtUniRecyclerAdapter$ViewHolder",
                                         "(Landroid/view/View;J)V",
                                         item->instance().object(),
                                         reinterpret_cast<jlong>(item));
@@ -135,8 +135,8 @@ static void native_onBindViewHolder(JNIEnv *env, jobject object, jlong instance,
 
 static void registerNativeRecyclerAdapterMethods(jobject adapter)
 {
-    JNINativeMethod methods[] {{"onCreateViewHolder", "(JLandroid/view/ViewGroup;I)Lorg/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder;", reinterpret_cast<void *>(native_onCreateViewHolder)},
-                               {"onBindViewHolder", "(JLorg/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter$ViewHolder;I)V", reinterpret_cast<void *>(native_onBindViewHolder)}};
+    JNINativeMethod methods[] {{"onCreateViewHolder", "(JLandroid/view/ViewGroup;I)Lorg/qtproject/qt5/android/bindings/support/v7/widget/QtUniRecyclerAdapter$ViewHolder;", reinterpret_cast<void *>(native_onCreateViewHolder)},
+                               {"onBindViewHolder", "(JLorg/qtproject/qt5/android/bindings/support/v7/widget/QtUniRecyclerAdapter$ViewHolder;I)V", reinterpret_cast<void *>(native_onBindViewHolder)}};
 
     QAndroidJniEnvironment env;
     jclass cls = env->GetObjectClass(adapter);
@@ -162,7 +162,7 @@ void QUniAndroidRecyclerAdapter::setCount(int count)
         return;
 
     d->count = count;
-    QtNativeAndroid::callIntMethod(instance(), "setItemCount", count);
+    QtUniAndroid::callIntMethod(instance(), "setItemCount", count);
     emit countChanged();
 }
 
@@ -179,14 +179,14 @@ void QUniAndroidRecyclerAdapter::setDelegate(QQmlComponent *delegate)
         return;
 
     d->delegate = delegate;
-    QtNativeAndroid::callVoidMethod(instance(), "notifyDataSetChanged");
+    QtUniAndroid::callVoidMethod(instance(), "notifyDataSetChanged");
     emit delegateChanged();
 }
 
 QAndroidJniObject QUniAndroidRecyclerAdapter::onCreate()
 {
     Q_D(QUniAndroidRecyclerAdapter);
-    return QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v7/widget/QtNativeRecyclerAdapter",
+    return QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v7/widget/QtUniRecyclerAdapter",
                              "(IJ)V",
                              d->count,
                              reinterpret_cast<jlong>(this));

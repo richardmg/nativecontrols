@@ -37,7 +37,7 @@
 #include <QtQml/qqmlextensionplugin.h>
 #include <QtQml/qqml.h>
 
-#include <QtNativeAndroid/private/quniandroidactionbardrawertoggle_p.h>
+#include <QtUniAndroid/private/quniandroidactionbardrawertoggle_p.h>
 
 QT_BEGIN_NAMESPACE
 
