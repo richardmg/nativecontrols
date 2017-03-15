@@ -1,7 +1,7 @@
 TARGET = quniuikit
 
-QT += unicontrols nativeuikitcontrols
-QT_PRIVATE += core-private unicontrols-private nativeuikitcontrols-private
+QT += unicontrols uniuikitcontrols
+QT_PRIVATE += core-private unicontrols-private uniuikitcontrols-private
 
 SOURCES += \
     quniuikitplatformplugin.cpp

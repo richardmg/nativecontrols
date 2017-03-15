@@ -74,4 +74,4 @@ void initializeEngine(QQmlEngine *engine, const char *uri) override
 
 QT_END_NAMESPACE
 
-#include "qmlnativeuikitcontrolsplugin.moc"
+#include "qmluniuikitcontrolsplugin.moc"

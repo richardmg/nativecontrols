@@ -1,5 +1,5 @@
 TARGET = QtUniUIKitControls
-MODULE = nativeuikitcontrols
+MODULE = uniuikitcontrols
 
 QT += unicontrols
 QT_PRIVATE += core-private gui-private qml-private

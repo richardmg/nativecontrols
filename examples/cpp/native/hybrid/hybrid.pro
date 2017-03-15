@@ -9,7 +9,7 @@ macos {
 }
 
 uikit:!watchos {
-    QT += nativeuikitcontrols
+    QT += uniuikitcontrols
     LIBS += -framework UIKit
 }
 

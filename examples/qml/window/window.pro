@@ -7,7 +7,7 @@ TARGET = window
 QT += gui qml quick unicontrols
 RESOURCES += main.qrc
 
-uikit:!watchos: QT += nativeuikitcontrols
+uikit:!watchos: QT += uniuikitcontrols
 macos: QT += nativeappkitcontrols
 
 # Input

@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = window
 
-QT += nativeuikitcontrols
+QT += uniuikitcontrols
 
 LIBS += -framework UIKit
 
