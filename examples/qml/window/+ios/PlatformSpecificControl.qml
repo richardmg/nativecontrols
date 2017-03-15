@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQml 2.0
-import Qt.UniControls 1.0 as Native
+import Qt.UniControls 1.0 as Uni
 import Qt.UniUIKitControls 1.0 as UIKit
 
 UIKit.View {
@@ -52,7 +52,7 @@ UIKit.View {
         onClicked: text = "You clicked me!"
     }
 
-    Native.Button {
+    Uni.Button {
         y: uikitButton.bottom + 8
         text: "Cross parented button"
         onClicked: text = "You clicked me!"
