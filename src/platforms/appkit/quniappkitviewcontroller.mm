@@ -38,11 +38,11 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/qnativeappkitviewcontroller.h>
-#include <QtNativeAppKitControls/qnativeappkitview.h>
-#include <QtNativeAppKitControls/qnativeappkittabviewitem.h>
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
-#include <QtNativeAppKitControls/private/qnativeappkitviewcontroller_p.h>
+#include <QtNativeAppKitControls/quniappkitviewcontroller.h>
+#include <QtNativeAppKitControls/quniappkitview.h>
+#include <QtNativeAppKitControls/quniappkittabviewitem.h>
+#include <QtNativeAppKitControls/private/quniappkitview_p.h>
+#include <QtNativeAppKitControls/private/quniappkitviewcontroller_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -232,7 +232,7 @@ void QNativeAppKitViewController::childEvent(QChildEvent *event)
      }
 }
 
-#include "moc_qnativeappkitviewcontroller.cpp"
+#include "moc_quniappkitviewcontroller.cpp"
 
 
 QT_END_NAMESPACE

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidcontextwrapper_p.h"
-#include "qnativeandroidcontextwrapper_p_p.h"
+#include "quniandroidcontextwrapper_p.h"
+#include "quniandroidcontextwrapper_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

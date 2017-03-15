@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroiddrawable_p.h"
-#include "qnativeandroiddrawable_p_p.h"
+#include "quniandroiddrawable_p.h"
+#include "quniandroiddrawable_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

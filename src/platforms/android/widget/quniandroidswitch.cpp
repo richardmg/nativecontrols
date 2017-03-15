@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidswitch_p.h"
+#include "quniandroidswitch_p.h"
 
 QT_BEGIN_NAMESPACE
 

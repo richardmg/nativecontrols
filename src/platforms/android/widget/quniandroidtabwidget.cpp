@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidtabwidget_p.h"
+#include "quniandroidtabwidget_p.h"
 
 QT_BEGIN_NAMESPACE
 

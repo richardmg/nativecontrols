@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidviewswitcher_p.h"
+#include "quniandroidviewswitcher_p.h"
 
 QT_BEGIN_NAMESPACE
 

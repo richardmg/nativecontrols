@@ -48,9 +48,9 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/qnativeandroidview_p_p.h>
-#include <QtNativeAndroid/private/qnativeandroidoptional_p.h>
-#include <QtNativeAndroid/private/qnativeandroidprogressbar_p.h>
+#include <QtNativeAndroid/private/quniandroidview_p_p.h>
+#include <QtNativeAndroid/private/quniandroidoptional_p.h>
+#include <QtNativeAndroid/private/quniandroidprogressbar_p.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -50,7 +50,7 @@
 
 #include <QtCore/private/qobject_p.h>
 #include <QtAndroidExtras/qandroidjniobject.h>
-#include <QtNativeAndroid/private/qnativeandroidobject_p.h>
+#include <QtNativeAndroid/private/quniandroidobject_p.h>
 #include <QtQml/qqmllist.h>
 
 QT_BEGIN_NAMESPACE

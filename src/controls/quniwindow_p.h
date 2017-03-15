@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include "qnativebase_p.h"
+#include "qunibase_p.h"
 
 QT_BEGIN_NAMESPACE
 

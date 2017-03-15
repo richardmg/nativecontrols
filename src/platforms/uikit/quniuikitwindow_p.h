@@ -50,7 +50,7 @@
 
 #include <QObject>
 
-#include <QtNativeUIKitControls/private/qnativeuikitview_p.h>
+#include <QtNativeUIKitControls/private/quniuikitview_p.h>
 
 QT_BEGIN_NAMESPACE
 

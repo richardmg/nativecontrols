@@ -50,7 +50,7 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/private/qnativeappkitqmlbase_p.h>
+#include <QtNativeAppKitControls/private/quniappkitqmlbase_p.h>
 
 typedef struct CGRect CGRect;
 typedef CGRect NSRect;

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidswiperefreshlayout_p.h"
-#include "qnativeandroidviewgroup_p_p.h"
+#include "quniandroidswiperefreshlayout_p.h"
+#include "quniandroidviewgroup_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE

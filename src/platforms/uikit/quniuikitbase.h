@@ -3,9 +3,9 @@
 
 #include <QObject>
 
-#include <QtNativeControls/qnativeplatformbase.h>
-#include <QtNativeUIKitControls/qnativeuikitcontrolsglobal.h>
-#include <QtNativeUIKitControls/qnativeuikitqmlbase.h>
+#include <QtNativeControls/quniplatformbase.h>
+#include <QtNativeUIKitControls/quniuikitcontrolsglobal.h>
+#include <QtNativeUIKitControls/quniuikitqmlbase.h>
 
 QT_BEGIN_NAMESPACE
 

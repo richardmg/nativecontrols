@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroiddrawerlayout_p.h"
-#include "qnativeandroidactionbardrawertoggle_p.h"
+#include "quniandroiddrawerlayout_p.h"
+#include "quniandroidactionbardrawertoggle_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE

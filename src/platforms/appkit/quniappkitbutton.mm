@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativebutton.h>
-#include <QtNativeAppKitControls/qnativeappkitbutton.h>
-#include <QtNativeAppKitControls/private/qnativeappkitbutton_p.h>
+#include <QtNativeControls/qunibutton.h>
+#include <QtNativeAppKitControls/quniappkitbutton.h>
+#include <QtNativeAppKitControls/private/quniappkitbutton_p.h>
 
 @interface QNativeAppKitButtonDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QNativeAppKitButtonPrivate) *_button;
@@ -143,7 +143,7 @@ void QNativeAppKitButton::setText(const QString &newText)
     emit textChanged(newText);
 }
 
-#include "moc_qnativeappkitbutton.cpp"
+#include "moc_quniappkitbutton.cpp"
 
 QT_END_NAMESPACE
 

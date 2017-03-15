@@ -34,11 +34,11 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativeview.h>
-#include <QtNativeControls/private/qnativeview_p.h>
-#include <QtNativeControls/qnativeplatformview.h>
-#include <QtNativeControls/qnativeplatformbase.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/quniview.h>
+#include <QtNativeControls/private/quniview_p.h>
+#include <QtNativeControls/quniplatformview.h>
+#include <QtNativeControls/quniplatformbase.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -239,7 +239,7 @@ QRectF QNativeView::geometry() const
     return d_func()->m_platformView->geometry();
 }
 
-#include "moc_qnativeview.cpp"
+#include "moc_quniview.cpp"
 
 QT_END_NAMESPACE
 

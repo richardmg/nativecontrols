@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidnumberpicker_p.h"
-#include "qnativeandroidlinearlayout_p_p.h"
+#include "quniandroidnumberpicker_p.h"
+#include "quniandroidlinearlayout_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE
@@ -127,4 +127,4 @@ void QNativeAndroidNumberPicker::onInflate(QAndroidJniObject &instance)
 
 QT_END_NAMESPACE
 
-#include "moc_qnativeandroidnumberpicker_p.cpp"
+#include "moc_quniandroidnumberpicker_p.cpp"

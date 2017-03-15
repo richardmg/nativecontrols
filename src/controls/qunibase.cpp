@@ -34,11 +34,11 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativebase.h>
-#include <QtNativeControls/private/qnativebase_p.h>
+#include <QtNativeControls/qunibase.h>
+#include <QtNativeControls/private/qunibase_p.h>
 
-#include <QtNativeControls/qnativeplatformbase.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/quniplatformbase.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -185,6 +185,6 @@ void QNativeBase::childEvent(QChildEvent *event)
         child->d_func()->syncPlatformParent();
 }
 
-#include "moc_qnativebase.cpp"
+#include "moc_qunibase.cpp"
 
 QT_END_NAMESPACE

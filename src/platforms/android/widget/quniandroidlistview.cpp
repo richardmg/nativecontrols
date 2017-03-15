@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidlistview_p.h"
+#include "quniandroidlistview_p.h"
 
 QT_BEGIN_NAMESPACE
 

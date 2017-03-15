@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativecontrol.h>
-#include <QtNativeAppKitControls/qnativeappkitview.h>
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QtNativeControls/qunicontrol.h>
+#include <QtNativeAppKitControls/quniappkitview.h>
+#include <QtNativeAppKitControls/private/quniappkitview_p.h>
 
 @interface QtNativeNSView : NSView
 
@@ -548,6 +548,6 @@ void QNativeAppKitView::childEvent(QChildEvent *event)
         d->removeSubView(dptr_child->view());
 }
 
-#include "moc_qnativeappkitview.cpp"
+#include "moc_quniappkitview.cpp"
 
 QT_END_NAMESPACE

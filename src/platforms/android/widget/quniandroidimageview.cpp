@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidimageview_p.h"
-#include "qnativeandroidview_p_p.h"
-#include "qnativeandroidoptional_p.h"
+#include "quniandroidimageview_p.h"
+#include "quniandroidview_p_p.h"
+#include "quniandroidoptional_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE

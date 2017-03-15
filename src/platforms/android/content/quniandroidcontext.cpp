@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidcontext_p.h"
-#include "qnativeandroidcontext_p_p.h"
+#include "quniandroidcontext_p.h"
+#include "quniandroidcontext_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

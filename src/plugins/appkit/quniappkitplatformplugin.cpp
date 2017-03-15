@@ -36,7 +36,7 @@
 
 #include <QtNativeControls>
 #include <QtNativeAppKitControls>
-#include <QtNativeAppKitControls/private/qnativeappkitbase_p.h>
+#include <QtNativeAppKitControls/private/quniappkitbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -157,4 +157,4 @@ public:
 
 QT_END_NAMESPACE
 
-#include "qnativeappkitplatformplugin.moc"
+#include "quniappkitplatformplugin.moc"

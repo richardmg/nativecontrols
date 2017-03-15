@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidcheckbox_p.h"
+#include "quniandroidcheckbox_p.h"
 
 QT_BEGIN_NAMESPACE
 

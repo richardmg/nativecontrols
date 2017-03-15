@@ -1,11 +1,11 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativeandroidr_p.h \
+    $$PWD/quniandroidr_p.h \
     $$PWD/qtnativeandroidglobal_p.h
 
 SOURCES += \
-    $$PWD/qnativeandroidr.cpp
+    $$PWD/quniandroidr.cpp
 
 include(app/app.pri)
 include(core/core.pri)

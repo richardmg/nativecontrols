@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidanticipateovershootinterpolator_p.h"
-#include "qnativeandroidinterpolator_p_p.h"
-#include "qnativeandroidoptional_p.h"
+#include "quniandroidanticipateovershootinterpolator_p.h"
+#include "quniandroidinterpolator_p_p.h"
+#include "quniandroidoptional_p.h"
 
 QT_BEGIN_NAMESPACE
 

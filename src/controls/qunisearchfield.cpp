@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativesearchfield.h>
-#include <QtNativeControls/private/qnativesearchfield_p.h>
-#include <QtNativeControls/qnativeplatformsearchfield.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/qunisearchfield.h>
+#include <QtNativeControls/private/qunisearchfield_p.h>
+#include <QtNativeControls/quniplatformsearchfield.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -107,7 +107,7 @@ void QNativeSearchField::setPlaceholderText(const QString &placeholderText)
     d_func()->m_platformSearchField->setPlaceholderText(placeholderText);
 }
 
-#include "moc_qnativesearchfield.cpp"
+#include "moc_qunisearchfield.cpp"
 
 QT_END_NAMESPACE
 

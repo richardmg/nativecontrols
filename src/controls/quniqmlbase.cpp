@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativeqmlbase.h>
-#include <QtNativeControls/private/qnativeqmlbase_p.h>
-#include <QtNativeControls/private/qnativebase_p.h>
+#include <QtNativeControls/quniqmlbase.h>
+#include <QtNativeControls/private/quniqmlbase_p.h>
+#include <QtNativeControls/private/qunibase_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -55,16 +55,16 @@ void QNativeQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject
     // don't get a QChildEvent when a qml object becomes a parent of another
     // qml object. 'appendChild' is the only callback we get when the parent changes.
     QObject *qparent = list->object;
-    QNativeBase *qnativeParent = static_cast<QNativeBase *>(qparent);
-    QNativeBase *qnativeChild = qobject_cast<QNativeBase *>(child);
+    QNativeBase *quniParent = static_cast<QNativeBase *>(qparent);
+    QNativeBase *quniChild = qobject_cast<QNativeBase *>(child);
 
-    if (qnativeChild) {
-        qnativeChild->setParent(qnativeParent);
-        static_cast<QNativeBasePrivate *>(QObjectPrivate::get(qnativeChild))->syncPlatformParent();
+    if (quniChild) {
+        quniChild->setParent(quniParent);
+        static_cast<QNativeBasePrivate *>(QObjectPrivate::get(quniChild))->syncPlatformParent();
     } else {
         // The child doesn't belong to QNative. Check
         // if the platform understands how to parent it
-        if (!qnativeParent->addNativeChild(child)) {
+        if (!quniParent->addNativeChild(child)) {
             // ...otherwise we fall back to normal QObject parenting
             child->setParent(qparent);
         }
@@ -97,6 +97,6 @@ QNativeQmlBase::~QNativeQmlBase()
     // delete children in m_data?
 }
 
-#include "moc_qnativeqmlbase.cpp"
+#include "moc_quniqmlbase.cpp"
 
 QT_END_NAMESPACE

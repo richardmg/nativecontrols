@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidscrollview_p.h"
-#include "qnativeandroidframelayout_p_p.h"
+#include "quniandroidscrollview_p.h"
+#include "quniandroidframelayout_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
-#include "qnativeandroidoptional_p.h"
+#include "quniandroidoptional_p.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -152,4 +152,4 @@ void QNativeAndroidScrollView::onInflate(QAndroidJniObject &instance)
 
 QT_END_NAMESPACE
 
-#include "moc_qnativeandroidscrollview_p.cpp"
+#include "moc_quniandroidscrollview_p.cpp"

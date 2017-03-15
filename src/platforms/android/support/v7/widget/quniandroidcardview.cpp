@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidcardview_p.h"
+#include "quniandroidcardview_p.h"
 
 QT_BEGIN_NAMESPACE
 

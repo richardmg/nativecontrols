@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativecontrol.h>
-#include <QtNativeUIKitControls/qnativeuikitcontrol.h>
-#include <QtNativeUIKitControls/private/qnativeuikitcontrol_p.h>
+#include <QtNativeControls/qunicontrol.h>
+#include <QtNativeUIKitControls/quniuikitcontrol.h>
+#include <QtNativeUIKitControls/private/quniuikitcontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -67,6 +67,6 @@ QNativeUIKitControl::~QNativeUIKitControl()
 {
 }
 
-#include "moc_qnativeuikitcontrol.cpp"
+#include "moc_quniuikitcontrol.cpp"
 
 QT_END_NAMESPACE

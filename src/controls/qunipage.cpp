@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativepage.h>
-#include <QtNativeControls/private/qnativepage_p.h>
-#include <QtNativeControls/qnativeplatformpage.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/qunipage.h>
+#include <QtNativeControls/private/qunipage_p.h>
+#include <QtNativeControls/quniplatformpage.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -80,7 +80,7 @@ QNativePage::~QNativePage()
 {
 }
 
-#include "moc_qnativepage.cpp"
+#include "moc_qunipage.cpp"
 
 QT_END_NAMESPACE
 

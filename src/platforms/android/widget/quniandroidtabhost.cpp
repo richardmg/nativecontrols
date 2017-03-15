@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidtabhost_p.h"
-#include "qnativeandroidframelayout_p_p.h"
-#include "qnativeandroidtabspec_p.h"
+#include "quniandroidtabhost_p.h"
+#include "quniandroidframelayout_p_p.h"
+#include "quniandroidtabspec_p.h"
 
 QT_BEGIN_NAMESPACE
 

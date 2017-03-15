@@ -38,7 +38,7 @@
 #define QNATIVEPLATFORMTEXTFIELD_H
 
 #include <QtCore>
-#include <QtNativeControls/qnativeplatformcontrol.h>
+#include <QtNativeControls/quniplatformcontrol.h>
 
 QT_BEGIN_NAMESPACE
 

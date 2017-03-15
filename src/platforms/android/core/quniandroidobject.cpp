@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidobject_p.h"
-#include "qnativeandroidobject_p_p.h"
+#include "quniandroidobject_p.h"
+#include "quniandroidobject_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 #include <QtCore/qcoreapplication.h>
@@ -208,4 +208,4 @@ void QNativeAndroidObject::childEvent(QChildEvent *event)
 
 QT_END_NAMESPACE
 
-#include "moc_qnativeandroidobject_p.cpp"
+#include "moc_quniandroidobject_p.cpp"

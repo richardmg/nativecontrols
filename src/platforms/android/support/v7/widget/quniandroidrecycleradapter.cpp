@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidrecycleradapter_p.h"
-#include "qnativeandroidcontextual_p_p.h"
+#include "quniandroidrecycleradapter_p.h"
+#include "quniandroidcontextual_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
-#include "qnativeandroidview_p.h"
+#include "quniandroidview_p.h"
 #include <QtQml/qqmlcomponent.h>
 #include <QtQml/qqmlcontext.h>
 
@@ -209,4 +209,4 @@ void QNativeAndroidRecyclerAdapter::onInflate(QAndroidJniObject &instance)
 
 QT_END_NAMESPACE
 
-#include "moc_qnativeandroidrecycleradapter_p.cpp"
+#include "moc_quniandroidrecycleradapter_p.cpp"

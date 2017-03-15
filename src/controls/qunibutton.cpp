@@ -34,12 +34,12 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativebutton.h>
-#include <QtNativeControls/private/qnativebutton_p.h>
-#include <QtNativeControls/qnativeplatformbutton.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
-#include <QtNativeControls/qnativecontrolsplatformplugin.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/qunibutton.h>
+#include <QtNativeControls/private/qunibutton_p.h>
+#include <QtNativeControls/quniplatformbutton.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
+#include <QtNativeControls/qunicontrolsplatformplugin.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -99,7 +99,7 @@ void QNativeButton::setText(const QString &newText)
     d_func()->m_platformButton->setText(newText);
 }
 
-#include "moc_qnativebutton.cpp"
+#include "moc_qunibutton.cpp"
 
 QT_END_NAMESPACE
 

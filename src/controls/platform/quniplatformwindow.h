@@ -38,7 +38,7 @@
 #define QNATIVEPLATFORMWINDOW_H
 
 #include <QtCore>
-#include <QtNativeControls/qnativeplatformbase.h>
+#include <QtNativeControls/quniplatformbase.h>
 
 QT_BEGIN_NAMESPACE
 

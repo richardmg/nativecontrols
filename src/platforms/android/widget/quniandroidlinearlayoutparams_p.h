@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/qnativeandroidmarginlayoutparams_p.h>
+#include <QtNativeAndroid/private/quniandroidmarginlayoutparams_p.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidlinearinterpolator_p.h"
+#include "quniandroidlinearinterpolator_p.h"
 
 QT_BEGIN_NAMESPACE
 

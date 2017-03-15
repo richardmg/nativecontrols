@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativetextfield.h>
-#include <QtNativeControls/private/qnativetextfield_p.h>
-#include <QtNativeControls/qnativeplatformtextfield.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/qunitextfield.h>
+#include <QtNativeControls/private/qunitextfield_p.h>
+#include <QtNativeControls/quniplatformtextfield.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -107,7 +107,7 @@ void QNativeTextField::setPlaceholderText(const QString &placeholderText)
     d_func()->m_platformTextField->setPlaceholderText(placeholderText);
 }
 
-#include "moc_qnativetextfield.cpp"
+#include "moc_qunitextfield.cpp"
 
 QT_END_NAMESPACE
 

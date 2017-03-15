@@ -22,12 +22,12 @@ APPKIT_CONTROLS = \
     viewcontroller
 
 for(c,APPKIT_CONTROLS) {
-    HEADERS += qnativeappkit$${c}.h
-    HEADERS += qnativeappkit$${c}_p.h
-    SOURCES += qnativeappkit$${c}.mm
+    HEADERS += quniappkit$${c}.h
+    HEADERS += quniappkit$${c}_p.h
+    SOURCES += quniappkit$${c}.mm
 }
 
 HEADERS += \
-    qnativeappkitcontrolsglobal.h
+    quniappkitcontrolsglobal.h
 
 load(qt_module)

@@ -34,12 +34,12 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidview_p.h"
-#include "qnativeandroidview_p_p.h"
-#include "qnativeandroiddrawable_p.h"
-#include "qnativeandroidcolordrawable_p.h"
-#include "qnativeandroidlayoutparams_p.h"
-#include "qnativeandroidanimation_p.h"
+#include "quniandroidview_p.h"
+#include "quniandroidview_p_p.h"
+#include "quniandroiddrawable_p.h"
+#include "quniandroidcolordrawable_p.h"
+#include "quniandroidlayoutparams_p.h"
+#include "quniandroidanimation_p.h"
 #include "qtnativeandroidfunctions_p.h"
 #include <QtCore/qcoreapplication.h>
 #include <QtCore/qcoreevent.h>
@@ -1017,4 +1017,4 @@ void QNativeAndroidView::objectChange(ObjectChange change)
 
 QT_END_NAMESPACE
 
-#include "moc_qnativeandroidview_p.cpp"
+#include "moc_quniandroidview_p.cpp"

@@ -49,7 +49,7 @@
 //
 
 #include <QtCore>
-#include <QtNativeControls/qnativecontrolsplatformplugin.h>
+#include <QtNativeControls/qunicontrolsplatformplugin.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidmenu_p.h"
-#include "qnativeandroidmenu_p_p.h"
-#include "qnativeandroidmenuitem_p.h"
+#include "quniandroidmenu_p.h"
+#include "quniandroidmenu_p_p.h"
+#include "quniandroidmenuitem_p.h"
 
 QT_BEGIN_NAMESPACE
 

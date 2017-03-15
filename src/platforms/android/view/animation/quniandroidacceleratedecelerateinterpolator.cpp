@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidacceleratedecelerateinterpolator_p.h"
+#include "quniandroidacceleratedecelerateinterpolator_p.h"
 
 QT_BEGIN_NAMESPACE
 

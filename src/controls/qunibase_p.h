@@ -48,8 +48,8 @@
 // We mean it.
 //
 
-#include <QtNativeControls/qnativebase.h>
-#include <QtNativeControls/private/qnativeqmlbase_p.h>
+#include <QtNativeControls/qunibase.h>
+#include <QtNativeControls/private/quniqmlbase_p.h>
 
 QT_BEGIN_NAMESPACE
 

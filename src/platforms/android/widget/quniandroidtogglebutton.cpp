@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidtogglebutton_p.h"
-#include "qnativeandroidcompoundbutton_p_p.h"
+#include "quniandroidtogglebutton_p.h"
+#include "quniandroidcompoundbutton_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE

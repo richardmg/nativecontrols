@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroiddatepicker_p.h"
-#include "qnativeandroidframelayout_p_p.h"
+#include "quniandroiddatepicker_p.h"
+#include "quniandroidframelayout_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

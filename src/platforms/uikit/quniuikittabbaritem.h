@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include <QtNativeControls/qnativeplatformtabspagetab.h>
-#include <QtNativeUIKitControls/qnativeuikitview.h>
+#include <QtNativeControls/quniplatformtabspagetab.h>
+#include <QtNativeUIKitControls/quniuikitview.h>
 
 QT_BEGIN_NAMESPACE
 

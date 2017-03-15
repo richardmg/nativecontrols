@@ -50,7 +50,7 @@
 
 #include <QtGui/QWindow>
 
-#include <QtNativeControls/private/qnativecontrol_p.h>
+#include <QtNativeControls/private/qunicontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 

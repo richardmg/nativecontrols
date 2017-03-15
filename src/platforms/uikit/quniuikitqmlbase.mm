@@ -34,11 +34,11 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativebase.h>
+#include <QtNativeControls/qunibase.h>
 
-#include <QtNativeUIKitControls/qnativeuikitqmlbase.h>
-#include <QtNativeUIKitControls/private/qnativeuikitqmlbase_p.h>
-#include <QtNativeUIKitControls/qnativeuikitbase.h>
+#include <QtNativeUIKitControls/quniuikitqmlbase.h>
+#include <QtNativeUIKitControls/private/quniuikitqmlbase_p.h>
+#include <QtNativeUIKitControls/quniuikitbase.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -71,8 +71,8 @@ void QNativeUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QO
     } else {
         // The child doesn't belong to QNativeUIKit. If it belongs
         // to QNative, try to parent it using the childs cross-parenting API
-        QNativeBase *qnativeChild = qobject_cast<QNativeBase *>(child);
-        if (!qnativeChild || !qnativeChild->setNativeParent(uikitParent)) {
+        QNativeBase *quniChild = qobject_cast<QNativeBase *>(child);
+        if (!quniChild || !quniChild->setNativeParent(uikitParent)) {
             // ...otherwise we fall back to normal QObject parenting
             child->setParent(qparent);
         }
@@ -105,6 +105,6 @@ QNativeUIKitQmlBase::~QNativeUIKitQmlBase()
     // delete children in m_data?
 }
 
-#include "moc_qnativeuikitqmlbase.cpp"
+#include "moc_quniuikitqmlbase.cpp"
 
 QT_END_NAMESPACE

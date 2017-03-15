@@ -37,8 +37,8 @@
 #ifndef QNATIVEAPPKITTEXTFIELD_H
 #define QNATIVEAPPKITTEXTFIELD_H
 
-#include <QtNativeControls/qnativeplatformtextfield.h>
-#include <QtNativeAppKitControls/qnativeappkitcontrol.h>
+#include <QtNativeControls/quniplatformtextfield.h>
+#include <QtNativeAppKitControls/quniappkitcontrol.h>
 
 QT_BEGIN_NAMESPACE
 

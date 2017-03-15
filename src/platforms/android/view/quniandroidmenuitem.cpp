@@ -34,11 +34,11 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidmenuitem_p.h"
-#include "qnativeandroidcontextual_p_p.h"
+#include "quniandroidmenuitem_p.h"
+#include "quniandroidcontextual_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
-#include "qnativeandroidcontext_p.h"
-#include "qnativeandroidview_p.h"
+#include "quniandroidcontext_p.h"
+#include "quniandroidview_p.h"
 
 QT_BEGIN_NAMESPACE
 

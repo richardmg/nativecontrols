@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/qnativeandroidbutton_p_p.h>
+#include <QtNativeAndroid/private/quniandroidbutton_p_p.h>
 #include <QtAndroidExtras/qandroidjniobject.h>
 
 QT_BEGIN_NAMESPACE

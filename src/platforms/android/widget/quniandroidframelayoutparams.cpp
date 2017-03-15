@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidframelayoutparams_p.h"
-#include "qnativeandroidmarginlayoutparams_p_p.h"
-#include "qnativeandroidview_p.h"
+#include "quniandroidframelayoutparams_p.h"
+#include "quniandroidmarginlayoutparams_p_p.h"
+#include "quniandroidview_p.h"
 
 QT_BEGIN_NAMESPACE
 

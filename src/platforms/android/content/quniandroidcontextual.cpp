@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidcontextual_p.h"
-#include "qnativeandroidcontextual_p_p.h"
-#include "qnativeandroidcontext_p.h"
+#include "quniandroidcontextual_p.h"
+#include "quniandroidcontextual_p_p.h"
+#include "quniandroidcontext_p.h"
 #include <QtCore/qdebug.h>
 
 QT_BEGIN_NAMESPACE
@@ -149,4 +149,4 @@ void QNativeAndroidContextual::componentComplete()
 
 QT_END_NAMESPACE
 
-#include "moc_qnativeandroidcontextual_p.cpp"
+#include "moc_quniandroidcontextual_p.cpp"

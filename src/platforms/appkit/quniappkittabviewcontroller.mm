@@ -38,10 +38,10 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/qnativeappkittabviewcontroller.h>
-#include <QtNativeAppKitControls/private/qnativeappkittabviewcontroller_p.h>
-#include <QtNativeAppKitControls/qnativeappkittabviewitem.h>
-#include <QtNativeAppKitControls/private/qnativeappkittabviewitem_p.h>
+#include <QtNativeAppKitControls/quniappkittabviewcontroller.h>
+#include <QtNativeAppKitControls/private/quniappkittabviewcontroller_p.h>
+#include <QtNativeAppKitControls/quniappkittabviewitem.h>
+#include <QtNativeAppKitControls/private/quniappkittabviewitem_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -103,6 +103,6 @@ NSTabViewController *QNativeAppKitTabViewController::nsTabViewControllerHandle()
     return static_cast<NSTabViewController *>(nsViewControllerHandle());
 }
 
-#include "moc_qnativeappkittabviewcontroller.cpp"
+#include "moc_quniappkittabviewcontroller.cpp"
 
 QT_END_NAMESPACE

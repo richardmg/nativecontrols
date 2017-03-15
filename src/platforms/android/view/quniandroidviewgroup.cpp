@@ -34,11 +34,11 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidviewgroup_p.h"
-#include "qnativeandroidviewgroup_p_p.h"
-#include "qnativeandroidlayoutparams_p.h"
+#include "quniandroidviewgroup_p.h"
+#include "quniandroidviewgroup_p_p.h"
+#include "quniandroidlayoutparams_p.h"
 #include "qtnativeandroidfunctions_p.h"
-#include "qnativeandroidcontext_p.h"
+#include "quniandroidcontext_p.h"
 
 QT_BEGIN_NAMESPACE
 

@@ -1,11 +1,11 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativeandroidcardview_p.h \
-    $$PWD/qnativeandroidrecycleradapter_p.h \
-    $$PWD/qnativeandroidrecyclerview_p.h
+    $$PWD/quniandroidcardview_p.h \
+    $$PWD/quniandroidrecycleradapter_p.h \
+    $$PWD/quniandroidrecyclerview_p.h
 
 SOURCES += \
-    $$PWD/qnativeandroidcardview.cpp \
-    $$PWD/qnativeandroidrecycleradapter.cpp \
-    $$PWD/qnativeandroidrecyclerview.cpp
+    $$PWD/quniandroidcardview.cpp \
+    $$PWD/quniandroidrecycleradapter.cpp \
+    $$PWD/quniandroidrecyclerview.cpp

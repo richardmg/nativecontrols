@@ -39,8 +39,8 @@
 
 #include <QObject>
 
-#include <QtNativeControls/qnativeplatformcontrol.h>
-#include <QtNativeUIKitControls/qnativeuikitbase.h>
+#include <QtNativeControls/quniplatformcontrol.h>
+#include <QtNativeUIKitControls/quniuikitbase.h>
 
 QT_BEGIN_NAMESPACE
 

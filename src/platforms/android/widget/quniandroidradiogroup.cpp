@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidradiogroup_p.h"
-#include "qnativeandroidlinearlayout_p_p.h"
-#include "qnativeandroidradiobutton_p.h"
+#include "quniandroidradiogroup_p.h"
+#include "quniandroidlinearlayout_p_p.h"
+#include "quniandroidradiobutton_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE
@@ -148,4 +148,4 @@ void QNativeAndroidRadioGroup::onInflate(QAndroidJniObject &instance)
 
 QT_END_NAMESPACE
 
-#include "moc_qnativeandroidradiogroup_p.cpp"
+#include "moc_quniandroidradiogroup_p.cpp"

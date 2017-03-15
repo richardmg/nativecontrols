@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativetextfield.h>
-#include <QtNativeAppKitControls/qnativeappkittextfield.h>
-#include <QtNativeAppKitControls/private/qnativeappkittextfield_p.h>
+#include <QtNativeControls/qunitextfield.h>
+#include <QtNativeAppKitControls/quniappkittextfield.h>
+#include <QtNativeAppKitControls/private/quniappkittextfield_p.h>
 
 @interface QNativeAppKitTextFieldDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QNativeAppKitTextFieldPrivate) *_textField;
@@ -153,4 +153,4 @@ void QNativeAppKitTextField::setPlaceholderText(const QString &newPlaceholderTex
     emit placeholderTextChanged(newPlaceholderText);
 }
 
-#include "moc_qnativeappkittextfield.cpp"
+#include "moc_quniappkittextfield.cpp"

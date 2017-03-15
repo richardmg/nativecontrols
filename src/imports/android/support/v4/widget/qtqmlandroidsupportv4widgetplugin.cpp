@@ -37,8 +37,8 @@
 #include <QtQml/qqmlextensionplugin.h>
 #include <QtQml/qqml.h>
 
-#include <QtNativeAndroid/private/qnativeandroiddrawerlayout_p.h>
-#include <QtNativeAndroid/private/qnativeandroidswiperefreshlayout_p.h>
+#include <QtNativeAndroid/private/quniandroiddrawerlayout_p.h>
+#include <QtNativeAndroid/private/quniandroidswiperefreshlayout_p.h>
 
 QT_BEGIN_NAMESPACE
 

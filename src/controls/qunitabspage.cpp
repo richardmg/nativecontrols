@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativetabspage.h>
-#include <QtNativeControls/private/qnativetabspage_p.h>
-#include <QtNativeControls/qnativeplatformtabspage.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/qunitabspage.h>
+#include <QtNativeControls/private/qunitabspage_p.h>
+#include <QtNativeControls/quniplatformtabspage.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -80,6 +80,6 @@ QNativeTabsPage::~QNativeTabsPage()
 {
 }
 
-#include "moc_qnativetabspage.cpp"
+#include "moc_qunitabspage.cpp"
 
 QT_END_NAMESPACE

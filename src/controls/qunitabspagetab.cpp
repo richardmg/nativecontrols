@@ -34,11 +34,11 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativetabspagetab.h>
-#include <QtNativeControls/private/qnativetabspagetab_p.h>
-#include <QtNativeControls/qnativeplatformtabspagetab.h>
-#include <QtNativeControls/qnativeplatformbase.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/qunitabspagetab.h>
+#include <QtNativeControls/private/qunitabspagetab_p.h>
+#include <QtNativeControls/quniplatformtabspagetab.h>
+#include <QtNativeControls/quniplatformbase.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -98,7 +98,7 @@ void QNativeTabsPageTab::setTitle(const QString &title)
     d_func()->m_platformTabsPageTab->setTitle(title);
 }
 
-#include "moc_qnativetabspagetab.cpp"
+#include "moc_qunitabspagetab.cpp"
 
 QT_END_NAMESPACE
 

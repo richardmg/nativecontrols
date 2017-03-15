@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidactionbar_p.h"
-#include "qnativeandroidobject_p_p.h"
-#include "qnativeandroiddrawable_p.h"
+#include "quniandroidactionbar_p.h"
+#include "quniandroidobject_p_p.h"
+#include "quniandroiddrawable_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE

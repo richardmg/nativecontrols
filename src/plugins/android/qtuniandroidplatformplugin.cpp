@@ -35,8 +35,8 @@
 ****************************************************************************/
 
 #include <QtNativeControls>
-#include <QtNativeAndroid/private/qnativeandroidbutton_p.h>
-#include <QtNativeAndroid/private/qnativeandroidactivity_p.h>
+#include <QtNativeAndroid/private/quniandroidbutton_p.h>
+#include <QtNativeAndroid/private/quniandroidactivity_p.h>
 
 QT_BEGIN_NAMESPACE
 

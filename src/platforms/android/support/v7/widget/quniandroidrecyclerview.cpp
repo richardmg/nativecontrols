@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidrecyclerview_p.h"
-#include "qnativeandroidviewgroup_p_p.h"
-#include "qnativeandroidrecycleradapter_p.h"
+#include "quniandroidrecyclerview_p.h"
+#include "quniandroidviewgroup_p_p.h"
+#include "quniandroidrecycleradapter_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroiddialog_p.h"
-#include "qnativeandroiddialog_p_p.h"
+#include "quniandroiddialog_p.h"
+#include "quniandroiddialog_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE

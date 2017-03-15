@@ -42,8 +42,8 @@
 
 #include <QtQml/qqml.h>
 
-#include <QtNativeControls/qnativeview.h>
-#include <QtNativeControls/qnativecontrolsglobal.h>
+#include <QtNativeControls/quniview.h>
+#include <QtNativeControls/qunicontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 

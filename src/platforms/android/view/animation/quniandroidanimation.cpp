@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidanimation_p.h"
-#include "qnativeandroidanimation_p_p.h"
+#include "quniandroidanimation_p.h"
+#include "quniandroidanimation_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
-#include "qnativeandroidinterpolator_p.h"
+#include "quniandroidinterpolator_p.h"
 
 QT_BEGIN_NAMESPACE
 

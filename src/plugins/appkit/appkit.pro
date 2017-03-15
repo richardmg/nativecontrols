@@ -1,10 +1,10 @@
-TARGET = qnativeappkit
+TARGET = quniappkit
 
 QT += nativecontrols nativeappkitcontrols
 QT_PRIVATE += core-private nativecontrols-private nativeappkitcontrols-private
 
 SOURCES += \
-    qnativeappkitplatformplugin.cpp
+    quniappkitplatformplugin.cpp
 
 OTHER_FILES = \
         plugin.json

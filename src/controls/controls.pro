@@ -20,21 +20,21 @@ NATIVE_CONTROLS = \
     tabspagetab
 
 for(c,NATIVE_CONTROLS) {
-    HEADERS += qnative$${c}.h
-    HEADERS += qnative$${c}_p.h
-    HEADERS += platform/qnativeplatform$${c}.h
-    SOURCES += qnative$${c}.cpp
+    HEADERS += quni$${c}.h
+    HEADERS += quni$${c}_p.h
+    HEADERS += platform/quniplatform$${c}.h
+    SOURCES += quni$${c}.cpp
 }
 
 HEADERS += \
-    qnativecontrolsglobal.h \
-    qnativeplatformmanager_p.h \
-    platform/qnativecontrolsplatformplugin.h \
-    qnativeqmlbase.h \
-    qnativeqmlbase_p.h
+    qunicontrolsglobal.h \
+    quniplatformmanager_p.h \
+    platform/qunicontrolsplatformplugin.h \
+    quniqmlbase.h \
+    quniqmlbase_p.h
 
 SOURCES += \
-    qnativeplatformmanager.cpp \
-    qnativeqmlbase.cpp
+    quniplatformmanager.cpp \
+    quniqmlbase.cpp
 
 load(qt_module)

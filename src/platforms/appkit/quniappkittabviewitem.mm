@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/qnativeappkittabviewitem.h>
-#include <QtNativeAppKitControls/private/qnativeappkittabviewitem_p.h>
-#include <QtNativeAppKitControls/qnativeappkitviewcontroller.h>
+#include <QtNativeAppKitControls/quniappkittabviewitem.h>
+#include <QtNativeAppKitControls/private/quniappkittabviewitem_p.h>
+#include <QtNativeAppKitControls/quniappkitviewcontroller.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -112,6 +112,6 @@ QNativeAppKitViewController *QNativeAppKitTabViewItem::viewController() const
     return d_func()->m_viewController;
 }
 
-#include "moc_qnativeappkittabviewitem.cpp"
+#include "moc_quniappkittabviewitem.cpp"
 
 QT_END_NAMESPACE

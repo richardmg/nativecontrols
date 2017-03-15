@@ -38,7 +38,7 @@
 #define QNATIVEPLATFORMBASE_H
 
 #include <QtCore>
-#include <QtNativeControls/qnativecontrolsglobal.h>
+#include <QtNativeControls/qunicontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidbounceinterpolator_p.h"
+#include "quniandroidbounceinterpolator_p.h"
 
 QT_BEGIN_NAMESPACE
 

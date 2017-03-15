@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativewindow.h>
-#include <QtNativeControls/private/qnativewindow_p.h>
-#include <QtNativeControls/qnativeplatformwindow.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/quniwindow.h>
+#include <QtNativeControls/private/quniwindow_p.h>
+#include <QtNativeControls/quniplatformwindow.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -105,7 +105,7 @@ void QNativeWindow::showFullScreen()
     d_func()->m_platformWindow->showFullScreen();
 }
 
-#include "moc_qnativewindow.cpp"
+#include "moc_quniwindow.cpp"
 
 QT_END_NAMESPACE
 

@@ -1,16 +1,16 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativeandroidactionbar_p.h \
-    $$PWD/qnativeandroidactivity_p.h \
-    $$PWD/qnativeandroidalertdialog_p.h \
-    $$PWD/qnativeandroiddialog_p.h \
-    $$PWD/qnativeandroiddialog_p_p.h \
-    $$PWD/qnativeandroidservice_p.h
+    $$PWD/quniandroidactionbar_p.h \
+    $$PWD/quniandroidactivity_p.h \
+    $$PWD/quniandroidalertdialog_p.h \
+    $$PWD/quniandroiddialog_p.h \
+    $$PWD/quniandroiddialog_p_p.h \
+    $$PWD/quniandroidservice_p.h
 
 SOURCES += \
-    $$PWD/qnativeandroidactionbar.cpp \
-    $$PWD/qnativeandroidactivity.cpp \
-    $$PWD/qnativeandroidalertdialog.cpp \
-    $$PWD/qnativeandroiddialog.cpp \
-    $$PWD/qnativeandroidservice.cpp
+    $$PWD/quniandroidactionbar.cpp \
+    $$PWD/quniandroidactivity.cpp \
+    $$PWD/quniandroidalertdialog.cpp \
+    $$PWD/quniandroiddialog.cpp \
+    $$PWD/quniandroidservice.cpp

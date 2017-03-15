@@ -38,10 +38,10 @@
 
 #include <QtCore>
 
-#include <QtNativeUIKitControls/qnativeuikittabbarcontroller.h>
-#include <QtNativeUIKitControls/private/qnativeuikittabbarcontroller_p.h>
-#include <QtNativeUIKitControls/qnativeuikittabbaritem.h>
-#include <QtNativeUIKitControls/private/qnativeuikittabbaritem_p.h>
+#include <QtNativeUIKitControls/quniuikittabbarcontroller.h>
+#include <QtNativeUIKitControls/private/quniuikittabbarcontroller_p.h>
+#include <QtNativeUIKitControls/quniuikittabbaritem.h>
+#include <QtNativeUIKitControls/private/quniuikittabbaritem_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -98,6 +98,6 @@ UITabBarController *QNativeUIKitTabBarController::uiTabBarControllerHandle()
     return static_cast<UITabBarController *>(uiViewControllerHandle());
 }
 
-#include "moc_qnativeuikittabbarcontroller.cpp"
+#include "moc_quniuikittabbarcontroller.cpp"
 
 QT_END_NAMESPACE

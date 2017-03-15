@@ -34,13 +34,13 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidactivity_p.h"
-#include "qnativeandroidcontextwrapper_p_p.h"
-#include "qnativeandroidactionbar_p.h"
-#include "qnativeandroidmenuitem_p.h"
-#include "qnativeandroidmenu_p.h"
-#include "qnativeandroidview_p.h"
-#include "qnativeandroidwindow_p.h"
+#include "quniandroidactivity_p.h"
+#include "quniandroidcontextwrapper_p_p.h"
+#include "quniandroidactionbar_p.h"
+#include "quniandroidmenuitem_p.h"
+#include "quniandroidmenu_p.h"
+#include "quniandroidview_p.h"
+#include "quniandroidwindow_p.h"
 #include "qtnativeandroidfunctions_p.h"
 #include <QtCore/private/qjnihelpers_p.h>
 #include <QtAndroidExtras/qandroidfunctions.h>

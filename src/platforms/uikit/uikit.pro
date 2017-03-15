@@ -22,12 +22,12 @@ IOS_CONTROLS = \
     tabbaritem
 
 for(c,IOS_CONTROLS) {
-    HEADERS += qnativeuikit$${c}.h
-    HEADERS += qnativeuikit$${c}_p.h
-    SOURCES += qnativeuikit$${c}.mm
+    HEADERS += quniuikit$${c}.h
+    HEADERS += quniuikit$${c}_p.h
+    SOURCES += quniuikit$${c}.mm
 }
 
 HEADERS += \
-    qnativeuikitcontrolsglobal.h
+    quniuikitcontrolsglobal.h
 
 load(qt_module)

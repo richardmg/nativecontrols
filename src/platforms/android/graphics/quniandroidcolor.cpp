@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidcolor_p.h"
+#include "quniandroidcolor_p.h"
 #include <QtGui/qcolor.h>
 
 QT_BEGIN_NAMESPACE

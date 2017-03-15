@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidrelativelayout_p.h"
+#include "quniandroidrelativelayout_p.h"
 
 QT_BEGIN_NAMESPACE
 

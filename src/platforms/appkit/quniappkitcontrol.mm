@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativecontrol.h>
-#include <QtNativeAppKitControls/qnativeappkitcontrol.h>
-#include <QtNativeAppKitControls/private/qnativeappkitcontrol_p.h>
+#include <QtNativeControls/qunicontrol.h>
+#include <QtNativeAppKitControls/quniappkitcontrol.h>
+#include <QtNativeAppKitControls/private/quniappkitcontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -67,6 +67,6 @@ QNativeAppKitControl::~QNativeAppKitControl()
 {
 }
 
-#include "moc_qnativeappkitcontrol.cpp"
+#include "moc_quniappkitcontrol.cpp"
 
 QT_END_NAMESPACE

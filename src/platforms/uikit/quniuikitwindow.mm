@@ -38,11 +38,11 @@
 
 #include <QtGui/qwindow.h>
 #include <QtCore/private/qobject_p.h>
-#include <QtNativeUIKitControls/qnativeuikitwindow.h>
-#include <QtNativeUIKitControls/qnativeuikitviewcontroller.h>
-#include <QtNativeUIKitControls/private/qnativeuikitwindow_p.h>
-#include <QtNativeUIKitControls/private/qnativeuikitviewcontroller_p.h>
-#include <QtNativeUIKitControls/private/qnativeuikitview_p.h>
+#include <QtNativeUIKitControls/quniuikitwindow.h>
+#include <QtNativeUIKitControls/quniuikitviewcontroller.h>
+#include <QtNativeUIKitControls/private/quniuikitwindow_p.h>
+#include <QtNativeUIKitControls/private/quniuikitviewcontroller_p.h>
+#include <QtNativeUIKitControls/private/quniuikitview_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -252,6 +252,6 @@ void QNativeUIKitWindow::childEvent(QChildEvent *event)
     }
 }
 
-#include "moc_qnativeuikitwindow.cpp"
+#include "moc_quniuikitwindow.cpp"
 
 QT_END_NAMESPACE

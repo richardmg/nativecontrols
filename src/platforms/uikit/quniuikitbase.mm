@@ -38,10 +38,10 @@
 
 #include <QtCore>
 
-#include <QtNativeUIKitControls/qnativeuikitbase.h>
-#include <QtNativeUIKitControls/private/qnativeuikitbase_p.h>
+#include <QtNativeUIKitControls/quniuikitbase.h>
+#include <QtNativeUIKitControls/private/quniuikitbase_p.h>
 
-#include <QtNativeControls/qnativebase.h>
+#include <QtNativeControls/qunibase.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -87,6 +87,6 @@ void QNativeUIKitBase::setPlatformParent(QNativePlatformBase *parent)
     setParent(dynamic_cast<QNativeUIKitBase *>(parent));
 }
 
-#include "moc_qnativeuikitbase.cpp"
+#include "moc_quniuikitbase.cpp"
 
 QT_END_NAMESPACE

@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidedittext_p.h"
+#include "quniandroidedittext_p.h"
 
 QT_BEGIN_NAMESPACE
 

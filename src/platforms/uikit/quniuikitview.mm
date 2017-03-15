@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativecontrol.h>
-#include <QtNativeUIKitControls/qnativeuikitview.h>
-#include <QtNativeUIKitControls/private/qnativeuikitview_p.h>
+#include <QtNativeControls/qunicontrol.h>
+#include <QtNativeUIKitControls/quniuikitview.h>
+#include <QtNativeUIKitControls/private/quniuikitview_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -488,6 +488,6 @@ void QNativeUIKitView::childEvent(QChildEvent *event)
     }
 }
 
-#include "moc_qnativeuikitview.cpp"
+#include "moc_quniuikitview.cpp"
 
 QT_END_NAMESPACE

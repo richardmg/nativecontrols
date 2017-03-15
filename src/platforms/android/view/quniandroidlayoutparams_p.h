@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeAndroid/private/qnativeandroidobject_p.h>
+#include <QtNativeAndroid/private/quniandroidobject_p.h>
 #include <QtQml/qqml.h>
 
 QT_BEGIN_NAMESPACE

@@ -39,8 +39,8 @@
 
 #include <QObject>
 
-#include <QtNativeAppKitControls/qnativeappkitviewcontroller.h>
-#include <QtNativeControls/qnativeplatformtabspage.h>
+#include <QtNativeAppKitControls/quniappkitviewcontroller.h>
+#include <QtNativeControls/quniplatformtabspage.h>
 
 QT_BEGIN_NAMESPACE
 

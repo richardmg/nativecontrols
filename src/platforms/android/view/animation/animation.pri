@@ -1,41 +1,41 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativeandroidacceleratedecelerateinterpolator_p.h \
-    $$PWD/qnativeandroidaccelerateinterpolator_p.h \
-    $$PWD/qnativeandroidalphaanimation_p.h \
-    $$PWD/qnativeandroidanimation_p.h \
-    $$PWD/qnativeandroidanimation_p_p.h \
-    $$PWD/qnativeandroidanimationset_p.h \
-    $$PWD/qnativeandroidanticipateinterpolator_p.h \
-    $$PWD/qnativeandroidanticipateovershootinterpolator_p.h \
-    $$PWD/qnativeandroidbounceinterpolator_p.h \
-    $$PWD/qnativeandroidcycleinterpolator_p.h \
-    $$PWD/qnativeandroiddecelerateinterpolator_p.h \
-    $$PWD/qnativeandroidinterpolator_p.h \
-    $$PWD/qnativeandroidinterpolator_p_p.h \
-    $$PWD/qnativeandroidlinearinterpolator_p.h \
-    $$PWD/qnativeandroidovershootinterpolator_p.h \
-    $$PWD/qnativeandroidpathinterpolator_p.h \
-    $$PWD/qnativeandroidrotateanimation_p.h \
-    $$PWD/qnativeandroidscaleanimation_p.h \
-    $$PWD/qnativeandroidtranslateanimation_p.h
+    $$PWD/quniandroidacceleratedecelerateinterpolator_p.h \
+    $$PWD/quniandroidaccelerateinterpolator_p.h \
+    $$PWD/quniandroidalphaanimation_p.h \
+    $$PWD/quniandroidanimation_p.h \
+    $$PWD/quniandroidanimation_p_p.h \
+    $$PWD/quniandroidanimationset_p.h \
+    $$PWD/quniandroidanticipateinterpolator_p.h \
+    $$PWD/quniandroidanticipateovershootinterpolator_p.h \
+    $$PWD/quniandroidbounceinterpolator_p.h \
+    $$PWD/quniandroidcycleinterpolator_p.h \
+    $$PWD/quniandroiddecelerateinterpolator_p.h \
+    $$PWD/quniandroidinterpolator_p.h \
+    $$PWD/quniandroidinterpolator_p_p.h \
+    $$PWD/quniandroidlinearinterpolator_p.h \
+    $$PWD/quniandroidovershootinterpolator_p.h \
+    $$PWD/quniandroidpathinterpolator_p.h \
+    $$PWD/quniandroidrotateanimation_p.h \
+    $$PWD/quniandroidscaleanimation_p.h \
+    $$PWD/quniandroidtranslateanimation_p.h
 
 SOURCES += \
-    $$PWD/qnativeandroidacceleratedecelerateinterpolator.cpp \
-    $$PWD/qnativeandroidaccelerateinterpolator.cpp \
-    $$PWD/qnativeandroidalphaanimation.cpp \
-    $$PWD/qnativeandroidanimation.cpp \
-    $$PWD/qnativeandroidanimationset.cpp \
-    $$PWD/qnativeandroidanticipateinterpolator.cpp \
-    $$PWD/qnativeandroidanticipateovershootinterpolator.cpp \
-    $$PWD/qnativeandroidbounceinterpolator.cpp \
-    $$PWD/qnativeandroidcycleinterpolator.cpp \
-    $$PWD/qnativeandroiddecelerateinterpolator.cpp \
-    $$PWD/qnativeandroidinterpolator.cpp \
-    $$PWD/qnativeandroidlinearinterpolator.cpp \
-    $$PWD/qnativeandroidovershootinterpolator.cpp \
-    $$PWD/qnativeandroidpathinterpolator.cpp \
-    $$PWD/qnativeandroidrotateanimation.cpp \
-    $$PWD/qnativeandroidscaleanimation.cpp \
-    $$PWD/qnativeandroidtranslateanimation.cpp
+    $$PWD/quniandroidacceleratedecelerateinterpolator.cpp \
+    $$PWD/quniandroidaccelerateinterpolator.cpp \
+    $$PWD/quniandroidalphaanimation.cpp \
+    $$PWD/quniandroidanimation.cpp \
+    $$PWD/quniandroidanimationset.cpp \
+    $$PWD/quniandroidanticipateinterpolator.cpp \
+    $$PWD/quniandroidanticipateovershootinterpolator.cpp \
+    $$PWD/quniandroidbounceinterpolator.cpp \
+    $$PWD/quniandroidcycleinterpolator.cpp \
+    $$PWD/quniandroiddecelerateinterpolator.cpp \
+    $$PWD/quniandroidinterpolator.cpp \
+    $$PWD/quniandroidlinearinterpolator.cpp \
+    $$PWD/quniandroidovershootinterpolator.cpp \
+    $$PWD/quniandroidpathinterpolator.cpp \
+    $$PWD/quniandroidrotateanimation.cpp \
+    $$PWD/quniandroidscaleanimation.cpp \
+    $$PWD/quniandroidtranslateanimation.cpp

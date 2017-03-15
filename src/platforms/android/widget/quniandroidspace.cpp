@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidspace_p.h"
+#include "quniandroidspace_p.h"
 
 QT_BEGIN_NAMESPACE
 

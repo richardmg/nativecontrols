@@ -38,9 +38,9 @@
 
 #include <QtCore>
 
-#include <QtNativeControls/qnativesearchfield.h>
-#include <QtNativeAppKitControls/qnativeappkitsearchfield.h>
-#include <QtNativeAppKitControls/private/qnativeappkitsearchfield_p.h>
+#include <QtNativeControls/qunisearchfield.h>
+#include <QtNativeAppKitControls/quniappkitsearchfield.h>
+#include <QtNativeAppKitControls/private/quniappkitsearchfield_p.h>
 
 @interface QNativeAppKitSearchFieldDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QNativeAppKitSearchFieldPrivate) *_textField;
@@ -153,4 +153,4 @@ void QNativeAppKitSearchField::setPlaceholderText(const QString &newPlaceholderT
     emit placeholderTextChanged(newPlaceholderText);
 }
 
-#include "moc_qnativeappkitsearchfield.cpp"
+#include "moc_quniappkitsearchfield.cpp"

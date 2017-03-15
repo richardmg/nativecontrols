@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidscaleanimation_p.h"
-#include "qnativeandroidanimation_p_p.h"
+#include "quniandroidscaleanimation_p.h"
+#include "quniandroidanimation_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

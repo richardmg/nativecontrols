@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidspinner_p.h"
+#include "quniandroidspinner_p.h"
 
 QT_BEGIN_NAMESPACE
 

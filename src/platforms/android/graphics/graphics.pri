@@ -1,9 +1,9 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativeandroidcolor_p.h
+    $$PWD/quniandroidcolor_p.h
 
 SOURCES += \
-    $$PWD/qnativeandroidcolor.cpp
+    $$PWD/quniandroidcolor.cpp
 
 include(drawable/drawable.pri)

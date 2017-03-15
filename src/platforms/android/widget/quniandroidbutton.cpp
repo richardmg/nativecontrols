@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidbutton_p.h"
-#include "qnativeandroidbutton_p_p.h"
+#include "quniandroidbutton_p.h"
+#include "quniandroidbutton_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

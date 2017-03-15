@@ -1,10 +1,10 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativeandroidcolordrawable_p.h \
-    $$PWD/qnativeandroiddrawable_p.h \
-    $$PWD/qnativeandroiddrawable_p_p.h
+    $$PWD/quniandroidcolordrawable_p.h \
+    $$PWD/quniandroiddrawable_p.h \
+    $$PWD/quniandroiddrawable_p_p.h
 
 SOURCES += \
-    $$PWD/qnativeandroidcolordrawable.cpp \
-    $$PWD/qnativeandroiddrawable.cpp
+    $$PWD/quniandroidcolordrawable.cpp \
+    $$PWD/quniandroiddrawable.cpp

@@ -38,8 +38,8 @@
 
 #include <QtCore>
 
-#include <QtNativeUIKitControls/qnativeuikittabbaritem.h>
-#include <QtNativeUIKitControls/private/qnativeuikittabbaritem_p.h>
+#include <QtNativeUIKitControls/quniuikittabbaritem.h>
+#include <QtNativeUIKitControls/private/quniuikittabbaritem_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -95,6 +95,6 @@ void QNativeUIKitTabBarItem::setTitle(const QString &title)
     uiTabBarItemHandle().title = title.toNSString();
 }
 
-#include "moc_qnativeuikittabbaritem.cpp"
+#include "moc_quniuikittabbaritem.cpp"
 
 QT_END_NAMESPACE

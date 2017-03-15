@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtNativeControls/private/qnativeview_p.h>
+#include <QtNativeControls/private/quniview_p.h>
 
 QT_BEGIN_NAMESPACE
 

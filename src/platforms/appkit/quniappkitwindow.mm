@@ -38,11 +38,11 @@
 
 #include <QtGui/qwindow.h>
 #include <QtCore/private/qobject_p.h>
-#include <QtNativeAppKitControls/qnativeappkitwindow.h>
-#include <QtNativeAppKitControls/qnativeappkitviewcontroller.h>
-#include <QtNativeAppKitControls/private/qnativeappkitwindow_p.h>
-#include <QtNativeAppKitControls/private/qnativeappkitviewcontroller_p.h>
-#include <QtNativeAppKitControls/private/qnativeappkitview_p.h>
+#include <QtNativeAppKitControls/quniappkitwindow.h>
+#include <QtNativeAppKitControls/quniappkitviewcontroller.h>
+#include <QtNativeAppKitControls/private/quniappkitwindow_p.h>
+#include <QtNativeAppKitControls/private/quniappkitviewcontroller_p.h>
+#include <QtNativeAppKitControls/private/quniappkitview_p.h>
 
 @interface QtNativeNSView : NSView
 
@@ -359,6 +359,6 @@ void QNativeAppKitWindow::childEvent(QChildEvent *event)
     }
 }
 
-#include "moc_qnativeappkitwindow.cpp"
+#include "moc_quniappkitwindow.cpp"
 
 QT_END_NAMESPACE

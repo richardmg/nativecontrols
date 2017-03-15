@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidabsseekbar_p.h"
-#include "qnativeandroidabsseekbar_p_p.h"
+#include "quniandroidabsseekbar_p.h"
+#include "quniandroidabsseekbar_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidsearchview_p.h"
+#include "quniandroidsearchview_p.h"
 
 QT_BEGIN_NAMESPACE
 

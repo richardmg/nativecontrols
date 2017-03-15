@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidbaseadapter_p.h"
-#include "qnativeandroidbaseadapter_p_p.h"
+#include "quniandroidbaseadapter_p.h"
+#include "quniandroidbaseadapter_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

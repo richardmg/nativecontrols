@@ -34,13 +34,13 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidpopupmenu_p.h"
-#include "qnativeandroidobject_p_p.h"
+#include "quniandroidpopupmenu_p.h"
+#include "quniandroidobject_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
-#include "qnativeandroidmenuitem_p.h"
-#include "qnativeandroidoptional_p.h"
-#include "qnativeandroidcontext_p.h"
-#include "qnativeandroidview_p.h"
+#include "quniandroidmenuitem_p.h"
+#include "quniandroidoptional_p.h"
+#include "quniandroidcontext_p.h"
+#include "quniandroidview_p.h"
 #include <QtCore/qdebug.h>
 
 QT_BEGIN_NAMESPACE

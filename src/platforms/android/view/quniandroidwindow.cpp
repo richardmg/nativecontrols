@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidwindow_p.h"
-#include "qnativeandroidcontextual_p_p.h"
-#include "qnativeandroidcontext_p.h"
-#include "qnativeandroidoptional_p.h"
+#include "quniandroidwindow_p.h"
+#include "quniandroidcontextual_p_p.h"
+#include "quniandroidcontext_p.h"
+#include "quniandroidoptional_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE

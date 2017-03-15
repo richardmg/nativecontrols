@@ -37,9 +37,9 @@
 #ifndef QNATIVEAPPKITWINDOW_H
 #define QNATIVEAPPKITWINDOW_H
 
-#include <QtNativeControls/qnativeplatformwindow.h>
+#include <QtNativeControls/quniplatformwindow.h>
 
-#include <QtNativeAppKitControls/qnativeappkitview.h>
+#include <QtNativeAppKitControls/quniappkitview.h>
 
 QT_BEGIN_NAMESPACE
 

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidservice_p.h"
-#include "qnativeandroidcontextwrapper_p_p.h"
+#include "quniandroidservice_p.h"
+#include "quniandroidcontextwrapper_p_p.h"
 #include "qtnativeandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE
@@ -187,4 +187,4 @@ void QNativeAndroidService::onInflate(QAndroidJniObject& instance)
 
 QT_END_NAMESPACE
 
-#include "moc_qnativeandroidservice_p.cpp"
+#include "moc_quniandroidservice_p.cpp"

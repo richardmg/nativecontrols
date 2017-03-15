@@ -1,24 +1,24 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qnativeandroidgravity_p.h \
-    $$PWD/qnativeandroidlayoutparams_p.h \
-    $$PWD/qnativeandroidlayoutparams_p_p.h \
-    $$PWD/qnativeandroidmenu_p.h \
-    $$PWD/qnativeandroidmenu_p_p.h \
-    $$PWD/qnativeandroidmenuitem_p.h \
-    $$PWD/qnativeandroidview_p.h \
-    $$PWD/qnativeandroidview_p_p.h \
-    $$PWD/qnativeandroidviewgroup_p.h \
-    $$PWD/qnativeandroidviewgroup_p_p.h \
-    $$PWD/qnativeandroidwindow_p.h
+    $$PWD/quniandroidgravity_p.h \
+    $$PWD/quniandroidlayoutparams_p.h \
+    $$PWD/quniandroidlayoutparams_p_p.h \
+    $$PWD/quniandroidmenu_p.h \
+    $$PWD/quniandroidmenu_p_p.h \
+    $$PWD/quniandroidmenuitem_p.h \
+    $$PWD/quniandroidview_p.h \
+    $$PWD/quniandroidview_p_p.h \
+    $$PWD/quniandroidviewgroup_p.h \
+    $$PWD/quniandroidviewgroup_p_p.h \
+    $$PWD/quniandroidwindow_p.h
 
 SOURCES += \
-    $$PWD/qnativeandroidlayoutparams.cpp \
-    $$PWD/qnativeandroidmenu.cpp \
-    $$PWD/qnativeandroidmenuitem.cpp \
-    $$PWD/qnativeandroidview.cpp \
-    $$PWD/qnativeandroidviewgroup.cpp \
-    $$PWD/qnativeandroidwindow.cpp
+    $$PWD/quniandroidlayoutparams.cpp \
+    $$PWD/quniandroidmenu.cpp \
+    $$PWD/quniandroidmenuitem.cpp \
+    $$PWD/quniandroidview.cpp \
+    $$PWD/quniandroidviewgroup.cpp \
+    $$PWD/quniandroidwindow.cpp
 
 include(animation/animation.pri)

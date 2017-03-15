@@ -34,11 +34,11 @@
 **
 ****************************************************************************/
 
-#include <QtNativeControls/qnativecontrol.h>
-#include <QtNativeControls/private/qnativecontrol_p.h>
-#include <QtNativeControls/qnativeplatformcontrol.h>
-#include <QtNativeControls/qnativeview.h>
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
+#include <QtNativeControls/qunicontrol.h>
+#include <QtNativeControls/private/qunicontrol_p.h>
+#include <QtNativeControls/quniplatformcontrol.h>
+#include <QtNativeControls/quniview.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -81,6 +81,6 @@ QNativeControl::~QNativeControl()
 {
 }
 
-#include "moc_qnativecontrol.cpp"
+#include "moc_qunicontrol.cpp"
 
 QT_END_NAMESPACE

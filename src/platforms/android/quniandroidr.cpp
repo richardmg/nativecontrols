@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidr_p.h"
+#include "quniandroidr_p.h"
 #include <QtCore/private/qobject_p.h>
 #include <QtAndroidExtras/qandroidjniobject.h>
 #include <QtAndroidExtras/qandroidjnienvironment.h>

@@ -37,8 +37,8 @@
 #ifndef QNATIVEWINDOW_H
 #define QNATIVEWINDOW_H
 
-#include <QtNativeControls/qnativebase.h>
-#include <QtNativeControls/qnativecontrolsglobal.h>
+#include <QtNativeControls/qunibase.h>
+#include <QtNativeControls/qunicontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 

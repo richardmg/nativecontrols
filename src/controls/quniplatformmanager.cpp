@@ -37,9 +37,9 @@
 #include <QtCore>
 #include <QtCore/private/qfactoryloader_p.h>
 
-#include <QtNativeControls/private/qnativeplatformmanager_p.h>
-#include <QtNativeControls/qnativecontrolsplatformplugin.h>
-#include <QtNativeControls/qnativecontrolsplatformplugin.h>
+#include <QtNativeControls/private/quniplatformmanager_p.h>
+#include <QtNativeControls/qunicontrolsplatformplugin.h>
+#include <QtNativeControls/qunicontrolsplatformplugin.h>
 
 QT_BEGIN_NAMESPACE
 

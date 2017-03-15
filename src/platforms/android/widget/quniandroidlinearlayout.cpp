@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidlinearlayout_p.h"
-#include "qnativeandroidlinearlayout_p_p.h"
+#include "quniandroidlinearlayout_p.h"
+#include "quniandroidlinearlayout_p_p.h"
 
 QT_BEGIN_NAMESPACE
 

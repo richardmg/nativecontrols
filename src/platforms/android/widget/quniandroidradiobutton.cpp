@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidradiobutton_p.h"
+#include "quniandroidradiobutton_p.h"
 
 QT_BEGIN_NAMESPACE
 

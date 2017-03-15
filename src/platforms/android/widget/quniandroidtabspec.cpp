@@ -34,9 +34,9 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidtabspec_p.h"
-#include "qnativeandroidtabhost_p.h"
-#include "qnativeandroidview_p.h"
+#include "quniandroidtabspec_p.h"
+#include "quniandroidtabhost_p.h"
+#include "quniandroidview_p.h"
 #include "qtnativeandroidfunctions_p.h"
 #include <QtAndroidExtras/qandroidjniobject.h>
 #include <QtCore/private/qobject_p.h>

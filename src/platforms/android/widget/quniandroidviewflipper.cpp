@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qnativeandroidviewflipper_p.h"
+#include "quniandroidviewflipper_p.h"
 
 QT_BEGIN_NAMESPACE
 

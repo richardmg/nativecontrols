@@ -51,7 +51,7 @@
 #include <QtCore>
 #include <QtCore/private/qobject_p.h>
 
-#include <QtNativeAppKitControls/private/qnativeappkitcontrol_p.h>
+#include <QtNativeAppKitControls/private/quniappkitcontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 

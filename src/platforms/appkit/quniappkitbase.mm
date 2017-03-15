@@ -38,10 +38,10 @@
 
 #include <QtCore>
 
-#include <QtNativeAppKitControls/qnativeappkitbase.h>
-#include <QtNativeAppKitControls/private/qnativeappkitbase_p.h>
+#include <QtNativeAppKitControls/quniappkitbase.h>
+#include <QtNativeAppKitControls/private/quniappkitbase_p.h>
 
-#include <QtNativeControls/qnativebase.h>
+#include <QtNativeControls/qunibase.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -87,6 +87,6 @@ void QNativeAppKitBase::setPlatformParent(QNativePlatformBase *parent)
     setParent(dynamic_cast<QNativeAppKitBase *>(parent));
 }
 
-#include "moc_qnativeappkitbase.cpp"
+#include "moc_quniappkitbase.cpp"
 
 QT_END_NAMESPACE
