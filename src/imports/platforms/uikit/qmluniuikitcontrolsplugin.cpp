@@ -40,14 +40,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class QmlNativeUIKitControlsPlugin: public QQmlExtensionPlugin
+class QmlUniUIKitControlsPlugin: public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
 
 public:
 
-QmlNativeUIKitControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
+QmlUniUIKitControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
 {
 }
 
