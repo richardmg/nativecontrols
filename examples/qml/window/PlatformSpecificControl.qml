@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQml 2.0
-import Qt.NativeControls 1.0
+import Qt.UniControls 1.0
 
 Button {
     text: "Normal button"

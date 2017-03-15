@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQml 2.0
-import Qt.NativeControls 1.0 as Native
+import Qt.UniControls 1.0 as Native
 import Qt.NativeUIKitControls 1.0 as UIKit
 
 UIKit.View {

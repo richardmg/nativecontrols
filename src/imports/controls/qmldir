@@ -1,3 +1,3 @@
-module Qt.NativeControls
+module Qt.UniControls
 plugin qmlunicontrols
-classname QmlNativeControlsPlugin
+classname QmlUniControlsPlugin
