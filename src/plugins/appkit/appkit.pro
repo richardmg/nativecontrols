@@ -1,7 +1,7 @@
 TARGET = quniappkit
 
-QT += unicontrols nativeappkitcontrols
-QT_PRIVATE += core-private unicontrols-private nativeappkitcontrols-private
+QT += unicontrols uniappkitcontrols
+QT_PRIVATE += core-private unicontrols-private uniappkitcontrols-private
 
 SOURCES += \
     quniappkitplatformplugin.cpp

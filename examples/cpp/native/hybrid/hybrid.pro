@@ -4,7 +4,7 @@ TARGET = hybrid
 QT += unicontrols
 
 macos {
-    QT += nativeappkitcontrols
+    QT += uniappkitcontrols
     LIBS += -framework AppKit
 }
 

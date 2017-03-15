@@ -8,7 +8,7 @@ QT += gui qml quick unicontrols
 RESOURCES += main.qrc
 
 uikit:!watchos: QT += uniuikitcontrols
-macos: QT += nativeappkitcontrols
+macos: QT += uniappkitcontrols
 
 # Input
 SOURCES += main.cpp

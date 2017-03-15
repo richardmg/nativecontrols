@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = window
 
-QT += nativeappkitcontrols
+QT += uniappkitcontrols
 
 OBJECTIVE_SOURCES += main.mm
 
