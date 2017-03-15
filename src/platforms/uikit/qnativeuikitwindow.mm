@@ -118,7 +118,7 @@ void QNativeUIKitWindow::setRootViewController(QNativeUIKitViewController *contr
         return;
 
     d->m_viewControllerSetExplicit = true;
-    d->m_viewController = dynamic_cast<QNativeUIKitViewController *>(controller);
+    d->m_viewController = controller;
     uiWindowHandle().rootViewController = d->m_viewController->uiViewControllerHandle();
     emit rootViewControllerChanged(controller);
 }
