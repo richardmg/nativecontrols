@@ -1,5 +1,5 @@
 TARGET = qmluniappkitcontrols
-TARGETPATH = Qt/NativeAppKitControls
+TARGETPATH = Qt/UniAppKitControls
 IMPORT_VERSION = 1.0
 
 QT += qml uniappkitcontrols

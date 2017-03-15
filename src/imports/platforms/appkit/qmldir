@@ -1,4 +1,4 @@
-module Qt.NativeAppKitControls
+module Qt.UniAppKitControls
 plugin qmluniappkitcontrols
-classname QmlNativeAppKitControlsPlugin
+classname QmlUniAppKitControlsPlugin
 
