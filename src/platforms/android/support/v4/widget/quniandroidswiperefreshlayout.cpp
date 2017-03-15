@@ -44,7 +44,7 @@ static void native_onRefresh(JNIEnv *env, jobject object, jlong instance)
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidSwipeRefreshLayout *layout = reinterpret_cast<QNativeAndroidSwipeRefreshLayout *>(instance);
+    QUniAndroidSwipeRefreshLayout *layout = reinterpret_cast<QUniAndroidSwipeRefreshLayout *>(instance);
     if (layout)
         QMetaObject::invokeMethod(layout, "_q_updateRefreshing", Qt::QueuedConnection, Q_ARG(bool, true));
 }
@@ -59,9 +59,9 @@ static void registerNativeSwipeRefreshLayoutMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidSwipeRefreshLayoutPrivate : public QNativeAndroidViewGroupPrivate
+class QUniAndroidSwipeRefreshLayoutPrivate : public QUniAndroidViewGroupPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidSwipeRefreshLayout)
+    Q_DECLARE_PUBLIC(QUniAndroidSwipeRefreshLayout)
 
 public:
     bool _q_updateRefreshing(bool refreshing);
@@ -70,9 +70,9 @@ public:
     QAndroidJniObject listener;
 };
 
-bool QNativeAndroidSwipeRefreshLayoutPrivate::_q_updateRefreshing(bool arg)
+bool QUniAndroidSwipeRefreshLayoutPrivate::_q_updateRefreshing(bool arg)
 {
-    Q_Q(QNativeAndroidSwipeRefreshLayout);
+    Q_Q(QUniAndroidSwipeRefreshLayout);
     if (refreshing == arg)
         return false;
 
@@ -81,35 +81,35 @@ bool QNativeAndroidSwipeRefreshLayoutPrivate::_q_updateRefreshing(bool arg)
     return true;
 }
 
-QNativeAndroidSwipeRefreshLayout::QNativeAndroidSwipeRefreshLayout(QNativeAndroidContext *context)
-    : QNativeAndroidViewGroup(*(new QNativeAndroidSwipeRefreshLayoutPrivate), context)
+QUniAndroidSwipeRefreshLayout::QUniAndroidSwipeRefreshLayout(QUniAndroidContext *context)
+    : QUniAndroidViewGroup(*(new QUniAndroidSwipeRefreshLayoutPrivate), context)
 {
 }
 
-bool QNativeAndroidSwipeRefreshLayout::isRefreshing() const
+bool QUniAndroidSwipeRefreshLayout::isRefreshing() const
 {
-    Q_D(const QNativeAndroidSwipeRefreshLayout);
+    Q_D(const QUniAndroidSwipeRefreshLayout);
     return d->refreshing;
 }
 
-void QNativeAndroidSwipeRefreshLayout::setRefreshing(bool refreshing)
+void QUniAndroidSwipeRefreshLayout::setRefreshing(bool refreshing)
 {
-    Q_D(QNativeAndroidSwipeRefreshLayout);
+    Q_D(QUniAndroidSwipeRefreshLayout);
     if (d->_q_updateRefreshing(refreshing))
         QtNativeAndroid::callBoolMethod(instance(), "setRefreshing", refreshing);
 }
 
-QAndroidJniObject QNativeAndroidSwipeRefreshLayout::onCreate()
+QAndroidJniObject QUniAndroidSwipeRefreshLayout::onCreate()
 {
     return QAndroidJniObject("android/support/v4/widget/SwipeRefreshLayout",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidSwipeRefreshLayout::onInflate(QAndroidJniObject &instance)
+void QUniAndroidSwipeRefreshLayout::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidSwipeRefreshLayout);
-    QNativeAndroidViewGroup::onInflate(instance);
+    Q_D(QUniAndroidSwipeRefreshLayout);
+    QUniAndroidViewGroup::onInflate(instance);
 
     d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/support/v4/widget/QtNativeSwipeRefreshLayoutListener",
                                    "(Landroid/support/v4/widget/SwipeRefreshLayout;J)V",

@@ -55,16 +55,16 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeControl;
-class QNativeAppKitControl;
+class QUniControl;
+class QUniAppKitControl;
 
-class QNativeAppKitControlPrivate : public QNativeAppKitViewPrivate
+class QUniAppKitControlPrivate : public QUniAppKitViewPrivate
 {
 public:
-    explicit QNativeAppKitControlPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitControlPrivate();
+    explicit QUniAppKitControlPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniAppKitControlPrivate();
 
-    Q_DECLARE_PUBLIC(QNativeAppKitControl)
+    Q_DECLARE_PUBLIC(QUniAppKitControl)
 };
 
 QT_END_NAMESPACE

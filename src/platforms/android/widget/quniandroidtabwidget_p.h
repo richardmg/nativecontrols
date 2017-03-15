@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidTabWidget : public QNativeAndroidLinearLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidTabWidget : public QUniAndroidLinearLayout
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidTabWidget(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidTabWidget(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

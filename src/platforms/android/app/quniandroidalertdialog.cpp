@@ -40,27 +40,27 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAlertDialogPrivate : public QNativeAndroidDialogPrivate
+class QUniAndroidAlertDialogPrivate : public QUniAndroidDialogPrivate
 {
 public:
     QString title;
     QString message;
 };
 
-QNativeAndroidAlertDialog::QNativeAndroidAlertDialog(QObject *parent)
-    : QNativeAndroidDialog(*(new QNativeAndroidAlertDialogPrivate), parent)
+QUniAndroidAlertDialog::QUniAndroidAlertDialog(QObject *parent)
+    : QUniAndroidDialog(*(new QUniAndroidAlertDialogPrivate), parent)
 {
 }
 
-QString QNativeAndroidAlertDialog::title() const
+QString QUniAndroidAlertDialog::title() const
 {
-    Q_D(const QNativeAndroidAlertDialog);
+    Q_D(const QUniAndroidAlertDialog);
     return d->title;
 }
 
-void QNativeAndroidAlertDialog::setTitle(const QString &title)
+void QUniAndroidAlertDialog::setTitle(const QString &title)
 {
-    Q_D(QNativeAndroidAlertDialog);
+    Q_D(QUniAndroidAlertDialog);
     if (d->title == title)
         return;
 
@@ -69,15 +69,15 @@ void QNativeAndroidAlertDialog::setTitle(const QString &title)
     emit titleChanged();
 }
 
-QString QNativeAndroidAlertDialog::message() const
+QString QUniAndroidAlertDialog::message() const
 {
-    Q_D(const QNativeAndroidAlertDialog);
+    Q_D(const QUniAndroidAlertDialog);
     return d->message;
 }
 
-void QNativeAndroidAlertDialog::setMessage(const QString &message)
+void QUniAndroidAlertDialog::setMessage(const QString &message)
 {
-    Q_D(QNativeAndroidAlertDialog);
+    Q_D(QUniAndroidAlertDialog);
     if (d->message != message)
         return;
 
@@ -86,17 +86,17 @@ void QNativeAndroidAlertDialog::setMessage(const QString &message)
     emit messageChanged();
 }
 
-QAndroidJniObject QNativeAndroidAlertDialog::onCreate()
+QAndroidJniObject QUniAndroidAlertDialog::onCreate()
 {
     return QAndroidJniObject("android/app/AlertDialog",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidAlertDialog::onInflate(QAndroidJniObject& instance)
+void QUniAndroidAlertDialog::onInflate(QAndroidJniObject& instance)
 {
-    Q_D(QNativeAndroidAlertDialog);
-    QNativeAndroidDialog::onInflate(instance);
+    Q_D(QUniAndroidAlertDialog);
+    QUniAndroidDialog::onInflate(instance);
 
     if (!d->title.isNull())
         instance.callMethod<void>("setTitle", "(Ljava/lang/CharSequence;)V", QAndroidJniObject::fromString(d->title).object());

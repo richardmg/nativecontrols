@@ -53,15 +53,15 @@ QmlNativeAppKitControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(p
 
 void registerTypes(const char *uri) override
 {
-    qmlRegisterType<QNativeAppKitControl>();
-    qmlRegisterType<QNativeAppKitWindow>(uri, 1, 0, "Window");
-    qmlRegisterType<QNativeAppKitButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeAppKitSearchField>(uri, 1, 0, "SearchField");
-    qmlRegisterType<QNativeAppKitTextField>(uri, 1, 0, "TextField");
-    qmlRegisterType<QNativeAppKitView>(uri, 1, 0, "View");
-    qmlRegisterType<QNativeAppKitViewController>(uri, 1, 0, "ViewController");
-    qmlRegisterType<QNativeAppKitTabViewController>(uri, 1, 0, "TabViewController");
-    qmlRegisterType<QNativeAppKitTabViewItem>(uri, 1, 0, "TabViewItem");
+    qmlRegisterType<QUniAppKitControl>();
+    qmlRegisterType<QUniAppKitWindow>(uri, 1, 0, "Window");
+    qmlRegisterType<QUniAppKitButton>(uri, 1, 0, "Button");
+    qmlRegisterType<QUniAppKitSearchField>(uri, 1, 0, "SearchField");
+    qmlRegisterType<QUniAppKitTextField>(uri, 1, 0, "TextField");
+    qmlRegisterType<QUniAppKitView>(uri, 1, 0, "View");
+    qmlRegisterType<QUniAppKitViewController>(uri, 1, 0, "ViewController");
+    qmlRegisterType<QUniAppKitTabViewController>(uri, 1, 0, "TabViewController");
+    qmlRegisterType<QUniAppKitTabViewItem>(uri, 1, 0, "TabViewItem");
 
 }
 

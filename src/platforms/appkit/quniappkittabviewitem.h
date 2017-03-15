@@ -44,33 +44,33 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitTabViewItemPrivate;
-class QNativeAppKitViewController;
+class QUniAppKitTabViewItemPrivate;
+class QUniAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSTabViewItem);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitTabViewItem : public QNativeAppKitBase, public virtual QNativePlatformTabsPageTab
+class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitTabViewItem : public QUniAppKitBase, public virtual QUniPlatformTabsPageTab
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAppKitTabViewItem(QNativeAppKitBase *parent = nullptr);
-    explicit QNativeAppKitTabViewItem(const QString &title, QNativeAppKitBase *parent = nullptr);
-    virtual ~QNativeAppKitTabViewItem();
+    explicit QUniAppKitTabViewItem(QUniAppKitBase *parent = nullptr);
+    explicit QUniAppKitTabViewItem(const QString &title, QUniAppKitBase *parent = nullptr);
+    virtual ~QUniAppKitTabViewItem();
 
     virtual QString title() const override;
     virtual void setTitle(const QString &title) override;
 
-    void setViewController(QNativeAppKitViewController *viewController);
-    QNativeAppKitViewController *viewController() const;
+    void setViewController(QUniAppKitViewController *viewController);
+    QUniAppKitViewController *viewController() const;
 
     NSTabViewItem *nsTabViewItemHandle();
 
 protected:
-    QNativeAppKitTabViewItem(QNativeAppKitTabViewItemPrivate &dd, QNativeAppKitBase *parent = nullptr);
+    QUniAppKitTabViewItem(QUniAppKitTabViewItemPrivate &dd, QUniAppKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeAppKitTabViewItem)
-    Q_DISABLE_COPY(QNativeAppKitTabViewItem)
+    Q_DECLARE_PRIVATE(QUniAppKitTabViewItem)
+    Q_DISABLE_COPY(QUniAppKitTabViewItem)
 };
 
 QT_END_NAMESPACE

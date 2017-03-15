@@ -56,11 +56,11 @@ public:
 
 void QtQmlAndroidAppPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterType<QNativeAndroidActionBar>(uri, 0, 21, "ActionBar");
-    qmlRegisterType<QNativeAndroidActivity>(uri, 0, 21, "Activity");
-    qmlRegisterType<QNativeAndroidAlertDialog>(uri, 0, 21, "AlertDialog");
-    qmlRegisterType<QNativeAndroidDialog>(uri, 0, 21, "Dialog");
-    qmlRegisterType<QNativeAndroidService>(uri, 0, 21, "Service");
+    qmlRegisterType<QUniAndroidActionBar>(uri, 0, 21, "ActionBar");
+    qmlRegisterType<QUniAndroidActivity>(uri, 0, 21, "Activity");
+    qmlRegisterType<QUniAndroidAlertDialog>(uri, 0, 21, "AlertDialog");
+    qmlRegisterType<QUniAndroidDialog>(uri, 0, 21, "Dialog");
+    qmlRegisterType<QUniAndroidService>(uri, 0, 21, "Service");
 }
 
 QT_END_NAMESPACE

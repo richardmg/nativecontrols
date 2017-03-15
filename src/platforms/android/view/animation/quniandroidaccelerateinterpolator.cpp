@@ -40,28 +40,28 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAccelerateInterpolatorPrivate : public QNativeAndroidInterpolatorPrivate
+class QUniAndroidAccelerateInterpolatorPrivate : public QUniAndroidInterpolatorPrivate
 {
 public:
-    QNativeAndroidOptional<qreal> factor;
+    QUniAndroidOptional<qreal> factor;
 };
 
-QNativeAndroidAccelerateInterpolator::QNativeAndroidAccelerateInterpolator(QObject *parent)
-    : QNativeAndroidInterpolator(*(new QNativeAndroidAccelerateInterpolatorPrivate), parent)
+QUniAndroidAccelerateInterpolator::QUniAndroidAccelerateInterpolator(QObject *parent)
+    : QUniAndroidInterpolator(*(new QUniAndroidAccelerateInterpolatorPrivate), parent)
 {
 }
 
-qreal QNativeAndroidAccelerateInterpolator::factor() const
+qreal QUniAndroidAccelerateInterpolator::factor() const
 {
-    Q_D(const QNativeAndroidAccelerateInterpolator);
+    Q_D(const QUniAndroidAccelerateInterpolator);
     if (d->factor.isNull())
         return 1.0;
     return d->factor;
 }
 
-void QNativeAndroidAccelerateInterpolator::setFactor(qreal factor)
+void QUniAndroidAccelerateInterpolator::setFactor(qreal factor)
 {
-    Q_D(QNativeAndroidAccelerateInterpolator);
+    Q_D(QUniAndroidAccelerateInterpolator);
     if (!d->factor.isNull() && qFuzzyCompare(d->factor, factor))
         return;
 
@@ -69,9 +69,9 @@ void QNativeAndroidAccelerateInterpolator::setFactor(qreal factor)
     emit factorChanged();
 }
 
-QAndroidJniObject QNativeAndroidAccelerateInterpolator::onCreate()
+QAndroidJniObject QUniAndroidAccelerateInterpolator::onCreate()
 {
-    Q_D(QNativeAndroidAccelerateInterpolator);
+    Q_D(QUniAndroidAccelerateInterpolator);
     if (d->factor.isNull())
         return QAndroidJniObject("android/view/animation/AccelerateInterpolator");
 

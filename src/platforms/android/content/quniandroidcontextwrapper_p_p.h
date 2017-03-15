@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidContextWrapperPrivate : public QNativeAndroidContextPrivate
+class QUniAndroidContextWrapperPrivate : public QUniAndroidContextPrivate
 {
 };
 

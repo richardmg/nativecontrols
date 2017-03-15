@@ -52,24 +52,24 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDrawablePrivate;
+class QUniAndroidDrawablePrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidDrawable : public QNativeAndroidObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidDrawable : public QUniAndroidObject
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidDrawable(QObject *parent = nullptr);
+    explicit QUniAndroidDrawable(QObject *parent = nullptr);
 
 protected:
-    QNativeAndroidDrawable(QNativeAndroidDrawablePrivate &dd, QObject *parent = nullptr);
+    QUniAndroidDrawable(QUniAndroidDrawablePrivate &dd, QObject *parent = nullptr);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidDrawable)
-    Q_DECLARE_PRIVATE(QNativeAndroidDrawable)
+    Q_DISABLE_COPY(QUniAndroidDrawable)
+    Q_DECLARE_PRIVATE(QUniAndroidDrawable)
 };
 
 QT_END_NAMESPACE

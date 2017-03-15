@@ -41,66 +41,66 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeWindowPrivate::QNativeWindowPrivate(int version)
-    : QNativeBasePrivate(version)
+QUniWindowPrivate::QUniWindowPrivate(int version)
+    : QUniBasePrivate(version)
     , m_platformWindow(nullptr)
 {
 }
 
-QNativeWindowPrivate::~QNativeWindowPrivate()
+QUniWindowPrivate::~QUniWindowPrivate()
 {
 }
 
-void QNativeWindowPrivate::createPlatformWindow()
+void QUniWindowPrivate::createPlatformWindow()
 {
     Q_ASSERT(!m_platformWindow);
-    m_platformWindow = QNativePlatformManager::platformPlugin()->createWindow(q_func());
+    m_platformWindow = QUniPlatformManager::platformPlugin()->createWindow(q_func());
     Q_ASSERT(m_platformWindow);
     setPlatformWindow(m_platformWindow);
 }
 
-void QNativeWindowPrivate::setPlatformWindow(QNativePlatformWindow *platformWindow)
+void QUniWindowPrivate::setPlatformWindow(QUniPlatformWindow *platformWindow)
 {
     m_platformWindow = platformWindow;
     setPlatformBase(platformWindow);
 }
 
-QNativeWindow::QNativeWindow()
-    : QNativeBase(*new QNativeWindowPrivate(), nullptr)
+QUniWindow::QUniWindow()
+    : QUniBase(*new QUniWindowPrivate(), nullptr)
 {
     d_func()->createPlatformWindow();
 }
 
-QNativeWindow::QNativeWindow(QNativeWindowPrivate &dd, QNativeBase *parent)
-    : QNativeBase(dd, parent)
+QUniWindow::QUniWindow(QUniWindowPrivate &dd, QUniBase *parent)
+    : QUniBase(dd, parent)
 {
 }
 
-QNativeWindow::~QNativeWindow()
+QUniWindow::~QUniWindow()
 {
 }
 
-qreal QNativeWindow::width() const
+qreal QUniWindow::width() const
 {
     return d_func()->m_platformWindow->width();
 }
 
-qreal QNativeWindow::height() const
+qreal QUniWindow::height() const
 {
     return d_func()->m_platformWindow->height();
 }
 
-bool QNativeWindow::isVisible() const
+bool QUniWindow::isVisible() const
 {
     return d_func()->m_platformWindow->isVisible();
 }
 
-void QNativeWindow::setVisible(bool v)
+void QUniWindow::setVisible(bool v)
 {
     d_func()->m_platformWindow->setVisible(v);
 }
 
-void QNativeWindow::showFullScreen()
+void QUniWindow::showFullScreen()
 {
     d_func()->m_platformWindow->showFullScreen();
 }

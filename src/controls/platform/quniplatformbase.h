@@ -42,50 +42,50 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformBase
+class Q_NATIVECONTROLS_EXPORT QUniPlatformBase
 {
 public:
-    virtual ~QNativePlatformBase() {}
+    virtual ~QUniPlatformBase() {}
 
-    virtual void setPlatformParent(QNativePlatformBase *) = 0;
+    virtual void setPlatformParent(QUniPlatformBase *) = 0;
 
     /**
-     * \sa QNativeBase::setNativeParent(QObject *parent)
+     * \sa QUniBase::setNativeParent(QObject *parent)
      */
     virtual bool setNativeParent(QObject *parent)
     {
-        // Override to support mixing platform controls with QNative controls.
+        // Override to support mixing platform controls with QUni controls.
         Q_UNUSED(parent);
         return false;
     }
 
     /**
-     * \sa QNativeBase::setNativeParent(const QByteArray &type, void *parent)
+     * \sa QUniBase::setNativeParent(const QByteArray &type, void *parent)
      */
     virtual bool setNativeParent(const QByteArray &type, void *parent)
     {
-        // Override to support mixing platform controls with QNative controls.
+        // Override to support mixing platform controls with QUni controls.
         Q_UNUSED(type);
         Q_UNUSED(parent);
         return false;
     }
 
     /**
-     * \sa QNativeBase::addNativeChild(QObject *child)
+     * \sa QUniBase::addNativeChild(QObject *child)
      */
     virtual bool addNativeChild(QObject *child)
     {
-        // Override to support mixing platform controls with QNative controls.
+        // Override to support mixing platform controls with QUni controls.
         Q_UNUSED(child);
         return false;
     }
 
     /**
-     * \sa QNativeBase::addNativeChild(const QByteArray &type, void *child)
+     * \sa QUniBase::addNativeChild(const QByteArray &type, void *child)
      */
     virtual bool addNativeChild(const QByteArray &type, void *child)
     {
-        // Override to support mixing platform controls with QNative controls.
+        // Override to support mixing platform controls with QUni controls.
         Q_UNUSED(type);
         Q_UNUSED(child);
         return false;
@@ -96,7 +96,7 @@ public:
      */
     virtual QByteArrayList supportedNativeChildTypes()
     {
-        // Override to support mixing platform controls with QNative controls.
+        // Override to support mixing platform controls with QUni controls.
         return QByteArrayList();
     }
 
@@ -105,7 +105,7 @@ public:
      */
     virtual QByteArrayList supportedNativeParentTypes()
     {
-        // Override to support mixing platform controls with QNative controls.
+        // Override to support mixing platform controls with QUni controls.
         return QByteArrayList();
     }
 };

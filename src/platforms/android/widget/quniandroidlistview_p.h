@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidListView : public QNativeAndroidAdapterView // TODO: AbsListView
+class Q_NATIVEANDROID_EXPORT QUniAndroidListView : public QUniAndroidAdapterView // TODO: AbsListView
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidListView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidListView(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

@@ -40,41 +40,41 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidPlatformButton : private QNativeAndroidButton, public QNativePlatformButton
+class QUniAndroidPlatformButton : private QUniAndroidButton, public QUniPlatformButton
 {
     Q_OBJECT
 
 public:
-    QNativeAndroidPlatformButton(QNativeButton *button)
+    QUniAndroidPlatformButton(QUniButton *button)
     {
         // TODO: signal arguments
-        connect(this, &QNativeAndroidView::visibleChanged, [=]() { emit button->visibleChanged(isVisible()); });
-        connect(this, &QNativeAndroidButton::textChanged, [=]() { emit button->textChanged(text()); });
-        connect(this, &QNativeAndroidButton::click, button, &QNativeButton::clicked);
+        connect(this, &QUniAndroidView::visibleChanged, [=]() { emit button->visibleChanged(isVisible()); });
+        connect(this, &QUniAndroidButton::textChanged, [=]() { emit button->textChanged(text()); });
+        connect(this, &QUniAndroidButton::click, button, &QUniButton::clicked);
     }
 
-    // QNativePlatformBase
-    void setPlatformParent(QNativePlatformBase *parent) override
+    // QUniPlatformBase
+    void setPlatformParent(QUniPlatformBase *parent) override
     {
-        QNativeAndroidObject *nativeParent = reinterpret_cast<QNativeAndroidObject *>(parent);
-        if (QNativeAndroidActivity *nativeActivity = qobject_cast<QNativeAndroidActivity *>(nativeParent))
+        QUniAndroidObject *nativeParent = reinterpret_cast<QUniAndroidObject *>(parent);
+        if (QUniAndroidActivity *nativeActivity = qobject_cast<QUniAndroidActivity *>(nativeParent))
             nativeActivity->setContentView(this);
-        else if (QNativeAndroidView *nativeView = qobject_cast<QNativeAndroidView *>(nativeParent))
+        else if (QUniAndroidView *nativeView = qobject_cast<QUniAndroidView *>(nativeParent))
             setParentView(nativeView);
     }
 
-    // QNativePlatformControl
-    bool visible() const override { return QNativeAndroidView::isVisible(); }
-    void setVisible(bool visible) override { QNativeAndroidView::setVisible(visible); }
-    // TODO: QNativeAndroidView::geometry() & setGeometry()
-    QRectF geometry() const override { return QRectF(QNativeAndroidView::x(), QNativeAndroidView::y(),
-                                                     QNativeAndroidView::width(), QNativeAndroidView::height()); }
+    // QUniPlatformControl
+    bool visible() const override { return QUniAndroidView::isVisible(); }
+    void setVisible(bool visible) override { QUniAndroidView::setVisible(visible); }
+    // TODO: QUniAndroidView::geometry() & setGeometry()
+    QRectF geometry() const override { return QRectF(QUniAndroidView::x(), QUniAndroidView::y(),
+                                                     QUniAndroidView::width(), QUniAndroidView::height()); }
     void setGeometry(const QRectF &rect) override
     {
-        QNativeAndroidView::setX(rect.x());
-        QNativeAndroidView::setY(rect.y());
-        QNativeAndroidView::setWidth(rect.width());
-        QNativeAndroidView::setHeight(rect.height());
+        QUniAndroidView::setX(rect.x());
+        QUniAndroidView::setY(rect.y());
+        QUniAndroidView::setWidth(rect.width());
+        QUniAndroidView::setHeight(rect.height());
     }
 
     QRectF frameGeometry() const override { return geometry(); }
@@ -95,46 +95,46 @@ public:
         return QSizeF();
     }
 
-    // QNativePlatformButton
-    QString text() override { return QNativeAndroidButton::text(); }
-    void setText(const QString &text) override { QNativeAndroidButton::setText(text); }
+    // QUniPlatformButton
+    QString text() override { return QUniAndroidButton::text(); }
+    void setText(const QString &text) override { QUniAndroidButton::setText(text); }
 };
 
-class QNativeAndroidPlatformWindow : private QNativeAndroidActivity, public QNativePlatformWindow
+class QUniAndroidPlatformWindow : private QUniAndroidActivity, public QUniPlatformWindow
 {
     Q_OBJECT
 
 public:
-    QNativeAndroidPlatformWindow(QNativeWindow *window)
+    QUniAndroidPlatformWindow(QUniWindow *window)
     {
         Q_UNUSED(window);
     }
 
-    // QNativePlatformBase
-    void setPlatformParent(QNativePlatformBase *parent) override { Q_UNUSED(parent); }
+    // QUniPlatformBase
+    void setPlatformParent(QUniPlatformBase *parent) override { Q_UNUSED(parent); }
 
     qreal width() const override { return NAN; }
     qreal height() const override { return NAN; }
 
-    // QNativePlatformWindow ### TODO: how does this map to Activity?
+    // QUniPlatformWindow ### TODO: how does this map to Activity?
     bool isVisible() const override { return true; }
     void setVisible(bool visible) override { Q_UNUSED(visible); }
-    void showFullScreen() override { QNativeAndroidActivity::start(); }
+    void showFullScreen() override { QUniAndroidActivity::start(); }
 };
 
-class QtNativeAndroidPlatformPlugin : public QObject, QNativePlatformPluginInterface
+class QtNativeAndroidPlatformPlugin : public QObject, QUniPlatformPluginInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID QNativePlatformPluginInterface_iid FILE "plugin.json")
-    Q_INTERFACES(QNativePlatformPluginInterface)
+    Q_PLUGIN_METADATA(IID QUniPlatformPluginInterface_iid FILE "plugin.json")
+    Q_INTERFACES(QUniPlatformPluginInterface)
 
 public:
-    virtual QNativePlatformBase* create(QNativeBase *nativeBase) const override
+    virtual QUniPlatformBase* create(QUniBase *nativeBase) const override
     {
-        if (QNativeButton *nativeButton = qobject_cast<QNativeButton *>(nativeBase))
-            return new QNativeAndroidPlatformButton(nativeButton);
-        if (QNativeWindow *nativeWindow = qobject_cast<QNativeWindow *>(nativeBase))
-            return new QNativeAndroidPlatformWindow(nativeWindow);
+        if (QUniButton *nativeButton = qobject_cast<QUniButton *>(nativeBase))
+            return new QUniAndroidPlatformButton(nativeButton);
+        if (QUniWindow *nativeWindow = qobject_cast<QUniWindow *>(nativeBase))
+            return new QUniAndroidPlatformWindow(nativeWindow);
         return nullptr;
     }
 };

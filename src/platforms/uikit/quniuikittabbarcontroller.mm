@@ -45,41 +45,41 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitTabBarControllerPrivate::QNativeUIKitTabBarControllerPrivate(int version)
-    : QNativeUIKitViewControllerPrivate(version)
+QUniUIKitTabBarControllerPrivate::QUniUIKitTabBarControllerPrivate(int version)
+    : QUniUIKitViewControllerPrivate(version)
 {
 }
 
-QNativeUIKitTabBarControllerPrivate::~QNativeUIKitTabBarControllerPrivate()
+QUniUIKitTabBarControllerPrivate::~QUniUIKitTabBarControllerPrivate()
 {
 }
 
-UIViewController *QNativeUIKitTabBarControllerPrivate::createViewController()
+UIViewController *QUniUIKitTabBarControllerPrivate::createViewController()
 {
     return [UITabBarController new];
 }
 
-QNativeUIKitTabBarController::QNativeUIKitTabBarController(QNativeUIKitBase *parent)
-    : QNativeUIKitViewController(*new QNativeUIKitTabBarControllerPrivate(), parent)
+QUniUIKitTabBarController::QUniUIKitTabBarController(QUniUIKitBase *parent)
+    : QUniUIKitViewController(*new QUniUIKitTabBarControllerPrivate(), parent)
 {
 }
 
-QNativeUIKitTabBarController::QNativeUIKitTabBarController(QNativeUIKitTabBarControllerPrivate &dd, QNativeUIKitBase *parent)
-    :QNativeUIKitViewController(dd, parent)
+QUniUIKitTabBarController::QUniUIKitTabBarController(QUniUIKitTabBarControllerPrivate &dd, QUniUIKitBase *parent)
+    :QUniUIKitViewController(dd, parent)
 {
 }
 
-QNativeUIKitTabBarController::~QNativeUIKitTabBarController()
+QUniUIKitTabBarController::~QUniUIKitTabBarController()
 {
 }
 
-QNativeUIKitView *QNativeUIKitTabBarController::view() const
+QUniUIKitView *QUniUIKitTabBarController::view() const
 {
     qWarning("Creating a view for a view controller that is not member of class UIViewController. This can make it act as a normal view controller!");
-    return QNativeUIKitViewController::view();
+    return QUniUIKitViewController::view();
 }
 
-void QNativeUIKitTabBarController::setViewControllers(QList<QNativeUIKitViewController *> list)
+void QUniUIKitTabBarController::setViewControllers(QList<QUniUIKitViewController *> list)
 {
     d_func()->m_viewControllers = list;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:list.length()];
@@ -88,12 +88,12 @@ void QNativeUIKitTabBarController::setViewControllers(QList<QNativeUIKitViewCont
     uiTabBarControllerHandle().viewControllers = array;
 }
 
-QList<QNativeUIKitViewController *> QNativeUIKitTabBarController::viewControllers() const
+QList<QUniUIKitViewController *> QUniUIKitTabBarController::viewControllers() const
 {
     return d_func()->m_viewControllers;
 }
 
-UITabBarController *QNativeUIKitTabBarController::uiTabBarControllerHandle()
+UITabBarController *QUniUIKitTabBarController::uiTabBarControllerHandle()
 {
     return static_cast<UITabBarController *>(uiViewControllerHandle());
 }

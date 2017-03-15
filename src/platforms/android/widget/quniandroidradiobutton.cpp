@@ -38,21 +38,21 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidRadioButton::QNativeAndroidRadioButton(QNativeAndroidContext *context)
-    : QNativeAndroidCompoundButton(context)
+QUniAndroidRadioButton::QUniAndroidRadioButton(QUniAndroidContext *context)
+    : QUniAndroidCompoundButton(context)
 {
 }
 
-QAndroidJniObject QNativeAndroidRadioButton::onCreate()
+QAndroidJniObject QUniAndroidRadioButton::onCreate()
 {
     return QAndroidJniObject("android/widget/RadioButton",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidRadioButton::onInflate(QAndroidJniObject &instance)
+void QUniAndroidRadioButton::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidCompoundButton::onInflate(instance);
+    QUniAndroidCompoundButton::onInflate(instance);
 }
 
 QT_END_NAMESPACE

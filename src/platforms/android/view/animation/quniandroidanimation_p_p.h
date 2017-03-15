@@ -54,23 +54,23 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAnimationPrivate : public QNativeAndroidContextualPrivate
+class QUniAndroidAnimationPrivate : public QUniAndroidContextualPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidAnimation)
+    Q_DECLARE_PUBLIC(QUniAndroidAnimation)
 
 public:
     void updateInterpolator();
 
-    QNativeAndroidOptional<int> resource;
-    QNativeAndroidOptional<int> duration;
-    QNativeAndroidOptional<bool> fillAfter;
-    QNativeAndroidOptional<bool> fillBefore;
-    QNativeAndroidOptional<bool> fillEnabled;
-    QNativeAndroidInterpolator *interpolator = nullptr;
-    QNativeAndroidOptional<int> repeatCount;
-    QNativeAndroidOptional<int> startOffset;
-    QNativeAndroidOptional<QNativeAndroidAnimation::RepeatMode> repeatMode;
-    QNativeAndroidOptional<QNativeAndroidAnimation::ZAdjustment> zAdjustment;
+    QUniAndroidOptional<int> resource;
+    QUniAndroidOptional<int> duration;
+    QUniAndroidOptional<bool> fillAfter;
+    QUniAndroidOptional<bool> fillBefore;
+    QUniAndroidOptional<bool> fillEnabled;
+    QUniAndroidInterpolator *interpolator = nullptr;
+    QUniAndroidOptional<int> repeatCount;
+    QUniAndroidOptional<int> startOffset;
+    QUniAndroidOptional<QUniAndroidAnimation::RepeatMode> repeatMode;
+    QUniAndroidOptional<QUniAndroidAnimation::ZAdjustment> zAdjustment;
 };
 
 QT_END_NAMESPACE

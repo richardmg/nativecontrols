@@ -45,29 +45,29 @@ int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
 
-    QNativeWindow window;
-    QNativeTabsPage tabsPage(&window);
-    QNativeTabsPageTab tab1(QStringLiteral("Tab 1"), &tabsPage);
-    QNativeTabsPageTab tab2(QStringLiteral("Tab 2"), &tabsPage);
+    QUniWindow window;
+    QUniTabsPage tabsPage(&window);
+    QUniTabsPageTab tab1(QStringLiteral("Tab 1"), &tabsPage);
+    QUniTabsPageTab tab2(QStringLiteral("Tab 2"), &tabsPage);
 
-    QNativeButton button(QStringLiteral("Click me"), &tab1);
+    QUniButton button(QStringLiteral("Click me"), &tab1);
     button.move(50, 100);
-    QObject::connect(&button, &QNativeButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
+    QObject::connect(&button, &QUniButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
 
-    QNativeTextField textField(&tab1);
+    QUniTextField textField(&tab1);
     textField.setPlaceholderText(QStringLiteral("TextField"));
     textField.move(button.left(), button.bottom() + 8);
 
-    QNativeView view(&tab1);
+    QUniView view(&tab1);
     view.setGeometry(textField.left(), textField.bottom() + 8, 200, 200);
 
-    QNativeButton button2("Button inside view", &view);
+    QUniButton button2("Button inside view", &view);
     button2.move(8, 0);
-    QObject::connect(&button2, &QNativeButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
+    QObject::connect(&button2, &QUniButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
 
-    QNativeButton buttonOnTab2(QStringLiteral("Button that moves"), &tab2);
+    QUniButton buttonOnTab2(QStringLiteral("Button that moves"), &tab2);
     buttonOnTab2.move(50, 100);
-    QObject::connect(&buttonOnTab2, &QNativeButton::clicked, [&buttonOnTab2](){
+    QObject::connect(&buttonOnTab2, &QUniButton::clicked, [&buttonOnTab2](){
         buttonOnTab2.setX(buttonOnTab2.x() + 10);
     });
 

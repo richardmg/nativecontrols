@@ -44,22 +44,22 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitControlPrivate;
+class QUniAppKitControlPrivate;
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitControl : public QNativeAppKitView, public virtual QNativePlatformControl
+class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitControl : public QUniAppKitView, public virtual QUniPlatformControl
 {
     Q_OBJECT
 
 public:
-    QNativeAppKitControl(QNativeAppKitBase *parent = nullptr);
-    virtual ~QNativeAppKitControl();
+    QUniAppKitControl(QUniAppKitBase *parent = nullptr);
+    virtual ~QUniAppKitControl();
 
 protected:
-    QNativeAppKitControl(QNativeAppKitControlPrivate &dd, QNativeAppKitBase *parent = nullptr);
+    QUniAppKitControl(QUniAppKitControlPrivate &dd, QUniAppKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeAppKitControl)
-    Q_DISABLE_COPY(QNativeAppKitControl)
+    Q_DECLARE_PRIVATE(QUniAppKitControl)
+    Q_DISABLE_COPY(QUniAppKitControl)
 };
 
 QT_END_NAMESPACE

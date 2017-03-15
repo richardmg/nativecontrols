@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidServicePrivate;
+class QUniAndroidServicePrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidService : public QNativeAndroidContextWrapper
+class Q_NATIVEANDROID_EXPORT QUniAndroidService : public QUniAndroidContextWrapper
 {
     Q_OBJECT
     Q_PROPERTY(bool sticky READ isSticky WRITE setSticky NOTIFY stickyChanged)
 
 public:
-    explicit QNativeAndroidService(QObject *parent = nullptr);
+    explicit QUniAndroidService(QObject *parent = nullptr);
 
     bool isSticky() const;
     void setSticky(bool sticky);
@@ -79,8 +79,8 @@ protected:
     void onInflate(QAndroidJniObject& instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidService)
-    Q_DECLARE_PRIVATE(QNativeAndroidService)
+    Q_DISABLE_COPY(QUniAndroidService)
+    Q_DECLARE_PRIVATE(QUniAndroidService)
 
     Q_PRIVATE_SLOT(d_func(), bool _q_startCommand(int flags, int startId))
 };

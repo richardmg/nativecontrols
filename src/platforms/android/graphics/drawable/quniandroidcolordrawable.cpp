@@ -40,33 +40,33 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidColorDrawablePrivate : public QNativeAndroidDrawablePrivate
+class QUniAndroidColorDrawablePrivate : public QUniAndroidDrawablePrivate
 {
 public:
     int color = 0;
 };
 
-QNativeAndroidColorDrawable::QNativeAndroidColorDrawable(QObject *parent)
-    : QNativeAndroidDrawable(*(new QNativeAndroidColorDrawablePrivate), parent)
+QUniAndroidColorDrawable::QUniAndroidColorDrawable(QObject *parent)
+    : QUniAndroidDrawable(*(new QUniAndroidColorDrawablePrivate), parent)
 {
 }
 
-QNativeAndroidColorDrawable::QNativeAndroidColorDrawable(int color, QObject *parent)
-    : QNativeAndroidDrawable(*(new QNativeAndroidColorDrawablePrivate), parent)
+QUniAndroidColorDrawable::QUniAndroidColorDrawable(int color, QObject *parent)
+    : QUniAndroidDrawable(*(new QUniAndroidColorDrawablePrivate), parent)
 {
-    Q_D(QNativeAndroidColorDrawable);
+    Q_D(QUniAndroidColorDrawable);
     d->color = color;
 }
 
-int QNativeAndroidColorDrawable::color() const
+int QUniAndroidColorDrawable::color() const
 {
-    Q_D(const QNativeAndroidColorDrawable);
+    Q_D(const QUniAndroidColorDrawable);
     return d->color;
 }
 
-void QNativeAndroidColorDrawable::setColor(int color)
+void QUniAndroidColorDrawable::setColor(int color)
 {
-    Q_D(QNativeAndroidColorDrawable);
+    Q_D(QUniAndroidColorDrawable);
     if (d->color == color)
         return;
 
@@ -75,15 +75,15 @@ void QNativeAndroidColorDrawable::setColor(int color)
     emit colorChanged();
 }
 
-QAndroidJniObject QNativeAndroidColorDrawable::onCreate()
+QAndroidJniObject QUniAndroidColorDrawable::onCreate()
 {
     return QAndroidJniObject("android/graphics/drawable/ColorDrawable");
 }
 
-void QNativeAndroidColorDrawable::onInflate(QAndroidJniObject &instance)
+void QUniAndroidColorDrawable::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidColorDrawable);
-    QNativeAndroidDrawable::onInflate(instance);
+    Q_D(QUniAndroidColorDrawable);
+    QUniAndroidDrawable::onInflate(instance);
 
     instance.callMethod<void>("setColor", "(I)V", d->color);
 }

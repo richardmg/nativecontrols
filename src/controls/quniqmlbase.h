@@ -43,24 +43,24 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeQmlBasePrivate;
+class QUniQmlBasePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeQmlBase : public QObject
+class Q_NATIVECONTROLS_EXPORT QUniQmlBase : public QObject
 {
     Q_OBJECT
-    Q_PRIVATE_PROPERTY(QNativeQmlBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
+    Q_PRIVATE_PROPERTY(QUniQmlBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
     Q_CLASSINFO("DefaultProperty", "data")
 
 public:
-    explicit QNativeQmlBase(QNativeQmlBase *parent = nullptr);
-    virtual ~QNativeQmlBase();
+    explicit QUniQmlBase(QUniQmlBase *parent = nullptr);
+    virtual ~QUniQmlBase();
 
 protected:
-    QNativeQmlBase(QNativeQmlBasePrivate &dd, QNativeQmlBase *parent = nullptr);
+    QUniQmlBase(QUniQmlBasePrivate &dd, QUniQmlBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeQmlBase)
-    Q_DISABLE_COPY(QNativeQmlBase)
+    Q_DECLARE_PRIVATE(QUniQmlBase)
+    Q_DISABLE_COPY(QUniQmlBase)
 };
 
 QT_END_NAMESPACE

@@ -45,39 +45,39 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidPopupMenuPrivate : public QNativeAndroidObjectPrivate
+class QUniAndroidPopupMenuPrivate : public QUniAndroidObjectPrivate
 {
 public:
-    QNativeAndroidView *anchor = nullptr;
-    QNativeAndroidOptional<int> gravity;
+    QUniAndroidView *anchor = nullptr;
+    QUniAndroidOptional<int> gravity;
     QAndroidJniObject listener;
 };
 
-QNativeAndroidPopupMenu::QNativeAndroidPopupMenu(QObject *parent)
-    : QNativeAndroidObject(*(new QNativeAndroidPopupMenuPrivate), parent)
+QUniAndroidPopupMenu::QUniAndroidPopupMenu(QObject *parent)
+    : QUniAndroidObject(*(new QUniAndroidPopupMenuPrivate), parent)
 {
 }
 
-QList<QNativeAndroidMenuItem *> QNativeAndroidPopupMenu::items() const
+QList<QUniAndroidMenuItem *> QUniAndroidPopupMenu::items() const
 {
-    QList<QNativeAndroidMenuItem *> lst;
+    QList<QUniAndroidMenuItem *> lst;
     foreach (QObject *child, children()) {
-        QNativeAndroidMenuItem *item = qobject_cast<QNativeAndroidMenuItem *>(child);
+        QUniAndroidMenuItem *item = qobject_cast<QUniAndroidMenuItem *>(child);
         if (item)
             lst += item;
     }
     return lst;
 }
 
-QNativeAndroidView *QNativeAndroidPopupMenu::anchor() const
+QUniAndroidView *QUniAndroidPopupMenu::anchor() const
 {
-    Q_D(const QNativeAndroidPopupMenu);
+    Q_D(const QUniAndroidPopupMenu);
     return d->anchor;
 }
 
-void QNativeAndroidPopupMenu::setAnchor(QNativeAndroidView *anchor)
+void QUniAndroidPopupMenu::setAnchor(QUniAndroidView *anchor)
 {
-    Q_D(QNativeAndroidPopupMenu);
+    Q_D(QUniAndroidPopupMenu);
     if (d->anchor == anchor)
         return;
 
@@ -85,17 +85,17 @@ void QNativeAndroidPopupMenu::setAnchor(QNativeAndroidView *anchor)
     emit anchorChanged();
 }
 
-int QNativeAndroidPopupMenu::gravity() const
+int QUniAndroidPopupMenu::gravity() const
 {
-    Q_D(const QNativeAndroidPopupMenu);
+    Q_D(const QUniAndroidPopupMenu);
     if (d->gravity.isNull())
         return 0; // TODO
     return d->gravity;
 }
 
-void QNativeAndroidPopupMenu::setGravity(int value)
+void QUniAndroidPopupMenu::setGravity(int value)
 {
-    Q_D(QNativeAndroidPopupMenu);
+    Q_D(QUniAndroidPopupMenu);
     if (value == gravity())
         return;
 
@@ -103,16 +103,16 @@ void QNativeAndroidPopupMenu::setGravity(int value)
     emit gravityChanged();
 }
 
-void QNativeAndroidPopupMenu::show()
+void QUniAndroidPopupMenu::show()
 {
-    Q_D(QNativeAndroidPopupMenu);
-    QNativeAndroidView *anchor = d->anchor ? d->anchor : qobject_cast<QNativeAndroidView *>(parent());
+    Q_D(QUniAndroidPopupMenu);
+    QUniAndroidView *anchor = d->anchor ? d->anchor : qobject_cast<QUniAndroidView *>(parent());
     if (!anchor) {
         qWarning() << "PopupMenu parent must be either anchored or in a view.";
         return;
     }
 
-    QNativeAndroidContext *context = anchor->context();
+    QUniAndroidContext *context = anchor->context();
     if (!context) {
         qWarning() << "PopupMenu is not ready - no context.";
         return;
@@ -135,7 +135,7 @@ void QNativeAndroidPopupMenu::show()
         inflate(popup);
 
         QAndroidJniObject menu = popup.callObjectMethod("getMenu", "()Landroid/view/Menu;");
-        foreach (QNativeAndroidMenuItem *item, items()) {
+        foreach (QUniAndroidMenuItem *item, items()) {
             QAndroidJniObject it = menu.callObjectMethod("add",
                                                          "(Ljava/lang/CharSequence;)Landroid/view/MenuItem;",
                                                          QAndroidJniObject::fromString(item->title()).object());
@@ -146,7 +146,7 @@ void QNativeAndroidPopupMenu::show()
     });
 }
 
-void QNativeAndroidPopupMenu::dismiss()
+void QUniAndroidPopupMenu::dismiss()
 {
     QtNativeAndroid::callVoidMethod(instance(), "dismiss");
 }

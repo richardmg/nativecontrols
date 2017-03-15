@@ -42,40 +42,40 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidViewGroup::QNativeAndroidViewGroup(QNativeAndroidContext *context)
-    : QNativeAndroidView(*(new QNativeAndroidViewGroupPrivate), context)
+QUniAndroidViewGroup::QUniAndroidViewGroup(QUniAndroidContext *context)
+    : QUniAndroidView(*(new QUniAndroidViewGroupPrivate), context)
 {
 }
 
-QNativeAndroidViewGroup::QNativeAndroidViewGroup(QNativeAndroidViewGroupPrivate &dd, QNativeAndroidContext *context)
-    : QNativeAndroidView(dd, context)
+QUniAndroidViewGroup::QUniAndroidViewGroup(QUniAndroidViewGroupPrivate &dd, QUniAndroidContext *context)
+    : QUniAndroidView(dd, context)
 {
 }
 
-QNativeAndroidLayoutParams *QNativeAndroidViewGroup::qmlAttachedProperties(QObject *object)
+QUniAndroidLayoutParams *QUniAndroidViewGroup::qmlAttachedProperties(QObject *object)
 {
-    QNativeAndroidView *view = qobject_cast<QNativeAndroidView*>(object);
+    QUniAndroidView *view = qobject_cast<QUniAndroidView*>(object);
     if (view)
-        return new QNativeAndroidLayoutParams(view);
+        return new QUniAndroidLayoutParams(view);
     return 0;
 }
 
-QAndroidJniObject QNativeAndroidViewGroup::onCreate()
+QAndroidJniObject QUniAndroidViewGroup::onCreate()
 {
     return QAndroidJniObject("android/view/ViewGroup",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidViewGroup::onInflate(QAndroidJniObject &instance)
+void QUniAndroidViewGroup::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidView::onInflate(instance);
+    QUniAndroidView::onInflate(instance);
 
-    foreach (QNativeAndroidView *child, childViews())
+    foreach (QUniAndroidView *child, childViews())
         instance.callMethod<void>("addView", "(Landroid/view/View;)V", child->instance().object());
 }
 
-void QNativeAndroidViewGroup::viewChange(ViewChange change, const ViewChangeData &data)
+void QUniAndroidViewGroup::viewChange(ViewChange change, const ViewChangeData &data)
 {
     Q_UNUSED(data);
     QAndroidJniObject group = instance();

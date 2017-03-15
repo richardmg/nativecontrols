@@ -43,54 +43,54 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitTabBarItemPrivate::QNativeUIKitTabBarItemPrivate(int version)
-    : QNativeUIKitBasePrivate(version)
+QUniUIKitTabBarItemPrivate::QUniUIKitTabBarItemPrivate(int version)
+    : QUniUIKitBasePrivate(version)
     , m_tabBarItem(nullptr)
 {
 }
 
-QNativeUIKitTabBarItemPrivate::~QNativeUIKitTabBarItemPrivate()
+QUniUIKitTabBarItemPrivate::~QUniUIKitTabBarItemPrivate()
 {
 }
 
-UITabBarItem *QNativeUIKitTabBarItemPrivate::tabBarItem()
+UITabBarItem *QUniUIKitTabBarItemPrivate::tabBarItem()
 {
     if (!m_tabBarItem)
         m_tabBarItem = [[UITabBarItem alloc] initWithTitle:@"" image:nil tag:1];
     return m_tabBarItem;
 }
 
-UITabBarItem *QNativeUIKitTabBarItem::uiTabBarItemHandle()
+UITabBarItem *QUniUIKitTabBarItem::uiTabBarItemHandle()
 {
     return d_func()->tabBarItem();
 }
 
-QNativeUIKitTabBarItem::QNativeUIKitTabBarItem(QNativeUIKitBase *parent)
-    : QNativeUIKitBase(*new QNativeUIKitTabBarItemPrivate(), parent)
+QUniUIKitTabBarItem::QUniUIKitTabBarItem(QUniUIKitBase *parent)
+    : QUniUIKitBase(*new QUniUIKitTabBarItemPrivate(), parent)
 {
 }
 
-QNativeUIKitTabBarItem::QNativeUIKitTabBarItem(const QString &title, QNativeUIKitBase *parent)
-    : QNativeUIKitBase(*new QNativeUIKitTabBarItemPrivate(), parent)
+QUniUIKitTabBarItem::QUniUIKitTabBarItem(const QString &title, QUniUIKitBase *parent)
+    : QUniUIKitBase(*new QUniUIKitTabBarItemPrivate(), parent)
 {
     setTitle(title);
 }
 
-QNativeUIKitTabBarItem::QNativeUIKitTabBarItem(QNativeUIKitTabBarItemPrivate &dd, QNativeUIKitBase *parent)
-    : QNativeUIKitBase(dd, parent)
+QUniUIKitTabBarItem::QUniUIKitTabBarItem(QUniUIKitTabBarItemPrivate &dd, QUniUIKitBase *parent)
+    : QUniUIKitBase(dd, parent)
 {
 }
 
-QNativeUIKitTabBarItem::~QNativeUIKitTabBarItem()
+QUniUIKitTabBarItem::~QUniUIKitTabBarItem()
 {
 }
 
-QString QNativeUIKitTabBarItem::title() const
+QString QUniUIKitTabBarItem::title() const
 {
-    return QString::fromNSString(const_cast<QNativeUIKitTabBarItem *>(this)->uiTabBarItemHandle().title);
+    return QString::fromNSString(const_cast<QUniUIKitTabBarItem *>(this)->uiTabBarItemHandle().title);
 }
 
-void QNativeUIKitTabBarItem::setTitle(const QString &title)
+void QUniUIKitTabBarItem::setTitle(const QString &title)
 {
     uiTabBarItemHandle().title = title.toNSString();
 }

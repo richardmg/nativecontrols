@@ -54,23 +54,23 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitTabViewItem;
-class QNativeAppKitViewController;
+class QUniAppKitTabViewItem;
+class QUniAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSTabViewItem);
 
-class QNativeAppKitTabViewItemPrivate : public QNativeAppKitBasePrivate
+class QUniAppKitTabViewItemPrivate : public QUniAppKitBasePrivate
 {
 public:
-    explicit QNativeAppKitTabViewItemPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitTabViewItemPrivate();
+    explicit QUniAppKitTabViewItemPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniAppKitTabViewItemPrivate();
 
     NSTabViewItem *tabViewItem();
 
-    Q_DECLARE_PUBLIC(QNativeAppKitTabViewItem)
+    Q_DECLARE_PUBLIC(QUniAppKitTabViewItem)
 
 private:
     NSTabViewItem *m_tabViewItem;
-    QNativeAppKitViewController *m_viewController;
+    QUniAppKitViewController *m_viewController;
 };
 
 QT_END_NAMESPACE

@@ -41,27 +41,27 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidArrayAdapterPrivate : public QNativeAndroidBaseAdapterPrivate
+class QUniAndroidArrayAdapterPrivate : public QUniAndroidBaseAdapterPrivate
 {
 public:
     int style = 17367043; // TODO: android.R.layout.simple_list_item_1
     QStringList array;
 };
 
-QNativeAndroidArrayAdapter::QNativeAndroidArrayAdapter(QObject *parent)
-    : QNativeAndroidBaseAdapter(*(new QNativeAndroidArrayAdapterPrivate), parent)
+QUniAndroidArrayAdapter::QUniAndroidArrayAdapter(QObject *parent)
+    : QUniAndroidBaseAdapter(*(new QUniAndroidArrayAdapterPrivate), parent)
 {
 }
 
-int QNativeAndroidArrayAdapter::style() const
+int QUniAndroidArrayAdapter::style() const
 {
-    Q_D(const QNativeAndroidArrayAdapter);
+    Q_D(const QUniAndroidArrayAdapter);
     return d->style;
 }
 
-void QNativeAndroidArrayAdapter::setStyle(int style)
+void QUniAndroidArrayAdapter::setStyle(int style)
 {
-    Q_D(QNativeAndroidArrayAdapter);
+    Q_D(QUniAndroidArrayAdapter);
     if (d->style == style)
         return;
 
@@ -69,15 +69,15 @@ void QNativeAndroidArrayAdapter::setStyle(int style)
     emit styleChanged();
 }
 
-QStringList QNativeAndroidArrayAdapter::array() const
+QStringList QUniAndroidArrayAdapter::array() const
 {
-    Q_D(const QNativeAndroidArrayAdapter);
+    Q_D(const QUniAndroidArrayAdapter);
     return d->array;
 }
 
-void QNativeAndroidArrayAdapter::setArray(const QStringList &array)
+void QUniAndroidArrayAdapter::setArray(const QStringList &array)
 {
-    Q_D(QNativeAndroidArrayAdapter);
+    Q_D(QUniAndroidArrayAdapter);
     if (d->array == array)
         return;
 
@@ -86,21 +86,21 @@ void QNativeAndroidArrayAdapter::setArray(const QStringList &array)
     emit arrayChanged();
 }
 
-int QNativeAndroidArrayAdapter::count() const
+int QUniAndroidArrayAdapter::count() const
 {
-    Q_D(const QNativeAndroidArrayAdapter);
+    Q_D(const QUniAndroidArrayAdapter);
     return d->array.count();
 }
 
-QString QNativeAndroidArrayAdapter::getItem(int position) const
+QString QUniAndroidArrayAdapter::getItem(int position) const
 {
-    Q_D(const QNativeAndroidArrayAdapter);
+    Q_D(const QUniAndroidArrayAdapter);
     return d->array.value(position);
 }
 
-void QNativeAndroidArrayAdapter::clear()
+void QUniAndroidArrayAdapter::clear()
 {
-    Q_D(QNativeAndroidArrayAdapter);
+    Q_D(QUniAndroidArrayAdapter);
     if (d->array.isEmpty())
         return;
 
@@ -109,19 +109,19 @@ void QNativeAndroidArrayAdapter::clear()
     emit arrayChanged();
 }
 
-QAndroidJniObject QNativeAndroidArrayAdapter::onCreate()
+QAndroidJniObject QUniAndroidArrayAdapter::onCreate()
 {
-    Q_D(QNativeAndroidArrayAdapter);
+    Q_D(QUniAndroidArrayAdapter);
     return QAndroidJniObject("android/widget/ArrayAdapter",
                              "(Landroid/content/Context;I)V",
                              ctx().object(),
                              d->style);
 }
 
-void QNativeAndroidArrayAdapter::onInflate(QAndroidJniObject &instance)
+void QUniAndroidArrayAdapter::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidArrayAdapter);
-    QNativeAndroidBaseAdapter::onInflate(instance);
+    Q_D(QUniAndroidArrayAdapter);
+    QUniAndroidBaseAdapter::onInflate(instance);
 
     foreach (const QString &str, d->array)
         instance.callMethod<void>("add", "(Ljava/lang/Object;)V", QAndroidJniObject::fromString(str).object());

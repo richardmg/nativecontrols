@@ -53,9 +53,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidTextViewPrivate;
+class QUniAndroidTextViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidTextView : public QNativeAndroidView
+class Q_NATIVEANDROID_EXPORT QUniAndroidTextView : public QUniAndroidView
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -66,7 +66,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidTextView : public QNativeAndroidView
     Q_PROPERTY(int inputType READ inputType WRITE setInputType NOTIFY inputTypeChanged)
 
 public:
-    explicit QNativeAndroidTextView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidTextView(QUniAndroidContext *context = nullptr);
 
     QString text() const;
     void setText(const QString &text);
@@ -95,14 +95,14 @@ Q_SIGNALS:
     void inputTypeChanged();
 
 protected:
-    QNativeAndroidTextView(QNativeAndroidTextViewPrivate &dd, QNativeAndroidContext *context = nullptr);
+    QUniAndroidTextView(QUniAndroidTextViewPrivate &dd, QUniAndroidContext *context = nullptr);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidTextView)
-    Q_DECLARE_PRIVATE(QNativeAndroidTextView)
+    Q_DISABLE_COPY(QUniAndroidTextView)
+    Q_DECLARE_PRIVATE(QUniAndroidTextView)
 };
 
 QT_END_NAMESPACE

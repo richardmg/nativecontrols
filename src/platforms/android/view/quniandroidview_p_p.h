@@ -54,24 +54,24 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidViewPrivate : public QNativeAndroidContextualPrivate
+class QUniAndroidViewPrivate : public QUniAndroidContextualPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidView)
+    Q_DECLARE_PUBLIC(QUniAndroidView)
 
 public:
-    static QNativeAndroidViewPrivate *get(QNativeAndroidView *view)
+    static QUniAndroidViewPrivate *get(QUniAndroidView *view)
     {
         return view->d_func();
     }
 
     void init();
 
-    QQmlListProperty<QNativeAndroidView> children();
+    QQmlListProperty<QUniAndroidView> children();
 
-    static void children_append(QQmlListProperty<QNativeAndroidView> *list, QNativeAndroidView *child);
-    static int children_count(QQmlListProperty<QNativeAndroidView> *list);
-    static QNativeAndroidView *children_at(QQmlListProperty<QNativeAndroidView> *list, int index);
-    static void children_clear(QQmlListProperty<QNativeAndroidView> *list);
+    static void children_append(QQmlListProperty<QUniAndroidView> *list, QUniAndroidView *child);
+    static int children_count(QQmlListProperty<QUniAndroidView> *list);
+    static QUniAndroidView *children_at(QQmlListProperty<QUniAndroidView> *list, int index);
+    static void children_clear(QQmlListProperty<QUniAndroidView> *list);
 
     void _q_updateBackground();
     void _q_updateAnimation();
@@ -80,40 +80,40 @@ public:
     void _q_updateGeometry(int top, int left, int right, int bottom);
 
     int id = 0;
-    QNativeAndroidView *parent = nullptr;
-    QList<QNativeAndroidView *> childViews;
-    QNativeAndroidDrawable *background = nullptr;
+    QUniAndroidView *parent = nullptr;
+    QList<QUniAndroidView *> childViews;
+    QUniAndroidDrawable *background = nullptr;
     int backgroundResource = 0;
-    QNativeAndroidAnimation *animation = nullptr;
+    QUniAndroidAnimation *animation = nullptr;
     bool polishing = false;
     bool visible = true;
 
     QAndroidJniObject listener;
 
-    QNativeAndroidLayoutParams *layoutParams = nullptr;
+    QUniAndroidLayoutParams *layoutParams = nullptr;
 
-    QNativeAndroidOptional<bool> focus;
-    QNativeAndroidOptional<int> top;
-    QNativeAndroidOptional<int> left;
-    QNativeAndroidOptional<int> right;
-    QNativeAndroidOptional<int> bottom;
-    QNativeAndroidOptional<int> padding;
-    QNativeAndroidOptional<int> paddingTop;
-    QNativeAndroidOptional<int> paddingLeft;
-    QNativeAndroidOptional<int> paddingRight;
-    QNativeAndroidOptional<int> paddingBottom;
-    QNativeAndroidOptional<qreal> alpha;
-    QNativeAndroidOptional<qreal> scaleX;
-    QNativeAndroidOptional<qreal> scaleY;
-    QNativeAndroidOptional<qreal> pivotX;
-    QNativeAndroidOptional<qreal> pivotY;
-    QNativeAndroidOptional<qreal> rotation;
-    QNativeAndroidOptional<qreal> rotationX;
-    QNativeAndroidOptional<qreal> rotationY;
-    QNativeAndroidOptional<qreal> translationX;
-    QNativeAndroidOptional<qreal> translationY;
-    QNativeAndroidOptional<qreal> translationZ;
-    QNativeAndroidOptional<qreal> elevation;
+    QUniAndroidOptional<bool> focus;
+    QUniAndroidOptional<int> top;
+    QUniAndroidOptional<int> left;
+    QUniAndroidOptional<int> right;
+    QUniAndroidOptional<int> bottom;
+    QUniAndroidOptional<int> padding;
+    QUniAndroidOptional<int> paddingTop;
+    QUniAndroidOptional<int> paddingLeft;
+    QUniAndroidOptional<int> paddingRight;
+    QUniAndroidOptional<int> paddingBottom;
+    QUniAndroidOptional<qreal> alpha;
+    QUniAndroidOptional<qreal> scaleX;
+    QUniAndroidOptional<qreal> scaleY;
+    QUniAndroidOptional<qreal> pivotX;
+    QUniAndroidOptional<qreal> pivotY;
+    QUniAndroidOptional<qreal> rotation;
+    QUniAndroidOptional<qreal> rotationX;
+    QUniAndroidOptional<qreal> rotationY;
+    QUniAndroidOptional<qreal> translationX;
+    QUniAndroidOptional<qreal> translationY;
+    QUniAndroidOptional<qreal> translationZ;
+    QUniAndroidOptional<qreal> elevation;
 };
 
 QT_END_NAMESPACE

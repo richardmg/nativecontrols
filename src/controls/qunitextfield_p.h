@@ -54,20 +54,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeTextField;
-class QNativePlatformTextField;
+class QUniTextField;
+class QUniPlatformTextField;
 
-class QNativeTextFieldPrivate : public QNativeControlPrivate
+class QUniTextFieldPrivate : public QUniControlPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeTextField)
+    Q_DECLARE_PUBLIC(QUniTextField)
 
 public:
-    explicit QNativeTextFieldPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeTextFieldPrivate();
+    explicit QUniTextFieldPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniTextFieldPrivate();
 
     void createPlatformTextField();
-    void setPlatformTextField(QNativePlatformTextField *platformTextField);
-    QNativePlatformTextField *m_platformTextField;
+    void setPlatformTextField(QUniPlatformTextField *platformTextField);
+    QUniPlatformTextField *m_platformTextField;
 };
 
 QT_END_NAMESPACE

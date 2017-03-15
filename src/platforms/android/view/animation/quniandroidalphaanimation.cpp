@@ -39,27 +39,27 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAlphaAnimationPrivate : public QNativeAndroidAnimationPrivate
+class QUniAndroidAlphaAnimationPrivate : public QUniAndroidAnimationPrivate
 {
 public:
     qreal fromAlpha = 0.0;
     qreal toAlpha = 0.0;
 };
 
-QNativeAndroidAlphaAnimation::QNativeAndroidAlphaAnimation(QObject *parent)
-    : QNativeAndroidAnimation(*(new QNativeAndroidAlphaAnimationPrivate), parent)
+QUniAndroidAlphaAnimation::QUniAndroidAlphaAnimation(QObject *parent)
+    : QUniAndroidAnimation(*(new QUniAndroidAlphaAnimationPrivate), parent)
 {
 }
 
-qreal QNativeAndroidAlphaAnimation::fromAlpha() const
+qreal QUniAndroidAlphaAnimation::fromAlpha() const
 {
-    Q_D(const QNativeAndroidAlphaAnimation);
+    Q_D(const QUniAndroidAlphaAnimation);
     return d->fromAlpha;
 }
 
-void QNativeAndroidAlphaAnimation::setFromAlpha(qreal alpha)
+void QUniAndroidAlphaAnimation::setFromAlpha(qreal alpha)
 {
-    Q_D(QNativeAndroidAlphaAnimation);
+    Q_D(QUniAndroidAlphaAnimation);
     if (qFuzzyCompare(d->fromAlpha, alpha))
         return;
 
@@ -67,15 +67,15 @@ void QNativeAndroidAlphaAnimation::setFromAlpha(qreal alpha)
     emit fromAlphaChanged();
 }
 
-qreal QNativeAndroidAlphaAnimation::toAlpha() const
+qreal QUniAndroidAlphaAnimation::toAlpha() const
 {
-    Q_D(const QNativeAndroidAlphaAnimation);
+    Q_D(const QUniAndroidAlphaAnimation);
     return d->toAlpha;
 }
 
-void QNativeAndroidAlphaAnimation::setToAlpha(qreal alpha)
+void QUniAndroidAlphaAnimation::setToAlpha(qreal alpha)
 {
-    Q_D(QNativeAndroidAlphaAnimation);
+    Q_D(QUniAndroidAlphaAnimation);
     if (qFuzzyCompare(d->toAlpha, alpha))
         return;
 
@@ -83,9 +83,9 @@ void QNativeAndroidAlphaAnimation::setToAlpha(qreal alpha)
     emit toAlphaChanged();
 }
 
-QAndroidJniObject QNativeAndroidAlphaAnimation::onCreate()
+QAndroidJniObject QUniAndroidAlphaAnimation::onCreate()
 {
-    Q_D(QNativeAndroidAlphaAnimation);
+    Q_D(QUniAndroidAlphaAnimation);
     return QAndroidJniObject("android/view/animation/AlphaAnimation",
                              "(FF)V",
                              d->fromAlpha, d->toAlpha);

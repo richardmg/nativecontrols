@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidCardView : public QNativeAndroidFrameLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidCardView : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidCardView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidCardView(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

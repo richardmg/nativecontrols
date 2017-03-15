@@ -42,14 +42,14 @@
 #include <QtNativeUIKitControls/quniuikitsearchfield.h>
 #include <QtNativeUIKitControls/private/quniuikitsearchfield_p.h>
 
-@interface QNativeUIKitSearchFieldDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QNativeUIKitSearchFieldPrivate) *_searchField;
+@interface QUniUIKitSearchFieldDelegate : NSObject {
+    QT_PREPEND_NAMESPACE(QUniUIKitSearchFieldPrivate) *_searchField;
 }
 @end
 
-@implementation QNativeUIKitSearchFieldDelegate
+@implementation QUniUIKitSearchFieldDelegate
 
--(id)initWithQNativeUIKitSearchFieldPrivate:(QT_PREPEND_NAMESPACE(QNativeUIKitSearchFieldPrivate) *)searchField
+-(id)initWithQUniUIKitSearchFieldPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitSearchFieldPrivate) *)searchField
 {
     self = [self init];
     if (self) {
@@ -63,29 +63,29 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitSearchFieldPrivate::QNativeUIKitSearchFieldPrivate(int version)
-    : QNativeUIKitControlPrivate(version)
+QUniUIKitSearchFieldPrivate::QUniUIKitSearchFieldPrivate(int version)
+    : QUniUIKitControlPrivate(version)
     , m_delegate(nullptr)
 {
 }
 
-QNativeUIKitSearchFieldPrivate::~QNativeUIKitSearchFieldPrivate()
+QUniUIKitSearchFieldPrivate::~QUniUIKitSearchFieldPrivate()
 {
     [m_delegate release];
 }
 
-void QNativeUIKitSearchFieldPrivate::connectSignals(QNativeBase *base)
+void QUniUIKitSearchFieldPrivate::connectSignals(QUniBase *base)
 {
-    Q_Q(QNativeUIKitSearchField);
-    QNativeUIKitControlPrivate::connectSignals(base);
-    const auto b = static_cast<QNativeSearchField *>(base);
-    q->connect(q, &QNativeUIKitSearchField::textChanged, b, &QNativeSearchField::textChanged);
-    q->connect(q, &QNativeUIKitSearchField::placeholderTextChanged, b, &QNativeSearchField::placeholderTextChanged);
+    Q_Q(QUniUIKitSearchField);
+    QUniUIKitControlPrivate::connectSignals(base);
+    const auto b = static_cast<QUniSearchField *>(base);
+    q->connect(q, &QUniUIKitSearchField::textChanged, b, &QUniSearchField::textChanged);
+    q->connect(q, &QUniUIKitSearchField::placeholderTextChanged, b, &QUniSearchField::placeholderTextChanged);
 }
 
-UIView *QNativeUIKitSearchFieldPrivate::createView()
+UIView *QUniUIKitSearchFieldPrivate::createView()
 {
-    m_delegate = [[QNativeUIKitSearchFieldDelegate alloc] initWithQNativeUIKitSearchFieldPrivate:this];
+    m_delegate = [[QUniUIKitSearchFieldDelegate alloc] initWithQUniUIKitSearchFieldPrivate:this];
 
     UISearchBar *uiSearchField = [[[UISearchBar alloc] init] autorelease];
     [uiSearchField sizeToFit];
@@ -93,39 +93,39 @@ UIView *QNativeUIKitSearchFieldPrivate::createView()
     return uiSearchField;
 }
 
-QNativeUIKitSearchField::QNativeUIKitSearchField(QNativeUIKitBase *parent)
-    : QNativeUIKitControl(*new QNativeUIKitSearchFieldPrivate(), parent)
+QUniUIKitSearchField::QUniUIKitSearchField(QUniUIKitBase *parent)
+    : QUniUIKitControl(*new QUniUIKitSearchFieldPrivate(), parent)
 {
 }
 
-QNativeUIKitSearchField::QNativeUIKitSearchField(const QString &text, QNativeUIKitBase *parent)
-    : QNativeUIKitControl(*new QNativeUIKitSearchFieldPrivate(), parent)
+QUniUIKitSearchField::QUniUIKitSearchField(const QString &text, QUniUIKitBase *parent)
+    : QUniUIKitControl(*new QUniUIKitSearchFieldPrivate(), parent)
 {
     setText(text);
 }
 
-QNativeUIKitSearchField::QNativeUIKitSearchField(QNativeUIKitSearchFieldPrivate &dd, QNativeUIKitBase *parent)
-    : QNativeUIKitControl(dd, parent)
+QUniUIKitSearchField::QUniUIKitSearchField(QUniUIKitSearchFieldPrivate &dd, QUniUIKitBase *parent)
+    : QUniUIKitControl(dd, parent)
 {
 }
 
-QNativeUIKitSearchField::~QNativeUIKitSearchField()
+QUniUIKitSearchField::~QUniUIKitSearchField()
 {
-    Q_D(QNativeUIKitSearchField);
+    Q_D(QUniUIKitSearchField);
     [d->m_delegate release];
 }
 
-UISearchBar *QNativeUIKitSearchField::uiSearchBarHandle()
+UISearchBar *QUniUIKitSearchField::uiSearchBarHandle()
 {
     return static_cast<UISearchBar *>(d_func()->view());
 }
 
-QString QNativeUIKitSearchField::text()
+QString QUniUIKitSearchField::text()
 {
     return QString::fromNSString(uiSearchBarHandle().text);
 }
 
-void QNativeUIKitSearchField::setText(const QString &newText)
+void QUniUIKitSearchField::setText(const QString &newText)
 {
     if (newText == text())
         return;
@@ -136,12 +136,12 @@ void QNativeUIKitSearchField::setText(const QString &newText)
     emit textChanged(newText);
 }
 
-QString QNativeUIKitSearchField::placeholderText()
+QString QUniUIKitSearchField::placeholderText()
 {
     return QString::fromNSString(uiSearchBarHandle().placeholder);
 }
 
-void QNativeUIKitSearchField::setPlaceholderText(const QString &newPlaceholderText)
+void QUniUIKitSearchField::setPlaceholderText(const QString &newPlaceholderText)
 {
     if (newPlaceholderText == placeholderText())
         return;

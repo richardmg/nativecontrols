@@ -54,14 +54,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitView;
+class QUniUIKitView;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
 
-class QNativeUIKitViewPrivate : public QNativeUIKitBasePrivate
+class QUniUIKitViewPrivate : public QUniUIKitBasePrivate
 {
 public:
-    explicit QNativeUIKitViewPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitViewPrivate();
+    explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitViewPrivate();
 
     UIView *view();
     UIView *view() const;
@@ -71,13 +71,13 @@ public:
     void setAlignmentRect(CGRect rect);
     void setGeometry(const QRectF &rect);
 
-    virtual void connectSignals(QNativeBase *base) override;
+    virtual void connectSignals(QUniBase *base) override;
     virtual void updateLayout(bool recursive);
 
     void initConnections();
     void updateImplicitSize();
 
-    Q_DECLARE_PUBLIC(QNativeUIKitView)
+    Q_DECLARE_PUBLIC(QUniUIKitView)
 
 protected:
     // Attributes to keep track of explicit

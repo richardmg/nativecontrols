@@ -39,26 +39,26 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidButton::QNativeAndroidButton(QNativeAndroidContext *context)
-    : QNativeAndroidTextView(*(new QNativeAndroidButtonPrivate), context)
+QUniAndroidButton::QUniAndroidButton(QUniAndroidContext *context)
+    : QUniAndroidTextView(*(new QUniAndroidButtonPrivate), context)
 {
 }
 
-QNativeAndroidButton::QNativeAndroidButton(QNativeAndroidButtonPrivate &dd, QNativeAndroidContext *context)
-    : QNativeAndroidTextView(dd, context)
+QUniAndroidButton::QUniAndroidButton(QUniAndroidButtonPrivate &dd, QUniAndroidContext *context)
+    : QUniAndroidTextView(dd, context)
 {
 }
 
-QAndroidJniObject QNativeAndroidButton::onCreate()
+QAndroidJniObject QUniAndroidButton::onCreate()
 {
     return QAndroidJniObject("android/widget/Button",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidButton::onInflate(QAndroidJniObject &instance)
+void QUniAndroidButton::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidTextView::onInflate(instance);
+    QUniAndroidTextView::onInflate(instance);
 }
 
 QT_END_NAMESPACE

@@ -40,28 +40,28 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAnticipateInterpolatorPrivate : public QNativeAndroidInterpolatorPrivate
+class QUniAndroidAnticipateInterpolatorPrivate : public QUniAndroidInterpolatorPrivate
 {
 public:
-    QNativeAndroidOptional<qreal> tension;
+    QUniAndroidOptional<qreal> tension;
 };
 
-QNativeAndroidAnticipateInterpolator::QNativeAndroidAnticipateInterpolator(QObject *parent)
-    : QNativeAndroidInterpolator(*(new QNativeAndroidAnticipateInterpolatorPrivate), parent)
+QUniAndroidAnticipateInterpolator::QUniAndroidAnticipateInterpolator(QObject *parent)
+    : QUniAndroidInterpolator(*(new QUniAndroidAnticipateInterpolatorPrivate), parent)
 {
 }
 
-qreal QNativeAndroidAnticipateInterpolator::tension() const
+qreal QUniAndroidAnticipateInterpolator::tension() const
 {
-    Q_D(const QNativeAndroidAnticipateInterpolator);
+    Q_D(const QUniAndroidAnticipateInterpolator);
     if (d->tension.isNull())
         return 1.0;
     return d->tension;
 }
 
-void QNativeAndroidAnticipateInterpolator::setTension(qreal tension)
+void QUniAndroidAnticipateInterpolator::setTension(qreal tension)
 {
-    Q_D(QNativeAndroidAnticipateInterpolator);
+    Q_D(QUniAndroidAnticipateInterpolator);
     if (!d->tension.isNull() && qFuzzyCompare(d->tension, tension))
         return;
 
@@ -69,9 +69,9 @@ void QNativeAndroidAnticipateInterpolator::setTension(qreal tension)
     emit tensionChanged();
 }
 
-QAndroidJniObject QNativeAndroidAnticipateInterpolator::onCreate()
+QAndroidJniObject QUniAndroidAnticipateInterpolator::onCreate()
 {
-    Q_D(QNativeAndroidAnticipateInterpolator);
+    Q_D(QUniAndroidAnticipateInterpolator);
     if (d->tension.isNull())
         return QAndroidJniObject("android/view/animation/AnticipateInterpolator");
 

@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidAccelerateDecelerateInterpolator : public QNativeAndroidInterpolator
+class Q_NATIVEANDROID_EXPORT QUniAndroidAccelerateDecelerateInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidAccelerateDecelerateInterpolator(QObject *parent = nullptr);
+    explicit QUniAndroidAccelerateDecelerateInterpolator(QObject *parent = nullptr);
 
 Q_SIGNALS:
 

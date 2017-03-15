@@ -52,10 +52,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidInterpolator;
-class QNativeAndroidAnimationPrivate;
+class QUniAndroidInterpolator;
+class QUniAndroidAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidAnimation : public QNativeAndroidContextual
+class Q_NATIVEANDROID_EXPORT QUniAndroidAnimation : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(int resource READ resource WRITE setResource NOTIFY resourceChanged)
@@ -63,7 +63,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidAnimation : public QNativeAndroidCont
     Q_PROPERTY(bool fillAfter READ fillAfter WRITE setFillAfter NOTIFY fillAfterChanged)
     Q_PROPERTY(bool fillBefore READ fillBefore WRITE setFillBefore NOTIFY fillBeforeChanged)
     Q_PROPERTY(bool fillEnabled READ fillEnabled WRITE setFillEnabled NOTIFY fillEnabledChanged)
-    Q_PROPERTY(QNativeAndroidInterpolator *interpolator READ interpolator WRITE setInterpolator NOTIFY interpolatorChanged)
+    Q_PROPERTY(QUniAndroidInterpolator *interpolator READ interpolator WRITE setInterpolator NOTIFY interpolatorChanged)
     Q_PROPERTY(int repeatCount READ repeatCount WRITE setRepeatCount NOTIFY repeatCountChanged)
     Q_PROPERTY(RepeatMode repeatMode READ repeatMode WRITE setRepeatMode NOTIFY repeatModeChanged)
     Q_PROPERTY(int startOffset READ startOffset WRITE setStartOffset NOTIFY startOffsetChanged)
@@ -71,7 +71,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidAnimation : public QNativeAndroidCont
     Q_ENUMS(RepeatMode ZAdjustment Infinity Relation)
 
 public:
-    explicit QNativeAndroidAnimation(QObject *parent = nullptr);
+    explicit QUniAndroidAnimation(QObject *parent = nullptr);
 
     int resource() const;
     void setResource(int resource);
@@ -98,8 +98,8 @@ public:
     bool fillEnabled() const;
     void setFillEnabled(bool enabled);
 
-    QNativeAndroidInterpolator *interpolator() const;
-    void setInterpolator(QNativeAndroidInterpolator *interpolator);
+    QUniAndroidInterpolator *interpolator() const;
+    void setInterpolator(QUniAndroidInterpolator *interpolator);
 
     int repeatCount() const;
     void setRepeatCount(int count);
@@ -142,7 +142,7 @@ Q_SIGNALS:
     void zAdjustmentChanged();
 
 protected:
-    QNativeAndroidAnimation(QNativeAndroidAnimationPrivate &dd, QObject *parent = nullptr);
+    QUniAndroidAnimation(QUniAndroidAnimationPrivate &dd, QObject *parent = nullptr);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
@@ -150,8 +150,8 @@ protected:
     void objectChange(ObjectChange change) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidAnimation)
-    Q_DECLARE_PRIVATE(QNativeAndroidAnimation)
+    Q_DISABLE_COPY(QUniAndroidAnimation)
+    Q_DECLARE_PRIVATE(QUniAndroidAnimation)
 };
 
 QT_END_NAMESPACE

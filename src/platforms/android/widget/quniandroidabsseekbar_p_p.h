@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAbsSeekBarPrivate : public QNativeAndroidProgressBarPrivate
+class QUniAndroidAbsSeekBarPrivate : public QUniAndroidProgressBarPrivate
 {
 public:
 };

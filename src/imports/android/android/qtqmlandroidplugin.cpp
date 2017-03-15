@@ -52,7 +52,7 @@ public:
 
 void QtQmlAndroidPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterSingletonType<QNativeAndroidR>(uri, 0, 21, "R", QNativeAndroidR::provider);
+    qmlRegisterSingletonType<QUniAndroidR>(uri, 0, 21, "R", QUniAndroidR::provider);
 }
 
 QT_END_NAMESPACE

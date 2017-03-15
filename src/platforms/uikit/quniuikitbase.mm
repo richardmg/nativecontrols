@@ -45,46 +45,46 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitBasePrivate::QNativeUIKitBasePrivate(int version)
-    : QNativeUIKitQmlBasePrivate(version)
+QUniUIKitBasePrivate::QUniUIKitBasePrivate(int version)
+    : QUniUIKitQmlBasePrivate(version)
 {
 }
 
-QNativeUIKitBasePrivate::~QNativeUIKitBasePrivate()
+QUniUIKitBasePrivate::~QUniUIKitBasePrivate()
 {
 }
 
-QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBase *parent)
-    :  QNativeUIKitQmlBase(*new QNativeUIKitBasePrivate(), parent)
+QUniUIKitBase::QUniUIKitBase(QUniUIKitBase *parent)
+    :  QUniUIKitQmlBase(*new QUniUIKitBasePrivate(), parent)
 {
 }
 
-QNativeUIKitBase::QNativeUIKitBase(QNativeUIKitBasePrivate &dd, QNativeUIKitBase *parent)
-    :  QNativeUIKitQmlBase(dd, parent)
+QUniUIKitBase::QUniUIKitBase(QUniUIKitBasePrivate &dd, QUniUIKitBase *parent)
+    :  QUniUIKitQmlBase(dd, parent)
 {
 }
 
-QNativeUIKitBase::~QNativeUIKitBase()
+QUniUIKitBase::~QUniUIKitBase()
 {
 }
 
-void QNativeUIKitBase::setParent(QNativeUIKitBase *parentBase)
+void QUniUIKitBase::setParent(QUniUIKitBase *parentBase)
 {
     if (parentBase == parent())
         return;
 
-    QNativeUIKitQmlBase::setParent(parentBase);
+    QUniUIKitQmlBase::setParent(parentBase);
     emit parentChanged(parentBase);
 }
 
-QNativeUIKitBase *QNativeUIKitBase::parentBase()
+QUniUIKitBase *QUniUIKitBase::parentBase()
 {
-    return qobject_cast<QNativeUIKitBase *>(parent());
+    return qobject_cast<QUniUIKitBase *>(parent());
 }
 
-void QNativeUIKitBase::setPlatformParent(QNativePlatformBase *parent)
+void QUniUIKitBase::setPlatformParent(QUniPlatformBase *parent)
 {
-    setParent(dynamic_cast<QNativeUIKitBase *>(parent));
+    setParent(dynamic_cast<QUniUIKitBase *>(parent));
 }
 
 #include "moc_quniuikitbase.cpp"

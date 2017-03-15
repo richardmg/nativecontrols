@@ -42,17 +42,17 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeTabsPageTabPrivate;
+class QUniTabsPageTabPrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeTabsPageTab : public QNativeBase
+class Q_NATIVECONTROLS_EXPORT QUniTabsPageTab : public QUniBase
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
 
 public:
-    explicit QNativeTabsPageTab(QNativeBase *parent = nullptr);
-    explicit QNativeTabsPageTab(const QString &title, QNativeBase *parent = nullptr);
-    virtual ~QNativeTabsPageTab();
+    explicit QUniTabsPageTab(QUniBase *parent = nullptr);
+    explicit QUniTabsPageTab(const QString &title, QUniBase *parent = nullptr);
+    virtual ~QUniTabsPageTab();
 
     QString title() const;
     void setTitle(const QString &title);
@@ -61,11 +61,11 @@ Q_SIGNALS:
     void titleChanged(const QString &title);
 
 protected:
-    QNativeTabsPageTab(QNativeTabsPageTabPrivate &dd, QNativeBase *parent = nullptr);
+    QUniTabsPageTab(QUniTabsPageTabPrivate &dd, QUniBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeTabsPageTab)
-    Q_DISABLE_COPY(QNativeTabsPageTab)
+    Q_DECLARE_PRIVATE(QUniTabsPageTab)
+    Q_DISABLE_COPY(QUniTabsPageTab)
 };
 
 QT_END_NAMESPACE

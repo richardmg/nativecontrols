@@ -40,29 +40,29 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidLinearLayoutParamsPrivate : public QNativeAndroidMarginLayoutParamsPrivate
+class QUniAndroidLinearLayoutParamsPrivate : public QUniAndroidMarginLayoutParamsPrivate
 {
 public:
-    QNativeAndroidOptional<int> gravity;
-    QNativeAndroidOptional<qreal> weight;
+    QUniAndroidOptional<int> gravity;
+    QUniAndroidOptional<qreal> weight;
 };
 
-QNativeAndroidLinearLayoutParams::QNativeAndroidLinearLayoutParams(QNativeAndroidView *view)
-    : QNativeAndroidMarginLayoutParams(*(new QNativeAndroidLinearLayoutParamsPrivate), view)
+QUniAndroidLinearLayoutParams::QUniAndroidLinearLayoutParams(QUniAndroidView *view)
+    : QUniAndroidMarginLayoutParams(*(new QUniAndroidLinearLayoutParamsPrivate), view)
 {
 }
 
-int QNativeAndroidLinearLayoutParams::gravity() const
+int QUniAndroidLinearLayoutParams::gravity() const
 {
-    Q_D(const QNativeAndroidLinearLayoutParams);
+    Q_D(const QUniAndroidLinearLayoutParams);
     if (d->gravity.isNull())
         return 0; // TODO
     return d->gravity;
 }
 
-void QNativeAndroidLinearLayoutParams::setGravity(int value)
+void QUniAndroidLinearLayoutParams::setGravity(int value)
 {
-    Q_D(QNativeAndroidLinearLayoutParams);
+    Q_D(QUniAndroidLinearLayoutParams);
     if (value == gravity())
         return;
 
@@ -71,17 +71,17 @@ void QNativeAndroidLinearLayoutParams::setGravity(int value)
     emit gravityChanged();
 }
 
-qreal QNativeAndroidLinearLayoutParams::weight() const
+qreal QUniAndroidLinearLayoutParams::weight() const
 {
-    Q_D(const QNativeAndroidLinearLayoutParams);
+    Q_D(const QUniAndroidLinearLayoutParams);
     if (d->weight.isNull())
         return 0.0; // TODO
     return d->weight;
 }
 
-void QNativeAndroidLinearLayoutParams::setWeight(qreal value)
+void QUniAndroidLinearLayoutParams::setWeight(qreal value)
 {
-    Q_D(QNativeAndroidLinearLayoutParams);
+    Q_D(QUniAndroidLinearLayoutParams);
     if (value == weight())
         return;
 
@@ -90,17 +90,17 @@ void QNativeAndroidLinearLayoutParams::setWeight(qreal value)
     emit weightChanged();
 }
 
-QAndroidJniObject QNativeAndroidLinearLayoutParams::onCreate()
+QAndroidJniObject QUniAndroidLinearLayoutParams::onCreate()
 {
     return QAndroidJniObject("android/widget/LinearLayout$LayoutParams",
                              "(II)V",
                              MATCH_PARENT, MATCH_PARENT);
 }
 
-void QNativeAndroidLinearLayoutParams::onInflate(QAndroidJniObject &instance)
+void QUniAndroidLinearLayoutParams::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidLinearLayoutParams);
-    QNativeAndroidMarginLayoutParams::onInflate(instance);
+    Q_D(QUniAndroidLinearLayoutParams);
+    QUniAndroidMarginLayoutParams::onInflate(instance);
 
     if (!d->gravity.isNull())
         instance.setField<jint>("gravity", d->gravity);

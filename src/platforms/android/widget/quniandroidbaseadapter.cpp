@@ -39,24 +39,24 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidBaseAdapter::QNativeAndroidBaseAdapter(QObject *parent)
-    : QNativeAndroidContextual(*(new QNativeAndroidBaseAdapterPrivate), parent)
+QUniAndroidBaseAdapter::QUniAndroidBaseAdapter(QObject *parent)
+    : QUniAndroidContextual(*(new QUniAndroidBaseAdapterPrivate), parent)
 {
 }
 
-QNativeAndroidBaseAdapter::QNativeAndroidBaseAdapter(QNativeAndroidBaseAdapterPrivate &dd, QObject *parent)
-    : QNativeAndroidContextual(dd, parent)
+QUniAndroidBaseAdapter::QUniAndroidBaseAdapter(QUniAndroidBaseAdapterPrivate &dd, QObject *parent)
+    : QUniAndroidContextual(dd, parent)
 {
 }
 
-QAndroidJniObject QNativeAndroidBaseAdapter::onCreate()
+QAndroidJniObject QUniAndroidBaseAdapter::onCreate()
 {
     return QAndroidJniObject("android/widget/BaseAdapter");
 }
 
-void QNativeAndroidBaseAdapter::onInflate(QAndroidJniObject &instance)
+void QUniAndroidBaseAdapter::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidContextual::onInflate(instance);
+    QUniAndroidContextual::onInflate(instance);
 }
 
 QT_END_NAMESPACE

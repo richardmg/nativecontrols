@@ -52,14 +52,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidTabHostPrivate;
+class QUniAndroidTabHostPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidTabHost : public QNativeAndroidFrameLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidTabHost : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidTabHost(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidTabHost(QUniAndroidContext *context = nullptr);
 
 Q_SIGNALS:
     void tabChanged(const QString &tabId);
@@ -69,8 +69,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidTabHost)
-    Q_DECLARE_PRIVATE(QNativeAndroidTabHost)
+    Q_DISABLE_COPY(QUniAndroidTabHost)
+    Q_DECLARE_PRIVATE(QUniAndroidTabHost)
 };
 
 QT_END_NAMESPACE

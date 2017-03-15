@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidButtonPrivate : public QNativeAndroidTextViewPrivate
+class QUniAndroidButtonPrivate : public QUniAndroidTextViewPrivate
 {
 public:
 };

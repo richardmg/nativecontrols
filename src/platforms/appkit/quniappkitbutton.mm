@@ -42,14 +42,14 @@
 #include <QtNativeAppKitControls/quniappkitbutton.h>
 #include <QtNativeAppKitControls/private/quniappkitbutton_p.h>
 
-@interface QNativeAppKitButtonDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QNativeAppKitButtonPrivate) *_button;
+@interface QUniAppKitButtonDelegate : NSObject {
+    QT_PREPEND_NAMESPACE(QUniAppKitButtonPrivate) *_button;
 }
 @end
 
-@implementation QNativeAppKitButtonDelegate
+@implementation QUniAppKitButtonDelegate
 
--(id)initWithQNativeAppKitButtonPrivate:(QT_PREPEND_NAMESPACE(QNativeAppKitButtonPrivate) *)button
+-(id)initWithQUniAppKitButtonPrivate:(QT_PREPEND_NAMESPACE(QUniAppKitButtonPrivate) *)button
 {
     self = [self init];
     if (self) {
@@ -68,28 +68,28 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAppKitButtonPrivate::QNativeAppKitButtonPrivate(int version)
-    : QNativeAppKitControlPrivate(version)
+QUniAppKitButtonPrivate::QUniAppKitButtonPrivate(int version)
+    : QUniAppKitControlPrivate(version)
     , m_delegate(nullptr)
 {
 }
 
-QNativeAppKitButtonPrivate::~QNativeAppKitButtonPrivate()
+QUniAppKitButtonPrivate::~QUniAppKitButtonPrivate()
 {
 }
 
-void QNativeAppKitButtonPrivate::connectSignals(QNativeBase *base)
+void QUniAppKitButtonPrivate::connectSignals(QUniBase *base)
 {
-    Q_Q(QNativeAppKitButton);
-    QNativeAppKitControlPrivate::connectSignals(base);
-    const auto b = static_cast<QNativeButton *>(base);
-    q->connect(q, &QNativeAppKitButton::textChanged, b, &QNativeButton::textChanged);
-    q->connect(q, &QNativeAppKitButton::clicked, b, &QNativeButton::clicked);
+    Q_Q(QUniAppKitButton);
+    QUniAppKitControlPrivate::connectSignals(base);
+    const auto b = static_cast<QUniButton *>(base);
+    q->connect(q, &QUniAppKitButton::textChanged, b, &QUniButton::textChanged);
+    q->connect(q, &QUniAppKitButton::clicked, b, &QUniButton::clicked);
 }
 
-NSView *QNativeAppKitButtonPrivate::createView()
+NSView *QUniAppKitButtonPrivate::createView()
 {
-    m_delegate = [[QNativeAppKitButtonDelegate alloc] initWithQNativeAppKitButtonPrivate:this];
+    m_delegate = [[QUniAppKitButtonDelegate alloc] initWithQUniAppKitButtonPrivate:this];
 
     NSButton *nsButton = [[[NSButton alloc] init] autorelease];
     nsButton.bezelStyle = NSRoundedBezelStyle;
@@ -100,39 +100,39 @@ NSView *QNativeAppKitButtonPrivate::createView()
     return nsButton;
 }
 
-QNativeAppKitButton::QNativeAppKitButton(QNativeAppKitBase *parent)
-    : QNativeAppKitControl(*new QNativeAppKitButtonPrivate(), parent)
+QUniAppKitButton::QUniAppKitButton(QUniAppKitBase *parent)
+    : QUniAppKitControl(*new QUniAppKitButtonPrivate(), parent)
 {
 }
 
-QNativeAppKitButton::QNativeAppKitButton(const QString &text, QNativeAppKitBase *parent)
-    : QNativeAppKitControl(*new QNativeAppKitButtonPrivate(), parent)
+QUniAppKitButton::QUniAppKitButton(const QString &text, QUniAppKitBase *parent)
+    : QUniAppKitControl(*new QUniAppKitButtonPrivate(), parent)
 {
     setText(text);
 }
 
-QNativeAppKitButton::QNativeAppKitButton(QNativeAppKitButtonPrivate &dd, QNativeAppKitBase *parent)
-    : QNativeAppKitControl(dd, parent)
+QUniAppKitButton::QUniAppKitButton(QUniAppKitButtonPrivate &dd, QUniAppKitBase *parent)
+    : QUniAppKitControl(dd, parent)
 {
 }
 
-QNativeAppKitButton::~QNativeAppKitButton()
+QUniAppKitButton::~QUniAppKitButton()
 {
-    Q_D(QNativeAppKitButton);
+    Q_D(QUniAppKitButton);
     [d->m_delegate release];
 }
 
-NSButton *QNativeAppKitButton::nsButtonHandle()
+NSButton *QUniAppKitButton::nsButtonHandle()
 {
     return static_cast<NSButton *>(d_func()->view());
 }
 
-QString QNativeAppKitButton::text()
+QString QUniAppKitButton::text()
 {
     return QString::fromNSString(nsButtonHandle().title);
 }
 
-void QNativeAppKitButton::setText(const QString &newText)
+void QUniAppKitButton::setText(const QString &newText)
 {
     if (newText == text())
         return;

@@ -52,7 +52,7 @@ public:
 
 void QtQmlAndroidGraphicsPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterSingletonType<QNativeAndroidColor>(uri, 0, 21, "Color", QNativeAndroidColor::provider);
+    qmlRegisterSingletonType<QUniAndroidColor>(uri, 0, 21, "Color", QUniAndroidColor::provider);
 }
 
 QT_END_NAMESPACE

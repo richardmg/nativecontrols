@@ -44,9 +44,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitViewPrivate;
+class QUniAppKitViewPrivate;
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitView : public QNativeAppKitBase, public virtual QNativePlatformView
+class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitView : public QUniAppKitBase, public virtual QUniPlatformView
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
@@ -62,8 +62,8 @@ class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitView : public QNativeAppKitBase
     Q_PROPERTY(qreal implicitHeight READ implicitHeight WRITE setImplicitHeight NOTIFY implicitHeightChanged FINAL)
 
 public:
-    QNativeAppKitView(QNativeAppKitBase *parent = nullptr);
-    virtual ~QNativeAppKitView();
+    QUniAppKitView(QUniAppKitBase *parent = nullptr);
+    virtual ~QUniAppKitView();
 
     virtual bool visible() const override;
     virtual void setVisible(bool visible) override;
@@ -105,7 +105,7 @@ public:
     qreal implicitHeight() const;
     void setImplicitHeight(qreal height);
 
-    QNativeAppKitView *parentView();
+    QUniAppKitView *parentView();
 
     bool setNativeParent(QObject *parent) override;
     bool setNativeParent(const QByteArray &type, void *parent) override;
@@ -128,12 +128,12 @@ Q_SIGNALS:
     void implicitHeightChanged(qreal h);
 
 protected:
-    QNativeAppKitView(QNativeAppKitViewPrivate &dd, QNativeAppKitBase *parent = nullptr);
+    QUniAppKitView(QUniAppKitViewPrivate &dd, QUniAppKitBase *parent = nullptr);
     void childEvent(QChildEvent *event) override;
 
 private:
-    Q_DECLARE_PRIVATE(QNativeAppKitView)
-    Q_DISABLE_COPY(QNativeAppKitView)
+    Q_DECLARE_PRIVATE(QUniAppKitView)
+    Q_DISABLE_COPY(QUniAppKitView)
 };
 
 QT_END_NAMESPACE

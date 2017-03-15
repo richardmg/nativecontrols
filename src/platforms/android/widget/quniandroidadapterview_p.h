@@ -52,19 +52,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidBaseAdapter;
-class QNativeAndroidAdapterViewPrivate;
+class QUniAndroidBaseAdapter;
+class QUniAndroidAdapterViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidAdapterView : public QNativeAndroidViewGroup
+class Q_NATIVEANDROID_EXPORT QUniAndroidAdapterView : public QUniAndroidViewGroup
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAndroidBaseAdapter *adapter READ adapter WRITE setAdapter NOTIFY adapterChanged) // TODO: Adapter
+    Q_PROPERTY(QUniAndroidBaseAdapter *adapter READ adapter WRITE setAdapter NOTIFY adapterChanged) // TODO: Adapter
 
 public:
-    explicit QNativeAndroidAdapterView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidAdapterView(QUniAndroidContext *context = nullptr);
 
-    QNativeAndroidBaseAdapter *adapter() const;
-    void setAdapter(QNativeAndroidBaseAdapter *adapter);
+    QUniAndroidBaseAdapter *adapter() const;
+    void setAdapter(QUniAndroidBaseAdapter *adapter);
 
 public Q_SLOTS:
     void setSelection(int position);
@@ -80,8 +80,8 @@ protected:
     void objectChange(ObjectChange change) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidAdapterView)
-    Q_DECLARE_PRIVATE(QNativeAndroidAdapterView)
+    Q_DISABLE_COPY(QUniAndroidAdapterView)
+    Q_DECLARE_PRIVATE(QUniAndroidAdapterView)
 };
 
 QT_END_NAMESPACE

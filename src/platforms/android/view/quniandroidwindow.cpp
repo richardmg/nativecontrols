@@ -42,29 +42,29 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidWindowPrivate : public QNativeAndroidContextualPrivate
+class QUniAndroidWindowPrivate : public QUniAndroidContextualPrivate
 {
 public:
-    QNativeAndroidOptional<int> statusBarColor;
+    QUniAndroidOptional<int> statusBarColor;
 };
 
-QNativeAndroidWindow::QNativeAndroidWindow(QNativeAndroidContext *context)
-    : QNativeAndroidContextual(*(new QNativeAndroidWindowPrivate), context)
+QUniAndroidWindow::QUniAndroidWindow(QUniAndroidContext *context)
+    : QUniAndroidContextual(*(new QUniAndroidWindowPrivate), context)
 {
     setContext(context);
 }
 
-int QNativeAndroidWindow::statusBarColor() const
+int QUniAndroidWindow::statusBarColor() const
 {
-    Q_D(const QNativeAndroidWindow);
+    Q_D(const QUniAndroidWindow);
     if (d->statusBarColor.isNull())
         return 0; // TODO
     return d->statusBarColor;
 }
 
-void QNativeAndroidWindow::setStatusBarColor(int color)
+void QUniAndroidWindow::setStatusBarColor(int color)
 {
-    Q_D(QNativeAndroidWindow);
+    Q_D(QUniAndroidWindow);
     if (!d->statusBarColor.isNull() && d->statusBarColor == color)
         return;
 
@@ -73,9 +73,9 @@ void QNativeAndroidWindow::setStatusBarColor(int color)
     emit statusBarColorChanged();
 }
 
-void QNativeAndroidWindow::onInflate(QAndroidJniObject &instance)
+void QUniAndroidWindow::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidWindow);
+    Q_D(QUniAndroidWindow);
     if (!d->statusBarColor.isNull()) {
         // TODO: WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
         instance.callMethod<void>("addFlags", "(I)V", 0x80000000);

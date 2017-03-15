@@ -38,12 +38,12 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidLinearInterpolator::QNativeAndroidLinearInterpolator(QObject *parent)
-    : QNativeAndroidInterpolator(parent)
+QUniAndroidLinearInterpolator::QUniAndroidLinearInterpolator(QObject *parent)
+    : QUniAndroidInterpolator(parent)
 {
 }
 
-QAndroidJniObject QNativeAndroidLinearInterpolator::onCreate()
+QAndroidJniObject QUniAndroidLinearInterpolator::onCreate()
 {
     return QAndroidJniObject("android/view/animation/LinearInterpolator");
 }

@@ -52,16 +52,16 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidColorDrawablePrivate;
+class QUniAndroidColorDrawablePrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidColorDrawable : public QNativeAndroidDrawable
+class Q_NATIVEANDROID_EXPORT QUniAndroidColorDrawable : public QUniAndroidDrawable
 {
     Q_OBJECT
     Q_PROPERTY(int color READ color WRITE setColor NOTIFY colorChanged)
 
 public:
-    explicit QNativeAndroidColorDrawable(QObject *parent = nullptr);
-    explicit QNativeAndroidColorDrawable(int color, QObject *parent = nullptr);
+    explicit QUniAndroidColorDrawable(QObject *parent = nullptr);
+    explicit QUniAndroidColorDrawable(int color, QObject *parent = nullptr);
 
     int color() const;
     void setColor(int color);
@@ -74,8 +74,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidColorDrawable)
-    Q_DECLARE_PRIVATE(QNativeAndroidColorDrawable)
+    Q_DISABLE_COPY(QUniAndroidColorDrawable)
+    Q_DECLARE_PRIVATE(QUniAndroidColorDrawable)
 };
 
 QT_END_NAMESPACE

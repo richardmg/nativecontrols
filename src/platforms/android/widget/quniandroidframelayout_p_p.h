@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidFrameLayoutPrivate : public QNativeAndroidViewGroupPrivate
+class QUniAndroidFrameLayoutPrivate : public QUniAndroidViewGroupPrivate
 {
 public:
 };

@@ -54,30 +54,30 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindow;
-class QNativeAppKitViewController;
+class QUniWindow;
+class QUniAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitWindowDelegate);
+Q_FORWARD_DECLARE_OBJC_CLASS(QUniAppKitWindowDelegate);
 
-class QNativeAppKitWindowPrivate : public QNativeAppKitViewPrivate
+class QUniAppKitWindowPrivate : public QUniAppKitViewPrivate
 {
 public:
-    explicit QNativeAppKitWindowPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitWindowPrivate();
+    explicit QUniAppKitWindowPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniAppKitWindowPrivate();
 
-    virtual void connectSignals(QNativeBase *base) override;
+    virtual void connectSignals(QUniBase *base) override;
     virtual void updateLayout(bool recursive) override;
 
     void addSubViewToContentView(NSView *nsView);
 
     NSWindow *window();
 
-    Q_DECLARE_PUBLIC(QNativeAppKitWindow)
+    Q_DECLARE_PUBLIC(QUniAppKitWindow)
 
 private:
     NSWindow *m_window;
-    QNativeAppKitViewController *m_viewController;
-    QNativeAppKitWindowDelegate *m_delegate;
+    QUniAppKitViewController *m_viewController;
+    QUniAppKitWindowDelegate *m_delegate;
     bool m_viewControllerSetExplicit;
 };
 

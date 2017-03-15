@@ -42,45 +42,45 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeBasePrivate::QNativeBasePrivate(int version)
-    : QNativeQmlBasePrivate(version)
+QUniBasePrivate::QUniBasePrivate(int version)
+    : QUniQmlBasePrivate(version)
     , m_platformBase(nullptr)
 {
 }
 
-QNativeBasePrivate::~QNativeBasePrivate()
+QUniBasePrivate::~QUniBasePrivate()
 {
     delete m_platformBase;
 }
 
-void QNativeBasePrivate::setPlatformBase(QNativePlatformBase *platformBase)
+void QUniBasePrivate::setPlatformBase(QUniPlatformBase *platformBase)
 {
-    // QNativeBasePrivate will take ownership over platformBase.
+    // QUniBasePrivate will take ownership over platformBase.
     m_platformBase = platformBase;
     syncPlatformParent();
 }
 
-void QNativeBasePrivate::syncPlatformParent()
+void QUniBasePrivate::syncPlatformParent()
 {
-    QNativeBase *p = qobject_cast<QNativeBase *>(q_func()->parent());
-    m_platformBase->setPlatformParent(p ? static_cast<QNativeBasePrivate *>(QObjectPrivate::get(p))->m_platformBase : nullptr);
+    QUniBase *p = qobject_cast<QUniBase *>(q_func()->parent());
+    m_platformBase->setPlatformParent(p ? static_cast<QUniBasePrivate *>(QObjectPrivate::get(p))->m_platformBase : nullptr);
 }
 
-QNativeBase::QNativeBase(QNativeBase *parent)
-    : QNativeQmlBase(parent)
-{
-}
-
-QNativeBase::QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent)
-    : QNativeQmlBase(dd, parent)
+QUniBase::QUniBase(QUniBase *parent)
+    : QUniQmlBase(parent)
 {
 }
 
-QNativeBase::~QNativeBase()
+QUniBase::QUniBase(QUniBasePrivate &dd, QUniBase *parent)
+    : QUniQmlBase(dd, parent)
 {
 }
 
-void QNativeBase::setParent(QNativeBase *parentBase)
+QUniBase::~QUniBase()
+{
+}
+
+void QUniBase::setParent(QUniBase *parentBase)
 {
     if (parentBase == parent())
         return;
@@ -90,22 +90,22 @@ void QNativeBase::setParent(QNativeBase *parentBase)
     emit parentChanged(parentBase);
 }
 
-QNativeBase *QNativeBase::parentBase()
+QUniBase *QUniBase::parentBase()
 {
-    return qobject_cast<QNativeBase *>(parent());
+    return qobject_cast<QUniBase *>(parent());
 }
 
 /**
  * @brief Set platform object as parent of this object.
  * \a parent is expected to be a subtype / control specific to the platform, but
- * unknown to QNative. What it means to use it as parent for this object is left
+ * unknown to QUni. What it means to use it as parent for this object is left
  * for the plugin to decide. Normal QObject parent-child ownership will apply, so
  * if \a parent is deleted, \c this will be deleted as well. You would call this
- * function whenever you need a QNative control to be a child of a QObject based
+ * function whenever you need a QUni control to be a child of a QObject based
  * platform control.
  * @return Returns \c true if the plugin was able to use \a parent as parent.
  */
-bool QNativeBase::setNativeParent(QObject *parent)
+bool QUniBase::setNativeParent(QObject *parent)
 {
     return d_func()->m_platformBase->setNativeParent(parent);
 }
@@ -113,18 +113,18 @@ bool QNativeBase::setNativeParent(QObject *parent)
 /**
  * @brief Set native OS object as parent of this object.
  * \a type is the type name of \a parent, and is expected to be a type / control
- * specific to the platform, but unknown to QNative. Especially, this function
+ * specific to the platform, but unknown to QUni. Especially, this function
  * accept types not deriving from QObject, like native OS controls. What it means
  * to use it as parent for this object is left for the plugin to decide.
  * The platform will not take ownership of \c this, so you should consider
  * assigning a normal QObject parent as well for automatic destruction.
  * The platform will not take ownership of \a parent, but depending on the
  * platform, it might keep a strong reference to it for as long as it needs it.
- * You would call this function whenever you need a QNative control to be a
+ * You would call this function whenever you need a QUni control to be a
  * child of a native OS control.
  * @return Returns \c true if the plugin was able to use \a parent as parent.
  */
-bool QNativeBase::setNativeParent(const QByteArray &type, void *parent)
+bool QUniBase::setNativeParent(const QByteArray &type, void *parent)
 {
     return d_func()->m_platformBase->setNativeParent(type, parent);
 }
@@ -132,14 +132,14 @@ bool QNativeBase::setNativeParent(const QByteArray &type, void *parent)
 /**
  * @brief Add platform object as child of this object.
  * \a child is expected to be a subtype / control specific to the platform, but
- * unknown to QNative. What it means to add it as a child of this object is left
+ * unknown to QUni. What it means to add it as a child of this object is left
  * for the plugin to decide. Normal QObject parent-child ownership will apply, so
  * if \a this is deleted, \a child will be deleted as well. You would call
  * this function whenever you need a QObject based platform control to be a child
- * of a QNative control.
+ * of a QUni control.
  * @return Returns \c true if the plugin was able to add \a child as a child.
  */
-bool QNativeBase::addNativeChild(QObject *child)
+bool QUniBase::addNativeChild(QObject *child)
 {
     return d_func()->m_platformBase->addNativeChild(child);
 }
@@ -147,7 +147,7 @@ bool QNativeBase::addNativeChild(QObject *child)
 /**
  * @brief Add native OS object as child of this object.
  * \a type is the type name of \a child, and is expected to be a type / control
- * specific to the platform, but unknown to QNative. Especially, this function
+ * specific to the platform, but unknown to QUni. Especially, this function
  * accept types not deriving from QObject, like native OS controls.
  * What it means to add it as a child this object is left for the plugin
  * to decide. The platform will not take ownership of \c this, so you should consider
@@ -155,10 +155,10 @@ bool QNativeBase::addNativeChild(QObject *child)
  * The platform will not take ownership of \a child, but depending on the
  * platform, it might keep a strong reference to it for as long as it needs it.
  * You would call this function whenever you need a native OS
- * control to be a child of a QNative control.
+ * control to be a child of a QUni control.
  * @return Returns \c true if the plugin was able to add \a child as a child.
  */
-bool QNativeBase::addNativeChild(const QByteArray &type, void *child)
+bool QUniBase::addNativeChild(const QByteArray &type, void *child)
 {
     return d_func()->m_platformBase->addNativeChild(type, child);
 }
@@ -166,7 +166,7 @@ bool QNativeBase::addNativeChild(const QByteArray &type, void *child)
 /**
  * Query the type names supported by addNativeChild().
  */
-QByteArrayList QNativeBase::supportedNativeChildTypes()
+QByteArrayList QUniBase::supportedNativeChildTypes()
 {
     return d_func()->m_platformBase->supportedNativeChildTypes();
 }
@@ -174,14 +174,14 @@ QByteArrayList QNativeBase::supportedNativeChildTypes()
 /**
  * Query the type names supported by setNativeParent().
  */
-QByteArrayList QNativeBase::supportedNativeParentTypes()
+QByteArrayList QUniBase::supportedNativeParentTypes()
 {
     return d_func()->m_platformBase->supportedNativeParentTypes();
 }
 
-void QNativeBase::childEvent(QChildEvent *event)
+void QUniBase::childEvent(QChildEvent *event)
 {
-    if (QNativeBase *child = qobject_cast<QNativeBase *>(event->child()))
+    if (QUniBase *child = qobject_cast<QUniBase *>(event->child()))
         child->d_func()->syncPlatformParent();
 }
 

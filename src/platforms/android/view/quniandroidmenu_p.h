@@ -52,27 +52,27 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidMenuItem;
-class QNativeAndroidMenuPrivate;
+class QUniAndroidMenuItem;
+class QUniAndroidMenuPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidMenu : public QNativeAndroidContextual
+class Q_NATIVEANDROID_EXPORT QUniAndroidMenu : public QUniAndroidContextual
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidMenu(QObject *parent = nullptr);
+    explicit QUniAndroidMenu(QObject *parent = nullptr);
 
-    QList<QNativeAndroidMenuItem *> items() const;
+    QList<QUniAndroidMenuItem *> items() const;
 
 protected:
-    QNativeAndroidMenu(QNativeAndroidMenuPrivate &dd, QObject *parent = nullptr);
+    QUniAndroidMenu(QUniAndroidMenuPrivate &dd, QObject *parent = nullptr);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidMenu)
-    Q_DECLARE_PRIVATE(QNativeAndroidMenu)
+    Q_DISABLE_COPY(QUniAndroidMenu)
+    Q_DECLARE_PRIVATE(QUniAndroidMenu)
 };
 
 QT_END_NAMESPACE

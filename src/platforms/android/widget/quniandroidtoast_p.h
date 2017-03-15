@@ -52,17 +52,17 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidView;
-class QNativeAndroidToastPrivate;
+class QUniAndroidView;
+class QUniAndroidToastPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidToast : public QNativeAndroidObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidToast : public QUniAndroidObject
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
     Q_PROPERTY(int gravity READ gravity WRITE setGravity NOTIFY gravityChanged)
 
 public:
-    explicit QNativeAndroidToast(QObject *parent = nullptr);
+    explicit QUniAndroidToast(QObject *parent = nullptr);
 
     QString text() const;
     void setText(const QString &text);
@@ -79,8 +79,8 @@ Q_SIGNALS:
     void gravityChanged();
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidToast)
-    Q_DECLARE_PRIVATE(QNativeAndroidToast)
+    Q_DISABLE_COPY(QUniAndroidToast)
+    Q_DECLARE_PRIVATE(QUniAndroidToast)
 };
 
 QT_END_NAMESPACE

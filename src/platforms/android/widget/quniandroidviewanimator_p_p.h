@@ -53,12 +53,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidViewAnimatorPrivate : public QNativeAndroidFrameLayoutPrivate
+class QUniAndroidViewAnimatorPrivate : public QUniAndroidFrameLayoutPrivate
 {
 public:
-    QNativeAndroidOptional<int> displayedChild;
-    QNativeAndroidOptional<int> inAnimation;
-    QNativeAndroidOptional<int> outAnimation;
+    QUniAndroidOptional<int> displayedChild;
+    QUniAndroidOptional<int> inAnimation;
+    QUniAndroidOptional<int> outAnimation;
 };
 
 QT_END_NAMESPACE

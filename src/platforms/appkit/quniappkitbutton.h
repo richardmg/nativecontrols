@@ -42,18 +42,18 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitButtonPrivate;
+class QUniAppKitButtonPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSButton);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitButton : public QNativeAppKitControl, public virtual QNativePlatformButton
+class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitButton : public QUniAppKitControl, public virtual QUniPlatformButton
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
 
 public:
-    QNativeAppKitButton(QNativeAppKitBase *parent = nullptr);
-    QNativeAppKitButton(const QString &text, QNativeAppKitBase *parent = nullptr);
-    virtual ~QNativeAppKitButton();
+    QUniAppKitButton(QUniAppKitBase *parent = nullptr);
+    QUniAppKitButton(const QString &text, QUniAppKitBase *parent = nullptr);
+    virtual ~QUniAppKitButton();
 
     NSButton *nsButtonHandle();
 
@@ -65,11 +65,11 @@ Q_SIGNALS:
     void clicked();
 
 protected:
-    QNativeAppKitButton(QNativeAppKitButtonPrivate &dd, QNativeAppKitBase *parent = nullptr);
+    QUniAppKitButton(QUniAppKitButtonPrivate &dd, QUniAppKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeAppKitButton)
-    Q_DISABLE_COPY(QNativeAppKitButton)
+    Q_DECLARE_PRIVATE(QUniAppKitButton)
+    Q_DISABLE_COPY(QUniAppKitButton)
 };
 
 QT_END_NAMESPACE

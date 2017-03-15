@@ -42,19 +42,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitSearchFieldPrivate;
+class QUniUIKitSearchFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UISearchBar);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitSearchField : public QNativeUIKitControl, public virtual QNativePlatformSearchField
+class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitSearchField : public QUniUIKitControl, public virtual QUniPlatformSearchField
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
     Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
-    QNativeUIKitSearchField(QNativeUIKitBase *parent = nullptr);
-    QNativeUIKitSearchField(const QString &text, QNativeUIKitBase *parent = nullptr);
-    virtual ~QNativeUIKitSearchField();
+    QUniUIKitSearchField(QUniUIKitBase *parent = nullptr);
+    QUniUIKitSearchField(const QString &text, QUniUIKitBase *parent = nullptr);
+    virtual ~QUniUIKitSearchField();
 
     UISearchBar *uiSearchBarHandle();
 
@@ -69,11 +69,11 @@ Q_SIGNALS:
     void placeholderTextChanged(const QString &placeholderText);
 
 protected:
-    QNativeUIKitSearchField(QNativeUIKitSearchFieldPrivate &dd, QNativeUIKitBase *parent = nullptr);
+    QUniUIKitSearchField(QUniUIKitSearchFieldPrivate &dd, QUniUIKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeUIKitSearchField)
-    Q_DISABLE_COPY(QNativeUIKitSearchField)
+    Q_DECLARE_PRIVATE(QUniUIKitSearchField)
+    Q_DISABLE_COPY(QUniUIKitSearchField)
 };
 
 QT_END_NAMESPACE

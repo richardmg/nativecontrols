@@ -55,21 +55,21 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeSearchField;
-class QNativeUIKitSearchField;
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeUIKitSearchFieldDelegate);
+class QUniSearchField;
+class QUniUIKitSearchField;
+Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitSearchFieldDelegate);
 
-class QNativeUIKitSearchFieldPrivate : public QNativeUIKitControlPrivate
+class QUniUIKitSearchFieldPrivate : public QUniUIKitControlPrivate
 {
 public:
-    explicit QNativeUIKitSearchFieldPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitSearchFieldPrivate();
+    explicit QUniUIKitSearchFieldPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitSearchFieldPrivate();
 
-    virtual void connectSignals(QNativeBase *base) override;
+    virtual void connectSignals(QUniBase *base) override;
 
-    QNativeUIKitSearchFieldDelegate *m_delegate;
+    QUniUIKitSearchFieldDelegate *m_delegate;
 
-    Q_DECLARE_PUBLIC(QNativeUIKitSearchField)
+    Q_DECLARE_PUBLIC(QUniUIKitSearchField)
 
 protected:
     UIView *createView() override;

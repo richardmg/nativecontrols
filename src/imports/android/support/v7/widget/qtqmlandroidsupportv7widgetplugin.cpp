@@ -54,9 +54,9 @@ public:
 
 void QtQmlAndroidSupportV7WidgetPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterType<QNativeAndroidCardView>(uri, 0, 21, "CardView");
-    qmlRegisterType<QNativeAndroidRecyclerAdapter>(uri, 0, 21, "RecyclerAdapter");
-    qmlRegisterType<QNativeAndroidRecyclerView>(uri, 0, 21, "RecyclerView");
+    qmlRegisterType<QUniAndroidCardView>(uri, 0, 21, "CardView");
+    qmlRegisterType<QUniAndroidRecyclerAdapter>(uri, 0, 21, "RecyclerAdapter");
+    qmlRegisterType<QUniAndroidRecyclerView>(uri, 0, 21, "RecyclerView");
 }
 
 QT_END_NAMESPACE

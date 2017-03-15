@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidRadioButton : public QNativeAndroidCompoundButton
+class Q_NATIVEANDROID_EXPORT QUniAndroidRadioButton : public QUniAndroidCompoundButton
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidRadioButton(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidRadioButton(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

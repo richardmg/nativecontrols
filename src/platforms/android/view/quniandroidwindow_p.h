@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidWindowPrivate;
+class QUniAndroidWindowPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidWindow : public QNativeAndroidContextual
+class Q_NATIVEANDROID_EXPORT QUniAndroidWindow : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(int statusBarColor READ statusBarColor WRITE setStatusBarColor NOTIFY statusBarColorChanged)
 
 public:
-    explicit QNativeAndroidWindow(QNativeAndroidContext *context);
+    explicit QUniAndroidWindow(QUniAndroidContext *context);
 
     int statusBarColor() const;
     void setStatusBarColor(int color);
@@ -72,8 +72,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidWindow)
-    Q_DECLARE_PRIVATE(QNativeAndroidWindow)
+    Q_DISABLE_COPY(QUniAndroidWindow)
+    Q_DECLARE_PRIVATE(QUniAndroidWindow)
 };
 
 QT_END_NAMESPACE

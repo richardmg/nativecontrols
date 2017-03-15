@@ -41,26 +41,26 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDrawerLayoutParamsPrivate : public QNativeAndroidMarginLayoutParamsPrivate
+class QUniAndroidDrawerLayoutParamsPrivate : public QUniAndroidMarginLayoutParamsPrivate
 {
 public:
     int gravity = 0;
 };
 
-QNativeAndroidDrawerLayoutParams::QNativeAndroidDrawerLayoutParams(QNativeAndroidView *view)
-    : QNativeAndroidMarginLayoutParams(*(new QNativeAndroidDrawerLayoutParamsPrivate), view)
+QUniAndroidDrawerLayoutParams::QUniAndroidDrawerLayoutParams(QUniAndroidView *view)
+    : QUniAndroidMarginLayoutParams(*(new QUniAndroidDrawerLayoutParamsPrivate), view)
 {
 }
 
-int QNativeAndroidDrawerLayoutParams::gravity() const
+int QUniAndroidDrawerLayoutParams::gravity() const
 {
-    Q_D(const QNativeAndroidDrawerLayoutParams);
+    Q_D(const QUniAndroidDrawerLayoutParams);
     return d->gravity;
 }
 
-void QNativeAndroidDrawerLayoutParams::setGravity(int gravity)
+void QUniAndroidDrawerLayoutParams::setGravity(int gravity)
 {
-    Q_D(QNativeAndroidDrawerLayoutParams);
+    Q_D(QUniAndroidDrawerLayoutParams);
     if (d->gravity == gravity)
         return;
 
@@ -69,18 +69,18 @@ void QNativeAndroidDrawerLayoutParams::setGravity(int gravity)
     emit gravityChanged();
 }
 
-QAndroidJniObject QNativeAndroidDrawerLayoutParams::onCreate()
+QAndroidJniObject QUniAndroidDrawerLayoutParams::onCreate()
 {
-    Q_D(QNativeAndroidDrawerLayoutParams);
+    Q_D(QUniAndroidDrawerLayoutParams);
     return QAndroidJniObject("android/support/v4/widget/DrawerLayout$LayoutParams",
                              "(III)V",
                              MATCH_PARENT, MATCH_PARENT, d->gravity);
 }
 
-void QNativeAndroidDrawerLayoutParams::onInflate(QAndroidJniObject &instance)
+void QUniAndroidDrawerLayoutParams::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidDrawerLayoutParams);
-    QNativeAndroidMarginLayoutParams::onInflate(instance);
+    Q_D(QUniAndroidDrawerLayoutParams);
+    QUniAndroidMarginLayoutParams::onInflate(instance);
 
     instance.setField<int>("gravity", d->gravity);
 }

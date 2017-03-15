@@ -41,9 +41,9 @@
 
 QT_BEGIN_NAMESPACE
 
-void QNativeAndroidAnimationPrivate::updateInterpolator()
+void QUniAndroidAnimationPrivate::updateInterpolator()
 {
-    Q_Q(QNativeAndroidAnimation);
+    Q_Q(QUniAndroidAnimation);
     if (!q->isValid() || !interpolator || !interpolator->isValid())
         return;
 
@@ -54,27 +54,27 @@ void QNativeAndroidAnimationPrivate::updateInterpolator()
     });
 }
 
-QNativeAndroidAnimation::QNativeAndroidAnimation(QObject *parent)
-    : QNativeAndroidContextual(*(new QNativeAndroidAnimationPrivate), parent)
+QUniAndroidAnimation::QUniAndroidAnimation(QObject *parent)
+    : QUniAndroidContextual(*(new QUniAndroidAnimationPrivate), parent)
 {
 }
 
-QNativeAndroidAnimation::QNativeAndroidAnimation(QNativeAndroidAnimationPrivate &dd, QObject *parent)
-    : QNativeAndroidContextual(dd, parent)
+QUniAndroidAnimation::QUniAndroidAnimation(QUniAndroidAnimationPrivate &dd, QObject *parent)
+    : QUniAndroidContextual(dd, parent)
 {
 }
 
-int QNativeAndroidAnimation::resource() const
+int QUniAndroidAnimation::resource() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (d->resource.isNull())
         return 0;
     return d->resource;
 }
 
-void QNativeAndroidAnimation::setResource(int resource)
+void QUniAndroidAnimation::setResource(int resource)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->resource.isNull() && d->resource == resource)
         return;
 
@@ -82,17 +82,17 @@ void QNativeAndroidAnimation::setResource(int resource)
     emit resourceChanged();
 }
 
-int QNativeAndroidAnimation::duration() const
+int QUniAndroidAnimation::duration() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (d->duration.isNull())
         return 0;
     return d->duration;
 }
 
-void QNativeAndroidAnimation::setDuration(int duration)
+void QUniAndroidAnimation::setDuration(int duration)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->duration.isNull() && d->duration == duration)
         return;
 
@@ -101,17 +101,17 @@ void QNativeAndroidAnimation::setDuration(int duration)
     emit durationChanged();
 }
 
-bool QNativeAndroidAnimation::fillAfter() const
+bool QUniAndroidAnimation::fillAfter() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (d->fillAfter.isNull())
         return false;
     return d->fillAfter;
 }
 
-void QNativeAndroidAnimation::setFillAfter(bool fill)
+void QUniAndroidAnimation::setFillAfter(bool fill)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->fillAfter.isNull() && d->fillAfter == fill)
         return;
 
@@ -120,17 +120,17 @@ void QNativeAndroidAnimation::setFillAfter(bool fill)
     emit fillAfterChanged();
 }
 
-bool QNativeAndroidAnimation::fillBefore() const
+bool QUniAndroidAnimation::fillBefore() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (d->fillBefore.isNull())
         return true;
     return d->fillBefore;
 }
 
-void QNativeAndroidAnimation::setFillBefore(bool fill)
+void QUniAndroidAnimation::setFillBefore(bool fill)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->fillBefore.isNull() && d->fillBefore == fill)
         return;
 
@@ -139,17 +139,17 @@ void QNativeAndroidAnimation::setFillBefore(bool fill)
     emit fillBeforeChanged();
 }
 
-bool QNativeAndroidAnimation::fillEnabled() const
+bool QUniAndroidAnimation::fillEnabled() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (!d->fillEnabled.isNull())
         return false;
     return d->fillEnabled;
 }
 
-void QNativeAndroidAnimation::setFillEnabled(bool fill)
+void QUniAndroidAnimation::setFillEnabled(bool fill)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->fillEnabled.isNull() && d->fillEnabled != fill)
         return;
 
@@ -158,41 +158,41 @@ void QNativeAndroidAnimation::setFillEnabled(bool fill)
     emit fillEnabledChanged();
 }
 
-QNativeAndroidInterpolator *QNativeAndroidAnimation::interpolator() const
+QUniAndroidInterpolator *QUniAndroidAnimation::interpolator() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     return d->interpolator;
 }
 
-void QNativeAndroidAnimation::setInterpolator(QNativeAndroidInterpolator *interpolator)
+void QUniAndroidAnimation::setInterpolator(QUniAndroidInterpolator *interpolator)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (d->interpolator == interpolator)
         return;
 
     if (d->interpolator) {
-        QObjectPrivate::disconnect(d->interpolator, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAnimationPrivate::updateInterpolator);
+        QObjectPrivate::disconnect(d->interpolator, &QUniAndroidObject::instanceChanged, d, &QUniAndroidAnimationPrivate::updateInterpolator);
         d->interpolator->destruct();
     }
     d->interpolator = interpolator;
     if (d->interpolator) {
-        QObjectPrivate::connect(d->interpolator, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAnimationPrivate::updateInterpolator);
+        QObjectPrivate::connect(d->interpolator, &QUniAndroidObject::instanceChanged, d, &QUniAndroidAnimationPrivate::updateInterpolator);
         if (isValid())
             d->interpolator->construct();
     }
 }
 
-int QNativeAndroidAnimation::repeatCount() const
+int QUniAndroidAnimation::repeatCount() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (d->repeatCount.isNull())
         return 0;
     return d->repeatCount;
 }
 
-void QNativeAndroidAnimation::setRepeatCount(int count)
+void QUniAndroidAnimation::setRepeatCount(int count)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->repeatCount.isNull() && d->repeatCount == count)
         return;
 
@@ -201,17 +201,17 @@ void QNativeAndroidAnimation::setRepeatCount(int count)
     emit repeatCountChanged();
 }
 
-QNativeAndroidAnimation::RepeatMode QNativeAndroidAnimation::repeatMode() const
+QUniAndroidAnimation::RepeatMode QUniAndroidAnimation::repeatMode() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (d->repeatMode.isNull())
         return RESTART;
     return d->repeatMode;
 }
 
-void QNativeAndroidAnimation::setRepeatMode(RepeatMode mode)
+void QUniAndroidAnimation::setRepeatMode(RepeatMode mode)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->repeatMode.isNull() && d->repeatMode == mode)
         return;
 
@@ -220,17 +220,17 @@ void QNativeAndroidAnimation::setRepeatMode(RepeatMode mode)
     emit repeatModeChanged();
 }
 
-int QNativeAndroidAnimation::startOffset() const
+int QUniAndroidAnimation::startOffset() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (d->startOffset.isNull())
         return 0;
     return d->startOffset;
 }
 
-void QNativeAndroidAnimation::setStartOffset(int offset)
+void QUniAndroidAnimation::setStartOffset(int offset)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->startOffset.isNull() && d->startOffset == offset)
         return;
 
@@ -239,17 +239,17 @@ void QNativeAndroidAnimation::setStartOffset(int offset)
     emit startOffsetChanged();
 }
 
-QNativeAndroidAnimation::ZAdjustment QNativeAndroidAnimation::zAdjustment() const
+QUniAndroidAnimation::ZAdjustment QUniAndroidAnimation::zAdjustment() const
 {
-    Q_D(const QNativeAndroidAnimation);
+    Q_D(const QUniAndroidAnimation);
     if (d->zAdjustment.isNull())
         return ZORDER_NORMAL;
     return d->zAdjustment;
 }
 
-void QNativeAndroidAnimation::setZAdjustment(ZAdjustment adjustment)
+void QUniAndroidAnimation::setZAdjustment(ZAdjustment adjustment)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (!d->zAdjustment.isNull() && d->zAdjustment == adjustment)
         return;
 
@@ -258,24 +258,24 @@ void QNativeAndroidAnimation::setZAdjustment(ZAdjustment adjustment)
     emit zAdjustmentChanged();
 }
 
-void QNativeAndroidAnimation::cancel()
+void QUniAndroidAnimation::cancel()
 {
     QtNativeAndroid::callVoidMethod(instance(), "cancel");
 }
 
-void QNativeAndroidAnimation::start()
+void QUniAndroidAnimation::start()
 {
     QtNativeAndroid::callVoidMethod(instance(), "start");
 }
 
-void QNativeAndroidAnimation::startNow()
+void QUniAndroidAnimation::startNow()
 {
     QtNativeAndroid::callVoidMethod(instance(), "startNow");
 }
 
-QAndroidJniObject QNativeAndroidAnimation::onCreate()
+QAndroidJniObject QUniAndroidAnimation::onCreate()
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (d->resource.isNull())
         return QAndroidJniObject("android/view/animation/Animation");
 
@@ -286,10 +286,10 @@ QAndroidJniObject QNativeAndroidAnimation::onCreate()
                                                      d->resource);
 }
 
-void QNativeAndroidAnimation::onInflate(QAndroidJniObject &instance)
+void QUniAndroidAnimation::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidAnimation);
-    QNativeAndroidContextual::onInflate(instance);
+    Q_D(QUniAndroidAnimation);
+    QUniAndroidContextual::onInflate(instance);
 
     if (!d->resource.isNull())
         return;
@@ -312,9 +312,9 @@ void QNativeAndroidAnimation::onInflate(QAndroidJniObject &instance)
         instance.callMethod<void>("setZAdjustment", "(I)V", d->zAdjustment);
 }
 
-void QNativeAndroidAnimation::objectChange(ObjectChange change)
+void QUniAndroidAnimation::objectChange(ObjectChange change)
 {
-    Q_D(QNativeAndroidAnimation);
+    Q_D(QUniAndroidAnimation);
     if (change == InstanceChange)
         d->updateInterpolator();
 }

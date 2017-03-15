@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidCheckBox : public QNativeAndroidCompoundButton
+class Q_NATIVEANDROID_EXPORT QUniAndroidCheckBox : public QUniAndroidCompoundButton
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidCheckBox(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidCheckBox(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

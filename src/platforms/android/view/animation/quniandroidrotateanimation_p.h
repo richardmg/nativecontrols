@@ -52,9 +52,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidRotateAnimationPrivate;
+class QUniAndroidRotateAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidRotateAnimation : public QNativeAndroidAnimation
+class Q_NATIVEANDROID_EXPORT QUniAndroidRotateAnimation : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(qreal fromDegrees READ fromDegrees WRITE setFromDegrees NOTIFY fromDegreesChanged)
@@ -66,7 +66,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidRotateAnimation : public QNativeAndro
     Q_ENUMS(Relation)
 
 public:
-    explicit QNativeAndroidRotateAnimation(QObject *parent = nullptr);
+    explicit QUniAndroidRotateAnimation(QObject *parent = nullptr);
 
     qreal fromDegrees() const;
     void setFromDegrees(qreal degrees);
@@ -98,8 +98,8 @@ protected:
     QAndroidJniObject onCreate() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidRotateAnimation)
-    Q_DECLARE_PRIVATE(QNativeAndroidRotateAnimation)
+    Q_DISABLE_COPY(QUniAndroidRotateAnimation)
+    Q_DECLARE_PRIVATE(QUniAndroidRotateAnimation)
 };
 
 QT_END_NAMESPACE

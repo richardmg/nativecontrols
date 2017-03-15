@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidViewFlipper : public QNativeAndroidViewAnimator
+class Q_NATIVEANDROID_EXPORT QUniAndroidViewFlipper : public QUniAndroidViewAnimator
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidViewFlipper(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidViewFlipper(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

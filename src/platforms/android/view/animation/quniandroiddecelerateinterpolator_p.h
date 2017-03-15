@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDecelerateInterpolatorPrivate;
+class QUniAndroidDecelerateInterpolatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidDecelerateInterpolator : public QNativeAndroidInterpolator
+class Q_NATIVEANDROID_EXPORT QUniAndroidDecelerateInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
     Q_PROPERTY(qreal factor READ factor WRITE setFactor NOTIFY factorChanged)
 
 public:
-    explicit QNativeAndroidDecelerateInterpolator(QObject *parent = nullptr);
+    explicit QUniAndroidDecelerateInterpolator(QObject *parent = nullptr);
 
     qreal factor() const;
     void setFactor(qreal factor);
@@ -72,8 +72,8 @@ protected:
     QAndroidJniObject onCreate() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidDecelerateInterpolator)
-    Q_DECLARE_PRIVATE(QNativeAndroidDecelerateInterpolator)
+    Q_DISABLE_COPY(QUniAndroidDecelerateInterpolator)
+    Q_DECLARE_PRIVATE(QUniAndroidDecelerateInterpolator)
 };
 
 QT_END_NAMESPACE

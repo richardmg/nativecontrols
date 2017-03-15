@@ -42,19 +42,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitSearchFieldPrivate;
+class QUniAppKitSearchFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSSearchField);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitSearchField : public QNativeAppKitControl, public virtual QNativePlatformSearchField
+class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitSearchField : public QUniAppKitControl, public virtual QUniPlatformSearchField
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
     Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
-    QNativeAppKitSearchField(QNativeAppKitBase *parent = nullptr);
-    QNativeAppKitSearchField(const QString &text, QNativeAppKitBase *parent = nullptr);
-    virtual ~QNativeAppKitSearchField();
+    QUniAppKitSearchField(QUniAppKitBase *parent = nullptr);
+    QUniAppKitSearchField(const QString &text, QUniAppKitBase *parent = nullptr);
+    virtual ~QUniAppKitSearchField();
 
     NSSearchField *nsSearchFieldHandle();
 
@@ -69,11 +69,11 @@ Q_SIGNALS:
     void placeholderTextChanged(const QString &placeholderText);
 
 protected:
-    QNativeAppKitSearchField(QNativeAppKitSearchFieldPrivate &dd, QNativeAppKitBase *parent = nullptr);
+    QUniAppKitSearchField(QUniAppKitSearchFieldPrivate &dd, QUniAppKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeAppKitSearchField)
-    Q_DISABLE_COPY(QNativeAppKitSearchField)
+    Q_DECLARE_PRIVATE(QUniAppKitSearchField)
+    Q_DISABLE_COPY(QUniAppKitSearchField)
 };
 
 QT_END_NAMESPACE

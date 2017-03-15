@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidActionBarDrawerToggle : public QNativeAndroidObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidActionBarDrawerToggle : public QUniAndroidObject
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidActionBarDrawerToggle(QObject *parent = nullptr);
+    explicit QUniAndroidActionBarDrawerToggle(QObject *parent = nullptr);
 
     void onCreate(const QAndroidJniObject &activity, const QAndroidJniObject &drawer);
 };

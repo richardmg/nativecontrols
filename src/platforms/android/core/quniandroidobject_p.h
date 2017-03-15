@@ -57,17 +57,17 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidObjectPrivate;
+class QUniAndroidObjectPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidObject : public QObject, public QQmlParserStatus
+class Q_NATIVEANDROID_EXPORT QUniAndroidObject : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_PRIVATE_PROPERTY(QNativeAndroidObject::d_func(), QQmlListProperty<QObject> data READ data NOTIFY dataChanged DESIGNABLE false)
+    Q_PRIVATE_PROPERTY(QUniAndroidObject::d_func(), QQmlListProperty<QObject> data READ data NOTIFY dataChanged DESIGNABLE false)
     Q_CLASSINFO("DefaultProperty", "data")
     Q_INTERFACES(QQmlParserStatus)
 
 public:
-    explicit QNativeAndroidObject(QObject *parent = nullptr);
+    explicit QUniAndroidObject(QObject *parent = nullptr);
 
     bool isValid() const;
     QAndroidJniObject instance() const;
@@ -85,7 +85,7 @@ Q_SIGNALS:
     void instanceChanged();
 
 protected:
-    QNativeAndroidObject(QNativeAndroidObjectPrivate &dd, QObject *parent = nullptr);
+    QUniAndroidObject(QUniAndroidObjectPrivate &dd, QObject *parent = nullptr);
 
     virtual QAndroidJniObject onCreate();
     virtual void onInflate(QAndroidJniObject &instance);
@@ -99,8 +99,8 @@ protected:
     void childEvent(QChildEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidObject)
-    Q_DECLARE_PRIVATE(QNativeAndroidObject)
+    Q_DISABLE_COPY(QUniAndroidObject)
+    Q_DECLARE_PRIVATE(QUniAndroidObject)
 
     Q_PRIVATE_SLOT(d_func(), void _q_changeInstance())
 };

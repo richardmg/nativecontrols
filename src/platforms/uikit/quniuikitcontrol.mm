@@ -44,26 +44,26 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitControlPrivate::QNativeUIKitControlPrivate(int version)
-    : QNativeUIKitViewPrivate(version)
+QUniUIKitControlPrivate::QUniUIKitControlPrivate(int version)
+    : QUniUIKitViewPrivate(version)
 {
 }
 
-QNativeUIKitControlPrivate::~QNativeUIKitControlPrivate()
+QUniUIKitControlPrivate::~QUniUIKitControlPrivate()
 {
 }
 
-QNativeUIKitControl::QNativeUIKitControl(QNativeUIKitBase *parent)
-    : QNativeUIKitView(*new QNativeUIKitControlPrivate(), parent)
+QUniUIKitControl::QUniUIKitControl(QUniUIKitBase *parent)
+    : QUniUIKitView(*new QUniUIKitControlPrivate(), parent)
 {
 }
 
-QNativeUIKitControl::QNativeUIKitControl(QNativeUIKitControlPrivate &dd, QNativeUIKitBase *parent)
-    : QNativeUIKitView(dd, parent)
+QUniUIKitControl::QUniUIKitControl(QUniUIKitControlPrivate &dd, QUniUIKitBase *parent)
+    : QUniUIKitView(dd, parent)
 {
 }
 
-QNativeUIKitControl::~QNativeUIKitControl()
+QUniUIKitControl::~QUniUIKitControl()
 {
 }
 

@@ -43,10 +43,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformTabsPageTab : public virtual QNativePlatformBase
+class Q_NATIVECONTROLS_EXPORT QUniPlatformTabsPageTab : public virtual QUniPlatformBase
 {
 public:
-    virtual ~QNativePlatformTabsPageTab() {}
+    virtual ~QUniPlatformTabsPageTab() {}
     virtual QString title() const = 0;
     virtual void setTitle(const QString &title) = 0;
 };

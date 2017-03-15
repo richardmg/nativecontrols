@@ -52,20 +52,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDrawable;
-class QNativeAndroidActionBarPrivate;
+class QUniAndroidDrawable;
+class QUniAndroidActionBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidActionBar : public QNativeAndroidObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidActionBar : public QUniAndroidObject
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
     Q_PROPERTY(qreal elevation READ elevation WRITE setElevation NOTIFY elevationChanged)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString subtitle READ subtitle WRITE setSubtitle NOTIFY subtitleChanged)
-    Q_PROPERTY(QNativeAndroidDrawable *background READ background WRITE setBackground NOTIFY backgroundChanged)
+    Q_PROPERTY(QUniAndroidDrawable *background READ background WRITE setBackground NOTIFY backgroundChanged)
 
 public:
-    explicit QNativeAndroidActionBar(QObject *parent = nullptr);
+    explicit QUniAndroidActionBar(QObject *parent = nullptr);
 
     bool isVisible() const;
     void setVisible(bool visible);
@@ -79,8 +79,8 @@ public:
     QString subtitle() const;
     void setSubtitle(const QString &subtitle);
 
-    QNativeAndroidDrawable *background() const;
-    void setBackground(QNativeAndroidDrawable *background);
+    QUniAndroidDrawable *background() const;
+    void setBackground(QUniAndroidDrawable *background);
 
 Q_SIGNALS:
     void visibleChanged();
@@ -95,8 +95,8 @@ protected:
     void objectChange(ObjectChange change) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidActionBar)
-    Q_DECLARE_PRIVATE(QNativeAndroidActionBar)
+    Q_DISABLE_COPY(QUniAndroidActionBar)
+    Q_DECLARE_PRIVATE(QUniAndroidActionBar)
 };
 
 QT_END_NAMESPACE

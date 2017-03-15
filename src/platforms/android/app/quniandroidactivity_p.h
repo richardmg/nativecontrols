@@ -52,33 +52,33 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidView;
-class QNativeAndroidMenu;
-class QNativeAndroidWindow;
-class QNativeAndroidActionBar;
-class QNativeAndroidActivityPrivate;
+class QUniAndroidView;
+class QUniAndroidMenu;
+class QUniAndroidWindow;
+class QUniAndroidActionBar;
+class QUniAndroidActivityPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidActivity : public QNativeAndroidContextWrapper
+class Q_NATIVEANDROID_EXPORT QUniAndroidActivity : public QUniAndroidContextWrapper
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAndroidWindow *window READ window CONSTANT)
-    Q_PROPERTY(QNativeAndroidActionBar *actionBar READ actionBar WRITE setActionBar)
-    Q_PROPERTY(QNativeAndroidMenu *optionsMenu READ optionsMenu WRITE setOptionsMenu)
-    Q_PROPERTY(QNativeAndroidView *contentView READ contentView WRITE setContentView)
+    Q_PROPERTY(QUniAndroidWindow *window READ window CONSTANT)
+    Q_PROPERTY(QUniAndroidActionBar *actionBar READ actionBar WRITE setActionBar)
+    Q_PROPERTY(QUniAndroidMenu *optionsMenu READ optionsMenu WRITE setOptionsMenu)
+    Q_PROPERTY(QUniAndroidView *contentView READ contentView WRITE setContentView)
 
 public:
-    explicit QNativeAndroidActivity(QObject *parent = nullptr);
+    explicit QUniAndroidActivity(QObject *parent = nullptr);
 
-    QNativeAndroidWindow *window() const;
+    QUniAndroidWindow *window() const;
 
-    QNativeAndroidActionBar *actionBar() const;
-    void setActionBar(QNativeAndroidActionBar *bar);
+    QUniAndroidActionBar *actionBar() const;
+    void setActionBar(QUniAndroidActionBar *bar);
 
-    QNativeAndroidMenu *optionsMenu() const;
-    void setOptionsMenu(QNativeAndroidMenu *menu);
+    QUniAndroidMenu *optionsMenu() const;
+    void setOptionsMenu(QUniAndroidMenu *menu);
 
-    QNativeAndroidView *contentView() const;
-    void setContentView(QNativeAndroidView *view);
+    QUniAndroidView *contentView() const;
+    void setContentView(QUniAndroidView *view);
 
 public Q_SLOTS:
     void start();
@@ -88,8 +88,8 @@ protected:
     void componentComplete() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidActivity)
-    Q_DECLARE_PRIVATE(QNativeAndroidActivity)
+    Q_DISABLE_COPY(QUniAndroidActivity)
+    Q_DECLARE_PRIVATE(QUniAndroidActivity)
 };
 
 QT_END_NAMESPACE

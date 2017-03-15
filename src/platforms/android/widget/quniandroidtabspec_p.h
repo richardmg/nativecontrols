@@ -56,19 +56,19 @@
 QT_BEGIN_NAMESPACE
 
 class QAndroidJniObject;
-class QNativeAndroidView;
-class QNativeAndroidTabHost;
-class QNativeAndroidTabSpecPrivate;
+class QUniAndroidView;
+class QUniAndroidTabHost;
+class QUniAndroidTabSpecPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidTabSpec : public QObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidTabSpec : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged)
 
 public:
-    explicit QNativeAndroidTabSpec(QNativeAndroidView *view);
+    explicit QUniAndroidTabSpec(QUniAndroidView *view);
 
-    static QNativeAndroidTabSpec *qmlAttachedProperties(QObject *object);
+    static QUniAndroidTabSpec *qmlAttachedProperties(QObject *object);
 
     QString label() const;
     void setLabel(const QString &label);
@@ -79,12 +79,12 @@ Q_SIGNALS:
     void labelChanged();
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidTabSpec)
-    Q_DECLARE_PRIVATE(QNativeAndroidTabSpec)
+    Q_DISABLE_COPY(QUniAndroidTabSpec)
+    Q_DECLARE_PRIVATE(QUniAndroidTabSpec)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPEINFO(QNativeAndroidTabSpec, QML_HAS_ATTACHED_PROPERTIES)
+QML_DECLARE_TYPEINFO(QUniAndroidTabSpec, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // QNATIVEANDROIDTABSPEC_P_H

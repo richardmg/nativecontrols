@@ -47,35 +47,35 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    QNativeAppKitWindow window;
+    QUniAppKitWindow window;
 
-    QNativeAppKitTabViewController tabViewController(&window);
-    QNativeAppKitViewController tab1(&tabViewController);
-    QNativeAppKitViewController tab2(&tabViewController);
-    QNativeAppKitTabViewItem tabItem1(QStringLiteral("Tab1"), &tab1);
-    QNativeAppKitTabViewItem tabItem2(QStringLiteral("Tab2"), &tab2);
-    tabViewController.setTabViewItems(QList<QNativeAppKitTabViewItem *>() << &tabItem1 << &tabItem2);
+    QUniAppKitTabViewController tabViewController(&window);
+    QUniAppKitViewController tab1(&tabViewController);
+    QUniAppKitViewController tab2(&tabViewController);
+    QUniAppKitTabViewItem tabItem1(QStringLiteral("Tab1"), &tab1);
+    QUniAppKitTabViewItem tabItem2(QStringLiteral("Tab2"), &tab2);
+    tabViewController.setTabViewItems(QList<QUniAppKitTabViewItem *>() << &tabItem1 << &tabItem2);
 
-    QNativeAppKitView *contentView = tab1.view();
+    QUniAppKitView *contentView = tab1.view();
     float margin = 2;
 
-    QNativeAppKitButton button(QStringLiteral("Click me"), contentView);
+    QUniAppKitButton button(QStringLiteral("Click me"), contentView);
     button.move(50, 100);
-    QObject::connect(&button, &QNativeAppKitButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
+    QObject::connect(&button, &QUniAppKitButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
 
-    QNativeAppKitTextField textField(contentView);
+    QUniAppKitTextField textField(contentView);
     textField.setPlaceholderText(QStringLiteral("TextField"));
     textField.move(button.left(), button.bottom() + margin);
     textField.resize(200, textField.implicitSize().height());
 
-    QNativeAppKitView view(contentView);
+    QUniAppKitView view(contentView);
     view.setGeometry(textField.left(), textField.bottom() + margin, 200, 200);
 
-    QNativeAppKitButton button2("Child button", &view);
+    QUniAppKitButton button2("Child button", &view);
     button2.move(0, 0);
-    QObject::connect(&button2, &QNativeAppKitButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
+    QObject::connect(&button2, &QUniAppKitButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
 
-    QNativeAppKitTextField textField2(contentView);
+    QUniAppKitTextField textField2(contentView);
     textField2.setPlaceholderText(QStringLiteral("TextField"));
     textField2.move(view.left(), view.bottom() + margin);
 

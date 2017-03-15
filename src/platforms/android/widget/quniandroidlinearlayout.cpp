@@ -39,35 +39,35 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidLinearLayout::QNativeAndroidLinearLayout(QNativeAndroidContext *context)
-    : QNativeAndroidViewGroup(*(new QNativeAndroidLinearLayoutPrivate), context)
+QUniAndroidLinearLayout::QUniAndroidLinearLayout(QUniAndroidContext *context)
+    : QUniAndroidViewGroup(*(new QUniAndroidLinearLayoutPrivate), context)
 {
 }
 
-QNativeAndroidLinearLayout::QNativeAndroidLinearLayout(QNativeAndroidLinearLayoutPrivate &dd, QNativeAndroidContext *context)
-    : QNativeAndroidViewGroup(dd, context)
+QUniAndroidLinearLayout::QUniAndroidLinearLayout(QUniAndroidLinearLayoutPrivate &dd, QUniAndroidContext *context)
+    : QUniAndroidViewGroup(dd, context)
 {
 }
 
-QNativeAndroidLinearLayoutParams *QNativeAndroidLinearLayout::qmlAttachedProperties(QObject *object)
+QUniAndroidLinearLayoutParams *QUniAndroidLinearLayout::qmlAttachedProperties(QObject *object)
 {
-    QNativeAndroidView *view = qobject_cast<QNativeAndroidView*>(object);
+    QUniAndroidView *view = qobject_cast<QUniAndroidView*>(object);
     if (view)
-        return new QNativeAndroidLinearLayoutParams(view);
+        return new QUniAndroidLinearLayoutParams(view);
     return 0;
 }
 
-bool QNativeAndroidLinearLayout::isBaselineAligned() const
+bool QUniAndroidLinearLayout::isBaselineAligned() const
 {
-    Q_D(const QNativeAndroidLinearLayout);
+    Q_D(const QUniAndroidLinearLayout);
     if (d->baselineAligned.isNull())
         return true;
     return d->baselineAligned;
 }
 
-void QNativeAndroidLinearLayout::setBaselineAligned(bool aligned)
+void QUniAndroidLinearLayout::setBaselineAligned(bool aligned)
 {
-    Q_D(QNativeAndroidLinearLayout);
+    Q_D(QUniAndroidLinearLayout);
     if (aligned == isBaselineAligned())
         return;
 
@@ -77,17 +77,17 @@ void QNativeAndroidLinearLayout::setBaselineAligned(bool aligned)
     emit baselineAlignedChanged();
 }
 
-int QNativeAndroidLinearLayout::baselineAlignedChildIndex() const
+int QUniAndroidLinearLayout::baselineAlignedChildIndex() const
 {
-    Q_D(const QNativeAndroidLinearLayout);
+    Q_D(const QUniAndroidLinearLayout);
     if (d->baselineAlignedChildIndex.isNull())
         return -1;
     return d->baselineAlignedChildIndex;
 }
 
-void QNativeAndroidLinearLayout::setBaselineAlignedChildIndex(int index)
+void QUniAndroidLinearLayout::setBaselineAlignedChildIndex(int index)
 {
-    Q_D(QNativeAndroidLinearLayout);
+    Q_D(QUniAndroidLinearLayout);
     if (index == baselineAlignedChildIndex())
         return;
 
@@ -97,17 +97,17 @@ void QNativeAndroidLinearLayout::setBaselineAlignedChildIndex(int index)
     emit baselineAlignedChildIndexChanged();
 }
 
-bool QNativeAndroidLinearLayout::isMeasureWithLargestChildEnabled() const
+bool QUniAndroidLinearLayout::isMeasureWithLargestChildEnabled() const
 {
-    Q_D(const QNativeAndroidLinearLayout);
+    Q_D(const QUniAndroidLinearLayout);
     if (d->measureWithLargestChild.isNull())
         return false;
     return d->measureWithLargestChild;
 }
 
-void QNativeAndroidLinearLayout::setMeasureWithLargestChildEnabled(bool enabled)
+void QUniAndroidLinearLayout::setMeasureWithLargestChildEnabled(bool enabled)
 {
-    Q_D(QNativeAndroidLinearLayout);
+    Q_D(QUniAndroidLinearLayout);
     if (enabled == isMeasureWithLargestChildEnabled())
         return;
 
@@ -117,17 +117,17 @@ void QNativeAndroidLinearLayout::setMeasureWithLargestChildEnabled(bool enabled)
     emit measureWithLargestChildEnabledChanged();
 }
 
-QNativeAndroidLinearLayout::Orientation QNativeAndroidLinearLayout::orientation() const
+QUniAndroidLinearLayout::Orientation QUniAndroidLinearLayout::orientation() const
 {
-    Q_D(const QNativeAndroidLinearLayout);
+    Q_D(const QUniAndroidLinearLayout);
     if (d->orientation.isNull())
         return HORIZONTAL;
     return d->orientation;
 }
 
-void QNativeAndroidLinearLayout::setOrientation(Orientation value)
+void QUniAndroidLinearLayout::setOrientation(Orientation value)
 {
-    Q_D(QNativeAndroidLinearLayout);
+    Q_D(QUniAndroidLinearLayout);
     if (value == orientation())
         return;
 
@@ -137,17 +137,17 @@ void QNativeAndroidLinearLayout::setOrientation(Orientation value)
     emit orientationChanged();
 }
 
-qreal QNativeAndroidLinearLayout::weightSum() const
+qreal QUniAndroidLinearLayout::weightSum() const
 {
-    Q_D(const QNativeAndroidLinearLayout);
+    Q_D(const QUniAndroidLinearLayout);
     if (d->weightSum.isNull())
         return -1.0f;
     return d->weightSum;
 }
 
-void QNativeAndroidLinearLayout::setWeightSum(qreal sum)
+void QUniAndroidLinearLayout::setWeightSum(qreal sum)
 {
-    Q_D(QNativeAndroidLinearLayout);
+    Q_D(QUniAndroidLinearLayout);
     if (sum == weightSum())
         return;
 
@@ -157,16 +157,16 @@ void QNativeAndroidLinearLayout::setWeightSum(qreal sum)
     emit weightSumChanged();
 }
 
-QAndroidJniObject QNativeAndroidLinearLayout::onCreate()
+QAndroidJniObject QUniAndroidLinearLayout::onCreate()
 {
     return QAndroidJniObject("android/widget/LinearLayout",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidLinearLayout::onInflate(QAndroidJniObject &instance)
+void QUniAndroidLinearLayout::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidLinearLayout);
+    Q_D(QUniAndroidLinearLayout);
     if (!d->baselineAligned.isNull())
         instance.callMethod<void>("setBaselineAligned", "(Z)V", d->baselineAligned);
     if (!d->measureWithLargestChild.isNull())
@@ -176,7 +176,7 @@ void QNativeAndroidLinearLayout::onInflate(QAndroidJniObject &instance)
     if (!d->weightSum.isNull())
         instance.callMethod<void>("setWeightSum", "(J)V", d->weightSum);
 
-    QNativeAndroidViewGroup::onInflate(instance);
+    QUniAndroidViewGroup::onInflate(instance);
 
     if (!d->baselineAlignedChildIndex.isNull())
         instance.callMethod<void>("setBaselineAlignedChildIndex", "(I)V", d->baselineAlignedChildIndex);

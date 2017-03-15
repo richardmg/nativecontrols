@@ -46,7 +46,7 @@ static bool native_onClick(JNIEnv *env, jobject object, jlong instance)
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
+    QUniAndroidMenuItem *item = reinterpret_cast<QUniAndroidMenuItem *>(instance);
     if (item) {
         QMetaObject::invokeMethod(item, "click", Qt::QueuedConnection);
         return true;
@@ -58,7 +58,7 @@ static bool native_onMenuItemActionCollapse(JNIEnv *env, jobject object, jlong i
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
+    QUniAndroidMenuItem *item = reinterpret_cast<QUniAndroidMenuItem *>(instance);
     if (item) {
         // TODO
         return true;
@@ -70,7 +70,7 @@ static bool native_onMenuItemActionExpand(JNIEnv *env, jobject object, jlong ins
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidMenuItem *item = reinterpret_cast<QNativeAndroidMenuItem *>(instance);
+    QUniAndroidMenuItem *item = reinterpret_cast<QUniAndroidMenuItem *>(instance);
     if (item) {
         // TODO
         return true;
@@ -90,9 +90,9 @@ static void registerNativeMenuItemMethods(jobject item)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidMenuItemPrivate : public QNativeAndroidContextualPrivate
+class QUniAndroidMenuItemPrivate : public QUniAndroidContextualPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidMenuItem)
+    Q_DECLARE_PUBLIC(QUniAndroidMenuItem)
 
 public:
     void updateActionView();
@@ -103,12 +103,12 @@ public:
     bool checkable = false;
     bool checked = false;
     int showAs = 0; // TODO: SHOW_AS_ACTION_NEVER
-    QNativeAndroidView *actionView = nullptr;
+    QUniAndroidView *actionView = nullptr;
 };
 
-void QNativeAndroidMenuItemPrivate::updateActionView()
+void QUniAndroidMenuItemPrivate::updateActionView()
 {
-    Q_Q(QNativeAndroidMenuItem);
+    Q_Q(QUniAndroidMenuItem);
     if (!q->isValid() || !actionView)
         return;
 
@@ -119,20 +119,20 @@ void QNativeAndroidMenuItemPrivate::updateActionView()
     });
 }
 
-QNativeAndroidMenuItem::QNativeAndroidMenuItem(QObject *parent)
-    : QNativeAndroidContextual(*(new QNativeAndroidMenuItemPrivate), parent)
+QUniAndroidMenuItem::QUniAndroidMenuItem(QObject *parent)
+    : QUniAndroidContextual(*(new QUniAndroidMenuItemPrivate), parent)
 {
 }
 
-QString QNativeAndroidMenuItem::title() const
+QString QUniAndroidMenuItem::title() const
 {
-    Q_D(const QNativeAndroidMenuItem);
+    Q_D(const QUniAndroidMenuItem);
     return d->title;
 }
 
-void QNativeAndroidMenuItem::setTitle(const QString &title)
+void QUniAndroidMenuItem::setTitle(const QString &title)
 {
-    Q_D(QNativeAndroidMenuItem);
+    Q_D(QUniAndroidMenuItem);
     if (d->title == title)
         return;
 
@@ -141,15 +141,15 @@ void QNativeAndroidMenuItem::setTitle(const QString &title)
     emit titleChanged();
 }
 
-bool QNativeAndroidMenuItem::isEnabled() const
+bool QUniAndroidMenuItem::isEnabled() const
 {
-    Q_D(const QNativeAndroidMenuItem);
+    Q_D(const QUniAndroidMenuItem);
     return d->enabled;
 }
 
-void QNativeAndroidMenuItem::setEnabled(bool enabled)
+void QUniAndroidMenuItem::setEnabled(bool enabled)
 {
-    Q_D(QNativeAndroidMenuItem);
+    Q_D(QUniAndroidMenuItem);
     if (d->enabled == enabled)
         return;
 
@@ -158,15 +158,15 @@ void QNativeAndroidMenuItem::setEnabled(bool enabled)
     emit enabledChanged();
 }
 
-bool QNativeAndroidMenuItem::isVisible() const
+bool QUniAndroidMenuItem::isVisible() const
 {
-    Q_D(const QNativeAndroidMenuItem);
+    Q_D(const QUniAndroidMenuItem);
     return d->visible;
 }
 
-void QNativeAndroidMenuItem::setVisible(bool visible)
+void QUniAndroidMenuItem::setVisible(bool visible)
 {
-    Q_D(QNativeAndroidMenuItem);
+    Q_D(QUniAndroidMenuItem);
     if (d->visible == visible)
         return;
 
@@ -177,15 +177,15 @@ void QNativeAndroidMenuItem::setVisible(bool visible)
     emit visibleChanged();
 }
 
-bool QNativeAndroidMenuItem::isCheckable() const
+bool QUniAndroidMenuItem::isCheckable() const
 {
-    Q_D(const QNativeAndroidMenuItem);
+    Q_D(const QUniAndroidMenuItem);
     return d->checkable;
 }
 
-void QNativeAndroidMenuItem::setCheckable(bool checkable)
+void QUniAndroidMenuItem::setCheckable(bool checkable)
 {
-    Q_D(QNativeAndroidMenuItem);
+    Q_D(QUniAndroidMenuItem);
     if (d->checkable == checkable)
         return;
 
@@ -194,15 +194,15 @@ void QNativeAndroidMenuItem::setCheckable(bool checkable)
     emit checkableChanged();
 }
 
-bool QNativeAndroidMenuItem::isChecked() const
+bool QUniAndroidMenuItem::isChecked() const
 {
-    Q_D(const QNativeAndroidMenuItem);
+    Q_D(const QUniAndroidMenuItem);
     return d->checked;
 }
 
-void QNativeAndroidMenuItem::setChecked(bool checked)
+void QUniAndroidMenuItem::setChecked(bool checked)
 {
-    Q_D(QNativeAndroidMenuItem);
+    Q_D(QUniAndroidMenuItem);
     if (d->checked == checked)
         return;
 
@@ -211,15 +211,15 @@ void QNativeAndroidMenuItem::setChecked(bool checked)
     emit checkedChanged();
 }
 
-int QNativeAndroidMenuItem::showAs() const
+int QUniAndroidMenuItem::showAs() const
 {
-    Q_D(const QNativeAndroidMenuItem);
+    Q_D(const QUniAndroidMenuItem);
     return d->showAs;
 }
 
-void QNativeAndroidMenuItem::setShowAs(int showAs)
+void QUniAndroidMenuItem::setShowAs(int showAs)
 {
-    Q_D(QNativeAndroidMenuItem);
+    Q_D(QUniAndroidMenuItem);
     if (d->showAs == showAs)
         return;
 
@@ -228,41 +228,41 @@ void QNativeAndroidMenuItem::setShowAs(int showAs)
     emit showAsChanged();
 }
 
-QNativeAndroidView *QNativeAndroidMenuItem::actionView() const
+QUniAndroidView *QUniAndroidMenuItem::actionView() const
 {
-    Q_D(const QNativeAndroidMenuItem);
+    Q_D(const QUniAndroidMenuItem);
     return d->actionView;
 }
 
-void QNativeAndroidMenuItem::setActionView(QNativeAndroidView *view)
+void QUniAndroidMenuItem::setActionView(QUniAndroidView *view)
 {
-    Q_D(QNativeAndroidMenuItem);
+    Q_D(QUniAndroidMenuItem);
     if (d->actionView == view)
         return;
 
     if (d->actionView) {
-        QObjectPrivate::disconnect(d->actionView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidMenuItemPrivate::updateActionView);
+        QObjectPrivate::disconnect(d->actionView, &QUniAndroidObject::instanceChanged, d, &QUniAndroidMenuItemPrivate::updateActionView);
         d->actionView->destruct();
     }
     d->actionView = view;
     if (d->actionView) {
-        QObjectPrivate::connect(d->actionView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidMenuItemPrivate::updateActionView);
+        QObjectPrivate::connect(d->actionView, &QUniAndroidObject::instanceChanged, d, &QUniAndroidMenuItemPrivate::updateActionView);
         if (isValid())
             d->actionView->construct();
     }
     emit actionViewChanged();
 }
 
-QAndroidJniObject QNativeAndroidMenuItem::onCreate()
+QAndroidJniObject QUniAndroidMenuItem::onCreate()
 {
     return QAndroidJniObject("org/qtproject/qt5/android/bindings/view/QtNativeMenuItem",
                              "(J)V",
                              reinterpret_cast<jlong>(this));
 }
 
-void QNativeAndroidMenuItem::onInflate(QAndroidJniObject &instance)
+void QUniAndroidMenuItem::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidMenuItem);
+    Q_D(QUniAndroidMenuItem);
     instance.callMethod<void>("setTitle", "(Ljava/lang/CharSequence;)V", QAndroidJniObject::fromString(d->title).object());
     instance.callMethod<void>("setEnabled", "(Z)V", d->enabled);
     instance.callMethod<void>("setVisible", "(Z)V", d->visible);
@@ -277,10 +277,10 @@ void QNativeAndroidMenuItem::onInflate(QAndroidJniObject &instance)
     }
 }
 
-void QNativeAndroidMenuItem::objectChange(ObjectChange change)
+void QUniAndroidMenuItem::objectChange(ObjectChange change)
 {
-    Q_D(QNativeAndroidMenuItem);
-    QNativeAndroidContextual::objectChange(change);
+    Q_D(QUniAndroidMenuItem);
+    QUniAndroidContextual::objectChange(change);
     if (change == InstanceChange)
         d->updateActionView();
 }

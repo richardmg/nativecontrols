@@ -53,8 +53,8 @@ public:
 
 void QtQmlAndroidSupportV4WidgetPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterType<QNativeAndroidDrawerLayout>(uri, 0, 21, "DrawerLayout");
-    qmlRegisterType<QNativeAndroidSwipeRefreshLayout>(uri, 0, 21, "SwipeRefreshLayout");
+    qmlRegisterType<QUniAndroidDrawerLayout>(uri, 0, 21, "DrawerLayout");
+    qmlRegisterType<QUniAndroidSwipeRefreshLayout>(uri, 0, 21, "SwipeRefreshLayout");
 }
 
 QT_END_NAMESPACE

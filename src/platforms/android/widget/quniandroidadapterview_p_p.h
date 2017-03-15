@@ -52,17 +52,17 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidBaseAdapter;
+class QUniAndroidBaseAdapter;
 
-class QNativeAndroidAdapterViewPrivate : public QNativeAndroidViewGroupPrivate
+class QUniAndroidAdapterViewPrivate : public QUniAndroidViewGroupPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidAdapterView)
+    Q_DECLARE_PUBLIC(QUniAndroidAdapterView)
 
 public:
     void updateAdapter();
 
     QAndroidJniObject listener;
-    QNativeAndroidBaseAdapter *adapter = nullptr;
+    QUniAndroidBaseAdapter *adapter = nullptr;
 };
 
 QT_END_NAMESPACE

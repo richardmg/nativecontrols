@@ -52,16 +52,16 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidScrollViewPrivate;
+class QUniAndroidScrollViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidScrollView : public QNativeAndroidFrameLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidScrollView : public QUniAndroidFrameLayout
 {
     Q_OBJECT
     Q_PROPERTY(int scrollX READ scrollX WRITE setScrollX NOTIFY scrollXChanged)
     Q_PROPERTY(int scrollY READ scrollY WRITE setScrollY NOTIFY scrollYChanged)
 
 public:
-    explicit QNativeAndroidScrollView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidScrollView(QUniAndroidContext *context = nullptr);
 
     int scrollX() const;
     void setScrollX(int x);
@@ -78,8 +78,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidScrollView)
-    Q_DECLARE_PRIVATE(QNativeAndroidScrollView)
+    Q_DISABLE_COPY(QUniAndroidScrollView)
+    Q_DECLARE_PRIVATE(QUniAndroidScrollView)
 
     Q_PRIVATE_SLOT(d_func(), bool _q_updateScrollX(int x))
     Q_PRIVATE_SLOT(d_func(), bool _q_updateScrollY(int y))

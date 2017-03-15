@@ -52,9 +52,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidViewAnimatorPrivate;
+class QUniAndroidViewAnimatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidViewAnimator : public QNativeAndroidFrameLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidViewAnimator : public QUniAndroidFrameLayout
 {
     Q_OBJECT
     Q_PROPERTY(int displayedChild READ displayedChild WRITE setDisplayedChild NOTIFY displayedChildChanged)
@@ -62,7 +62,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidViewAnimator : public QNativeAndroidF
     Q_PROPERTY(int outAnimation READ outAnimation WRITE setOutAnimation NOTIFY outAnimationChanged)
 
 public:
-    explicit QNativeAndroidViewAnimator(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidViewAnimator(QUniAndroidContext *context = nullptr);
 
     int displayedChild() const;
     void setDisplayedChild(int child);
@@ -87,8 +87,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidViewAnimator)
-    Q_DECLARE_PRIVATE(QNativeAndroidViewAnimator)
+    Q_DISABLE_COPY(QUniAndroidViewAnimator)
+    Q_DECLARE_PRIVATE(QUniAndroidViewAnimator)
 };
 
 QT_END_NAMESPACE

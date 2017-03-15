@@ -41,25 +41,25 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidTextView::QNativeAndroidTextView(QNativeAndroidContext *context)
-    : QNativeAndroidView(*(new QNativeAndroidTextViewPrivate), context)
+QUniAndroidTextView::QUniAndroidTextView(QUniAndroidContext *context)
+    : QUniAndroidView(*(new QUniAndroidTextViewPrivate), context)
 {
 }
 
-QNativeAndroidTextView::QNativeAndroidTextView(QNativeAndroidTextViewPrivate &dd, QNativeAndroidContext *context)
-    : QNativeAndroidView(dd, context)
+QUniAndroidTextView::QUniAndroidTextView(QUniAndroidTextViewPrivate &dd, QUniAndroidContext *context)
+    : QUniAndroidView(dd, context)
 {
 }
 
-QString QNativeAndroidTextView::text() const
+QString QUniAndroidTextView::text() const
 {
-    Q_D(const QNativeAndroidTextView);
+    Q_D(const QUniAndroidTextView);
     return d->text;
 }
 
-void QNativeAndroidTextView::setText(const QString &text)
+void QUniAndroidTextView::setText(const QString &text)
 {
-    Q_D(QNativeAndroidTextView);
+    Q_D(QUniAndroidTextView);
     if (d->text == text)
         return;
 
@@ -68,17 +68,17 @@ void QNativeAndroidTextView::setText(const QString &text)
     emit textChanged();
 }
 
-int QNativeAndroidTextView::textColor() const
+int QUniAndroidTextView::textColor() const
 {
-    Q_D(const QNativeAndroidTextView);
+    Q_D(const QUniAndroidTextView);
     if (d->textColor.isNull())
-        return QNativeAndroidColor::BLACK; // TODO
+        return QUniAndroidColor::BLACK; // TODO
     return d->textColor;
 }
 
-void QNativeAndroidTextView::setTextColor(int color)
+void QUniAndroidTextView::setTextColor(int color)
 {
-    Q_D(QNativeAndroidTextView);
+    Q_D(QUniAndroidTextView);
     if (color == textColor())
         return;
 
@@ -87,17 +87,17 @@ void QNativeAndroidTextView::setTextColor(int color)
     emit textColorChanged();
 }
 
-qreal QNativeAndroidTextView::textSize() const
+qreal QUniAndroidTextView::textSize() const
 {
-    Q_D(const QNativeAndroidTextView);
+    Q_D(const QUniAndroidTextView);
     if (d->textSize.isNull())
         return -1;
     return d->textSize;
 }
 
-void QNativeAndroidTextView::setTextSize(qreal size)
+void QUniAndroidTextView::setTextSize(qreal size)
 {
-    Q_D(QNativeAndroidTextView);
+    Q_D(QUniAndroidTextView);
     if (qFuzzyCompare(size, textSize()))
         return;
 
@@ -106,15 +106,15 @@ void QNativeAndroidTextView::setTextSize(qreal size)
     emit textSizeChanged();
 }
 
-QString QNativeAndroidTextView::hint() const
+QString QUniAndroidTextView::hint() const
 {
-    Q_D(const QNativeAndroidTextView);
+    Q_D(const QUniAndroidTextView);
     return d->hint;
 }
 
-void QNativeAndroidTextView::setHint(const QString &hint)
+void QUniAndroidTextView::setHint(const QString &hint)
 {
-    Q_D(QNativeAndroidTextView);
+    Q_D(QUniAndroidTextView);
     if (d->hint == hint)
         return;
 
@@ -123,15 +123,15 @@ void QNativeAndroidTextView::setHint(const QString &hint)
     emit hintChanged();
 }
 
-bool QNativeAndroidTextView::isSingleLine() const
+bool QUniAndroidTextView::isSingleLine() const
 {
-    Q_D(const QNativeAndroidTextView);
+    Q_D(const QUniAndroidTextView);
     return d->singleLine;
 }
 
-void QNativeAndroidTextView::setSingleLine(bool singleLine)
+void QUniAndroidTextView::setSingleLine(bool singleLine)
 {
-    Q_D(QNativeAndroidTextView);
+    Q_D(QUniAndroidTextView);
     if (d->singleLine == singleLine)
         return;
 
@@ -140,17 +140,17 @@ void QNativeAndroidTextView::setSingleLine(bool singleLine)
     emit singleLineChanged();
 }
 
-int QNativeAndroidTextView::inputType() const
+int QUniAndroidTextView::inputType() const
 {
-    Q_D(const QNativeAndroidTextView);
+    Q_D(const QUniAndroidTextView);
     if (d->inputType.isNull())
         return 0; // TODO
     return d->inputType;
 }
 
-void QNativeAndroidTextView::setInputType(int type)
+void QUniAndroidTextView::setInputType(int type)
 {
-    Q_D(QNativeAndroidTextView);
+    Q_D(QUniAndroidTextView);
     if (!d->inputType.isNull() && d->inputType == type)
         return;
 
@@ -159,17 +159,17 @@ void QNativeAndroidTextView::setInputType(int type)
     emit inputTypeChanged();
 }
 
-QAndroidJniObject QNativeAndroidTextView::onCreate()
+QAndroidJniObject QUniAndroidTextView::onCreate()
 {
     return QAndroidJniObject("android/widget/TextView",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidTextView::onInflate(QAndroidJniObject &instance)
+void QUniAndroidTextView::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidTextView);
-    QNativeAndroidView::onInflate(instance);
+    Q_D(QUniAndroidTextView);
+    QUniAndroidView::onInflate(instance);
 
     if (!d->text.isNull())
         instance.callMethod<void>("setText", "(Ljava/lang/CharSequence;)V", QAndroidJniObject::fromString(d->text).object());

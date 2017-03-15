@@ -57,9 +57,9 @@ QT_BEGIN_NAMESPACE
 class QJSEngine;
 class QQmlEngine;
 class QQmlPropertyMap;
-class QNativeAndroidRPrivate;
+class QUniAndroidRPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidR : public QObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidR : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlPropertyMap *anim READ anim CONSTANT)
@@ -86,7 +86,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidR : public QObject
     Q_PROPERTY(QQmlPropertyMap *xml READ xml CONSTANT)
 
 public:
-    explicit QNativeAndroidR(QObject *parent = nullptr);
+    explicit QUniAndroidR(QObject *parent = nullptr);
 
     QQmlPropertyMap *anim();
     QQmlPropertyMap *animator();
@@ -114,8 +114,8 @@ public:
     static QObject *provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidR)
-    Q_DECLARE_PRIVATE(QNativeAndroidR)
+    Q_DISABLE_COPY(QUniAndroidR)
+    Q_DECLARE_PRIVATE(QUniAndroidR)
 };
 
 QT_END_NAMESPACE

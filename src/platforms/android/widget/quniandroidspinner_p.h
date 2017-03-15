@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidSpinner : public QNativeAndroidAdapterView // TODO: AbsSpinner
+class Q_NATIVEANDROID_EXPORT QUniAndroidSpinner : public QUniAndroidAdapterView // TODO: AbsSpinner
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidSpinner(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidSpinner(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

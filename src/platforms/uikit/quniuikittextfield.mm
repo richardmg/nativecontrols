@@ -42,14 +42,14 @@
 #include <QtNativeUIKitControls/quniuikittextfield.h>
 #include <QtNativeUIKitControls/private/quniuikittextfield_p.h>
 
-@interface QNativeUIKitTextFieldDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QNativeUIKitTextFieldPrivate) *_textField;
+@interface QUniUIKitTextFieldDelegate : NSObject {
+    QT_PREPEND_NAMESPACE(QUniUIKitTextFieldPrivate) *_textField;
 }
 @end
 
-@implementation QNativeUIKitTextFieldDelegate
+@implementation QUniUIKitTextFieldDelegate
 
--(id)initWithQNativeUIKitTextFieldPrivate:(QT_PREPEND_NAMESPACE(QNativeUIKitTextFieldPrivate) *)textField
+-(id)initWithQUniUIKitTextFieldPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTextFieldPrivate) *)textField
 {
     self = [self init];
     if (self) {
@@ -63,31 +63,31 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitTextFieldPrivate::QNativeUIKitTextFieldPrivate(int version)
-    : QNativeUIKitControlPrivate(version)
+QUniUIKitTextFieldPrivate::QUniUIKitTextFieldPrivate(int version)
+    : QUniUIKitControlPrivate(version)
     , m_delegate(nullptr)
 {
 }
 
-QNativeUIKitTextFieldPrivate::~QNativeUIKitTextFieldPrivate()
+QUniUIKitTextFieldPrivate::~QUniUIKitTextFieldPrivate()
 {
     [m_delegate release];
 }
 
-void QNativeUIKitTextFieldPrivate::connectSignals(QNativeBase *base)
+void QUniUIKitTextFieldPrivate::connectSignals(QUniBase *base)
 {
-    Q_Q(QNativeUIKitTextField);
-    QNativeUIKitControlPrivate::connectSignals(base);
-    const auto b = static_cast<QNativeTextField *>(base);
-    q->connect(q, &QNativeUIKitTextField::textChanged,
-               b, &QNativeTextField::textChanged);
-    q->connect(q, &QNativeUIKitTextField::placeholderTextChanged,
-               b, &QNativeTextField::placeholderTextChanged);
+    Q_Q(QUniUIKitTextField);
+    QUniUIKitControlPrivate::connectSignals(base);
+    const auto b = static_cast<QUniTextField *>(base);
+    q->connect(q, &QUniUIKitTextField::textChanged,
+               b, &QUniTextField::textChanged);
+    q->connect(q, &QUniUIKitTextField::placeholderTextChanged,
+               b, &QUniTextField::placeholderTextChanged);
 }
 
-UIView *QNativeUIKitTextFieldPrivate::createView()
+UIView *QUniUIKitTextFieldPrivate::createView()
 {
-    m_delegate = [[QNativeUIKitTextFieldDelegate alloc] initWithQNativeUIKitTextFieldPrivate:this];
+    m_delegate = [[QUniUIKitTextFieldDelegate alloc] initWithQUniUIKitTextFieldPrivate:this];
 
     UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
     [uiTextField sizeToFit];
@@ -95,39 +95,39 @@ UIView *QNativeUIKitTextFieldPrivate::createView()
     return uiTextField;
 }
 
-QNativeUIKitTextField::QNativeUIKitTextField(QNativeUIKitBase *parent)
-    : QNativeUIKitControl(*new QNativeUIKitTextFieldPrivate(), parent)
+QUniUIKitTextField::QUniUIKitTextField(QUniUIKitBase *parent)
+    : QUniUIKitControl(*new QUniUIKitTextFieldPrivate(), parent)
 {
 }
 
-QNativeUIKitTextField::QNativeUIKitTextField(const QString &text, QNativeUIKitBase *parent)
-    : QNativeUIKitControl(*new QNativeUIKitTextFieldPrivate(), parent)
+QUniUIKitTextField::QUniUIKitTextField(const QString &text, QUniUIKitBase *parent)
+    : QUniUIKitControl(*new QUniUIKitTextFieldPrivate(), parent)
 {
     setText(text);
 }
 
-QNativeUIKitTextField::QNativeUIKitTextField(QNativeUIKitTextFieldPrivate &dd, QNativeUIKitBase *parent)
-    : QNativeUIKitControl(dd, parent)
+QUniUIKitTextField::QUniUIKitTextField(QUniUIKitTextFieldPrivate &dd, QUniUIKitBase *parent)
+    : QUniUIKitControl(dd, parent)
 {
 }
 
-QNativeUIKitTextField::~QNativeUIKitTextField()
+QUniUIKitTextField::~QUniUIKitTextField()
 {
-    Q_D(QNativeUIKitTextField);
+    Q_D(QUniUIKitTextField);
     [d->m_delegate release];
 }
 
-UITextField *QNativeUIKitTextField::uiTextFieldHandle()
+UITextField *QUniUIKitTextField::uiTextFieldHandle()
 {
     return static_cast<UITextField *>(d_func()->view());
 }
 
-QString QNativeUIKitTextField::text()
+QString QUniUIKitTextField::text()
 {
     return QString::fromNSString(uiTextFieldHandle().text);
 }
 
-void QNativeUIKitTextField::setText(const QString &newText)
+void QUniUIKitTextField::setText(const QString &newText)
 {
     if (newText == text())
         return;
@@ -138,12 +138,12 @@ void QNativeUIKitTextField::setText(const QString &newText)
     emit textChanged(newText);
 }
 
-QString QNativeUIKitTextField::placeholderText()
+QString QUniUIKitTextField::placeholderText()
 {
     return QString::fromNSString(uiTextFieldHandle().placeholder);
 }
 
-void QNativeUIKitTextField::setPlaceholderText(const QString &newPlaceholderText)
+void QUniUIKitTextField::setPlaceholderText(const QString &newPlaceholderText)
 {
     if (newPlaceholderText == placeholderText())
         return;

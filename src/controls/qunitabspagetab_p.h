@@ -54,20 +54,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeTabsPageTab;
-class QNativePlatformTabsPageTab;
+class QUniTabsPageTab;
+class QUniPlatformTabsPageTab;
 
-class QNativeTabsPageTabPrivate : public QNativeBasePrivate
+class QUniTabsPageTabPrivate : public QUniBasePrivate
 {
-    Q_DECLARE_PUBLIC(QNativeTabsPageTab)
+    Q_DECLARE_PUBLIC(QUniTabsPageTab)
 
 public:
-    explicit QNativeTabsPageTabPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeTabsPageTabPrivate();
+    explicit QUniTabsPageTabPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniTabsPageTabPrivate();
 
     void createPlatformTabsPageTab();
-    void setPlatformTabsPageTab(QNativePlatformTabsPageTab *platformTabsPageTab);
-    QNativePlatformTabsPageTab *m_platformTabsPageTab;
+    void setPlatformTabsPageTab(QUniPlatformTabsPageTab *platformTabsPageTab);
+    QUniPlatformTabsPageTab *m_platformTabsPageTab;
 };
 
 QT_END_NAMESPACE

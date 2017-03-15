@@ -54,14 +54,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidProgressBarPrivate : public QNativeAndroidViewPrivate
+class QUniAndroidProgressBarPrivate : public QUniAndroidViewPrivate
 {
 public:
     int max = 100;
     int progress = 0;
     int secondary = 0;
     bool indeterminate = false;
-    QNativeAndroidOptional<QNativeAndroidProgressBar::Style> style;
+    QUniAndroidOptional<QUniAndroidProgressBar::Style> style;
 };
 
 QT_END_NAMESPACE

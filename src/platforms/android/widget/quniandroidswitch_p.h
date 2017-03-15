@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidSwitch : public QNativeAndroidCompoundButton
+class Q_NATIVEANDROID_EXPORT QUniAndroidSwitch : public QUniAndroidCompoundButton
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidSwitch(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidSwitch(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

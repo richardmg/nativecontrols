@@ -52,9 +52,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidTranslateAnimationPrivate;
+class QUniAndroidTranslateAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidTranslateAnimation : public QNativeAndroidAnimation
+class Q_NATIVEANDROID_EXPORT QUniAndroidTranslateAnimation : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(qreal fromX READ fromX WRITE setFromX NOTIFY fromXChanged)
@@ -67,7 +67,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidTranslateAnimation : public QNativeAn
     Q_PROPERTY(Relation toYType READ toYType WRITE setToYType NOTIFY toYTypeChanged)
 
 public:
-    explicit QNativeAndroidTranslateAnimation(QObject *parent = nullptr);
+    explicit QUniAndroidTranslateAnimation(QObject *parent = nullptr);
 
     qreal fromX() const;
     void setFromX(qreal x);
@@ -107,8 +107,8 @@ protected:
     QAndroidJniObject onCreate() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidTranslateAnimation)
-    Q_DECLARE_PRIVATE(QNativeAndroidTranslateAnimation)
+    Q_DISABLE_COPY(QUniAndroidTranslateAnimation)
+    Q_DECLARE_PRIVATE(QUniAndroidTranslateAnimation)
 };
 
 QT_END_NAMESPACE

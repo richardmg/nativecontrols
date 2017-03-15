@@ -58,13 +58,13 @@ public:
 
 void QtQmlAndroidViewPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterUncreatableType<QNativeAndroidGravity>(uri, 0, 21, "Gravity", QStringLiteral("Gravity is an enum"));
-    qmlRegisterUncreatableType<QNativeAndroidLayoutParams>(uri, 0, 21, "Layout", QStringLiteral("Layout is an attached property"));
-    qmlRegisterType<QNativeAndroidMenu>(uri, 0, 21, "Menu");
-    qmlRegisterType<QNativeAndroidMenuItem>(uri, 0, 21, "MenuItem");
-    qmlRegisterType<QNativeAndroidView>(uri, 0, 21, "View");
-    qmlRegisterType<QNativeAndroidViewGroup>(uri, 0, 21, "ViewGroup");
-    qmlRegisterType<QNativeAndroidWindow>();
+    qmlRegisterUncreatableType<QUniAndroidGravity>(uri, 0, 21, "Gravity", QStringLiteral("Gravity is an enum"));
+    qmlRegisterUncreatableType<QUniAndroidLayoutParams>(uri, 0, 21, "Layout", QStringLiteral("Layout is an attached property"));
+    qmlRegisterType<QUniAndroidMenu>(uri, 0, 21, "Menu");
+    qmlRegisterType<QUniAndroidMenuItem>(uri, 0, 21, "MenuItem");
+    qmlRegisterType<QUniAndroidView>(uri, 0, 21, "View");
+    qmlRegisterType<QUniAndroidViewGroup>(uri, 0, 21, "ViewGroup");
+    qmlRegisterType<QUniAndroidWindow>();
 }
 
 QT_END_NAMESPACE

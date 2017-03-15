@@ -44,27 +44,27 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitView;
-class QNativeAppKitViewControllerPrivate;
-class QNativeAppKitTabViewItem;
+class QUniAppKitView;
+class QUniAppKitViewControllerPrivate;
+class QUniAppKitTabViewItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSViewController);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitViewController : public QNativeAppKitBase, public virtual QNativePlatformPage
+class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitViewController : public QUniAppKitBase, public virtual QUniPlatformPage
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAppKitView *view READ view WRITE setView NOTIFY viewChanged)
+    Q_PROPERTY(QUniAppKitView *view READ view WRITE setView NOTIFY viewChanged)
 
 public:
-    QNativeAppKitViewController(QNativeAppKitBase *parent = nullptr);
-    ~QNativeAppKitViewController();
+    QUniAppKitViewController(QUniAppKitBase *parent = nullptr);
+    ~QUniAppKitViewController();
 
-    QNativeAppKitView *view() const;
-    void setView(QNativeAppKitView *view);
+    QUniAppKitView *view() const;
+    void setView(QUniAppKitView *view);
 
-    void setChildViewControllers(QList<QNativeAppKitViewController *> list);
-    QList<QNativeAppKitViewController *> childViewControllers() const;
+    void setChildViewControllers(QList<QUniAppKitViewController *> list);
+    QList<QUniAppKitViewController *> childViewControllers() const;
 
-    QNativeAppKitViewController *parentViewController();
+    QUniAppKitViewController *parentViewController();
 
     NSViewController *nsViewControllerHandle();
 
@@ -76,15 +76,15 @@ public:
     QByteArrayList supportedNativeParentTypes() override;
 
 Q_SIGNALS:
-    void viewChanged(QNativeAppKitView *contentView);
+    void viewChanged(QUniAppKitView *contentView);
 
 protected:
-    QNativeAppKitViewController(QNativeAppKitViewControllerPrivate &dd, QNativeAppKitBase *parent = nullptr);
+    QUniAppKitViewController(QUniAppKitViewControllerPrivate &dd, QUniAppKitBase *parent = nullptr);
     void childEvent(QChildEvent *event) override;
 
 private:
-    Q_DECLARE_PRIVATE(QNativeAppKitViewController)
-    Q_DISABLE_COPY(QNativeAppKitViewController)
+    Q_DECLARE_PRIVATE(QUniAppKitViewController)
+    Q_DISABLE_COPY(QUniAppKitViewController)
 };
 
 QT_END_NAMESPACE

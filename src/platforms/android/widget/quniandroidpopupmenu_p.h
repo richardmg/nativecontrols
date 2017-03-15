@@ -52,23 +52,23 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidView;
-class QNativeAndroidMenuItem;
-class QNativeAndroidPopupMenuPrivate;
+class QUniAndroidView;
+class QUniAndroidMenuItem;
+class QUniAndroidPopupMenuPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidPopupMenu : public QNativeAndroidObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidPopupMenu : public QUniAndroidObject
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAndroidView *anchor READ anchor WRITE setAnchor NOTIFY anchorChanged)
+    Q_PROPERTY(QUniAndroidView *anchor READ anchor WRITE setAnchor NOTIFY anchorChanged)
     Q_PROPERTY(int gravity READ gravity WRITE setGravity NOTIFY gravityChanged)
 
 public:
-    explicit QNativeAndroidPopupMenu(QObject *parent = nullptr);
+    explicit QUniAndroidPopupMenu(QObject *parent = nullptr);
 
-    QList<QNativeAndroidMenuItem *> items() const;
+    QList<QUniAndroidMenuItem *> items() const;
 
-    QNativeAndroidView *anchor() const;
-    void setAnchor(QNativeAndroidView *anchor);
+    QUniAndroidView *anchor() const;
+    void setAnchor(QUniAndroidView *anchor);
 
     int gravity() const;
     void setGravity(int gravity);
@@ -84,8 +84,8 @@ Q_SIGNALS:
     void itemClick();
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidPopupMenu)
-    Q_DECLARE_PRIVATE(QNativeAndroidPopupMenu)
+    Q_DISABLE_COPY(QUniAndroidPopupMenu)
+    Q_DECLARE_PRIVATE(QUniAndroidPopupMenu)
 };
 
 QT_END_NAMESPACE

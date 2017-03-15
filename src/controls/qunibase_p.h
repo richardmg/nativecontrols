@@ -53,21 +53,21 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeBase;
-class QNativePlatformBase;
+class QUniBase;
+class QUniPlatformBase;
 
-class QNativeBasePrivate : public QNativeQmlBasePrivate
+class QUniBasePrivate : public QUniQmlBasePrivate
 {
-    Q_DECLARE_PUBLIC(QNativeBase)
+    Q_DECLARE_PUBLIC(QUniBase)
 
 public:
-    explicit QNativeBasePrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeBasePrivate();
+    explicit QUniBasePrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniBasePrivate();
 
-    void setPlatformBase(QNativePlatformBase *platformBase);
+    void setPlatformBase(QUniPlatformBase *platformBase);
     void syncPlatformParent();
 
-    QNativePlatformBase *m_platformBase;
+    QUniPlatformBase *m_platformBase;
 };
 
 QT_END_NAMESPACE

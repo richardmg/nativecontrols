@@ -44,20 +44,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativePlatformBase;
-class QNativeBasePrivate;
+class QUniPlatformBase;
+class QUniBasePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeBase : public QNativeQmlBase
+class Q_NATIVECONTROLS_EXPORT QUniBase : public QUniQmlBase
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeBase *parent READ parentBase WRITE setParent NOTIFY parentChanged DESIGNABLE false)
+    Q_PROPERTY(QUniBase *parent READ parentBase WRITE setParent NOTIFY parentChanged DESIGNABLE false)
 
 public:
-    explicit QNativeBase(QNativeBase *parent = nullptr);
-    virtual ~QNativeBase();
+    explicit QUniBase(QUniBase *parent = nullptr);
+    virtual ~QUniBase();
 
-    void setParent(QNativeBase *parent);
-    QNativeBase *parentBase();
+    void setParent(QUniBase *parent);
+    QUniBase *parentBase();
 
     bool setNativeParent(QObject *parent);
     bool setNativeParent(const QByteArray &type, void *parent);
@@ -67,15 +67,15 @@ public:
     QByteArrayList supportedNativeParentTypes();
 
 Q_SIGNALS:
-    void parentChanged(QNativeBase *parent);
+    void parentChanged(QUniBase *parent);
 
 protected:
-    QNativeBase(QNativeBasePrivate &dd, QNativeBase *parent = nullptr);
+    QUniBase(QUniBasePrivate &dd, QUniBase *parent = nullptr);
     void childEvent(QChildEvent *event) override;
 
 private:
-    Q_DECLARE_PRIVATE(QNativeBase)
-    Q_DISABLE_COPY(QNativeBase)
+    Q_DECLARE_PRIVATE(QUniBase)
+    Q_DISABLE_COPY(QUniBase)
 };
 
 QT_END_NAMESPACE

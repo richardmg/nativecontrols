@@ -44,7 +44,7 @@ static void native_onValueChange(JNIEnv *env, jobject object, jlong instance, ji
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidNumberPicker *picker = reinterpret_cast<QNativeAndroidNumberPicker *>(instance);
+    QUniAndroidNumberPicker *picker = reinterpret_cast<QUniAndroidNumberPicker *>(instance);
     if (picker)
         QMetaObject::invokeMethod(picker, "_q_updateValue", Qt::QueuedConnection, Q_ARG(int, value));
 }
@@ -59,9 +59,9 @@ static void registerNativeNumberPickerMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidNumberPickerPrivate : public QNativeAndroidLinearLayoutPrivate
+class QUniAndroidNumberPickerPrivate : public QUniAndroidLinearLayoutPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidNumberPicker)
+    Q_DECLARE_PUBLIC(QUniAndroidNumberPicker)
 
 public:
     bool _q_updateValue(int value);
@@ -70,9 +70,9 @@ public:
     QAndroidJniObject listener;
 };
 
-bool QNativeAndroidNumberPickerPrivate::_q_updateValue(int arg)
+bool QUniAndroidNumberPickerPrivate::_q_updateValue(int arg)
 {
-    Q_Q(QNativeAndroidNumberPicker);
+    Q_Q(QUniAndroidNumberPicker);
     if (value == arg)
         return false;
 
@@ -81,35 +81,35 @@ bool QNativeAndroidNumberPickerPrivate::_q_updateValue(int arg)
     return true;
 }
 
-QNativeAndroidNumberPicker::QNativeAndroidNumberPicker(QNativeAndroidContext *context)
-    : QNativeAndroidLinearLayout(*(new QNativeAndroidNumberPickerPrivate), context)
+QUniAndroidNumberPicker::QUniAndroidNumberPicker(QUniAndroidContext *context)
+    : QUniAndroidLinearLayout(*(new QUniAndroidNumberPickerPrivate), context)
 {
 }
 
-int QNativeAndroidNumberPicker::value() const
+int QUniAndroidNumberPicker::value() const
 {
-    Q_D(const QNativeAndroidNumberPicker);
+    Q_D(const QUniAndroidNumberPicker);
     return d->value;
 }
 
-void QNativeAndroidNumberPicker::setValue(int value)
+void QUniAndroidNumberPicker::setValue(int value)
 {
-    Q_D(QNativeAndroidNumberPicker);
+    Q_D(QUniAndroidNumberPicker);
     if (d->_q_updateValue(value))
         QtNativeAndroid::callIntMethod(instance(), "setValue", value);
 }
 
-QAndroidJniObject QNativeAndroidNumberPicker::onCreate()
+QAndroidJniObject QUniAndroidNumberPicker::onCreate()
 {
     return QAndroidJniObject("android/widget/NumberPicker",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidNumberPicker::onInflate(QAndroidJniObject &instance)
+void QUniAndroidNumberPicker::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidNumberPicker);
-    QNativeAndroidLinearLayout::onInflate(instance);
+    Q_D(QUniAndroidNumberPicker);
+    QUniAndroidLinearLayout::onInflate(instance);
 
     d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeNumberPickerListener",
                                    "(Landroid/widget/NumberPicker;J)V",

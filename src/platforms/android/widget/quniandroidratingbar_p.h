@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidRatingBarPrivate;
+class QUniAndroidRatingBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidRatingBar : public QNativeAndroidAbsSeekBar
+class Q_NATIVEANDROID_EXPORT QUniAndroidRatingBar : public QUniAndroidAbsSeekBar
 {
     Q_OBJECT
     Q_PROPERTY(qreal rating READ rating WRITE setRating NOTIFY ratingChanged)
 
 public:
-    explicit QNativeAndroidRatingBar(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidRatingBar(QUniAndroidContext *context = nullptr);
 
     qreal rating() const;
     void setRating(qreal rating);
@@ -73,8 +73,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidRatingBar)
-    Q_DECLARE_PRIVATE(QNativeAndroidRatingBar)
+    Q_DISABLE_COPY(QUniAndroidRatingBar)
+    Q_DECLARE_PRIVATE(QUniAndroidRatingBar)
 };
 
 QT_END_NAMESPACE

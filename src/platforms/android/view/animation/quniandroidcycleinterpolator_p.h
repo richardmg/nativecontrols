@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidCycleInterpolatorPrivate;
+class QUniAndroidCycleInterpolatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidCycleInterpolator : public QNativeAndroidInterpolator
+class Q_NATIVEANDROID_EXPORT QUniAndroidCycleInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
     Q_PROPERTY(qreal cycles READ cycles WRITE setCycles NOTIFY cyclesChanged)
 
 public:
-    explicit QNativeAndroidCycleInterpolator(QObject *parent = nullptr);
+    explicit QUniAndroidCycleInterpolator(QObject *parent = nullptr);
 
     qreal cycles() const;
     void setCycles(qreal cycles);
@@ -72,8 +72,8 @@ protected:
     QAndroidJniObject onCreate() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidCycleInterpolator)
-    Q_DECLARE_PRIVATE(QNativeAndroidCycleInterpolator)
+    Q_DISABLE_COPY(QUniAndroidCycleInterpolator)
+    Q_DECLARE_PRIVATE(QUniAndroidCycleInterpolator)
 };
 
 QT_END_NAMESPACE

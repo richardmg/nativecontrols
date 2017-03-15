@@ -40,31 +40,31 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidPathInterpolatorPrivate : public QNativeAndroidInterpolatorPrivate
+class QUniAndroidPathInterpolatorPrivate : public QUniAndroidInterpolatorPrivate
 {
 public:
-    QNativeAndroidOptional<qreal> controlX;
-    QNativeAndroidOptional<qreal> controlY;
-    QNativeAndroidOptional<qreal> controlX2;
-    QNativeAndroidOptional<qreal> controlY2;
+    QUniAndroidOptional<qreal> controlX;
+    QUniAndroidOptional<qreal> controlY;
+    QUniAndroidOptional<qreal> controlX2;
+    QUniAndroidOptional<qreal> controlY2;
 };
 
-QNativeAndroidPathInterpolator::QNativeAndroidPathInterpolator(QObject *parent)
-    : QNativeAndroidInterpolator(*(new QNativeAndroidPathInterpolatorPrivate), parent)
+QUniAndroidPathInterpolator::QUniAndroidPathInterpolator(QObject *parent)
+    : QUniAndroidInterpolator(*(new QUniAndroidPathInterpolatorPrivate), parent)
 {
 }
 
-qreal QNativeAndroidPathInterpolator::controlX() const
+qreal QUniAndroidPathInterpolator::controlX() const
 {
-    Q_D(const QNativeAndroidPathInterpolator);
+    Q_D(const QUniAndroidPathInterpolator);
     if (d->controlX.isNull())
         return 0.0;
     return d->controlX;
 }
 
-void QNativeAndroidPathInterpolator::setControlX(qreal x)
+void QUniAndroidPathInterpolator::setControlX(qreal x)
 {
-    Q_D(QNativeAndroidPathInterpolator);
+    Q_D(QUniAndroidPathInterpolator);
     if (!d->controlX.isNull() && qFuzzyCompare(d->controlX, x))
         return;
 
@@ -72,17 +72,17 @@ void QNativeAndroidPathInterpolator::setControlX(qreal x)
     emit controlXChanged();
 }
 
-qreal QNativeAndroidPathInterpolator::controlY() const
+qreal QUniAndroidPathInterpolator::controlY() const
 {
-    Q_D(const QNativeAndroidPathInterpolator);
+    Q_D(const QUniAndroidPathInterpolator);
     if (d->controlY.isNull())
         return 0.0;
     return d->controlY;
 }
 
-void QNativeAndroidPathInterpolator::setControlY(qreal y)
+void QUniAndroidPathInterpolator::setControlY(qreal y)
 {
-    Q_D(QNativeAndroidPathInterpolator);
+    Q_D(QUniAndroidPathInterpolator);
     if (!d->controlY.isNull() && qFuzzyCompare(d->controlY, y))
         return;
 
@@ -90,17 +90,17 @@ void QNativeAndroidPathInterpolator::setControlY(qreal y)
     emit controlYChanged();
 }
 
-qreal QNativeAndroidPathInterpolator::controlX2() const
+qreal QUniAndroidPathInterpolator::controlX2() const
 {
-    Q_D(const QNativeAndroidPathInterpolator);
+    Q_D(const QUniAndroidPathInterpolator);
     if (d->controlX2.isNull())
         return 0.0;
     return d->controlX2;
 }
 
-void QNativeAndroidPathInterpolator::setControlX2(qreal x)
+void QUniAndroidPathInterpolator::setControlX2(qreal x)
 {
-    Q_D(QNativeAndroidPathInterpolator);
+    Q_D(QUniAndroidPathInterpolator);
     if (!d->controlX2.isNull() && qFuzzyCompare(d->controlX2, x))
         return;
 
@@ -108,17 +108,17 @@ void QNativeAndroidPathInterpolator::setControlX2(qreal x)
     emit controlX2Changed();
 }
 
-qreal QNativeAndroidPathInterpolator::controlY2() const
+qreal QUniAndroidPathInterpolator::controlY2() const
 {
-    Q_D(const QNativeAndroidPathInterpolator);
+    Q_D(const QUniAndroidPathInterpolator);
     if (d->controlY2.isNull())
         return 0.0;
     return d->controlY2;
 }
 
-void QNativeAndroidPathInterpolator::setControlY2(qreal y)
+void QUniAndroidPathInterpolator::setControlY2(qreal y)
 {
-    Q_D(QNativeAndroidPathInterpolator);
+    Q_D(QUniAndroidPathInterpolator);
     if (!d->controlY2.isNull() && qFuzzyCompare(d->controlY2, y))
         return;
 
@@ -126,9 +126,9 @@ void QNativeAndroidPathInterpolator::setControlY2(qreal y)
     emit controlY2Changed();
 }
 
-QAndroidJniObject QNativeAndroidPathInterpolator::onCreate()
+QAndroidJniObject QUniAndroidPathInterpolator::onCreate()
 {
-    Q_D(QNativeAndroidPathInterpolator);
+    Q_D(QUniAndroidPathInterpolator);
     if (!d->controlX.isNull() && !d->controlY.isNull() && !d->controlX2.isNull() && !d->controlY2.isNull())
         return QAndroidJniObject("android/view/animation/PathInterpolator",
                                  "(FFFF)V",

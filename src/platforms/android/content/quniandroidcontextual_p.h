@@ -52,34 +52,34 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidContext;
-class QNativeAndroidContextualPrivate;
+class QUniAndroidContext;
+class QUniAndroidContextualPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidContextual : public QNativeAndroidObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidContextual : public QUniAndroidObject
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAndroidContext *context READ context NOTIFY contextChanged)
+    Q_PROPERTY(QUniAndroidContext *context READ context NOTIFY contextChanged)
 
 public:
-    explicit QNativeAndroidContextual(QObject *parent = nullptr);
-    explicit QNativeAndroidContextual(QNativeAndroidContext *context, QObject *parent = nullptr);
+    explicit QUniAndroidContextual(QObject *parent = nullptr);
+    explicit QUniAndroidContextual(QUniAndroidContext *context, QObject *parent = nullptr);
 
     QAndroidJniObject ctx() const;
-    QNativeAndroidContext *context() const;
-    void setContext(QNativeAndroidContext *context);
+    QUniAndroidContext *context() const;
+    void setContext(QUniAndroidContext *context);
 
 Q_SIGNALS:
     void contextChanged();
 
 protected:
-    QNativeAndroidContextual(QNativeAndroidContextualPrivate &dd, QObject *parent = nullptr);
-    QNativeAndroidContextual(QNativeAndroidContextualPrivate &dd, QNativeAndroidContext *context, QObject *parent = nullptr);
+    QUniAndroidContextual(QUniAndroidContextualPrivate &dd, QObject *parent = nullptr);
+    QUniAndroidContextual(QUniAndroidContextualPrivate &dd, QUniAndroidContext *context, QObject *parent = nullptr);
 
     void componentComplete() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidContextual)
-    Q_DECLARE_PRIVATE(QNativeAndroidContextual)
+    Q_DISABLE_COPY(QUniAndroidContextual)
+    Q_DECLARE_PRIVATE(QUniAndroidContextual)
 
     Q_PRIVATE_SLOT(d_func(), void _q_resolveContext())
 };

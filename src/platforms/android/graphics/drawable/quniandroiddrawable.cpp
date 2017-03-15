@@ -39,22 +39,22 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidDrawable::QNativeAndroidDrawable(QObject *parent)
-    : QNativeAndroidObject(*(new QNativeAndroidDrawablePrivate), parent)
+QUniAndroidDrawable::QUniAndroidDrawable(QObject *parent)
+    : QUniAndroidObject(*(new QUniAndroidDrawablePrivate), parent)
 {
 }
 
-QNativeAndroidDrawable::QNativeAndroidDrawable(QNativeAndroidDrawablePrivate &dd, QObject *parent)
-    : QNativeAndroidObject(dd, parent)
+QUniAndroidDrawable::QUniAndroidDrawable(QUniAndroidDrawablePrivate &dd, QObject *parent)
+    : QUniAndroidObject(dd, parent)
 {
 }
 
-QAndroidJniObject QNativeAndroidDrawable::onCreate()
+QAndroidJniObject QUniAndroidDrawable::onCreate()
 {
     return QAndroidJniObject("android/graphics/drawable/Drawable");
 }
 
-void QNativeAndroidDrawable::onInflate(QAndroidJniObject &instance)
+void QUniAndroidDrawable::onInflate(QAndroidJniObject &instance)
 {
     Q_UNUSED(instance);
 }

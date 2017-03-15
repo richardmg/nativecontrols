@@ -45,7 +45,7 @@ static void native_onItemClick(JNIEnv *env, jobject object, jlong instance, jint
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidAdapterView *view = reinterpret_cast<QNativeAndroidAdapterView *>(instance);
+    QUniAndroidAdapterView *view = reinterpret_cast<QUniAndroidAdapterView *>(instance);
     if (view)
         QMetaObject::invokeMethod(view, "click", Qt::QueuedConnection, Q_ARG(int, position));
 }
@@ -60,9 +60,9 @@ static void registerNativeAdapterViewMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-void QNativeAndroidAdapterViewPrivate::updateAdapter()
+void QUniAndroidAdapterViewPrivate::updateAdapter()
 {
-    Q_Q(QNativeAndroidAdapterView);
+    Q_Q(QUniAndroidAdapterView);
     if (!q->isValid())
         return;
 
@@ -76,59 +76,59 @@ void QNativeAndroidAdapterViewPrivate::updateAdapter()
     });
 }
 
-QNativeAndroidAdapterView::QNativeAndroidAdapterView(QNativeAndroidContext *context)
-    : QNativeAndroidViewGroup(*(new QNativeAndroidAdapterViewPrivate), context)
+QUniAndroidAdapterView::QUniAndroidAdapterView(QUniAndroidContext *context)
+    : QUniAndroidViewGroup(*(new QUniAndroidAdapterViewPrivate), context)
 {
 }
 
-QNativeAndroidBaseAdapter *QNativeAndroidAdapterView::adapter() const
+QUniAndroidBaseAdapter *QUniAndroidAdapterView::adapter() const
 {
-    Q_D(const QNativeAndroidAdapterView);
+    Q_D(const QUniAndroidAdapterView);
     return d->adapter;
 }
 
-void QNativeAndroidAdapterView::setAdapter(QNativeAndroidBaseAdapter *adapter)
+void QUniAndroidAdapterView::setAdapter(QUniAndroidBaseAdapter *adapter)
 {
-    Q_D(QNativeAndroidAdapterView);
+    Q_D(QUniAndroidAdapterView);
     if (d->adapter == adapter)
         return;
 
     if (d->adapter) {
         d->adapter->setContext(0);
-        QObjectPrivate::disconnect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAdapterViewPrivate::updateAdapter);
+        QObjectPrivate::disconnect(d->adapter, &QUniAndroidObject::instanceChanged, d, &QUniAndroidAdapterViewPrivate::updateAdapter);
         d->adapter->destruct();
     }
     d->adapter = adapter;
     if (d->adapter) {
         d->adapter->setContext(context());
-        QObjectPrivate::connect(d->adapter, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidAdapterViewPrivate::updateAdapter);
+        QObjectPrivate::connect(d->adapter, &QUniAndroidObject::instanceChanged, d, &QUniAndroidAdapterViewPrivate::updateAdapter);
         if (isValid())
             d->adapter->construct();
     }
     emit adapterChanged();
 }
 
-void QNativeAndroidAdapterView::setSelection(int position)
+void QUniAndroidAdapterView::setSelection(int position)
 {
     QtNativeAndroid::callIntMethod(instance(), "setSelection", position);
 }
 
-QAndroidJniObject QNativeAndroidAdapterView::onCreate()
+QAndroidJniObject QUniAndroidAdapterView::onCreate()
 {
     return QAndroidJniObject("android/widget/AdapterView",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidAdapterView::onInflate(QAndroidJniObject &instance)
+void QUniAndroidAdapterView::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidAdapterView);
+    Q_D(QUniAndroidAdapterView);
     d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeAdapterViewListener",
                                    "(Landroid/widget/AdapterView;J)V",
                                    instance.object(),
                                    reinterpret_cast<jlong>(this));
 
-    QNativeAndroidViewGroup::onInflate(instance);
+    QUniAndroidViewGroup::onInflate(instance);
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {
@@ -137,10 +137,10 @@ void QNativeAndroidAdapterView::onInflate(QAndroidJniObject &instance)
     }
 }
 
-void QNativeAndroidAdapterView::objectChange(ObjectChange change)
+void QUniAndroidAdapterView::objectChange(ObjectChange change)
 {
-    Q_D(QNativeAndroidAdapterView);
-    QNativeAndroidViewGroup::objectChange(change);
+    Q_D(QUniAndroidAdapterView);
+    QUniAndroidViewGroup::objectChange(change);
     if (change == InstanceChange)
         d->updateAdapter();
 }

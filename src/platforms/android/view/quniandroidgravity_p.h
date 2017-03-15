@@ -54,7 +54,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidGravity : public QObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidGravity : public QObject
 {
     Q_OBJECT
     Q_FLAGS(Flags)
@@ -94,7 +94,7 @@ public:
     Q_DECLARE_FLAGS(Flags, Flag)
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(QNativeAndroidGravity::Flags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(QUniAndroidGravity::Flags)
 
 QT_END_NAMESPACE
 

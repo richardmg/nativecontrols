@@ -40,29 +40,29 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeQmlBasePrivate::QNativeQmlBasePrivate(int version)
+QUniQmlBasePrivate::QUniQmlBasePrivate(int version)
     : QObjectPrivate(version)
 {
 }
 
-QNativeQmlBasePrivate::~QNativeQmlBasePrivate()
+QUniQmlBasePrivate::~QUniQmlBasePrivate()
 {
 }
 
-void QNativeQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
+void QUniQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
 {
     // Note that QtDeclarative undermines QObject::setParent, meaning that we
     // don't get a QChildEvent when a qml object becomes a parent of another
     // qml object. 'appendChild' is the only callback we get when the parent changes.
     QObject *qparent = list->object;
-    QNativeBase *quniParent = static_cast<QNativeBase *>(qparent);
-    QNativeBase *quniChild = qobject_cast<QNativeBase *>(child);
+    QUniBase *quniParent = static_cast<QUniBase *>(qparent);
+    QUniBase *quniChild = qobject_cast<QUniBase *>(child);
 
     if (quniChild) {
         quniChild->setParent(quniParent);
-        static_cast<QNativeBasePrivate *>(QObjectPrivate::get(quniChild))->syncPlatformParent();
+        static_cast<QUniBasePrivate *>(QObjectPrivate::get(quniChild))->syncPlatformParent();
     } else {
-        // The child doesn't belong to QNative. Check
+        // The child doesn't belong to QUni. Check
         // if the platform understands how to parent it
         if (!quniParent->addNativeChild(child)) {
             // ...otherwise we fall back to normal QObject parenting
@@ -71,28 +71,28 @@ void QNativeQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject
     }
 }
 
-QQmlListProperty<QObject> QNativeQmlBasePrivate::data()
+QQmlListProperty<QObject> QUniQmlBasePrivate::data()
 {
     return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
 }
 
-bool QNativeQmlBasePrivate::isComplete()
+bool QUniQmlBasePrivate::isComplete()
 {
     // todo: hook up to QQmlParserStatus
    return true;
 }
 
-QNativeQmlBase::QNativeQmlBase(QNativeQmlBase *parent)
+QUniQmlBase::QUniQmlBase(QUniQmlBase *parent)
     : QObject(parent)
 {
 }
 
-QNativeQmlBase::QNativeQmlBase(QNativeQmlBasePrivate &dd, QNativeQmlBase *parent)
+QUniQmlBase::QUniQmlBase(QUniQmlBasePrivate &dd, QUniQmlBase *parent)
     : QObject(dd, parent)
 {
 }
 
-QNativeQmlBase::~QNativeQmlBase()
+QUniQmlBase::~QUniQmlBase()
 {
     // delete children in m_data?
 }

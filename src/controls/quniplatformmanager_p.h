@@ -55,14 +55,14 @@ QT_BEGIN_NAMESPACE
 
 class QFactoryLoader;
 
-class QNativePlatformManager
+class QUniPlatformManager
 {
 public:
-    static QNativePlatformPluginInterface *platformPlugin();
+    static QUniPlatformPluginInterface *platformPlugin();
 
 private:
     static QFactoryLoader *s_loader;
-    static QNativePlatformPluginInterface *s_platformPlugin;
+    static QUniPlatformPluginInterface *s_platformPlugin;
 };
 
 QT_END_NAMESPACE

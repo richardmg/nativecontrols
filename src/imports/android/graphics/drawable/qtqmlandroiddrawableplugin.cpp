@@ -53,8 +53,8 @@ public:
 
 void QtQmlAndroidDrawablePlugin::registerTypes(const char *uri)
 {
-    qmlRegisterType<QNativeAndroidColorDrawable>(uri, 0, 21, "ColorDrawable");
-    qmlRegisterType<QNativeAndroidDrawable>(uri, 0, 21, "Drawable");
+    qmlRegisterType<QUniAndroidColorDrawable>(uri, 0, 21, "ColorDrawable");
+    qmlRegisterType<QUniAndroidDrawable>(uri, 0, 21, "Drawable");
 }
 
 QT_END_NAMESPACE

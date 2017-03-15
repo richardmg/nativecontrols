@@ -44,7 +44,7 @@ static void native_onRatingChanged(JNIEnv *env, jobject object, jlong instance, 
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidRatingBar *bar = reinterpret_cast<QNativeAndroidRatingBar *>(instance);
+    QUniAndroidRatingBar *bar = reinterpret_cast<QUniAndroidRatingBar *>(instance);
     if (bar && fromUser)
         QMetaObject::invokeMethod(bar, "updateRating", Qt::QueuedConnection, Q_ARG(qreal, rating));
 }
@@ -59,27 +59,27 @@ static void registerNativeRatingBarMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidRatingBarPrivate : public QNativeAndroidAbsSeekBarPrivate
+class QUniAndroidRatingBarPrivate : public QUniAndroidAbsSeekBarPrivate
 {
 public:
     qreal rating = 0.0;
     QAndroidJniObject listener;
 };
 
-QNativeAndroidRatingBar::QNativeAndroidRatingBar(QNativeAndroidContext *context)
-    : QNativeAndroidAbsSeekBar(*(new QNativeAndroidRatingBarPrivate), context)
+QUniAndroidRatingBar::QUniAndroidRatingBar(QUniAndroidContext *context)
+    : QUniAndroidAbsSeekBar(*(new QUniAndroidRatingBarPrivate), context)
 {
 }
 
-qreal QNativeAndroidRatingBar::rating() const
+qreal QUniAndroidRatingBar::rating() const
 {
-    Q_D(const QNativeAndroidRatingBar);
+    Q_D(const QUniAndroidRatingBar);
     return d->rating;
 }
 
-void QNativeAndroidRatingBar::setRating(qreal rating)
+void QUniAndroidRatingBar::setRating(qreal rating)
 {
-    Q_D(QNativeAndroidRatingBar);
+    Q_D(QUniAndroidRatingBar);
     if (qFuzzyCompare(d->rating, rating))
         return;
 
@@ -88,17 +88,17 @@ void QNativeAndroidRatingBar::setRating(qreal rating)
     emit ratingChanged();
 }
 
-QAndroidJniObject QNativeAndroidRatingBar::onCreate()
+QAndroidJniObject QUniAndroidRatingBar::onCreate()
 {
     return QAndroidJniObject("android/widget/RatingBar",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidRatingBar::onInflate(QAndroidJniObject &instance)
+void QUniAndroidRatingBar::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidRatingBar);
-    QNativeAndroidAbsSeekBar::onInflate(instance);
+    Q_D(QUniAndroidRatingBar);
+    QUniAndroidAbsSeekBar::onInflate(instance);
 
     d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeRatingBarListener",
                                    "(Landroid/widget/RatingBar;J)V",

@@ -38,21 +38,21 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidSwitch::QNativeAndroidSwitch(QNativeAndroidContext *context)
-    : QNativeAndroidCompoundButton(context)
+QUniAndroidSwitch::QUniAndroidSwitch(QUniAndroidContext *context)
+    : QUniAndroidCompoundButton(context)
 {
 }
 
-QAndroidJniObject QNativeAndroidSwitch::onCreate()
+QAndroidJniObject QUniAndroidSwitch::onCreate()
 {
     return QAndroidJniObject("android/widget/Switch",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidSwitch::onInflate(QAndroidJniObject &instance)
+void QUniAndroidSwitch::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidCompoundButton::onInflate(instance);
+    QUniAndroidCompoundButton::onInflate(instance);
 }
 
 QT_END_NAMESPACE

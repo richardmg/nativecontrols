@@ -39,7 +39,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidScaleAnimationPrivate : public QNativeAndroidAnimationPrivate
+class QUniAndroidScaleAnimationPrivate : public QUniAndroidAnimationPrivate
 {
 public:
     qreal fromX = 0.0;
@@ -48,24 +48,24 @@ public:
     qreal toY = 0.0;
     qreal pivotX = 0.0;
     qreal pivotY = 0.0;
-    QNativeAndroidScaleAnimation::Relation pivotXType = QNativeAndroidScaleAnimation::ABSOLUTE;
-    QNativeAndroidScaleAnimation::Relation pivotYType = QNativeAndroidScaleAnimation::ABSOLUTE;
+    QUniAndroidScaleAnimation::Relation pivotXType = QUniAndroidScaleAnimation::ABSOLUTE;
+    QUniAndroidScaleAnimation::Relation pivotYType = QUniAndroidScaleAnimation::ABSOLUTE;
 };
 
-QNativeAndroidScaleAnimation::QNativeAndroidScaleAnimation(QObject *parent)
-    : QNativeAndroidAnimation(*(new QNativeAndroidScaleAnimationPrivate), parent)
+QUniAndroidScaleAnimation::QUniAndroidScaleAnimation(QObject *parent)
+    : QUniAndroidAnimation(*(new QUniAndroidScaleAnimationPrivate), parent)
 {
 }
 
-qreal QNativeAndroidScaleAnimation::fromXScale() const
+qreal QUniAndroidScaleAnimation::fromXScale() const
 {
-    Q_D(const QNativeAndroidScaleAnimation);
+    Q_D(const QUniAndroidScaleAnimation);
     return d->fromX;
 }
 
-void QNativeAndroidScaleAnimation::setFromXScale(qreal x)
+void QUniAndroidScaleAnimation::setFromXScale(qreal x)
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     if (qFuzzyCompare(d->fromX, x))
         return;
 
@@ -73,15 +73,15 @@ void QNativeAndroidScaleAnimation::setFromXScale(qreal x)
     emit fromXScaleChanged();
 }
 
-qreal QNativeAndroidScaleAnimation::fromYScale() const
+qreal QUniAndroidScaleAnimation::fromYScale() const
 {
-    Q_D(const QNativeAndroidScaleAnimation);
+    Q_D(const QUniAndroidScaleAnimation);
     return d->fromY;
 }
 
-void QNativeAndroidScaleAnimation::setFromYScale(qreal y)
+void QUniAndroidScaleAnimation::setFromYScale(qreal y)
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     if (qFuzzyCompare(d->fromY, y))
         return;
 
@@ -89,15 +89,15 @@ void QNativeAndroidScaleAnimation::setFromYScale(qreal y)
     emit fromYScaleChanged();
 }
 
-qreal QNativeAndroidScaleAnimation::toXScale() const
+qreal QUniAndroidScaleAnimation::toXScale() const
 {
-    Q_D(const QNativeAndroidScaleAnimation);
+    Q_D(const QUniAndroidScaleAnimation);
     return d->toX;
 }
 
-void QNativeAndroidScaleAnimation::setToXScale(qreal x)
+void QUniAndroidScaleAnimation::setToXScale(qreal x)
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     if (qFuzzyCompare(d->toX, x))
         return;
 
@@ -105,15 +105,15 @@ void QNativeAndroidScaleAnimation::setToXScale(qreal x)
     emit toXScaleChanged();
 }
 
-qreal QNativeAndroidScaleAnimation::toYScale() const
+qreal QUniAndroidScaleAnimation::toYScale() const
 {
-    Q_D(const QNativeAndroidScaleAnimation);
+    Q_D(const QUniAndroidScaleAnimation);
     return d->toY;
 }
 
-void QNativeAndroidScaleAnimation::setToYScale(qreal y)
+void QUniAndroidScaleAnimation::setToYScale(qreal y)
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     if (qFuzzyCompare(d->toY, y))
         return;
 
@@ -121,15 +121,15 @@ void QNativeAndroidScaleAnimation::setToYScale(qreal y)
     emit toYScaleChanged();
 }
 
-qreal QNativeAndroidScaleAnimation::pivotX() const
+qreal QUniAndroidScaleAnimation::pivotX() const
 {
-    Q_D(const QNativeAndroidScaleAnimation);
+    Q_D(const QUniAndroidScaleAnimation);
     return d->pivotX;
 }
 
-void QNativeAndroidScaleAnimation::setPivotX(qreal pivotX)
+void QUniAndroidScaleAnimation::setPivotX(qreal pivotX)
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     if (qFuzzyCompare(d->pivotX, pivotX))
         return;
 
@@ -137,15 +137,15 @@ void QNativeAndroidScaleAnimation::setPivotX(qreal pivotX)
     emit pivotXChanged();
 }
 
-qreal QNativeAndroidScaleAnimation::pivotY() const
+qreal QUniAndroidScaleAnimation::pivotY() const
 {
-    Q_D(const QNativeAndroidScaleAnimation);
+    Q_D(const QUniAndroidScaleAnimation);
     return d->pivotY;
 }
 
-void QNativeAndroidScaleAnimation::setPivotY(qreal pivotY)
+void QUniAndroidScaleAnimation::setPivotY(qreal pivotY)
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     if (qFuzzyCompare(d->pivotY, pivotY))
         return;
 
@@ -153,15 +153,15 @@ void QNativeAndroidScaleAnimation::setPivotY(qreal pivotY)
     emit pivotYChanged();
 }
 
-QNativeAndroidAnimation::Relation QNativeAndroidScaleAnimation::pivotXType() const
+QUniAndroidAnimation::Relation QUniAndroidScaleAnimation::pivotXType() const
 {
-    Q_D(const QNativeAndroidScaleAnimation);
+    Q_D(const QUniAndroidScaleAnimation);
     return d->pivotXType;
 }
 
-void QNativeAndroidScaleAnimation::setPivotXType(Relation type)
+void QUniAndroidScaleAnimation::setPivotXType(Relation type)
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     if (d->pivotXType == type)
         return;
 
@@ -169,15 +169,15 @@ void QNativeAndroidScaleAnimation::setPivotXType(Relation type)
     emit pivotXTypeChanged();
 }
 
-QNativeAndroidAnimation::Relation QNativeAndroidScaleAnimation::pivotYType() const
+QUniAndroidAnimation::Relation QUniAndroidScaleAnimation::pivotYType() const
 {
-    Q_D(const QNativeAndroidScaleAnimation);
+    Q_D(const QUniAndroidScaleAnimation);
     return d->pivotYType;
 }
 
-void QNativeAndroidScaleAnimation::setPivotYType(Relation type)
+void QUniAndroidScaleAnimation::setPivotYType(Relation type)
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     if (d->pivotYType == type)
         return;
 
@@ -185,9 +185,9 @@ void QNativeAndroidScaleAnimation::setPivotYType(Relation type)
     emit pivotYTypeChanged();
 }
 
-QAndroidJniObject QNativeAndroidScaleAnimation::onCreate()
+QAndroidJniObject QUniAndroidScaleAnimation::onCreate()
 {
-    Q_D(QNativeAndroidScaleAnimation);
+    Q_D(QUniAndroidScaleAnimation);
     return QAndroidJniObject("android/view/animation/ScaleAnimation",
                              "(FFFFIFIF)V",
                              d->fromX, d->toX, d->fromY, d->toY,

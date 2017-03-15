@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAnimationSetPrivate;
+class QUniAndroidAnimationSetPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidAnimationSet : public QNativeAndroidAnimation
+class Q_NATIVEANDROID_EXPORT QUniAndroidAnimationSet : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(bool shareInterpolator READ shareInterpolator WRITE setShareInterpolator NOTIFY shareInterpolatorChanged)
 
 public:
-    explicit QNativeAndroidAnimationSet(QObject *parent = nullptr);
+    explicit QUniAndroidAnimationSet(QObject *parent = nullptr);
 
     bool shareInterpolator() const;
     void setShareInterpolator(bool share);
@@ -73,8 +73,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidAnimationSet)
-    Q_DECLARE_PRIVATE(QNativeAndroidAnimationSet)
+    Q_DISABLE_COPY(QUniAndroidAnimationSet)
+    Q_DECLARE_PRIVATE(QUniAndroidAnimationSet)
 };
 
 QT_END_NAMESPACE

@@ -43,18 +43,18 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitWindowPrivate;
-class QNativeAppKitViewController;
+class QUniAppKitWindowPrivate;
+class QUniAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitWindow : public QNativeAppKitBase, public virtual QNativePlatformWindow
+class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitWindow : public QUniAppKitBase, public virtual QUniPlatformWindow
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAppKitViewController *contentViewController READ contentViewController WRITE setContentViewController NOTIFY contentViewControllerChanged)
+    Q_PROPERTY(QUniAppKitViewController *contentViewController READ contentViewController WRITE setContentViewController NOTIFY contentViewControllerChanged)
 
 public:
-    QNativeAppKitWindow();
-    virtual ~QNativeAppKitWindow();
+    QUniAppKitWindow();
+    virtual ~QUniAppKitWindow();
 
     virtual qreal width() const override;
     virtual qreal height() const override;
@@ -67,8 +67,8 @@ public:
 
     NSWindow *nsWindowHandle();
 
-    void setContentViewController(QNativeAppKitViewController *contentViewController);
-    QNativeAppKitViewController *contentViewController() const;
+    void setContentViewController(QUniAppKitViewController *contentViewController);
+    QUniAppKitViewController *contentViewController() const;
 
     QRectF frame() const;
     void setFrame(const QRectF &rect);
@@ -86,15 +86,15 @@ Q_SIGNALS:
     void widthChanged(qreal w);
     void heightChanged(qreal h);
     void visibleChanged(bool isVisible);
-    void contentViewControllerChanged(QNativeAppKitViewController *controller);
+    void contentViewControllerChanged(QUniAppKitViewController *controller);
 
 protected:
-    QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd);
+    QUniAppKitWindow(QUniAppKitWindowPrivate &dd);
     void childEvent(QChildEvent *event) override;
 
 private:
-    Q_DECLARE_PRIVATE(QNativeAppKitWindow)
-    Q_DISABLE_COPY(QNativeAppKitWindow)
+    Q_DECLARE_PRIVATE(QUniAppKitWindow)
+    Q_DISABLE_COPY(QUniAppKitWindow)
 };
 
 QT_END_NAMESPACE

@@ -43,58 +43,58 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeButtonPrivate::QNativeButtonPrivate(int version)
-    : QNativeControlPrivate(version)
+QUniButtonPrivate::QUniButtonPrivate(int version)
+    : QUniControlPrivate(version)
     , m_platformButton(nullptr)
 {
 }
 
-QNativeButtonPrivate::~QNativeButtonPrivate()
+QUniButtonPrivate::~QUniButtonPrivate()
 {
 }
 
-void QNativeButtonPrivate::createPlatformButton()
+void QUniButtonPrivate::createPlatformButton()
 {
     Q_ASSERT(!m_platformButton);
-    m_platformButton = QNativePlatformManager::platformPlugin()->createButton(q_func());
+    m_platformButton = QUniPlatformManager::platformPlugin()->createButton(q_func());
     Q_ASSERT(m_platformButton);
     setPlatformButton(m_platformButton);
 }
 
-void QNativeButtonPrivate::setPlatformButton(QNativePlatformButton *platformButton)
+void QUniButtonPrivate::setPlatformButton(QUniPlatformButton *platformButton)
 {
     m_platformButton = platformButton;
     setPlatformControl(platformButton);
 }
 
-QNativeButton::QNativeButton(QNativeBase *parent)
-    : QNativeControl(*new QNativeButtonPrivate(), parent)
+QUniButton::QUniButton(QUniBase *parent)
+    : QUniControl(*new QUniButtonPrivate(), parent)
 {
     d_func()->createPlatformButton();
 }
 
-QNativeButton::QNativeButton(const QString &text, QNativeBase *parent)
-    : QNativeControl(*new QNativeButtonPrivate(), parent)
+QUniButton::QUniButton(const QString &text, QUniBase *parent)
+    : QUniControl(*new QUniButtonPrivate(), parent)
 {
     d_func()->createPlatformButton();
     setText(text);
 }
 
-QNativeButton::QNativeButton(QNativeButtonPrivate &dd, QNativeBase *parent)
-    : QNativeControl(dd, parent)
+QUniButton::QUniButton(QUniButtonPrivate &dd, QUniBase *parent)
+    : QUniControl(dd, parent)
 {
 }
 
-QNativeButton::~QNativeButton()
+QUniButton::~QUniButton()
 {
 }
 
-QString QNativeButton::text()
+QString QUniButton::text()
 {
     return d_func()->m_platformButton->text();
 }
 
-void QNativeButton::setText(const QString &newText)
+void QUniButton::setText(const QString &newText)
 {
     d_func()->m_platformButton->setText(newText);
 }

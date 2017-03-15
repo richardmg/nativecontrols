@@ -40,22 +40,22 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidViewAnimator::QNativeAndroidViewAnimator(QNativeAndroidContext *context)
-    : QNativeAndroidFrameLayout(*(new QNativeAndroidViewAnimatorPrivate), context)
+QUniAndroidViewAnimator::QUniAndroidViewAnimator(QUniAndroidContext *context)
+    : QUniAndroidFrameLayout(*(new QUniAndroidViewAnimatorPrivate), context)
 {
 }
 
-int QNativeAndroidViewAnimator::displayedChild() const
+int QUniAndroidViewAnimator::displayedChild() const
 {
-    Q_D(const QNativeAndroidViewAnimator);
+    Q_D(const QUniAndroidViewAnimator);
     if (d->displayedChild.isNull())
         return 0;
     return d->displayedChild;
 }
 
-void QNativeAndroidViewAnimator::setDisplayedChild(int child)
+void QUniAndroidViewAnimator::setDisplayedChild(int child)
 {
-    Q_D(QNativeAndroidViewAnimator);
+    Q_D(QUniAndroidViewAnimator);
     if (child == displayedChild())
         return;
 
@@ -64,17 +64,17 @@ void QNativeAndroidViewAnimator::setDisplayedChild(int child)
     emit displayedChildChanged();
 }
 
-int QNativeAndroidViewAnimator::inAnimation() const
+int QUniAndroidViewAnimator::inAnimation() const
 {
-    Q_D(const QNativeAndroidViewAnimator);
+    Q_D(const QUniAndroidViewAnimator);
     if (d->inAnimation.isNull())
         return -1;
     return d->inAnimation;
 }
 
-void QNativeAndroidViewAnimator::setInAnimation(int animation)
+void QUniAndroidViewAnimator::setInAnimation(int animation)
 {
-    Q_D(QNativeAndroidViewAnimator);
+    Q_D(QUniAndroidViewAnimator);
     if (animation == inAnimation())
         return;
 
@@ -88,17 +88,17 @@ void QNativeAndroidViewAnimator::setInAnimation(int animation)
     emit inAnimationChanged();
 }
 
-int QNativeAndroidViewAnimator::outAnimation() const
+int QUniAndroidViewAnimator::outAnimation() const
 {
-    Q_D(const QNativeAndroidViewAnimator);
+    Q_D(const QUniAndroidViewAnimator);
     if (d->outAnimation.isNull())
         return -1;
     return d->outAnimation;
 }
 
-void QNativeAndroidViewAnimator::setOutAnimation(int animation)
+void QUniAndroidViewAnimator::setOutAnimation(int animation)
 {
-    Q_D(QNativeAndroidViewAnimator);
+    Q_D(QUniAndroidViewAnimator);
     if (animation == outAnimation())
         return;
 
@@ -112,27 +112,27 @@ void QNativeAndroidViewAnimator::setOutAnimation(int animation)
     emit inAnimationChanged();
 }
 
-void QNativeAndroidViewAnimator::showNext()
+void QUniAndroidViewAnimator::showNext()
 {
     QtNativeAndroid::callVoidMethod(instance(), "showNext");
 }
 
-void QNativeAndroidViewAnimator::showPrevious()
+void QUniAndroidViewAnimator::showPrevious()
 {
     QtNativeAndroid::callVoidMethod(instance(), "showPrevious");
 }
 
-QAndroidJniObject QNativeAndroidViewAnimator::onCreate()
+QAndroidJniObject QUniAndroidViewAnimator::onCreate()
 {
     return QAndroidJniObject("android/widget/ViewAnimator",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidViewAnimator::onInflate(QAndroidJniObject &instance)
+void QUniAndroidViewAnimator::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidViewAnimator);
-    QNativeAndroidFrameLayout::onInflate(instance);
+    Q_D(QUniAndroidViewAnimator);
+    QUniAndroidFrameLayout::onInflate(instance);
 
     if (!d->displayedChild.isNull())
         instance.callMethod<void>("setDisplayedChild", "(I)V", d->displayedChild);

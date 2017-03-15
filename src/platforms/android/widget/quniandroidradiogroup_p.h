@@ -52,19 +52,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidRadioButton;
-class QNativeAndroidRadioGroupPrivate;
+class QUniAndroidRadioButton;
+class QUniAndroidRadioGroupPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidRadioGroup : public QNativeAndroidLinearLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidRadioGroup : public QUniAndroidLinearLayout
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAndroidRadioButton *checkedButton READ checkedButton WRITE setCheckedButton NOTIFY checkedButtonChanged)
+    Q_PROPERTY(QUniAndroidRadioButton *checkedButton READ checkedButton WRITE setCheckedButton NOTIFY checkedButtonChanged)
 
 public:
-    explicit QNativeAndroidRadioGroup(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidRadioGroup(QUniAndroidContext *context = nullptr);
 
-    QNativeAndroidRadioButton *checkedButton() const;
-    void setCheckedButton(QNativeAndroidRadioButton *button);
+    QUniAndroidRadioButton *checkedButton() const;
+    void setCheckedButton(QUniAndroidRadioButton *button);
 
 public Q_SLOTS:
     void clearCheck();
@@ -77,11 +77,11 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidRadioGroup)
-    Q_DECLARE_PRIVATE(QNativeAndroidRadioGroup)
+    Q_DISABLE_COPY(QUniAndroidRadioGroup)
+    Q_DECLARE_PRIVATE(QUniAndroidRadioGroup)
 
     Q_PRIVATE_SLOT(d_func(), void _q_updateCheckedButtonId(int checkedId))
-    Q_PRIVATE_SLOT(d_func(), bool _q_updateCheckedButton(QNativeAndroidRadioButton *button))
+    Q_PRIVATE_SLOT(d_func(), bool _q_updateCheckedButton(QUniAndroidRadioButton *button))
 };
 
 QT_END_NAMESPACE

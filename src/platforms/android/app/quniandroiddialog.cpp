@@ -40,46 +40,46 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidDialog::QNativeAndroidDialog(QObject *parent)
-    : QNativeAndroidContextual(*(new QNativeAndroidDialogPrivate), parent)
+QUniAndroidDialog::QUniAndroidDialog(QObject *parent)
+    : QUniAndroidContextual(*(new QUniAndroidDialogPrivate), parent)
 {
 }
 
-QNativeAndroidDialog::QNativeAndroidDialog(QNativeAndroidDialogPrivate &dd, QObject *parent)
-    : QNativeAndroidContextual(dd, parent)
+QUniAndroidDialog::QUniAndroidDialog(QUniAndroidDialogPrivate &dd, QObject *parent)
+    : QUniAndroidContextual(dd, parent)
 {
 }
 
-void QNativeAndroidDialog::cancel()
+void QUniAndroidDialog::cancel()
 {
     QtNativeAndroid::callVoidMethod(instance(), "cancel");
 }
 
-void QNativeAndroidDialog::dismiss()
+void QUniAndroidDialog::dismiss()
 {
     QtNativeAndroid::callVoidMethod(instance(), "dismiss");
 }
 
-void QNativeAndroidDialog::hide()
+void QUniAndroidDialog::hide()
 {
     QtNativeAndroid::callVoidMethod(instance(), "hide");
 }
 
-void QNativeAndroidDialog::show()
+void QUniAndroidDialog::show()
 {
     QtNativeAndroid::callVoidMethod(instance(), "show");
 }
 
-QAndroidJniObject QNativeAndroidDialog::onCreate()
+QAndroidJniObject QUniAndroidDialog::onCreate()
 {
     return QAndroidJniObject("android/app/Dialog",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidDialog::onInflate(QAndroidJniObject& instance)
+void QUniAndroidDialog::onInflate(QAndroidJniObject& instance)
 {
-    QNativeAndroidContextual::onInflate(instance);
+    QUniAndroidContextual::onInflate(instance);
 }
 
 QT_END_NAMESPACE

@@ -42,19 +42,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeTextFieldPrivate;
-class QNativePlatformTextField;
+class QUniTextFieldPrivate;
+class QUniPlatformTextField;
 
-class Q_NATIVECONTROLS_EXPORT QNativeTextField : public QNativeControl
+class Q_NATIVECONTROLS_EXPORT QUniTextField : public QUniControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
     Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
-    explicit QNativeTextField(QNativeBase *parent = nullptr);
-    explicit QNativeTextField(const QString &text, QNativeBase *parent = nullptr);
-    virtual ~QNativeTextField();
+    explicit QUniTextField(QUniBase *parent = nullptr);
+    explicit QUniTextField(const QString &text, QUniBase *parent = nullptr);
+    virtual ~QUniTextField();
 
     QString text();
     void setText(const QString &text);
@@ -67,11 +67,11 @@ Q_SIGNALS:
     void placeholderTextChanged(const QString &placeholderText);
 
 protected:
-    QNativeTextField(QNativeTextFieldPrivate &dd, QNativeBase *parent = nullptr);
+    QUniTextField(QUniTextFieldPrivate &dd, QUniBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeTextField)
-    Q_DISABLE_COPY(QNativeTextField)
+    Q_DECLARE_PRIVATE(QUniTextField)
+    Q_DISABLE_COPY(QUniTextField)
 };
 
 QT_END_NAMESPACE

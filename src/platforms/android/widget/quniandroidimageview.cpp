@@ -41,28 +41,28 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidImageViewPrivate : public QNativeAndroidViewPrivate
+class QUniAndroidImageViewPrivate : public QUniAndroidViewPrivate
 {
 public:
     QUrl uri;
     int resource = 0;
-    QNativeAndroidOptional<int> tint;
+    QUniAndroidOptional<int> tint;
 };
 
-QNativeAndroidImageView::QNativeAndroidImageView(QNativeAndroidContext *context)
-    : QNativeAndroidView(*(new QNativeAndroidImageViewPrivate), context)
+QUniAndroidImageView::QUniAndroidImageView(QUniAndroidContext *context)
+    : QUniAndroidView(*(new QUniAndroidImageViewPrivate), context)
 {
 }
 
-QUrl QNativeAndroidImageView::imageURI() const
+QUrl QUniAndroidImageView::imageURI() const
 {
-    Q_D(const QNativeAndroidImageView);
+    Q_D(const QUniAndroidImageView);
     return d->uri;
 }
 
-void QNativeAndroidImageView::setImageURI(const QUrl &uri)
+void QUniAndroidImageView::setImageURI(const QUrl &uri)
 {
-    Q_D(QNativeAndroidImageView);
+    Q_D(QUniAndroidImageView);
     if (d->uri == uri)
         return;
 
@@ -77,15 +77,15 @@ void QNativeAndroidImageView::setImageURI(const QUrl &uri)
     emit imageURIChanged();
 }
 
-int QNativeAndroidImageView::imageResource() const
+int QUniAndroidImageView::imageResource() const
 {
-    Q_D(const QNativeAndroidImageView);
+    Q_D(const QUniAndroidImageView);
     return d->resource;
 }
 
-void QNativeAndroidImageView::setImageResource(int resource)
+void QUniAndroidImageView::setImageResource(int resource)
 {
-    Q_D(QNativeAndroidImageView);
+    Q_D(QUniAndroidImageView);
     if (d->resource == resource)
         return;
 
@@ -94,17 +94,17 @@ void QNativeAndroidImageView::setImageResource(int resource)
     emit imageResourceChanged();
 }
 
-int QNativeAndroidImageView::imageTintColor() const
+int QUniAndroidImageView::imageTintColor() const
 {
-    Q_D(const QNativeAndroidImageView);
+    Q_D(const QUniAndroidImageView);
     if (d->tint.isNull())
         return 0; // TODO
     return d->tint;
 }
 
-void QNativeAndroidImageView::setImageTintColor(int color)
+void QUniAndroidImageView::setImageTintColor(int color)
 {
-    Q_D(QNativeAndroidImageView);
+    Q_D(QUniAndroidImageView);
     if (!d->tint.isNull() && d->tint == color)
         return;
 
@@ -122,17 +122,17 @@ void QNativeAndroidImageView::setImageTintColor(int color)
     emit imageTintColorChanged();
 }
 
-QAndroidJniObject QNativeAndroidImageView::onCreate()
+QAndroidJniObject QUniAndroidImageView::onCreate()
 {
     return QAndroidJniObject("android/widget/ImageView",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidImageView::onInflate(QAndroidJniObject &instance)
+void QUniAndroidImageView::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidImageView);
-    QNativeAndroidView::onInflate(instance);
+    Q_D(QUniAndroidImageView);
+    QUniAndroidView::onInflate(instance);
 
     if (d->uri.isValid())
         instance.callMethod<void>("setImageURI", "(Landroid/net/Uri;)V", getUri().object());
@@ -147,9 +147,9 @@ void QNativeAndroidImageView::onInflate(QAndroidJniObject &instance)
     }
 }
 
-QAndroidJniObject QNativeAndroidImageView::getUri() const
+QAndroidJniObject QUniAndroidImageView::getUri() const
 {
-    Q_D(const QNativeAndroidImageView);
+    Q_D(const QUniAndroidImageView);
     QAndroidJniObject str = QAndroidJniObject::fromString(d->uri.toString());
     return QAndroidJniObject::callStaticObjectMethod("android/net/Uri", "parse", "(Ljava/lang/String;)Landroid/net/Uri;", str.object());
 }

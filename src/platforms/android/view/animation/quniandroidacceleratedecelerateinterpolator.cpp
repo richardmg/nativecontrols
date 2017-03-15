@@ -38,12 +38,12 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidAccelerateDecelerateInterpolator::QNativeAndroidAccelerateDecelerateInterpolator(QObject *parent)
-    : QNativeAndroidInterpolator(parent)
+QUniAndroidAccelerateDecelerateInterpolator::QUniAndroidAccelerateDecelerateInterpolator(QObject *parent)
+    : QUniAndroidInterpolator(parent)
 {
 }
 
-QAndroidJniObject QNativeAndroidAccelerateDecelerateInterpolator::onCreate()
+QAndroidJniObject QUniAndroidAccelerateDecelerateInterpolator::onCreate()
 {
     return QAndroidJniObject("android/view/animation/AccelerateDecelerateInterpolator");
 }

@@ -54,20 +54,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeButton;
-class QNativePlatformButton;
+class QUniButton;
+class QUniPlatformButton;
 
-class QNativeButtonPrivate : public QNativeControlPrivate
+class QUniButtonPrivate : public QUniControlPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeButton)
+    Q_DECLARE_PUBLIC(QUniButton)
 
 public:
-    explicit QNativeButtonPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeButtonPrivate();
+    explicit QUniButtonPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniButtonPrivate();
 
     void createPlatformButton();
-    void setPlatformButton(QNativePlatformButton *platformButton);
-    QNativePlatformButton *m_platformButton;
+    void setPlatformButton(QUniPlatformButton *platformButton);
+    QUniPlatformButton *m_platformButton;
 };
 
 QT_END_NAMESPACE

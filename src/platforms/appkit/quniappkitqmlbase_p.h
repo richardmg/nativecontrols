@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitQmlBase;
+class QUniAppKitQmlBase;
 
-class QNativeAppKitQmlBasePrivate : public QObjectPrivate
+class QUniAppKitQmlBasePrivate : public QObjectPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAppKitQmlBase)
+    Q_DECLARE_PUBLIC(QUniAppKitQmlBase)
 
 public:
-    explicit QNativeAppKitQmlBasePrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitQmlBasePrivate();
+    explicit QUniAppKitQmlBasePrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniAppKitQmlBasePrivate();
 
     static void appendChild(QQmlListProperty<QObject> *list, QObject *obj);
     QQmlListProperty<QObject> data();

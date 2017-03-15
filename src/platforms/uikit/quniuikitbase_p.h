@@ -56,19 +56,19 @@ typedef struct CGRect CGRect;
 
 QT_BEGIN_NAMESPACE
 
-class QNativeBase;
-class QNativeUIKitBase;
+class QUniBase;
+class QUniUIKitBase;
 
-class QNativeUIKitBasePrivate : public QNativeUIKitQmlBasePrivate
+class QUniUIKitBasePrivate : public QUniUIKitQmlBasePrivate
 {
 public:
-    explicit QNativeUIKitBasePrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitBasePrivate();
+    explicit QUniUIKitBasePrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitBasePrivate();
 
-    // Used by QNativeUIKitPlatformPlugin
-    virtual void connectSignals(QNativeBase *) {}
+    // Used by QUniUIKitPlatformPlugin
+    virtual void connectSignals(QUniBase *) {}
 
-    Q_DECLARE_PUBLIC(QNativeUIKitBase)
+    Q_DECLARE_PUBLIC(QUniUIKitBase)
 };
 
 QT_END_NAMESPACE

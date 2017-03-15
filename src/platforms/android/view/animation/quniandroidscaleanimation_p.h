@@ -52,9 +52,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidScaleAnimationPrivate;
+class QUniAndroidScaleAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidScaleAnimation : public QNativeAndroidAnimation
+class Q_NATIVEANDROID_EXPORT QUniAndroidScaleAnimation : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(qreal fromXScale READ fromXScale WRITE setFromXScale NOTIFY fromXScaleChanged)
@@ -67,7 +67,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidScaleAnimation : public QNativeAndroi
     Q_PROPERTY(Relation pivotYType READ pivotYType WRITE setPivotYType NOTIFY pivotYTypeChanged)
 
 public:
-    explicit QNativeAndroidScaleAnimation(QObject *parent = nullptr);
+    explicit QUniAndroidScaleAnimation(QObject *parent = nullptr);
 
     qreal fromXScale() const;
     void setFromXScale(qreal scale);
@@ -107,8 +107,8 @@ protected:
     QAndroidJniObject onCreate() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidScaleAnimation)
-    Q_DECLARE_PRIVATE(QNativeAndroidScaleAnimation)
+    Q_DISABLE_COPY(QUniAndroidScaleAnimation)
+    Q_DECLARE_PRIVATE(QUniAndroidScaleAnimation)
 };
 
 QT_END_NAMESPACE

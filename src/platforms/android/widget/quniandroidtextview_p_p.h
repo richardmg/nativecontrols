@@ -53,15 +53,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidTextViewPrivate : public QNativeAndroidViewPrivate
+class QUniAndroidTextViewPrivate : public QUniAndroidViewPrivate
 {
 public:
     QString text;
     QString hint;
-    QNativeAndroidOptional<int> textColor;
-    QNativeAndroidOptional<qreal> textSize;
+    QUniAndroidOptional<int> textColor;
+    QUniAndroidOptional<qreal> textSize;
     bool singleLine = false;
-    QNativeAndroidOptional<int> inputType;
+    QUniAndroidOptional<int> inputType;
 };
 
 QT_END_NAMESPACE

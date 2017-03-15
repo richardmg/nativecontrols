@@ -39,31 +39,31 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidRotateAnimationPrivate : public QNativeAndroidAnimationPrivate
+class QUniAndroidRotateAnimationPrivate : public QUniAndroidAnimationPrivate
 {
 public:
     qreal from = 0.0;
     qreal to = 0.0;
     qreal pivotX = 0.0;
     qreal pivotY = 0.0;
-    QNativeAndroidRotateAnimation::Relation pivotXType = QNativeAndroidRotateAnimation::ABSOLUTE;
-    QNativeAndroidRotateAnimation::Relation pivotYType = QNativeAndroidRotateAnimation::ABSOLUTE;
+    QUniAndroidRotateAnimation::Relation pivotXType = QUniAndroidRotateAnimation::ABSOLUTE;
+    QUniAndroidRotateAnimation::Relation pivotYType = QUniAndroidRotateAnimation::ABSOLUTE;
 };
 
-QNativeAndroidRotateAnimation::QNativeAndroidRotateAnimation(QObject *parent)
-    : QNativeAndroidAnimation(*(new QNativeAndroidRotateAnimationPrivate), parent)
+QUniAndroidRotateAnimation::QUniAndroidRotateAnimation(QObject *parent)
+    : QUniAndroidAnimation(*(new QUniAndroidRotateAnimationPrivate), parent)
 {
 }
 
-qreal QNativeAndroidRotateAnimation::fromDegrees() const
+qreal QUniAndroidRotateAnimation::fromDegrees() const
 {
-    Q_D(const QNativeAndroidRotateAnimation);
+    Q_D(const QUniAndroidRotateAnimation);
     return d->from;
 }
 
-void QNativeAndroidRotateAnimation::setFromDegrees(qreal degrees)
+void QUniAndroidRotateAnimation::setFromDegrees(qreal degrees)
 {
-    Q_D(QNativeAndroidRotateAnimation);
+    Q_D(QUniAndroidRotateAnimation);
     if (qFuzzyCompare(d->from, degrees))
         return;
 
@@ -71,15 +71,15 @@ void QNativeAndroidRotateAnimation::setFromDegrees(qreal degrees)
     emit fromDegreesChanged();
 }
 
-qreal QNativeAndroidRotateAnimation::toDegrees() const
+qreal QUniAndroidRotateAnimation::toDegrees() const
 {
-    Q_D(const QNativeAndroidRotateAnimation);
+    Q_D(const QUniAndroidRotateAnimation);
     return d->to;
 }
 
-void QNativeAndroidRotateAnimation::setToDegrees(qreal degrees)
+void QUniAndroidRotateAnimation::setToDegrees(qreal degrees)
 {
-    Q_D(QNativeAndroidRotateAnimation);
+    Q_D(QUniAndroidRotateAnimation);
     if (qFuzzyCompare(d->to, degrees))
         return;
 
@@ -87,15 +87,15 @@ void QNativeAndroidRotateAnimation::setToDegrees(qreal degrees)
     emit toDegreesChanged();
 }
 
-qreal QNativeAndroidRotateAnimation::pivotX() const
+qreal QUniAndroidRotateAnimation::pivotX() const
 {
-    Q_D(const QNativeAndroidRotateAnimation);
+    Q_D(const QUniAndroidRotateAnimation);
     return d->pivotX;
 }
 
-void QNativeAndroidRotateAnimation::setPivotX(qreal pivotX)
+void QUniAndroidRotateAnimation::setPivotX(qreal pivotX)
 {
-    Q_D(QNativeAndroidRotateAnimation);
+    Q_D(QUniAndroidRotateAnimation);
     if (qFuzzyCompare(d->pivotX, pivotX))
         return;
 
@@ -103,15 +103,15 @@ void QNativeAndroidRotateAnimation::setPivotX(qreal pivotX)
     emit pivotXChanged();
 }
 
-qreal QNativeAndroidRotateAnimation::pivotY() const
+qreal QUniAndroidRotateAnimation::pivotY() const
 {
-    Q_D(const QNativeAndroidRotateAnimation);
+    Q_D(const QUniAndroidRotateAnimation);
     return d->pivotY;
 }
 
-void QNativeAndroidRotateAnimation::setPivotY(qreal pivotY)
+void QUniAndroidRotateAnimation::setPivotY(qreal pivotY)
 {
-    Q_D(QNativeAndroidRotateAnimation);
+    Q_D(QUniAndroidRotateAnimation);
     if (qFuzzyCompare(d->pivotY, pivotY))
         return;
 
@@ -119,15 +119,15 @@ void QNativeAndroidRotateAnimation::setPivotY(qreal pivotY)
     emit pivotYChanged();
 }
 
-QNativeAndroidRotateAnimation::Relation QNativeAndroidRotateAnimation::pivotXType() const
+QUniAndroidRotateAnimation::Relation QUniAndroidRotateAnimation::pivotXType() const
 {
-    Q_D(const QNativeAndroidRotateAnimation);
+    Q_D(const QUniAndroidRotateAnimation);
     return d->pivotXType;
 }
 
-void QNativeAndroidRotateAnimation::setPivotXType(Relation type)
+void QUniAndroidRotateAnimation::setPivotXType(Relation type)
 {
-    Q_D(QNativeAndroidRotateAnimation);
+    Q_D(QUniAndroidRotateAnimation);
     if (d->pivotXType == type)
         return;
 
@@ -135,15 +135,15 @@ void QNativeAndroidRotateAnimation::setPivotXType(Relation type)
     emit pivotXTypeChanged();
 }
 
-QNativeAndroidRotateAnimation::Relation QNativeAndroidRotateAnimation::pivotYType() const
+QUniAndroidRotateAnimation::Relation QUniAndroidRotateAnimation::pivotYType() const
 {
-    Q_D(const QNativeAndroidRotateAnimation);
+    Q_D(const QUniAndroidRotateAnimation);
     return d->pivotYType;
 }
 
-void QNativeAndroidRotateAnimation::setPivotYType(Relation type)
+void QUniAndroidRotateAnimation::setPivotYType(Relation type)
 {
-    Q_D(QNativeAndroidRotateAnimation);
+    Q_D(QUniAndroidRotateAnimation);
     if (d->pivotYType == type)
         return;
 
@@ -151,9 +151,9 @@ void QNativeAndroidRotateAnimation::setPivotYType(Relation type)
     emit pivotYTypeChanged();
 }
 
-QAndroidJniObject QNativeAndroidRotateAnimation::onCreate()
+QAndroidJniObject QUniAndroidRotateAnimation::onCreate()
 {
-    Q_D(QNativeAndroidRotateAnimation);
+    Q_D(QUniAndroidRotateAnimation);
     return QAndroidJniObject("android/view/animation/RotateAnimation",
                              "(FFIFIF)V",
                              d->from, d->to,

@@ -48,9 +48,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidActivityPrivate : public QNativeAndroidContextWrapperPrivate
+class QUniAndroidActivityPrivate : public QUniAndroidContextWrapperPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidActivity)
+    Q_DECLARE_PUBLIC(QUniAndroidActivity)
 
 public:
     void setupWindow();
@@ -59,15 +59,15 @@ public:
     void invalidateOptionsMenu();
     void updateContentView();
 
-    QNativeAndroidWindow *window = nullptr;
-    QNativeAndroidView *contentView = nullptr;
-    QNativeAndroidMenu *optionsMenu = nullptr;
-    QNativeAndroidActionBar *actionBar = nullptr;
+    QUniAndroidWindow *window = nullptr;
+    QUniAndroidView *contentView = nullptr;
+    QUniAndroidMenu *optionsMenu = nullptr;
+    QUniAndroidActionBar *actionBar = nullptr;
 };
 
-void QNativeAndroidActivityPrivate::setupWindow()
+void QUniAndroidActivityPrivate::setupWindow()
 {
-    Q_Q(QNativeAndroidActivity);
+    Q_Q(QUniAndroidActivity);
     if (!q->isValid())
         return;
 
@@ -78,9 +78,9 @@ void QNativeAndroidActivityPrivate::setupWindow()
     });
 }
 
-void QNativeAndroidActivityPrivate::setupActionBar()
+void QUniAndroidActivityPrivate::setupActionBar()
 {
-    Q_Q(QNativeAndroidActivity);
+    Q_Q(QUniAndroidActivity);
     if (!q->isValid())
         return;
 
@@ -91,9 +91,9 @@ void QNativeAndroidActivityPrivate::setupActionBar()
     });
 }
 
-void QNativeAndroidActivityPrivate::updateOptionsMenu()
+void QUniAndroidActivityPrivate::updateOptionsMenu()
 {
-    Q_Q(QNativeAndroidActivity);
+    Q_Q(QUniAndroidActivity);
     if (!q->isValid())
         return;
 
@@ -107,15 +107,15 @@ void QNativeAndroidActivityPrivate::updateOptionsMenu()
     });
 }
 
-void QNativeAndroidActivityPrivate::invalidateOptionsMenu()
+void QUniAndroidActivityPrivate::invalidateOptionsMenu()
 {
-    Q_Q(QNativeAndroidActivity);
+    Q_Q(QUniAndroidActivity);
     QtNativeAndroid::callVoidMethod(q->instance(), "invalidateOptionsMenu");
 }
 
-void QNativeAndroidActivityPrivate::updateContentView()
+void QUniAndroidActivityPrivate::updateContentView()
 {
-    Q_Q(QNativeAndroidActivity);
+    Q_Q(QUniAndroidActivity);
     if (!q->isValid())
         return;
 
@@ -129,31 +129,31 @@ void QNativeAndroidActivityPrivate::updateContentView()
     });
 }
 
-QNativeAndroidActivity::QNativeAndroidActivity(QObject *parent)
-    : QNativeAndroidContextWrapper(*(new QNativeAndroidActivityPrivate), parent)
+QUniAndroidActivity::QUniAndroidActivity(QObject *parent)
+    : QUniAndroidContextWrapper(*(new QUniAndroidActivityPrivate), parent)
 {
-    Q_D(QNativeAndroidActivity);
-    d->window = new QNativeAndroidWindow(this);
+    Q_D(QUniAndroidActivity);
+    d->window = new QUniAndroidWindow(this);
 
     // TODO: multiple activities?
     d->setInstance(QtAndroid::androidActivity());
 }
 
-QNativeAndroidWindow *QNativeAndroidActivity::window() const
+QUniAndroidWindow *QUniAndroidActivity::window() const
 {
-    Q_D(const QNativeAndroidActivity);
+    Q_D(const QUniAndroidActivity);
     return d->window;
 }
 
-QNativeAndroidActionBar *QNativeAndroidActivity::actionBar() const
+QUniAndroidActionBar *QUniAndroidActivity::actionBar() const
 {
-    Q_D(const QNativeAndroidActivity);
+    Q_D(const QUniAndroidActivity);
     return d->actionBar;
 }
 
-void QNativeAndroidActivity::setActionBar(QNativeAndroidActionBar *bar)
+void QUniAndroidActivity::setActionBar(QUniAndroidActionBar *bar)
 {
-    Q_D(QNativeAndroidActivity);
+    Q_D(QUniAndroidActivity);
     if (d->actionBar == bar)
         return;
 
@@ -164,60 +164,60 @@ void QNativeAndroidActivity::setActionBar(QNativeAndroidActionBar *bar)
         d->setupActionBar();
 }
 
-QNativeAndroidMenu *QNativeAndroidActivity::optionsMenu() const
+QUniAndroidMenu *QUniAndroidActivity::optionsMenu() const
 {
-    Q_D(const QNativeAndroidActivity);
+    Q_D(const QUniAndroidActivity);
     return d->optionsMenu;
 }
 
-void QNativeAndroidActivity::setOptionsMenu(QNativeAndroidMenu *menu)
+void QUniAndroidActivity::setOptionsMenu(QUniAndroidMenu *menu)
 {
-    Q_D(QNativeAndroidActivity);
+    Q_D(QUniAndroidActivity);
     if (d->optionsMenu == menu)
         return;
 
     if (d->optionsMenu) {
-        QObjectPrivate::disconnect(d->optionsMenu, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateOptionsMenu);
+        QObjectPrivate::disconnect(d->optionsMenu, &QUniAndroidObject::instanceChanged, d, &QUniAndroidActivityPrivate::updateOptionsMenu);
         d->optionsMenu->destruct();
     }
     d->optionsMenu = menu;
     if (d->optionsMenu) {
-        QObjectPrivate::connect(d->optionsMenu, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateOptionsMenu);
+        QObjectPrivate::connect(d->optionsMenu, &QUniAndroidObject::instanceChanged, d, &QUniAndroidActivityPrivate::updateOptionsMenu);
         if (isComponentComplete())
             d->optionsMenu->construct();
     }
 }
 
-QNativeAndroidView *QNativeAndroidActivity::contentView() const
+QUniAndroidView *QUniAndroidActivity::contentView() const
 {
-    Q_D(const QNativeAndroidActivity);
+    Q_D(const QUniAndroidActivity);
     return d->contentView;
 }
 
-void QNativeAndroidActivity::setContentView(QNativeAndroidView *view)
+void QUniAndroidActivity::setContentView(QUniAndroidView *view)
 {
-    Q_D(QNativeAndroidActivity);
+    Q_D(QUniAndroidActivity);
     if (d->contentView == view)
         return;
     if (d->contentView) {
-        QObjectPrivate::disconnect(d->contentView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateContentView);
+        QObjectPrivate::disconnect(d->contentView, &QUniAndroidObject::instanceChanged, d, &QUniAndroidActivityPrivate::updateContentView);
         d->contentView->destruct();
     }
     d->contentView = view;
     if (d->contentView) {
         view->setParent(this);
         view->setContext(this);
-        QObjectPrivate::connect(d->contentView, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActivityPrivate::updateContentView);
+        QObjectPrivate::connect(d->contentView, &QUniAndroidObject::instanceChanged, d, &QUniAndroidActivityPrivate::updateContentView);
         if (isComponentComplete())
             d->contentView->construct();
     }
 }
 
-void QNativeAndroidActivity::start()
+void QUniAndroidActivity::start()
 {
-    Q_D(QNativeAndroidActivity);
+    Q_D(QUniAndroidActivity);
     foreach (QObject *child, children()) {
-        QNativeAndroidObject *object = qobject_cast<QNativeAndroidObject *>(child);
+        QUniAndroidObject *object = qobject_cast<QUniAndroidObject *>(child);
         if (object)
             object->construct();
     }
@@ -229,14 +229,14 @@ void QNativeAndroidActivity::start()
         d->setupWindow();
 }
 
-void QNativeAndroidActivity::classBegin()
+void QUniAndroidActivity::classBegin()
 {
-    QNativeAndroidContextWrapper::classBegin();
+    QUniAndroidContextWrapper::classBegin();
 }
 
-void QNativeAndroidActivity::componentComplete()
+void QUniAndroidActivity::componentComplete()
 {
-    QNativeAndroidContextWrapper::componentComplete();
+    QUniAndroidContextWrapper::componentComplete();
     start();
 }
 

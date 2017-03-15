@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDialogPrivate : public QNativeAndroidContextualPrivate
+class QUniAndroidDialogPrivate : public QUniAndroidContextualPrivate
 {
 };
 

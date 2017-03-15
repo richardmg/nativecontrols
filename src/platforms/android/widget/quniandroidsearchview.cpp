@@ -38,21 +38,21 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidSearchView::QNativeAndroidSearchView(QNativeAndroidContext *context)
-    : QNativeAndroidLinearLayout(context)
+QUniAndroidSearchView::QUniAndroidSearchView(QUniAndroidContext *context)
+    : QUniAndroidLinearLayout(context)
 {
 }
 
-QAndroidJniObject QNativeAndroidSearchView::onCreate()
+QAndroidJniObject QUniAndroidSearchView::onCreate()
 {
     return QAndroidJniObject("android/widget/SearchView",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidSearchView::onInflate(QAndroidJniObject &instance)
+void QUniAndroidSearchView::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidLinearLayout::onInflate(instance);
+    QUniAndroidLinearLayout::onInflate(instance);
 }
 
 QT_END_NAMESPACE

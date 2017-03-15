@@ -46,26 +46,26 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitWindowPrivate::QNativeUIKitWindowPrivate(int version)
-    : QNativeUIKitViewPrivate(version)
+QUniUIKitWindowPrivate::QUniUIKitWindowPrivate(int version)
+    : QUniUIKitViewPrivate(version)
     , m_viewController(nullptr)
     , m_viewControllerSetExplicit(false)
 {
 }
 
-QNativeUIKitWindowPrivate::~QNativeUIKitWindowPrivate()
+QUniUIKitWindowPrivate::~QUniUIKitWindowPrivate()
 {
 }
 
-void QNativeUIKitWindowPrivate::connectSignals(QNativeBase *base)
+void QUniUIKitWindowPrivate::connectSignals(QUniBase *base)
 {
-    Q_Q(QNativeUIKitWindow);
-    QNativeUIKitBasePrivate::connectSignals(base);
-    const auto b = static_cast<QNativeWindow *>(base);
-    q->connect(q, &QNativeUIKitWindow::visibleChanged, b, &QNativeWindow::visibleChanged);
+    Q_Q(QUniUIKitWindow);
+    QUniUIKitBasePrivate::connectSignals(base);
+    const auto b = static_cast<QUniWindow *>(base);
+    q->connect(q, &QUniUIKitWindow::visibleChanged, b, &QUniWindow::visibleChanged);
 }
 
-void QNativeUIKitWindowPrivate::updateLayout(bool recursive)
+void QUniUIKitWindowPrivate::updateLayout(bool recursive)
 {
     if (testAttribute(LayedOut))
         return;
@@ -73,47 +73,47 @@ void QNativeUIKitWindowPrivate::updateLayout(bool recursive)
 
     if (recursive) {
         for (QObject *child : q_func()->children()) {
-            if (QNativeUIKitViewPrivate *basePrivate = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(child)))
+            if (QUniUIKitViewPrivate *basePrivate = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(child)))
                 basePrivate->updateLayout(recursive);
         }
     }
 }
 
-void QNativeUIKitWindowPrivate::addSubViewToContentView(UIView *uiView)
+void QUniUIKitWindowPrivate::addSubViewToContentView(UIView *uiView)
 {
-    Q_Q(QNativeUIKitWindow);
-    QNativeUIKitView *contentView = q->rootViewController()->view();
-    QNativeUIKitViewPrivate *dptr_contentView = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(contentView));
+    Q_Q(QUniUIKitWindow);
+    QUniUIKitView *contentView = q->rootViewController()->view();
+    QUniUIKitViewPrivate *dptr_contentView = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(contentView));
     dptr_contentView->addSubView(uiView);
 }
 
-UIView *QNativeUIKitWindowPrivate::createView()
+UIView *QUniUIKitWindowPrivate::createView()
 {
     return [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 }
 
-QNativeUIKitWindow::QNativeUIKitWindow()
-    : QNativeUIKitView(*new QNativeUIKitWindowPrivate(), nullptr)
+QUniUIKitWindow::QUniUIKitWindow()
+    : QUniUIKitView(*new QUniUIKitWindowPrivate(), nullptr)
 {
 }
 
-QNativeUIKitWindow::QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd)
-    : QNativeUIKitView(dd, nullptr)
+QUniUIKitWindow::QUniUIKitWindow(QUniUIKitWindowPrivate &dd)
+    : QUniUIKitView(dd, nullptr)
 {
 }
 
-QNativeUIKitWindow::~QNativeUIKitWindow()
+QUniUIKitWindow::~QUniUIKitWindow()
 {
 }
 
-UIWindow *QNativeUIKitWindow::uiWindowHandle()
+UIWindow *QUniUIKitWindow::uiWindowHandle()
 {
     return static_cast<UIWindow *>(d_func()->view());
 }
 
-void QNativeUIKitWindow::setRootViewController(QNativeUIKitViewController *controller)
+void QUniUIKitWindow::setRootViewController(QUniUIKitViewController *controller)
 {
-    Q_D(QNativeUIKitWindow);
+    Q_D(QUniUIKitWindow);
     if (d->m_viewController == controller)
         return;
 
@@ -123,36 +123,36 @@ void QNativeUIKitWindow::setRootViewController(QNativeUIKitViewController *contr
     emit rootViewControllerChanged(controller);
 }
 
-QNativeUIKitViewController *QNativeUIKitWindow::rootViewController() const
+QUniUIKitViewController *QUniUIKitWindow::rootViewController() const
 {
-    Q_D(const QNativeUIKitWindow);
+    Q_D(const QUniUIKitWindow);
     if (!d->m_viewController) {
-        QNativeUIKitWindow *self = const_cast<QNativeUIKitWindow *>(this);
-        self->setRootViewController(new QNativeUIKitViewController(self));
+        QUniUIKitWindow *self = const_cast<QUniUIKitWindow *>(this);
+        self->setRootViewController(new QUniUIKitViewController(self));
         // Keep track of whether or not the view controller was created
         // by ourselves, in case we accidentally create one before
         // the app gets around to add one as a child.
-        const_cast<QNativeUIKitWindowPrivate *>(d)->m_viewControllerSetExplicit = false;
+        const_cast<QUniUIKitWindowPrivate *>(d)->m_viewControllerSetExplicit = false;
     }
     return d->m_viewController;
 }
 
-qreal QNativeUIKitWindow::width() const
+qreal QUniUIKitWindow::width() const
 {
     return d_func()->view().frame.size.width;
 }
 
-qreal QNativeUIKitWindow::height() const
+qreal QUniUIKitWindow::height() const
 {
     return d_func()->view().frame.size.height;
 }
 
-bool QNativeUIKitWindow::isVisible() const
+bool QUniUIKitWindow::isVisible() const
 {
     return !d_func()->view().hidden;
 }
 
-void QNativeUIKitWindow::setVisible(bool newVisible)
+void QUniUIKitWindow::setVisible(bool newVisible)
 {
     if (newVisible == isVisible())
         return;
@@ -174,71 +174,71 @@ void QNativeUIKitWindow::setVisible(bool newVisible)
     emit visibleChanged(newVisible);
 }
 
-void QNativeUIKitWindow::showFullScreen()
+void QUniUIKitWindow::showFullScreen()
 {
     setVisible(true);
 }
 
-bool QNativeUIKitWindow::event(QEvent *e)
+bool QUniUIKitWindow::event(QEvent *e)
 {
-    Q_D(QNativeUIKitWindow);
+    Q_D(QUniUIKitWindow);
     switch (e->type()) {
     case QEvent::LayoutRequest:
         d->updateLayout(true);
     default:
-        return QNativeUIKitBase::event(e);
+        return QUniUIKitBase::event(e);
     }
     return true;
 }
 
-bool QNativeUIKitWindow::addNativeChild(QObject *child)
+bool QUniUIKitWindow::addNativeChild(QObject *child)
 {
-    if (QNativeUIKitView *c = qobject_cast<QNativeUIKitView *>(child))
+    if (QUniUIKitView *c = qobject_cast<QUniUIKitView *>(child))
         c->setParent(this);
-    else if (QNativeUIKitViewController *c = qobject_cast<QNativeUIKitViewController *>(child))
+    else if (QUniUIKitViewController *c = qobject_cast<QUniUIKitViewController *>(child))
         c->setParent(this);
     else
-        return QNativeUIKitBase::addNativeChild(child);
+        return QUniUIKitBase::addNativeChild(child);
     return true;
 }
 
-bool QNativeUIKitWindow::addNativeChild(const QByteArray &type, void *child)
+bool QUniUIKitWindow::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "UIView")
         d_func()->addSubViewToContentView(static_cast<UIView *>(child));
     else if (type == "UIViewController")
         uiWindowHandle().rootViewController = static_cast<UIViewController *>(child);
     else
-        return QNativeUIKitView::addNativeChild(type, child);
+        return QUniUIKitView::addNativeChild(type, child);
     return true;
 }
 
-QByteArrayList QNativeUIKitWindow::supportedNativeChildTypes()
+QByteArrayList QUniUIKitWindow::supportedNativeChildTypes()
 {
-    return QNativeUIKitView::supportedNativeChildTypes() << "UIViewController";
+    return QUniUIKitView::supportedNativeChildTypes() << "UIViewController";
 }
 
-QByteArrayList QNativeUIKitWindow::supportedNativeParentTypes()
+QByteArrayList QUniUIKitWindow::supportedNativeParentTypes()
 {
     return QByteArrayList();
 }
 
-void QNativeUIKitWindow::childEvent(QChildEvent *event)
+void QUniUIKitWindow::childEvent(QChildEvent *event)
 {
-    Q_D(QNativeUIKitWindow);
+    Q_D(QUniUIKitWindow);
     // Note that event->child() might not be fully constructed at this point, if
     // called from its constructor chain. But the private part will.
     QObject *child = event->child();
 
-    if (QNativeUIKitViewPrivate *dptr_child = dynamic_cast<QNativeUIKitViewPrivate *>(QObjectPrivate::get(child))) {
+    if (QUniUIKitViewPrivate *dptr_child = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(child))) {
         if (event->added()) {
-            // QNativeUIKitView added as children of the window will have their
+            // QUniUIKitView added as children of the window will have their
             // UIViews added as children of the view controller view instead.
             d->addSubViewToContentView(dptr_child->view());
         } else if (event->removed()) {
             [dptr_child->view() removeFromSuperview];
         }
-    } else if (QNativeUIKitViewControllerPrivate *dptr_child = dynamic_cast<QNativeUIKitViewControllerPrivate *>(QObjectPrivate::get(child))) {
+    } else if (QUniUIKitViewControllerPrivate *dptr_child = dynamic_cast<QUniUIKitViewControllerPrivate *>(QObjectPrivate::get(child))) {
         if (event->added()) {
             if (!d->m_viewController || !d->m_viewControllerSetExplicit) {
                 // If no view controller is set from before (other than the default

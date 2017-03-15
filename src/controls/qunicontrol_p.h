@@ -52,20 +52,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeControl;
-class QNativePlatformControl;
+class QUniControl;
+class QUniPlatformControl;
 
-class QNativeControlPrivate : public QNativeViewPrivate
+class QUniControlPrivate : public QUniViewPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeControl)
+    Q_DECLARE_PUBLIC(QUniControl)
 
 public:
-    explicit QNativeControlPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeControlPrivate();
+    explicit QUniControlPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniControlPrivate();
 
     void createPlatformControl();
-    void setPlatformControl(QNativePlatformControl *platformControl);
-    QNativePlatformControl *m_platformControl;
+    void setPlatformControl(QUniPlatformControl *platformControl);
+    QUniPlatformControl *m_platformControl;
 };
 
 QT_END_NAMESPACE

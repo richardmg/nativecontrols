@@ -52,20 +52,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindow;
-class QNativePlatformWindow;
+class QUniWindow;
+class QUniPlatformWindow;
 
-class QNativeWindowPrivate : public QNativeBasePrivate
+class QUniWindowPrivate : public QUniBasePrivate
 {
-    Q_DECLARE_PUBLIC(QNativeWindow)
+    Q_DECLARE_PUBLIC(QUniWindow)
 
 public:
-    explicit QNativeWindowPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeWindowPrivate();
+    explicit QUniWindowPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniWindowPrivate();
 
     void createPlatformWindow();
-    void setPlatformWindow(QNativePlatformWindow *platformWindow);
-    QNativePlatformWindow *m_platformWindow;
+    void setPlatformWindow(QUniPlatformWindow *platformWindow);
+    QUniPlatformWindow *m_platformWindow;
 };
 
 QT_END_NAMESPACE

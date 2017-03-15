@@ -53,16 +53,16 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidArrayAdapterPrivate;
+class QUniAndroidArrayAdapterPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidArrayAdapter : public QNativeAndroidBaseAdapter
+class Q_NATIVEANDROID_EXPORT QUniAndroidArrayAdapter : public QUniAndroidBaseAdapter
 {
     Q_OBJECT
     Q_PROPERTY(int style READ style WRITE setStyle NOTIFY styleChanged)
     Q_PROPERTY(QStringList array READ array WRITE setArray NOTIFY arrayChanged)
 
 public:
-    explicit QNativeAndroidArrayAdapter(QObject *parent = nullptr);
+    explicit QUniAndroidArrayAdapter(QObject *parent = nullptr);
 
     int style() const;
     void setStyle(int style);
@@ -85,8 +85,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidArrayAdapter)
-    Q_DECLARE_PRIVATE(QNativeAndroidArrayAdapter)
+    Q_DISABLE_COPY(QUniAndroidArrayAdapter)
+    Q_DECLARE_PRIVATE(QUniAndroidArrayAdapter)
 };
 
 QT_END_NAMESPACE

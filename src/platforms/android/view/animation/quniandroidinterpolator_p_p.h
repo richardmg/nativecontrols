@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidInterpolatorPrivate : public QNativeAndroidObjectPrivate
+class QUniAndroidInterpolatorPrivate : public QUniAndroidObjectPrivate
 {
 public:
 };

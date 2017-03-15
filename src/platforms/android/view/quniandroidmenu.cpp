@@ -40,35 +40,35 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidMenu::QNativeAndroidMenu(QObject *parent)
-    : QNativeAndroidContextual(*(new QNativeAndroidMenuPrivate), parent)
+QUniAndroidMenu::QUniAndroidMenu(QObject *parent)
+    : QUniAndroidContextual(*(new QUniAndroidMenuPrivate), parent)
 {
 }
 
-QNativeAndroidMenu::QNativeAndroidMenu(QNativeAndroidMenuPrivate &dd, QObject *parent)
-    : QNativeAndroidContextual(dd, parent)
+QUniAndroidMenu::QUniAndroidMenu(QUniAndroidMenuPrivate &dd, QObject *parent)
+    : QUniAndroidContextual(dd, parent)
 {
 }
 
-QList<QNativeAndroidMenuItem *> QNativeAndroidMenu::items() const
+QList<QUniAndroidMenuItem *> QUniAndroidMenu::items() const
 {
-    QList<QNativeAndroidMenuItem *> lst;
+    QList<QUniAndroidMenuItem *> lst;
     foreach (QObject *child, children()) {
-        QNativeAndroidMenuItem *item = qobject_cast<QNativeAndroidMenuItem *>(child);
+        QUniAndroidMenuItem *item = qobject_cast<QUniAndroidMenuItem *>(child);
         if (item)
             lst += item;
     }
     return lst;
 }
 
-QAndroidJniObject QNativeAndroidMenu::onCreate()
+QAndroidJniObject QUniAndroidMenu::onCreate()
 {
     return QAndroidJniObject("org/qtproject/qt5/android/bindings/view/QtNativeMenu");
 }
 
-void QNativeAndroidMenu::onInflate(QAndroidJniObject &instance)
+void QUniAndroidMenu::onInflate(QAndroidJniObject &instance)
 {
-    foreach (QNativeAndroidMenuItem *item, items()) {
+    foreach (QUniAndroidMenuItem *item, items()) {
         item->construct();
         if (item->isValid())
             instance.callMethod<void>("add", "(Lorg/qtproject/qt5/android/bindings/view/QtNativeMenuItem;)V", item->instance().object());

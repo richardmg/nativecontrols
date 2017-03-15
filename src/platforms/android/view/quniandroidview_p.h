@@ -53,22 +53,22 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDrawable;
-class QNativeAndroidAnimation;
-class QNativeAndroidLayoutParams;
-class QNativeAndroidViewPrivate;
+class QUniAndroidDrawable;
+class QUniAndroidAnimation;
+class QUniAndroidLayoutParams;
+class QUniAndroidViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidView : public QNativeAndroidContextual
+class Q_NATIVEANDROID_EXPORT QUniAndroidView : public QUniAndroidContextual
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAndroidView *parent READ parentView WRITE setParentView NOTIFY parentChanged)
-    Q_PRIVATE_PROPERTY(QNativeAndroidView::d_func(), QQmlListProperty<QNativeAndroidView> children READ children NOTIFY childrenChanged DESIGNABLE false)
+    Q_PROPERTY(QUniAndroidView *parent READ parentView WRITE setParentView NOTIFY parentChanged)
+    Q_PRIVATE_PROPERTY(QUniAndroidView::d_func(), QQmlListProperty<QUniAndroidView> children READ children NOTIFY childrenChanged DESIGNABLE false)
 
-    Q_PROPERTY(QNativeAndroidDrawable *background READ background WRITE setBackground NOTIFY backgroundChanged)
+    Q_PROPERTY(QUniAndroidDrawable *background READ background WRITE setBackground NOTIFY backgroundChanged)
     Q_PROPERTY(int backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
     Q_PROPERTY(int backgroundResource READ backgroundResource WRITE setBackgroundResource NOTIFY backgroundResourceChanged)
 
-    Q_PROPERTY(QNativeAndroidAnimation *animation READ animation WRITE setAnimation NOTIFY animationChanged)
+    Q_PROPERTY(QUniAndroidAnimation *animation READ animation WRITE setAnimation NOTIFY animationChanged)
 
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
     Q_PROPERTY(bool focus READ hasFocus NOTIFY focusChanged)
@@ -104,22 +104,22 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidView : public QNativeAndroidContextua
     Q_PROPERTY(qreal translationZ READ translationZ WRITE setTranslationZ NOTIFY translationZChanged)
 
 public:
-    explicit QNativeAndroidView(QNativeAndroidContext *context = nullptr);
-    ~QNativeAndroidView();
+    explicit QUniAndroidView(QUniAndroidContext *context = nullptr);
+    ~QUniAndroidView();
 
     int identifier() const;
     void setIdentifier(int id);
 
-    QNativeAndroidView *parentView() const;
-    void setParentView(QNativeAndroidView *parent);
+    QUniAndroidView *parentView() const;
+    void setParentView(QUniAndroidView *parent);
 
-    QList<QNativeAndroidView *> childViews() const;
+    QList<QUniAndroidView *> childViews() const;
 
-    QNativeAndroidLayoutParams *layoutParams() const;
-    void setLayoutParams(QNativeAndroidLayoutParams *params);
+    QUniAndroidLayoutParams *layoutParams() const;
+    void setLayoutParams(QUniAndroidLayoutParams *params);
 
-    QNativeAndroidDrawable *background() const;
-    void setBackground(QNativeAndroidDrawable *background, int resource = 0);
+    QUniAndroidDrawable *background() const;
+    void setBackground(QUniAndroidDrawable *background, int resource = 0);
 
     int backgroundColor() const;
     void setBackgroundColor(int color);
@@ -127,8 +127,8 @@ public:
     int backgroundResource() const;
     void setBackgroundResource(int resource);
 
-    QNativeAndroidAnimation *animation() const;
-    void setAnimation(QNativeAndroidAnimation *animation);
+    QUniAndroidAnimation *animation() const;
+    void setAnimation(QUniAndroidAnimation *animation);
 
     bool isVisible() const;
     void setVisible(bool visible);
@@ -223,22 +223,22 @@ public:
     };
 
     union ViewChangeData {
-        ViewChangeData(QNativeAndroidView *v) : view(v) {}
+        ViewChangeData(QUniAndroidView *v) : view(v) {}
         ViewChangeData(qreal n) : number(n) {}
         ViewChangeData(bool b) : boolean(b) {}
 
-        QNativeAndroidView *view;
+        QUniAndroidView *view;
         qreal number;
         bool boolean;
     };
 
 Q_SIGNALS:
-    void parentChanged(QNativeAndroidView *parent);
-    void backgroundChanged(QNativeAndroidDrawable *background);
+    void parentChanged(QUniAndroidView *parent);
+    void backgroundChanged(QUniAndroidDrawable *background);
     void backgroundColorChanged(int backgroundColor);
     void backgroundResourceChanged(int backgroundResource);
-    void animationChanged(QNativeAndroidAnimation *animation);
-    void childrenChanged(const QList<QNativeAndroidView *> &children);
+    void animationChanged(QUniAndroidAnimation *animation);
+    void childrenChanged(const QList<QUniAndroidView *> &children);
     void visibleChanged(bool visible);
     void focusChanged(bool focus);
     void click();
@@ -271,13 +271,13 @@ Q_SIGNALS:
     void longClick(); // TODO: accept
 
 protected:
-    QNativeAndroidView(QNativeAndroidViewPrivate &dd, QNativeAndroidContext *context = nullptr);
+    QUniAndroidView(QUniAndroidViewPrivate &dd, QUniAndroidContext *context = nullptr);
 
     virtual void polish();
     virtual void viewChange(ViewChange change, const ViewChangeData &data);
 
-    void addChild(QNativeAndroidView *child);
-    void removeChild(QNativeAndroidView *child);
+    void addChild(QUniAndroidView *child);
+    void removeChild(QUniAndroidView *child);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
@@ -287,8 +287,8 @@ protected:
     void objectChange(ObjectChange change) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidView)
-    Q_DECLARE_PRIVATE(QNativeAndroidView)
+    Q_DISABLE_COPY(QUniAndroidView)
+    Q_DECLARE_PRIVATE(QUniAndroidView)
 
     Q_PRIVATE_SLOT(d_func(), void _q_updateBackground())
     Q_PRIVATE_SLOT(d_func(), void _q_updateAnimation())

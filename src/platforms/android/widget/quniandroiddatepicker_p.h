@@ -52,22 +52,22 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDatePickerPrivate;
+class QUniAndroidDatePickerPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidDatePicker : public QNativeAndroidFrameLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidDatePicker : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidDatePicker(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidDatePicker(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidDatePicker)
-    Q_DECLARE_PRIVATE(QNativeAndroidDatePicker)
+    Q_DISABLE_COPY(QUniAndroidDatePicker)
+    Q_DECLARE_PRIVATE(QUniAndroidDatePicker)
 };
 
 QT_END_NAMESPACE

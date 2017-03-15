@@ -58,15 +58,15 @@
 
 @end
 
-@interface QNativeAppKitWindowDelegate : NSObject <NSWindowDelegate> {
-    QT_PREPEND_NAMESPACE(QNativeAppKitWindowPrivate) *_window;
+@interface QUniAppKitWindowDelegate : NSObject <NSWindowDelegate> {
+    QT_PREPEND_NAMESPACE(QUniAppKitWindowPrivate) *_window;
 }
 
 @end
 
-@implementation QNativeAppKitWindowDelegate
+@implementation QUniAppKitWindowDelegate
 
-- (instancetype)initWithQNativeAppKitWindowPrivate:(QT_PREPEND_NAMESPACE(QNativeAppKitWindowPrivate) *)window
+- (instancetype)initWithQUniAppKitWindowPrivate:(QT_PREPEND_NAMESPACE(QUniAppKitWindowPrivate) *)window
 {
     self = [self init];
     if (self) {
@@ -87,8 +87,8 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAppKitWindowPrivate::QNativeAppKitWindowPrivate(int version)
-    : QNativeAppKitViewPrivate(version)
+QUniAppKitWindowPrivate::QUniAppKitWindowPrivate(int version)
+    : QUniAppKitViewPrivate(version)
     , m_window(nullptr)
     , m_viewController(nullptr)
     , m_delegate(nullptr)
@@ -96,22 +96,22 @@ QNativeAppKitWindowPrivate::QNativeAppKitWindowPrivate(int version)
 {
 }
 
-QNativeAppKitWindowPrivate::~QNativeAppKitWindowPrivate()
+QUniAppKitWindowPrivate::~QUniAppKitWindowPrivate()
 {
     [m_window release];
 }
 
-void QNativeAppKitWindowPrivate::connectSignals(QNativeBase *base)
+void QUniAppKitWindowPrivate::connectSignals(QUniBase *base)
 {
-    Q_Q(QNativeAppKitWindow);
-    QNativeAppKitBasePrivate::connectSignals(base);
-    const auto b = static_cast<QNativeWindow *>(base);
-    q->connect(q, &QNativeAppKitWindow::widthChanged, b, &QNativeWindow::widthChanged);
-    q->connect(q, &QNativeAppKitWindow::heightChanged, b, &QNativeWindow::heightChanged);
-    q->connect(q, &QNativeAppKitWindow::visibleChanged, b, &QNativeWindow::visibleChanged);
+    Q_Q(QUniAppKitWindow);
+    QUniAppKitBasePrivate::connectSignals(base);
+    const auto b = static_cast<QUniWindow *>(base);
+    q->connect(q, &QUniAppKitWindow::widthChanged, b, &QUniWindow::widthChanged);
+    q->connect(q, &QUniAppKitWindow::heightChanged, b, &QUniWindow::heightChanged);
+    q->connect(q, &QUniAppKitWindow::visibleChanged, b, &QUniWindow::visibleChanged);
 }
 
-void QNativeAppKitWindowPrivate::updateLayout(bool recursive)
+void QUniAppKitWindowPrivate::updateLayout(bool recursive)
 {
     if (testAttribute(LayedOut))
         return;
@@ -119,26 +119,26 @@ void QNativeAppKitWindowPrivate::updateLayout(bool recursive)
 
     if (recursive) {
         for (QObject *child : q_func()->children()) {
-            if (QNativeAppKitViewPrivate *basePrivate = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(child)))
+            if (QUniAppKitViewPrivate *basePrivate = dynamic_cast<QUniAppKitViewPrivate *>(QObjectPrivate::get(child)))
                 basePrivate->updateLayout(recursive);
         }
     }
 }
 
-void QNativeAppKitWindowPrivate::addSubViewToContentView(NSView *nsView)
+void QUniAppKitWindowPrivate::addSubViewToContentView(NSView *nsView)
 {
-    Q_Q(QNativeAppKitWindow);
-    QNativeAppKitView *contentView = q->contentViewController()->view();
-    QNativeAppKitViewPrivate *dptr_contentView = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(contentView));
+    Q_Q(QUniAppKitWindow);
+    QUniAppKitView *contentView = q->contentViewController()->view();
+    QUniAppKitViewPrivate *dptr_contentView = dynamic_cast<QUniAppKitViewPrivate *>(QObjectPrivate::get(contentView));
     dptr_contentView->addSubView(nsView);
 }
 
-NSWindow *QNativeAppKitWindowPrivate::window()
+NSWindow *QUniAppKitWindowPrivate::window()
 {
     if (m_window)
         return m_window;
 
-    m_delegate = [[QNativeAppKitWindowDelegate alloc] initWithQNativeAppKitWindowPrivate:this];
+    m_delegate = [[QUniAppKitWindowDelegate alloc] initWithQUniAppKitWindowPrivate:this];
 
     NSRect screenFrame = NSScreen.mainScreen.visibleFrame;
     NSRect windowFrame = NSMakeRect(0, 0,
@@ -159,30 +159,30 @@ NSWindow *QNativeAppKitWindowPrivate::window()
     return m_window;
 }
 
-QNativeAppKitWindow::QNativeAppKitWindow()
-    : QNativeAppKitBase(*new QNativeAppKitWindowPrivate(), nullptr)
+QUniAppKitWindow::QUniAppKitWindow()
+    : QUniAppKitBase(*new QUniAppKitWindowPrivate(), nullptr)
 {
 }
 
-QNativeAppKitWindow::QNativeAppKitWindow(QNativeAppKitWindowPrivate &dd)
-    : QNativeAppKitBase(dd, nullptr)
+QUniAppKitWindow::QUniAppKitWindow(QUniAppKitWindowPrivate &dd)
+    : QUniAppKitBase(dd, nullptr)
 {
 }
 
-QNativeAppKitWindow::~QNativeAppKitWindow()
+QUniAppKitWindow::~QUniAppKitWindow()
 {
-    Q_D(QNativeAppKitWindow);
+    Q_D(QUniAppKitWindow);
     [d->m_delegate release];
 }
 
-NSWindow *QNativeAppKitWindow::nsWindowHandle()
+NSWindow *QUniAppKitWindow::nsWindowHandle()
 {
     return d_func()->window();
 }
 
-void QNativeAppKitWindow::setContentViewController(QNativeAppKitViewController *controller)
+void QUniAppKitWindow::setContentViewController(QUniAppKitViewController *controller)
 {
-    Q_D(QNativeAppKitWindow);
+    Q_D(QUniAppKitWindow);
     if (d->m_viewController == controller)
         return;
 
@@ -200,63 +200,63 @@ void QNativeAppKitWindow::setContentViewController(QNativeAppKitViewController *
     emit contentViewControllerChanged(controller);
 }
 
-QNativeAppKitViewController *QNativeAppKitWindow::contentViewController() const
+QUniAppKitViewController *QUniAppKitWindow::contentViewController() const
 {
-    Q_D(const QNativeAppKitWindow);
+    Q_D(const QUniAppKitWindow);
     if (!d->m_viewController) {
-        QNativeAppKitWindow *self = const_cast<QNativeAppKitWindow *>(this);
-        self->setContentViewController(new QNativeAppKitViewController(self));
+        QUniAppKitWindow *self = const_cast<QUniAppKitWindow *>(this);
+        self->setContentViewController(new QUniAppKitViewController(self));
         // Keep track of whether or not the view controller was created
         // by ourselves, in case we accidentally create one before
         // the app gets around to add one as a child.
-        const_cast<QNativeAppKitWindowPrivate *>(d)->m_viewControllerSetExplicit = false;
+        const_cast<QUniAppKitWindowPrivate *>(d)->m_viewControllerSetExplicit = false;
     }
     return d->m_viewController;
 }
 
-QRectF QNativeAppKitWindow::frame() const
+QRectF QUniAppKitWindow::frame() const
 {
-    return QRectF::fromCGRect(const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle().frame);
+    return QRectF::fromCGRect(const_cast<QUniAppKitWindow *>(this)->nsWindowHandle().frame);
 }
 
-void QNativeAppKitWindow::setFrame(const QRectF &frame)
+void QUniAppKitWindow::setFrame(const QRectF &frame)
 {
     [nsWindowHandle() setFrame:frame.toCGRect() display:YES];
 }
 
-QRectF QNativeAppKitWindow::contentRect() const
+QRectF QUniAppKitWindow::contentRect() const
 {
     return contentRectForFrameRect(frame());
 }
 
-QRectF QNativeAppKitWindow::contentRectForFrameRect(const QRectF &rect) const
+QRectF QUniAppKitWindow::contentRectForFrameRect(const QRectF &rect) const
 {
-    NSWindow *window = const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle();
+    NSWindow *window = const_cast<QUniAppKitWindow *>(this)->nsWindowHandle();
     return QRectF::fromCGRect([window contentRectForFrameRect:rect.toCGRect()]);
 }
 
-QRectF QNativeAppKitWindow::frameRectForContentRect(const QRectF &rect) const
+QRectF QUniAppKitWindow::frameRectForContentRect(const QRectF &rect) const
 {
-    NSWindow *window = const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle();
+    NSWindow *window = const_cast<QUniAppKitWindow *>(this)->nsWindowHandle();
     return QRectF::fromCGRect([window frameRectForContentRect:rect.toCGRect()]);
 }
 
-qreal QNativeAppKitWindow::width() const
+qreal QUniAppKitWindow::width() const
 {
     return frame().width();
 }
 
-qreal QNativeAppKitWindow::height() const
+qreal QUniAppKitWindow::height() const
 {
     return frame().height();
 }
 
-bool QNativeAppKitWindow::isVisible() const
+bool QUniAppKitWindow::isVisible() const
 {
-    return const_cast<QNativeAppKitWindow *>(this)->nsWindowHandle().visible;
+    return const_cast<QUniAppKitWindow *>(this)->nsWindowHandle().visible;
 }
 
-void QNativeAppKitWindow::setVisible(bool newVisible)
+void QUniAppKitWindow::setVisible(bool newVisible)
 {
     if (newVisible == isVisible())
         return;
@@ -277,7 +277,7 @@ void QNativeAppKitWindow::setVisible(bool newVisible)
     emit visibleChanged(newVisible);
 }
 
-void QNativeAppKitWindow::showFullScreen()
+void QUniAppKitWindow::showFullScreen()
 {
     if (!isVisible())
         setVisible(true);
@@ -286,66 +286,66 @@ void QNativeAppKitWindow::showFullScreen()
         [nsWindowHandle() toggleFullScreen:nsWindowHandle()];
 }
 
-bool QNativeAppKitWindow::event(QEvent *e)
+bool QUniAppKitWindow::event(QEvent *e)
 {
-    Q_D(QNativeAppKitWindow);
+    Q_D(QUniAppKitWindow);
     switch (e->type()) {
     case QEvent::LayoutRequest:
         d->updateLayout(true);
     default:
-        return QNativeAppKitBase::event(e);
+        return QUniAppKitBase::event(e);
     }
     return true;
 }
 
-bool QNativeAppKitWindow::addNativeChild(QObject *child)
+bool QUniAppKitWindow::addNativeChild(QObject *child)
 {
-    if (QNativeAppKitView *c = qobject_cast<QNativeAppKitView *>(child))
+    if (QUniAppKitView *c = qobject_cast<QUniAppKitView *>(child))
         c->setParent(this);
-    else if (QNativeAppKitViewController *c = qobject_cast<QNativeAppKitViewController *>(child))
+    else if (QUniAppKitViewController *c = qobject_cast<QUniAppKitViewController *>(child))
         c->setParent(this);
     else
-        return QNativeAppKitBase::addNativeChild(child);
+        return QUniAppKitBase::addNativeChild(child);
     return true;
 }
 
-bool QNativeAppKitWindow::addNativeChild(const QByteArray &type, void *child)
+bool QUniAppKitWindow::addNativeChild(const QByteArray &type, void *child)
 {
     if (type == "NSView")
         d_func()->addSubViewToContentView(static_cast<NSView *>(child));
     else if (type == "NSViewController")
         nsWindowHandle().contentViewController = static_cast<NSViewController *>(child);
     else
-        return QNativeAppKitBase::addNativeChild(type, child);
+        return QUniAppKitBase::addNativeChild(type, child);
     return true;
 }
 
-QByteArrayList QNativeAppKitWindow::supportedNativeChildTypes()
+QByteArrayList QUniAppKitWindow::supportedNativeChildTypes()
 {
-    return QNativeAppKitBase::supportedNativeChildTypes() << "NSView" << "NSViewController";
+    return QUniAppKitBase::supportedNativeChildTypes() << "NSView" << "NSViewController";
 }
 
-QByteArrayList QNativeAppKitWindow::supportedNativeParentTypes()
+QByteArrayList QUniAppKitWindow::supportedNativeParentTypes()
 {
     return QByteArrayList();
 }
 
-void QNativeAppKitWindow::childEvent(QChildEvent *event)
+void QUniAppKitWindow::childEvent(QChildEvent *event)
 {
-    Q_D(QNativeAppKitWindow);
+    Q_D(QUniAppKitWindow);
     // Note that event->child() might not be fully constructed at this point, if
     // called from its constructor chain. But the private part will.
     QObject *child = event->child();
 
-    if (QNativeAppKitViewPrivate *dptr_child = dynamic_cast<QNativeAppKitViewPrivate *>(QObjectPrivate::get(event->child()))) {
+    if (QUniAppKitViewPrivate *dptr_child = dynamic_cast<QUniAppKitViewPrivate *>(QObjectPrivate::get(event->child()))) {
         if (event->added()) {
-            // QNativeAppKitView added as children of the window will have their
+            // QUniAppKitView added as children of the window will have their
             // NSViews added as children of the view controller view instead.
             d->addSubViewToContentView(dptr_child->view());
         } else if (event->removed()) {
             d->removeSubView(dptr_child->view());
         }
-    } else if (QNativeAppKitViewControllerPrivate *dptr_child = dynamic_cast<QNativeAppKitViewControllerPrivate *>(QObjectPrivate::get(child))) {
+    } else if (QUniAppKitViewControllerPrivate *dptr_child = dynamic_cast<QUniAppKitViewControllerPrivate *>(QObjectPrivate::get(child))) {
         if (event->added()) {
             if (!d->m_viewController || !d->m_viewControllerSetExplicit) {
                 // If no view controller is set from before (other than the default

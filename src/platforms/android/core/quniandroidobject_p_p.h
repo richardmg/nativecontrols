@@ -55,12 +55,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidObjectPrivate : public QObjectPrivate
+class QUniAndroidObjectPrivate : public QObjectPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidObject)
+    Q_DECLARE_PUBLIC(QUniAndroidObject)
 
 public:
-    static QNativeAndroidObjectPrivate *get(QNativeAndroidObject *obj)
+    static QUniAndroidObjectPrivate *get(QUniAndroidObject *obj)
     {
         return obj->d_func();
     }

@@ -44,7 +44,7 @@ static void native_onTabChanged(JNIEnv *env, jobject object, jlong instance, jst
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidTabHost *host = reinterpret_cast<QNativeAndroidTabHost *>(instance);
+    QUniAndroidTabHost *host = reinterpret_cast<QUniAndroidTabHost *>(instance);
     if (host)
         QMetaObject::invokeMethod(host, "tabChanged", Qt::QueuedConnection, Q_ARG(QString, QAndroidJniObject(tabId).toString()));
 }
@@ -59,28 +59,28 @@ static void registerNativeTabHostMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidTabHostPrivate : public QNativeAndroidFrameLayoutPrivate
+class QUniAndroidTabHostPrivate : public QUniAndroidFrameLayoutPrivate
 {
 public:
     QAndroidJniObject listener;
 };
 
-QNativeAndroidTabHost::QNativeAndroidTabHost(QNativeAndroidContext *context)
-    : QNativeAndroidFrameLayout(*(new QNativeAndroidTabHostPrivate), context)
+QUniAndroidTabHost::QUniAndroidTabHost(QUniAndroidContext *context)
+    : QUniAndroidFrameLayout(*(new QUniAndroidTabHostPrivate), context)
 {
 }
 
-QAndroidJniObject QNativeAndroidTabHost::onCreate()
+QAndroidJniObject QUniAndroidTabHost::onCreate()
 {
     return QAndroidJniObject("android/widget/TabHost",
                              "(Landroid/content/Context;Landroid/util/AttributeSet;)V",
                              ctx().object(), 0);
 }
 
-void QNativeAndroidTabHost::onInflate(QAndroidJniObject &instance)
+void QUniAndroidTabHost::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidTabHost);
-    QNativeAndroidFrameLayout::onInflate(instance);
+    Q_D(QUniAndroidTabHost);
+    QUniAndroidFrameLayout::onInflate(instance);
 
     d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeTabHostListener",
                                    "(Landroid/widget/TabHost;J)V",
@@ -96,8 +96,8 @@ void QNativeAndroidTabHost::onInflate(QAndroidJniObject &instance)
     instance.callMethod<void>("setup");
 
     int index = 0;
-    QList<QNativeAndroidTabSpec *> tabs = findChildren<QNativeAndroidTabSpec *>();
-    foreach (QNativeAndroidTabSpec *tab, tabs)
+    QList<QUniAndroidTabSpec *> tabs = findChildren<QUniAndroidTabSpec *>();
+    foreach (QUniAndroidTabSpec *tab, tabs)
         tab->setup(instance, index++);
 }
 

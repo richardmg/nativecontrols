@@ -39,26 +39,26 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAnimationSetPrivate : public QNativeAndroidAnimationPrivate
+class QUniAndroidAnimationSetPrivate : public QUniAndroidAnimationPrivate
 {
 public:
     bool shareInterpolator = false;
 };
 
-QNativeAndroidAnimationSet::QNativeAndroidAnimationSet(QObject *parent)
-    : QNativeAndroidAnimation(*(new QNativeAndroidAnimationSetPrivate), parent)
+QUniAndroidAnimationSet::QUniAndroidAnimationSet(QObject *parent)
+    : QUniAndroidAnimation(*(new QUniAndroidAnimationSetPrivate), parent)
 {
 }
 
-bool QNativeAndroidAnimationSet::shareInterpolator() const
+bool QUniAndroidAnimationSet::shareInterpolator() const
 {
-    Q_D(const QNativeAndroidAnimationSet);
+    Q_D(const QUniAndroidAnimationSet);
     return d->shareInterpolator;
 }
 
-void QNativeAndroidAnimationSet::setShareInterpolator(bool share)
+void QUniAndroidAnimationSet::setShareInterpolator(bool share)
 {
-    Q_D(QNativeAndroidAnimationSet);
+    Q_D(QUniAndroidAnimationSet);
     if (d->shareInterpolator == share)
         return;
 
@@ -66,20 +66,20 @@ void QNativeAndroidAnimationSet::setShareInterpolator(bool share)
     emit shareInterpolatorChanged();
 }
 
-QAndroidJniObject QNativeAndroidAnimationSet::onCreate()
+QAndroidJniObject QUniAndroidAnimationSet::onCreate()
 {
-    Q_D(QNativeAndroidAnimationSet);
+    Q_D(QUniAndroidAnimationSet);
     return QAndroidJniObject("android/view/animation/AnimationSet",
                              "(Z)V",
                              d->shareInterpolator);
 }
 
-void QNativeAndroidAnimationSet::onInflate(QAndroidJniObject &instance)
+void QUniAndroidAnimationSet::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidAnimation::onInflate(instance);
+    QUniAndroidAnimation::onInflate(instance);
 
     foreach (QObject *object, children()) {
-        QNativeAndroidAnimation *child = qobject_cast<QNativeAndroidAnimation *>(object);
+        QUniAndroidAnimation *child = qobject_cast<QUniAndroidAnimation *>(object);
         if (child) {
             QAndroidJniObject animation = child->instance();
             if (animation.isValid())

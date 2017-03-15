@@ -43,27 +43,27 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidToastPrivate : public QNativeAndroidObjectPrivate
+class QUniAndroidToastPrivate : public QUniAndroidObjectPrivate
 {
 public:
     QString text;
-    QNativeAndroidOptional<int> gravity;
+    QUniAndroidOptional<int> gravity;
 };
 
-QNativeAndroidToast::QNativeAndroidToast(QObject *parent)
-    : QNativeAndroidObject(*(new QNativeAndroidToastPrivate), parent)
+QUniAndroidToast::QUniAndroidToast(QObject *parent)
+    : QUniAndroidObject(*(new QUniAndroidToastPrivate), parent)
 {
 }
 
-QString QNativeAndroidToast::text() const
+QString QUniAndroidToast::text() const
 {
-    Q_D(const QNativeAndroidToast);
+    Q_D(const QUniAndroidToast);
     return d->text;
 }
 
-void QNativeAndroidToast::setText(const QString &text)
+void QUniAndroidToast::setText(const QString &text)
 {
-    Q_D(QNativeAndroidToast);
+    Q_D(QUniAndroidToast);
     if (d->text == text)
         return;
 
@@ -71,17 +71,17 @@ void QNativeAndroidToast::setText(const QString &text)
     emit textChanged();
 }
 
-int QNativeAndroidToast::gravity() const
+int QUniAndroidToast::gravity() const
 {
-    Q_D(const QNativeAndroidToast);
+    Q_D(const QUniAndroidToast);
     if (d->gravity.isNull())
         return 0; // TODO
     return d->gravity;
 }
 
-void QNativeAndroidToast::setGravity(int value)
+void QUniAndroidToast::setGravity(int value)
 {
-    Q_D(QNativeAndroidToast);
+    Q_D(QUniAndroidToast);
     if (value == gravity())
         return;
 
@@ -89,10 +89,10 @@ void QNativeAndroidToast::setGravity(int value)
     emit gravityChanged();
 }
 
-void QNativeAndroidToast::show()
+void QUniAndroidToast::show()
 {
-    Q_D(QNativeAndroidToast);
-    QNativeAndroidView *view = qobject_cast<QNativeAndroidView *>(parent());
+    Q_D(QUniAndroidToast);
+    QUniAndroidView *view = qobject_cast<QUniAndroidView *>(parent());
     if (!view) {
         qWarning() << "Toast must be in a view.";
         return;
@@ -127,7 +127,7 @@ void QNativeAndroidToast::show()
     });
 }
 
-void QNativeAndroidToast::cancel()
+void QUniAndroidToast::cancel()
 {
     QtNativeAndroid::callVoidMethod(instance(), "cancel");
 }

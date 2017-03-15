@@ -38,21 +38,21 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidSpinner::QNativeAndroidSpinner(QNativeAndroidContext *context)
-    : QNativeAndroidAdapterView(context)
+QUniAndroidSpinner::QUniAndroidSpinner(QUniAndroidContext *context)
+    : QUniAndroidAdapterView(context)
 {
 }
 
-QAndroidJniObject QNativeAndroidSpinner::onCreate()
+QAndroidJniObject QUniAndroidSpinner::onCreate()
 {
     return QAndroidJniObject("android/widget/Spinner",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidSpinner::onInflate(QAndroidJniObject &instance)
+void QUniAndroidSpinner::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidAdapterView::onInflate(instance);
+    QUniAndroidAdapterView::onInflate(instance);
 }
 
 QT_END_NAMESPACE

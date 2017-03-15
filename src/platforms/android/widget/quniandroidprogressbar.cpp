@@ -40,25 +40,25 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidProgressBar::QNativeAndroidProgressBar(QNativeAndroidContext *context)
-    : QNativeAndroidView(*(new QNativeAndroidProgressBarPrivate), context)
+QUniAndroidProgressBar::QUniAndroidProgressBar(QUniAndroidContext *context)
+    : QUniAndroidView(*(new QUniAndroidProgressBarPrivate), context)
 {
 }
 
-QNativeAndroidProgressBar::QNativeAndroidProgressBar(QNativeAndroidProgressBarPrivate &dd, QNativeAndroidContext *context)
-    : QNativeAndroidView(dd, context)
+QUniAndroidProgressBar::QUniAndroidProgressBar(QUniAndroidProgressBarPrivate &dd, QUniAndroidContext *context)
+    : QUniAndroidView(dd, context)
 {
 }
 
-bool QNativeAndroidProgressBar::isIndeterminate() const
+bool QUniAndroidProgressBar::isIndeterminate() const
 {
-    Q_D(const QNativeAndroidProgressBar);
+    Q_D(const QUniAndroidProgressBar);
     return d->indeterminate;
 }
 
-void QNativeAndroidProgressBar::setIndeterminate(bool indeterminate)
+void QUniAndroidProgressBar::setIndeterminate(bool indeterminate)
 {
-    Q_D(QNativeAndroidProgressBar);
+    Q_D(QUniAndroidProgressBar);
     if (d->indeterminate == indeterminate)
         return;
 
@@ -67,15 +67,15 @@ void QNativeAndroidProgressBar::setIndeterminate(bool indeterminate)
     emit indeterminateChanged();
 }
 
-int QNativeAndroidProgressBar::progress() const
+int QUniAndroidProgressBar::progress() const
 {
-    Q_D(const QNativeAndroidProgressBar);
+    Q_D(const QUniAndroidProgressBar);
     return d->progress;
 }
 
-void QNativeAndroidProgressBar::setProgress(int progress)
+void QUniAndroidProgressBar::setProgress(int progress)
 {
-    Q_D(QNativeAndroidProgressBar);
+    Q_D(QUniAndroidProgressBar);
     if (d->secondary == progress)
         return;
 
@@ -84,15 +84,15 @@ void QNativeAndroidProgressBar::setProgress(int progress)
     emit progressChanged();
 }
 
-int QNativeAndroidProgressBar::secondaryProgress() const
+int QUniAndroidProgressBar::secondaryProgress() const
 {
-    Q_D(const QNativeAndroidProgressBar);
+    Q_D(const QUniAndroidProgressBar);
     return d->secondary;
 }
 
-void QNativeAndroidProgressBar::setSecondaryProgress(int progress)
+void QUniAndroidProgressBar::setSecondaryProgress(int progress)
 {
-    Q_D(QNativeAndroidProgressBar);
+    Q_D(QUniAndroidProgressBar);
     if (d->secondary == progress)
         return;
 
@@ -101,15 +101,15 @@ void QNativeAndroidProgressBar::setSecondaryProgress(int progress)
     emit secondaryProgressChanged();
 }
 
-int QNativeAndroidProgressBar::max() const
+int QUniAndroidProgressBar::max() const
 {
-    Q_D(const QNativeAndroidProgressBar);
+    Q_D(const QUniAndroidProgressBar);
     return d->max;
 }
 
-void QNativeAndroidProgressBar::setMax(int max)
+void QUniAndroidProgressBar::setMax(int max)
 {
-    Q_D(QNativeAndroidProgressBar);
+    Q_D(QUniAndroidProgressBar);
     if (d->max == max)
         return;
 
@@ -118,31 +118,31 @@ void QNativeAndroidProgressBar::setMax(int max)
     emit maxChanged();
 }
 
-QNativeAndroidProgressBar::Style QNativeAndroidProgressBar::style() const
+QUniAndroidProgressBar::Style QUniAndroidProgressBar::style() const
 {
-    Q_D(const QNativeAndroidProgressBar);
+    Q_D(const QUniAndroidProgressBar);
     if (d->style.isNull())
         return Medium;
     return d->style;
 }
 
-void QNativeAndroidProgressBar::setStyle(Style style)
+void QUniAndroidProgressBar::setStyle(Style style)
 {
-    Q_D(QNativeAndroidProgressBar);
+    Q_D(QUniAndroidProgressBar);
     d->style = style; // TODO: warning after construction or re-construct?
 }
 
-QAndroidJniObject QNativeAndroidProgressBar::onCreate()
+QAndroidJniObject QUniAndroidProgressBar::onCreate()
 {
     return QAndroidJniObject("android/widget/ProgressBar",
                              "(Landroid/content/Context;Landroid/util/AttributeSet;I)V",
                              ctx().object(), 0, style());
 }
 
-void QNativeAndroidProgressBar::onInflate(QAndroidJniObject &instance)
+void QUniAndroidProgressBar::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidProgressBar);
-    QNativeAndroidView::onInflate(instance);
+    Q_D(QUniAndroidProgressBar);
+    QUniAndroidView::onInflate(instance);
 
     if (d->progress > 0)
         instance.callMethod<void>("setProgress", "(I)V", d->progress);

@@ -53,9 +53,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidLinearLayoutPrivate;
+class QUniAndroidLinearLayoutPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidLinearLayout : public QNativeAndroidViewGroup
+class Q_NATIVEANDROID_EXPORT QUniAndroidLinearLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
     Q_PROPERTY(bool baselineAligned READ isBaselineAligned WRITE setBaselineAligned NOTIFY baselineAlignedChanged)
@@ -66,9 +66,9 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidLinearLayout : public QNativeAndroidV
     Q_ENUMS(Orientation)
 
 public:
-    explicit QNativeAndroidLinearLayout(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidLinearLayout(QUniAndroidContext *context = nullptr);
 
-    static QNativeAndroidLinearLayoutParams *qmlAttachedProperties(QObject *object);
+    static QUniAndroidLinearLayoutParams *qmlAttachedProperties(QObject *object);
 
     enum Orientation {
         HORIZONTAL = 0,
@@ -101,18 +101,18 @@ Q_SIGNALS:
     void weightSumChanged();
 
 protected:
-    QNativeAndroidLinearLayout(QNativeAndroidLinearLayoutPrivate &dd, QNativeAndroidContext *context = nullptr);
+    QUniAndroidLinearLayout(QUniAndroidLinearLayoutPrivate &dd, QUniAndroidContext *context = nullptr);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidLinearLayout)
-    Q_DECLARE_PRIVATE(QNativeAndroidLinearLayout)
+    Q_DISABLE_COPY(QUniAndroidLinearLayout)
+    Q_DECLARE_PRIVATE(QUniAndroidLinearLayout)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPEINFO(QNativeAndroidLinearLayout, QML_HAS_ATTACHED_PROPERTIES)
+QML_DECLARE_TYPEINFO(QUniAndroidLinearLayout, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // QNATIVEANDROIDLINEARLAYOUT_P_H

@@ -43,7 +43,7 @@ static void native_onProgressChanged(JNIEnv *env, jobject object, jlong instance
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidSeekBar *bar = reinterpret_cast<QNativeAndroidSeekBar *>(instance);
+    QUniAndroidSeekBar *bar = reinterpret_cast<QUniAndroidSeekBar *>(instance);
     if (bar && fromUser)
         QMetaObject::invokeMethod(bar, "updateProgress", Qt::QueuedConnection, Q_ARG(int, progress));
 }
@@ -58,28 +58,28 @@ static void registerNativeSeekBarMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidSeekBarPrivate : public QNativeAndroidAbsSeekBarPrivate
+class QUniAndroidSeekBarPrivate : public QUniAndroidAbsSeekBarPrivate
 {
 public:
     QAndroidJniObject listener;
 };
 
-QNativeAndroidSeekBar::QNativeAndroidSeekBar(QNativeAndroidContext *context)
-    : QNativeAndroidAbsSeekBar(*(new QNativeAndroidSeekBarPrivate), context)
+QUniAndroidSeekBar::QUniAndroidSeekBar(QUniAndroidContext *context)
+    : QUniAndroidAbsSeekBar(*(new QUniAndroidSeekBarPrivate), context)
 {
 }
 
-QAndroidJniObject QNativeAndroidSeekBar::onCreate()
+QAndroidJniObject QUniAndroidSeekBar::onCreate()
 {
     return QAndroidJniObject("android/widget/SeekBar",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidSeekBar::onInflate(QAndroidJniObject &instance)
+void QUniAndroidSeekBar::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidSeekBar);
-    QNativeAndroidAbsSeekBar::onInflate(instance);
+    Q_D(QUniAndroidSeekBar);
+    QUniAndroidAbsSeekBar::onInflate(instance);
 
     d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeSeekBarListener",
                                    "(Landroid/widget/SeekBar;J)V",

@@ -53,9 +53,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidCompoundButtonPrivate : public QNativeAndroidButtonPrivate
+class QUniAndroidCompoundButtonPrivate : public QUniAndroidButtonPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidCompoundButton)
+    Q_DECLARE_PUBLIC(QUniAndroidCompoundButton)
 
 public:
     bool _q_updateChecked(bool checked);

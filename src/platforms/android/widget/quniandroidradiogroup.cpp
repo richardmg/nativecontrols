@@ -45,7 +45,7 @@ static void native_onCheckedChanged(JNIEnv *env, jobject object, jlong instance,
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidRadioGroup *group = reinterpret_cast<QNativeAndroidRadioGroup *>(instance);
+    QUniAndroidRadioGroup *group = reinterpret_cast<QUniAndroidRadioGroup *>(instance);
     if (group)
         QMetaObject::invokeMethod(group, "_q_updateCheckedButtonId", Qt::QueuedConnection, Q_ARG(int, checkedId));
 }
@@ -60,23 +60,23 @@ static void registerNativeRadioGroupMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidRadioGroupPrivate : public QNativeAndroidLinearLayoutPrivate
+class QUniAndroidRadioGroupPrivate : public QUniAndroidLinearLayoutPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidRadioGroup)
+    Q_DECLARE_PUBLIC(QUniAndroidRadioGroup)
 
 public:
     void _q_updateCheckedButtonId(int checkedId);
-    bool _q_updateCheckedButton(QNativeAndroidRadioButton *button);
+    bool _q_updateCheckedButton(QUniAndroidRadioButton *button);
 
     QAndroidJniObject listener;
-    QNativeAndroidRadioButton* checkedButton = nullptr;
+    QUniAndroidRadioButton* checkedButton = nullptr;
 };
 
-void QNativeAndroidRadioGroupPrivate::_q_updateCheckedButtonId(int checkedId)
+void QUniAndroidRadioGroupPrivate::_q_updateCheckedButtonId(int checkedId)
 {
-    Q_Q(QNativeAndroidRadioGroup);
+    Q_Q(QUniAndroidRadioGroup);
     foreach (QObject *child, q->children()) {
-        QNativeAndroidRadioButton *button = qobject_cast<QNativeAndroidRadioButton *>(child);
+        QUniAndroidRadioButton *button = qobject_cast<QUniAndroidRadioButton *>(child);
         if (button && button->identifier() == checkedId) {
             _q_updateCheckedButton(button);
             return;
@@ -85,9 +85,9 @@ void QNativeAndroidRadioGroupPrivate::_q_updateCheckedButtonId(int checkedId)
     _q_updateCheckedButton(nullptr);
 }
 
-bool QNativeAndroidRadioGroupPrivate::_q_updateCheckedButton(QNativeAndroidRadioButton *button)
+bool QUniAndroidRadioGroupPrivate::_q_updateCheckedButton(QUniAndroidRadioButton *button)
 {
-    Q_Q(QNativeAndroidRadioGroup);
+    Q_Q(QUniAndroidRadioGroup);
     if (checkedButton == button)
         return false;
 
@@ -96,40 +96,40 @@ bool QNativeAndroidRadioGroupPrivate::_q_updateCheckedButton(QNativeAndroidRadio
     return true;
 }
 
-QNativeAndroidRadioGroup::QNativeAndroidRadioGroup(QNativeAndroidContext *context)
-    : QNativeAndroidLinearLayout(*(new QNativeAndroidRadioGroupPrivate), context)
+QUniAndroidRadioGroup::QUniAndroidRadioGroup(QUniAndroidContext *context)
+    : QUniAndroidLinearLayout(*(new QUniAndroidRadioGroupPrivate), context)
 {
 }
 
-QNativeAndroidRadioButton *QNativeAndroidRadioGroup::checkedButton() const
+QUniAndroidRadioButton *QUniAndroidRadioGroup::checkedButton() const
 {
-    Q_D(const QNativeAndroidRadioGroup);
+    Q_D(const QUniAndroidRadioGroup);
     return d->checkedButton;
 }
 
-void QNativeAndroidRadioGroup::setCheckedButton(QNativeAndroidRadioButton *button)
+void QUniAndroidRadioGroup::setCheckedButton(QUniAndroidRadioButton *button)
 {
-    Q_D(QNativeAndroidRadioGroup);
+    Q_D(QUniAndroidRadioGroup);
     if (d->_q_updateCheckedButton(button))
         QtNativeAndroid::callIntMethod(instance(), "check", button ? button->identifier() : -1);
 }
 
-void QNativeAndroidRadioGroup::clearCheck()
+void QUniAndroidRadioGroup::clearCheck()
 {
     QtNativeAndroid::callVoidMethod(instance(), "clearCheck");
 }
 
-QAndroidJniObject QNativeAndroidRadioGroup::onCreate()
+QAndroidJniObject QUniAndroidRadioGroup::onCreate()
 {
     return QAndroidJniObject("android/widget/RadioGroup",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidRadioGroup::onInflate(QAndroidJniObject &instance)
+void QUniAndroidRadioGroup::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidRadioGroup);
-    QNativeAndroidLinearLayout::onInflate(instance);
+    Q_D(QUniAndroidRadioGroup);
+    QUniAndroidLinearLayout::onInflate(instance);
 
     d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeRadioGroupListener",
                                    "(Landroid/widget/RadioGroup;J)V",

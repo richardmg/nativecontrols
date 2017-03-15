@@ -41,7 +41,7 @@
 
 QT_BEGIN_NAMESPACE
 
-#define Q_NATIVE_FORWARD_DECLARE(TYPE) class QNative ## TYPE; class QNativePlatform ## TYPE;
+#define Q_NATIVE_FORWARD_DECLARE(TYPE) class QUni ## TYPE; class QUniPlatform ## TYPE;
 
 Q_NATIVE_FORWARD_DECLARE(Window)
 Q_NATIVE_FORWARD_DECLARE(View)
@@ -53,25 +53,25 @@ Q_NATIVE_FORWARD_DECLARE(Page)
 Q_NATIVE_FORWARD_DECLARE(TabsPage)
 Q_NATIVE_FORWARD_DECLARE(TabsPageTab)
 
-#define QNativePlatformPluginInterface_iid "org.qt-project.Qt.Native.Platform"
+#define QUniPlatformPluginInterface_iid "org.qt-project.Qt.Native.Platform"
 
-class QNativePlatformPluginInterface
+class QUniPlatformPluginInterface
 {
 public:
-    virtual ~QNativePlatformPluginInterface() {}
+    virtual ~QUniPlatformPluginInterface() {}
 
-    virtual QNativePlatformWindow* createWindow(QNativeWindow *window) const = 0;
-    virtual QNativePlatformView* createView(QNativeView *view) const = 0;
-    virtual QNativePlatformControl* createControl(QNativeControl *control) const = 0;
-    virtual QNativePlatformButton* createButton(QNativeButton *button) const = 0;
-    virtual QNativePlatformTextField* createTextField(QNativeTextField *textField) const = 0;
-    virtual QNativePlatformSearchField* createSearchField(QNativeSearchField *searchField) const = 0;
-    virtual QNativePlatformPage* createPage(QNativePage *page) const = 0;
-    virtual QNativePlatformTabsPage* createTabsPage(QNativeTabsPage *tabsPage) const = 0;
-    virtual QNativePlatformTabsPageTab* createTabsPageTab(QNativeTabsPageTab *tabsPageTab) const = 0;
+    virtual QUniPlatformWindow* createWindow(QUniWindow *window) const = 0;
+    virtual QUniPlatformView* createView(QUniView *view) const = 0;
+    virtual QUniPlatformControl* createControl(QUniControl *control) const = 0;
+    virtual QUniPlatformButton* createButton(QUniButton *button) const = 0;
+    virtual QUniPlatformTextField* createTextField(QUniTextField *textField) const = 0;
+    virtual QUniPlatformSearchField* createSearchField(QUniSearchField *searchField) const = 0;
+    virtual QUniPlatformPage* createPage(QUniPage *page) const = 0;
+    virtual QUniPlatformTabsPage* createTabsPage(QUniTabsPage *tabsPage) const = 0;
+    virtual QUniPlatformTabsPageTab* createTabsPageTab(QUniTabsPageTab *tabsPageTab) const = 0;
 };
 
-Q_DECLARE_INTERFACE(QNativePlatformPluginInterface, QNativePlatformPluginInterface_iid)
+Q_DECLARE_INTERFACE(QUniPlatformPluginInterface, QUniPlatformPluginInterface_iid)
 
 QT_END_NAMESPACE
 

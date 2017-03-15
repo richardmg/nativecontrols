@@ -40,28 +40,28 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidOvershootInterpolatorPrivate : public QNativeAndroidInterpolatorPrivate
+class QUniAndroidOvershootInterpolatorPrivate : public QUniAndroidInterpolatorPrivate
 {
 public:
-    QNativeAndroidOptional<qreal> tension;
+    QUniAndroidOptional<qreal> tension;
 };
 
-QNativeAndroidOvershootInterpolator::QNativeAndroidOvershootInterpolator(QObject *parent)
-    : QNativeAndroidInterpolator(*(new QNativeAndroidOvershootInterpolatorPrivate), parent)
+QUniAndroidOvershootInterpolator::QUniAndroidOvershootInterpolator(QObject *parent)
+    : QUniAndroidInterpolator(*(new QUniAndroidOvershootInterpolatorPrivate), parent)
 {
 }
 
-qreal QNativeAndroidOvershootInterpolator::tension() const
+qreal QUniAndroidOvershootInterpolator::tension() const
 {
-    Q_D(const QNativeAndroidOvershootInterpolator);
+    Q_D(const QUniAndroidOvershootInterpolator);
     if (d->tension.isNull())
         return 2.0;
     return d->tension;
 }
 
-void QNativeAndroidOvershootInterpolator::setTension(qreal tension)
+void QUniAndroidOvershootInterpolator::setTension(qreal tension)
 {
-    Q_D(QNativeAndroidOvershootInterpolator);
+    Q_D(QUniAndroidOvershootInterpolator);
     if (!d->tension.isNull() && qFuzzyCompare(d->tension, tension))
         return;
 
@@ -69,9 +69,9 @@ void QNativeAndroidOvershootInterpolator::setTension(qreal tension)
     emit tensionChanged();
 }
 
-QAndroidJniObject QNativeAndroidOvershootInterpolator::onCreate()
+QAndroidJniObject QUniAndroidOvershootInterpolator::onCreate()
 {
-    Q_D(QNativeAndroidOvershootInterpolator);
+    Q_D(QUniAndroidOvershootInterpolator);
     if (d->tension.isNull())
         return QAndroidJniObject("android/view/animation/OvershootInterpolator");
 

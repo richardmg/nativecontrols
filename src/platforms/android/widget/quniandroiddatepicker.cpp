@@ -39,26 +39,26 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDatePickerPrivate : public QNativeAndroidFrameLayoutPrivate
+class QUniAndroidDatePickerPrivate : public QUniAndroidFrameLayoutPrivate
 {
 public:
 };
 
-QNativeAndroidDatePicker::QNativeAndroidDatePicker(QNativeAndroidContext *context)
-    : QNativeAndroidFrameLayout(*(new QNativeAndroidDatePickerPrivate), context)
+QUniAndroidDatePicker::QUniAndroidDatePicker(QUniAndroidContext *context)
+    : QUniAndroidFrameLayout(*(new QUniAndroidDatePickerPrivate), context)
 {
 }
 
-QAndroidJniObject QNativeAndroidDatePicker::onCreate()
+QAndroidJniObject QUniAndroidDatePicker::onCreate()
 {
     return QAndroidJniObject("android/widget/DatePicker",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidDatePicker::onInflate(QAndroidJniObject &instance)
+void QUniAndroidDatePicker::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidFrameLayout::onInflate(instance);
+    QUniAndroidFrameLayout::onInflate(instance);
 }
 
 QT_END_NAMESPACE

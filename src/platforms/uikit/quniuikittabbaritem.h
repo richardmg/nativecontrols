@@ -8,17 +8,17 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitTabBarItemPrivate;
+class QUniUIKitTabBarItemPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarItem);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitTabBarItem : public QNativeUIKitBase, public virtual QNativePlatformTabsPageTab
+class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitTabBarItem : public QUniUIKitBase, public virtual QUniPlatformTabsPageTab
 {
     Q_OBJECT
 
 public:
-    explicit QNativeUIKitTabBarItem(QNativeUIKitBase *parent = nullptr);
-    explicit QNativeUIKitTabBarItem(const QString &title, QNativeUIKitBase *parent = nullptr);
-    virtual ~QNativeUIKitTabBarItem();
+    explicit QUniUIKitTabBarItem(QUniUIKitBase *parent = nullptr);
+    explicit QUniUIKitTabBarItem(const QString &title, QUniUIKitBase *parent = nullptr);
+    virtual ~QUniUIKitTabBarItem();
 
     virtual QString title() const override;
     virtual void setTitle(const QString &title) override;
@@ -26,11 +26,11 @@ public:
     UITabBarItem *uiTabBarItemHandle();
 
 protected:
-    QNativeUIKitTabBarItem(QNativeUIKitTabBarItemPrivate &dd, QNativeUIKitBase *parent = nullptr);
+    QUniUIKitTabBarItem(QUniUIKitTabBarItemPrivate &dd, QUniUIKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeUIKitTabBarItem)
-    Q_DISABLE_COPY(QNativeUIKitTabBarItem)
+    Q_DECLARE_PRIVATE(QUniUIKitTabBarItem)
+    Q_DISABLE_COPY(QUniUIKitTabBarItem)
 };
 
 QT_END_NAMESPACE

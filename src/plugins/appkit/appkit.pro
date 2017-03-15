@@ -10,6 +10,6 @@ OTHER_FILES = \
         plugin.json
 
 PLUGIN_TYPE = nativecontrols
-PLUGIN_CLASS_NAME = QNativeAppKitPlatformPlugin
+PLUGIN_CLASS_NAME = QUniAppKitPlatformPlugin
 load(qt_plugin)
 

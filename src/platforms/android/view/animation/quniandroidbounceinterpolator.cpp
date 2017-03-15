@@ -38,12 +38,12 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidBounceInterpolator::QNativeAndroidBounceInterpolator(QObject *parent)
-    : QNativeAndroidInterpolator(parent)
+QUniAndroidBounceInterpolator::QUniAndroidBounceInterpolator(QObject *parent)
+    : QUniAndroidInterpolator(parent)
 {
 }
 
-QAndroidJniObject QNativeAndroidBounceInterpolator::onCreate()
+QAndroidJniObject QUniAndroidBounceInterpolator::onCreate()
 {
     return QAndroidJniObject("android/view/animation/BounceInterpolator");
 }

@@ -41,68 +41,68 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeSearchFieldPrivate::QNativeSearchFieldPrivate(int version)
-    : QNativeControlPrivate(version)
+QUniSearchFieldPrivate::QUniSearchFieldPrivate(int version)
+    : QUniControlPrivate(version)
     , m_platformSearchField(nullptr)
 {
 }
 
-QNativeSearchFieldPrivate::~QNativeSearchFieldPrivate()
+QUniSearchFieldPrivate::~QUniSearchFieldPrivate()
 {
 }
 
-void QNativeSearchFieldPrivate::createPlatformSearchField()
+void QUniSearchFieldPrivate::createPlatformSearchField()
 {
     Q_ASSERT(!m_platformSearchField);
-    m_platformSearchField = QNativePlatformManager::platformPlugin()->createSearchField(q_func());
+    m_platformSearchField = QUniPlatformManager::platformPlugin()->createSearchField(q_func());
     Q_ASSERT(m_platformSearchField);
     setPlatformSearchField(m_platformSearchField);
 }
 
-void QNativeSearchFieldPrivate::setPlatformSearchField(QNativePlatformSearchField *platformSearchField)
+void QUniSearchFieldPrivate::setPlatformSearchField(QUniPlatformSearchField *platformSearchField)
 {
     m_platformSearchField = platformSearchField;
     setPlatformControl(platformSearchField);
 }
 
-QNativeSearchField::QNativeSearchField(QNativeBase *parent)
-    : QNativeControl(*new QNativeSearchFieldPrivate(), parent)
+QUniSearchField::QUniSearchField(QUniBase *parent)
+    : QUniControl(*new QUniSearchFieldPrivate(), parent)
 {
     d_func()->createPlatformSearchField();
 }
 
-QNativeSearchField::QNativeSearchField(const QString &text, QNativeBase *parent)
-    : QNativeControl(*new QNativeSearchFieldPrivate(), parent)
+QUniSearchField::QUniSearchField(const QString &text, QUniBase *parent)
+    : QUniControl(*new QUniSearchFieldPrivate(), parent)
 {
     d_func()->createPlatformSearchField();
     setText(text);
 }
 
-QNativeSearchField::QNativeSearchField(QNativeSearchFieldPrivate &dd, QNativeBase *parent)
-    : QNativeControl(dd, parent)
+QUniSearchField::QUniSearchField(QUniSearchFieldPrivate &dd, QUniBase *parent)
+    : QUniControl(dd, parent)
 {
 }
 
-QNativeSearchField::~QNativeSearchField()
+QUniSearchField::~QUniSearchField()
 {
 }
 
-QString QNativeSearchField::text()
+QString QUniSearchField::text()
 {
     return d_func()->m_platformSearchField->text();
 }
 
-void QNativeSearchField::setText(const QString &newText)
+void QUniSearchField::setText(const QString &newText)
 {
     d_func()->m_platformSearchField->setText(newText);
 }
 
-QString QNativeSearchField::placeholderText()
+QString QUniSearchField::placeholderText()
 {
     return d_func()->m_platformSearchField->placeholderText();
 }
 
-void QNativeSearchField::setPlaceholderText(const QString &placeholderText)
+void QUniSearchField::setPlaceholderText(const QString &placeholderText)
 {
     d_func()->m_platformSearchField->setPlaceholderText(placeholderText);
 }

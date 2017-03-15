@@ -42,22 +42,22 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativePagePrivate;
+class QUniPagePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativePage : public QNativeBase
+class Q_NATIVECONTROLS_EXPORT QUniPage : public QUniBase
 {
     Q_OBJECT
 
 public:
-    explicit QNativePage(QNativeBase *parent = nullptr);
-    virtual ~QNativePage();
+    explicit QUniPage(QUniBase *parent = nullptr);
+    virtual ~QUniPage();
 
 protected:
-    QNativePage(QNativePagePrivate &dd, QNativeBase *parent = nullptr);
+    QUniPage(QUniPagePrivate &dd, QUniBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativePage)
-    Q_DISABLE_COPY(QNativePage)
+    Q_DECLARE_PRIVATE(QUniPage)
+    Q_DISABLE_COPY(QUniPage)
 };
 
 QT_END_NAMESPACE

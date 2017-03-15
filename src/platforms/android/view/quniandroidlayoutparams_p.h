@@ -53,10 +53,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidView;
-class QNativeAndroidLayoutParamsPrivate;
+class QUniAndroidView;
+class QUniAndroidLayoutParamsPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidLayoutParams : public QNativeAndroidObject
+class Q_NATIVEANDROID_EXPORT QUniAndroidLayoutParams : public QUniAndroidObject
 {
     Q_OBJECT
     Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged)
@@ -64,9 +64,9 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidLayoutParams : public QNativeAndroidO
     Q_ENUMS(Size)
 
 public:
-    explicit QNativeAndroidLayoutParams(QNativeAndroidView *view);
+    explicit QUniAndroidLayoutParams(QUniAndroidView *view);
 
-    static QNativeAndroidLayoutParams *qmlAttachedProperties(QObject *object);
+    static QUniAndroidLayoutParams *qmlAttachedProperties(QObject *object);
 
     enum Size {
         FILL_PARENT = -1,
@@ -88,7 +88,7 @@ Q_SIGNALS:
     void heightChanged();
 
 protected:
-    QNativeAndroidLayoutParams(QNativeAndroidLayoutParamsPrivate &dd, QNativeAndroidView *view);
+    QUniAndroidLayoutParams(QUniAndroidLayoutParamsPrivate &dd, QUniAndroidView *view);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
@@ -96,12 +96,12 @@ protected:
     bool event(QEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidLayoutParams)
-    Q_DECLARE_PRIVATE(QNativeAndroidLayoutParams)
+    Q_DISABLE_COPY(QUniAndroidLayoutParams)
+    Q_DECLARE_PRIVATE(QUniAndroidLayoutParams)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPEINFO(QNativeAndroidLayoutParams, QML_HAS_ATTACHED_PROPERTIES)
+QML_DECLARE_TYPEINFO(QUniAndroidLayoutParams, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // QNATIVEANDROIDLAYOUTPARAMS_P_H

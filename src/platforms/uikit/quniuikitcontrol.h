@@ -8,22 +8,22 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitControlPrivate;
+class QUniUIKitControlPrivate;
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitControl : public QNativeUIKitView, public virtual QNativePlatformControl
+class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitControl : public QUniUIKitView, public virtual QUniPlatformControl
 {
     Q_OBJECT
 
 public:
-    QNativeUIKitControl(QNativeUIKitBase *parent = nullptr);
-    virtual ~QNativeUIKitControl();
+    QUniUIKitControl(QUniUIKitBase *parent = nullptr);
+    virtual ~QUniUIKitControl();
 
 protected:
-    QNativeUIKitControl(QNativeUIKitControlPrivate &dd, QNativeUIKitBase *parent = nullptr);
+    QUniUIKitControl(QUniUIKitControlPrivate &dd, QUniUIKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeUIKitControl)
-    Q_DISABLE_COPY(QNativeUIKitControl)
+    Q_DECLARE_PRIVATE(QUniUIKitControl)
+    Q_DISABLE_COPY(QUniUIKitControl)
 };
 
 QT_END_NAMESPACE

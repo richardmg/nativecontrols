@@ -39,26 +39,26 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidCalendarViewPrivate : public QNativeAndroidFrameLayoutPrivate
+class QUniAndroidCalendarViewPrivate : public QUniAndroidFrameLayoutPrivate
 {
 public:
 };
 
-QNativeAndroidCalendarView::QNativeAndroidCalendarView(QNativeAndroidContext *context)
-    : QNativeAndroidFrameLayout(*(new QNativeAndroidCalendarViewPrivate), context)
+QUniAndroidCalendarView::QUniAndroidCalendarView(QUniAndroidContext *context)
+    : QUniAndroidFrameLayout(*(new QUniAndroidCalendarViewPrivate), context)
 {
 }
 
-QAndroidJniObject QNativeAndroidCalendarView::onCreate()
+QAndroidJniObject QUniAndroidCalendarView::onCreate()
 {
     return QAndroidJniObject("android/widget/CalendarView",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidCalendarView::onInflate(QAndroidJniObject &instance)
+void QUniAndroidCalendarView::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidViewGroup::onInflate(instance);
+    QUniAndroidViewGroup::onInflate(instance);
 }
 
 QT_END_NAMESPACE

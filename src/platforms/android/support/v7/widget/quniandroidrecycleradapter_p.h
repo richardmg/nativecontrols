@@ -53,17 +53,17 @@
 QT_BEGIN_NAMESPACE
 
 class QQmlComponent;
-class QNativeAndroidView;
-class QNativeAndroidRecyclerAdapterPrivate;
+class QUniAndroidView;
+class QUniAndroidRecyclerAdapterPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidRecyclerAdapter : public QNativeAndroidContextual
+class Q_NATIVEANDROID_EXPORT QUniAndroidRecyclerAdapter : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)
     Q_PROPERTY(QQmlComponent *delegate READ delegate WRITE setDelegate NOTIFY delegateChanged)
 
 public:
-    explicit QNativeAndroidRecyclerAdapter(QObject *parent = nullptr);
+    explicit QUniAndroidRecyclerAdapter(QObject *parent = nullptr);
 
     int count() const;
     void setCount(int count);
@@ -80,11 +80,11 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidRecyclerAdapter)
-    Q_DECLARE_PRIVATE(QNativeAndroidRecyclerAdapter)
+    Q_DISABLE_COPY(QUniAndroidRecyclerAdapter)
+    Q_DECLARE_PRIVATE(QUniAndroidRecyclerAdapter)
 
-    Q_PRIVATE_SLOT(d_func(), QNativeAndroidView *_q_createItem())
-    Q_PRIVATE_SLOT(d_func(), void _q_setItemPosition(QNativeAndroidView *item, int position))
+    Q_PRIVATE_SLOT(d_func(), QUniAndroidView *_q_createItem())
+    Q_PRIVATE_SLOT(d_func(), void _q_setItemPosition(QUniAndroidView *item, int position))
 };
 
 QT_END_NAMESPACE

@@ -53,14 +53,14 @@ QmlNativeControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
 
 void registerTypes(const char *uri) override
 {
-    qmlRegisterType<QNativeControl>();
-    qmlRegisterType<QNativeWindow>(uri, 1, 0, "Window");
-    qmlRegisterType<QNativeView>(uri, 1, 0, "View");
-    qmlRegisterType<QNativeButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QNativeTextField>(uri, 1, 0, "TextField");
-    qmlRegisterType<QNativeSearchField>(uri, 1, 0, "SearchField");
-    qmlRegisterType<QNativeTabsPage>(uri, 1, 0, "TabsPage");
-    qmlRegisterType<QNativeTabsPageTab>(uri, 1, 0, "TabsPageTab");
+    qmlRegisterType<QUniControl>();
+    qmlRegisterType<QUniWindow>(uri, 1, 0, "Window");
+    qmlRegisterType<QUniView>(uri, 1, 0, "View");
+    qmlRegisterType<QUniButton>(uri, 1, 0, "Button");
+    qmlRegisterType<QUniTextField>(uri, 1, 0, "TextField");
+    qmlRegisterType<QUniSearchField>(uri, 1, 0, "SearchField");
+    qmlRegisterType<QUniTabsPage>(uri, 1, 0, "TabsPage");
+    qmlRegisterType<QUniTabsPageTab>(uri, 1, 0, "TabsPageTab");
 }
 
 void initializeEngine(QQmlEngine *engine, const char *uri) override

@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidCompoundButtonPrivate;
+class QUniAndroidCompoundButtonPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidCompoundButton : public QNativeAndroidButton
+class Q_NATIVEANDROID_EXPORT QUniAndroidCompoundButton : public QUniAndroidButton
 {
     Q_OBJECT
     Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY checkedChanged)
 
 public:
-    explicit QNativeAndroidCompoundButton(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidCompoundButton(QUniAndroidContext *context = nullptr);
 
     bool isChecked() const;
     void setChecked(bool checked);
@@ -72,14 +72,14 @@ Q_SIGNALS:
     void checkedChanged();
 
 protected:
-    QNativeAndroidCompoundButton(QNativeAndroidCompoundButtonPrivate &dd, QNativeAndroidContext *context = nullptr);
+    QUniAndroidCompoundButton(QUniAndroidCompoundButtonPrivate &dd, QUniAndroidContext *context = nullptr);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidCompoundButton)
-    Q_DECLARE_PRIVATE(QNativeAndroidCompoundButton)
+    Q_DISABLE_COPY(QUniAndroidCompoundButton)
+    Q_DECLARE_PRIVATE(QUniAndroidCompoundButton)
 
     Q_PRIVATE_SLOT(d_func(), bool _q_updateChecked(bool checked))
 };

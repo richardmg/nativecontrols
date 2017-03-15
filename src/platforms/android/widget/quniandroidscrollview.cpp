@@ -45,7 +45,7 @@ static void native_onScrollChanged(JNIEnv *env, jobject object, jlong instance, 
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidScrollView *view = reinterpret_cast<QNativeAndroidScrollView *>(instance);
+    QUniAndroidScrollView *view = reinterpret_cast<QUniAndroidScrollView *>(instance);
     if (view) {
         QMetaObject::invokeMethod(view, "_q_updateScrollX", Qt::QueuedConnection, Q_ARG(int, left));
         QMetaObject::invokeMethod(view, "_q_updateScrollY", Qt::QueuedConnection, Q_ARG(int, top));
@@ -62,21 +62,21 @@ static void registerNativeScrollViewMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidScrollViewPrivate : public QNativeAndroidFrameLayoutPrivate
+class QUniAndroidScrollViewPrivate : public QUniAndroidFrameLayoutPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidScrollView)
+    Q_DECLARE_PUBLIC(QUniAndroidScrollView)
 
 public:
     bool _q_updateScrollX(int x);
     bool _q_updateScrollY(int y);
 
-    QNativeAndroidOptional<int> scrollX;
-    QNativeAndroidOptional<int> scrollY;
+    QUniAndroidOptional<int> scrollX;
+    QUniAndroidOptional<int> scrollY;
 };
 
-bool QNativeAndroidScrollViewPrivate::_q_updateScrollX(int x)
+bool QUniAndroidScrollViewPrivate::_q_updateScrollX(int x)
 {
-    Q_Q(QNativeAndroidScrollView);
+    Q_Q(QUniAndroidScrollView);
     if (!scrollX.isNull() && scrollX == x)
         return false;
 
@@ -85,9 +85,9 @@ bool QNativeAndroidScrollViewPrivate::_q_updateScrollX(int x)
     return true;
 }
 
-bool QNativeAndroidScrollViewPrivate::_q_updateScrollY(int y)
+bool QUniAndroidScrollViewPrivate::_q_updateScrollY(int y)
 {
-    Q_Q(QNativeAndroidScrollView);
+    Q_Q(QUniAndroidScrollView);
     if (!scrollY.isNull() && scrollY == y)
         return false;
 
@@ -96,42 +96,42 @@ bool QNativeAndroidScrollViewPrivate::_q_updateScrollY(int y)
     return true;
 }
 
-QNativeAndroidScrollView::QNativeAndroidScrollView(QNativeAndroidContext *context)
-    : QNativeAndroidFrameLayout(*(new QNativeAndroidScrollViewPrivate), context)
+QUniAndroidScrollView::QUniAndroidScrollView(QUniAndroidContext *context)
+    : QUniAndroidFrameLayout(*(new QUniAndroidScrollViewPrivate), context)
 {
 }
 
-int QNativeAndroidScrollView::scrollX() const
+int QUniAndroidScrollView::scrollX() const
 {
-    Q_D(const QNativeAndroidScrollView);
+    Q_D(const QUniAndroidScrollView);
     if (d->scrollX.isNull())
         return 0;
     return d->scrollX;
 }
 
-void QNativeAndroidScrollView::setScrollX(int x)
+void QUniAndroidScrollView::setScrollX(int x)
 {
-    Q_D(QNativeAndroidScrollView);
+    Q_D(QUniAndroidScrollView);
     if (d->_q_updateScrollX(x))
         QtNativeAndroid::callIntMethod(instance(), "setScrollX", x);
 }
 
-int QNativeAndroidScrollView::scrollY() const
+int QUniAndroidScrollView::scrollY() const
 {
-    Q_D(const QNativeAndroidScrollView);
+    Q_D(const QUniAndroidScrollView);
     if (d->scrollY.isNull())
         return 0;
     return d->scrollY;
 }
 
-void QNativeAndroidScrollView::setScrollY(int y)
+void QUniAndroidScrollView::setScrollY(int y)
 {
-    Q_D(QNativeAndroidScrollView);
+    Q_D(QUniAndroidScrollView);
     if (d->_q_updateScrollY(y))
         QtNativeAndroid::callIntMethod(instance(), "setScrollY", y);
 }
 
-QAndroidJniObject QNativeAndroidScrollView::onCreate()
+QAndroidJniObject QUniAndroidScrollView::onCreate()
 {
     return QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeScrollView",
                              "(Landroid/content/Context;J)V",
@@ -139,9 +139,9 @@ QAndroidJniObject QNativeAndroidScrollView::onCreate()
                              reinterpret_cast<jlong>(this));
 }
 
-void QNativeAndroidScrollView::onInflate(QAndroidJniObject &instance)
+void QUniAndroidScrollView::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidFrameLayout::onInflate(instance);
+    QUniAndroidFrameLayout::onInflate(instance);
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {

@@ -42,7 +42,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidRPrivate : public QObjectPrivate
+class QUniAndroidRPrivate : public QObjectPrivate
 {
 public:
     QQmlPropertyMap *anim = nullptr;
@@ -69,8 +69,8 @@ public:
     QQmlPropertyMap *xml = nullptr;
 };
 
-QNativeAndroidR::QNativeAndroidR(QObject *parent)
-    : QObject(*(new QNativeAndroidRPrivate), parent)
+QUniAndroidR::QUniAndroidR(QObject *parent)
+    : QObject(*(new QUniAndroidRPrivate), parent)
 {
 }
 
@@ -94,187 +94,187 @@ static QQmlPropertyMap *getFields(const char *className, QObject *parent)
     return map;
 }
 
-QQmlPropertyMap *QNativeAndroidR::anim()
+QQmlPropertyMap *QUniAndroidR::anim()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->anim)
         d->anim = getFields("android/R$anim", this);
     return d->anim;
 }
 
-QQmlPropertyMap *QNativeAndroidR::animator()
+QQmlPropertyMap *QUniAndroidR::animator()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->animator)
         d->animator = getFields("android/R$animator", this);
     return d->animator;
 }
 
-QQmlPropertyMap *QNativeAndroidR::array()
+QQmlPropertyMap *QUniAndroidR::array()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->array)
         d->array = getFields("android/R$array", this);
     return d->array;
 }
 
-QQmlPropertyMap *QNativeAndroidR::attr()
+QQmlPropertyMap *QUniAndroidR::attr()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->attr)
         d->attr = getFields("android/R$attr", this);
     return d->attr;
 }
 
-QQmlPropertyMap *QNativeAndroidR::boolean()
+QQmlPropertyMap *QUniAndroidR::boolean()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->boolean)
         d->boolean = getFields("android/R$boolean", this);
     return d->boolean;
 }
 
-QQmlPropertyMap *QNativeAndroidR::color()
+QQmlPropertyMap *QUniAndroidR::color()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->color)
         d->color = getFields("android/R$color", this);
     return d->color;
 }
 
-QQmlPropertyMap *QNativeAndroidR::dimen()
+QQmlPropertyMap *QUniAndroidR::dimen()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->dimen)
         d->dimen = getFields("android/R$dimen", this);
     return d->dimen;
 }
 
-QQmlPropertyMap *QNativeAndroidR::drawable()
+QQmlPropertyMap *QUniAndroidR::drawable()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->drawable)
         d->drawable = getFields("android/R$drawable", this);
     return d->drawable;
 }
 
-QQmlPropertyMap *QNativeAndroidR::fraction()
+QQmlPropertyMap *QUniAndroidR::fraction()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->fraction)
         d->fraction = getFields("android/R$fraction", this);
     return d->fraction;
 }
 
-QQmlPropertyMap *QNativeAndroidR::id()
+QQmlPropertyMap *QUniAndroidR::id()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->id)
         d->id = getFields("android/R$id", this);
     return d->id;
 }
 
-QQmlPropertyMap *QNativeAndroidR::integer()
+QQmlPropertyMap *QUniAndroidR::integer()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->integer)
         d->integer = getFields("android/R$integer", this);
     return d->integer;
 }
 
-QQmlPropertyMap *QNativeAndroidR::interpolator()
+QQmlPropertyMap *QUniAndroidR::interpolator()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->interpolator)
         d->interpolator = getFields("android/R$interpolator", this);
     return d->interpolator;
 }
 
-QQmlPropertyMap *QNativeAndroidR::layout()
+QQmlPropertyMap *QUniAndroidR::layout()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->layout)
         d->layout = getFields("android/R$layout", this);
     return d->layout;
 }
 
-QQmlPropertyMap *QNativeAndroidR::menu()
+QQmlPropertyMap *QUniAndroidR::menu()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->menu)
         d->menu = getFields("android/R$menu", this);
     return d->menu;
 }
 
-QQmlPropertyMap *QNativeAndroidR::mipmap()
+QQmlPropertyMap *QUniAndroidR::mipmap()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->mipmap)
         d->mipmap = getFields("android/R$mipmap", this);
     return d->mipmap;
 }
 
-QQmlPropertyMap *QNativeAndroidR::plurals()
+QQmlPropertyMap *QUniAndroidR::plurals()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->plurals)
         d->plurals = getFields("android/R$plurals", this);
     return d->plurals;
 }
 
-QQmlPropertyMap *QNativeAndroidR::raw()
+QQmlPropertyMap *QUniAndroidR::raw()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->raw)
         d->raw = getFields("android/R$raw", this);
     return d->raw;
 }
 
-QQmlPropertyMap *QNativeAndroidR::string()
+QQmlPropertyMap *QUniAndroidR::string()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->string)
         d->string = getFields("android/R$string", this);
     return d->string;
 }
 
-QQmlPropertyMap *QNativeAndroidR::style()
+QQmlPropertyMap *QUniAndroidR::style()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->style)
         d->style = getFields("android/R$style", this);
     return d->style;
 }
 
-QQmlPropertyMap *QNativeAndroidR::styleable()
+QQmlPropertyMap *QUniAndroidR::styleable()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->styleable)
         d->styleable = getFields("android/R$styleable", this);
     return d->styleable;
 }
 
-QQmlPropertyMap *QNativeAndroidR::transition()
+QQmlPropertyMap *QUniAndroidR::transition()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->transition)
         d->transition = getFields("android/R$transition", this);
     return d->transition;
 }
 
-QQmlPropertyMap *QNativeAndroidR::xml()
+QQmlPropertyMap *QUniAndroidR::xml()
 {
-    Q_D(QNativeAndroidR);
+    Q_D(QUniAndroidR);
     if (!d->xml)
         d->xml = getFields("android/R$xml", this);
     return d->xml;
 }
 
-QObject *QNativeAndroidR::provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+QObject *QUniAndroidR::provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine);
     Q_UNUSED(scriptEngine);
-    return new QNativeAndroidR;
+    return new QUniAndroidR;
 }
 
 QT_END_NAMESPACE

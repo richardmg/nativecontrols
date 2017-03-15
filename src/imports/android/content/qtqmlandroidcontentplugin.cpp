@@ -52,7 +52,7 @@ public:
 
 void QtQmlAndroidContentPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterUncreatableType<QNativeAndroidContext>(uri, 0, 21, "Context", QStringLiteral("Cannot create Context"));
+    qmlRegisterUncreatableType<QUniAndroidContext>(uri, 0, 21, "Context", QStringLiteral("Cannot create Context"));
 }
 
 QT_END_NAMESPACE

@@ -39,23 +39,23 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidContextWrapper::QNativeAndroidContextWrapper(QObject *parent)
-    : QNativeAndroidContext(*(new QNativeAndroidContextWrapperPrivate), parent)
+QUniAndroidContextWrapper::QUniAndroidContextWrapper(QObject *parent)
+    : QUniAndroidContext(*(new QUniAndroidContextWrapperPrivate), parent)
 {
 }
 
-QNativeAndroidContextWrapper::QNativeAndroidContextWrapper(QNativeAndroidContext *context, QObject *parent)
-    : QNativeAndroidContext(*(new QNativeAndroidContextWrapperPrivate), context, parent)
+QUniAndroidContextWrapper::QUniAndroidContextWrapper(QUniAndroidContext *context, QObject *parent)
+    : QUniAndroidContext(*(new QUniAndroidContextWrapperPrivate), context, parent)
 {
 }
 
-QNativeAndroidContextWrapper::QNativeAndroidContextWrapper(QNativeAndroidContextWrapperPrivate &dd, QObject *parent)
-    : QNativeAndroidContext(dd, parent)
+QUniAndroidContextWrapper::QUniAndroidContextWrapper(QUniAndroidContextWrapperPrivate &dd, QObject *parent)
+    : QUniAndroidContext(dd, parent)
 {
 }
 
-QNativeAndroidContextWrapper::QNativeAndroidContextWrapper(QNativeAndroidContextWrapperPrivate &dd, QNativeAndroidContext *context, QObject *parent)
-    : QNativeAndroidContext(dd, context, parent)
+QUniAndroidContextWrapper::QUniAndroidContextWrapper(QUniAndroidContextWrapperPrivate &dd, QUniAndroidContext *context, QObject *parent)
+    : QUniAndroidContext(dd, context, parent)
 {
 }
 

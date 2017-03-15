@@ -41,68 +41,68 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeTextFieldPrivate::QNativeTextFieldPrivate(int version)
-    : QNativeControlPrivate(version)
+QUniTextFieldPrivate::QUniTextFieldPrivate(int version)
+    : QUniControlPrivate(version)
     , m_platformTextField(nullptr)
 {
 }
 
-QNativeTextFieldPrivate::~QNativeTextFieldPrivate()
+QUniTextFieldPrivate::~QUniTextFieldPrivate()
 {
 }
 
-void QNativeTextFieldPrivate::createPlatformTextField()
+void QUniTextFieldPrivate::createPlatformTextField()
 {
     Q_ASSERT(!m_platformTextField);
-    m_platformTextField = QNativePlatformManager::platformPlugin()->createTextField(q_func());
+    m_platformTextField = QUniPlatformManager::platformPlugin()->createTextField(q_func());
     Q_ASSERT(m_platformTextField);
     setPlatformTextField(m_platformTextField);
 }
 
-void QNativeTextFieldPrivate::setPlatformTextField(QNativePlatformTextField *platformTextField)
+void QUniTextFieldPrivate::setPlatformTextField(QUniPlatformTextField *platformTextField)
 {
     m_platformTextField = platformTextField;
     setPlatformControl(platformTextField);
 }
 
-QNativeTextField::QNativeTextField(QNativeBase *parent)
-    : QNativeControl(*new QNativeTextFieldPrivate(), parent)
+QUniTextField::QUniTextField(QUniBase *parent)
+    : QUniControl(*new QUniTextFieldPrivate(), parent)
 {
     d_func()->createPlatformTextField();
 }
 
-QNativeTextField::QNativeTextField(const QString &text, QNativeBase *parent)
-    : QNativeControl(*new QNativeTextFieldPrivate(), parent)
+QUniTextField::QUniTextField(const QString &text, QUniBase *parent)
+    : QUniControl(*new QUniTextFieldPrivate(), parent)
 {
     d_func()->createPlatformTextField();
     setText(text);
 }
 
-QNativeTextField::QNativeTextField(QNativeTextFieldPrivate &dd, QNativeBase *parent)
-    : QNativeControl(dd, parent)
+QUniTextField::QUniTextField(QUniTextFieldPrivate &dd, QUniBase *parent)
+    : QUniControl(dd, parent)
 {
 }
 
-QNativeTextField::~QNativeTextField()
+QUniTextField::~QUniTextField()
 {
 }
 
-QString QNativeTextField::text()
+QString QUniTextField::text()
 {
     return d_func()->m_platformTextField->text();
 }
 
-void QNativeTextField::setText(const QString &newText)
+void QUniTextField::setText(const QString &newText)
 {
     d_func()->m_platformTextField->setText(newText);
 }
 
-QString QNativeTextField::placeholderText()
+QString QUniTextField::placeholderText()
 {
     return d_func()->m_platformTextField->placeholderText();
 }
 
-void QNativeTextField::setPlaceholderText(const QString &placeholderText)
+void QUniTextField::setPlaceholderText(const QString &placeholderText)
 {
     d_func()->m_platformTextField->setPlaceholderText(placeholderText);
 }

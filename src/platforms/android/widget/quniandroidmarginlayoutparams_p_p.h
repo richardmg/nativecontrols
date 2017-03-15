@@ -53,14 +53,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidMarginLayoutParamsPrivate : public QNativeAndroidLayoutParamsPrivate
+class QUniAndroidMarginLayoutParamsPrivate : public QUniAndroidLayoutParamsPrivate
 {
 public:
-    QNativeAndroidOptional<int> margin;
-    QNativeAndroidOptional<int> topMargin;
-    QNativeAndroidOptional<int> leftMargin;
-    QNativeAndroidOptional<int> rightMargin;
-    QNativeAndroidOptional<int> bottomMargin;
+    QUniAndroidOptional<int> margin;
+    QUniAndroidOptional<int> topMargin;
+    QUniAndroidOptional<int> leftMargin;
+    QUniAndroidOptional<int> rightMargin;
+    QUniAndroidOptional<int> bottomMargin;
 };
 
 QT_END_NAMESPACE

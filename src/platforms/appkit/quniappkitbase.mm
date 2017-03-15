@@ -45,46 +45,46 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAppKitBasePrivate::QNativeAppKitBasePrivate(int version)
-    : QNativeAppKitQmlBasePrivate(version)
+QUniAppKitBasePrivate::QUniAppKitBasePrivate(int version)
+    : QUniAppKitQmlBasePrivate(version)
 {
 }
 
-QNativeAppKitBasePrivate::~QNativeAppKitBasePrivate()
+QUniAppKitBasePrivate::~QUniAppKitBasePrivate()
 {
 }
 
-QNativeAppKitBase::QNativeAppKitBase(QNativeAppKitBase *parent)
-    : QNativeAppKitQmlBase(*new QNativeAppKitBasePrivate(), parent)
+QUniAppKitBase::QUniAppKitBase(QUniAppKitBase *parent)
+    : QUniAppKitQmlBase(*new QUniAppKitBasePrivate(), parent)
 {
 }
 
-QNativeAppKitBase::QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent)
-    : QNativeAppKitQmlBase(dd, parent)
+QUniAppKitBase::QUniAppKitBase(QUniAppKitBasePrivate &dd, QUniAppKitBase *parent)
+    : QUniAppKitQmlBase(dd, parent)
 {
 }
 
-QNativeAppKitBase::~QNativeAppKitBase()
+QUniAppKitBase::~QUniAppKitBase()
 {
 }
 
-void QNativeAppKitBase::setParent(QNativeAppKitBase *parentBase)
+void QUniAppKitBase::setParent(QUniAppKitBase *parentBase)
 {
     if (parentBase == parent())
         return;
 
-    QNativeAppKitQmlBase::setParent(parentBase);
+    QUniAppKitQmlBase::setParent(parentBase);
     emit parentChanged(parentBase);
 }
 
-QNativeAppKitBase *QNativeAppKitBase::parentBase()
+QUniAppKitBase *QUniAppKitBase::parentBase()
 {
-    return qobject_cast<QNativeAppKitBase *>(parent());
+    return qobject_cast<QUniAppKitBase *>(parent());
 }
 
-void QNativeAppKitBase::setPlatformParent(QNativePlatformBase *parent)
+void QUniAppKitBase::setPlatformParent(QUniPlatformBase *parent)
 {
-    setParent(dynamic_cast<QNativeAppKitBase *>(parent));
+    setParent(dynamic_cast<QUniAppKitBase *>(parent));
 }
 
 #include "moc_quniappkitbase.cpp"

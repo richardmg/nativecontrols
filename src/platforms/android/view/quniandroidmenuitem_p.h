@@ -52,10 +52,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidView;
-class QNativeAndroidMenuItemPrivate;
+class QUniAndroidView;
+class QUniAndroidMenuItemPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidMenuItem : public QNativeAndroidContextual
+class Q_NATIVEANDROID_EXPORT QUniAndroidMenuItem : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
@@ -64,11 +64,11 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidMenuItem : public QNativeAndroidConte
     Q_PROPERTY(bool checkable READ isCheckable WRITE setCheckable NOTIFY checkableChanged)
     Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY checkedChanged)
     Q_PROPERTY(int showAs READ showAs WRITE setShowAs NOTIFY showAsChanged)
-    Q_PROPERTY(QNativeAndroidView *actionView READ actionView WRITE setActionView NOTIFY actionViewChanged)
+    Q_PROPERTY(QUniAndroidView *actionView READ actionView WRITE setActionView NOTIFY actionViewChanged)
     Q_ENUMS(ShowAs)
 
 public:
-    explicit QNativeAndroidMenuItem(QObject *parent = nullptr);
+    explicit QUniAndroidMenuItem(QObject *parent = nullptr);
 
     QString title() const;
     void setTitle(const QString &title);
@@ -96,8 +96,8 @@ public:
     int showAs() const;
     void setShowAs(int showAs);
 
-    QNativeAndroidView *actionView() const;
-    void setActionView(QNativeAndroidView *view);
+    QUniAndroidView *actionView() const;
+    void setActionView(QUniAndroidView *view);
 
 Q_SIGNALS:
     void click();
@@ -116,8 +116,8 @@ protected:
     void objectChange(ObjectChange change) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidMenuItem)
-    Q_DECLARE_PRIVATE(QNativeAndroidMenuItem)
+    Q_DISABLE_COPY(QUniAndroidMenuItem)
+    Q_DECLARE_PRIVATE(QUniAndroidMenuItem)
 };
 
 QT_END_NAMESPACE

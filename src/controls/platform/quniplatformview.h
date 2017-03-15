@@ -43,10 +43,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformView : public virtual QNativePlatformBase
+class Q_NATIVECONTROLS_EXPORT QUniPlatformView : public virtual QUniPlatformBase
 {
 public:
-    virtual ~QNativePlatformView() {}
+    virtual ~QUniPlatformView() {}
 
     virtual bool visible() const = 0;
     virtual void setVisible(bool visible) = 0;

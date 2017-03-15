@@ -38,22 +38,22 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidTabWidget::QNativeAndroidTabWidget(QNativeAndroidContext *context)
-    : QNativeAndroidLinearLayout(context)
+QUniAndroidTabWidget::QUniAndroidTabWidget(QUniAndroidContext *context)
+    : QUniAndroidLinearLayout(context)
 {
     setIdentifier(16908307); // TODO: android.R.id.tabs
 }
 
-QAndroidJniObject QNativeAndroidTabWidget::onCreate()
+QAndroidJniObject QUniAndroidTabWidget::onCreate()
 {
     return QAndroidJniObject("android/widget/TabWidget",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidTabWidget::onInflate(QAndroidJniObject &instance)
+void QUniAndroidTabWidget::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidLinearLayout::onInflate(instance);
+    QUniAndroidLinearLayout::onInflate(instance);
 }
 
 QT_END_NAMESPACE

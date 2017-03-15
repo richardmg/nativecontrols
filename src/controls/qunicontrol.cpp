@@ -42,42 +42,42 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeControlPrivate::QNativeControlPrivate(int version)
-    : QNativeViewPrivate(version)
+QUniControlPrivate::QUniControlPrivate(int version)
+    : QUniViewPrivate(version)
     , m_platformControl(nullptr)
 {
 }
 
-QNativeControlPrivate::~QNativeControlPrivate()
+QUniControlPrivate::~QUniControlPrivate()
 {
 }
 
-void QNativeControlPrivate::createPlatformControl()
+void QUniControlPrivate::createPlatformControl()
 {
     Q_ASSERT(!m_platformControl);
-    m_platformControl = QNativePlatformManager::platformPlugin()->createControl(q_func());
+    m_platformControl = QUniPlatformManager::platformPlugin()->createControl(q_func());
     Q_ASSERT(m_platformControl);
     setPlatformControl(m_platformControl);
 }
 
-void QNativeControlPrivate::setPlatformControl(QNativePlatformControl *platformControl)
+void QUniControlPrivate::setPlatformControl(QUniPlatformControl *platformControl)
 {
     m_platformControl = platformControl;
     setPlatformView(platformControl);
 }
 
-QNativeControl::QNativeControl(QNativeBase *parent)
-    : QNativeView(parent)
+QUniControl::QUniControl(QUniBase *parent)
+    : QUniView(parent)
 {
     d_func()->createPlatformControl();
 }
 
-QNativeControl::QNativeControl(QNativeControlPrivate &dd, QNativeBase *parent)
-    : QNativeView(dd, parent)
+QUniControl::QUniControl(QUniControlPrivate &dd, QUniBase *parent)
+    : QUniView(dd, parent)
 {
 }
 
-QNativeControl::~QNativeControl()
+QUniControl::~QUniControl()
 {
 }
 

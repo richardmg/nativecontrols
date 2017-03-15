@@ -40,27 +40,27 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidMarginLayoutParams::QNativeAndroidMarginLayoutParams(QNativeAndroidView *view)
-    : QNativeAndroidLayoutParams(*(new QNativeAndroidMarginLayoutParamsPrivate), view)
+QUniAndroidMarginLayoutParams::QUniAndroidMarginLayoutParams(QUniAndroidView *view)
+    : QUniAndroidLayoutParams(*(new QUniAndroidMarginLayoutParamsPrivate), view)
 {
 }
 
-QNativeAndroidMarginLayoutParams::QNativeAndroidMarginLayoutParams(QNativeAndroidMarginLayoutParamsPrivate &dd, QNativeAndroidView *view)
-    : QNativeAndroidLayoutParams(dd, view)
+QUniAndroidMarginLayoutParams::QUniAndroidMarginLayoutParams(QUniAndroidMarginLayoutParamsPrivate &dd, QUniAndroidView *view)
+    : QUniAndroidLayoutParams(dd, view)
 {
 }
 
-int QNativeAndroidMarginLayoutParams::margin() const
+int QUniAndroidMarginLayoutParams::margin() const
 {
-    Q_D(const QNativeAndroidMarginLayoutParams);
+    Q_D(const QUniAndroidMarginLayoutParams);
     if (d->margin.isNull())
         return 0;
     return d->margin;
 }
 
-void QNativeAndroidMarginLayoutParams::setMargin(int margin)
+void QUniAndroidMarginLayoutParams::setMargin(int margin)
 {
-    Q_D(QNativeAndroidMarginLayoutParams);
+    Q_D(QUniAndroidMarginLayoutParams);
     if (!d->margin.isNull() && d->margin == margin)
         return;
 
@@ -69,17 +69,17 @@ void QNativeAndroidMarginLayoutParams::setMargin(int margin)
     emit marginChanged();
 }
 
-int QNativeAndroidMarginLayoutParams::topMargin() const
+int QUniAndroidMarginLayoutParams::topMargin() const
 {
-    Q_D(const QNativeAndroidMarginLayoutParams);
+    Q_D(const QUniAndroidMarginLayoutParams);
     if (d->topMargin.isNull())
         return margin();
     return d->topMargin;
 }
 
-void QNativeAndroidMarginLayoutParams::setTopMargin(int margin)
+void QUniAndroidMarginLayoutParams::setTopMargin(int margin)
 {
-    Q_D(QNativeAndroidMarginLayoutParams);
+    Q_D(QUniAndroidMarginLayoutParams);
     if (!d->topMargin.isNull() && d->topMargin == margin)
         return;
 
@@ -88,17 +88,17 @@ void QNativeAndroidMarginLayoutParams::setTopMargin(int margin)
     emit topMarginChanged();
 }
 
-int QNativeAndroidMarginLayoutParams::leftMargin() const
+int QUniAndroidMarginLayoutParams::leftMargin() const
 {
-    Q_D(const QNativeAndroidMarginLayoutParams);
+    Q_D(const QUniAndroidMarginLayoutParams);
     if (d->leftMargin.isNull())
         return margin();
     return d->leftMargin;
 }
 
-void QNativeAndroidMarginLayoutParams::setLeftMargin(int margin)
+void QUniAndroidMarginLayoutParams::setLeftMargin(int margin)
 {
-    Q_D(QNativeAndroidMarginLayoutParams);
+    Q_D(QUniAndroidMarginLayoutParams);
     if (!d->leftMargin.isNull() && d->leftMargin == margin)
         return;
 
@@ -107,17 +107,17 @@ void QNativeAndroidMarginLayoutParams::setLeftMargin(int margin)
     emit leftMarginChanged();
 }
 
-int QNativeAndroidMarginLayoutParams::rightMargin() const
+int QUniAndroidMarginLayoutParams::rightMargin() const
 {
-    Q_D(const QNativeAndroidMarginLayoutParams);
+    Q_D(const QUniAndroidMarginLayoutParams);
     if (d->rightMargin.isNull())
         return margin();
     return d->rightMargin;
 }
 
-void QNativeAndroidMarginLayoutParams::setRightMargin(int margin)
+void QUniAndroidMarginLayoutParams::setRightMargin(int margin)
 {
-    Q_D(QNativeAndroidMarginLayoutParams);
+    Q_D(QUniAndroidMarginLayoutParams);
     if (!d->rightMargin.isNull() && d->rightMargin == margin)
         return;
 
@@ -126,17 +126,17 @@ void QNativeAndroidMarginLayoutParams::setRightMargin(int margin)
     emit rightMarginChanged();
 }
 
-int QNativeAndroidMarginLayoutParams::bottomMargin() const
+int QUniAndroidMarginLayoutParams::bottomMargin() const
 {
-    Q_D(const QNativeAndroidMarginLayoutParams);
+    Q_D(const QUniAndroidMarginLayoutParams);
     if (d->bottomMargin.isNull())
         return margin();
     return d->bottomMargin;
 }
 
-void QNativeAndroidMarginLayoutParams::setBottomMargin(int margin)
+void QUniAndroidMarginLayoutParams::setBottomMargin(int margin)
 {
-    Q_D(QNativeAndroidMarginLayoutParams);
+    Q_D(QUniAndroidMarginLayoutParams);
     if (!d->bottomMargin.isNull() && d->bottomMargin == margin)
         return;
 
@@ -145,16 +145,16 @@ void QNativeAndroidMarginLayoutParams::setBottomMargin(int margin)
     emit bottomMarginChanged();
 }
 
-QAndroidJniObject QNativeAndroidMarginLayoutParams::onCreate()
+QAndroidJniObject QUniAndroidMarginLayoutParams::onCreate()
 {
     return QAndroidJniObject("android/view/ViewGroup$MarginLayoutParams",
                              "(II)V",
                              MATCH_PARENT, MATCH_PARENT);
 }
 
-void QNativeAndroidMarginLayoutParams::onInflate(QAndroidJniObject &instance)
+void QUniAndroidMarginLayoutParams::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidLayoutParams::onInflate(instance);
+    QUniAndroidLayoutParams::onInflate(instance);
 
     instance.callMethod<void>("setMargins",
                               "(IIII)V",

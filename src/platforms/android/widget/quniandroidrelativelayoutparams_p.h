@@ -52,24 +52,24 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidRelativeLayoutParamsPrivate;
+class QUniAndroidRelativeLayoutParamsPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidRelativeLayoutParams : public QNativeAndroidMarginLayoutParams
+class Q_NATIVEANDROID_EXPORT QUniAndroidRelativeLayoutParams : public QUniAndroidMarginLayoutParams
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAndroidView *above READ above WRITE setAbove NOTIFY aboveChanged)
-    Q_PROPERTY(QNativeAndroidView *below READ below WRITE setBelow NOTIFY belowChanged)
-    Q_PROPERTY(QNativeAndroidView *alignTop READ alignTop WRITE setAlignTop NOTIFY alignTopChanged)
-    Q_PROPERTY(QNativeAndroidView *alignLeft READ alignLeft WRITE setAlignLeft NOTIFY alignLeftChanged)
-    Q_PROPERTY(QNativeAndroidView *alignRight READ alignRight WRITE setAlignRight NOTIFY alignRightChanged)
-    Q_PROPERTY(QNativeAndroidView *alignBottom READ alignBottom WRITE setAlignBottom NOTIFY alignBottomChanged)
-    Q_PROPERTY(QNativeAndroidView *alignStart READ alignStart WRITE setAlignStart NOTIFY alignStartChanged)
-    Q_PROPERTY(QNativeAndroidView *alignEnd READ alignEnd WRITE setAlignEnd NOTIFY alignEndChanged)
-    Q_PROPERTY(QNativeAndroidView *alignBaseline READ alignBaseline WRITE setAlignBaseline NOTIFY alignBaselineChanged)
-    Q_PROPERTY(QNativeAndroidView *toLeftOf READ toLeftOf WRITE setToLeftOf NOTIFY toLeftOfChanged)
-    Q_PROPERTY(QNativeAndroidView *toRightOf READ toRightOf WRITE setToRightOf NOTIFY toRightOfChanged)
-    Q_PROPERTY(QNativeAndroidView *toStartOf READ toStartOf WRITE setToStartOf NOTIFY toStartOfChanged)
-    Q_PROPERTY(QNativeAndroidView *toEndOf READ toEndOf WRITE setToEndOf NOTIFY toEndOfChanged)
+    Q_PROPERTY(QUniAndroidView *above READ above WRITE setAbove NOTIFY aboveChanged)
+    Q_PROPERTY(QUniAndroidView *below READ below WRITE setBelow NOTIFY belowChanged)
+    Q_PROPERTY(QUniAndroidView *alignTop READ alignTop WRITE setAlignTop NOTIFY alignTopChanged)
+    Q_PROPERTY(QUniAndroidView *alignLeft READ alignLeft WRITE setAlignLeft NOTIFY alignLeftChanged)
+    Q_PROPERTY(QUniAndroidView *alignRight READ alignRight WRITE setAlignRight NOTIFY alignRightChanged)
+    Q_PROPERTY(QUniAndroidView *alignBottom READ alignBottom WRITE setAlignBottom NOTIFY alignBottomChanged)
+    Q_PROPERTY(QUniAndroidView *alignStart READ alignStart WRITE setAlignStart NOTIFY alignStartChanged)
+    Q_PROPERTY(QUniAndroidView *alignEnd READ alignEnd WRITE setAlignEnd NOTIFY alignEndChanged)
+    Q_PROPERTY(QUniAndroidView *alignBaseline READ alignBaseline WRITE setAlignBaseline NOTIFY alignBaselineChanged)
+    Q_PROPERTY(QUniAndroidView *toLeftOf READ toLeftOf WRITE setToLeftOf NOTIFY toLeftOfChanged)
+    Q_PROPERTY(QUniAndroidView *toRightOf READ toRightOf WRITE setToRightOf NOTIFY toRightOfChanged)
+    Q_PROPERTY(QUniAndroidView *toStartOf READ toStartOf WRITE setToStartOf NOTIFY toStartOfChanged)
+    Q_PROPERTY(QUniAndroidView *toEndOf READ toEndOf WRITE setToEndOf NOTIFY toEndOfChanged)
     Q_PROPERTY(bool alignParentTop READ alignParentTop WRITE setAlignParentTop NOTIFY alignParentTopChanged)
     Q_PROPERTY(bool alignParentLeft READ alignParentLeft WRITE setAlignParentLeft NOTIFY alignParentLeftChanged)
     Q_PROPERTY(bool alignParentRight READ alignParentRight WRITE setAlignParentRight NOTIFY alignParentRightChanged)
@@ -82,46 +82,46 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidRelativeLayoutParams : public QNative
     Q_PROPERTY(bool centerInParent READ centerInParent WRITE setCenterInParent NOTIFY centerInParentChanged)
 
 public:
-    explicit QNativeAndroidRelativeLayoutParams(QNativeAndroidView *view);
+    explicit QUniAndroidRelativeLayoutParams(QUniAndroidView *view);
 
-    QNativeAndroidView *above() const;
-    void setAbove(QNativeAndroidView *view);
+    QUniAndroidView *above() const;
+    void setAbove(QUniAndroidView *view);
 
-    QNativeAndroidView *below() const;
-    void setBelow(QNativeAndroidView *view);
+    QUniAndroidView *below() const;
+    void setBelow(QUniAndroidView *view);
 
-    QNativeAndroidView *alignTop() const;
-    void setAlignTop(QNativeAndroidView *view);
+    QUniAndroidView *alignTop() const;
+    void setAlignTop(QUniAndroidView *view);
 
-    QNativeAndroidView *alignLeft() const;
-    void setAlignLeft(QNativeAndroidView *view);
+    QUniAndroidView *alignLeft() const;
+    void setAlignLeft(QUniAndroidView *view);
 
-    QNativeAndroidView *alignRight() const;
-    void setAlignRight(QNativeAndroidView *view);
+    QUniAndroidView *alignRight() const;
+    void setAlignRight(QUniAndroidView *view);
 
-    QNativeAndroidView *alignBottom() const;
-    void setAlignBottom(QNativeAndroidView *view);
+    QUniAndroidView *alignBottom() const;
+    void setAlignBottom(QUniAndroidView *view);
 
-    QNativeAndroidView *alignStart() const;
-    void setAlignStart(QNativeAndroidView *view);
+    QUniAndroidView *alignStart() const;
+    void setAlignStart(QUniAndroidView *view);
 
-    QNativeAndroidView *alignEnd() const;
-    void setAlignEnd(QNativeAndroidView *view);
+    QUniAndroidView *alignEnd() const;
+    void setAlignEnd(QUniAndroidView *view);
 
-    QNativeAndroidView *alignBaseline() const;
-    void setAlignBaseline(QNativeAndroidView *view);
+    QUniAndroidView *alignBaseline() const;
+    void setAlignBaseline(QUniAndroidView *view);
 
-    QNativeAndroidView *toLeftOf() const;
-    void setToLeftOf(QNativeAndroidView *view);
+    QUniAndroidView *toLeftOf() const;
+    void setToLeftOf(QUniAndroidView *view);
 
-    QNativeAndroidView *toRightOf() const;
-    void setToRightOf(QNativeAndroidView *view);
+    QUniAndroidView *toRightOf() const;
+    void setToRightOf(QUniAndroidView *view);
 
-    QNativeAndroidView *toStartOf() const;
-    void setToStartOf(QNativeAndroidView *view);
+    QUniAndroidView *toStartOf() const;
+    void setToStartOf(QUniAndroidView *view);
 
-    QNativeAndroidView *toEndOf() const;
-    void setToEndOf(QNativeAndroidView *view);
+    QUniAndroidView *toEndOf() const;
+    void setToEndOf(QUniAndroidView *view);
 
     bool alignParentTop() const;
     void setAlignParentTop(bool align);
@@ -184,8 +184,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidRelativeLayoutParams)
-    Q_DECLARE_PRIVATE(QNativeAndroidRelativeLayoutParams)
+    Q_DISABLE_COPY(QUniAndroidRelativeLayoutParams)
+    Q_DECLARE_PRIVATE(QUniAndroidRelativeLayoutParams)
 };
 
 QT_END_NAMESPACE

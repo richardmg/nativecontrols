@@ -42,23 +42,23 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeTabsPagePrivate;
-class QNativePlatformController;
+class QUniTabsPagePrivate;
+class QUniPlatformController;
 
-class Q_NATIVECONTROLS_EXPORT QNativeTabsPage : public QNativePage
+class Q_NATIVECONTROLS_EXPORT QUniTabsPage : public QUniPage
 {
     Q_OBJECT
 
 public:
-    explicit QNativeTabsPage(QNativeBase *parent = nullptr);
-    virtual ~QNativeTabsPage();
+    explicit QUniTabsPage(QUniBase *parent = nullptr);
+    virtual ~QUniTabsPage();
 
 protected:
-    QNativeTabsPage(QNativeTabsPagePrivate &dd, QNativeBase *parent = nullptr);
+    QUniTabsPage(QUniTabsPagePrivate &dd, QUniBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeTabsPage)
-    Q_DISABLE_COPY(QNativeTabsPage)
+    Q_DECLARE_PRIVATE(QUniTabsPage)
+    Q_DISABLE_COPY(QUniTabsPage)
 };
 
 QT_END_NAMESPACE

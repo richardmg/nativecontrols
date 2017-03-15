@@ -39,23 +39,23 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidContext::QNativeAndroidContext(QObject *parent)
-    : QNativeAndroidContextual(this, parent)
+QUniAndroidContext::QUniAndroidContext(QObject *parent)
+    : QUniAndroidContextual(this, parent)
 {
 }
 
-QNativeAndroidContext::QNativeAndroidContext(QNativeAndroidContext *context, QObject *parent)
-    : QNativeAndroidContextual(context, parent)
+QUniAndroidContext::QUniAndroidContext(QUniAndroidContext *context, QObject *parent)
+    : QUniAndroidContextual(context, parent)
 {
 }
 
-QNativeAndroidContext::QNativeAndroidContext(QNativeAndroidContextPrivate &dd, QObject *parent)
-    : QNativeAndroidContextual(dd, parent)
+QUniAndroidContext::QUniAndroidContext(QUniAndroidContextPrivate &dd, QObject *parent)
+    : QUniAndroidContextual(dd, parent)
 {
 }
 
-QNativeAndroidContext::QNativeAndroidContext(QNativeAndroidContextPrivate &dd, QNativeAndroidContext *context, QObject *parent)
-    : QNativeAndroidContextual(dd, context, parent)
+QUniAndroidContext::QUniAndroidContext(QUniAndroidContextPrivate &dd, QUniAndroidContext *context, QObject *parent)
+    : QUniAndroidContextual(dd, context, parent)
 {
 }
 

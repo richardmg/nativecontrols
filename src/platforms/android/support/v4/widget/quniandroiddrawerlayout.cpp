@@ -40,42 +40,42 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidDrawerLayout::QNativeAndroidDrawerLayout(QNativeAndroidContext *context)
-    : QNativeAndroidViewGroup(context)
+QUniAndroidDrawerLayout::QUniAndroidDrawerLayout(QUniAndroidContext *context)
+    : QUniAndroidViewGroup(context)
 {
 }
 
-QNativeAndroidDrawerLayoutParams *QNativeAndroidDrawerLayout::qmlAttachedProperties(QObject *object)
+QUniAndroidDrawerLayoutParams *QUniAndroidDrawerLayout::qmlAttachedProperties(QObject *object)
 {
-    QNativeAndroidView *view = qobject_cast<QNativeAndroidView*>(object);
+    QUniAndroidView *view = qobject_cast<QUniAndroidView*>(object);
     if (view)
-        return new QNativeAndroidDrawerLayoutParams(view);
+        return new QUniAndroidDrawerLayoutParams(view);
     return 0;
 }
 
-void QNativeAndroidDrawerLayout::closeDrawers()
+void QUniAndroidDrawerLayout::closeDrawers()
 {
     QtNativeAndroid::callVoidMethod(instance(), "closeDrawers");
 }
 
-void QNativeAndroidDrawerLayout::closeDrawer(int gravity)
+void QUniAndroidDrawerLayout::closeDrawer(int gravity)
 {
     QtNativeAndroid::callIntMethod(instance(), "closeDrawer", gravity);
 }
 
-QAndroidJniObject QNativeAndroidDrawerLayout::onCreate()
+QAndroidJniObject QUniAndroidDrawerLayout::onCreate()
 {
     return QAndroidJniObject("android/support/v4/widget/DrawerLayout",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidDrawerLayout::onInflate(QAndroidJniObject &instance)
+void QUniAndroidDrawerLayout::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidViewGroup::onInflate(instance);
+    QUniAndroidViewGroup::onInflate(instance);
 
     foreach (QObject *child, QObject::children()) {
-        QNativeAndroidActionBarDrawerToggle *toggle = qobject_cast<QNativeAndroidActionBarDrawerToggle *>(child);
+        QUniAndroidActionBarDrawerToggle *toggle = qobject_cast<QUniAndroidActionBarDrawerToggle *>(child);
         if (toggle)
             toggle->onCreate(ctx(), instance);
     }

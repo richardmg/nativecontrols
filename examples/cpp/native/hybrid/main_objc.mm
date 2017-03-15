@@ -51,16 +51,16 @@
 #include <UIKit/UIKit.h>
 #endif
 
-void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
+void main_objc(QUniWindow &window, QUniButton &nativeButton)
 {
 #if defined(Q_OS_MACOS)
     // Create a platform specific button, and add it as a child of the
-    // window using the QNativeWindow::addNativeChild() function.
-    QNativeAppKitButton *nativeAppKitButton1 = new QNativeAppKitButton;
+    // window using the QUniWindow::addNativeChild() function.
+    QUniAppKitButton *nativeAppKitButton1 = new QUniAppKitButton;
     nativeAppKitButton1->move(nativeButton.left(), nativeButton.bottom());
-    nativeAppKitButton1->nsButtonHandle().title = @"QNativeAppKitButton";
+    nativeAppKitButton1->nsButtonHandle().title = @"QUniAppKitButton";
 
-    QObject::connect(nativeAppKitButton1, &QNativeAppKitButton::clicked,
+    QObject::connect(nativeAppKitButton1, &QUniAppKitButton::clicked,
                      [nativeAppKitButton1](){ nativeAppKitButton1->setText(QStringLiteral("Clicked!")); });
     window.addNativeChild(nativeAppKitButton1);
 
@@ -71,24 +71,24 @@ void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
     [switchButton sizeToFit];
     window.addNativeChild("NSView", switchButton);
 
-    // You can also go the other way, creating a QNativeButton as a direct child of another NSView.
+    // You can also go the other way, creating a QUniButton as a direct child of another NSView.
     // Note that switchButton.frame is specified with origo bottom-left, as opposed to
     // Qt geometry, which is specified with origo top-left
-    QNativeButton *nativeButton2 = new QNativeButton("QNativeButton 2");
+    QUniButton *nativeButton2 = new QUniButton("QUniButton 2");
     float y = window.height() - switchButton.frame.origin.y - switchButton.frame.size.height;
     nativeButton2->move(switchButton.frame.origin.x, y);
-    QObject::connect(nativeButton2, &QNativeButton::clicked,
+    QObject::connect(nativeButton2, &QUniButton::clicked,
                      [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
     nativeButton2->setNativeParent("NSView", switchButton.superview);
 #endif
 
 #if defined(Q_OS_IOS) || defined(Q_OS_TVOS)
     // Create a platform specific button, and add it as a child of the
-    // window using the QNativeWindow::addNativeChild() function.
-    QNativeUIKitButton *nativeUIKitButton1 = new QNativeUIKitButton;
+    // window using the QUniWindow::addNativeChild() function.
+    QUniUIKitButton *nativeUIKitButton1 = new QUniUIKitButton;
     nativeUIKitButton1->move(nativeButton.left(), nativeButton.bottom());
-    [nativeUIKitButton1->uiButtonHandle() setTitle:@"QNativeUIKitButton" forState:UIControlStateNormal];
-    QObject::connect(nativeUIKitButton1, &QNativeUIKitButton::clicked,
+    [nativeUIKitButton1->uiButtonHandle() setTitle:@"QUniUIKitButton" forState:UIControlStateNormal];
+    QObject::connect(nativeUIKitButton1, &QUniUIKitButton::clicked,
                      [nativeUIKitButton1](){ nativeUIKitButton1->setText(QStringLiteral("Clicked!")); });
     window.addNativeChild(nativeUIKitButton1);
 
@@ -98,11 +98,11 @@ void main_objc(QNativeWindow &window, QNativeButton &nativeButton)
     [uiSwitch sizeToFit];
     window.addNativeChild("UIView", uiSwitch);
 
-    // You can also go the other way, creating a QNativeButton
+    // You can also go the other way, creating a QUniButton
     // as a direct child of another UIView.
-    QNativeButton *nativeButton2 = new QNativeButton("QNativeButton 2");
+    QUniButton *nativeButton2 = new QUniButton("QUniButton 2");
     nativeButton2->move(uiSwitch.frame.origin.x, uiSwitch.frame.origin.y + uiSwitch.bounds.size.height);
-    QObject::connect(nativeButton2, &QNativeButton::clicked,
+    QObject::connect(nativeButton2, &QUniButton::clicked,
                      [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
     nativeButton2->setNativeParent("UIView", uiSwitch.superview);
 #endif

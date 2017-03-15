@@ -55,21 +55,21 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeButton;
-class QNativeAppKitButton;
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitButtonDelegate);
+class QUniButton;
+class QUniAppKitButton;
+Q_FORWARD_DECLARE_OBJC_CLASS(QUniAppKitButtonDelegate);
 
-class QNativeAppKitButtonPrivate : public QNativeAppKitControlPrivate
+class QUniAppKitButtonPrivate : public QUniAppKitControlPrivate
 {
 public:
-    explicit QNativeAppKitButtonPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitButtonPrivate();
+    explicit QUniAppKitButtonPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniAppKitButtonPrivate();
 
-    virtual void connectSignals(QNativeBase *base) override;
+    virtual void connectSignals(QUniBase *base) override;
 
-    QNativeAppKitButtonDelegate *m_delegate;
+    QUniAppKitButtonDelegate *m_delegate;
 
-    Q_DECLARE_PUBLIC(QNativeAppKitButton)
+    Q_DECLARE_PUBLIC(QUniAppKitButton)
 
 protected:
     NSView *createView() override;

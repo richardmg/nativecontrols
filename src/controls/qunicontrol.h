@@ -47,23 +47,23 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativePlatformControl;
-class QNativeControlPrivate;
+class QUniPlatformControl;
+class QUniControlPrivate;
 
-class Q_NATIVECONTROLS_EXPORT QNativeControl : public QNativeView
+class Q_NATIVECONTROLS_EXPORT QUniControl : public QUniView
 {
     Q_OBJECT
 
 public:
-    explicit QNativeControl(QNativeBase *parentControl = nullptr);
-    virtual ~QNativeControl();
+    explicit QUniControl(QUniBase *parentControl = nullptr);
+    virtual ~QUniControl();
 
 protected:
-    QNativeControl(QNativeControlPrivate &dd, QNativeBase *parent = nullptr);
+    QUniControl(QUniControlPrivate &dd, QUniBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeControl)
-    Q_DISABLE_COPY(QNativeControl)
+    Q_DECLARE_PRIVATE(QUniControl)
+    Q_DISABLE_COPY(QUniControl)
 };
 
 QT_END_NAMESPACE

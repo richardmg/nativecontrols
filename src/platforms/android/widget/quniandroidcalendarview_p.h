@@ -52,22 +52,22 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidCalendarViewPrivate;
+class QUniAndroidCalendarViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidCalendarView : public QNativeAndroidFrameLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidCalendarView : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidCalendarView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidCalendarView(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidCalendarView)
-    Q_DECLARE_PRIVATE(QNativeAndroidCalendarView)
+    Q_DISABLE_COPY(QUniAndroidCalendarView)
+    Q_DECLARE_PRIVATE(QUniAndroidCalendarView)
 };
 
 QT_END_NAMESPACE

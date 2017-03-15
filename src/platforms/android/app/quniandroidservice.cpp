@@ -45,7 +45,7 @@ static void native_onCreated(JNIEnv *env, jobject object, jlong instance)
     Q_UNUSED(env);
     Q_UNUSED(object);
     Q_UNUSED(instance);
-//    QNativeAndroidService *service = reinterpret_cast<QNativeAndroidService *>(instance);
+//    QUniAndroidService *service = reinterpret_cast<QUniAndroidService *>(instance);
 //    if (service)
 //        QMetaObject::invokeMethod(service, "created", Qt::QueuedConnection);
 }
@@ -54,7 +54,7 @@ static void native_onDestroyed(JNIEnv *env, jobject object, jlong instance)
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidService *service = reinterpret_cast<QNativeAndroidService *>(instance);
+    QUniAndroidService *service = reinterpret_cast<QUniAndroidService *>(instance);
     if (service)
         QMetaObject::invokeMethod(service, "stopped", Qt::QueuedConnection);
 }
@@ -63,7 +63,7 @@ static jboolean native_onStartCommand(JNIEnv *env, jobject object, jlong instanc
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidService *service = reinterpret_cast<QNativeAndroidService *>(instance);
+    QUniAndroidService *service = reinterpret_cast<QUniAndroidService *>(instance);
     bool ret = false;
     if (service) {
         QMetaObject::invokeMethod(service, "_q_startCommand", Qt::BlockingQueuedConnection, Q_RETURN_ARG(bool, ret), Q_ARG(int, flags), Q_ARG(int, startId));
@@ -84,7 +84,7 @@ static void registerNativeServiceMethods(jobject service)
     env->DeleteLocalRef(cls);
 }
 
-class QNativeAndroidServicePrivate : public QNativeAndroidContextWrapperPrivate
+class QUniAndroidServicePrivate : public QUniAndroidContextWrapperPrivate
 {
 public:
     bool _q_startCommand(int flags, int startId);
@@ -92,27 +92,27 @@ public:
     bool sticky = true;
 };
 
-bool QNativeAndroidServicePrivate::_q_startCommand(int flags, int startId)
+bool QUniAndroidServicePrivate::_q_startCommand(int flags, int startId)
 {
     Q_UNUSED(flags);
     Q_UNUSED(startId);
     return sticky;
 }
 
-QNativeAndroidService::QNativeAndroidService(QObject *parent)
-    : QNativeAndroidContextWrapper(*(new QNativeAndroidServicePrivate), nullptr, parent)
+QUniAndroidService::QUniAndroidService(QObject *parent)
+    : QUniAndroidContextWrapper(*(new QUniAndroidServicePrivate), nullptr, parent)
 {
 }
 
-bool QNativeAndroidService::isSticky() const
+bool QUniAndroidService::isSticky() const
 {
-    Q_D(const QNativeAndroidService);
+    Q_D(const QUniAndroidService);
     return d->sticky;
 }
 
-void QNativeAndroidService::setSticky(bool sticky)
+void QUniAndroidService::setSticky(bool sticky)
 {
-    Q_D(QNativeAndroidService);
+    Q_D(QUniAndroidService);
     if (d->sticky == sticky)
         return;
 
@@ -120,7 +120,7 @@ void QNativeAndroidService::setSticky(bool sticky)
     emit stickyChanged();
 }
 
-void QNativeAndroidService::start()
+void QUniAndroidService::start()
 {
     QAndroidJniObject context = ctx();
     QAndroidJniObject service = instance();
@@ -145,7 +145,7 @@ void QNativeAndroidService::start()
     });
 }
 
-void QNativeAndroidService::stop()
+void QUniAndroidService::stop()
 {
     QAndroidJniObject context = ctx();
     QAndroidJniObject service = instance();
@@ -169,14 +169,14 @@ void QNativeAndroidService::stop()
     });
 }
 
-QAndroidJniObject QNativeAndroidService::onCreate()
+QAndroidJniObject QUniAndroidService::onCreate()
 {
     return QAndroidJniObject("org/qtproject/qt5/android/bindings/app/QtNativeService");
 }
 
-void QNativeAndroidService::onInflate(QAndroidJniObject& instance)
+void QUniAndroidService::onInflate(QAndroidJniObject& instance)
 {
-    QNativeAndroidContextWrapper::onInflate(instance);
+    QUniAndroidContextWrapper::onInflate(instance);
 
     static bool nativeMethodsRegistered = false;
     if (!nativeMethodsRegistered) {

@@ -42,10 +42,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeWindowPrivate;
-class QNativePlatformWindow;
+class QUniWindowPrivate;
+class QUniPlatformWindow;
 
-class Q_NATIVECONTROLS_EXPORT QNativeWindow : public QNativeBase
+class Q_NATIVECONTROLS_EXPORT QUniWindow : public QUniBase
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
@@ -53,8 +53,8 @@ class Q_NATIVECONTROLS_EXPORT QNativeWindow : public QNativeBase
     Q_PROPERTY(qreal height READ height NOTIFY heightChanged)
 
 public:
-    explicit QNativeWindow();
-    virtual ~QNativeWindow();
+    explicit QUniWindow();
+    virtual ~QUniWindow();
 
     qreal width() const;
     qreal height() const;
@@ -69,11 +69,11 @@ Q_SIGNALS:
     void visibleChanged(bool visible);
 
 protected:
-    QNativeWindow(QNativeWindowPrivate &dd, QNativeBase *parent = nullptr);
+    QUniWindow(QUniWindowPrivate &dd, QUniBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeWindow)
-    Q_DISABLE_COPY(QNativeWindow)
+    Q_DECLARE_PRIVATE(QUniWindow)
+    Q_DISABLE_COPY(QUniWindow)
 };
 
 QT_END_NAMESPACE

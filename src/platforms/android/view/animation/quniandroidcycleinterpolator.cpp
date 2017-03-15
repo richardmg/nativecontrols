@@ -40,28 +40,28 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidCycleInterpolatorPrivate : public QNativeAndroidInterpolatorPrivate
+class QUniAndroidCycleInterpolatorPrivate : public QUniAndroidInterpolatorPrivate
 {
 public:
-    QNativeAndroidOptional<qreal> cycles;
+    QUniAndroidOptional<qreal> cycles;
 };
 
-QNativeAndroidCycleInterpolator::QNativeAndroidCycleInterpolator(QObject *parent)
-    : QNativeAndroidInterpolator(*(new QNativeAndroidCycleInterpolatorPrivate), parent)
+QUniAndroidCycleInterpolator::QUniAndroidCycleInterpolator(QObject *parent)
+    : QUniAndroidInterpolator(*(new QUniAndroidCycleInterpolatorPrivate), parent)
 {
 }
 
-qreal QNativeAndroidCycleInterpolator::cycles() const
+qreal QUniAndroidCycleInterpolator::cycles() const
 {
-    Q_D(const QNativeAndroidCycleInterpolator);
+    Q_D(const QUniAndroidCycleInterpolator);
     if (d->cycles.isNull())
         return 1.0;
     return d->cycles;
 }
 
-void QNativeAndroidCycleInterpolator::setCycles(qreal cycles)
+void QUniAndroidCycleInterpolator::setCycles(qreal cycles)
 {
-    Q_D(QNativeAndroidCycleInterpolator);
+    Q_D(QUniAndroidCycleInterpolator);
     if (!d->cycles.isNull() && qFuzzyCompare(d->cycles, cycles))
         return;
 
@@ -69,9 +69,9 @@ void QNativeAndroidCycleInterpolator::setCycles(qreal cycles)
     emit cyclesChanged();
 }
 
-QAndroidJniObject QNativeAndroidCycleInterpolator::onCreate()
+QAndroidJniObject QUniAndroidCycleInterpolator::onCreate()
 {
-    Q_D(QNativeAndroidCycleInterpolator);
+    Q_D(QUniAndroidCycleInterpolator);
     if (d->cycles.isNull())
         return QAndroidJniObject("android/view/animation/CycleInterpolator");
 

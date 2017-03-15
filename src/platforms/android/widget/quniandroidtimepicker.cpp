@@ -39,26 +39,26 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidTimePickerPrivate : public QNativeAndroidFrameLayoutPrivate
+class QUniAndroidTimePickerPrivate : public QUniAndroidFrameLayoutPrivate
 {
 public:
 };
 
-QNativeAndroidTimePicker::QNativeAndroidTimePicker(QNativeAndroidContext *context)
-    : QNativeAndroidFrameLayout(*(new QNativeAndroidTimePickerPrivate), context)
+QUniAndroidTimePicker::QUniAndroidTimePicker(QUniAndroidContext *context)
+    : QUniAndroidFrameLayout(*(new QUniAndroidTimePickerPrivate), context)
 {
 }
 
-QAndroidJniObject QNativeAndroidTimePicker::onCreate()
+QAndroidJniObject QUniAndroidTimePicker::onCreate()
 {
     return QAndroidJniObject("android/widget/TimePicker",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidTimePicker::onInflate(QAndroidJniObject &instance)
+void QUniAndroidTimePicker::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidFrameLayout::onInflate(instance);
+    QUniAndroidFrameLayout::onInflate(instance);
 }
 
 QT_END_NAMESPACE

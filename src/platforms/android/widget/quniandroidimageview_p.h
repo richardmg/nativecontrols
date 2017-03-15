@@ -53,9 +53,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidImageViewPrivate;
+class QUniAndroidImageViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidImageView : public QNativeAndroidView
+class Q_NATIVEANDROID_EXPORT QUniAndroidImageView : public QUniAndroidView
 {
     Q_OBJECT
     Q_PROPERTY(QUrl imageURI READ imageURI WRITE setImageURI NOTIFY imageURIChanged)
@@ -63,7 +63,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidImageView : public QNativeAndroidView
     Q_PROPERTY(int imageTintColor READ imageTintColor WRITE setImageTintColor NOTIFY imageTintColorChanged)
 
 public:
-    explicit QNativeAndroidImageView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidImageView(QUniAndroidContext *context = nullptr);
 
     QUrl imageURI() const;
     void setImageURI(const QUrl &uri);
@@ -84,8 +84,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidImageView)
-    Q_DECLARE_PRIVATE(QNativeAndroidImageView)
+    Q_DISABLE_COPY(QUniAndroidImageView)
+    Q_DECLARE_PRIVATE(QUniAndroidImageView)
 
     QAndroidJniObject getUri() const;
 };

@@ -52,16 +52,16 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidAlphaAnimationPrivate;
+class QUniAndroidAlphaAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidAlphaAnimation : public QNativeAndroidAnimation
+class Q_NATIVEANDROID_EXPORT QUniAndroidAlphaAnimation : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(qreal fromAlpha READ fromAlpha WRITE setFromAlpha NOTIFY fromAlphaChanged)
     Q_PROPERTY(qreal toAlpha READ toAlpha WRITE setToAlpha NOTIFY toAlphaChanged)
 
 public:
-    explicit QNativeAndroidAlphaAnimation(QObject *parent = nullptr);
+    explicit QUniAndroidAlphaAnimation(QObject *parent = nullptr);
 
     qreal fromAlpha() const;
     void setFromAlpha(qreal alpha);
@@ -77,8 +77,8 @@ protected:
     QAndroidJniObject onCreate() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidAlphaAnimation)
-    Q_DECLARE_PRIVATE(QNativeAndroidAlphaAnimation)
+    Q_DISABLE_COPY(QUniAndroidAlphaAnimation)
+    Q_DECLARE_PRIVATE(QUniAndroidAlphaAnimation)
 };
 
 QT_END_NAMESPACE

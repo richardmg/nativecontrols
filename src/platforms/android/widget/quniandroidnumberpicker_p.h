@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidNumberPickerPrivate;
+class QUniAndroidNumberPickerPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidNumberPicker : public QNativeAndroidLinearLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidNumberPicker : public QUniAndroidLinearLayout
 {
     Q_OBJECT
     Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
 
 public:
-    explicit QNativeAndroidNumberPicker(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidNumberPicker(QUniAndroidContext *context = nullptr);
 
     int value() const;
     void setValue(int value);
@@ -73,8 +73,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidNumberPicker)
-    Q_DECLARE_PRIVATE(QNativeAndroidNumberPicker)
+    Q_DISABLE_COPY(QUniAndroidNumberPicker)
+    Q_DECLARE_PRIVATE(QUniAndroidNumberPicker)
 
     Q_PRIVATE_SLOT(d_func(), bool _q_updateValue(int value))
 };

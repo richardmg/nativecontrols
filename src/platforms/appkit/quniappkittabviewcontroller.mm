@@ -45,41 +45,41 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAppKitTabViewControllerPrivate::QNativeAppKitTabViewControllerPrivate(int version)
-    : QNativeAppKitViewControllerPrivate(version)
+QUniAppKitTabViewControllerPrivate::QUniAppKitTabViewControllerPrivate(int version)
+    : QUniAppKitViewControllerPrivate(version)
 {
 }
 
-QNativeAppKitTabViewControllerPrivate::~QNativeAppKitTabViewControllerPrivate()
+QUniAppKitTabViewControllerPrivate::~QUniAppKitTabViewControllerPrivate()
 {
 }
 
-NSViewController *QNativeAppKitTabViewControllerPrivate::createViewController()
+NSViewController *QUniAppKitTabViewControllerPrivate::createViewController()
 {
     return [NSTabViewController new];
 }
 
-QNativeAppKitTabViewController::QNativeAppKitTabViewController(QNativeAppKitBase *parent)
-    : QNativeAppKitViewController(*new QNativeAppKitTabViewControllerPrivate(), parent)
+QUniAppKitTabViewController::QUniAppKitTabViewController(QUniAppKitBase *parent)
+    : QUniAppKitViewController(*new QUniAppKitTabViewControllerPrivate(), parent)
 {
 }
 
-QNativeAppKitTabViewController::QNativeAppKitTabViewController(QNativeAppKitTabViewControllerPrivate &dd, QNativeAppKitBase *parent)
-    :QNativeAppKitViewController(dd, parent)
+QUniAppKitTabViewController::QUniAppKitTabViewController(QUniAppKitTabViewControllerPrivate &dd, QUniAppKitBase *parent)
+    :QUniAppKitViewController(dd, parent)
 {
 }
 
-QNativeAppKitTabViewController::~QNativeAppKitTabViewController()
+QUniAppKitTabViewController::~QUniAppKitTabViewController()
 {
 }
 
-QNativeAppKitView *QNativeAppKitTabViewController::view() const
+QUniAppKitView *QUniAppKitTabViewController::view() const
 {
-    qWarning("NSTabViewController doesn't use a view. Calling QNativeAppKitTabViewController::view() will not work for a NSTabViewController!");
-    return QNativeAppKitViewController::view();
+    qWarning("NSTabViewController doesn't use a view. Calling QUniAppKitTabViewController::view() will not work for a NSTabViewController!");
+    return QUniAppKitViewController::view();
 }
 
-void QNativeAppKitTabViewController::setTabViewItems(QList<QNativeAppKitTabViewItem *> list)
+void QUniAppKitTabViewController::setTabViewItems(QList<QUniAppKitTabViewItem *> list)
 {
     d_func()->m_tabViewItems = list;
     nsTabViewControllerHandle().childViewControllers = @[];
@@ -89,16 +89,16 @@ void QNativeAppKitTabViewController::setTabViewItems(QList<QNativeAppKitTabViewI
         if (item.viewController)
             [nsTabViewControllerHandle() addTabViewItem:item];
         else
-            qWarning() << "A QNativeAppKitTabViewItem needs a QNativeAppKitViewController set before used with a QNativeAppKitTabViewController";
+            qWarning() << "A QUniAppKitTabViewItem needs a QUniAppKitViewController set before used with a QUniAppKitTabViewController";
     }
 }
 
-QList<QNativeAppKitTabViewItem *> QNativeAppKitTabViewController::tabViewItems() const
+QList<QUniAppKitTabViewItem *> QUniAppKitTabViewController::tabViewItems() const
 {
     return d_func()->m_tabViewItems;
 }
 
-NSTabViewController *QNativeAppKitTabViewController::nsTabViewControllerHandle()
+NSTabViewController *QUniAppKitTabViewController::nsTabViewControllerHandle()
 {
     return static_cast<NSTabViewController *>(nsViewControllerHandle());
 }

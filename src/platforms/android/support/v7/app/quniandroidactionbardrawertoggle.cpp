@@ -38,12 +38,12 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidActionBarDrawerToggle::QNativeAndroidActionBarDrawerToggle(QObject *parent)
-    : QNativeAndroidObject(parent)
+QUniAndroidActionBarDrawerToggle::QUniAndroidActionBarDrawerToggle(QObject *parent)
+    : QUniAndroidObject(parent)
 {
 }
 
-void QNativeAndroidActionBarDrawerToggle::onCreate(const QAndroidJniObject &activity, const QAndroidJniObject &drawer)
+void QUniAndroidActionBarDrawerToggle::onCreate(const QAndroidJniObject &activity, const QAndroidJniObject &drawer)
 {
     QAndroidJniObject toggle("android/support/v7/app/ActionBarDrawerToggle",
                              "(Landroid/app/Activity;Landroid/support/v4/widget/DrawerLayout;II)V",

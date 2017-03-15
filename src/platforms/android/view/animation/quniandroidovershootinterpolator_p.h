@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidOvershootInterpolatorPrivate;
+class QUniAndroidOvershootInterpolatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidOvershootInterpolator : public QNativeAndroidInterpolator
+class Q_NATIVEANDROID_EXPORT QUniAndroidOvershootInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
     Q_PROPERTY(qreal tension READ tension WRITE setTension NOTIFY tensionChanged)
 
 public:
-    explicit QNativeAndroidOvershootInterpolator(QObject *parent = nullptr);
+    explicit QUniAndroidOvershootInterpolator(QObject *parent = nullptr);
 
     qreal tension() const;
     void setTension(qreal tension);
@@ -72,8 +72,8 @@ protected:
     QAndroidJniObject onCreate() override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidOvershootInterpolator)
-    Q_DECLARE_PRIVATE(QNativeAndroidOvershootInterpolator)
+    Q_DISABLE_COPY(QUniAndroidOvershootInterpolator)
+    Q_DECLARE_PRIVATE(QUniAndroidOvershootInterpolator)
 };
 
 QT_END_NAMESPACE

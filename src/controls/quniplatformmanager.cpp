@@ -43,19 +43,19 @@
 
 QT_BEGIN_NAMESPACE
 
-QFactoryLoader *QNativePlatformManager::s_loader = nullptr;
-QNativePlatformPluginInterface *QNativePlatformManager::s_platformPlugin = nullptr;
+QFactoryLoader *QUniPlatformManager::s_loader = nullptr;
+QUniPlatformPluginInterface *QUniPlatformManager::s_platformPlugin = nullptr;
 
-QNativePlatformPluginInterface *QNativePlatformManager::platformPlugin()
+QUniPlatformPluginInterface *QUniPlatformManager::platformPlugin()
 {
     if (!s_platformPlugin) {
-        s_loader = new QFactoryLoader(QNativePlatformPluginInterface_iid, QLatin1String("/nativecontrols"));
+        s_loader = new QFactoryLoader(QUniPlatformPluginInterface_iid, QLatin1String("/nativecontrols"));
         if (!s_loader->metaData().isEmpty()) {
             // Always use first available plugin for now. Todo: make this configurable.
-            s_platformPlugin = qobject_cast<QNativePlatformPluginInterface *>(s_loader->instance(0));
+            s_platformPlugin = qobject_cast<QUniPlatformPluginInterface *>(s_loader->instance(0));
         } else {
             // Require a plugin for now
-            Q_ASSERT("Found no available QNativeControls platform plugin!");
+            Q_ASSERT("Found no available QUniControls platform plugin!");
         }
     }
 

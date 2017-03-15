@@ -52,22 +52,22 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidSeekBarPrivate;
+class QUniAndroidSeekBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidSeekBar : public QNativeAndroidAbsSeekBar
+class Q_NATIVEANDROID_EXPORT QUniAndroidSeekBar : public QUniAndroidAbsSeekBar
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidSeekBar(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidSeekBar(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidSeekBar)
-    Q_DECLARE_PRIVATE(QNativeAndroidSeekBar)
+    Q_DISABLE_COPY(QUniAndroidSeekBar)
+    Q_DECLARE_PRIVATE(QUniAndroidSeekBar)
 };
 
 QT_END_NAMESPACE

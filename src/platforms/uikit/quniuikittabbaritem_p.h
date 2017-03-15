@@ -54,18 +54,18 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitTabBarItem;
+class QUniUIKitTabBarItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarItem);
 
-class QNativeUIKitTabBarItemPrivate : public QNativeUIKitBasePrivate
+class QUniUIKitTabBarItemPrivate : public QUniUIKitBasePrivate
 {
 public:
-    explicit QNativeUIKitTabBarItemPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitTabBarItemPrivate();
+    explicit QUniUIKitTabBarItemPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitTabBarItemPrivate();
 
     UITabBarItem *tabBarItem();
 
-    Q_DECLARE_PUBLIC(QNativeUIKitTabBarItem)
+    Q_DECLARE_PUBLIC(QUniUIKitTabBarItem)
 
 private:
     UITabBarItem *m_tabBarItem;

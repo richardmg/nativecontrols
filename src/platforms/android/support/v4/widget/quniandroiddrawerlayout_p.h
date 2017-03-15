@@ -53,14 +53,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidDrawerLayout : public QNativeAndroidViewGroup
+class Q_NATIVEANDROID_EXPORT QUniAndroidDrawerLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidDrawerLayout(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidDrawerLayout(QUniAndroidContext *context = nullptr);
 
-    static QNativeAndroidDrawerLayoutParams *qmlAttachedProperties(QObject *object);
+    static QUniAndroidDrawerLayoutParams *qmlAttachedProperties(QObject *object);
 
 public Q_SLOTS:
     void closeDrawers();
@@ -73,6 +73,6 @@ protected:
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPEINFO(QNativeAndroidDrawerLayout, QML_HAS_ATTACHED_PROPERTIES)
+QML_DECLARE_TYPEINFO(QUniAndroidDrawerLayout, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // QNATIVEANDROIDDRAWERLAYOUT_P_H

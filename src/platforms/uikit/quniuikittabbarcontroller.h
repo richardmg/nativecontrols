@@ -8,29 +8,29 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitTabBarControllerPrivate;
+class QUniUIKitTabBarControllerPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarController);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitTabBarController : public QNativeUIKitViewController, public virtual QNativePlatformTabsPage
+class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitTabBarController : public QUniUIKitViewController, public virtual QUniPlatformTabsPage
 {
     Q_OBJECT
 
 public:
-    QNativeUIKitTabBarController(QNativeUIKitBase *parent = nullptr);
-    virtual ~QNativeUIKitTabBarController();
+    QUniUIKitTabBarController(QUniUIKitBase *parent = nullptr);
+    virtual ~QUniUIKitTabBarController();
 
-    void setViewControllers(QList<QNativeUIKitViewController *> list);
-    QList<QNativeUIKitViewController *> viewControllers() const;
+    void setViewControllers(QList<QUniUIKitViewController *> list);
+    QList<QUniUIKitViewController *> viewControllers() const;
 
     UITabBarController *uiTabBarControllerHandle();
-    QNativeUIKitView *view() const;
+    QUniUIKitView *view() const;
 
 protected:
-    QNativeUIKitTabBarController(QNativeUIKitTabBarControllerPrivate &dd, QNativeUIKitBase *parent = nullptr);
+    QUniUIKitTabBarController(QUniUIKitTabBarControllerPrivate &dd, QUniUIKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeUIKitTabBarController)
-    Q_DISABLE_COPY(QNativeUIKitTabBarController)
+    Q_DECLARE_PRIVATE(QUniUIKitTabBarController)
+    Q_DISABLE_COPY(QUniUIKitTabBarController)
 };
 
 QT_END_NAMESPACE

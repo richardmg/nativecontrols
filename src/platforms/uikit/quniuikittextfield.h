@@ -42,19 +42,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitTextFieldPrivate;
+class QUniUIKitTextFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITextField);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitTextField : public QNativeUIKitControl, public virtual QNativePlatformTextField
+class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitTextField : public QUniUIKitControl, public virtual QUniPlatformTextField
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
     Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
-    QNativeUIKitTextField(QNativeUIKitBase *parent = nullptr);
-    QNativeUIKitTextField(const QString &text, QNativeUIKitBase *parent = nullptr);
-    virtual ~QNativeUIKitTextField();
+    QUniUIKitTextField(QUniUIKitBase *parent = nullptr);
+    QUniUIKitTextField(const QString &text, QUniUIKitBase *parent = nullptr);
+    virtual ~QUniUIKitTextField();
 
     UITextField *uiTextFieldHandle();
 
@@ -69,11 +69,11 @@ Q_SIGNALS:
     void placeholderTextChanged(const QString &placeholderText);
 
 protected:
-    QNativeUIKitTextField(QNativeUIKitTextFieldPrivate &dd, QNativeUIKitBase *parent = nullptr);
+    QUniUIKitTextField(QUniUIKitTextFieldPrivate &dd, QUniUIKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeUIKitTextField)
-    Q_DISABLE_COPY(QNativeUIKitTextField)
+    Q_DECLARE_PRIVATE(QUniUIKitTextField)
+    Q_DISABLE_COPY(QUniUIKitTextField)
 };
 
 QT_END_NAMESPACE

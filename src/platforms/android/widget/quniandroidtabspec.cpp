@@ -43,37 +43,37 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidTabSpecPrivate : public QObjectPrivate
+class QUniAndroidTabSpecPrivate : public QObjectPrivate
 {
 public:
     QString label;
 };
 
-QNativeAndroidTabSpec::QNativeAndroidTabSpec(QNativeAndroidView *view)
-    : QObject(*(new QNativeAndroidTabSpecPrivate), view)
+QUniAndroidTabSpec::QUniAndroidTabSpec(QUniAndroidView *view)
+    : QObject(*(new QUniAndroidTabSpecPrivate), view)
 {
-    QNativeAndroidView *parent = qobject_cast<QNativeAndroidView *>(view->parent());
+    QUniAndroidView *parent = qobject_cast<QUniAndroidView *>(view->parent());
     if (parent)
         parent->setIdentifier(16908305); // TODO: android.R.id.tabcontent
 }
 
-QNativeAndroidTabSpec *QNativeAndroidTabSpec::qmlAttachedProperties(QObject *object)
+QUniAndroidTabSpec *QUniAndroidTabSpec::qmlAttachedProperties(QObject *object)
 {
-    QNativeAndroidView *view = qobject_cast<QNativeAndroidView*>(object);
+    QUniAndroidView *view = qobject_cast<QUniAndroidView*>(object);
     if (view)
-        return new QNativeAndroidTabSpec(view);
+        return new QUniAndroidTabSpec(view);
     return 0;
 }
 
-QString QNativeAndroidTabSpec::label() const
+QString QUniAndroidTabSpec::label() const
 {
-    Q_D(const QNativeAndroidTabSpec);
+    Q_D(const QUniAndroidTabSpec);
     return d->label;
 }
 
-void QNativeAndroidTabSpec::setLabel(const QString &label)
+void QUniAndroidTabSpec::setLabel(const QString &label)
 {
-    Q_D(QNativeAndroidTabSpec);
+    Q_D(QUniAndroidTabSpec);
     if (d->label == label)
         return;
 
@@ -82,11 +82,11 @@ void QNativeAndroidTabSpec::setLabel(const QString &label)
     emit labelChanged();
 }
 
-void QNativeAndroidTabSpec::setup(QAndroidJniObject &host, int index)
+void QUniAndroidTabSpec::setup(QAndroidJniObject &host, int index)
 {
-    Q_D(QNativeAndroidTabSpec);
+    Q_D(QUniAndroidTabSpec);
     int id = -1;
-    QNativeAndroidView *content = qobject_cast<QNativeAndroidView *>(parent());
+    QUniAndroidView *content = qobject_cast<QUniAndroidView *>(parent());
     if (content)
         id = content->identifier();
 

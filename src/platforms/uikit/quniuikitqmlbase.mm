@@ -42,23 +42,23 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitQmlBasePrivate::QNativeUIKitQmlBasePrivate(int version)
+QUniUIKitQmlBasePrivate::QUniUIKitQmlBasePrivate(int version)
     : QObjectPrivate(version)
 {
 }
 
-QNativeUIKitQmlBasePrivate::~QNativeUIKitQmlBasePrivate()
+QUniUIKitQmlBasePrivate::~QUniUIKitQmlBasePrivate()
 {
 }
 
-void QNativeUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
+void QUniUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
 {
     // Note that QtDeclarative undermines QObject::setParent, meaning that we
     // don't get a QChildEvent when a qml object becomes a parent of another
     // qml object. 'appendChild' is the only callback we get when the parent changes.
     QObject *qparent = list->object;
-    QNativeUIKitBase *uikitParent = static_cast<QNativeUIKitBase *>(qparent);
-    QNativeUIKitBase *uikitChild = qobject_cast<QNativeUIKitBase *>(child);
+    QUniUIKitBase *uikitParent = static_cast<QUniUIKitBase *>(qparent);
+    QUniUIKitBase *uikitChild = qobject_cast<QUniUIKitBase *>(child);
 
     if (uikitChild) {
         if (uikitChild->parent() != uikitParent) {
@@ -69,9 +69,9 @@ void QNativeUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QO
             QCoreApplication::sendEvent(uikitParent, &e);
         }
     } else {
-        // The child doesn't belong to QNativeUIKit. If it belongs
-        // to QNative, try to parent it using the childs cross-parenting API
-        QNativeBase *quniChild = qobject_cast<QNativeBase *>(child);
+        // The child doesn't belong to QUniUIKit. If it belongs
+        // to QUni, try to parent it using the childs cross-parenting API
+        QUniBase *quniChild = qobject_cast<QUniBase *>(child);
         if (!quniChild || !quniChild->setNativeParent(uikitParent)) {
             // ...otherwise we fall back to normal QObject parenting
             child->setParent(qparent);
@@ -79,28 +79,28 @@ void QNativeUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QO
     }
 }
 
-QQmlListProperty<QObject> QNativeUIKitQmlBasePrivate::data()
+QQmlListProperty<QObject> QUniUIKitQmlBasePrivate::data()
 {
     return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
 }
 
-bool QNativeUIKitQmlBasePrivate::isComplete()
+bool QUniUIKitQmlBasePrivate::isComplete()
 {
     // todo: hook up to QQmlParserStatus
    return true;
 }
 
-QNativeUIKitQmlBase::QNativeUIKitQmlBase(QNativeUIKitQmlBase *parent)
+QUniUIKitQmlBase::QUniUIKitQmlBase(QUniUIKitQmlBase *parent)
     : QObject(parent)
 {
 }
 
-QNativeUIKitQmlBase::QNativeUIKitQmlBase(QNativeUIKitQmlBasePrivate &dd, QNativeUIKitQmlBase *parent)
+QUniUIKitQmlBase::QUniUIKitQmlBase(QUniUIKitQmlBasePrivate &dd, QUniUIKitQmlBase *parent)
     : QObject(dd, parent)
 {
 }
 
-QNativeUIKitQmlBase::~QNativeUIKitQmlBase()
+QUniUIKitQmlBase::~QUniUIKitQmlBase()
 {
     // delete children in m_data?
 }

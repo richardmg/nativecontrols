@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidSearchView : public QNativeAndroidLinearLayout
+class Q_NATIVEANDROID_EXPORT QUniAndroidSearchView : public QUniAndroidLinearLayout
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidSearchView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidSearchView(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

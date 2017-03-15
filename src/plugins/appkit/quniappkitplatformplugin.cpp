@@ -40,116 +40,116 @@
 
 QT_BEGIN_NAMESPACE
 
-class QAppKitPluginTabsPageTab : public QNativeAppKitViewController, public virtual QNativePlatformTabsPageTab
+class QAppKitPluginTabsPageTab : public QUniAppKitViewController, public virtual QUniPlatformTabsPageTab
 {
 public:
     explicit QAppKitPluginTabsPageTab()
-        : QNativeAppKitViewController(nullptr)
+        : QUniAppKitViewController(nullptr)
     {
-        // A QNativeAppKitTabViewItem doesn't map directy to a QNativePlatformTabsPageTab since
+        // A QUniAppKitTabViewItem doesn't map directy to a QUniPlatformTabsPageTab since
         // a tab in uikit consist of a view controller with a tab bar item. So we create this
         // helper class that puts together the composition.
-        m_tabViewItem = new QNativeAppKitTabViewItem(this);
+        m_tabViewItem = new QUniAppKitTabViewItem(this);
     }
 
-    void setPlatformParent(QNativePlatformBase *platformParent) override
+    void setPlatformParent(QUniPlatformBase *platformParent) override
     {
         // If the new, or the old, parent is a viewcontroller, we need to
         // add, or remove, ourselves from the list of child controllers it contains.
         if (!platformParent) {
-            if (QNativeAppKitTabViewController *prevParent = dynamic_cast<QNativeAppKitTabViewController *>(parent())) {
-                QList<QNativeAppKitTabViewItem *> tabItems = prevParent->tabViewItems();
+            if (QUniAppKitTabViewController *prevParent = dynamic_cast<QUniAppKitTabViewController *>(parent())) {
+                QList<QUniAppKitTabViewItem *> tabItems = prevParent->tabViewItems();
                 tabItems.removeOne(m_tabViewItem);
                 prevParent->setTabViewItems(tabItems);
             }
-        } else if (QNativeAppKitTabViewController *newParent = dynamic_cast<QNativeAppKitTabViewController *>(platformParent)) {
-            QList<QNativeAppKitTabViewItem *> tabItems = newParent->tabViewItems();
+        } else if (QUniAppKitTabViewController *newParent = dynamic_cast<QUniAppKitTabViewController *>(platformParent)) {
+            QList<QUniAppKitTabViewItem *> tabItems = newParent->tabViewItems();
             tabItems.append(m_tabViewItem);
             newParent->setTabViewItems(tabItems);
         }
 
         // We also need to update the QObject parent structure for memory management
-        QNativeAppKitViewController::setPlatformParent(platformParent);
+        QUniAppKitViewController::setPlatformParent(platformParent);
     }
 
     QString title() const override { return m_tabViewItem->title(); }
     void setTitle(const QString &title) override { m_tabViewItem->setTitle(title); }
 
-    QNativeAppKitTabViewItem *m_tabViewItem;
+    QUniAppKitTabViewItem *m_tabViewItem;
 };
 
 // ----------------------------------------------------------------------------------
 
-class QNativeAppKitPlatformPlugin : public QObject, QNativePlatformPluginInterface
+class QUniAppKitPlatformPlugin : public QObject, QUniPlatformPluginInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID QNativePlatformPluginInterface_iid FILE "plugin.json")
-    Q_INTERFACES(QNativePlatformPluginInterface)
+    Q_PLUGIN_METADATA(IID QUniPlatformPluginInterface_iid FILE "plugin.json")
+    Q_INTERFACES(QUniPlatformPluginInterface)
 
 public:
-    explicit QNativeAppKitPlatformPlugin(QObject* = 0) {}
-    ~QNativeAppKitPlatformPlugin() {}
+    explicit QUniAppKitPlatformPlugin(QObject* = 0) {}
+    ~QUniAppKitPlatformPlugin() {}
 
-     virtual QNativePlatformWindow* createWindow(QNativeWindow *window) const override
+     virtual QUniPlatformWindow* createWindow(QUniWindow *window) const override
      {
-         auto platform = new QNativeAppKitWindow();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(window);
+         auto platform = new QUniAppKitWindow();
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(window);
          return platform;
      }
 
-     virtual QNativePlatformView* createView(QNativeView *view) const override
+     virtual QUniPlatformView* createView(QUniView *view) const override
      {
-         auto platform = new QNativeAppKitView();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(view);
+         auto platform = new QUniAppKitView();
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(view);
          return platform;
      }
 
-     virtual QNativePlatformControl* createControl(QNativeControl *control) const override
+     virtual QUniPlatformControl* createControl(QUniControl *control) const override
      {
-         auto platform = new QNativeAppKitControl();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(control);
+         auto platform = new QUniAppKitControl();
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(control);
          return platform;
      }
 
-     virtual QNativePlatformButton* createButton(QNativeButton *button) const override
+     virtual QUniPlatformButton* createButton(QUniButton *button) const override
      {
-         auto platform = new QNativeAppKitButton();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(button);
+         auto platform = new QUniAppKitButton();
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(button);
          return platform;
      }
 
-     virtual QNativePlatformTextField* createTextField(QNativeTextField *textField) const override
+     virtual QUniPlatformTextField* createTextField(QUniTextField *textField) const override
      {
-         auto platform = new QNativeAppKitTextField();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(textField);
+         auto platform = new QUniAppKitTextField();
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(textField);
          return platform;
      }
 
-     virtual QNativePlatformSearchField* createSearchField(QNativeSearchField *searchField) const override
+     virtual QUniPlatformSearchField* createSearchField(QUniSearchField *searchField) const override
      {
-         auto platform = new QNativeAppKitSearchField();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(searchField);
+         auto platform = new QUniAppKitSearchField();
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(searchField);
          return platform;
      }
 
-     virtual QNativePlatformPage* createPage(QNativePage *page) const override
+     virtual QUniPlatformPage* createPage(QUniPage *page) const override
      {
-         auto platform = new QNativeAppKitViewController();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(page);
+         auto platform = new QUniAppKitViewController();
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(page);
          return platform;
      }
 
-     virtual QNativePlatformTabsPage* createTabsPage(QNativeTabsPage *tabsPage) const override
+     virtual QUniPlatformTabsPage* createTabsPage(QUniTabsPage *tabsPage) const override
      {
-         auto platform = new QNativeAppKitTabViewController();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(tabsPage);
+         auto platform = new QUniAppKitTabViewController();
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(tabsPage);
          return platform;
      }
 
-     virtual QNativePlatformTabsPageTab* createTabsPageTab(QNativeTabsPageTab *tabsPageTab) const override
+     virtual QUniPlatformTabsPageTab* createTabsPageTab(QUniTabsPageTab *tabsPageTab) const override
      {
          auto platform = new QAppKitPluginTabsPageTab();
-         static_cast<QNativeAppKitBase *>(platform)->d_func()->connectSignals(tabsPageTab);
+         static_cast<QUniAppKitBase *>(platform)->d_func()->connectSignals(tabsPageTab);
          return platform;
      }
 

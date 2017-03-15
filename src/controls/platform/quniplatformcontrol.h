@@ -43,10 +43,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformControl : public virtual QNativePlatformView
+class Q_NATIVECONTROLS_EXPORT QUniPlatformControl : public virtual QUniPlatformView
 {
 public:
-    virtual ~QNativePlatformControl() {}
+    virtual ~QUniPlatformControl() {}
 };
 
 QT_END_NAMESPACE

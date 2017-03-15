@@ -55,21 +55,21 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeTextField;
-class QNativeAppKitTextField;
-Q_FORWARD_DECLARE_OBJC_CLASS(QNativeAppKitTextFieldDelegate);
+class QUniTextField;
+class QUniAppKitTextField;
+Q_FORWARD_DECLARE_OBJC_CLASS(QUniAppKitTextFieldDelegate);
 
-class QNativeAppKitTextFieldPrivate : public QNativeAppKitControlPrivate
+class QUniAppKitTextFieldPrivate : public QUniAppKitControlPrivate
 {
 public:
-    explicit QNativeAppKitTextFieldPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitTextFieldPrivate();
+    explicit QUniAppKitTextFieldPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniAppKitTextFieldPrivate();
 
-    virtual void connectSignals(QNativeBase *base) override;
+    virtual void connectSignals(QUniBase *base) override;
 
-    QNativeAppKitTextFieldDelegate *m_delegate;
+    QUniAppKitTextFieldDelegate *m_delegate;
 
-    Q_DECLARE_PUBLIC(QNativeAppKitTextField)
+    Q_DECLARE_PUBLIC(QUniAppKitTextField)
 
 protected:
     NSView *createView() override;

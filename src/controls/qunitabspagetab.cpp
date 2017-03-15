@@ -42,58 +42,58 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeTabsPageTabPrivate::QNativeTabsPageTabPrivate(int version)
-    : QNativeBasePrivate(version)
+QUniTabsPageTabPrivate::QUniTabsPageTabPrivate(int version)
+    : QUniBasePrivate(version)
     , m_platformTabsPageTab(nullptr)
 {
 }
 
-QNativeTabsPageTabPrivate::~QNativeTabsPageTabPrivate()
+QUniTabsPageTabPrivate::~QUniTabsPageTabPrivate()
 {
 }
 
-void QNativeTabsPageTabPrivate::createPlatformTabsPageTab()
+void QUniTabsPageTabPrivate::createPlatformTabsPageTab()
 {
     Q_ASSERT(!m_platformTabsPageTab);
-    m_platformTabsPageTab = QNativePlatformManager::platformPlugin()->createTabsPageTab(q_func());
+    m_platformTabsPageTab = QUniPlatformManager::platformPlugin()->createTabsPageTab(q_func());
     Q_ASSERT(m_platformTabsPageTab);
     setPlatformTabsPageTab(m_platformTabsPageTab);
 }
 
-void QNativeTabsPageTabPrivate::setPlatformTabsPageTab(QNativePlatformTabsPageTab *platformTabsPageTab)
+void QUniTabsPageTabPrivate::setPlatformTabsPageTab(QUniPlatformTabsPageTab *platformTabsPageTab)
 {
     m_platformTabsPageTab = platformTabsPageTab;
     setPlatformBase(platformTabsPageTab);
 }
 
-QNativeTabsPageTab::QNativeTabsPageTab(QNativeBase *parent)
-    : QNativeBase(*new QNativeTabsPageTabPrivate(), parent)
+QUniTabsPageTab::QUniTabsPageTab(QUniBase *parent)
+    : QUniBase(*new QUniTabsPageTabPrivate(), parent)
 {
     d_func()->createPlatformTabsPageTab();
 }
 
-QNativeTabsPageTab::QNativeTabsPageTab(const QString &title, QNativeBase *parent)
-    : QNativeBase(*new QNativeTabsPageTabPrivate(), parent)
+QUniTabsPageTab::QUniTabsPageTab(const QString &title, QUniBase *parent)
+    : QUniBase(*new QUniTabsPageTabPrivate(), parent)
 {
     d_func()->createPlatformTabsPageTab();
     setTitle(title);
 }
 
-QNativeTabsPageTab::QNativeTabsPageTab(QNativeTabsPageTabPrivate &dd, QNativeBase *parent)
-    : QNativeBase(dd, parent)
+QUniTabsPageTab::QUniTabsPageTab(QUniTabsPageTabPrivate &dd, QUniBase *parent)
+    : QUniBase(dd, parent)
 {
 }
 
-QNativeTabsPageTab::~QNativeTabsPageTab()
+QUniTabsPageTab::~QUniTabsPageTab()
 {
 }
 
-QString QNativeTabsPageTab::title() const
+QString QUniTabsPageTab::title() const
 {
     return d_func()->m_platformTabsPageTab->title();
 }
 
-void QNativeTabsPageTab::setTitle(const QString &title)
+void QUniTabsPageTab::setTitle(const QString &title)
 {
     d_func()->m_platformTabsPageTab->setTitle(title);
 }

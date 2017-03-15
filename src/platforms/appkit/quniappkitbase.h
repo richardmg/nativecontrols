@@ -9,34 +9,34 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAppKitBasePrivate;
+class QUniAppKitBasePrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSView);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QNativeAppKitBase : public QNativeAppKitQmlBase, public virtual QNativePlatformBase
+class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitBase : public QUniAppKitQmlBase, public virtual QUniPlatformBase
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAppKitBase *parent READ parentBase WRITE setParent NOTIFY parentChanged DESIGNABLE false)
+    Q_PROPERTY(QUniAppKitBase *parent READ parentBase WRITE setParent NOTIFY parentChanged DESIGNABLE false)
 
 public:
-    QNativeAppKitBase(QNativeAppKitBase *parent = nullptr);
-    virtual ~QNativeAppKitBase();
+    QUniAppKitBase(QUniAppKitBase *parent = nullptr);
+    virtual ~QUniAppKitBase();
 
-    void setParent(QNativeAppKitBase *parent);
-    QNativeAppKitBase *parentBase();
+    void setParent(QUniAppKitBase *parent);
+    QUniAppKitBase *parentBase();
 
-    void setPlatformParent(QNativePlatformBase *) override;
+    void setPlatformParent(QUniPlatformBase *) override;
 
 Q_SIGNALS:
-    void parentChanged(QNativeAppKitBase *parent);
+    void parentChanged(QUniAppKitBase *parent);
 
 protected:
-    QNativeAppKitBase(QNativeAppKitBasePrivate &dd, QNativeAppKitBase *parent = nullptr);
+    QUniAppKitBase(QUniAppKitBasePrivate &dd, QUniAppKitBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeAppKitBase)
-    Q_DISABLE_COPY(QNativeAppKitBase)
+    Q_DECLARE_PRIVATE(QUniAppKitBase)
+    Q_DISABLE_COPY(QUniAppKitBase)
 
-    friend class QNativeAppKitPlatformPlugin;
+    friend class QUniAppKitPlatformPlugin;
 };
 
 QT_END_NAMESPACE

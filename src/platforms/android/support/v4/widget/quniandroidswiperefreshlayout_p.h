@@ -52,15 +52,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidSwipeRefreshLayoutPrivate;
+class QUniAndroidSwipeRefreshLayoutPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidSwipeRefreshLayout : public QNativeAndroidViewGroup
+class Q_NATIVEANDROID_EXPORT QUniAndroidSwipeRefreshLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
     Q_PROPERTY(bool refreshing READ isRefreshing WRITE setRefreshing NOTIFY refreshingChanged)
 
 public:
-    explicit QNativeAndroidSwipeRefreshLayout(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidSwipeRefreshLayout(QUniAndroidContext *context = nullptr);
 
     bool isRefreshing() const;
     void setRefreshing(bool refreshing);
@@ -73,8 +73,8 @@ protected:
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidSwipeRefreshLayout)
-    Q_DECLARE_PRIVATE(QNativeAndroidSwipeRefreshLayout)
+    Q_DISABLE_COPY(QUniAndroidSwipeRefreshLayout)
+    Q_DECLARE_PRIVATE(QUniAndroidSwipeRefreshLayout)
 };
 
 QT_END_NAMESPACE

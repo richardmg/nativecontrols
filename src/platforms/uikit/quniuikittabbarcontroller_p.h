@@ -54,18 +54,18 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitTabBarController;
+class QUniUIKitTabBarController;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarController);
 
-class QNativeUIKitTabBarControllerPrivate : public QNativeUIKitViewControllerPrivate
+class QUniUIKitTabBarControllerPrivate : public QUniUIKitViewControllerPrivate
 {
 public:
-    explicit QNativeUIKitTabBarControllerPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitTabBarControllerPrivate();
+    explicit QUniUIKitTabBarControllerPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitTabBarControllerPrivate();
 
-    QList<QNativeUIKitViewController *> m_viewControllers;
+    QList<QUniUIKitViewController *> m_viewControllers;
 
-    Q_DECLARE_PUBLIC(QNativeUIKitTabBarController)
+    Q_DECLARE_PUBLIC(QUniUIKitTabBarController)
 
 protected:
     virtual UIViewController *createViewController();

@@ -42,14 +42,14 @@
 #include <QtNativeAppKitControls/quniappkitsearchfield.h>
 #include <QtNativeAppKitControls/private/quniappkitsearchfield_p.h>
 
-@interface QNativeAppKitSearchFieldDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QNativeAppKitSearchFieldPrivate) *_textField;
+@interface QUniAppKitSearchFieldDelegate : NSObject {
+    QT_PREPEND_NAMESPACE(QUniAppKitSearchFieldPrivate) *_textField;
 }
 @end
 
-@implementation QNativeAppKitSearchFieldDelegate
+@implementation QUniAppKitSearchFieldDelegate
 
--(id)initWithQNativeAppKitSearchFieldPrivate:(QT_PREPEND_NAMESPACE(QNativeAppKitSearchFieldPrivate) *)textField
+-(id)initWithQUniAppKitSearchFieldPrivate:(QT_PREPEND_NAMESPACE(QUniAppKitSearchFieldPrivate) *)textField
 {
     self = [self init];
     if (self) {
@@ -63,30 +63,30 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAppKitSearchFieldPrivate::QNativeAppKitSearchFieldPrivate(int version)
-    : QNativeAppKitControlPrivate(version)
+QUniAppKitSearchFieldPrivate::QUniAppKitSearchFieldPrivate(int version)
+    : QUniAppKitControlPrivate(version)
     , m_delegate(nullptr)
 {
 }
 
-QNativeAppKitSearchFieldPrivate::~QNativeAppKitSearchFieldPrivate()
+QUniAppKitSearchFieldPrivate::~QUniAppKitSearchFieldPrivate()
 {
 }
 
-void QNativeAppKitSearchFieldPrivate::connectSignals(QNativeBase *base)
+void QUniAppKitSearchFieldPrivate::connectSignals(QUniBase *base)
 {
-    Q_Q(QNativeAppKitSearchField);
-    QNativeAppKitControlPrivate::connectSignals(base);
-    const auto b = static_cast<QNativeSearchField *>(base);
-    q->connect(q, &QNativeAppKitSearchField::textChanged,
-               b, &QNativeSearchField::textChanged);
-    q->connect(q, &QNativeAppKitSearchField::placeholderTextChanged,
-               b, &QNativeSearchField::placeholderTextChanged);
+    Q_Q(QUniAppKitSearchField);
+    QUniAppKitControlPrivate::connectSignals(base);
+    const auto b = static_cast<QUniSearchField *>(base);
+    q->connect(q, &QUniAppKitSearchField::textChanged,
+               b, &QUniSearchField::textChanged);
+    q->connect(q, &QUniAppKitSearchField::placeholderTextChanged,
+               b, &QUniSearchField::placeholderTextChanged);
 }
 
-NSView *QNativeAppKitSearchFieldPrivate::createView()
+NSView *QUniAppKitSearchFieldPrivate::createView()
 {
-    m_delegate = [[QNativeAppKitSearchFieldDelegate alloc] initWithQNativeAppKitSearchFieldPrivate:this];
+    m_delegate = [[QUniAppKitSearchFieldDelegate alloc] initWithQUniAppKitSearchFieldPrivate:this];
 
     NSSearchField *nsSearchField = [[[NSSearchField alloc] init] autorelease];
     [nsSearchField sizeToFit];
@@ -94,39 +94,39 @@ NSView *QNativeAppKitSearchFieldPrivate::createView()
     return nsSearchField;
 }
 
-QNativeAppKitSearchField::QNativeAppKitSearchField(QNativeAppKitBase *parent)
-    : QNativeAppKitControl(*new QNativeAppKitSearchFieldPrivate(), parent)
+QUniAppKitSearchField::QUniAppKitSearchField(QUniAppKitBase *parent)
+    : QUniAppKitControl(*new QUniAppKitSearchFieldPrivate(), parent)
 {
 }
 
-QNativeAppKitSearchField::QNativeAppKitSearchField(const QString &text, QNativeAppKitBase *parent)
-    : QNativeAppKitControl(*new QNativeAppKitSearchFieldPrivate(), parent)
+QUniAppKitSearchField::QUniAppKitSearchField(const QString &text, QUniAppKitBase *parent)
+    : QUniAppKitControl(*new QUniAppKitSearchFieldPrivate(), parent)
 {
     setText(text);
 }
 
-QNativeAppKitSearchField::QNativeAppKitSearchField(QNativeAppKitSearchFieldPrivate &dd, QNativeAppKitBase *parent)
-    : QNativeAppKitControl(dd, parent)
+QUniAppKitSearchField::QUniAppKitSearchField(QUniAppKitSearchFieldPrivate &dd, QUniAppKitBase *parent)
+    : QUniAppKitControl(dd, parent)
 {
 }
 
-QNativeAppKitSearchField::~QNativeAppKitSearchField()
+QUniAppKitSearchField::~QUniAppKitSearchField()
 {
-    Q_D(QNativeAppKitSearchField);
+    Q_D(QUniAppKitSearchField);
     [d->m_delegate release];
 }
 
-NSSearchField *QNativeAppKitSearchField::nsSearchFieldHandle()
+NSSearchField *QUniAppKitSearchField::nsSearchFieldHandle()
 {
     return static_cast<NSSearchField *>(d_func()->view());
 }
 
-QString QNativeAppKitSearchField::text()
+QString QUniAppKitSearchField::text()
 {
     return QString::fromNSString(nsSearchFieldHandle().stringValue);
 }
 
-void QNativeAppKitSearchField::setText(const QString &newText)
+void QUniAppKitSearchField::setText(const QString &newText)
 {
     if (newText == text())
         return;
@@ -137,12 +137,12 @@ void QNativeAppKitSearchField::setText(const QString &newText)
     emit textChanged(newText);
 }
 
-QString QNativeAppKitSearchField::placeholderText()
+QString QUniAppKitSearchField::placeholderText()
 {
     return QString::fromNSString(nsSearchFieldHandle().placeholderString);
 }
 
-void QNativeAppKitSearchField::setPlaceholderText(const QString &newPlaceholderText)
+void QUniAppKitSearchField::setPlaceholderText(const QString &newPlaceholderText)
 {
     if (newPlaceholderText == placeholderText())
         return;

@@ -52,23 +52,23 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidContextPrivate;
+class QUniAndroidContextPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidContext : public QNativeAndroidContextual
+class Q_NATIVEANDROID_EXPORT QUniAndroidContext : public QUniAndroidContextual
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidContext(QObject *parent = nullptr);
-    explicit QNativeAndroidContext(QNativeAndroidContext *context, QObject *parent = nullptr);
+    explicit QUniAndroidContext(QObject *parent = nullptr);
+    explicit QUniAndroidContext(QUniAndroidContext *context, QObject *parent = nullptr);
 
 protected:
-    QNativeAndroidContext(QNativeAndroidContextPrivate &dd, QObject *parent = nullptr);
-    QNativeAndroidContext(QNativeAndroidContextPrivate &dd, QNativeAndroidContext *context, QObject *parent = nullptr);
+    QUniAndroidContext(QUniAndroidContextPrivate &dd, QObject *parent = nullptr);
+    QUniAndroidContext(QUniAndroidContextPrivate &dd, QUniAndroidContext *context, QObject *parent = nullptr);
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidContext)
-    Q_DECLARE_PRIVATE(QNativeAndroidContext)
+    Q_DISABLE_COPY(QUniAndroidContext)
+    Q_DECLARE_PRIVATE(QUniAndroidContext)
 };
 
 QT_END_NAMESPACE

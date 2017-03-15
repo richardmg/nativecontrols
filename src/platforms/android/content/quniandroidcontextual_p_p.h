@@ -52,19 +52,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidContext;
+class QUniAndroidContext;
 
-class QNativeAndroidContextualPrivate : public QNativeAndroidObjectPrivate
+class QUniAndroidContextualPrivate : public QUniAndroidObjectPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidContextual)
+    Q_DECLARE_PUBLIC(QUniAndroidContextual)
 
 public:
-    bool initContext(QNativeAndroidContext *context = nullptr);
+    bool initContext(QUniAndroidContext *context = nullptr);
     void propagateContext();
 
     void _q_resolveContext();
 
-    QNativeAndroidContext *context = nullptr;
+    QUniAndroidContext *context = nullptr;
 };
 
 QT_END_NAMESPACE

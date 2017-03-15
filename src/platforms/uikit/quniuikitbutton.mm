@@ -42,14 +42,14 @@
 #include <QtNativeUIKitControls/quniuikitbutton.h>
 #include <QtNativeUIKitControls/private/quniuikitbutton_p.h>
 
-@interface QNativeUIKitButtonDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QNativeUIKitButtonPrivate) *_button;
+@interface QUniUIKitButtonDelegate : NSObject {
+    QT_PREPEND_NAMESPACE(QUniUIKitButtonPrivate) *_button;
 }
 @end
 
-@implementation QNativeUIKitButtonDelegate
+@implementation QUniUIKitButtonDelegate
 
--(id)initWithQNativeUIKitButtonPrivate:(QT_PREPEND_NAMESPACE(QNativeUIKitButtonPrivate) *)button
+-(id)initWithQUniUIKitButtonPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitButtonPrivate) *)button
 {
     self = [self init];
     if (self) {
@@ -68,69 +68,69 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeUIKitButtonPrivate::QNativeUIKitButtonPrivate(int version)
-    : QNativeUIKitControlPrivate(version)
+QUniUIKitButtonPrivate::QUniUIKitButtonPrivate(int version)
+    : QUniUIKitControlPrivate(version)
 {
 }
 
-QNativeUIKitButtonPrivate::~QNativeUIKitButtonPrivate()
+QUniUIKitButtonPrivate::~QUniUIKitButtonPrivate()
 {
     [m_delegate release];
 }
 
-void QNativeUIKitButtonPrivate::connectSignals(QNativeBase *base)
+void QUniUIKitButtonPrivate::connectSignals(QUniBase *base)
 {
-    Q_Q(QNativeUIKitButton);
-    QNativeUIKitControlPrivate::connectSignals(base);
-    const auto b = static_cast<QNativeButton *>(base);
-    q->connect(q, &QNativeUIKitButton::textChanged, b, &QNativeButton::textChanged);
-    q->connect(q, &QNativeUIKitButton::clicked, b, &QNativeButton::clicked);
+    Q_Q(QUniUIKitButton);
+    QUniUIKitControlPrivate::connectSignals(base);
+    const auto b = static_cast<QUniButton *>(base);
+    q->connect(q, &QUniUIKitButton::textChanged, b, &QUniButton::textChanged);
+    q->connect(q, &QUniUIKitButton::clicked, b, &QUniButton::clicked);
 }
 
-UIView *QNativeUIKitButtonPrivate::createView()
+UIView *QUniUIKitButtonPrivate::createView()
 {
     UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
     [uiButton sizeToFit];
 
-    m_delegate = [[QNativeUIKitButtonDelegate alloc] initWithQNativeUIKitButtonPrivate:this];
+    m_delegate = [[QUniUIKitButtonDelegate alloc] initWithQUniUIKitButtonPrivate:this];
     [uiButton addTarget:m_delegate action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
     return uiButton;
 }
 
-QNativeUIKitButton::QNativeUIKitButton(QNativeUIKitBase *parent)
-    : QNativeUIKitControl(*new QNativeUIKitButtonPrivate(), parent)
+QUniUIKitButton::QUniUIKitButton(QUniUIKitBase *parent)
+    : QUniUIKitControl(*new QUniUIKitButtonPrivate(), parent)
 {
 }
 
-QNativeUIKitButton::QNativeUIKitButton(const QString &text, QNativeUIKitBase *parent)
-    : QNativeUIKitControl(*new QNativeUIKitButtonPrivate(), parent)
+QUniUIKitButton::QUniUIKitButton(const QString &text, QUniUIKitBase *parent)
+    : QUniUIKitControl(*new QUniUIKitButtonPrivate(), parent)
 {
     setText(text);
 }
 
-QNativeUIKitButton::QNativeUIKitButton(QNativeUIKitButtonPrivate &dd, QNativeUIKitBase *parent)
-    : QNativeUIKitControl(dd, parent)
+QUniUIKitButton::QUniUIKitButton(QUniUIKitButtonPrivate &dd, QUniUIKitBase *parent)
+    : QUniUIKitControl(dd, parent)
 {
 }
 
-QNativeUIKitButton::~QNativeUIKitButton()
+QUniUIKitButton::~QUniUIKitButton()
 {
-    Q_D(QNativeUIKitButton);
+    Q_D(QUniUIKitButton);
     [d->m_delegate release];
 }
 
-UIButton *QNativeUIKitButton::uiButtonHandle()
+UIButton *QUniUIKitButton::uiButtonHandle()
 {
     return static_cast<UIButton *>(d_func()->view());
 }
 
-QString QNativeUIKitButton::text()
+QString QUniUIKitButton::text()
 {
     return QString::fromNSString([uiButtonHandle() titleForState:UIControlStateNormal]);
 }
 
-void QNativeUIKitButton::setText(const QString &newText)
+void QUniUIKitButton::setText(const QString &newText)
 {
     if (newText == text())
         return;

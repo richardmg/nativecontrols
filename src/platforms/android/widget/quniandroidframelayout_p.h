@@ -53,30 +53,30 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidFrameLayoutPrivate;
+class QUniAndroidFrameLayoutPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidFrameLayout : public QNativeAndroidViewGroup
+class Q_NATIVEANDROID_EXPORT QUniAndroidFrameLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidFrameLayout(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidFrameLayout(QUniAndroidContext *context = nullptr);
 
-    static QNativeAndroidFrameLayoutParams *qmlAttachedProperties(QObject *object);
+    static QUniAndroidFrameLayoutParams *qmlAttachedProperties(QObject *object);
 
 protected:
-    QNativeAndroidFrameLayout(QNativeAndroidFrameLayoutPrivate &dd, QNativeAndroidContext *context = nullptr);
+    QUniAndroidFrameLayout(QUniAndroidFrameLayoutPrivate &dd, QUniAndroidContext *context = nullptr);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidFrameLayout)
-    Q_DECLARE_PRIVATE(QNativeAndroidFrameLayout)
+    Q_DISABLE_COPY(QUniAndroidFrameLayout)
+    Q_DECLARE_PRIVATE(QUniAndroidFrameLayout)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPEINFO(QNativeAndroidFrameLayout, QML_HAS_ATTACHED_PROPERTIES)
+QML_DECLARE_TYPEINFO(QUniAndroidFrameLayout, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // QNATIVEANDROIDFRAMELAYOUT_P_H

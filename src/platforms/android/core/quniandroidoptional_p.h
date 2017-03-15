@@ -54,13 +54,13 @@
 QT_BEGIN_NAMESPACE
 
 template <typename T>
-class QNativeAndroidOptional
+class QUniAndroidOptional
 {
 public:
-    QNativeAndroidOptional() : t(), exists(false) {}
-    explicit QNativeAndroidOptional(const T &t) : t(t), exists(true) {}
-    explicit QNativeAndroidOptional(T &&t) : t(std::move(t)), exists(true) {}
-    QNativeAndroidOptional &operator=(const T &o) { t = o; exists = true; return *this; }
+    QUniAndroidOptional() : t(), exists(false) {}
+    explicit QUniAndroidOptional(const T &t) : t(t), exists(true) {}
+    explicit QUniAndroidOptional(T &&t) : t(std::move(t)), exists(true) {}
+    QUniAndroidOptional &operator=(const T &o) { t = o; exists = true; return *this; }
 
     operator T&() Q_DECL_NOTHROW { return t; }
     operator const T&() const Q_DECL_NOTHROW { return t; }
@@ -73,32 +73,32 @@ private:
 };
 
 template <typename T>
-inline bool operator==(const QNativeAndroidOptional<T> &lhs, const QNativeAndroidOptional<T> &rhs)
+inline bool operator==(const QUniAndroidOptional<T> &lhs, const QUniAndroidOptional<T> &rhs)
     Q_DECL_NOEXCEPT_EXPR(noexcept(static_cast<const T&>(lhs) == static_cast<const T&>(rhs)))
 { return lhs.isNull() == rhs.isNull() && !lhs.isNull() && static_cast<const T&>(lhs) == static_cast<const T&>(rhs); }
 
 template <typename T>
-inline bool operator==(const QNativeAndroidOptional<T> &lhs, const T &rhs)
+inline bool operator==(const QUniAndroidOptional<T> &lhs, const T &rhs)
     Q_DECL_NOEXCEPT_EXPR(noexcept(static_cast<const T&>(lhs) == rhs))
 { return !lhs.isNull() && static_cast<const T&>(lhs) == rhs; }
 
 template <typename T>
-inline bool operator==(const T &lhs, const QNativeAndroidOptional<T> &rhs)
+inline bool operator==(const T &lhs, const QUniAndroidOptional<T> &rhs)
     Q_DECL_NOEXCEPT_EXPR(noexcept(lhs == static_cast<const T&>(rhs)))
 { return !rhs.isNull() && lhs == static_cast<const T&>(rhs); }
 
 template <typename T>
-inline bool operator!=(const QNativeAndroidOptional<T> &lhs, const QNativeAndroidOptional<T> &rhs)
+inline bool operator!=(const QUniAndroidOptional<T> &lhs, const QUniAndroidOptional<T> &rhs)
     Q_DECL_NOEXCEPT_EXPR(noexcept(lhs == rhs))
 { return !operator==(lhs, rhs); }
 
 template <typename T>
-inline bool operator!=(const QNativeAndroidOptional<T> &lhs, const T &rhs)
+inline bool operator!=(const QUniAndroidOptional<T> &lhs, const T &rhs)
     Q_DECL_NOEXCEPT_EXPR(noexcept(lhs == rhs))
 { return !operator==(lhs, rhs); }
 
 template <typename T>
-inline bool operator!=(const T &lhs, const QNativeAndroidOptional<T> &rhs)
+inline bool operator!=(const T &lhs, const QUniAndroidOptional<T> &rhs)
     Q_DECL_NOEXCEPT_EXPR(noexcept(lhs == rhs))
 { return !operator==(lhs, rhs); }
 

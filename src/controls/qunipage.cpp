@@ -41,42 +41,42 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativePagePrivate::QNativePagePrivate(int version)
-    : QNativeBasePrivate(version)
+QUniPagePrivate::QUniPagePrivate(int version)
+    : QUniBasePrivate(version)
     , m_platformPage(nullptr)
 {
 }
 
-QNativePagePrivate::~QNativePagePrivate()
+QUniPagePrivate::~QUniPagePrivate()
 {
 }
 
-void QNativePagePrivate::createPlatformPage()
+void QUniPagePrivate::createPlatformPage()
 {
     Q_ASSERT(!m_platformPage);
-    m_platformPage = QNativePlatformManager::platformPlugin()->createPage(q_func());
+    m_platformPage = QUniPlatformManager::platformPlugin()->createPage(q_func());
     Q_ASSERT(m_platformPage);
     setPlatformPage(m_platformPage);
 }
 
-void QNativePagePrivate::setPlatformPage(QNativePlatformPage *platformPage)
+void QUniPagePrivate::setPlatformPage(QUniPlatformPage *platformPage)
 {
     m_platformPage = platformPage;
     setPlatformBase(platformPage);
 }
 
-QNativePage::QNativePage(QNativeBase *parent)
-    : QNativeBase(*new QNativePagePrivate(), parent)
+QUniPage::QUniPage(QUniBase *parent)
+    : QUniBase(*new QUniPagePrivate(), parent)
 {
     d_func()->createPlatformPage();
 }
 
-QNativePage::QNativePage(QNativePagePrivate &dd, QNativeBase *parent)
-    : QNativeBase(dd, parent)
+QUniPage::QUniPage(QUniPagePrivate &dd, QUniBase *parent)
+    : QUniBase(dd, parent)
 {
 }
 
-QNativePage::~QNativePage()
+QUniPage::~QUniPage()
 {
 }
 

@@ -67,23 +67,23 @@ public:
 
 void QtQmlAndroidAnimationPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterType<QNativeAndroidAccelerateDecelerateInterpolator>(uri, 0, 21, "AccelerateDecelerateInterpolator");
-    qmlRegisterType<QNativeAndroidAccelerateInterpolator>(uri, 0, 21, "AccelerateInterpolator");
-    qmlRegisterType<QNativeAndroidAlphaAnimation>(uri, 0, 21, "AlphaAnimation");
-    qmlRegisterType<QNativeAndroidAnimation>(uri, 0, 21, "Animation");
-    qmlRegisterType<QNativeAndroidAnimationSet>(uri, 0, 21, "AnimationSet");
-    qmlRegisterType<QNativeAndroidAnticipateInterpolator>(uri, 0, 21, "AnticipateInterpolator");
-    qmlRegisterType<QNativeAndroidAnticipateOvershootInterpolator>(uri, 0, 21, "AnticipateOvershootInterpolator");
-    qmlRegisterType<QNativeAndroidBounceInterpolator>(uri, 0, 21, "BounceInterpolator");
-    qmlRegisterType<QNativeAndroidCycleInterpolator>(uri, 0, 21, "CycleInterpolator");
-    qmlRegisterType<QNativeAndroidDecelerateInterpolator>(uri, 0, 21, "DecelerateInterpolator");
-    qmlRegisterUncreatableType<QNativeAndroidInterpolator>(uri, 0, 21, "Interpolator", QStringLiteral("Interpolator is abstract"));
-    qmlRegisterType<QNativeAndroidLinearInterpolator>(uri, 0, 21, "LinearInterpolator");
-    qmlRegisterType<QNativeAndroidOvershootInterpolator>(uri, 0, 21, "OvershootInterpolator");
-    qmlRegisterType<QNativeAndroidPathInterpolator>(uri, 0, 21, "PathInterpolator");
-    qmlRegisterType<QNativeAndroidRotateAnimation>(uri, 0, 21, "RotateAnimation");
-    qmlRegisterType<QNativeAndroidScaleAnimation>(uri, 0, 21, "ScaleAnimation");
-    qmlRegisterType<QNativeAndroidTranslateAnimation>(uri, 0, 21, "TranslateAnimation");
+    qmlRegisterType<QUniAndroidAccelerateDecelerateInterpolator>(uri, 0, 21, "AccelerateDecelerateInterpolator");
+    qmlRegisterType<QUniAndroidAccelerateInterpolator>(uri, 0, 21, "AccelerateInterpolator");
+    qmlRegisterType<QUniAndroidAlphaAnimation>(uri, 0, 21, "AlphaAnimation");
+    qmlRegisterType<QUniAndroidAnimation>(uri, 0, 21, "Animation");
+    qmlRegisterType<QUniAndroidAnimationSet>(uri, 0, 21, "AnimationSet");
+    qmlRegisterType<QUniAndroidAnticipateInterpolator>(uri, 0, 21, "AnticipateInterpolator");
+    qmlRegisterType<QUniAndroidAnticipateOvershootInterpolator>(uri, 0, 21, "AnticipateOvershootInterpolator");
+    qmlRegisterType<QUniAndroidBounceInterpolator>(uri, 0, 21, "BounceInterpolator");
+    qmlRegisterType<QUniAndroidCycleInterpolator>(uri, 0, 21, "CycleInterpolator");
+    qmlRegisterType<QUniAndroidDecelerateInterpolator>(uri, 0, 21, "DecelerateInterpolator");
+    qmlRegisterUncreatableType<QUniAndroidInterpolator>(uri, 0, 21, "Interpolator", QStringLiteral("Interpolator is abstract"));
+    qmlRegisterType<QUniAndroidLinearInterpolator>(uri, 0, 21, "LinearInterpolator");
+    qmlRegisterType<QUniAndroidOvershootInterpolator>(uri, 0, 21, "OvershootInterpolator");
+    qmlRegisterType<QUniAndroidPathInterpolator>(uri, 0, 21, "PathInterpolator");
+    qmlRegisterType<QUniAndroidRotateAnimation>(uri, 0, 21, "RotateAnimation");
+    qmlRegisterType<QUniAndroidScaleAnimation>(uri, 0, 21, "ScaleAnimation");
+    qmlRegisterType<QUniAndroidTranslateAnimation>(uri, 0, 21, "TranslateAnimation");
 }
 
 QT_END_NAMESPACE

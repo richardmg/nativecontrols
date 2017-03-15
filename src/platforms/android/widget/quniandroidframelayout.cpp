@@ -39,34 +39,34 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidFrameLayout::QNativeAndroidFrameLayout(QNativeAndroidContext *context)
-    : QNativeAndroidViewGroup(*(new QNativeAndroidFrameLayoutPrivate), context)
+QUniAndroidFrameLayout::QUniAndroidFrameLayout(QUniAndroidContext *context)
+    : QUniAndroidViewGroup(*(new QUniAndroidFrameLayoutPrivate), context)
 {
 }
 
-QNativeAndroidFrameLayout::QNativeAndroidFrameLayout(QNativeAndroidFrameLayoutPrivate &dd, QNativeAndroidContext *context)
-    : QNativeAndroidViewGroup(dd, context)
+QUniAndroidFrameLayout::QUniAndroidFrameLayout(QUniAndroidFrameLayoutPrivate &dd, QUniAndroidContext *context)
+    : QUniAndroidViewGroup(dd, context)
 {
 }
 
-QNativeAndroidFrameLayoutParams *QNativeAndroidFrameLayout::qmlAttachedProperties(QObject *object)
+QUniAndroidFrameLayoutParams *QUniAndroidFrameLayout::qmlAttachedProperties(QObject *object)
 {
-    QNativeAndroidView *view = qobject_cast<QNativeAndroidView*>(object);
+    QUniAndroidView *view = qobject_cast<QUniAndroidView*>(object);
     if (view)
-        return new QNativeAndroidFrameLayoutParams(view);
+        return new QUniAndroidFrameLayoutParams(view);
     return 0;
 }
 
-QAndroidJniObject QNativeAndroidFrameLayout::onCreate()
+QAndroidJniObject QUniAndroidFrameLayout::onCreate()
 {
     return QAndroidJniObject("android/widget/FrameLayout",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidFrameLayout::onInflate(QAndroidJniObject &instance)
+void QUniAndroidFrameLayout::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidViewGroup::onInflate(instance);
+    QUniAndroidViewGroup::onInflate(instance);
 }
 
 QT_END_NAMESPACE

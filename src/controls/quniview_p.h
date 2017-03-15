@@ -54,20 +54,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeView;
-class QNativePlatformView;
+class QUniView;
+class QUniPlatformView;
 
-class QNativeViewPrivate : public QNativeBasePrivate
+class QUniViewPrivate : public QUniBasePrivate
 {
-    Q_DECLARE_PUBLIC(QNativeView)
+    Q_DECLARE_PUBLIC(QUniView)
 
 public:
-    explicit QNativeViewPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeViewPrivate();
+    explicit QUniViewPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniViewPrivate();
 
     void createPlatformView();
-    void setPlatformView(QNativePlatformView *platformView);
-    QNativePlatformView *m_platformView;
+    void setPlatformView(QUniPlatformView *platformView);
+    QUniPlatformView *m_platformView;
 };
 
 QT_END_NAMESPACE

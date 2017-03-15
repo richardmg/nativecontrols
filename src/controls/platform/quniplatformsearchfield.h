@@ -42,10 +42,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformSearchField : public virtual QNativePlatformControl
+class Q_NATIVECONTROLS_EXPORT QUniPlatformSearchField : public virtual QUniPlatformControl
 {
 public:
-    virtual ~QNativePlatformSearchField() {}
+    virtual ~QUniPlatformSearchField() {}
 
     virtual QString text() = 0;
     virtual void setText(const QString &text) = 0;

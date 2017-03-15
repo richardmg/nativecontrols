@@ -39,26 +39,26 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidAbsSeekBar::QNativeAndroidAbsSeekBar(QNativeAndroidContext *context)
-    : QNativeAndroidProgressBar(*(new QNativeAndroidAbsSeekBarPrivate), context)
+QUniAndroidAbsSeekBar::QUniAndroidAbsSeekBar(QUniAndroidContext *context)
+    : QUniAndroidProgressBar(*(new QUniAndroidAbsSeekBarPrivate), context)
 {
 }
 
-QNativeAndroidAbsSeekBar::QNativeAndroidAbsSeekBar(QNativeAndroidAbsSeekBarPrivate &dd, QNativeAndroidContext *context)
-    : QNativeAndroidProgressBar(dd, context)
+QUniAndroidAbsSeekBar::QUniAndroidAbsSeekBar(QUniAndroidAbsSeekBarPrivate &dd, QUniAndroidContext *context)
+    : QUniAndroidProgressBar(dd, context)
 {
 }
 
-QAndroidJniObject QNativeAndroidAbsSeekBar::onCreate()
+QAndroidJniObject QUniAndroidAbsSeekBar::onCreate()
 {
     return QAndroidJniObject("android/widget/AbsSeekBar",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidAbsSeekBar::onInflate(QAndroidJniObject &instance)
+void QUniAndroidAbsSeekBar::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidProgressBar::onInflate(instance);
+    QUniAndroidProgressBar::onInflate(instance);
 }
 
 QT_END_NAMESPACE

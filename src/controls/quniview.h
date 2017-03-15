@@ -42,10 +42,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeViewPrivate;
-class QNativePlatformView;
+class QUniViewPrivate;
+class QUniPlatformView;
 
-class Q_NATIVECONTROLS_EXPORT QNativeView : public QNativeBase
+class Q_NATIVECONTROLS_EXPORT QUniView : public QUniBase
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
@@ -61,10 +61,10 @@ class Q_NATIVECONTROLS_EXPORT QNativeView : public QNativeBase
     Q_PROPERTY(qreal implicitHeight READ implicitHeight WRITE setImplicitHeight NOTIFY implicitHeightChanged FINAL)
 
 public:
-    explicit QNativeView(QNativeBase *parent = nullptr);
-    virtual ~QNativeView();
+    explicit QUniView(QUniBase *parent = nullptr);
+    virtual ~QUniView();
 
-    QNativeView *parentView();
+    QUniView *parentView();
 
     bool visible() const;
     void setVisible(bool visible);
@@ -115,11 +115,11 @@ Q_SIGNALS:
     void implicitHeightChanged(qreal h);
 
 protected:
-    QNativeView(QNativeViewPrivate &dd, QNativeBase *parent = nullptr);
+    QUniView(QUniViewPrivate &dd, QUniBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeView)
-    Q_DISABLE_COPY(QNativeView)
+    Q_DECLARE_PRIVATE(QUniView)
+    Q_DISABLE_COPY(QUniView)
 };
 
 QT_END_NAMESPACE

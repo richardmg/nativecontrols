@@ -54,20 +54,20 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeSearchField;
-class QNativePlatformSearchField;
+class QUniSearchField;
+class QUniPlatformSearchField;
 
-class QNativeSearchFieldPrivate : public QNativeControlPrivate
+class QUniSearchFieldPrivate : public QUniControlPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeSearchField)
+    Q_DECLARE_PUBLIC(QUniSearchField)
 
 public:
-    explicit QNativeSearchFieldPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeSearchFieldPrivate();
+    explicit QUniSearchFieldPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniSearchFieldPrivate();
 
     void createPlatformSearchField();
-    void setPlatformSearchField(QNativePlatformSearchField *platformSearchField);
-    QNativePlatformSearchField *m_platformSearchField;
+    void setPlatformSearchField(QUniPlatformSearchField *platformSearchField);
+    QUniPlatformSearchField *m_platformSearchField;
 };
 
 QT_END_NAMESPACE

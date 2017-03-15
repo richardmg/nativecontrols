@@ -53,15 +53,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidView;
+class QUniAndroidView;
 
-class QNativeAndroidLayoutParamsPrivate : public QNativeAndroidObjectPrivate
+class QUniAndroidLayoutParamsPrivate : public QUniAndroidObjectPrivate
 {
 public:
     bool dirty = false;
-    QNativeAndroidView *view = nullptr;
-    QNativeAndroidOptional<int> width;
-    QNativeAndroidOptional<int> height;
+    QUniAndroidView *view = nullptr;
+    QUniAndroidOptional<int> width;
+    QUniAndroidOptional<int> height;
 };
 
 QT_END_NAMESPACE

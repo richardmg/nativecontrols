@@ -38,21 +38,21 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidListView::QNativeAndroidListView(QNativeAndroidContext *context)
-    : QNativeAndroidAdapterView(context)
+QUniAndroidListView::QUniAndroidListView(QUniAndroidContext *context)
+    : QUniAndroidAdapterView(context)
 {
 }
 
-QAndroidJniObject QNativeAndroidListView::onCreate()
+QAndroidJniObject QUniAndroidListView::onCreate()
 {
     return QAndroidJniObject("android/widget/ListView",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidListView::onInflate(QAndroidJniObject &instance)
+void QUniAndroidListView::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidAdapterView::onInflate(instance);
+    QUniAndroidAdapterView::onInflate(instance);
 }
 
 QT_END_NAMESPACE

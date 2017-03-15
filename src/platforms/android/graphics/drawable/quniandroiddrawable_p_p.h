@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidDrawablePrivate : public QNativeAndroidObjectPrivate
+class QUniAndroidDrawablePrivate : public QUniAndroidObjectPrivate
 {
 public:
 };

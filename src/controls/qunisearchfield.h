@@ -42,19 +42,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeSearchFieldPrivate;
-class QNativePlatformSearchField;
+class QUniSearchFieldPrivate;
+class QUniPlatformSearchField;
 
-class Q_NATIVECONTROLS_EXPORT QNativeSearchField : public QNativeControl
+class Q_NATIVECONTROLS_EXPORT QUniSearchField : public QUniControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
     Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
 
 public:
-    explicit QNativeSearchField(QNativeBase *parent = nullptr);
-    explicit QNativeSearchField(const QString &text, QNativeBase *parent = nullptr);
-    virtual ~QNativeSearchField();
+    explicit QUniSearchField(QUniBase *parent = nullptr);
+    explicit QUniSearchField(const QString &text, QUniBase *parent = nullptr);
+    virtual ~QUniSearchField();
 
     QString text();
     void setText(const QString &text);
@@ -67,11 +67,11 @@ Q_SIGNALS:
     void placeholderTextChanged(const QString &placeholderText);
 
 protected:
-    QNativeSearchField(QNativeSearchFieldPrivate &dd, QNativeBase *parent = nullptr);
+    QUniSearchField(QUniSearchFieldPrivate &dd, QUniBase *parent = nullptr);
 
 private:
-    Q_DECLARE_PRIVATE(QNativeSearchField)
-    Q_DISABLE_COPY(QNativeSearchField)
+    Q_DECLARE_PRIVATE(QUniSearchField)
+    Q_DISABLE_COPY(QUniSearchField)
 };
 
 QT_END_NAMESPACE

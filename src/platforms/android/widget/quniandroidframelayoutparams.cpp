@@ -40,28 +40,28 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidFrameLayoutParamsPrivate : public QNativeAndroidMarginLayoutParamsPrivate
+class QUniAndroidFrameLayoutParamsPrivate : public QUniAndroidMarginLayoutParamsPrivate
 {
 public:
-    QNativeAndroidOptional<int> gravity;
+    QUniAndroidOptional<int> gravity;
 };
 
-QNativeAndroidFrameLayoutParams::QNativeAndroidFrameLayoutParams(QNativeAndroidView *view)
-    : QNativeAndroidMarginLayoutParams(*(new QNativeAndroidMarginLayoutParamsPrivate), view)
+QUniAndroidFrameLayoutParams::QUniAndroidFrameLayoutParams(QUniAndroidView *view)
+    : QUniAndroidMarginLayoutParams(*(new QUniAndroidMarginLayoutParamsPrivate), view)
 {
 }
 
-int QNativeAndroidFrameLayoutParams::gravity() const
+int QUniAndroidFrameLayoutParams::gravity() const
 {
-    Q_D(const QNativeAndroidFrameLayoutParams);
+    Q_D(const QUniAndroidFrameLayoutParams);
     if (d->gravity.isNull())
         return 0; // TODO
     return d->gravity;
 }
 
-void QNativeAndroidFrameLayoutParams::setGravity(int value)
+void QUniAndroidFrameLayoutParams::setGravity(int value)
 {
-    Q_D(QNativeAndroidFrameLayoutParams);
+    Q_D(QUniAndroidFrameLayoutParams);
     if (value == gravity())
         return;
 
@@ -70,17 +70,17 @@ void QNativeAndroidFrameLayoutParams::setGravity(int value)
     emit gravityChanged();
 }
 
-QAndroidJniObject QNativeAndroidFrameLayoutParams::onCreate()
+QAndroidJniObject QUniAndroidFrameLayoutParams::onCreate()
 {
     return QAndroidJniObject("android/widget/FrameLayout$LayoutParams",
                              "(II)V",
                              MATCH_PARENT, MATCH_PARENT);
 }
 
-void QNativeAndroidFrameLayoutParams::onInflate(QAndroidJniObject &instance)
+void QUniAndroidFrameLayoutParams::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidFrameLayoutParams);
-    QNativeAndroidMarginLayoutParams::onInflate(instance);
+    Q_D(QUniAndroidFrameLayoutParams);
+    QUniAndroidMarginLayoutParams::onInflate(instance);
 
     if (!d->gravity.isNull())
         instance.callMethod<void>("setGravity", "(I)V", d->gravity);

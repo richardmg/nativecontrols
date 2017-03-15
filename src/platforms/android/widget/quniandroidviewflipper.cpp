@@ -38,21 +38,21 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidViewFlipper::QNativeAndroidViewFlipper(QNativeAndroidContext *context)
-    : QNativeAndroidViewAnimator(context)
+QUniAndroidViewFlipper::QUniAndroidViewFlipper(QUniAndroidContext *context)
+    : QUniAndroidViewAnimator(context)
 {
 }
 
-QAndroidJniObject QNativeAndroidViewFlipper::onCreate()
+QAndroidJniObject QUniAndroidViewFlipper::onCreate()
 {
     return QAndroidJniObject("android/widget/ViewFlipper",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidViewFlipper::onInflate(QAndroidJniObject &instance)
+void QUniAndroidViewFlipper::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidViewAnimator::onInflate(instance);
+    QUniAndroidViewAnimator::onInflate(instance);
 }
 
 QT_END_NAMESPACE

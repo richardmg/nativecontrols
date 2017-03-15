@@ -39,17 +39,17 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidInterpolator::QNativeAndroidInterpolator(QObject *parent)
-    : QNativeAndroidObject(*(new QNativeAndroidInterpolatorPrivate), parent)
+QUniAndroidInterpolator::QUniAndroidInterpolator(QObject *parent)
+    : QUniAndroidObject(*(new QUniAndroidInterpolatorPrivate), parent)
 {
 }
 
-QNativeAndroidInterpolator::QNativeAndroidInterpolator(QNativeAndroidInterpolatorPrivate &dd, QObject *parent)
-    : QNativeAndroidObject(dd, parent)
+QUniAndroidInterpolator::QUniAndroidInterpolator(QUniAndroidInterpolatorPrivate &dd, QObject *parent)
+    : QUniAndroidObject(dd, parent)
 {
 }
 
-QAndroidJniObject QNativeAndroidInterpolator::onCreate()
+QAndroidJniObject QUniAndroidInterpolator::onCreate()
 {
     return QAndroidJniObject();
 }

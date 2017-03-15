@@ -54,16 +54,16 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidLinearLayoutPrivate : public QNativeAndroidViewGroupPrivate
+class QUniAndroidLinearLayoutPrivate : public QUniAndroidViewGroupPrivate
 {
 public:
-    QNativeAndroidOptional<bool> baselineAligned;
-    QNativeAndroidOptional<bool> baselineAlignedChildIndex;
+    QUniAndroidOptional<bool> baselineAligned;
+    QUniAndroidOptional<bool> baselineAlignedChildIndex;
     // TODO: Drawable divider
     // TODO: int gravity
-    QNativeAndroidOptional<bool> measureWithLargestChild;
-    QNativeAndroidOptional<QNativeAndroidLinearLayout::Orientation> orientation;
-    QNativeAndroidOptional<qreal> weightSum;
+    QUniAndroidOptional<bool> measureWithLargestChild;
+    QUniAndroidOptional<QUniAndroidLinearLayout::Orientation> orientation;
+    QUniAndroidOptional<qreal> weightSum;
 };
 
 QT_END_NAMESPACE

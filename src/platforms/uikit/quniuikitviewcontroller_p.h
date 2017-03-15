@@ -54,30 +54,30 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitView;
-class QNativeUIKitViewController;
-class QNativeUIKitTabBarItem;
+class QUniUIKitView;
+class QUniUIKitViewController;
+class QUniUIKitTabBarItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIViewController);
 
-class QNativeUIKitViewControllerPrivate : public QNativeUIKitBasePrivate
+class QUniUIKitViewControllerPrivate : public QUniUIKitBasePrivate
 {
 public:
-    explicit QNativeUIKitViewControllerPrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeUIKitViewControllerPrivate();
+    explicit QUniUIKitViewControllerPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitViewControllerPrivate();
 
-    Q_DECLARE_PUBLIC(QNativeUIKitViewController)
+    Q_DECLARE_PUBLIC(QUniUIKitViewController)
 
     UIViewController *viewController();
     void addChildViewController(UIViewController *child);
     void addSubViewToContentView(UIView *uiView);
 
-    QNativeUIKitTabBarItem *m_tabBarItem;
+    QUniUIKitTabBarItem *m_tabBarItem;
 protected:
     virtual UIViewController *createViewController();
 
 private:
     UIViewController *m_viewController;
-    QNativeUIKitView *m_view;
+    QUniUIKitView *m_view;
 };
 
 QT_END_NAMESPACE

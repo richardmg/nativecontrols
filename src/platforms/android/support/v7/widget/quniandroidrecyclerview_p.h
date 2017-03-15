@@ -52,19 +52,19 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidRecyclerAdapter;
-class QNativeAndroidRecyclerViewPrivate;
+class QUniAndroidRecyclerAdapter;
+class QUniAndroidRecyclerViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidRecyclerView : public QNativeAndroidViewGroup
+class Q_NATIVEANDROID_EXPORT QUniAndroidRecyclerView : public QUniAndroidViewGroup
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeAndroidRecyclerAdapter *adapter READ adapter WRITE setAdapter NOTIFY adapterChanged)
+    Q_PROPERTY(QUniAndroidRecyclerAdapter *adapter READ adapter WRITE setAdapter NOTIFY adapterChanged)
 
 public:
-    explicit QNativeAndroidRecyclerView(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidRecyclerView(QUniAndroidContext *context = nullptr);
 
-    QNativeAndroidRecyclerAdapter *adapter() const;
-    void setAdapter(QNativeAndroidRecyclerAdapter *adapter);
+    QUniAndroidRecyclerAdapter *adapter() const;
+    void setAdapter(QUniAndroidRecyclerAdapter *adapter);
 
 Q_SIGNALS:
     void adapterChanged();
@@ -76,8 +76,8 @@ protected:
     void objectChange(ObjectChange change) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidRecyclerView)
-    Q_DECLARE_PRIVATE(QNativeAndroidRecyclerView)
+    Q_DISABLE_COPY(QUniAndroidRecyclerView)
+    Q_DECLARE_PRIVATE(QUniAndroidRecyclerView)
 };
 
 QT_END_NAMESPACE

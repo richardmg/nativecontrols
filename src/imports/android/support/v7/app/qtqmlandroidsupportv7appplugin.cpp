@@ -52,7 +52,7 @@ public:
 
 void QtQmlAndroidSupportV7AppPlugin::registerTypes(const char *uri)
 {
-    qmlRegisterType<QNativeAndroidActionBarDrawerToggle>(uri, 0, 21, "ActionBarDrawerToggle");
+    qmlRegisterType<QUniAndroidActionBarDrawerToggle>(uri, 0, 21, "ActionBarDrawerToggle");
 }
 
 QT_END_NAMESPACE

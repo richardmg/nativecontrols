@@ -52,12 +52,12 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidEditText : public QNativeAndroidTextView
+class Q_NATIVEANDROID_EXPORT QUniAndroidEditText : public QUniAndroidTextView
 {
     Q_OBJECT
 
 public:
-    explicit QNativeAndroidEditText(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidEditText(QUniAndroidContext *context = nullptr);
 
 protected:
     QAndroidJniObject onCreate() override;

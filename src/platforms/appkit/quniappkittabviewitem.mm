@@ -44,70 +44,70 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAppKitTabViewItemPrivate::QNativeAppKitTabViewItemPrivate(int version)
-    : QNativeAppKitBasePrivate(version)
+QUniAppKitTabViewItemPrivate::QUniAppKitTabViewItemPrivate(int version)
+    : QUniAppKitBasePrivate(version)
     , m_tabViewItem(nullptr)
     , m_viewController(nullptr)
 {
 }
 
-QNativeAppKitTabViewItemPrivate::~QNativeAppKitTabViewItemPrivate()
+QUniAppKitTabViewItemPrivate::~QUniAppKitTabViewItemPrivate()
 {
 }
 
-NSTabViewItem *QNativeAppKitTabViewItemPrivate::tabViewItem()
+NSTabViewItem *QUniAppKitTabViewItemPrivate::tabViewItem()
 {
     if (!m_tabViewItem)
         m_tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:nil];
     return m_tabViewItem;
 }
 
-NSTabViewItem *QNativeAppKitTabViewItem::nsTabViewItemHandle()
+NSTabViewItem *QUniAppKitTabViewItem::nsTabViewItemHandle()
 {
     return d_func()->tabViewItem();
 }
 
-QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(QNativeAppKitBase *parent)
-    : QNativeAppKitBase(*new QNativeAppKitTabViewItemPrivate(), parent)
+QUniAppKitTabViewItem::QUniAppKitTabViewItem(QUniAppKitBase *parent)
+    : QUniAppKitBase(*new QUniAppKitTabViewItemPrivate(), parent)
 {
-    if (QNativeAppKitViewController *vc = qobject_cast<QNativeAppKitViewController *>(parent))
+    if (QUniAppKitViewController *vc = qobject_cast<QUniAppKitViewController *>(parent))
         setViewController(vc);
 }
 
-QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(const QString &title, QNativeAppKitBase *parent)
-    : QNativeAppKitBase(*new QNativeAppKitTabViewItemPrivate(), parent)
+QUniAppKitTabViewItem::QUniAppKitTabViewItem(const QString &title, QUniAppKitBase *parent)
+    : QUniAppKitBase(*new QUniAppKitTabViewItemPrivate(), parent)
 {
-    if (QNativeAppKitViewController *vc = qobject_cast<QNativeAppKitViewController *>(parent))
+    if (QUniAppKitViewController *vc = qobject_cast<QUniAppKitViewController *>(parent))
         setViewController(vc);
     setTitle(title);
 }
 
-QNativeAppKitTabViewItem::QNativeAppKitTabViewItem(QNativeAppKitTabViewItemPrivate &dd, QNativeAppKitBase *parent)
-    : QNativeAppKitBase(dd, parent)
+QUniAppKitTabViewItem::QUniAppKitTabViewItem(QUniAppKitTabViewItemPrivate &dd, QUniAppKitBase *parent)
+    : QUniAppKitBase(dd, parent)
 {
 }
 
-QNativeAppKitTabViewItem::~QNativeAppKitTabViewItem()
+QUniAppKitTabViewItem::~QUniAppKitTabViewItem()
 {
 }
 
-QString QNativeAppKitTabViewItem::title() const
+QString QUniAppKitTabViewItem::title() const
 {
-    return QString::fromNSString(const_cast<QNativeAppKitTabViewItem *>(this)->nsTabViewItemHandle().label);
+    return QString::fromNSString(const_cast<QUniAppKitTabViewItem *>(this)->nsTabViewItemHandle().label);
 }
 
-void QNativeAppKitTabViewItem::setTitle(const QString &title)
+void QUniAppKitTabViewItem::setTitle(const QString &title)
 {
     nsTabViewItemHandle().label = title.toNSString();
 }
 
-void QNativeAppKitTabViewItem::setViewController(QNativeAppKitViewController *viewController)
+void QUniAppKitTabViewItem::setViewController(QUniAppKitViewController *viewController)
 {
     d_func()->m_viewController = viewController;
     nsTabViewItemHandle().viewController = viewController->nsViewControllerHandle();
 }
 
-QNativeAppKitViewController *QNativeAppKitTabViewItem::viewController() const
+QUniAppKitViewController *QUniAppKitTabViewItem::viewController() const
 {
     return d_func()->m_viewController;
 }

@@ -52,9 +52,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidProgressBarPrivate;
+class QUniAndroidProgressBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QNativeAndroidProgressBar : public QNativeAndroidView
+class Q_NATIVEANDROID_EXPORT QUniAndroidProgressBar : public QUniAndroidView
 {
     Q_OBJECT
     Q_PROPERTY(bool indeterminate READ isIndeterminate WRITE setIndeterminate NOTIFY indeterminateChanged)
@@ -65,7 +65,7 @@ class Q_NATIVEANDROID_EXPORT QNativeAndroidProgressBar : public QNativeAndroidVi
     Q_ENUMS(Style)
 
 public:
-    explicit QNativeAndroidProgressBar(QNativeAndroidContext *context = nullptr);
+    explicit QUniAndroidProgressBar(QUniAndroidContext *context = nullptr);
 
     bool isIndeterminate() const;
     void setIndeterminate(bool indeterminate);
@@ -100,14 +100,14 @@ Q_SIGNALS:
     void maxChanged();
 
 protected:
-    QNativeAndroidProgressBar(QNativeAndroidProgressBarPrivate &dd, QNativeAndroidContext *context = nullptr);
+    QUniAndroidProgressBar(QUniAndroidProgressBarPrivate &dd, QUniAndroidContext *context = nullptr);
 
     QAndroidJniObject onCreate() override;
     void onInflate(QAndroidJniObject &instance) override;
 
 private:
-    Q_DISABLE_COPY(QNativeAndroidProgressBar)
-    Q_DECLARE_PRIVATE(QNativeAndroidProgressBar)
+    Q_DISABLE_COPY(QUniAndroidProgressBar)
+    Q_DECLARE_PRIVATE(QUniAndroidProgressBar)
 };
 
 QT_END_NAMESPACE

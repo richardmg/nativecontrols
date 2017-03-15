@@ -42,10 +42,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QNativePlatformWindow : public virtual QNativePlatformBase
+class Q_NATIVECONTROLS_EXPORT QUniPlatformWindow : public virtual QUniPlatformBase
 {
 public:
-    virtual ~QNativePlatformWindow() {}
+    virtual ~QUniPlatformWindow() {}
     virtual qreal width() const = 0;
     virtual qreal height() const = 0;
     virtual bool isVisible() const = 0;

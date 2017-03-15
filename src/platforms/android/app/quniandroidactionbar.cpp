@@ -41,9 +41,9 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeAndroidActionBarPrivate : public QNativeAndroidObjectPrivate
+class QUniAndroidActionBarPrivate : public QUniAndroidObjectPrivate
 {
-    Q_DECLARE_PUBLIC(QNativeAndroidActionBar)
+    Q_DECLARE_PUBLIC(QUniAndroidActionBar)
 
 public:
     void updateBackground();
@@ -52,12 +52,12 @@ public:
     qreal elevation = 0.0;
     QString title;
     QString subtitle;
-    QNativeAndroidDrawable *background = nullptr;
+    QUniAndroidDrawable *background = nullptr;
 };
 
-void QNativeAndroidActionBarPrivate::updateBackground()
+void QUniAndroidActionBarPrivate::updateBackground()
 {
-    Q_Q(QNativeAndroidActionBar);
+    Q_Q(QUniAndroidActionBar);
     if (!q->isValid() || !background)
         return;
 
@@ -68,20 +68,20 @@ void QNativeAndroidActionBarPrivate::updateBackground()
     });
 }
 
-QNativeAndroidActionBar::QNativeAndroidActionBar(QObject *parent)
-    : QNativeAndroidObject(*(new QNativeAndroidActionBarPrivate), parent)
+QUniAndroidActionBar::QUniAndroidActionBar(QObject *parent)
+    : QUniAndroidObject(*(new QUniAndroidActionBarPrivate), parent)
 {
 }
 
-bool QNativeAndroidActionBar::isVisible() const
+bool QUniAndroidActionBar::isVisible() const
 {
-    Q_D(const QNativeAndroidActionBar);
+    Q_D(const QUniAndroidActionBar);
     return d->visible;
 }
 
-void QNativeAndroidActionBar::setVisible(bool visible)
+void QUniAndroidActionBar::setVisible(bool visible)
 {
-    Q_D(QNativeAndroidActionBar);
+    Q_D(QUniAndroidActionBar);
     if (visible == isVisible())
         return;
 
@@ -93,15 +93,15 @@ void QNativeAndroidActionBar::setVisible(bool visible)
     emit visibleChanged();
 }
 
-qreal QNativeAndroidActionBar::elevation() const
+qreal QUniAndroidActionBar::elevation() const
 {
-    Q_D(const QNativeAndroidActionBar);
+    Q_D(const QUniAndroidActionBar);
     return d->elevation;
 }
 
-void QNativeAndroidActionBar::setElevation(qreal elevation)
+void QUniAndroidActionBar::setElevation(qreal elevation)
 {
-    Q_D(QNativeAndroidActionBar);
+    Q_D(QUniAndroidActionBar);
     if (qFuzzyCompare(d->elevation, elevation))
         return;
 
@@ -110,15 +110,15 @@ void QNativeAndroidActionBar::setElevation(qreal elevation)
     emit elevationChanged();
 }
 
-QString QNativeAndroidActionBar::title() const
+QString QUniAndroidActionBar::title() const
 {
-    Q_D(const QNativeAndroidActionBar);
+    Q_D(const QUniAndroidActionBar);
     return d->title;
 }
 
-void QNativeAndroidActionBar::setTitle(const QString &title)
+void QUniAndroidActionBar::setTitle(const QString &title)
 {
-    Q_D(QNativeAndroidActionBar);
+    Q_D(QUniAndroidActionBar);
     if (d->title == title)
         return;
 
@@ -127,15 +127,15 @@ void QNativeAndroidActionBar::setTitle(const QString &title)
     emit titleChanged();
 }
 
-QString QNativeAndroidActionBar::subtitle() const
+QString QUniAndroidActionBar::subtitle() const
 {
-    Q_D(const QNativeAndroidActionBar);
+    Q_D(const QUniAndroidActionBar);
     return d->subtitle;
 }
 
-void QNativeAndroidActionBar::setSubtitle(const QString &subtitle)
+void QUniAndroidActionBar::setSubtitle(const QString &subtitle)
 {
-    Q_D(QNativeAndroidActionBar);
+    Q_D(QUniAndroidActionBar);
     if (d->subtitle == subtitle)
         return;
 
@@ -144,33 +144,33 @@ void QNativeAndroidActionBar::setSubtitle(const QString &subtitle)
     emit subtitleChanged();
 }
 
-QNativeAndroidDrawable *QNativeAndroidActionBar::background() const
+QUniAndroidDrawable *QUniAndroidActionBar::background() const
 {
-    Q_D(const QNativeAndroidActionBar);
+    Q_D(const QUniAndroidActionBar);
     return d->background;
 }
 
-void QNativeAndroidActionBar::setBackground(QNativeAndroidDrawable *background)
+void QUniAndroidActionBar::setBackground(QUniAndroidDrawable *background)
 {
-    Q_D(QNativeAndroidActionBar);
+    Q_D(QUniAndroidActionBar);
     if (d->background == background)
         return;
 
     if (d->background) {
-        QObjectPrivate::disconnect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActionBarPrivate::updateBackground);
+        QObjectPrivate::disconnect(d->background, &QUniAndroidObject::instanceChanged, d, &QUniAndroidActionBarPrivate::updateBackground);
         d->background->destruct();
     }
     d->background = background;
     if (d->background) {
-        QObjectPrivate::connect(d->background, &QNativeAndroidObject::instanceChanged, d, &QNativeAndroidActionBarPrivate::updateBackground);
+        QObjectPrivate::connect(d->background, &QUniAndroidObject::instanceChanged, d, &QUniAndroidActionBarPrivate::updateBackground);
         d->background->construct();
     }
     emit backgroundChanged();
 }
 
-void QNativeAndroidActionBar::onInflate(QAndroidJniObject &instance)
+void QUniAndroidActionBar::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidActionBar);
+    Q_D(QUniAndroidActionBar);
     instance.callMethod<void>(d->visible ? "show" : "hide");
 
     if (!d->title.isNull())
@@ -184,10 +184,10 @@ void QNativeAndroidActionBar::onInflate(QAndroidJniObject &instance)
     instance.callMethod<void>("setHomeButtonEnabled", "(Z)V", true);
 }
 
-void QNativeAndroidActionBar::objectChange(ObjectChange change)
+void QUniAndroidActionBar::objectChange(ObjectChange change)
 {
-    Q_D(QNativeAndroidActionBar);
-    QNativeAndroidObject::objectChange(change);
+    Q_D(QUniAndroidActionBar);
+    QUniAndroidObject::objectChange(change);
     if (change == InstanceChange)
         d->updateBackground();
 }

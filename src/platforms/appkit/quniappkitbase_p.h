@@ -57,19 +57,19 @@ typedef CGRect NSRect;
 
 QT_BEGIN_NAMESPACE
 
-class QNativeBase;
-class QNativeAppKitBase;
+class QUniBase;
+class QUniAppKitBase;
 
-class QNativeAppKitBasePrivate : public QNativeAppKitQmlBasePrivate
+class QUniAppKitBasePrivate : public QUniAppKitQmlBasePrivate
 {
 public:
-    explicit QNativeAppKitBasePrivate(int version = QObjectPrivateVersion);
-    virtual ~QNativeAppKitBasePrivate();
+    explicit QUniAppKitBasePrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniAppKitBasePrivate();
 
-    // Used by QNativeAppKitPlatformPlugin
-    virtual void connectSignals(QNativeBase *) {}
+    // Used by QUniAppKitPlatformPlugin
+    virtual void connectSignals(QUniBase *) {}
 
-    Q_DECLARE_PUBLIC(QNativeAppKitBase)
+    Q_DECLARE_PUBLIC(QUniAppKitBase)
 };
 
 QT_END_NAMESPACE

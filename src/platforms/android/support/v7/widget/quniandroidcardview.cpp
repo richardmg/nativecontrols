@@ -38,21 +38,21 @@
 
 QT_BEGIN_NAMESPACE
 
-QNativeAndroidCardView::QNativeAndroidCardView(QNativeAndroidContext *context)
-    : QNativeAndroidFrameLayout(context)
+QUniAndroidCardView::QUniAndroidCardView(QUniAndroidContext *context)
+    : QUniAndroidFrameLayout(context)
 {
 }
 
-QAndroidJniObject QNativeAndroidCardView::onCreate()
+QAndroidJniObject QUniAndroidCardView::onCreate()
 {
     return QAndroidJniObject("android/support/v7/widget/CardView",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidCardView::onInflate(QAndroidJniObject &instance)
+void QUniAndroidCardView::onInflate(QAndroidJniObject &instance)
 {
-    QNativeAndroidFrameLayout::onInflate(instance);
+    QUniAndroidFrameLayout::onInflate(instance);
 }
 
 QT_END_NAMESPACE

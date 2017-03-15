@@ -43,23 +43,23 @@
 
 QT_BEGIN_NAMESPACE
 
-class QNativeUIKitWindowPrivate;
-class QNativeUIKitViewController;
+class QUniUIKitWindowPrivate;
+class QUniUIKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QNativeUIKitWindow : public QNativeUIKitView, public virtual QNativePlatformWindow
+class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitWindow : public QUniUIKitView, public virtual QUniPlatformWindow
 {
     Q_OBJECT
-    Q_PROPERTY(QNativeUIKitViewController *rootViewController READ rootViewController WRITE setRootViewController NOTIFY rootViewControllerChanged)
+    Q_PROPERTY(QUniUIKitViewController *rootViewController READ rootViewController WRITE setRootViewController NOTIFY rootViewControllerChanged)
 
 public:
-    QNativeUIKitWindow();
-    virtual ~QNativeUIKitWindow();
+    QUniUIKitWindow();
+    virtual ~QUniUIKitWindow();
 
     UIWindow *uiWindowHandle();
 
-    void setRootViewController(QNativeUIKitViewController *rootViewController);
-    QNativeUIKitViewController *rootViewController() const;
+    void setRootViewController(QUniUIKitViewController *rootViewController);
+    QUniUIKitViewController *rootViewController() const;
 
     qreal width() const override;
     qreal height() const override;
@@ -77,15 +77,15 @@ public:
 
 Q_SIGNALS:
     void visibleChanged(bool isVisible);
-    void rootViewControllerChanged(QNativeUIKitViewController *controller);
+    void rootViewControllerChanged(QUniUIKitViewController *controller);
 
 protected:
-    QNativeUIKitWindow(QNativeUIKitWindowPrivate &dd);
+    QUniUIKitWindow(QUniUIKitWindowPrivate &dd);
     void childEvent(QChildEvent *event) override;
 
 private:
-    Q_DECLARE_PRIVATE(QNativeUIKitWindow)
-    Q_DISABLE_COPY(QNativeUIKitWindow)
+    Q_DECLARE_PRIVATE(QUniUIKitWindow)
+    Q_DISABLE_COPY(QUniUIKitWindow)
 };
 
 QT_END_NAMESPACE

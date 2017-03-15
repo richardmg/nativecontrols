@@ -44,7 +44,7 @@ static void native_onCheckedChanged(JNIEnv *env, jobject object, jlong instance,
 {
     Q_UNUSED(env);
     Q_UNUSED(object);
-    QNativeAndroidCompoundButton *button = reinterpret_cast<QNativeAndroidCompoundButton *>(instance);
+    QUniAndroidCompoundButton *button = reinterpret_cast<QUniAndroidCompoundButton *>(instance);
     if (button)
         QMetaObject::invokeMethod(button, "_q_updateChecked", Qt::QueuedConnection, Q_ARG(bool, isChecked));
 }
@@ -59,9 +59,9 @@ static void registerNativeCompoundButtonMethods(jobject listener)
     env->DeleteLocalRef(cls);
 }
 
-bool QNativeAndroidCompoundButtonPrivate::_q_updateChecked(bool arg)
+bool QUniAndroidCompoundButtonPrivate::_q_updateChecked(bool arg)
 {
-    Q_Q(QNativeAndroidCompoundButton);
+    Q_Q(QUniAndroidCompoundButton);
     if (arg == q->isChecked())
         return false;
 
@@ -70,45 +70,45 @@ bool QNativeAndroidCompoundButtonPrivate::_q_updateChecked(bool arg)
     return true;
 }
 
-QNativeAndroidCompoundButton::QNativeAndroidCompoundButton(QNativeAndroidContext *context)
-    : QNativeAndroidButton(*(new QNativeAndroidCompoundButtonPrivate), context)
+QUniAndroidCompoundButton::QUniAndroidCompoundButton(QUniAndroidContext *context)
+    : QUniAndroidButton(*(new QUniAndroidCompoundButtonPrivate), context)
 {
 }
 
-QNativeAndroidCompoundButton::QNativeAndroidCompoundButton(QNativeAndroidCompoundButtonPrivate &dd, QNativeAndroidContext *context)
-    : QNativeAndroidButton(dd, context)
+QUniAndroidCompoundButton::QUniAndroidCompoundButton(QUniAndroidCompoundButtonPrivate &dd, QUniAndroidContext *context)
+    : QUniAndroidButton(dd, context)
 {
 }
 
-bool QNativeAndroidCompoundButton::isChecked() const
+bool QUniAndroidCompoundButton::isChecked() const
 {
-    Q_D(const QNativeAndroidCompoundButton);
+    Q_D(const QUniAndroidCompoundButton);
     return d->checked;
 }
 
-void QNativeAndroidCompoundButton::setChecked(bool checked)
+void QUniAndroidCompoundButton::setChecked(bool checked)
 {
-    Q_D(QNativeAndroidCompoundButton);
+    Q_D(QUniAndroidCompoundButton);
     if (d->_q_updateChecked(checked))
         QtNativeAndroid::callBoolMethod(instance(), "setChecked", checked);
 }
 
-void QNativeAndroidCompoundButton::toggle()
+void QUniAndroidCompoundButton::toggle()
 {
     QtNativeAndroid::callVoidMethod(instance(), "toggle");
 }
 
-QAndroidJniObject QNativeAndroidCompoundButton::onCreate()
+QAndroidJniObject QUniAndroidCompoundButton::onCreate()
 {
     return QAndroidJniObject("android/widget/CompoundButton",
                              "(Landroid/content/Context;)V",
                              ctx().object());
 }
 
-void QNativeAndroidCompoundButton::onInflate(QAndroidJniObject &instance)
+void QUniAndroidCompoundButton::onInflate(QAndroidJniObject &instance)
 {
-    Q_D(QNativeAndroidCompoundButton);
-    QNativeAndroidButton::onInflate(instance);
+    Q_D(QUniAndroidCompoundButton);
+    QUniAndroidButton::onInflate(instance);
 
     d->listener = QAndroidJniObject("org/qtproject/qt5/android/bindings/widget/QtNativeCompoundButtonListener",
                                    "(Landroid/widget/CompoundButton;J)V",
