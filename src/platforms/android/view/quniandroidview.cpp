@@ -40,7 +40,7 @@
 #include "quniandroidcolordrawable_p.h"
 #include "quniandroidlayoutparams_p.h"
 #include "quniandroidanimation_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 #include <QtCore/qcoreapplication.h>
 #include <QtCore/qcoreevent.h>
 #include <QtCore/qhash.h>

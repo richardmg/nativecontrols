@@ -36,7 +36,7 @@
 
 #include "quniandroidrecycleradapter_p.h"
 #include "quniandroidcontextual_p_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 #include "quniandroidview_p.h"
 #include <QtQml/qqmlcomponent.h>
 #include <QtQml/qqmlcontext.h>

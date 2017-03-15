@@ -2,7 +2,7 @@ INCLUDEPATH += $$PWD
 
 HEADERS += \
     $$PWD/quniandroidr_p.h \
-    $$PWD/qtnativeandroidglobal_p.h
+    $$PWD/qtuniandroidglobal_p.h
 
 SOURCES += \
     $$PWD/quniandroidr.cpp

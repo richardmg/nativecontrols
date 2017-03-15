@@ -36,7 +36,7 @@
 
 #include "quniandroidviewanimator_p.h"
 #include "quniandroidviewanimator_p_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE
 

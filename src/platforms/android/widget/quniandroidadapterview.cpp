@@ -37,7 +37,7 @@
 #include "quniandroidadapterview_p.h"
 #include "quniandroidadapterview_p_p.h"
 #include "quniandroidbaseadapter_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE
 

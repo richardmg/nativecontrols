@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 #include <QtCore/qstring.h>
 #include <QtCore/private/qjnihelpers_p.h>
 #include <QtConcurrent/qtconcurrentrun.h>

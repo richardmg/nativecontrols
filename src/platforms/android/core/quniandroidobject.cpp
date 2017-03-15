@@ -36,7 +36,7 @@
 
 #include "quniandroidobject_p.h"
 #include "quniandroidobject_p_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 
 #include <QtCore/qcoreapplication.h>
 #include <QtCore/qreadwritelock.h>

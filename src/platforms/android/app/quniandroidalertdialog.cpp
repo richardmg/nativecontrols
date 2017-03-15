@@ -36,7 +36,7 @@
 
 #include "quniandroidalertdialog_p.h"
 #include "quniandroiddialog_p_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE
 

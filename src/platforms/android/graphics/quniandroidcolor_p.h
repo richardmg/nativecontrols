@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtUniAndroid/private/qtnativeandroidglobal_p.h>
+#include <QtUniAndroid/private/qtuniandroidglobal_p.h>
 
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlengine.h>

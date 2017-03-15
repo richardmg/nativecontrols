@@ -41,7 +41,7 @@
 #include "quniandroidmenu_p.h"
 #include "quniandroidview_p.h"
 #include "quniandroidwindow_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 #include <QtCore/private/qjnihelpers_p.h>
 #include <QtAndroidExtras/qandroidfunctions.h>
 #include <QtAndroidExtras/qandroidjnienvironment.h>

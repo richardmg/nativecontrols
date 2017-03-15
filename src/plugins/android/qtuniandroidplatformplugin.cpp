@@ -141,4 +141,4 @@ public:
 
 QT_END_NAMESPACE
 
-#include "qtnativeandroidplatformplugin.moc"
+#include "qtuniandroidplatformplugin.moc"

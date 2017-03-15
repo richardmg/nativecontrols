@@ -1,5 +1,5 @@
 TARGET = QtUniAndroid
-MODULE = nativeandroid
+MODULE = uniandroid
 
 QT += androidextras qml
 QT += core-private # qjnihelpers
@@ -7,7 +7,7 @@ QT += core-private # qjnihelpers
 CONFIG += c++11
 CONFIG -= create_cmake
 
-features.files = $$MODULE_PREFIX/features/nativeandroid.prf
+features.files = $$MODULE_PREFIX/features/uniandroid.prf
 features.path = $$[QT_HOST_DATA]/mkspecs/features
 !prefix_build: COPIES += features
 INSTALLS += features

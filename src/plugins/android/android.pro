@@ -1,10 +1,10 @@
-TARGET = qtnativeandroidplugin
+TARGET = qtuniandroidplugin
 
-QT += unicontrols nativeandroid
-QT_PRIVATE += core-private nativeandroid-private
+QT += unicontrols uniandroid
+QT_PRIVATE += core-private uniandroid-private
 
 SOURCES += \
-    qtnativeandroidplatformplugin.cpp
+    qtuniandroidplatformplugin.cpp
 
 OTHER_FILES = \
     plugin.json

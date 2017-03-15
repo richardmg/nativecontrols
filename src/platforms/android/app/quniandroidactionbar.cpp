@@ -37,7 +37,7 @@
 #include "quniandroidactionbar_p.h"
 #include "quniandroidobject_p_p.h"
 #include "quniandroiddrawable_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 
 QT_BEGIN_NAMESPACE
 

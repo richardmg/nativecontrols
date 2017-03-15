@@ -36,7 +36,7 @@
 
 #include "quniandroidscrollview_p.h"
 #include "quniandroidframelayout_p_p.h"
-#include "qtnativeandroidfunctions_p.h"
+#include "qtuniandroidfunctions_p.h"
 #include "quniandroidoptional_p.h"
 
 QT_BEGIN_NAMESPACE

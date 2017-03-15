@@ -2,7 +2,7 @@ TARGET = qtqmlandroidviewplugin
 TARGETPATH = android/view
 IMPORT_VERSION = 0.21
 
-QT += nativeandroid-private
+QT += uniandroid-private
 
 SOURCES += \
     $$PWD/qtqmlandroidviewplugin.cpp
