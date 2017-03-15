@@ -4,7 +4,7 @@
 
 TEMPLATE = app
 TARGET = window
-QT += gui qml quick nativecontrols
+QT += gui qml quick unicontrols
 RESOURCES += main.qrc
 
 uikit:!watchos: QT += nativeuikitcontrols

@@ -5,7 +5,7 @@
 TEMPLATE = app
 TARGET = window
 
-QT += nativecontrols
+QT += unicontrols
 
 # Input
 SOURCES += main.cpp

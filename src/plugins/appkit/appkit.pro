@@ -1,7 +1,7 @@
 TARGET = quniappkit
 
-QT += nativecontrols nativeappkitcontrols
-QT_PRIVATE += core-private nativecontrols-private nativeappkitcontrols-private
+QT += unicontrols nativeappkitcontrols
+QT_PRIVATE += core-private unicontrols-private nativeappkitcontrols-private
 
 SOURCES += \
     quniappkitplatformplugin.cpp
@@ -9,7 +9,7 @@ SOURCES += \
 OTHER_FILES = \
         plugin.json
 
-PLUGIN_TYPE = nativecontrols
+PLUGIN_TYPE = unicontrols
 PLUGIN_CLASS_NAME = QUniAppKitPlatformPlugin
 load(qt_plugin)
 

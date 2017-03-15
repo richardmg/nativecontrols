@@ -1,7 +1,7 @@
 TARGET = QtUniUIKitControls
 MODULE = nativeuikitcontrols
 
-QT += nativecontrols
+QT += unicontrols
 QT_PRIVATE += core-private gui-private qml-private
 
 DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII

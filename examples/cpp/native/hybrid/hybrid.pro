@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = hybrid
 
-QT += nativecontrols
+QT += unicontrols
 
 macos {
     QT += nativeappkitcontrols

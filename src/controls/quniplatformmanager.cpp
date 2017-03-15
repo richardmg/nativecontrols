@@ -49,7 +49,7 @@ QUniPlatformPluginInterface *QUniPlatformManager::s_platformPlugin = nullptr;
 QUniPlatformPluginInterface *QUniPlatformManager::platformPlugin()
 {
     if (!s_platformPlugin) {
-        s_loader = new QFactoryLoader(QUniPlatformPluginInterface_iid, QLatin1String("/nativecontrols"));
+        s_loader = new QFactoryLoader(QUniPlatformPluginInterface_iid, QLatin1String("/unicontrols"));
         if (!s_loader->metaData().isEmpty()) {
             // Always use first available plugin for now. Todo: make this configurable.
             s_platformPlugin = qobject_cast<QUniPlatformPluginInterface *>(s_loader->instance(0));

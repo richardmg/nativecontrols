@@ -1,6 +1,6 @@
 TARGET = QtUniControls
-MODULE = nativecontrols
-MODULE_PLUGIN_TYPES = nativecontrols
+MODULE = unicontrols
+MODULE_PLUGIN_TYPES = unicontrols
 
 QT += qml
 QT_PRIVATE += core-private gui-private qml-private
