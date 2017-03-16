@@ -48,15 +48,14 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QUniAppKitWindow window;
-
     QUniAppKitTabViewController tabViewController(&window);
-    QUniAppKitViewController tab1(&tabViewController);
-    QUniAppKitViewController tab2(&tabViewController);
-    QUniAppKitTabViewItem tabItem1(QStringLiteral("Tab1"), &tab1);
-    QUniAppKitTabViewItem tabItem2(QStringLiteral("Tab2"), &tab2);
+    QUniAppKitTabViewItem tabItem1(QStringLiteral("Tab1"), &tabViewController);
+    QUniAppKitTabViewItem tabItem2(QStringLiteral("Tab2"), &tabViewController);
     tabViewController.setTabViewItems(QList<QUniAppKitTabViewItem *>() << &tabItem1 << &tabItem2);
+    // Hvordan virker dette fra QML? Er QML avhengig av at hvis tabviewitem er child, så kalles setTabViewItems direkte?
+    // Bør igrunn all QObject parent logikk flyttes inn i qmlbase / plugin?
 
-    QUniAppKitView *contentView = tab1.view();
+    QUniAppKitView *contentView = tabItem1.viewController()->view();
     float margin = 2;
 
     QUniAppKitButton button(QStringLiteral("Click me"), contentView);
