@@ -64,8 +64,6 @@ public:
     explicit QUniAppKitTabViewItemPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniAppKitTabViewItemPrivate();
 
-    NSTabViewItem *tabViewItem();
-
     Q_DECLARE_PUBLIC(QUniAppKitTabViewItem)
 
 private:
