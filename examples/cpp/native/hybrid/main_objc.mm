@@ -59,7 +59,6 @@ void main_objc(QUniWindow &window, QUniButton &nativeButton)
     QUniAppKitButton *nativeAppKitButton1 = new QUniAppKitButton;
     nativeAppKitButton1->move(nativeButton.left(), nativeButton.bottom());
     nativeAppKitButton1->nsButtonHandle().title = @"QUniAppKitButton";
-
     QObject::connect(nativeAppKitButton1, &QUniAppKitButton::clicked,
                      [nativeAppKitButton1](){ nativeAppKitButton1->setText(QStringLiteral("Clicked!")); });
     window.addNativeChild(nativeAppKitButton1);
@@ -74,7 +73,7 @@ void main_objc(QUniWindow &window, QUniButton &nativeButton)
     // You can also go the other way, creating a QUniButton as a direct child of another NSView.
     // Note that switchButton.frame is specified with origo bottom-left, as opposed to
     // Qt geometry, which is specified with origo top-left
-    QUniButton *nativeButton2 = new QUniButton("QUniButton 2");
+    QUniButton *nativeButton2 = new QUniButton("QUniButton 2", &window);
     float y = window.height() - switchButton.frame.origin.y - switchButton.frame.size.height;
     nativeButton2->move(switchButton.frame.origin.x, y);
     QObject::connect(nativeButton2, &QUniButton::clicked,
@@ -100,7 +99,7 @@ void main_objc(QUniWindow &window, QUniButton &nativeButton)
 
     // You can also go the other way, creating a QUniButton
     // as a direct child of another UIView.
-    QUniButton *nativeButton2 = new QUniButton("QUniButton 2");
+    QUniButton *nativeButton2 = new QUniButton("QUniButton 2", &window);
     nativeButton2->move(uiSwitch.frame.origin.x, uiSwitch.frame.origin.y + uiSwitch.bounds.size.height);
     QObject::connect(nativeButton2, &QUniButton::clicked,
                      [nativeButton2](){ nativeButton2->setText(QStringLiteral("Clicked!")); });
