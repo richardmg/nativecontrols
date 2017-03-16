@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCOMPOUNDBUTTON_P_H
-#define QNATIVEANDROIDCOMPOUNDBUTTON_P_H
+#ifndef QUNIANDROIDCOMPOUNDBUTTON_P_H
+#define QUNIANDROIDCOMPOUNDBUTTON_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidCompoundButtonPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidCompoundButton : public QUniAndroidButton
+class Q_UNIANDROID_EXPORT QUniAndroidCompoundButton : public QUniAndroidButton
 {
     Q_OBJECT
     Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY checkedChanged)
@@ -86,4 +86,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCOMPOUNDBUTTON_P_H
+#endif // QUNIANDROIDCOMPOUNDBUTTON_P_H

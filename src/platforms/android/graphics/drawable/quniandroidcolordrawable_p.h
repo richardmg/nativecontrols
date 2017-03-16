@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCOLORDRAWABLE_P_H
-#define QNATIVEANDROIDCOLORDRAWABLE_P_H
+#ifndef QUNIANDROIDCOLORDRAWABLE_P_H
+#define QUNIANDROIDCOLORDRAWABLE_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidColorDrawablePrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidColorDrawable : public QUniAndroidDrawable
+class Q_UNIANDROID_EXPORT QUniAndroidColorDrawable : public QUniAndroidDrawable
 {
     Q_OBJECT
     Q_PROPERTY(int color READ color WRITE setColor NOTIFY colorChanged)
@@ -80,4 +80,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCOLORDRAWABLE_P_H
+#endif // QUNIANDROIDCOLORDRAWABLE_P_H

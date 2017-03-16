@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDVIEW_P_H
-#define QNATIVEANDROIDVIEW_P_H
+#ifndef QUNIANDROIDVIEW_P_H
+#define QUNIANDROIDVIEW_P_H
 
 //
 //  W A R N I N G
@@ -58,7 +58,7 @@ class QUniAndroidAnimation;
 class QUniAndroidLayoutParams;
 class QUniAndroidViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidView : public QUniAndroidContextual
+class Q_UNIANDROID_EXPORT QUniAndroidView : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(QUniAndroidView *parent READ parentView WRITE setParentView NOTIFY parentChanged)
@@ -299,4 +299,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDVIEW_P_H
+#endif // QUNIANDROIDVIEW_P_H

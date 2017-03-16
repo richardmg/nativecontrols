@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDEDITTEXT_P_H
-#define QNATIVEANDROIDEDITTEXT_P_H
+#ifndef QUNIANDROIDEDITTEXT_P_H
+#define QUNIANDROIDEDITTEXT_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidEditText : public QUniAndroidTextView
+class Q_UNIANDROID_EXPORT QUniAndroidEditText : public QUniAndroidTextView
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDEDITTEXT_P_H
+#endif // QUNIANDROIDEDITTEXT_P_H

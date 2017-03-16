@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDLINEARINTERPOLATOR_P_H
-#define QNATIVEANDROIDLINEARINTERPOLATOR_P_H
+#ifndef QUNIANDROIDLINEARINTERPOLATOR_P_H
+#define QUNIANDROIDLINEARINTERPOLATOR_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidLinearInterpolator : public QUniAndroidInterpolator
+class Q_UNIANDROID_EXPORT QUniAndroidLinearInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
 
@@ -67,4 +67,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDLINEARINTERPOLATOR_P_H
+#endif // QUNIANDROIDLINEARINTERPOLATOR_P_H

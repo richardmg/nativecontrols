@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEQMLBASE_H
-#define QNATIVEQMLBASE_H
+#ifndef QUNIQMLBASE_H
+#define QUNIQMLBASE_H
 
 #include <QObject>
 #include <QQmlListProperty>
@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniQmlBasePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QUniQmlBase : public QObject
+class Q_UNICONTROLS_EXPORT QUniQmlBase : public QObject
 {
     Q_OBJECT
     Q_PRIVATE_PROPERTY(QUniQmlBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
@@ -65,4 +65,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEQMLBASE_H
+#endif // QUNIQMLBASE_H

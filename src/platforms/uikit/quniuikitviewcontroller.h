@@ -1,5 +1,5 @@
-#ifndef QNATIVEUIKITVIEWCONTROLLER_H
-#define QNATIVEUIKITVIEWCONTROLLER_H
+#ifndef QUNIUIKITVIEWCONTROLLER_H
+#define QUNIUIKITVIEWCONTROLLER_H
 
 #include <QObject>
 
@@ -13,7 +13,7 @@ class QUniUIKitViewControllerPrivate;
 class QUniUIKitTabBarItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIViewController);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitViewController : public QUniUIKitBase, public virtual QUniPlatformPage
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitViewController : public QUniUIKitBase, public virtual QUniPlatformPage
 {
     Q_OBJECT
     Q_PROPERTY(QUniUIKitView *view READ view WRITE setView NOTIFY viewChanged)
@@ -53,4 +53,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEUIKITVIEWCONTROLLER_H
+#endif // QUNIUIKITVIEWCONTROLLER_H

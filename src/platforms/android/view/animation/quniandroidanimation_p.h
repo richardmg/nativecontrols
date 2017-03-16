@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDANIMATION_P_H
-#define QNATIVEANDROIDANIMATION_P_H
+#ifndef QUNIANDROIDANIMATION_P_H
+#define QUNIANDROIDANIMATION_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidInterpolator;
 class QUniAndroidAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidAnimation : public QUniAndroidContextual
+class Q_UNIANDROID_EXPORT QUniAndroidAnimation : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(int resource READ resource WRITE setResource NOTIFY resourceChanged)
@@ -156,4 +156,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDANIMATION_P_H
+#endif // QUNIANDROIDANIMATION_P_H

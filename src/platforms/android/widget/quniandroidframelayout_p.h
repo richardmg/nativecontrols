@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDFRAMELAYOUT_P_H
-#define QNATIVEANDROIDFRAMELAYOUT_P_H
+#ifndef QUNIANDROIDFRAMELAYOUT_P_H
+#define QUNIANDROIDFRAMELAYOUT_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidFrameLayoutPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidFrameLayout : public QUniAndroidViewGroup
+class Q_UNIANDROID_EXPORT QUniAndroidFrameLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
 
@@ -79,4 +79,4 @@ QT_END_NAMESPACE
 
 QML_DECLARE_TYPEINFO(QUniAndroidFrameLayout, QML_HAS_ATTACHED_PROPERTIES)
 
-#endif // QNATIVEANDROIDFRAMELAYOUT_P_H
+#endif // QUNIANDROIDFRAMELAYOUT_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDFRAMELAYOUTPARAMS_P_H
-#define QNATIVEANDROIDFRAMELAYOUTPARAMS_P_H
+#ifndef QUNIANDROIDFRAMELAYOUTPARAMS_P_H
+#define QUNIANDROIDFRAMELAYOUTPARAMS_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidFrameLayoutParamsPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidFrameLayoutParams : public QUniAndroidMarginLayoutParams
+class Q_UNIANDROID_EXPORT QUniAndroidFrameLayoutParams : public QUniAndroidMarginLayoutParams
 {
     Q_OBJECT
     Q_PROPERTY(int gravity READ gravity WRITE setGravity NOTIFY gravityChanged)
@@ -79,4 +79,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDFRAMELAYOUTPARAMS_P_H
+#endif // QUNIANDROIDFRAMELAYOUTPARAMS_P_H

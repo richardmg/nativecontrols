@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDTABHOST_P_H
-#define QNATIVEANDROIDTABHOST_P_H
+#ifndef QUNIANDROIDTABHOST_P_H
+#define QUNIANDROIDTABHOST_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidTabHostPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidTabHost : public QUniAndroidFrameLayout
+class Q_UNIANDROID_EXPORT QUniAndroidTabHost : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
@@ -75,4 +75,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDTABHOST_P_H
+#endif // QUNIANDROIDTABHOST_P_H

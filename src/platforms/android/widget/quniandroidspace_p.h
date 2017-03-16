@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSPACE_P_H
-#define QNATIVEANDROIDSPACE_P_H
+#ifndef QUNIANDROIDSPACE_P_H
+#define QUNIANDROIDSPACE_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidSpace : public QUniAndroidView
+class Q_UNIANDROID_EXPORT QUniAndroidSpace : public QUniAndroidView
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSPACE_P_H
+#endif // QUNIANDROIDSPACE_P_H

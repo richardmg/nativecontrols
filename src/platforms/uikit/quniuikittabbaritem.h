@@ -1,5 +1,5 @@
-#ifndef QNATIVEUIKITTABBARITEM_H
-#define QNATIVEUIKITTABBARITEM_H
+#ifndef QUNIUIKITTABBARITEM_H
+#define QUNIUIKITTABBARITEM_H
 
 #include <QObject>
 
@@ -11,7 +11,7 @@ QT_BEGIN_NAMESPACE
 class QUniUIKitTabBarItemPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarItem);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitTabBarItem : public QUniUIKitBase, public virtual QUniPlatformTabsPageTab
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarItem : public QUniUIKitBase, public virtual QUniPlatformTabsPageTab
 {
     Q_OBJECT
 
@@ -35,4 +35,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEUIKITTABBARITEM_H
+#endif // QUNIUIKITTABBARITEM_H

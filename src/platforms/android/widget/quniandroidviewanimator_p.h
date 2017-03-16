@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDVIEWANIMATOR_P_H
-#define QNATIVEANDROIDVIEWANIMATOR_P_H
+#ifndef QUNIANDROIDVIEWANIMATOR_P_H
+#define QUNIANDROIDVIEWANIMATOR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidViewAnimatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidViewAnimator : public QUniAndroidFrameLayout
+class Q_UNIANDROID_EXPORT QUniAndroidViewAnimator : public QUniAndroidFrameLayout
 {
     Q_OBJECT
     Q_PROPERTY(int displayedChild READ displayedChild WRITE setDisplayedChild NOTIFY displayedChildChanged)
@@ -93,4 +93,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDVIEWANIMATOR_P_H
+#endif // QUNIANDROIDVIEWANIMATOR_P_H

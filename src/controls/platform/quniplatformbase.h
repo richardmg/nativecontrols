@@ -34,15 +34,15 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMBASE_H
-#define QNATIVEPLATFORMBASE_H
+#ifndef QUNIPLATFORMBASE_H
+#define QUNIPLATFORMBASE_H
 
 #include <QtCore>
 #include <QtUniControls/qunicontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QUniPlatformBase
+class Q_UNICONTROLS_EXPORT QUniPlatformBase
 {
 public:
     virtual ~QUniPlatformBase() {}
@@ -112,4 +112,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMBASE_H
+#endif // QUNIPLATFORMBASE_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDNUMBERPICKER_P_H
-#define QNATIVEANDROIDNUMBERPICKER_P_H
+#ifndef QUNIANDROIDNUMBERPICKER_P_H
+#define QUNIANDROIDNUMBERPICKER_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidNumberPickerPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidNumberPicker : public QUniAndroidLinearLayout
+class Q_UNIANDROID_EXPORT QUniAndroidNumberPicker : public QUniAndroidLinearLayout
 {
     Q_OBJECT
     Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
@@ -81,4 +81,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDNUMBERPICKER_P_H
+#endif // QUNIANDROIDNUMBERPICKER_P_H

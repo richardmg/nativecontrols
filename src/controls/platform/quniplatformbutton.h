@@ -34,15 +34,15 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMBUTTON_H
-#define QNATIVEPLATFORMBUTTON_H
+#ifndef QUNIPLATFORMBUTTON_H
+#define QUNIPLATFORMBUTTON_H
 
 #include <QtCore>
 #include <QtUniControls/quniplatformcontrol.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QUniPlatformButton : public virtual QUniPlatformControl
+class Q_UNICONTROLS_EXPORT QUniPlatformButton : public virtual QUniPlatformControl
 {
 public:
     virtual ~QUniPlatformButton() {}
@@ -53,4 +53,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMBUTTON_H
+#endif // QUNIPLATFORMBUTTON_H

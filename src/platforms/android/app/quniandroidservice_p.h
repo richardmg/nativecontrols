@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSERVICE_P_H
-#define QNATIVEANDROIDSERVICE_P_H
+#ifndef QUNIANDROIDSERVICE_P_H
+#define QUNIANDROIDSERVICE_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidServicePrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidService : public QUniAndroidContextWrapper
+class Q_UNIANDROID_EXPORT QUniAndroidService : public QUniAndroidContextWrapper
 {
     Q_OBJECT
     Q_PROPERTY(bool sticky READ isSticky WRITE setSticky NOTIFY stickyChanged)
@@ -87,4 +87,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSERVICE_P_H
+#endif // QUNIANDROIDSERVICE_P_H

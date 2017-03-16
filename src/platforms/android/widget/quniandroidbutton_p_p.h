@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDBUTTON_P_P_H
-#define QNATIVEANDROIDBUTTON_P_P_H
+#ifndef QUNIANDROIDBUTTON_P_P_H
+#define QUNIANDROIDBUTTON_P_P_H
 
 //
 //  W A R N I N G
@@ -59,4 +59,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDBUTTON_P_P_H
+#endif // QUNIANDROIDBUTTON_P_P_H

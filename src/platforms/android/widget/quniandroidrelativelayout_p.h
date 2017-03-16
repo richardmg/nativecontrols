@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDRELATIVELAYOUT_P_H
-#define QNATIVEANDROIDRELATIVELAYOUT_P_H
+#ifndef QUNIANDROIDRELATIVELAYOUT_P_H
+#define QUNIANDROIDRELATIVELAYOUT_P_H
 
 //
 //  W A R N I N G
@@ -53,7 +53,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidRelativeLayout : public QUniAndroidViewGroup
+class Q_UNIANDROID_EXPORT QUniAndroidRelativeLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
 
@@ -96,4 +96,4 @@ QT_END_NAMESPACE
 
 QML_DECLARE_TYPEINFO(QUniAndroidRelativeLayout, QML_HAS_ATTACHED_PROPERTIES)
 
-#endif // QNATIVEANDROIDRELATIVELAYOUT_P_H
+#endif // QUNIANDROIDRELATIVELAYOUT_P_H

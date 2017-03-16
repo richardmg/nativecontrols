@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITVIEWCONTROLLER_P_H
-#define QNATIVEAPPKITVIEWCONTROLLER_P_H
+#ifndef QUNIAPPKITVIEWCONTROLLER_P_H
+#define QUNIAPPKITVIEWCONTROLLER_P_H
 
 //
 //  W A R N I N G
@@ -83,4 +83,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPKITVIEWCONTROLLER_P_H
+#endif // QUNIAPPKITVIEWCONTROLLER_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEBUTTON_H
-#define QNATIVEBUTTON_H
+#ifndef QUNIBUTTON_H
+#define QUNIBUTTON_H
 
 #include <QtUniControls/qunicontrol.h>
 #include <QtUniControls/qunicontrolsglobal.h>
@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QUniButtonPrivate;
 class QUniPlatformButton;
 
-class Q_NATIVECONTROLS_EXPORT QUniButton : public QUniControl
+class Q_UNICONTROLS_EXPORT QUniButton : public QUniControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -72,4 +72,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEBUTTON_H
+#endif // QUNIBUTTON_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDBUTTON_P_H
-#define QNATIVEANDROIDBUTTON_P_H
+#ifndef QUNIANDROIDBUTTON_P_H
+#define QUNIANDROIDBUTTON_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidButtonPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidButton : public QUniAndroidTextView
+class Q_UNIANDROID_EXPORT QUniAndroidButton : public QUniAndroidTextView
 {
     Q_OBJECT
 
@@ -74,4 +74,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDBUTTON_P_H
+#endif // QUNIANDROIDBUTTON_P_H

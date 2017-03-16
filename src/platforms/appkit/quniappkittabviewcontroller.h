@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITTABVIEWCONTROLLER_H
-#define QNATIVEAPPKITTABVIEWCONTROLLER_H
+#ifndef QUNIAPPKITTABVIEWCONTROLLER_H
+#define QUNIAPPKITTABVIEWCONTROLLER_H
 
 #include <QObject>
 
@@ -47,7 +47,7 @@ QT_BEGIN_NAMESPACE
 class QUniAppKitTabViewControllerPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSTabViewController);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitTabViewController : public QUniAppKitViewController, public virtual QUniPlatformTabsPage
+class Q_UNIAPPKITCONTROLS_EXPORT QUniAppKitTabViewController : public QUniAppKitViewController, public virtual QUniPlatformTabsPage
 {
     Q_OBJECT
 
@@ -71,4 +71,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPKITTABVIEWCONTROLLER_H
+#endif // QUNIAPPKITTABVIEWCONTROLLER_H

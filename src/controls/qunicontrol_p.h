@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVECONTROL_P_H
-#define QNATIVECONTROL_P_H
+#ifndef QUNICONTROL_P_H
+#define QUNICONTROL_P_H
 
 //
 //  W A R N I N G
@@ -70,4 +70,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif //QNATIVECONTROL_P_H
+#endif //QUNICONTROL_P_H

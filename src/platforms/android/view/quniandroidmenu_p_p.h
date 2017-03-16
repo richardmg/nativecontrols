@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDMENU_P_P_H
-#define QNATIVEANDROIDMENU_P_P_H
+#ifndef QUNIANDROIDMENU_P_P_H
+#define QUNIANDROIDMENU_P_P_H
 
 //
 //  W A R N I N G
@@ -58,4 +58,4 @@ class QUniAndroidMenuPrivate : public QUniAndroidContextualPrivate
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDMENU_P_P_H
+#endif // QUNIANDROIDMENU_P_P_H

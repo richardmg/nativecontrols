@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDTRANSLATEANIMATION_P_H
-#define QNATIVEANDROIDTRANSLATEANIMATION_P_H
+#ifndef QUNIANDROIDTRANSLATEANIMATION_P_H
+#define QUNIANDROIDTRANSLATEANIMATION_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidTranslateAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidTranslateAnimation : public QUniAndroidAnimation
+class Q_UNIANDROID_EXPORT QUniAndroidTranslateAnimation : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(qreal fromX READ fromX WRITE setFromX NOTIFY fromXChanged)
@@ -113,4 +113,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDTRANSLATEANIMATION_P_H
+#endif // QUNIANDROIDTRANSLATEANIMATION_P_H

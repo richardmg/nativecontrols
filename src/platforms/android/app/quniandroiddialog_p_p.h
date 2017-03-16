@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDDIALOG_P_P_H
-#define QNATIVEANDROIDDIALOG_P_P_H
+#ifndef QUNIANDROIDDIALOG_P_P_H
+#define QUNIANDROIDDIALOG_P_P_H
 
 //
 //  W A R N I N G
@@ -58,4 +58,4 @@ class QUniAndroidDialogPrivate : public QUniAndroidContextualPrivate
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDDIALOG_P_P_H
+#endif // QUNIANDROIDDIALOG_P_P_H

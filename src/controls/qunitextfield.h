@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVETEXTFIELD_H
-#define QNATIVETEXTFIELD_H
+#ifndef QUNITEXTFIELD_H
+#define QUNITEXTFIELD_H
 
 #include <QtUniControls/qunicontrol.h>
 #include <QtUniControls/qunicontrolsglobal.h>
@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QUniTextFieldPrivate;
 class QUniPlatformTextField;
 
-class Q_NATIVECONTROLS_EXPORT QUniTextField : public QUniControl
+class Q_UNICONTROLS_EXPORT QUniTextField : public QUniControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -76,4 +76,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVETEXTFIELD_H
+#endif // QUNITEXTFIELD_H

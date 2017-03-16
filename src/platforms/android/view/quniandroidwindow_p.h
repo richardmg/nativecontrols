@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDWINDOW_P_H
-#define QNATIVEANDROIDWINDOW_P_H
+#ifndef QUNIANDROIDWINDOW_P_H
+#define QUNIANDROIDWINDOW_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidWindowPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidWindow : public QUniAndroidContextual
+class Q_UNIANDROID_EXPORT QUniAndroidWindow : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(int statusBarColor READ statusBarColor WRITE setStatusBarColor NOTIFY statusBarColorChanged)
@@ -78,4 +78,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDWINDOW_P_H
+#endif // QUNIANDROIDWINDOW_P_H

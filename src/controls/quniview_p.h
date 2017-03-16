@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEVIEW_P_H
-#define QNATIVEVIEW_P_H
+#ifndef QUNIVIEW_P_H
+#define QUNIVIEW_P_H
 
 //
 //  W A R N I N G
@@ -72,4 +72,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEVIEW_P_H
+#endif // QUNIVIEW_P_H

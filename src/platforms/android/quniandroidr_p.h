@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDR_P_H
-#define QNATIVEANDROIDR_P_H
+#ifndef QUNIANDROIDR_P_H
+#define QUNIANDROIDR_P_H
 
 //
 //  W A R N I N G
@@ -59,7 +59,7 @@ class QQmlEngine;
 class QQmlPropertyMap;
 class QUniAndroidRPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidR : public QObject
+class Q_UNIANDROID_EXPORT QUniAndroidR : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlPropertyMap *anim READ anim CONSTANT)
@@ -120,4 +120,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDR_P_H
+#endif // QUNIANDROIDR_P_H

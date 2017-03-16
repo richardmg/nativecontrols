@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDMARGINLAYOUTPARAMS_P_H
-#define QNATIVEANDROIDMARGINLAYOUTPARAMS_P_H
+#ifndef QUNIANDROIDMARGINLAYOUTPARAMS_P_H
+#define QUNIANDROIDMARGINLAYOUTPARAMS_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidMarginLayoutParamsPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidMarginLayoutParams : public QUniAndroidLayoutParams
+class Q_UNIANDROID_EXPORT QUniAndroidMarginLayoutParams : public QUniAndroidLayoutParams
 {
     Q_OBJECT
     Q_PROPERTY(int margin READ margin WRITE setMargin NOTIFY marginChanged)
@@ -101,4 +101,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDMARGINLAYOUTPARAMS_P_H
+#endif // QUNIANDROIDMARGINLAYOUTPARAMS_P_H

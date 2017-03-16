@@ -35,8 +35,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDOPTIONAL_P_H
-#define QNATIVEANDROIDOPTIONAL_P_H
+#ifndef QUNIANDROIDOPTIONAL_P_H
+#define QUNIANDROIDOPTIONAL_P_H
 
 //
 //  W A R N I N G
@@ -104,4 +104,4 @@ inline bool operator!=(const T &lhs, const QUniAndroidOptional<T> &rhs)
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDOPTIONAL_P_H
+#endif // QUNIANDROIDOPTIONAL_P_H

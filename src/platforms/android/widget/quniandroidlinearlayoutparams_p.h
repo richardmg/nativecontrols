@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDLINEARLAYOUTPARAMS_P_H
-#define QNATIVEANDROIDLINEARLAYOUTPARAMS_P_H
+#ifndef QUNIANDROIDLINEARLAYOUTPARAMS_P_H
+#define QUNIANDROIDLINEARLAYOUTPARAMS_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidLinearLayoutParamsPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidLinearLayoutParams : public QUniAndroidMarginLayoutParams
+class Q_UNIANDROID_EXPORT QUniAndroidLinearLayoutParams : public QUniAndroidMarginLayoutParams
 {
     Q_OBJECT
     Q_PROPERTY(int gravity READ gravity WRITE setGravity NOTIFY gravityChanged)
@@ -84,4 +84,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDLINEARLAYOUTPARAMS_P_H
+#endif // QUNIANDROIDLINEARLAYOUTPARAMS_P_H

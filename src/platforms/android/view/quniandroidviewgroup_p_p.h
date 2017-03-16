@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDVIEWGROUP_P_P_H
-#define QNATIVEANDROIDVIEWGROUP_P_P_H
+#ifndef QUNIANDROIDVIEWGROUP_P_P_H
+#define QUNIANDROIDVIEWGROUP_P_P_H
 
 //
 //  W A R N I N G
@@ -59,4 +59,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDVIEWGROUP_P_P_H
+#endif // QUNIANDROIDVIEWGROUP_P_P_H

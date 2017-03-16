@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDDRAWABLE_P_P_H
-#define QNATIVEANDROIDDRAWABLE_P_P_H
+#ifndef QUNIANDROIDDRAWABLE_P_P_H
+#define QUNIANDROIDDRAWABLE_P_P_H
 
 //
 //  W A R N I N G
@@ -59,4 +59,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDDRAWABLE_P_P_H
+#endif // QUNIANDROIDDRAWABLE_P_P_H

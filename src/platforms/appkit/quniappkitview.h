@@ -46,7 +46,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAppKitViewPrivate;
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitView : public QUniAppKitBase, public virtual QUniPlatformView
+class Q_UNIAPPKITCONTROLS_EXPORT QUniAppKitView : public QUniAppKitBase, public virtual QUniPlatformView
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)

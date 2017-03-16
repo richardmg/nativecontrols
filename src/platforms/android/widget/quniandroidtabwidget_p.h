@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDTABWIDGET_P_H
-#define QNATIVEANDROIDTABWIDGET_P_H
+#ifndef QUNIANDROIDTABWIDGET_P_H
+#define QUNIANDROIDTABWIDGET_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidTabWidget : public QUniAndroidLinearLayout
+class Q_UNIANDROID_EXPORT QUniAndroidTabWidget : public QUniAndroidLinearLayout
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDTABWIDGET_P_H
+#endif // QUNIANDROIDTABWIDGET_P_H

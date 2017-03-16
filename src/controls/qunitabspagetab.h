@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVETAB_H
-#define QNATIVETAB_H
+#ifndef QUNITAB_H
+#define QUNITAB_H
 
 #include <QtUniControls/qunibase.h>
 #include <QtUniControls/qunicontrolsglobal.h>
@@ -44,7 +44,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniTabsPageTabPrivate;
 
-class Q_NATIVECONTROLS_EXPORT QUniTabsPageTab : public QUniBase
+class Q_UNICONTROLS_EXPORT QUniTabsPageTab : public QUniBase
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
@@ -70,4 +70,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVETAB_H
+#endif // QUNITAB_H

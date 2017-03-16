@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEIOSBUTTON_P_H
-#define QNATIVEIOSBUTTON_P_H
+#ifndef QUNIIOSBUTTON_P_H
+#define QUNIIOSBUTTON_P_H
 
 //
 //  W A R N I N G
@@ -78,4 +78,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEIOSBUTTON_P_H
+#endif // QUNIIOSBUTTON_P_H

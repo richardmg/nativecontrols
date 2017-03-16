@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDADAPTERVIEW_P_H
-#define QNATIVEANDROIDADAPTERVIEW_P_H
+#ifndef QUNIANDROIDADAPTERVIEW_P_H
+#define QUNIANDROIDADAPTERVIEW_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidBaseAdapter;
 class QUniAndroidAdapterViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidAdapterView : public QUniAndroidViewGroup
+class Q_UNIANDROID_EXPORT QUniAndroidAdapterView : public QUniAndroidViewGroup
 {
     Q_OBJECT
     Q_PROPERTY(QUniAndroidBaseAdapter *adapter READ adapter WRITE setAdapter NOTIFY adapterChanged) // TODO: Adapter
@@ -86,4 +86,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDADAPTERVIEW_P_H
+#endif // QUNIANDROIDADAPTERVIEW_P_H

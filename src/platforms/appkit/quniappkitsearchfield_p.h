@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITSEARCHFIELD_P_H
-#define QNATIVEAPPKITSEARCHFIELD_P_H
+#ifndef QUNIAPPKITSEARCHFIELD_P_H
+#define QUNIAPPKITSEARCHFIELD_P_H
 
 //
 //  W A R N I N G
@@ -77,4 +77,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPKITSEARCHFIELD_P_H
+#endif // QUNIAPPKITSEARCHFIELD_P_H

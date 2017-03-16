@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCALENDARVIEW_P_H
-#define QNATIVEANDROIDCALENDARVIEW_P_H
+#ifndef QUNIANDROIDCALENDARVIEW_P_H
+#define QUNIANDROIDCALENDARVIEW_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidCalendarViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidCalendarView : public QUniAndroidFrameLayout
+class Q_UNIANDROID_EXPORT QUniAndroidCalendarView : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
@@ -72,4 +72,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCALENDARVIEW_P_H
+#endif // QUNIANDROIDCALENDARVIEW_P_H

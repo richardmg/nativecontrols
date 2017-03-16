@@ -1,5 +1,5 @@
-#ifndef QNATIVEUIKITBASE_H
-#define QNATIVEUIKITBASE_H
+#ifndef QUNIUIKITBASE_H
+#define QUNIUIKITBASE_H
 
 #include <QObject>
 
@@ -12,7 +12,7 @@ QT_BEGIN_NAMESPACE
 class QUniUIKitBasePrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitBase : public QUniUIKitQmlBase, public virtual QUniPlatformBase
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitBase : public QUniUIKitQmlBase, public virtual QUniPlatformBase
 {
     Q_OBJECT
     Q_PROPERTY(QUniUIKitBase *parent READ parentBase WRITE setParent NOTIFY parentChanged DESIGNABLE false)
@@ -41,4 +41,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEUIKITBASE_H
+#endif // QUNIUIKITBASE_H

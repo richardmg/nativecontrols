@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEQMLBASE_P_H
-#define QNATIVEQMLBASE_P_H
+#ifndef QUNIQMLBASE_P_H
+#define QUNIQMLBASE_P_H
 
 //
 //  W A R N I N G
@@ -67,4 +67,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEQMLBASE_P_H
+#endif // QUNIQMLBASE_P_H

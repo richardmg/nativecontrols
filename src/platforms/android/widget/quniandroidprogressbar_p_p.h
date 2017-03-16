@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDPROGRESSBAR_P_P_H
-#define QNATIVEANDROIDPROGRESSBAR_P_P_H
+#ifndef QUNIANDROIDPROGRESSBAR_P_P_H
+#define QUNIANDROIDPROGRESSBAR_P_P_H
 
 //
 //  W A R N I N G
@@ -66,4 +66,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDPROGRESSBAR_P_P_H
+#endif // QUNIANDROIDPROGRESSBAR_P_P_H

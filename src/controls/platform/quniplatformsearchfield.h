@@ -34,15 +34,15 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMSEARCHFIELD_H
-#define QNATIVEPLATFORMSEARCHFIELD_H
+#ifndef QUNIPLATFORMSEARCHFIELD_H
+#define QUNIPLATFORMSEARCHFIELD_H
 
 #include <QtCore>
 #include <QtUniControls/quniplatformcontrol.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QUniPlatformSearchField : public virtual QUniPlatformControl
+class Q_UNICONTROLS_EXPORT QUniPlatformSearchField : public virtual QUniPlatformControl
 {
 public:
     virtual ~QUniPlatformSearchField() {}
@@ -56,4 +56,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMSEARCHFIELD_H
+#endif // QUNIPLATFORMSEARCHFIELD_H

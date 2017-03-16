@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDABSSEEKBAR_P_P_H
-#define QNATIVEANDROIDABSSEEKBAR_P_P_H
+#ifndef QUNIANDROIDABSSEEKBAR_P_P_H
+#define QUNIANDROIDABSSEEKBAR_P_P_H
 
 //
 //  W A R N I N G
@@ -59,4 +59,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDABSSEEKBAR_P_P_H
+#endif // QUNIANDROIDABSSEEKBAR_P_P_H

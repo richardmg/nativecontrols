@@ -34,15 +34,15 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMWINDOW_H
-#define QNATIVEPLATFORMWINDOW_H
+#ifndef QUNIPLATFORMWINDOW_H
+#define QUNIPLATFORMWINDOW_H
 
 #include <QtCore>
 #include <QtUniControls/quniplatformbase.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QUniPlatformWindow : public virtual QUniPlatformBase
+class Q_UNICONTROLS_EXPORT QUniPlatformWindow : public virtual QUniPlatformBase
 {
 public:
     virtual ~QUniPlatformWindow() {}
@@ -55,4 +55,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMWINDOW_H
+#endif // QUNIPLATFORMWINDOW_H

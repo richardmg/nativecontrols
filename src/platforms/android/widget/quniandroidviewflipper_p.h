@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDVIEWFLIPPER_P_H
-#define QNATIVEANDROIDVIEWFLIPPER_P_H
+#ifndef QUNIANDROIDVIEWFLIPPER_P_H
+#define QUNIANDROIDVIEWFLIPPER_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidViewFlipper : public QUniAndroidViewAnimator
+class Q_UNIANDROID_EXPORT QUniAndroidViewFlipper : public QUniAndroidViewAnimator
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDVIEWFLIPPER_P_H
+#endif // QUNIANDROIDVIEWFLIPPER_P_H

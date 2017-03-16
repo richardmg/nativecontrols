@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEIOSWINDOW_P_H
-#define QNATIVEIOSWINDOW_P_H
+#ifndef QUNIIOSWINDOW_P_H
+#define QUNIIOSWINDOW_P_H
 
 //
 //  W A R N I N G
@@ -81,4 +81,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEIOSWINDOW_P_H
+#endif //QUNIIOSWINDOW_P_H

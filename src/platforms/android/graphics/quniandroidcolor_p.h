@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCOLOR_P_H
-#define QNATIVEANDROIDCOLOR_P_H
+#ifndef QUNIANDROIDCOLOR_P_H
+#define QUNIANDROIDCOLOR_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidColor : public QObject
+class Q_UNIANDROID_EXPORT QUniAndroidColor : public QObject
 {
     Q_OBJECT
     Q_ENUMS(Constants)
@@ -89,4 +89,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCOLOR_P_H
+#endif // QUNIANDROIDCOLOR_P_H

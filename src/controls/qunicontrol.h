@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVECONTROL_H
-#define QNATIVECONTROL_H
+#ifndef QUNICONTROL_H
+#define QUNICONTROL_H
 
 #include <QtCore/qobject.h>
 #include <QtGui/qwindow.h>
@@ -50,7 +50,7 @@ QT_BEGIN_NAMESPACE
 class QUniPlatformControl;
 class QUniControlPrivate;
 
-class Q_NATIVECONTROLS_EXPORT QUniControl : public QUniView
+class Q_UNICONTROLS_EXPORT QUniControl : public QUniView
 {
     Q_OBJECT
 
@@ -68,4 +68,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVECONTROL_H
+#endif // QUNICONTROL_H

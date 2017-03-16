@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDBASEADAPTER_P_P_H
-#define QNATIVEANDROIDBASEADAPTER_P_P_H
+#ifndef QUNIANDROIDBASEADAPTER_P_P_H
+#define QUNIANDROIDBASEADAPTER_P_P_H
 
 //
 //  W A R N I N G
@@ -59,4 +59,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDBASEADAPTER_P_P_H
+#endif // QUNIANDROIDBASEADAPTER_P_P_H

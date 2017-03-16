@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDTIMEPICKER_P_H
-#define QNATIVEANDROIDTIMEPICKER_P_H
+#ifndef QUNIANDROIDTIMEPICKER_P_H
+#define QUNIANDROIDTIMEPICKER_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidTimePickerPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidTimePicker : public QUniAndroidFrameLayout
+class Q_UNIANDROID_EXPORT QUniAndroidTimePicker : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
@@ -72,4 +72,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDTIMEPICKER_P_H
+#endif // QUNIANDROIDTIMEPICKER_P_H

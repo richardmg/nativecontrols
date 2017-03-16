@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEIOSWINDOW_H
-#define QNATIVEIOSWINDOW_H
+#ifndef QUNIIOSWINDOW_H
+#define QUNIIOSWINDOW_H
 
 #include <QtUniControls/quniplatformwindow.h>
 
@@ -47,7 +47,7 @@ class QUniUIKitWindowPrivate;
 class QUniUIKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitWindow : public QUniUIKitView, public virtual QUniPlatformWindow
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitWindow : public QUniUIKitView, public virtual QUniPlatformWindow
 {
     Q_OBJECT
     Q_PROPERTY(QUniUIKitViewController *rootViewController READ rootViewController WRITE setRootViewController NOTIFY rootViewControllerChanged)
@@ -90,4 +90,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEIOSWINDOW_H
+#endif // QUNIIOSWINDOW_H

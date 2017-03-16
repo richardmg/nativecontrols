@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDLAYOUTPARAMS_P_H
-#define QNATIVEANDROIDLAYOUTPARAMS_P_H
+#ifndef QUNIANDROIDLAYOUTPARAMS_P_H
+#define QUNIANDROIDLAYOUTPARAMS_P_H
 
 //
 //  W A R N I N G
@@ -56,7 +56,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidView;
 class QUniAndroidLayoutParamsPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidLayoutParams : public QUniAndroidObject
+class Q_UNIANDROID_EXPORT QUniAndroidLayoutParams : public QUniAndroidObject
 {
     Q_OBJECT
     Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged)
@@ -104,4 +104,4 @@ QT_END_NAMESPACE
 
 QML_DECLARE_TYPEINFO(QUniAndroidLayoutParams, QML_HAS_ATTACHED_PROPERTIES)
 
-#endif // QNATIVEANDROIDLAYOUTPARAMS_P_H
+#endif // QUNIANDROIDLAYOUTPARAMS_P_H

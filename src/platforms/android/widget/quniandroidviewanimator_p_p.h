@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDVIEWANIMATOR_P_P_H
-#define QNATIVEANDROIDVIEWANIMATOR_P_P_H
+#ifndef QUNIANDROIDVIEWANIMATOR_P_P_H
+#define QUNIANDROIDVIEWANIMATOR_P_P_H
 
 //
 //  W A R N I N G
@@ -63,4 +63,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDVIEWANIMATOR_P_P_H
+#endif // QUNIANDROIDVIEWANIMATOR_P_P_H

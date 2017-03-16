@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITVIEWCONTROLLER_H
-#define QNATIVEAPPKITVIEWCONTROLLER_H
+#ifndef QUNIAPPKITVIEWCONTROLLER_H
+#define QUNIAPPKITVIEWCONTROLLER_H
 
 #include <QObject>
 
@@ -49,7 +49,7 @@ class QUniAppKitViewControllerPrivate;
 class QUniAppKitTabViewItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSViewController);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitViewController : public QUniAppKitBase, public virtual QUniPlatformPage
+class Q_UNIAPPKITCONTROLS_EXPORT QUniAppKitViewController : public QUniAppKitBase, public virtual QUniPlatformPage
 {
     Q_OBJECT
     Q_PROPERTY(QUniAppKitView *view READ view WRITE setView NOTIFY viewChanged)
@@ -89,4 +89,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPKITVIEWCONTROLLER_H
+#endif // QUNIAPPKITVIEWCONTROLLER_H

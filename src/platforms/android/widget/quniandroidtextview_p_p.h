@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDTEXTVIEW_P_P_H
-#define QNATIVEANDROIDTEXTVIEW_P_P_H
+#ifndef QUNIANDROIDTEXTVIEW_P_P_H
+#define QUNIANDROIDTEXTVIEW_P_P_H
 
 //
 //  W A R N I N G
@@ -66,4 +66,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDTEXTVIEW_P_P_H
+#endif // QUNIANDROIDTEXTVIEW_P_P_H

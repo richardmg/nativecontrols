@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDARRAYADAPTER_P_H
-#define QNATIVEANDROIDARRAYADAPTER_P_H
+#ifndef QUNIANDROIDARRAYADAPTER_P_H
+#define QUNIANDROIDARRAYADAPTER_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidArrayAdapterPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidArrayAdapter : public QUniAndroidBaseAdapter
+class Q_UNIANDROID_EXPORT QUniAndroidArrayAdapter : public QUniAndroidBaseAdapter
 {
     Q_OBJECT
     Q_PROPERTY(int style READ style WRITE setStyle NOTIFY styleChanged)
@@ -91,4 +91,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDARRAYADAPTER_P_H
+#endif // QUNIANDROIDARRAYADAPTER_P_H

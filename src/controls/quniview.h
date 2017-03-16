@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEVIEW_H
-#define QNATIVEVIEW_H
+#ifndef QUNIVIEW_H
+#define QUNIVIEW_H
 
 #include <QtUniControls/qunibase.h>
 #include <QtUniControls/qunicontrolsglobal.h>
@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QUniViewPrivate;
 class QUniPlatformView;
 
-class Q_NATIVECONTROLS_EXPORT QUniView : public QUniBase
+class Q_UNICONTROLS_EXPORT QUniView : public QUniBase
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
@@ -124,4 +124,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEVIEW_H
+#endif // QUNIVIEW_H

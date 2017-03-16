@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDIMAGEVIEW_P_H
-#define QNATIVEANDROIDIMAGEVIEW_P_H
+#ifndef QUNIANDROIDIMAGEVIEW_P_H
+#define QUNIANDROIDIMAGEVIEW_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidImageViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidImageView : public QUniAndroidView
+class Q_UNIANDROID_EXPORT QUniAndroidImageView : public QUniAndroidView
 {
     Q_OBJECT
     Q_PROPERTY(QUrl imageURI READ imageURI WRITE setImageURI NOTIFY imageURIChanged)
@@ -92,4 +92,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDTEXTVIEW_P_H
+#endif // QUNIANDROIDTEXTVIEW_P_H

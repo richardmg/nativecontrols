@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITTABBARCONTROLLER_P_H
-#define QNATIVEUIKITTABBARCONTROLLER_P_H
+#ifndef QUNIUIKITTABBARCONTROLLER_P_H
+#define QUNIUIKITTABBARCONTROLLER_P_H
 
 //
 //  W A R N I N G
@@ -74,4 +74,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEUIKITTABBARCONTROLLER_P_H
+#endif //QUNIUIKITTABBARCONTROLLER_P_H

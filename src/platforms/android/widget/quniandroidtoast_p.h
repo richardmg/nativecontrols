@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDTOAST_P_H
-#define QNATIVEANDROIDTOAST_P_H
+#ifndef QUNIANDROIDTOAST_P_H
+#define QUNIANDROIDTOAST_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidView;
 class QUniAndroidToastPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidToast : public QUniAndroidObject
+class Q_UNIANDROID_EXPORT QUniAndroidToast : public QUniAndroidObject
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -85,4 +85,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDTOAST_P_H
+#endif // QUNIANDROIDTOAST_P_H

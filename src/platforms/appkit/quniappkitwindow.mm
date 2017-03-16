@@ -52,7 +52,7 @@
 
 - (BOOL)isFlipped
 {
-    static const bool useFlippedViews = qEnvironmentVariableIsSet("QT_NATIVE_MAC_USE_FLIPPED_NSVIEWS");
+    static const bool useFlippedViews = qEnvironmentVariableIsSet("QT_UNI_MAC_USE_FLIPPED_NSVIEWS");
     return useFlippedViews ? YES : NO;
 }
 

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDALERTDIALOG_P_H
-#define QNATIVEANDROIDALERTDIALOG_P_H
+#ifndef QUNIANDROIDALERTDIALOG_P_H
+#define QUNIANDROIDALERTDIALOG_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidAlertDialogPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidAlertDialog : public QUniAndroidDialog
+class Q_UNIANDROID_EXPORT QUniAndroidAlertDialog : public QUniAndroidDialog
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
@@ -84,4 +84,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDALERTDIALOG_P_H
+#endif // QUNIANDROIDALERTDIALOG_P_H

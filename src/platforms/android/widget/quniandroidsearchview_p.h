@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSEARCHVIEW_P_H
-#define QNATIVEANDROIDSEARCHVIEW_P_H
+#ifndef QUNIANDROIDSEARCHVIEW_P_H
+#define QUNIANDROIDSEARCHVIEW_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidSearchView : public QUniAndroidLinearLayout
+class Q_UNIANDROID_EXPORT QUniAndroidSearchView : public QUniAndroidLinearLayout
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSEARCHVIEW_P_H
+#endif // QUNIANDROIDSEARCHVIEW_P_H

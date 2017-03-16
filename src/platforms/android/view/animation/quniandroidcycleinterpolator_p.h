@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCYCLEINTERPOLATOR_P_H
-#define QNATIVEANDROIDCYCLEINTERPOLATOR_P_H
+#ifndef QUNIANDROIDCYCLEINTERPOLATOR_P_H
+#define QUNIANDROIDCYCLEINTERPOLATOR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidCycleInterpolatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidCycleInterpolator : public QUniAndroidInterpolator
+class Q_UNIANDROID_EXPORT QUniAndroidCycleInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
     Q_PROPERTY(qreal cycles READ cycles WRITE setCycles NOTIFY cyclesChanged)
@@ -78,4 +78,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCYCLEINTERPOLATOR_P_H
+#endif // QUNIANDROIDCYCLEINTERPOLATOR_P_H

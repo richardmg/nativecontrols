@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QTNATIVEANDROIDFUNCTIONS_P_H
-#define QTNATIVEANDROIDFUNCTIONS_P_H
+#ifndef QTUNIANDROIDFUNCTIONS_P_H
+#define QTUNIANDROIDFUNCTIONS_P_H
 
 //
 //  W A R N I N G
@@ -68,4 +68,4 @@ namespace QtUniAndroid
 
 QT_END_NAMESPACE
 
-#endif // QTNATIVEANDROIDFUNCTIONS_P_H
+#endif // QTUNIANDROIDFUNCTIONS_P_H

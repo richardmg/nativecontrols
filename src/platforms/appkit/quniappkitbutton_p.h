@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITBUTTON_P_H
-#define QNATIVEAPPKITBUTTON_P_H
+#ifndef QUNIAPPKITBUTTON_P_H
+#define QUNIAPPKITBUTTON_P_H
 
 //
 //  W A R N I N G
@@ -77,4 +77,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPKITBUTTON_P_H
+#endif // QUNIAPPKITBUTTON_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDBASEADAPTER_P_H
-#define QNATIVEANDROIDBASEADAPTER_P_H
+#ifndef QUNIANDROIDBASEADAPTER_P_H
+#define QUNIANDROIDBASEADAPTER_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidBaseAdapterPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidBaseAdapter : public QUniAndroidContextual
+class Q_UNIANDROID_EXPORT QUniAndroidBaseAdapter : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
@@ -83,4 +83,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDBASEADAPTER_P_H
+#endif // QUNIANDROIDBASEADAPTER_P_H

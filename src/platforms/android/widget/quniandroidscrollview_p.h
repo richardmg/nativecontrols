@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSCROLLVIEW_P_H
-#define QNATIVEANDROIDSCROLLVIEW_P_H
+#ifndef QUNIANDROIDSCROLLVIEW_P_H
+#define QUNIANDROIDSCROLLVIEW_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidScrollViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidScrollView : public QUniAndroidFrameLayout
+class Q_UNIANDROID_EXPORT QUniAndroidScrollView : public QUniAndroidFrameLayout
 {
     Q_OBJECT
     Q_PROPERTY(int scrollX READ scrollX WRITE setScrollX NOTIFY scrollXChanged)
@@ -87,4 +87,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSCROLLVIEW_P_H
+#endif // QUNIANDROIDSCROLLVIEW_P_H

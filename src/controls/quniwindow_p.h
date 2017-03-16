@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEWINDOW_P_H
-#define QNATIVEWINDOW_P_H
+#ifndef QUNIWINDOW_P_H
+#define QUNIWINDOW_P_H
 
 //
 //  W A R N I N G
@@ -70,4 +70,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEWINDOW_P_H
+#endif //QUNIWINDOW_P_H

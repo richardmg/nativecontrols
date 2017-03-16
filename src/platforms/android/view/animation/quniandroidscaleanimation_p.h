@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSCALEANIMATION_P_H
-#define QNATIVEANDROIDSCALEANIMATION_P_H
+#ifndef QUNIANDROIDSCALEANIMATION_P_H
+#define QUNIANDROIDSCALEANIMATION_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidScaleAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidScaleAnimation : public QUniAndroidAnimation
+class Q_UNIANDROID_EXPORT QUniAndroidScaleAnimation : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(qreal fromXScale READ fromXScale WRITE setFromXScale NOTIFY fromXScaleChanged)
@@ -113,4 +113,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSCALEANIMATION_P_H
+#endif // QUNIANDROIDSCALEANIMATION_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDGRAVITY_P_H
-#define QNATIVEANDROIDGRAVITY_P_H
+#ifndef QUNIANDROIDGRAVITY_P_H
+#define QUNIANDROIDGRAVITY_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidGravity : public QObject
+class Q_UNIANDROID_EXPORT QUniAndroidGravity : public QObject
 {
     Q_OBJECT
     Q_FLAGS(Flags)
@@ -98,4 +98,4 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(QUniAndroidGravity::Flags)
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDGRAVITY_P_H
+#endif // QUNIANDROIDGRAVITY_P_H

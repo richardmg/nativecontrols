@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCONTEXTWRAPPER_P_H
-#define QNATIVEANDROIDCONTEXTWRAPPER_P_H
+#ifndef QUNIANDROIDCONTEXTWRAPPER_P_H
+#define QUNIANDROIDCONTEXTWRAPPER_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidContextWrapperPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidContextWrapper : public QUniAndroidContext
+class Q_UNIANDROID_EXPORT QUniAndroidContextWrapper : public QUniAndroidContext
 {
     Q_OBJECT
 
@@ -73,4 +73,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCONTEXTWRAPPER_P_H
+#endif // QUNIANDROIDCONTEXTWRAPPER_P_H

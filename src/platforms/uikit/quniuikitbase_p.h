@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITBASE_P_H
-#define QNATIVEUIKITBASE_P_H
+#ifndef QUNIUIKITBASE_P_H
+#define QUNIUIKITBASE_P_H
 
 //
 //  W A R N I N G
@@ -73,4 +73,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEUIKITBASE_P_H
+#endif //QUNIUIKITBASE_P_H

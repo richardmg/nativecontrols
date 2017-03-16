@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDACCELERATEINTERPOLATOR_P_H
-#define QNATIVEANDROIDACCELERATEINTERPOLATOR_P_H
+#ifndef QUNIANDROIDACCELERATEINTERPOLATOR_P_H
+#define QUNIANDROIDACCELERATEINTERPOLATOR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidAccelerateInterpolatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidAccelerateInterpolator : public QUniAndroidInterpolator
+class Q_UNIANDROID_EXPORT QUniAndroidAccelerateInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
     Q_PROPERTY(qreal factor READ factor WRITE setFactor NOTIFY factorChanged)
@@ -78,4 +78,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDACCELERATEINTERPOLATOR_P_H
+#endif // QUNIANDROIDACCELERATEINTERPOLATOR_P_H

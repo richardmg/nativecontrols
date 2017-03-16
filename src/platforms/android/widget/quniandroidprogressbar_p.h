@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDPROGRESSBAR_P_H
-#define QNATIVEANDROIDPROGRESSBAR_P_H
+#ifndef QUNIANDROIDPROGRESSBAR_P_H
+#define QUNIANDROIDPROGRESSBAR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidProgressBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidProgressBar : public QUniAndroidView
+class Q_UNIANDROID_EXPORT QUniAndroidProgressBar : public QUniAndroidView
 {
     Q_OBJECT
     Q_PROPERTY(bool indeterminate READ isIndeterminate WRITE setIndeterminate NOTIFY indeterminateChanged)
@@ -112,4 +112,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDPROGRESSBAR_P_H
+#endif // QUNIANDROIDPROGRESSBAR_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPAGE_P_H
-#define QNATIVEPAGE_P_H
+#ifndef QUNIPAGE_P_H
+#define QUNIPAGE_P_H
 
 //
 //  W A R N I N G
@@ -72,4 +72,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPAGE_P_H
+#endif // QUNIPAGE_P_H

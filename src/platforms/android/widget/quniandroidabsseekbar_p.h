@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDABSSEEKBAR_P_H
-#define QNATIVEANDROIDABSSEEKBAR_P_H
+#ifndef QUNIANDROIDABSSEEKBAR_P_H
+#define QUNIANDROIDABSSEEKBAR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidAbsSeekBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidAbsSeekBar : public QUniAndroidProgressBar
+class Q_UNIANDROID_EXPORT QUniAndroidAbsSeekBar : public QUniAndroidProgressBar
 {
     Q_OBJECT
 
@@ -74,4 +74,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDABSSEEKBAR_P_H
+#endif // QUNIANDROIDABSSEEKBAR_P_H

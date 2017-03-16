@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDRECYCLERVIEW_P_H
-#define QNATIVEANDROIDRECYCLERVIEW_P_H
+#ifndef QUNIANDROIDRECYCLERVIEW_P_H
+#define QUNIANDROIDRECYCLERVIEW_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidRecyclerAdapter;
 class QUniAndroidRecyclerViewPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidRecyclerView : public QUniAndroidViewGroup
+class Q_UNIANDROID_EXPORT QUniAndroidRecyclerView : public QUniAndroidViewGroup
 {
     Q_OBJECT
     Q_PROPERTY(QUniAndroidRecyclerAdapter *adapter READ adapter WRITE setAdapter NOTIFY adapterChanged)
@@ -82,4 +82,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDRECYCLERVIEW_P_H
+#endif // QUNIANDROIDRECYCLERVIEW_P_H

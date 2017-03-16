@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDOBJECT_P_H
-#define QNATIVEANDROIDOBJECT_P_H
+#ifndef QUNIANDROIDOBJECT_P_H
+#define QUNIANDROIDOBJECT_P_H
 
 //
 //  W A R N I N G
@@ -59,7 +59,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidObjectPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidObject : public QObject, public QQmlParserStatus
+class Q_UNIANDROID_EXPORT QUniAndroidObject : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
     Q_PRIVATE_PROPERTY(QUniAndroidObject::d_func(), QQmlListProperty<QObject> data READ data NOTIFY dataChanged DESIGNABLE false)
@@ -107,4 +107,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDOBJECT_P_H
+#endif // QUNIANDROIDOBJECT_P_H

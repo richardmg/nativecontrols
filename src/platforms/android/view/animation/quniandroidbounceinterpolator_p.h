@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDBOUNCEINTERPOLATOR_P_H
-#define QNATIVEANDROIDBOUNCEINTERPOLATOR_P_H
+#ifndef QUNIANDROIDBOUNCEINTERPOLATOR_P_H
+#define QUNIANDROIDBOUNCEINTERPOLATOR_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidBounceInterpolator : public QUniAndroidInterpolator
+class Q_UNIANDROID_EXPORT QUniAndroidBounceInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
 
@@ -67,4 +67,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDBOUNCEINTERPOLATOR_P_H
+#endif // QUNIANDROIDBOUNCEINTERPOLATOR_P_H

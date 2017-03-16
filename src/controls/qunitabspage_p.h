@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVETABSPAGE_P_H
-#define QNATIVETABSPAGE_P_H
+#ifndef QUNITABSPAGE_P_H
+#define QUNITABSPAGE_P_H
 
 //
 //  W A R N I N G
@@ -72,4 +72,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVETABSPAGE_P_H
+#endif // QUNITABSPAGE_P_H

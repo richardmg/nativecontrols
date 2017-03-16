@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDLINEARLAYOUT_P_P_H
-#define QNATIVEANDROIDLINEARLAYOUT_P_P_H
+#ifndef QUNIANDROIDLINEARLAYOUT_P_P_H
+#define QUNIANDROIDLINEARLAYOUT_P_P_H
 
 //
 //  W A R N I N G
@@ -68,4 +68,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDLINEARLAYOUT_P_P_H
+#endif // QUNIANDROIDLINEARLAYOUT_P_P_H

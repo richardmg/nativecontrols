@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDACTIONBAR_P_H
-#define QNATIVEANDROIDACTIONBAR_P_H
+#ifndef QUNIANDROIDACTIONBAR_P_H
+#define QUNIANDROIDACTIONBAR_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidDrawable;
 class QUniAndroidActionBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidActionBar : public QUniAndroidObject
+class Q_UNIANDROID_EXPORT QUniAndroidActionBar : public QUniAndroidObject
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
@@ -101,4 +101,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDACTIONBAR_P_H
+#endif // QUNIANDROIDACTIONBAR_P_H

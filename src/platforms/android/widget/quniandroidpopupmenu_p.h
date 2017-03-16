@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDPOPUPMENU_P_H
-#define QNATIVEANDROIDPOPUPMENU_P_H
+#ifndef QUNIANDROIDPOPUPMENU_P_H
+#define QUNIANDROIDPOPUPMENU_P_H
 
 //
 //  W A R N I N G
@@ -56,7 +56,7 @@ class QUniAndroidView;
 class QUniAndroidMenuItem;
 class QUniAndroidPopupMenuPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidPopupMenu : public QUniAndroidObject
+class Q_UNIANDROID_EXPORT QUniAndroidPopupMenu : public QUniAndroidObject
 {
     Q_OBJECT
     Q_PROPERTY(QUniAndroidView *anchor READ anchor WRITE setAnchor NOTIFY anchorChanged)
@@ -90,4 +90,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDPOPUPMENU_P_H
+#endif // QUNIANDROIDPOPUPMENU_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDDATEPICKER_P_H
-#define QNATIVEANDROIDDATEPICKER_P_H
+#ifndef QUNIANDROIDDATEPICKER_P_H
+#define QUNIANDROIDDATEPICKER_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidDatePickerPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidDatePicker : public QUniAndroidFrameLayout
+class Q_UNIANDROID_EXPORT QUniAndroidDatePicker : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
@@ -72,4 +72,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDDATEPICKER_P_H
+#endif // QUNIANDROIDDATEPICKER_P_H

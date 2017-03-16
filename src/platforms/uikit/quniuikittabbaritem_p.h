@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITTABBARITEM_P_H
-#define QNATIVEUIKITTABBARITEM_P_H
+#ifndef QUNIUIKITTABBARITEM_P_H
+#define QUNIUIKITTABBARITEM_P_H
 
 //
 //  W A R N I N G
@@ -73,4 +73,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEUIKITTABBARITEM_P_H
+#endif //QUNIUIKITTABBARITEM_P_H

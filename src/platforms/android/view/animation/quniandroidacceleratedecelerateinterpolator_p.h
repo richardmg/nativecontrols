@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDACCELERATEDECELERATEINTERPOLATOR_P_H
-#define QNATIVEANDROIDACCELERATEDECELERATEINTERPOLATOR_P_H
+#ifndef QUNIANDROIDACCELERATEDECELERATEINTERPOLATOR_P_H
+#define QUNIANDROIDACCELERATEDECELERATEINTERPOLATOR_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidAccelerateDecelerateInterpolator : public QUniAndroidInterpolator
+class Q_UNIANDROID_EXPORT QUniAndroidAccelerateDecelerateInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
 
@@ -67,4 +67,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDACCELERATEDECELERATEINTERPOLATOR_P_H
+#endif // QUNIANDROIDACCELERATEDECELERATEINTERPOLATOR_P_H

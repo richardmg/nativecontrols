@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVECONTROLSGLOBAL_H
-#define QNATIVECONTROLSGLOBAL_H
+#ifndef QUNICONTROLSGLOBAL_H
+#define QUNICONTROLSGLOBAL_H
 
 //
 //  W A R N I N G
@@ -53,15 +53,15 @@
 QT_BEGIN_NAMESPACE
 
 #ifndef QT_STATIC
-#  if defined(QT_BUILD_NATIVECONTROLS_LIB)
-#    define Q_NATIVECONTROLS_EXPORT Q_DECL_EXPORT
+#  if defined(QT_BUILD_UNICONTROLS_LIB)
+#    define Q_UNICONTROLS_EXPORT Q_DECL_EXPORT
 #  else
-#    define Q_NATIVECONTROLS_EXPORT Q_DECL_IMPORT
+#    define Q_UNICONTROLS_EXPORT Q_DECL_IMPORT
 #  endif
 #else
-#  define Q_NATIVECONTROLS_EXPORT
+#  define Q_UNICONTROLS_EXPORT
 #endif
 
 QT_END_NAMESPACE
 
-#endif // QNATIVECONTROLSGLOBAL_H
+#endif // QUNICONTROLSGLOBAL_H

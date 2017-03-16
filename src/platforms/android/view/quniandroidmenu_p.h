@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDMENU_P_H
-#define QNATIVEANDROIDMENU_P_H
+#ifndef QUNIANDROIDMENU_P_H
+#define QUNIANDROIDMENU_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidMenuItem;
 class QUniAndroidMenuPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidMenu : public QUniAndroidContextual
+class Q_UNIANDROID_EXPORT QUniAndroidMenu : public QUniAndroidContextual
 {
     Q_OBJECT
 
@@ -77,4 +77,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDMENU_P_H
+#endif // QUNIANDROIDMENU_P_H

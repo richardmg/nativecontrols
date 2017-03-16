@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDRADIOBUTTON_P_H
-#define QNATIVEANDROIDRADIOBUTTON_P_H
+#ifndef QUNIANDROIDRADIOBUTTON_P_H
+#define QUNIANDROIDRADIOBUTTON_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidRadioButton : public QUniAndroidCompoundButton
+class Q_UNIANDROID_EXPORT QUniAndroidRadioButton : public QUniAndroidCompoundButton
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDRADIOBUTTON_P_H
+#endif // QUNIANDROIDRADIOBUTTON_P_H

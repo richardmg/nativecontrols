@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDANIMATION_P_P_H
-#define QNATIVEANDROIDANIMATION_P_P_H
+#ifndef QUNIANDROIDANIMATION_P_P_H
+#define QUNIANDROIDANIMATION_P_P_H
 
 //
 //  W A R N I N G
@@ -75,4 +75,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDANIMATION_P_P_H
+#endif // QUNIANDROIDANIMATION_P_P_H

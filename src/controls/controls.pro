@@ -7,7 +7,7 @@ QT_PRIVATE += core-private gui-private qml-private
 
 DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 
-NATIVE_CONTROLS = \
+UNI_CONTROLS = \
     base \
     window \
     view \
@@ -19,7 +19,7 @@ NATIVE_CONTROLS = \
     tabspage \
     tabspagetab
 
-for(c,NATIVE_CONTROLS) {
+for(c,UNI_CONTROLS) {
     HEADERS += quni$${c}.h
     HEADERS += quni$${c}_p.h
     HEADERS += platform/quniplatform$${c}.h

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEBUTTON_P_H
-#define QNATIVEBUTTON_P_H
+#ifndef QUNIBUTTON_P_H
+#define QUNIBUTTON_P_H
 
 //
 //  W A R N I N G
@@ -72,4 +72,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEBUTTON_P_H
+#endif // QUNIBUTTON_P_H

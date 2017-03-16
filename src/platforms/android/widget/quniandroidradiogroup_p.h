@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDRADIOGROUP_P_H
-#define QNATIVEANDROIDRADIOGROUP_P_H
+#ifndef QUNIANDROIDRADIOGROUP_P_H
+#define QUNIANDROIDRADIOGROUP_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidRadioButton;
 class QUniAndroidRadioGroupPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidRadioGroup : public QUniAndroidLinearLayout
+class Q_UNIANDROID_EXPORT QUniAndroidRadioGroup : public QUniAndroidLinearLayout
 {
     Q_OBJECT
     Q_PROPERTY(QUniAndroidRadioButton *checkedButton READ checkedButton WRITE setCheckedButton NOTIFY checkedButtonChanged)
@@ -86,4 +86,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDRADIOGROUP_P_H
+#endif // QUNIANDROIDRADIOGROUP_P_H

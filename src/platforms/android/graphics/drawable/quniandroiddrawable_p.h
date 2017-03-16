@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDDRAWABLE_P_H
-#define QNATIVEANDROIDDRAWABLE_P_H
+#ifndef QUNIANDROIDDRAWABLE_P_H
+#define QUNIANDROIDDRAWABLE_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidDrawablePrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidDrawable : public QUniAndroidObject
+class Q_UNIANDROID_EXPORT QUniAndroidDrawable : public QUniAndroidObject
 {
     Q_OBJECT
 
@@ -74,4 +74,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDDRAWABLE_P_H
+#endif // QUNIANDROIDDRAWABLE_P_H

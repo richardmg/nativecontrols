@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QTNATIVEANDROIDGLOBAL_P_H
-#define QTNATIVEANDROIDGLOBAL_P_H
+#ifndef QTUNIANDROIDGLOBAL_P_H
+#define QTUNIANDROIDGLOBAL_P_H
 
 //
 //  W A R N I N G
@@ -55,13 +55,13 @@
 QT_BEGIN_NAMESPACE
 
 #ifndef QT_STATIC
-#  if defined(QT_BUILD_NATIVEANDROID_LIB)
-#    define Q_NATIVEANDROID_EXPORT Q_DECL_EXPORT
+#  if defined(QT_BUILD_UNIANDROID_LIB)
+#    define Q_UNIANDROID_EXPORT Q_DECL_EXPORT
 #  else
-#    define Q_NATIVEANDROID_EXPORT Q_DECL_IMPORT
+#    define Q_UNIANDROID_EXPORT Q_DECL_IMPORT
 #  endif
 #else
-#  define Q_NATIVEANDROID_EXPORT
+#  define Q_UNIANDROID_EXPORT
 #endif
 
 namespace QtUniAndroid {
@@ -73,4 +73,4 @@ namespace QtUniAndroid {
 
 QT_END_NAMESPACE
 
-#endif // QTNATIVEANDROIDGLOBAL_P_H
+#endif // QTUNIANDROIDGLOBAL_P_H

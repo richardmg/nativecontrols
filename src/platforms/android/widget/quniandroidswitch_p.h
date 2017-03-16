@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSWITCH_P_H
-#define QNATIVEANDROIDSWITCH_P_H
+#ifndef QUNIANDROIDSWITCH_P_H
+#define QUNIANDROIDSWITCH_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidSwitch : public QUniAndroidCompoundButton
+class Q_UNIANDROID_EXPORT QUniAndroidSwitch : public QUniAndroidCompoundButton
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSWITCH_P_H
+#endif // QUNIANDROIDSWITCH_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMVIEW_H
-#define QNATIVEPLATFORMVIEW_H
+#ifndef QUNIPLATFORMVIEW_H
+#define QUNIPLATFORMVIEW_H
 
 #include <QtCore>
 #include <QtUniControls/qunicontrolsglobal.h>
@@ -43,7 +43,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QUniPlatformView : public virtual QUniPlatformBase
+class Q_UNICONTROLS_EXPORT QUniPlatformView : public virtual QUniPlatformBase
 {
 public:
     virtual ~QUniPlatformView() {}
@@ -65,4 +65,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMVIEW_H
+#endif // QUNIPLATFORMVIEW_H

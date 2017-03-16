@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVETEXTFIELD_P_H
-#define QNATIVETEXTFIELD_P_H
+#ifndef QUNITEXTFIELD_P_H
+#define QUNITEXTFIELD_P_H
 
 //
 //  W A R N I N G
@@ -72,4 +72,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVETEXTFIELD_P_H
+#endif // QUNITEXTFIELD_P_H

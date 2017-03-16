@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITWINDOW_P_H
-#define QNATIVEAPPKITWINDOW_P_H
+#ifndef QUNIAPPKITWINDOW_P_H
+#define QUNIAPPKITWINDOW_P_H
 
 //
 //  W A R N I N G
@@ -83,4 +83,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEAPPKITWINDOW_P_H
+#endif //QUNIAPPKITWINDOW_P_H

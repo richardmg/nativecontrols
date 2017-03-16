@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDADAPTERVIEW_P_P_H
-#define QNATIVEANDROIDADAPTERVIEW_P_P_H
+#ifndef QUNIANDROIDADAPTERVIEW_P_P_H
+#define QUNIANDROIDADAPTERVIEW_P_P_H
 
 //
 //  W A R N I N G
@@ -67,4 +67,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDADAPTERVIEW_P_P_H
+#endif // QUNIANDROIDADAPTERVIEW_P_P_H

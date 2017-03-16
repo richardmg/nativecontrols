@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDANIMATIONSET_P_H
-#define QNATIVEANDROIDANIMATIONSET_P_H
+#ifndef QUNIANDROIDANIMATIONSET_P_H
+#define QUNIANDROIDANIMATIONSET_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidAnimationSetPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidAnimationSet : public QUniAndroidAnimation
+class Q_UNIANDROID_EXPORT QUniAndroidAnimationSet : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(bool shareInterpolator READ shareInterpolator WRITE setShareInterpolator NOTIFY shareInterpolatorChanged)
@@ -79,4 +79,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDANIMATIONSET_P_H
+#endif // QUNIANDROIDANIMATIONSET_P_H

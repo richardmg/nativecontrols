@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDACTIONBARDRAWERTOGGLE_P_H
-#define QNATIVEANDROIDACTIONBARDRAWERTOGGLE_P_H
+#ifndef QUNIANDROIDACTIONBARDRAWERTOGGLE_P_H
+#define QUNIANDROIDACTIONBARDRAWERTOGGLE_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidActionBarDrawerToggle : public QUniAndroidObject
+class Q_UNIANDROID_EXPORT QUniAndroidActionBarDrawerToggle : public QUniAndroidObject
 {
     Q_OBJECT
 
@@ -64,4 +64,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDACTIONBARDRAWERTOGGLE_P_H
+#endif // QUNIANDROIDACTIONBARDRAWERTOGGLE_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITBUTTON_H
-#define QNATIVEAPPKITBUTTON_H
+#ifndef QUNIAPPKITBUTTON_H
+#define QUNIAPPKITBUTTON_H
 
 #include <QtUniControls/quniplatformbutton.h>
 #include <QtUniAppKitControls/quniappkitcontrol.h>
@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QUniAppKitButtonPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSButton);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitButton : public QUniAppKitControl, public virtual QUniPlatformButton
+class Q_UNIAPPKITCONTROLS_EXPORT QUniAppKitButton : public QUniAppKitControl, public virtual QUniPlatformButton
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -74,4 +74,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPKITBUTTON_H
+#endif // QUNIAPPKITBUTTON_H

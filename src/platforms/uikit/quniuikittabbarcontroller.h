@@ -1,5 +1,5 @@
-#ifndef QNATIVEUIKITTABBARCONTROLLER_H
-#define QNATIVEUIKITTABBARCONTROLLER_H
+#ifndef QUNIUIKITTABBARCONTROLLER_H
+#define QUNIUIKITTABBARCONTROLLER_H
 
 #include <QObject>
 
@@ -11,7 +11,7 @@ QT_BEGIN_NAMESPACE
 class QUniUIKitTabBarControllerPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarController);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitTabBarController : public QUniUIKitViewController, public virtual QUniPlatformTabsPage
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarController : public QUniUIKitViewController, public virtual QUniPlatformTabsPage
 {
     Q_OBJECT
 
@@ -35,4 +35,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEUIKITTABBARCONTROLLER_H
+#endif // QUNIUIKITTABBARCONTROLLER_H

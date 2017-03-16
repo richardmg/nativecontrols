@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDLINEARLAYOUT_P_H
-#define QNATIVEANDROIDLINEARLAYOUT_P_H
+#ifndef QUNIANDROIDLINEARLAYOUT_P_H
+#define QUNIANDROIDLINEARLAYOUT_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidLinearLayoutPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidLinearLayout : public QUniAndroidViewGroup
+class Q_UNIANDROID_EXPORT QUniAndroidLinearLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
     Q_PROPERTY(bool baselineAligned READ isBaselineAligned WRITE setBaselineAligned NOTIFY baselineAlignedChanged)
@@ -115,4 +115,4 @@ QT_END_NAMESPACE
 
 QML_DECLARE_TYPEINFO(QUniAndroidLinearLayout, QML_HAS_ATTACHED_PROPERTIES)
 
-#endif // QNATIVEANDROIDLINEARLAYOUT_P_H
+#endif // QUNIANDROIDLINEARLAYOUT_P_H

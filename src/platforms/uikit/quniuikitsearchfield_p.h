@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITSEARCHFIELD_P_H
-#define QNATIVEUIKITSEARCHFIELD_P_H
+#ifndef QUNIUIKITSEARCHFIELD_P_H
+#define QUNIUIKITSEARCHFIELD_P_H
 
 //
 //  W A R N I N G
@@ -78,4 +78,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEUIKITSEARCHFIELD_P_H
+#endif // QUNIUIKITSEARCHFIELD_P_H

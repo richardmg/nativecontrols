@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDTOGGLEBUTTON_P_H
-#define QNATIVEANDROIDTOGGLEBUTTON_P_H
+#ifndef QUNIANDROIDTOGGLEBUTTON_P_H
+#define QUNIANDROIDTOGGLEBUTTON_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidToggleButtonPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidToggleButton : public QUniAndroidCompoundButton
+class Q_UNIANDROID_EXPORT QUniAndroidToggleButton : public QUniAndroidCompoundButton
 {
     Q_OBJECT
     Q_PROPERTY(QString textOn READ textOn WRITE setTextOn NOTIFY textOnChanged)
@@ -84,4 +84,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDTOGGLEBUTTON_P_H
+#endif // QUNIANDROIDTOGGLEBUTTON_P_H

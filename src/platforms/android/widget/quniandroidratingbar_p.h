@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDRATINGBAR_P_H
-#define QNATIVEANDROIDRATINGBAR_P_H
+#ifndef QUNIANDROIDRATINGBAR_P_H
+#define QUNIANDROIDRATINGBAR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidRatingBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidRatingBar : public QUniAndroidAbsSeekBar
+class Q_UNIANDROID_EXPORT QUniAndroidRatingBar : public QUniAndroidAbsSeekBar
 {
     Q_OBJECT
     Q_PROPERTY(qreal rating READ rating WRITE setRating NOTIFY ratingChanged)
@@ -79,4 +79,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDRATINGBAR_P_H
+#endif // QUNIANDROIDRATINGBAR_P_H

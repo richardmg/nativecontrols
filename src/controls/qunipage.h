@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPAGE_H
-#define QNATIVEPAGE_H
+#ifndef QUNIPAGE_H
+#define QUNIPAGE_H
 
 #include <QtUniControls/qunibase.h>
 #include <QtUniControls/qunicontrolsglobal.h>
@@ -44,7 +44,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniPagePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QUniPage : public QUniBase
+class Q_UNICONTROLS_EXPORT QUniPage : public QUniBase
 {
     Q_OBJECT
 
@@ -62,4 +62,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPAGE_H
+#endif // QUNIPAGE_H

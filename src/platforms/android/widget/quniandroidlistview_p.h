@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDLISTVIEW_P_H
-#define QNATIVEANDROIDLISTVIEW_P_H
+#ifndef QUNIANDROIDLISTVIEW_P_H
+#define QUNIANDROIDLISTVIEW_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidListView : public QUniAndroidAdapterView // TODO: AbsListView
+class Q_UNIANDROID_EXPORT QUniAndroidListView : public QUniAndroidAdapterView // TODO: AbsListView
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDLISTVIEW_P_H
+#endif // QUNIANDROIDLISTVIEW_P_H

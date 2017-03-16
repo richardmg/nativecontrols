@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDTABSPEC_P_H
-#define QNATIVEANDROIDTABSPEC_P_H
+#ifndef QUNIANDROIDTABSPEC_P_H
+#define QUNIANDROIDTABSPEC_P_H
 
 //
 //  W A R N I N G
@@ -60,7 +60,7 @@ class QUniAndroidView;
 class QUniAndroidTabHost;
 class QUniAndroidTabSpecPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidTabSpec : public QObject
+class Q_UNIANDROID_EXPORT QUniAndroidTabSpec : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged)
@@ -87,4 +87,4 @@ QT_END_NAMESPACE
 
 QML_DECLARE_TYPEINFO(QUniAndroidTabSpec, QML_HAS_ATTACHED_PROPERTIES)
 
-#endif // QNATIVEANDROIDTABSPEC_P_H
+#endif // QUNIANDROIDTABSPEC_P_H

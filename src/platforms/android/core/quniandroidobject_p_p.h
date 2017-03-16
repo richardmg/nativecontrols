@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDOBJECT_P_P_H
-#define QNATIVEANDROIDOBJECT_P_P_H
+#ifndef QUNIANDROIDOBJECT_P_P_H
+#define QUNIANDROIDOBJECT_P_P_H
 
 //
 //  W A R N I N G
@@ -81,4 +81,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDOBJECT_P_P_H
+#endif // QUNIANDROIDOBJECT_P_P_H

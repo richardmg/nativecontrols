@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDMENUITEM_P_H
-#define QNATIVEANDROIDMENUITEM_P_H
+#ifndef QUNIANDROIDMENUITEM_P_H
+#define QUNIANDROIDMENUITEM_P_H
 
 //
 //  W A R N I N G
@@ -55,7 +55,7 @@ QT_BEGIN_NAMESPACE
 class QUniAndroidView;
 class QUniAndroidMenuItemPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidMenuItem : public QUniAndroidContextual
+class Q_UNIANDROID_EXPORT QUniAndroidMenuItem : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
@@ -122,4 +122,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDMENUITEM_P_H
+#endif // QUNIANDROIDMENUITEM_P_H

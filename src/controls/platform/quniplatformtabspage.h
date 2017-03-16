@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMTABSPAGE_H
-#define QNATIVEPLATFORMTABSPAGE_H
+#ifndef QUNIPLATFORMTABSPAGE_H
+#define QUNIPLATFORMTABSPAGE_H
 
 #include <QtCore>
 #include <QtUniControls/quniplatformpage.h>
@@ -43,7 +43,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QUniPlatformTabsPage : public virtual QUniPlatformPage
+class Q_UNICONTROLS_EXPORT QUniPlatformTabsPage : public virtual QUniPlatformPage
 {
 public:
     virtual ~QUniPlatformTabsPage() {}
@@ -51,4 +51,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMTABSPAGE_H
+#endif // QUNIPLATFORMTABSPAGE_H

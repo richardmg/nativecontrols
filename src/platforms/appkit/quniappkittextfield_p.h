@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITTEXTFIELD_P_H
-#define QNATIVEAPPKITTEXTFIELD_P_H
+#ifndef QUNIAPPKITTEXTFIELD_P_H
+#define QUNIAPPKITTEXTFIELD_P_H
 
 //
 //  W A R N I N G
@@ -77,4 +77,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPKITTEXTFIELD_P_H
+#endif // QUNIAPPKITTEXTFIELD_P_H

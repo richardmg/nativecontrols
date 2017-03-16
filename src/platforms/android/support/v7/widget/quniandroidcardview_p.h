@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCARDVIEW_P_H
-#define QNATIVEANDROIDCARDVIEW_P_H
+#ifndef QUNIANDROIDCARDVIEW_P_H
+#define QUNIANDROIDCARDVIEW_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidCardView : public QUniAndroidFrameLayout
+class Q_UNIANDROID_EXPORT QUniAndroidCardView : public QUniAndroidFrameLayout
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCARDVIEW_P_H
+#endif // QUNIANDROIDCARDVIEW_P_H

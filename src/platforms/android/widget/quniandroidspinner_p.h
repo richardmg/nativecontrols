@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSPINNER_P_H
-#define QNATIVEANDROIDSPINNER_P_H
+#ifndef QUNIANDROIDSPINNER_P_H
+#define QUNIANDROIDSPINNER_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidSpinner : public QUniAndroidAdapterView // TODO: AbsSpinner
+class Q_UNIANDROID_EXPORT QUniAndroidSpinner : public QUniAndroidAdapterView // TODO: AbsSpinner
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSPINNER_P_H
+#endif // QUNIANDROIDSPINNER_P_H

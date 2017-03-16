@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDRECYCLERADAPTER_P_H
-#define QNATIVEANDROIDRECYCLERADAPTER_P_H
+#ifndef QUNIANDROIDRECYCLERADAPTER_P_H
+#define QUNIANDROIDRECYCLERADAPTER_P_H
 
 //
 //  W A R N I N G
@@ -56,7 +56,7 @@ class QQmlComponent;
 class QUniAndroidView;
 class QUniAndroidRecyclerAdapterPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidRecyclerAdapter : public QUniAndroidContextual
+class Q_UNIANDROID_EXPORT QUniAndroidRecyclerAdapter : public QUniAndroidContextual
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)
@@ -89,4 +89,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDRECYCLERADAPTER_P_H
+#endif // QUNIANDROIDRECYCLERADAPTER_P_H

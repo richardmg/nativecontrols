@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEUIKITTEXTFIELD_H
-#define QNATIVEUIKITTEXTFIELD_H
+#ifndef QUNIUIKITTEXTFIELD_H
+#define QUNIUIKITTEXTFIELD_H
 
 #include <QtUniControls/quniplatformtextfield.h>
 #include <QtUniUIKitControls/quniuikitcontrol.h>
@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QUniUIKitTextFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITextField);
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitTextField : public QUniUIKitControl, public virtual QUniPlatformTextField
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTextField : public QUniUIKitControl, public virtual QUniPlatformTextField
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -77,4 +77,4 @@ private:
 };
 
 QT_END_NAMESPACE
-#endif // QNATIVEUIKITTEXTFIELD_H
+#endif // QUNIUIKITTEXTFIELD_H

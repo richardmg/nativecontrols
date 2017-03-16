@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITTABVIEWITEM_P_H
-#define QNATIVEAPPKITTABVIEWITEM_P_H
+#ifndef QUNIAPPKITTABVIEWITEM_P_H
+#define QUNIAPPKITTABVIEWITEM_P_H
 
 //
 //  W A R N I N G
@@ -75,4 +75,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif //QNATIVEAPPKITTABVIEWITEM_P_H
+#endif //QUNIAPPKITTABVIEWITEM_P_H

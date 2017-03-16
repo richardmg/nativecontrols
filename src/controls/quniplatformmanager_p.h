@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMMANAGER_P_H
-#define QNATIVEPLATFORMMANAGER_P_H
+#ifndef QUNIPLATFORMMANAGER_P_H
+#define QUNIPLATFORMMANAGER_P_H
 
 //
 //  W A R N I N G
@@ -67,4 +67,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMMANAGER_P_H
+#endif // QUNIPLATFORMMANAGER_P_H

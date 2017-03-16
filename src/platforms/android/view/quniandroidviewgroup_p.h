@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDVIEWGROUP_P_H
-#define QNATIVEANDROIDVIEWGROUP_P_H
+#ifndef QUNIANDROIDVIEWGROUP_P_H
+#define QUNIANDROIDVIEWGROUP_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidViewGroupPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidViewGroup : public QUniAndroidView
+class Q_UNIANDROID_EXPORT QUniAndroidViewGroup : public QUniAndroidView
 {
     Q_OBJECT
 
@@ -80,4 +80,4 @@ QT_END_NAMESPACE
 
 QML_DECLARE_TYPEINFO(QUniAndroidViewGroup, QML_HAS_ATTACHED_PROPERTIES)
 
-#endif // QNATIVEANDROIDVIEWGROUP_P_H
+#endif // QUNIANDROIDVIEWGROUP_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITCONTROL_H
-#define QNATIVEAPPKITCONTROL_H
+#ifndef QUNIAPPKITCONTROL_H
+#define QUNIAPPKITCONTROL_H
 
 #include <QObject>
 
@@ -46,7 +46,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAppKitControlPrivate;
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitControl : public QUniAppKitView, public virtual QUniPlatformControl
+class Q_UNIAPPKITCONTROLS_EXPORT QUniAppKitControl : public QUniAppKitView, public virtual QUniPlatformControl
 {
     Q_OBJECT
 
@@ -64,4 +64,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEAPPKITCONTROL_H
+#endif // QUNIAPPKITCONTROL_H

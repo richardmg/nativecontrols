@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDDRAWERLAYOUTPARAMS_P_H
-#define QNATIVEANDROIDDRAWERLAYOUTPARAMS_P_H
+#ifndef QUNIANDROIDDRAWERLAYOUTPARAMS_P_H
+#define QUNIANDROIDDRAWERLAYOUTPARAMS_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidDrawerLayoutParamsPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidDrawerLayoutParams : public QUniAndroidMarginLayoutParams
+class Q_UNIANDROID_EXPORT QUniAndroidDrawerLayoutParams : public QUniAndroidMarginLayoutParams
 {
     Q_OBJECT
     Q_PROPERTY(int gravity READ gravity WRITE setGravity NOTIFY gravityChanged) // TODO Gravity
@@ -79,4 +79,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDDRAWERLAYOUTPARAMS_P_H
+#endif // QUNIANDROIDDRAWERLAYOUTPARAMS_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDANTICIPATEOVERSHOOTINTERPOLATOR_P_H
-#define QNATIVEANDROIDANTICIPATEOVERSHOOTINTERPOLATOR_P_H
+#ifndef QUNIANDROIDANTICIPATEOVERSHOOTINTERPOLATOR_P_H
+#define QUNIANDROIDANTICIPATEOVERSHOOTINTERPOLATOR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidAnticipateOvershootInterpolatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidAnticipateOvershootInterpolator : public QUniAndroidInterpolator
+class Q_UNIANDROID_EXPORT QUniAndroidAnticipateOvershootInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
     Q_PROPERTY(qreal tension READ tension WRITE setTension NOTIFY tensionChanged)
@@ -83,4 +83,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDANTICIPATEOVERSHOOTINTERPOLATOR_P_H
+#endif // QUNIANDROIDANTICIPATEOVERSHOOTINTERPOLATOR_P_H

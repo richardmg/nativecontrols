@@ -1,5 +1,5 @@
-#ifndef QNATIVEUIKITCONTROL_H
-#define QNATIVEUIKITCONTROL_H
+#ifndef QUNIUIKITCONTROL_H
+#define QUNIUIKITCONTROL_H
 
 #include <QObject>
 
@@ -10,7 +10,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniUIKitControlPrivate;
 
-class Q_NATIVEUIKITCONTROLS_EXPORT QUniUIKitControl : public QUniUIKitView, public virtual QUniPlatformControl
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitControl : public QUniUIKitView, public virtual QUniPlatformControl
 {
     Q_OBJECT
 
@@ -28,4 +28,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEUIKITCONTROL_H
+#endif // QUNIUIKITCONTROL_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDDRAWERLAYOUT_P_H
-#define QNATIVEANDROIDDRAWERLAYOUT_P_H
+#ifndef QUNIANDROIDDRAWERLAYOUT_P_H
+#define QUNIANDROIDDRAWERLAYOUT_P_H
 
 //
 //  W A R N I N G
@@ -53,7 +53,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidDrawerLayout : public QUniAndroidViewGroup
+class Q_UNIANDROID_EXPORT QUniAndroidDrawerLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
 
@@ -75,4 +75,4 @@ QT_END_NAMESPACE
 
 QML_DECLARE_TYPEINFO(QUniAndroidDrawerLayout, QML_HAS_ATTACHED_PROPERTIES)
 
-#endif // QNATIVEANDROIDDRAWERLAYOUT_P_H
+#endif // QUNIANDROIDDRAWERLAYOUT_P_H

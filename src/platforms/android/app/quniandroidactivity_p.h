@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDACTIVITY_P_H
-#define QNATIVEANDROIDACTIVITY_P_H
+#ifndef QUNIANDROIDACTIVITY_P_H
+#define QUNIANDROIDACTIVITY_P_H
 
 //
 //  W A R N I N G
@@ -58,7 +58,7 @@ class QUniAndroidWindow;
 class QUniAndroidActionBar;
 class QUniAndroidActivityPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidActivity : public QUniAndroidContextWrapper
+class Q_UNIANDROID_EXPORT QUniAndroidActivity : public QUniAndroidContextWrapper
 {
     Q_OBJECT
     Q_PROPERTY(QUniAndroidWindow *window READ window CONSTANT)
@@ -94,4 +94,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDACTIVITY_P_H
+#endif // QUNIANDROIDACTIVITY_P_H

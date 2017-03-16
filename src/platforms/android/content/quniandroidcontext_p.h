@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCONTEXT_P_H
-#define QNATIVEANDROIDCONTEXT_P_H
+#ifndef QUNIANDROIDCONTEXT_P_H
+#define QUNIANDROIDCONTEXT_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidContextPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidContext : public QUniAndroidContextual
+class Q_UNIANDROID_EXPORT QUniAndroidContext : public QUniAndroidContextual
 {
     Q_OBJECT
 
@@ -73,4 +73,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCONTEXT_P_H
+#endif // QUNIANDROIDCONTEXT_P_H

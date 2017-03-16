@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDROTATEANIMATION_P_H
-#define QNATIVEANDROIDROTATEANIMATION_P_H
+#ifndef QUNIANDROIDROTATEANIMATION_P_H
+#define QUNIANDROIDROTATEANIMATION_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidRotateAnimationPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidRotateAnimation : public QUniAndroidAnimation
+class Q_UNIANDROID_EXPORT QUniAndroidRotateAnimation : public QUniAndroidAnimation
 {
     Q_OBJECT
     Q_PROPERTY(qreal fromDegrees READ fromDegrees WRITE setFromDegrees NOTIFY fromDegreesChanged)
@@ -104,4 +104,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDROTATEANIMATION_P_H
+#endif // QUNIANDROIDROTATEANIMATION_P_H

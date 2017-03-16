@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCHECKBOX_P_H
-#define QNATIVEANDROIDCHECKBOX_P_H
+#ifndef QUNIANDROIDCHECKBOX_P_H
+#define QUNIANDROIDCHECKBOX_P_H
 
 //
 //  W A R N I N G
@@ -52,7 +52,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidCheckBox : public QUniAndroidCompoundButton
+class Q_UNIANDROID_EXPORT QUniAndroidCheckBox : public QUniAndroidCompoundButton
 {
     Q_OBJECT
 
@@ -66,4 +66,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCHECKBOX_P_H
+#endif // QUNIANDROIDCHECKBOX_P_H

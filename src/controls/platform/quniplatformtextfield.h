@@ -34,15 +34,15 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEPLATFORMTEXTFIELD_H
-#define QNATIVEPLATFORMTEXTFIELD_H
+#ifndef QUNIPLATFORMTEXTFIELD_H
+#define QUNIPLATFORMTEXTFIELD_H
 
 #include <QtCore>
 #include <QtUniControls/quniplatformcontrol.h>
 
 QT_BEGIN_NAMESPACE
 
-class Q_NATIVECONTROLS_EXPORT QUniPlatformTextField : public virtual QUniPlatformControl
+class Q_UNICONTROLS_EXPORT QUniPlatformTextField : public virtual QUniPlatformControl
 {
 public:
     virtual ~QUniPlatformTextField() {}
@@ -56,4 +56,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEPLATFORMTEXTFIELD_H
+#endif // QUNIPLATFORMTEXTFIELD_H

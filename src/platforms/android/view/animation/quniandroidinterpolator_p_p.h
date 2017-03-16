@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDINTERPOLATOR_P_P_H
-#define QNATIVEANDROIDINTERPOLATOR_P_P_H
+#ifndef QUNIANDROIDINTERPOLATOR_P_P_H
+#define QUNIANDROIDINTERPOLATOR_P_P_H
 
 //
 //  W A R N I N G
@@ -59,4 +59,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDINTERPOLATOR_P_P_H
+#endif // QUNIANDROIDINTERPOLATOR_P_P_H

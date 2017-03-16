@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSWIPEREFRESHLAYOUT_P_H
-#define QNATIVEANDROIDSWIPEREFRESHLAYOUT_P_H
+#ifndef QUNIANDROIDSWIPEREFRESHLAYOUT_P_H
+#define QUNIANDROIDSWIPEREFRESHLAYOUT_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidSwipeRefreshLayoutPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidSwipeRefreshLayout : public QUniAndroidViewGroup
+class Q_UNIANDROID_EXPORT QUniAndroidSwipeRefreshLayout : public QUniAndroidViewGroup
 {
     Q_OBJECT
     Q_PROPERTY(bool refreshing READ isRefreshing WRITE setRefreshing NOTIFY refreshingChanged)
@@ -79,4 +79,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSWIPEREFRESHLAYOUT_P_H
+#endif // QUNIANDROIDSWIPEREFRESHLAYOUT_P_H

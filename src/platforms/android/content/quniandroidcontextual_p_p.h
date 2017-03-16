@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCONTEXTUAL_P_P_H
-#define QNATIVEANDROIDCONTEXTUAL_P_P_H
+#ifndef QUNIANDROIDCONTEXTUAL_P_P_H
+#define QUNIANDROIDCONTEXTUAL_P_P_H
 
 //
 //  W A R N I N G
@@ -69,4 +69,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCONTEXTUAL_P_P_H
+#endif // QUNIANDROIDCONTEXTUAL_P_P_H

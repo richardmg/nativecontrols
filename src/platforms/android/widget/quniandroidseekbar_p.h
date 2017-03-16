@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDSEEKBAR_P_H
-#define QNATIVEANDROIDSEEKBAR_P_H
+#ifndef QUNIANDROIDSEEKBAR_P_H
+#define QUNIANDROIDSEEKBAR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidSeekBarPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidSeekBar : public QUniAndroidAbsSeekBar
+class Q_UNIANDROID_EXPORT QUniAndroidSeekBar : public QUniAndroidAbsSeekBar
 {
     Q_OBJECT
 
@@ -72,4 +72,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDSEEKBAR_P_H
+#endif // QUNIANDROIDSEEKBAR_P_H

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEAPPKITSEARCHFIELD_H
-#define QNATIVEAPPKITSEARCHFIELD_H
+#ifndef QUNIAPPKITSEARCHFIELD_H
+#define QUNIAPPKITSEARCHFIELD_H
 
 #include <QtUniControls/quniplatformsearchfield.h>
 #include <QtUniAppKitControls/quniappkitcontrol.h>
@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QUniAppKitSearchFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSSearchField);
 
-class Q_NATIVEAPPKITCONTROLS_EXPORT QUniAppKitSearchField : public QUniAppKitControl, public virtual QUniPlatformSearchField
+class Q_UNIAPPKITCONTROLS_EXPORT QUniAppKitSearchField : public QUniAppKitControl, public virtual QUniPlatformSearchField
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -77,4 +77,4 @@ private:
 };
 
 QT_END_NAMESPACE
-#endif // QNATIVEAPPKITSEARCHFIELD_H
+#endif // QUNIAPPKITSEARCHFIELD_H

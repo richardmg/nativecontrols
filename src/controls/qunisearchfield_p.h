@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVESEARCHFIELD_P_H
-#define QNATIVESEARCHFIELD_P_H
+#ifndef QUNISEARCHFIELD_P_H
+#define QUNISEARCHFIELD_P_H
 
 //
 //  W A R N I N G
@@ -72,4 +72,4 @@ public:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVESEARCHFIELD_P_H
+#endif // QUNISEARCHFIELD_P_H

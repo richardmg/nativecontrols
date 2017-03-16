@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDCONTEXTWRAPPER_P_P_H
-#define QNATIVEANDROIDCONTEXTWRAPPER_P_P_H
+#ifndef QUNIANDROIDCONTEXTWRAPPER_P_P_H
+#define QUNIANDROIDCONTEXTWRAPPER_P_P_H
 
 //
 //  W A R N I N G
@@ -58,4 +58,4 @@ class QUniAndroidContextWrapperPrivate : public QUniAndroidContextPrivate
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDCONTEXTWRAPPER_P_P_H
+#endif // QUNIANDROIDCONTEXTWRAPPER_P_P_H

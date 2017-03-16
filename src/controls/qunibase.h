@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEBASE_H
-#define QNATIVEBASE_H
+#ifndef QUNIBASE_H
+#define QUNIBASE_H
 
 #include <QObject>
 #include <QQmlListProperty>
@@ -47,7 +47,7 @@ QT_BEGIN_NAMESPACE
 class QUniPlatformBase;
 class QUniBasePrivate;
 
-class Q_NATIVECONTROLS_EXPORT QUniBase : public QUniQmlBase
+class Q_UNICONTROLS_EXPORT QUniBase : public QUniQmlBase
 {
     Q_OBJECT
     Q_PROPERTY(QUniBase *parent READ parentBase WRITE setParent NOTIFY parentChanged DESIGNABLE false)
@@ -80,4 +80,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEBASE_H
+#endif // QUNIBASE_H

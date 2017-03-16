@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVEANDROIDAPATHINTERPOLATOR_P_H
-#define QNATIVEANDROIDAPATHINTERPOLATOR_P_H
+#ifndef QUNIANDROIDAPATHINTERPOLATOR_P_H
+#define QUNIANDROIDAPATHINTERPOLATOR_P_H
 
 //
 //  W A R N I N G
@@ -54,7 +54,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniAndroidPathInterpolatorPrivate;
 
-class Q_NATIVEANDROID_EXPORT QUniAndroidPathInterpolator : public QUniAndroidInterpolator
+class Q_UNIANDROID_EXPORT QUniAndroidPathInterpolator : public QUniAndroidInterpolator
 {
     Q_OBJECT
     Q_PROPERTY(qreal controlX READ controlX WRITE setControlX NOTIFY controlXChanged)
@@ -93,4 +93,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVEANDROIDAPATHINTERPOLATOR_P_H
+#endif // QUNIANDROIDAPATHINTERPOLATOR_P_H

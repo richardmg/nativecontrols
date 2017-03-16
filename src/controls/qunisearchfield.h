@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVESEARCHFIELD_H
-#define QNATIVESEARCHFIELD_H
+#ifndef QUNISEARCHFIELD_H
+#define QUNISEARCHFIELD_H
 
 #include <QtUniControls/qunicontrol.h>
 #include <QtUniControls/qunicontrolsglobal.h>
@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 class QUniSearchFieldPrivate;
 class QUniPlatformSearchField;
 
-class Q_NATIVECONTROLS_EXPORT QUniSearchField : public QUniControl
+class Q_UNICONTROLS_EXPORT QUniSearchField : public QUniControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -76,4 +76,4 @@ private:
 
 QT_END_NAMESPACE
 
-#endif // QNATIVESEARCHFIELD_H
+#endif // QUNISEARCHFIELD_H
