@@ -61,21 +61,14 @@ void QUniAppKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObj
     QUniAppKitBase *appkitChild = qobject_cast<QUniAppKitBase *>(child);
 
     if (appkitChild) {
-        if (appkitChild->parent() != appkitParent) {
-            appkitChild->setParent(appkitParent);
-        } else {
-            // Force a child event, since we depend on it
-            QChildEvent e(QEvent::ChildAdded, appkitChild);
-            QCoreApplication::sendEvent(appkitParent, &e);
-        }
+        // Force a child event, since we depend on it
+        QChildEvent e(QEvent::ChildAdded, appkitChild);
+        QCoreApplication::sendEvent(appkitParent, &e);
     } else {
         // The child doesn't belong to QUniAppKit. If it belongs
         // to QUni, try to parent it using the childs cross-parenting API
-        QUniBase *quniChild = qobject_cast<QUniBase *>(child);
-        if (!quniChild || !quniChild->setNativeParent(appkitParent)) {
-            // ...otherwise we fall back to normal QObject parenting
-            child->setParent(qparent);
-        }
+        if (QUniBase *quniChild = qobject_cast<QUniBase *>(child))
+            quniChild->setNativeParent(appkitParent);
     }
 }
 
