@@ -67,6 +67,7 @@ public:
 
 protected:
     QUniAppKitTabViewItem(QUniAppKitTabViewItemPrivate &dd, QUniAppKitBase *parent = nullptr);
+    void childEvent(QChildEvent *event) override;
 
 private:
     Q_DECLARE_PRIVATE(QUniAppKitTabViewItem)

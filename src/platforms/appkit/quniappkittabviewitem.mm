@@ -40,6 +40,7 @@
 
 #include <QtUniAppKitControls/quniappkittabviewitem.h>
 #include <QtUniAppKitControls/private/quniappkittabviewitem_p.h>
+#include <QtUniAppKitControls/private/quniappkitviewcontroller_p.h>
 #include <QtUniAppKitControls/quniappkitviewcontroller.h>
 
 QT_BEGIN_NAMESPACE
@@ -48,6 +49,7 @@ QUniAppKitTabViewItemPrivate::QUniAppKitTabViewItemPrivate(int version)
     : QUniAppKitBasePrivate(version)
     , m_tabViewItem([[NSTabViewItem alloc] initWithIdentifier:nil])
     , m_viewController(nullptr)
+    , m_viewControllerSetExplicit(false)
 {
 }
 
@@ -88,6 +90,7 @@ void QUniAppKitTabViewItem::setTitle(const QString &title)
 void QUniAppKitTabViewItem::setViewController(QUniAppKitViewController *viewController)
 {
     Q_D(QUniAppKitTabViewItem);
+    d->m_viewControllerSetExplicit = true;
     d->m_viewController = viewController;
     d->m_tabViewItem.viewController = viewController->nsViewControllerHandle();
 }
@@ -98,6 +101,7 @@ QUniAppKitViewController *QUniAppKitTabViewItem::viewController() const
     if (!d->m_viewController) {
         QUniAppKitTabViewItem *self = const_cast<QUniAppKitTabViewItem *>(this);
         self->setViewController(new QUniAppKitViewController(self));
+        self->d_func()->m_viewControllerSetExplicit = false;
     }
     return d->m_viewController;
 }
@@ -107,6 +111,24 @@ NSTabViewItem *QUniAppKitTabViewItem::nsTabViewItemHandle()
     (void)viewController();
     return d_func()->m_tabViewItem;
 }
+
+void QUniAppKitTabViewItem::childEvent(QChildEvent *event)
+{
+    Q_D(QUniAppKitTabViewItem);
+    // Note that event->child() might not be fully constructed at this point, if
+    // called from its constructor chain. But the private part will.
+     QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
+
+     if (QUniAppKitViewControllerPrivate *dptr_child = dynamic_cast<QUniAppKitViewControllerPrivate *>(childPrivate)) {
+         if (event->added()) {
+             if (!d->m_viewControllerSetExplicit)
+                setViewController(dptr_child->q_func());
+         } else if (d->m_viewController == event->child()) {
+             setViewController(nullptr);
+         }
+     }
+}
+
 
 #include "moc_quniappkittabviewitem.cpp"
 

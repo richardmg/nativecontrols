@@ -51,11 +51,11 @@
 #include <QtCore>
 
 #include <QtUniAppKitControls/private/quniappkitbase_p.h>
+#include <QtUniAppKitControls/quniappkitviewcontroller.h>
 
 QT_BEGIN_NAMESPACE
 
 class QUniAppKitView;
-class QUniAppKitViewController;
 class QUniAppKitTabViewItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSViewController);
 
