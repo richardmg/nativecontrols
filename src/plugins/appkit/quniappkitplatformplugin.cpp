@@ -47,9 +47,12 @@ public:
         : QUniAppKitViewController(nullptr)
     {
         // A QUniAppKitTabViewItem doesn't map directy to a QUniPlatformTabsPageTab since
-        // a tab in uikit consist of a view controller with a tab bar item. So we create this
-        // helper class that puts together the composition.
+        // a tab in appkit consist of a tabViewItem with a ViewController. So we create this
+        // helper class to put together the composition. The composition is reversed, since we
+        // want a TabsPageTab to be a ViewController rather than a TabViewItem, so that the app
+        // can add views directly as children.
         m_tabViewItem = new QUniAppKitTabViewItem(this);
+        m_tabViewItem->setViewController(this);
     }
 
     void setPlatformParent(QUniPlatformBase *platformParent) override
