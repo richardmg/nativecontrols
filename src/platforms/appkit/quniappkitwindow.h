@@ -51,6 +51,7 @@ class Q_UNIAPPKITCONTROLS_EXPORT QUniAppKitWindow : public QUniAppKitBase, publi
 {
     Q_OBJECT
     Q_PROPERTY(QUniAppKitViewController *contentViewController READ contentViewController WRITE setContentViewController NOTIFY contentViewControllerChanged)
+    Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
 
 public:
     QUniAppKitWindow();
