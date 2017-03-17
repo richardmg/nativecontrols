@@ -63,6 +63,7 @@ public:
 
 protected:
     QUniAppKitTabViewController(QUniAppKitTabViewControllerPrivate &dd, QUniAppKitBase *parent = nullptr);
+    void childEvent(QChildEvent *event);
 
 private:
     Q_DECLARE_PRIVATE(QUniAppKitTabViewController)

@@ -103,6 +103,23 @@ NSTabViewController *QUniAppKitTabViewController::nsTabViewControllerHandle()
     return static_cast<NSTabViewController *>(nsViewControllerHandle());
 }
 
+void QUniAppKitTabViewController::childEvent(QChildEvent *event)
+{
+    // Note that event->child() might not be fully constructed at this point, if
+    // called from its constructor chain. But the private part will.
+     QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
+
+     if (dynamic_cast<QUniAppKitViewControllerPrivate *>(childPrivate)) {
+         // Using the NSViewController.childViewControllers API interferes
+         // with the NSTabViewController.tabViewItems API. So we choose to
+         // ignore any atempts to do the former.
+         return;
+     }
+
+     QUniAppKitViewController::childEvent(event);
+}
+
+
 #include "moc_quniappkittabviewcontroller.cpp"
 
 QT_END_NAMESPACE
