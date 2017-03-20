@@ -49,21 +49,44 @@ class Q_UNICONTROLS_EXPORT QUniWindow : public QUniBase
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
-    Q_PROPERTY(qreal width READ width NOTIFY widthChanged)
-    Q_PROPERTY(qreal height READ height NOTIFY heightChanged)
+    Q_PROPERTY(qreal x READ x WRITE setX NOTIFY xChanged FINAL)
+    Q_PROPERTY(qreal y READ y WRITE setY NOTIFY yChanged FINAL)
+    Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY widthChanged FINAL)
+    Q_PROPERTY(qreal height READ height WRITE setHeight NOTIFY heightChanged FINAL)
 
 public:
     explicit QUniWindow();
     virtual ~QUniWindow();
 
+    QRectF geometry() const;
+    void setGeometry(const QRectF &rect);
+    void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
+
+    void setPosition(const QPointF &pos);
+    void setPosition(qreal posx, qreal posy);
+
+    void resize(const QSizeF size);
+    void resize(qreal width, qreal height);
+
+    qreal x() const;
+    void setX(qreal);
+
+    qreal y() const;
+    void setY(qreal);
+
     qreal width() const;
+    void setWidth(qreal);
+
     qreal height() const;
+    void setHeight(qreal);
 
     bool isVisible() const;
     void setVisible(bool visible);
     void showFullScreen();
 
 Q_SIGNALS:
+    void xChanged(qreal x);
+    void yChanged(qreal y);
     void widthChanged(qreal w);
     void heightChanged(qreal h);
     void visibleChanged(bool visible);

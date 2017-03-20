@@ -46,8 +46,10 @@ class Q_UNICONTROLS_EXPORT QUniPlatformWindow : public virtual QUniPlatformBase
 {
 public:
     virtual ~QUniPlatformWindow() {}
-    virtual qreal width() const = 0;
-    virtual qreal height() const = 0;
+    virtual QRectF geometry() const = 0;
+    virtual void setGeometry(const QRectF &rect) = 0;
+    virtual void setPosition(const QPointF &pos) = 0;
+    virtual void resize(const QSizeF size) = 0;
     virtual bool isVisible() const = 0;
     virtual void setVisible(bool visible) = 0;
     virtual void showFullScreen() = 0;

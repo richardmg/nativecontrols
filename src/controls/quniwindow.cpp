@@ -80,14 +80,91 @@ QUniWindow::~QUniWindow()
 {
 }
 
+qreal QUniWindow::x() const
+{
+    return d_func()->m_platformWindow->geometry().x();
+}
+
+void QUniWindow::setX(qreal x)
+{
+    Q_D(QUniWindow);
+    QRectF g = d->m_platformWindow->geometry();
+    g.moveLeft(x);
+    d->m_platformWindow->setGeometry(g);
+}
+
+qreal QUniWindow::y() const
+{
+    return d_func()->m_platformWindow->geometry().y();
+}
+
+void QUniWindow::setY(qreal y)
+{
+    Q_D(QUniWindow);
+    QRectF g = d->m_platformWindow->geometry();
+    g.moveTop(y);
+    d->m_platformWindow->setGeometry(g);
+}
+
 qreal QUniWindow::width() const
 {
-    return d_func()->m_platformWindow->width();
+    return d_func()->m_platformWindow->geometry().width();
+}
+
+void QUniWindow::setWidth(qreal w)
+{
+    Q_D(QUniWindow);
+    QRectF g = d->m_platformWindow->geometry();
+    g.setWidth(w);
+    d->m_platformWindow->setGeometry(g);
 }
 
 qreal QUniWindow::height() const
 {
-    return d_func()->m_platformWindow->height();
+    return d_func()->m_platformWindow->geometry().height();
+}
+
+void QUniWindow::setHeight(qreal h)
+{
+    Q_D(QUniWindow);
+    QRectF g = d->m_platformWindow->geometry();
+    g.setHeight(h);
+    d->m_platformWindow->setGeometry(g);
+}
+
+QRectF QUniWindow::geometry() const
+{
+    return d_func()->m_platformWindow->geometry();
+}
+
+void QUniWindow::setGeometry(const QRectF &rect)
+{
+    d_func()->m_platformWindow->setGeometry(rect);
+}
+
+void QUniWindow::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
+{
+    d_func()->m_platformWindow->setGeometry(QRectF(posx, posy, w, h));
+}
+
+void QUniWindow::setPosition(const QPointF &pos)
+{
+    d_func()->m_platformWindow->setPosition(pos);
+}
+
+void QUniWindow::setPosition(qreal posx, qreal posy)
+{
+    d_func()->m_platformWindow->setPosition(QPointF(posx, posy));
+}
+
+void QUniWindow::resize(const QSizeF size)
+{
+    d_func()->m_platformWindow->resize(size);
+}
+
+void QUniWindow::resize(qreal width, qreal height)
+{
+    d_func()->m_platformWindow->resize(QSizeF(width, height));
 }
 
 bool QUniWindow::isVisible() const
