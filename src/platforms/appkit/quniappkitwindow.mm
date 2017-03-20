@@ -125,6 +125,11 @@ void QUniAppKitWindowPrivate::updateLayout(bool recursive)
     }
 }
 
+void QUniAppKitWindowPrivate::setFrame(const QRectF &frame)
+{
+    [window() setFrame:frame.toCGRect() display:YES];
+}
+
 void QUniAppKitWindowPrivate::addSubViewToContentView(NSView *nsView)
 {
     Q_Q(QUniAppKitWindow);
@@ -221,7 +226,7 @@ QRectF QUniAppKitWindow::frame() const
 
 void QUniAppKitWindow::setFrame(const QRectF &frame)
 {
-    [nsWindowHandle() setFrame:frame.toCGRect() display:YES];
+    setGeometry(frame);
 }
 
 QRectF QUniAppKitWindow::contentRect() const
@@ -239,16 +244,6 @@ QRectF QUniAppKitWindow::frameRectForContentRect(const QRectF &rect) const
 {
     NSWindow *window = const_cast<QUniAppKitWindow *>(this)->nsWindowHandle();
     return QRectF::fromCGRect([window frameRectForContentRect:rect.toCGRect()]);
-}
-
-qreal QUniAppKitWindow::width() const
-{
-    return frame().width();
-}
-
-qreal QUniAppKitWindow::height() const
-{
-    return frame().height();
 }
 
 bool QUniAppKitWindow::isVisible() const
@@ -284,6 +279,119 @@ void QUniAppKitWindow::showFullScreen()
 
     if (([nsWindowHandle() styleMask] & NSFullScreenWindowMask) != NSFullScreenWindowMask)
         [nsWindowHandle() toggleFullScreen:nsWindowHandle()];
+}
+
+QRectF QUniAppKitWindow::geometry() const
+{
+    return frame();
+}
+
+void QUniAppKitWindow::setGeometry(const QRectF &rect)
+{
+    setX(rect.x());
+    setY(rect.y());
+    setWidth(rect.width());
+    setHeight(rect.height());
+}
+
+void QUniAppKitWindow::setGeometry(qreal posx, qreal posy, qreal w, qreal h)
+{
+    setX(posx);
+    setY(posy);
+    setWidth(w);
+    setHeight(h);
+}
+
+void QUniAppKitWindow::setPosition(const QPointF &pos)
+{
+    setX(pos.x());
+    setY(pos.y());
+}
+
+void QUniAppKitWindow::resize(const QSizeF size)
+{
+    setWidth(size.width());
+    setHeight(size.height());
+}
+
+qreal QUniAppKitWindow::x() const
+{
+    return geometry().x();
+}
+
+void QUniAppKitWindow::setX(qreal newX)
+{
+    Q_D(QUniAppKitWindow);
+    d->setAttribute(QUniAppKitWindowPrivate::MovedX);
+
+    if (newX == x())
+        return;
+
+    QRectF g = geometry();
+    g.moveLeft(newX);
+    d_func()->setFrame(g);
+
+    emit xChanged(newX);
+}
+
+qreal QUniAppKitWindow::y() const
+{
+    return geometry().y();
+}
+
+void QUniAppKitWindow::setY(qreal newY)
+{
+    Q_D(QUniAppKitWindow);
+    d->setAttribute(QUniAppKitWindowPrivate::MovedY);
+
+    if (newY == y())
+        return;
+
+    QRectF g = geometry();
+    g.moveTop(newY);
+    d_func()->setFrame(g);
+
+    emit yChanged(newY);
+}
+
+qreal QUniAppKitWindow::width() const
+{
+    return geometry().width();
+}
+
+void QUniAppKitWindow::setWidth(qreal newWidth)
+{
+    Q_D(QUniAppKitWindow);
+    d->setAttribute(QUniAppKitWindowPrivate::ResizedWidth);
+
+    if (newWidth == width())
+        return;
+
+    QRectF g = geometry();
+    g.setWidth(newWidth);
+    d_func()->setFrame(g);
+
+    emit widthChanged(newWidth);
+}
+
+qreal QUniAppKitWindow::height() const
+{
+    return geometry().height();
+}
+
+void QUniAppKitWindow::setHeight(qreal newHeight)
+{
+    Q_D(QUniAppKitWindow);
+    d->setAttribute(QUniAppKitWindowPrivate::ResizedHeight);
+
+    if (newHeight == height())
+        return;
+
+    QRectF g = geometry();
+    g.setHeight(newHeight);
+    d_func()->setFrame(g);
+
+    emit heightChanged(newHeight);
 }
 
 bool QUniAppKitWindow::event(QEvent *e)

@@ -68,6 +68,7 @@ public:
     virtual void connectSignals(QUniBase *base) override;
     virtual void updateLayout(bool recursive) override;
 
+    void setFrame(const QRectF &frame);
     void addSubViewToContentView(NSView *nsView);
 
     NSWindow *window();

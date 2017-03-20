@@ -52,19 +52,42 @@ class Q_UNIAPPKITCONTROLS_EXPORT QUniAppKitWindow : public QUniAppKitBase, publi
     Q_OBJECT
     Q_PROPERTY(QUniAppKitViewController *contentViewController READ contentViewController WRITE setContentViewController NOTIFY contentViewControllerChanged)
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
+    Q_PROPERTY(qreal x READ x WRITE setX NOTIFY xChanged FINAL)
+    Q_PROPERTY(qreal y READ y WRITE setY NOTIFY yChanged FINAL)
+    Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY widthChanged FINAL)
+    Q_PROPERTY(qreal height READ height WRITE setHeight NOTIFY heightChanged FINAL)
 
 public:
     QUniAppKitWindow();
     virtual ~QUniAppKitWindow();
 
-    virtual qreal width() const override;
-    virtual qreal height() const override;
-
     virtual bool isVisible() const override;
     virtual void setVisible(bool isVisible) override;
     virtual void showFullScreen() override;
 
+    virtual QRectF geometry() const override;
+    virtual void setGeometry(const QRectF &rect) override;
+
+    virtual void setPosition(const QPointF &pos) override;
+    virtual void resize(const QSizeF size) override;
+
     virtual bool event(QEvent *e) override;
+
+    void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
+    void setPosition(qreal posx, qreal posy);
+    void resize(qreal width, qreal height);
+
+    qreal x() const;
+    void setX(qreal);
+
+    qreal y() const;
+    void setY(qreal);
+
+    qreal width() const;
+    void setWidth(qreal);
+
+    qreal height() const;
+    void setHeight(qreal);
 
     NSWindow *nsWindowHandle();
 
@@ -84,6 +107,8 @@ public:
     QByteArrayList supportedNativeParentTypes() override;
 
 Q_SIGNALS:
+    void xChanged(qreal x);
+    void yChanged(qreal y);
     void widthChanged(qreal w);
     void heightChanged(qreal h);
     void visibleChanged(bool isVisible);
