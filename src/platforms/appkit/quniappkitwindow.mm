@@ -125,11 +125,6 @@ void QUniAppKitWindowPrivate::updateLayout(bool recursive)
     }
 }
 
-void QUniAppKitWindowPrivate::setFrame(const QRectF &frame)
-{
-    [window() setFrame:frame.toCGRect() display:YES];
-}
-
 void QUniAppKitWindowPrivate::addSubViewToContentView(NSView *nsView)
 {
     Q_Q(QUniAppKitWindow);
@@ -292,7 +287,7 @@ void QUniAppKitWindow::showFullScreen()
 
 QRectF QUniAppKitWindow::geometry() const
 {
-    return frame();
+    return contentRectForFrameRect(frame());
 }
 
 void QUniAppKitWindow::setGeometry(const QRectF &rect)
@@ -338,7 +333,7 @@ void QUniAppKitWindow::setX(qreal newX)
 
     QRectF g = geometry();
     g.moveLeft(newX);
-    d_func()->setFrame(g);
+    setFrame(frameRectForContentRect(g));
 
     emit xChanged(newX);
 }
@@ -358,7 +353,7 @@ void QUniAppKitWindow::setY(qreal newY)
 
     QRectF g = geometry();
     g.moveTop(newY);
-    d_func()->setFrame(g);
+    setFrame(frameRectForContentRect(g));
 
     emit yChanged(newY);
 }
@@ -378,7 +373,7 @@ void QUniAppKitWindow::setWidth(qreal newWidth)
 
     QRectF g = geometry();
     g.setWidth(newWidth);
-    d_func()->setFrame(g);
+    setFrame(frameRectForContentRect(g));
 
     emit widthChanged(newWidth);
 }
@@ -398,7 +393,7 @@ void QUniAppKitWindow::setHeight(qreal newHeight)
 
     QRectF g = geometry();
     g.setHeight(newHeight);
-    d_func()->setFrame(g);
+    setFrame(frameRectForContentRect(g));
 
     emit heightChanged(newHeight);
 }

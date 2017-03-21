@@ -69,7 +69,6 @@ public:
 
     void updateLayout(bool recursive);
 
-    void setFrame(const QRectF &frame);
     void addSubViewToContentView(NSView *nsView);
     void removeSubViewFromContentView(NSView *view);
 
