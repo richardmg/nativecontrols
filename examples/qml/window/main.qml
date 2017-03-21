@@ -43,8 +43,8 @@ import Qt.UniControls 1.0
 
 Window {
     id: theWindow
-//    width: 480
-//    height: 640
+    width: 800
+    height: 600
     visible: true
 
     property int windowAvailableWidth: theWindow.width - 48
