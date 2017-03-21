@@ -235,7 +235,7 @@ QRectF QUniAppKitWindow::frame() const
 
 void QUniAppKitWindow::setFrame(const QRectF &frame)
 {
-    setGeometry(frame);
+    [nsWindowHandle() setFrame:frame.toCGRect() display:YES];
 }
 
 QRectF QUniAppKitWindow::contentRect() const
