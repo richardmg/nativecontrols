@@ -113,6 +113,10 @@ private:
     void addSubViewToSuperView(NSView *subView, NSView *superView);
 };
 
+qreal qt_mac_flipYCoordinate(qreal y, qreal height, NSView *view);
+QRectF qt_mac_flipRect(const NSRect &rect, NSView *view);
+NSRect qt_mac_flipRect(const QRectF &rect, NSView *view);
+
 QT_END_NAMESPACE
 
 #endif //QNATIVAPPKITVIEW_P_H

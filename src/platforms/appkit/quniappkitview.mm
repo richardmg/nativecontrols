@@ -50,14 +50,14 @@ QT_BEGIN_NAMESPACE
 
 NSRect qt_mac_flipRect(const QRectF &rect, NSView *view);
 
-static qreal qt_mac_flipYCoordinate(qreal y, qreal height, NSView *view)
+qreal qt_mac_flipYCoordinate(qreal y, qreal height, NSView *view)
 {
     if (view.superview && !view.superview.isFlipped)
         return view.superview.frame.size.height - (y + height);
     return y;
 }
 
-static QRectF qt_mac_flipRect(const NSRect &rect, NSView *view)
+QRectF qt_mac_flipRect(const NSRect &rect, NSView *view)
 {
     return QRectF(rect.origin.x,
                   qt_mac_flipYCoordinate(rect.origin.y, rect.size.height, view),

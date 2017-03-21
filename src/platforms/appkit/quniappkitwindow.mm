@@ -88,7 +88,7 @@
 QT_BEGIN_NAMESPACE
 
 QUniAppKitWindowPrivate::QUniAppKitWindowPrivate(int version)
-    : QUniAppKitViewPrivate(version)
+    : QUniAppKitBasePrivate(version)
     , m_window(nullptr)
     , m_viewController(nullptr)
     , m_delegate(nullptr)
@@ -136,6 +136,15 @@ void QUniAppKitWindowPrivate::addSubViewToContentView(NSView *nsView)
     QUniAppKitView *contentView = q->contentViewController()->view();
     QUniAppKitViewPrivate *dptr_contentView = dynamic_cast<QUniAppKitViewPrivate *>(QObjectPrivate::get(contentView));
     dptr_contentView->addSubView(nsView);
+}
+
+void QUniAppKitWindowPrivate::removeSubViewFromContentView(NSView *view)
+{
+    const BOOL hadSuperview = !!view.superview;
+    const QRectF rect = qt_mac_flipRect(view.frame, view);
+    [view removeFromSuperview];
+    if (hadSuperview)
+        view.frame = rect.toCGRect();
 }
 
 NSWindow *QUniAppKitWindowPrivate::window()
@@ -451,7 +460,7 @@ void QUniAppKitWindow::childEvent(QChildEvent *event)
             // NSViews added as children of the view controller view instead.
             d->addSubViewToContentView(dptr_child->view());
         } else if (event->removed()) {
-            d->removeSubView(dptr_child->view());
+            d->removeSubViewFromContentView(dptr_child->view());
         }
     } else if (QUniAppKitViewControllerPrivate *dptr_child = dynamic_cast<QUniAppKitViewControllerPrivate *>(QObjectPrivate::get(child))) {
         if (event->added()) {

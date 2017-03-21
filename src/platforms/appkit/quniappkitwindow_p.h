@@ -59,21 +59,48 @@ class QUniAppKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSWindow);
 Q_FORWARD_DECLARE_OBJC_CLASS(QUniAppKitWindowDelegate);
 
-class QUniAppKitWindowPrivate : public QUniAppKitViewPrivate
+class QUniAppKitWindowPrivate : public QUniAppKitBasePrivate
 {
 public:
     explicit QUniAppKitWindowPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniAppKitWindowPrivate();
 
     virtual void connectSignals(QUniBase *base) override;
-    virtual void updateLayout(bool recursive) override;
+
+    void updateLayout(bool recursive);
 
     void setFrame(const QRectF &frame);
     void addSubViewToContentView(NSView *nsView);
+    void removeSubViewFromContentView(NSView *view);
 
     NSWindow *window();
 
     Q_DECLARE_PUBLIC(QUniAppKitWindow)
+
+protected:
+    // Attributes to keep track of explicit
+    // application assignments
+    enum Attribute {
+        LayedOut		= 0x00000001,
+        MovedX			= 0x00000002,
+        MovedY			= 0x00000004,
+        ResizedWidth	= 0x00000008,
+        ResizedHeight	= 0x00000010,
+        ResizedImplicitWidth = 0x00000020,
+        ResizedImplicitHeight = 0x00000040,
+    };
+
+    uint m_attributes;
+
+    inline void setAttribute(Attribute attribute, bool on = true)
+    {
+        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
+    }
+
+    inline bool testAttribute(Attribute attribute)
+    {
+        return bool(m_attributes & attribute);
+    }
 
 private:
     NSWindow *m_window;
