@@ -56,24 +56,30 @@ public:
     QUniUIKitWindow();
     virtual ~QUniUIKitWindow();
 
-    UIWindow *uiWindowHandle();
-
-    void setRootViewController(QUniUIKitViewController *rootViewController);
-    QUniUIKitViewController *rootViewController() const;
-
-    qreal width() const override;
-    qreal height() const override;
-
     virtual bool isVisible() const override;
     virtual void setVisible(bool isVisible) override;
     virtual void showFullScreen() override;
 
+    virtual QRectF geometry() const override;
+    virtual void setGeometry(const QRectF &) override {}
+
+    virtual void setPosition(const QPointF &) override {}
+    virtual void resize(const QSizeF) override {}
+
     virtual bool event(QEvent *e) override;
+
+    qreal width() const;
+    qreal height() const;
+
+    void setRootViewController(QUniUIKitViewController *rootViewController);
+    QUniUIKitViewController *rootViewController() const;
 
     bool addNativeChild(QObject *child) override;
     bool addNativeChild(const QByteArray &type, void *child) override;
     QByteArrayList supportedNativeChildTypes() override;
     QByteArrayList supportedNativeParentTypes() override;
+
+    UIWindow *uiWindowHandle();
 
 Q_SIGNALS:
     void visibleChanged(bool isVisible);

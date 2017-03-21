@@ -139,12 +139,12 @@ QUniUIKitViewController *QUniUIKitWindow::rootViewController() const
 
 qreal QUniUIKitWindow::width() const
 {
-    return d_func()->view().frame.size.width;
+    return geometry().width();
 }
 
 qreal QUniUIKitWindow::height() const
 {
-    return d_func()->view().frame.size.height;
+    return geometry().height();
 }
 
 bool QUniUIKitWindow::isVisible() const
@@ -177,6 +177,11 @@ void QUniUIKitWindow::setVisible(bool newVisible)
 void QUniUIKitWindow::showFullScreen()
 {
     setVisible(true);
+}
+
+QRectF QUniUIKitWindow::geometry() const
+{
+    return QRectF::fromCGRect(d_func()->view().frame);
 }
 
 bool QUniUIKitWindow::event(QEvent *e)
