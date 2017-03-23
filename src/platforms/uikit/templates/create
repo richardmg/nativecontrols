@@ -1,0 +1,49 @@
+#!/bin/bash
+
+if test "$#" -lt "3"; then
+    echo "Usage: ./create <class name> <base class> <native type to wrap>"
+    echo "Example: ./create QUniUIKitSlider QUniUIKitControl UISlider"
+    exit -1
+fi
+
+# Class name to substitute in templates
+OLD_CLASS_NAME=QUniUIKitButton
+OLD_BASE_CLASS=QUniUIKitControl
+OLD_NATIVE_TYPE=UIButton
+
+# Assign better arg names, and escape control charcters
+NEW_CLASS_NAME=$(echo $1|sed -e 's/[]\/$*.^|[]/\\&/g')
+NEW_BASE_CLASS=$(echo $2|sed -e 's/[\/&]/\\&/g')
+NEW_NATIVE_TYPE=$(echo $3|sed -e 's/[\/&]/\\&/g')
+
+# Create upper-, and lowercase versions
+OLD_CLASS_NAME_UC=$(echo "$OLD_CLASS_NAME" | awk '{print toupper($0)}')
+OLD_CLASS_NAME_LC=$(echo "$OLD_CLASS_NAME" | awk '{print tolower($0)}')
+OLD_BASE_CLASS_UC=$(echo "$OLD_BASE_CLASS" | awk '{print toupper($0)}')
+OLD_BASE_CLASS_LC=$(echo "$OLD_BASE_CLASS" | awk '{print tolower($0)}')
+OLD_NATIVE_TYPE_UC=$(echo "$OLD_NATIVE_TYPE" | awk '{print toupper($0)}')
+OLD_NATIVE_TYPE_LC=$(echo "$OLD_NATIVE_TYPE" | awk '{print tolower($0)}')
+
+NEW_CLASS_NAME_UC=$(echo "$NEW_CLASS_NAME" | awk '{print toupper($0)}')
+NEW_CLASS_NAME_LC=$(echo "$NEW_CLASS_NAME" | awk '{print tolower($0)}')
+NEW_BASE_CLASS_UC=$(echo "$NEW_BASE_CLASS" | awk '{print toupper($0)}')
+NEW_BASE_CLASS_LC=$(echo "$NEW_BASE_CLASS" | awk '{print tolower($0)}')
+NEW_NATIVE_TYPE_UC=$(echo "$NEW_NATIVE_TYPE" | awk '{print toupper($0)}')
+NEW_NATIVE_TYPE_LC=$(echo "$NEW_NATIVE_TYPE" | awk '{print tolower($0)}')
+
+function createFile() {
+   FILENAME_OLD=${OLD_CLASS_NAME_LC}$1
+   FILENAME_NEW=${NEW_CLASS_NAME_LC}$1
+
+   sed s/$OLD_CLASS_NAME/$NEW_CLASS_NAME/g $FILENAME_OLD > $FILENAME_NEW
+   sed -i "" s/$OLD_CLASS_NAME_UC/$NEW_CLASS_NAME_UC/g $FILENAME_NEW
+   sed -i "" s/$OLD_NATIVE_TYPE/$NEW_NATIVE_TYPE/g $FILENAME_NEW
+   sed -i "" s/$OLD_BASE_CLASS/$NEW_BASE_CLASS/g $FILENAME_NEW
+   sed -i "" s/$OLD_BASE_CLASS_LC/$NEW_BASE_CLASS_LC/g $FILENAME_NEW
+   sed -i "" s/$OLD_CLASS_NAME_LC/$NEW_CLASS_NAME_LC/g $FILENAME_NEW
+}
+
+createFile ".h"
+createFile "_p.h"
+createFile ".mm"
+
