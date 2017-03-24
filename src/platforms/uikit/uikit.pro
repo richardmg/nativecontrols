@@ -17,6 +17,7 @@ IOS_CONTROLS = \
     button \
     textfield \
     searchfield \
+    slider \
     viewcontroller \
     tabbarcontroller \
     tabbaritem
