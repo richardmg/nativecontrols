@@ -47,7 +47,7 @@ class Q_UNICONTROLS_EXPORT QUniPlatformButton : public virtual QUniPlatformContr
 public:
     virtual ~QUniPlatformButton() {}
 
-    virtual QString text() = 0;
+    virtual QString text() const = 0;
     virtual void setText(const QString &text) = 0;
 };
 

@@ -55,7 +55,7 @@ public:
     explicit QUniButton(const QString &text, QUniBase *parent = nullptr);
     virtual ~QUniButton();
 
-    QString text();
+    QString text() const;
     void setText(const QString &text);
 
 Q_SIGNALS:

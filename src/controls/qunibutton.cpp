@@ -89,7 +89,7 @@ QUniButton::~QUniButton()
 {
 }
 
-QString QUniButton::text()
+QString QUniButton::text() const
 {
     return d_func()->m_platformButton->text();
 }
