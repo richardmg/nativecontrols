@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if test "$#" -lt "3"; then
-    echo "Usage: ./create <class name> <base class> <native type to wrap>"
+    echo "Usage: ./create <class name> <base class> <native type to wrap> [target path]"
     echo "Example: ./create QUniUIKitSlider QUniUIKitControl UISlider"
     exit -1
 fi
@@ -15,6 +15,7 @@ OLD_NATIVE_TYPE=UIButton
 NEW_CLASS_NAME=$(echo $1|sed -e 's/[]\/$*.^|[]/\\&/g')
 NEW_BASE_CLASS=$(echo $2|sed -e 's/[\/&]/\\&/g')
 NEW_NATIVE_TYPE=$(echo $3|sed -e 's/[\/&]/\\&/g')
+TARGETPATH=$([[ -n $4 ]] && echo $4 || echo ".")
 
 # Create upper-, and lowercase versions
 OLD_CLASS_NAME_UC=$(echo "$OLD_CLASS_NAME" | awk '{print toupper($0)}')
@@ -33,7 +34,7 @@ NEW_NATIVE_TYPE_LC=$(echo "$NEW_NATIVE_TYPE" | awk '{print tolower($0)}')
 
 function createFile() {
    FILENAME_OLD=${OLD_CLASS_NAME_LC}$1
-   FILENAME_NEW=${NEW_CLASS_NAME_LC}$1
+   FILENAME_NEW=${TARGETPATH}/${NEW_CLASS_NAME_LC}$1
 
    sed s/$OLD_CLASS_NAME/$NEW_CLASS_NAME/g $FILENAME_OLD > $FILENAME_NEW
    sed -i "" s/$OLD_CLASS_NAME_UC/$NEW_CLASS_NAME_UC/g $FILENAME_NEW
