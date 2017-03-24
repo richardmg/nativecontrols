@@ -32,6 +32,10 @@ NEW_BASE_CLASS_LC=$(echo "$NEW_BASE_CLASS" | awk '{print tolower($0)}')
 NEW_NATIVE_TYPE_UC=$(echo "$NEW_NATIVE_TYPE" | awk '{print toupper($0)}')
 NEW_NATIVE_TYPE_LC=$(echo "$NEW_NATIVE_TYPE" | awk '{print tolower($0)}')
 
+# Create camel case versions of native type as well
+OLD_NATIVE_TYPE_CC=$(echo "$OLD_NATIVE_TYPE" | awk '{print tolower(substr($0, 0, 2)) substr($0, 3)}')
+NEW_NATIVE_TYPE_CC=$(echo "$NEW_NATIVE_TYPE" | awk '{print tolower(substr($0, 0, 2)) substr($0, 3)}')
+
 function createFile() {
    FILENAME_OLD=${OLD_CLASS_NAME_LC}$1
    FILENAME_NEW=${TARGETPATH}/${NEW_CLASS_NAME_LC}$1
@@ -42,6 +46,7 @@ function createFile() {
    sed -i "" s/$OLD_BASE_CLASS/$NEW_BASE_CLASS/g $FILENAME_NEW
    sed -i "" s/$OLD_BASE_CLASS_LC/$NEW_BASE_CLASS_LC/g $FILENAME_NEW
    sed -i "" s/$OLD_CLASS_NAME_LC/$NEW_CLASS_NAME_LC/g $FILENAME_NEW
+   sed -i "" s/$OLD_NATIVE_TYPE_CC/$NEW_NATIVE_TYPE_CC/g $FILENAME_NEW
 }
 
 createFile ".h"

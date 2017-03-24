@@ -87,6 +87,11 @@ UIView *QUniUIKitButtonPrivate::createView()
     return _UIButton;
 }
 
+UIButton *QUniUIKitButtonPrivate::uiButton() const
+{
+    return static_cast<UIButton *>(view());
+}
+
 QUniUIKitButton::QUniUIKitButton(QUniUIKitBase *parent)
     : QUniUIKitControl(*new QUniUIKitButtonPrivate(), parent)
 {
@@ -109,13 +114,14 @@ QUniUIKitButton::~QUniUIKitButton()
     [d->m_delegate release];
 }
 
-UIButton *QUniUIKitButton::UIButtonHandle()
+UIButton *QUniUIKitButton::uiButtonHandle()
 {
-    return static_cast<UIButton *>(d_func()->view());
+    return d_func()->uiButton();
 }
 
-QString QUniUIKitButton::text()
+QString QUniUIKitButton::text() const
 {
+//    e.g return d_func()->uiButton().title;
     return QString::fromNSString(@"");
 }
 
@@ -124,10 +130,27 @@ void QUniUIKitButton::setText(const QString &newText)
     if (newText == text())
         return;
 
-    // update value here
+    // update value here, and if needed, update implicit size
     d_func()->updateImplicitSize();
 
     emit textChanged(newText);
+}
+
+float QUniUIKitButton::value() const
+{
+//    e.g return d_func()->uiButton().value;
+    return 0.;
+}
+
+void QUniUIKitButton::setValue(const float &newValue)
+{
+    if (newValue == value())
+        return;
+
+    // update value here, and if needed, update implicit size
+    d_func()->updateImplicitSize();
+
+    emit valueChanged(newValue);
 }
 
 #include "moc_quniuikitbutton.cpp"

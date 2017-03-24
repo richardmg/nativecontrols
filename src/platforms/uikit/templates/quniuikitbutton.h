@@ -48,19 +48,24 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitButton : public QUniUIKitControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(float value READ value WRITE setValue NOTIFY valueChanged)
 
 public:
     QUniUIKitButton(QUniUIKitBase *parent = nullptr);
     QUniUIKitButton(const QString &text, QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitButton();
 
-    UIButton *UIButtonHandle();
+    UIButton *uiButtonHandle();
 
-    QString text();
+    QString text() const;
     void setText(const QString &text);
+
+    float value() const;
+    void setValue(const float &newValue);
 
 Q_SIGNALS:
     void textChanged(const QString &text);
+    void valueChanged(float value);
     void clicked();
 
 protected:
