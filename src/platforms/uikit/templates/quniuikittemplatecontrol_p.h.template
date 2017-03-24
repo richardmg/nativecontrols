@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QUNIUIKITBUTTON_P_H
-#define QUNIUIKITBUTTON_P_H
+#ifndef QUNIUIKITTEMPLATECONTROL_P_H
+#define QUNIUIKITTEMPLATECONTROL_P_H
 
 //
 //  W A R N I N G
@@ -51,22 +51,23 @@
 #include <QtCore>
 #include <QtCore/private/qobject_p.h>
 
-#include <QtUniUIKitControls/quniuikitbutton.h>
-#include <QtUniUIKitControls/private/quniuikitcontrol_p.h>
+#include <QtUniUIKitControls/quniuikittemplatecontrol.h>
+#include <QtUniUIKitControls/private/quniuikittemplatebasecontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitButtonDelegate);
+Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitTemplateControlDelegate);
 
-class QUniUIKitButtonPrivate : public QUniUIKitControlPrivate
+class QUniUIKitTemplateControlPrivate : public QUniUIKitTemplateBaseControlPrivate
 {
 public:
-    explicit QUniUIKitButtonPrivate(int version = QObjectPrivateVersion);
-    virtual ~QUniUIKitButtonPrivate();
+    explicit QUniUIKitTemplateControlPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitTemplateControlPrivate();
 
-    QUniUIKitButtonDelegate *m_delegate;
+    UITemplateControl *uiTemplateControl() const;
+    QUniUIKitTemplateControlDelegate *m_delegate;
 
-    Q_DECLARE_PUBLIC(QUniUIKitButton)
+    Q_DECLARE_PUBLIC(QUniUIKitTemplateControl)
 
 protected:
     UIView *createView() override;
@@ -75,4 +76,4 @@ protected:
 
 QT_END_NAMESPACE
 
-#endif // QUNIUIKITBUTTON_P_H
+#endif // QUNIUIKITTEMPLATECONTROL_P_H

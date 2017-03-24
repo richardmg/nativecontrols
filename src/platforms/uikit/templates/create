@@ -7,9 +7,9 @@ if test "$#" -lt "3"; then
 fi
 
 # Class name to substitute in templates
-OLD_CLASS_NAME=QUniUIKitButton
-OLD_BASE_CLASS=QUniUIKitControl
-OLD_NATIVE_TYPE=UIButton
+OLD_CLASS_NAME=QUniUIKitTemplateControl
+OLD_BASE_CLASS=QUniUIKitTemplateBaseControl
+OLD_NATIVE_TYPE=UITemplateControl
 
 # Assign better arg names, and escape control charcters
 NEW_CLASS_NAME=$(echo $1|sed -e 's/[]\/$*.^|[]/\\&/g')
@@ -37,7 +37,7 @@ OLD_NATIVE_TYPE_CC=$(echo "$OLD_NATIVE_TYPE" | awk '{print tolower(substr($0, 0,
 NEW_NATIVE_TYPE_CC=$(echo "$NEW_NATIVE_TYPE" | awk '{print tolower(substr($0, 0, 2)) substr($0, 3)}')
 
 function createFile() {
-   FILENAME_OLD=${OLD_CLASS_NAME_LC}$1
+   FILENAME_OLD=${OLD_CLASS_NAME_LC}${1}.template
    FILENAME_NEW=${TARGETPATH}/${NEW_CLASS_NAME_LC}$1
 
    sed s/$OLD_CLASS_NAME/$NEW_CLASS_NAME/g $FILENAME_OLD > $FILENAME_NEW

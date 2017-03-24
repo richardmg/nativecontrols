@@ -38,21 +38,21 @@
 
 #include <QtCore>
 
-#include <QtUniUIKitControls/quniuikitbutton.h>
-#include <QtUniUIKitControls/private/quniuikitbutton_p.h>
+#include <QtUniUIKitControls/quniuikittemplatecontrol.h>
+#include <QtUniUIKitControls/private/quniuikittemplatecontrol_p.h>
 
-@interface QUniUIKitButtonDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QUniUIKitButtonPrivate) *_quniuikitbutton;
+@interface QUniUIKitTemplateControlDelegate : NSObject {
+    QT_PREPEND_NAMESPACE(QUniUIKitTemplateControlPrivate) *_quniuikittemplatecontrol;
 }
 @end
 
-@implementation QUniUIKitButtonDelegate
+@implementation QUniUIKitTemplateControlDelegate
 
--(id)initWithQUniUIKitButtonPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitButtonPrivate) *)quniuikitbutton
+-(id)initWithQUniUIKitTemplateControlPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTemplateControlPrivate) *)quniuikittemplatecontrol
 {
     self = [self init];
     if (self) {
-        _quniuikitbutton = quniuikitbutton;
+        _quniuikittemplatecontrol = quniuikittemplatecontrol;
     }
 
     return self;
@@ -60,72 +60,72 @@
 
 -(void)onClicked
 {
-    emit _quniuikitbutton->q_func()->clicked();
+    emit _quniuikittemplatecontrol->q_func()->clicked();
 }
 
 @end
 
 QT_BEGIN_NAMESPACE
 
-QUniUIKitButtonPrivate::QUniUIKitButtonPrivate(int version)
-    : QUniUIKitControlPrivate(version)
+QUniUIKitTemplateControlPrivate::QUniUIKitTemplateControlPrivate(int version)
+    : QUniUIKitTemplateBaseControlPrivate(version)
 {
 }
 
-QUniUIKitButtonPrivate::~QUniUIKitButtonPrivate()
+QUniUIKitTemplateControlPrivate::~QUniUIKitTemplateControlPrivate()
 {
     [m_delegate release];
 }
 
-UIView *QUniUIKitButtonPrivate::createView()
+UIView *QUniUIKitTemplateControlPrivate::createView()
 {
-    UIButton *_UIButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    [_UIButton sizeToFit];
+    UITemplateControl *uiTemplateControl = [[UITemplateControl alloc] initWithFrame:CGRectZero];
+    [uiTemplateControl sizeToFit];
 
-    m_delegate = [[QUniUIKitButtonDelegate alloc] initWithQUniUIKitButtonPrivate:this];
-    [_UIButton addTarget:m_delegate action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
-    return _UIButton;
+    m_delegate = [[QUniUIKitTemplateControlDelegate alloc] initWithQUniUIKitTemplateControlPrivate:this];
+    [uiTemplateControl addTarget:m_delegate action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
+    return uiTemplateControl;
 }
 
-UIButton *QUniUIKitButtonPrivate::uiButton() const
+UITemplateControl *QUniUIKitTemplateControlPrivate::uiTemplateControl() const
 {
-    return static_cast<UIButton *>(view());
+    return static_cast<UITemplateControl *>(view());
 }
 
-QUniUIKitButton::QUniUIKitButton(QUniUIKitBase *parent)
-    : QUniUIKitControl(*new QUniUIKitButtonPrivate(), parent)
+QUniUIKitTemplateControl::QUniUIKitTemplateControl(QUniUIKitBase *parent)
+    : QUniUIKitTemplateBaseControl(*new QUniUIKitTemplateControlPrivate(), parent)
 {
 }
 
-QUniUIKitButton::QUniUIKitButton(const QString &text, QUniUIKitBase *parent)
-    : QUniUIKitControl(*new QUniUIKitButtonPrivate(), parent)
+QUniUIKitTemplateControl::QUniUIKitTemplateControl(const QString &text, QUniUIKitBase *parent)
+    : QUniUIKitTemplateBaseControl(*new QUniUIKitTemplateControlPrivate(), parent)
 {
     setText(text);
 }
 
-QUniUIKitButton::QUniUIKitButton(QUniUIKitButtonPrivate &dd, QUniUIKitBase *parent)
-    : QUniUIKitControl(dd, parent)
+QUniUIKitTemplateControl::QUniUIKitTemplateControl(QUniUIKitTemplateControlPrivate &dd, QUniUIKitBase *parent)
+    : QUniUIKitTemplateBaseControl(dd, parent)
 {
 }
 
-QUniUIKitButton::~QUniUIKitButton()
+QUniUIKitTemplateControl::~QUniUIKitTemplateControl()
 {
-    Q_D(QUniUIKitButton);
+    Q_D(QUniUIKitTemplateControl);
     [d->m_delegate release];
 }
 
-UIButton *QUniUIKitButton::uiButtonHandle()
+UITemplateControl *QUniUIKitTemplateControl::uiTemplateControlHandle()
 {
-    return d_func()->uiButton();
+    return d_func()->uiTemplateControl();
 }
 
-QString QUniUIKitButton::text() const
+QString QUniUIKitTemplateControl::text() const
 {
-//    e.g return d_func()->uiButton().title;
+//    e.g return d_func()->uiTemplateControl().title;
     return QString::fromNSString(@"");
 }
 
-void QUniUIKitButton::setText(const QString &newText)
+void QUniUIKitTemplateControl::setText(const QString &newText)
 {
     if (newText == text())
         return;
@@ -136,13 +136,13 @@ void QUniUIKitButton::setText(const QString &newText)
     emit textChanged(newText);
 }
 
-float QUniUIKitButton::value() const
+float QUniUIKitTemplateControl::value() const
 {
-//    e.g return d_func()->uiButton().value;
+//    e.g return d_func()->uiTemplateControl().value;
     return 0.;
 }
 
-void QUniUIKitButton::setValue(const float &newValue)
+void QUniUIKitTemplateControl::setValue(const float &newValue)
 {
     if (newValue == value())
         return;
@@ -153,7 +153,7 @@ void QUniUIKitButton::setValue(const float &newValue)
     emit valueChanged(newValue);
 }
 
-#include "moc_quniuikitbutton.cpp"
+#include "moc_quniuikittemplatecontrol.cpp"
 
 QT_END_NAMESPACE
 
