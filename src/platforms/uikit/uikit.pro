@@ -30,4 +30,10 @@ for(c,IOS_CONTROLS) {
 HEADERS += \
     quniuikitcontrolsglobal.h
 
+OTHER_FILES += \
+    templates/quniuikittemplatecontrol.h.template \
+    templates/quniuikittemplatecontrol_p.h.template \
+    templates/quniuikittemplatecontrol.mm.template \
+    templates/create
+
 load(qt_module)
