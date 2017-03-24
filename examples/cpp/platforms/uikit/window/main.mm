@@ -56,26 +56,31 @@ int main(int argc, char *argv[])
     tab2.setTabBarItem(new QUniUIKitTabBarItem(QStringLiteral("Tab2"), &tab2));
     tabBarController.setViewControllers(QList<QUniUIKitViewController *>() << &tab1 << &tab2);
 
-    QUniUIKitView *contentView = tab1.view();
+    QUniUIKitView *contentViewTab1 = tab1.view();
+    QUniUIKitView *contentViewTab2 = tab2.view();
     float margin = 0;
 
-    QUniUIKitButton button(QStringLiteral("Click me"), contentView);
+    QUniUIKitButton button(QStringLiteral("Click me"), contentViewTab1);
     button.move(50, 100);
     QObject::connect(&button, &QUniUIKitButton::clicked, [&button](){ button.setText(QStringLiteral("Thanks!")); });
 
-    QUniUIKitTextField textField(contentView);
+    QUniUIKitTextField textField(contentViewTab1);
     textField.setPlaceholderText(QStringLiteral("TextField"));
     textField.move(button.left(), button.bottom() + margin);
     textField.resize(200, textField.implicitSize().height());
 
-    QUniUIKitView view(contentView);
+    QUniUIKitView view(contentViewTab1);
     view.setGeometry(button.left(), textField.geometry().bottom() + margin, 200, 200);
 
     QUniUIKitButton button2("Child button", &view);
     button2.move(0, 0);
     QObject::connect(&button2, &QUniUIKitButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
 
-    QUniUIKitTextField textField2(contentView);
+    QUniUIKitSlider slider(contentViewTab2);
+    slider.setGeometry(50, 50, window.width() - 100, slider.implicitHeight());
+    QObject::connect(&slider, &QUniUIKitSlider::valueChanged, [&slider](){ qDebug() << "new value:" << slider.value(); });
+
+    QUniUIKitTextField textField2(contentViewTab1);
     textField2.setPlaceholderText(QStringLiteral("TextField 2"));
     textField2.move(button.left(), 300);
 //    textField2.resize(200, textField.implicitSize().height());
