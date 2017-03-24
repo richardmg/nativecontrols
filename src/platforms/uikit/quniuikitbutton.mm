@@ -98,6 +98,11 @@ UIView *QUniUIKitButtonPrivate::createView()
     return uiButton;
 }
 
+UIButton *QUniUIKitButtonPrivate::uiButton() const
+{
+    return static_cast<UIButton *>(view());
+}
+
 QUniUIKitButton::QUniUIKitButton(QUniUIKitBase *parent)
     : QUniUIKitControl(*new QUniUIKitButtonPrivate(), parent)
 {
@@ -122,12 +127,12 @@ QUniUIKitButton::~QUniUIKitButton()
 
 UIButton *QUniUIKitButton::uiButtonHandle()
 {
-    return static_cast<UIButton *>(d_func()->view());
+    return d_func()->uiButton();
 }
 
-QString QUniUIKitButton::text()
+QString QUniUIKitButton::text() const
 {
-    return QString::fromNSString([uiButtonHandle() titleForState:UIControlStateNormal]);
+    return QString::fromNSString([d_func()->uiButton() titleForState:UIControlStateNormal]);
 }
 
 void QUniUIKitButton::setText(const QString &newText)

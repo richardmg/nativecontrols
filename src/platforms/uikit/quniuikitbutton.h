@@ -57,7 +57,7 @@ public:
 
     UIButton *uiButtonHandle();
 
-    virtual QString text() override;
+    virtual QString text() const override;
     virtual void setText(const QString &text) override;
 
 Q_SIGNALS:

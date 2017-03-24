@@ -67,6 +67,7 @@ public:
 
     virtual void connectSignals(QUniBase *base) override;
 
+    UIButton *uiButton() const;
     QUniUIKitButtonDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QUniUIKitButton)
