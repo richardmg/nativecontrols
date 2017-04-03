@@ -14,6 +14,7 @@ Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarItem);
 class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarItem : public QUniUIKitBase, public virtual QUniPlatformTabsPageTab
 {
     Q_OBJECT
+    Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
 
 public:
     explicit QUniUIKitTabBarItem(QUniUIKitBase *parent = nullptr);
@@ -21,9 +22,12 @@ public:
     virtual ~QUniUIKitTabBarItem();
 
     virtual QString title() const override;
-    virtual void setTitle(const QString &title) override;
+    virtual void setTitle(const QString &newTitle) override;
 
     UITabBarItem *uiTabBarItemHandle();
+
+Q_SIGNALS:
+    void titleChanged(const QString &title);
 
 protected:
     QUniUIKitTabBarItem(QUniUIKitTabBarItemPrivate &dd, QUniUIKitBase *parent = nullptr);

@@ -90,9 +90,14 @@ QString QUniUIKitTabBarItem::title() const
     return QString::fromNSString(const_cast<QUniUIKitTabBarItem *>(this)->uiTabBarItemHandle().title);
 }
 
-void QUniUIKitTabBarItem::setTitle(const QString &title)
+void QUniUIKitTabBarItem::setTitle(const QString &newTitle)
 {
-    uiTabBarItemHandle().title = title.toNSString();
+    if (title() == newTitle)
+        return;
+
+    uiTabBarItemHandle().title = newTitle.toNSString();
+
+    emit titleChanged(newTitle);
 }
 
 #include "moc_quniuikittabbaritem.cpp"
