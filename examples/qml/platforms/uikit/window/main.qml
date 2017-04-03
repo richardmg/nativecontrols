@@ -46,13 +46,32 @@ Window {
     id: theWindow
     visible: true
 
-    ViewController {
-        View {
-            y: 20
-            Button {
-                text: "click me"
+    TabBarController {
+
+        ViewController {
+            TabBarItem {
+                title: "Tab 1"
+            }
+            View {
+                y: 20
+                Button {
+                    text: "click me"
+                }
             }
         }
+
+        ViewController {
+            TabBarItem {
+                title: "Tab 2"
+            }
+            View {
+                y: 20
+                Button {
+                    text: "click me"
+                }
+            }
+        }
+
     }
 
 }
