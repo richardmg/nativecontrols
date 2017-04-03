@@ -49,6 +49,9 @@ public:
 
 QmlUniAppKitControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(parent)
 {
+#ifdef QT_STATIC
+    Q_INIT_RESOURCE(qmake_Qt_UniAppKitControls);
+#endif
 }
 
 void registerTypes(const char *uri) override
