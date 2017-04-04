@@ -43,6 +43,7 @@
 #include <QtUniUIKitControls/quniuikittabbaritem.h>
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
 #include <QtUniUIKitControls/private/quniuikitviewcontroller_p.h>
+#include <QtUniUIKitControls/private/quniuikittabbaritem_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -225,6 +226,11 @@ void QUniUIKitViewController::childEvent(QChildEvent *event)
             d->addChildViewController(dptr_child->q_func()->uiViewControllerHandle());
         else
             [dptr_child->m_viewController removeFromParentViewController];
+    } else if (QUniUIKitTabBarItemPrivate *dptr_child = dynamic_cast<QUniUIKitTabBarItemPrivate *>(childPrivate)) {
+        if (event->added())
+            setTabBarItem(dptr_child->q_func());
+        else
+            setTabBarItem(nullptr);
     }
 }
 
