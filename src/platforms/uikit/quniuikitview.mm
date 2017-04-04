@@ -306,6 +306,27 @@ void QUniUIKitView::setImplicitHeight(qreal height)
     emit implicitHeightChanged(height);
 }
 
+QColor QUniUIKitView::backgroundColor() const
+{
+    CGFloat r, g, b, a;
+    [d_func()->view().backgroundColor getRed:&r green:&g blue:&b alpha:&a];
+    return QColor::fromRgba(qRgba(r * 255, g * 255, b * 255, a * 255));
+}
+
+void QUniUIKitView::setBackgroundColor(const QColor &color)
+{
+    if (backgroundColor() == color)
+        return;
+
+    uiViewHandle().backgroundColor = [UIColor
+            colorWithRed:color.red() / 255.
+            green:color.green() / 255.
+            blue:color.blue() / 255.
+            alpha:color.alpha() / 255.];
+
+    emit backgroundColorChanged(color);
+}
+
 QRectF QUniUIKitView::geometry() const
 {
     return QRectF::fromCGRect(d_func()->alignmentRect());

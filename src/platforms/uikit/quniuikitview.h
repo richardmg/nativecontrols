@@ -60,6 +60,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitBase, public vir
     Q_PROPERTY(qreal bottom READ bottom NOTIFY bottomChanged FINAL)
     Q_PROPERTY(qreal implicitWidth READ implicitWidth WRITE setImplicitWidth NOTIFY implicitWidthChanged FINAL)
     Q_PROPERTY(qreal implicitHeight READ implicitHeight WRITE setImplicitHeight NOTIFY implicitHeightChanged FINAL)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged FINAL)
 
 public:
     QUniUIKitView(QUniUIKitBase *parent = nullptr);
@@ -105,6 +106,9 @@ public:
     qreal implicitHeight() const;
     void setImplicitHeight(qreal height);
 
+    QColor backgroundColor() const;
+    void setBackgroundColor(const QColor &color);
+
     QUniUIKitView *parentView();
 
     bool setNativeParent(QObject *parent) override;
@@ -126,6 +130,7 @@ Q_SIGNALS:
     void bottomChanged(qreal bottom);
     void implicitWidthChanged(qreal w);
     void implicitHeightChanged(qreal h);
+    void backgroundColorChanged(const QColor &color);
 
 protected:
     QUniUIKitView(QUniUIKitViewPrivate &dd, QUniUIKitBase *parent = nullptr);
