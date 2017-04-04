@@ -208,35 +208,11 @@ void QUniUIKitViewController::childEvent(QChildEvent *event)
     // called from its constructor chain. But the private part will.
     QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
 
-    if (QUniUIKitViewPrivate *dptr_child = dynamic_cast<QUniUIKitViewPrivate *>(childPrivate)) {
-        // QUniUIKitView added as children of a plain QUniUIKitViewController will
-        // have their UIViews added as children of the content view instead as a convenience.
-        // But we only do this if the view controller is a plain QUniUIKitViewController.
-        // Otherwise, if you e.g assign a UIView to UITabBarController.view, it will no longer
-        // behave like a tab bar, but instead fall back to act like a normal view controller.
-        if (![uiViewControllerHandle() isMemberOfClass:[UIViewController class]])
-            return;
-        if (event->added()) {
-            // Since you are allowed to set a parentless view explicit as a
-            // content view, and then later do the reparenting, we need to ensure
-            // that we don't try to make the content view a subview of itself.
-            QUniUIKitView *contentView = d->m_view;
-            QUniUIKitView *subView = dptr_child->q_func();
-            if (contentView && subView != contentView)
-                d->addSubViewToContentView(subView->uiViewHandle());
-        } else if (event->removed()) {
-            [dptr_child->view() removeFromSuperview];
-        }
-    } else if (QUniUIKitViewControllerPrivate *dptr_child = dynamic_cast<QUniUIKitViewControllerPrivate *>(childPrivate)) {
+    if (QUniUIKitViewControllerPrivate *dptr_child = dynamic_cast<QUniUIKitViewControllerPrivate *>(childPrivate)) {
         if (event->added())
             d->addChildViewController(dptr_child->q_func()->uiViewControllerHandle());
         else
             [dptr_child->m_viewController removeFromParentViewController];
-    } else if (QUniUIKitTabBarItemPrivate *dptr_child = dynamic_cast<QUniUIKitTabBarItemPrivate *>(childPrivate)) {
-        if (event->added())
-            setTabBarItem(dptr_child->q_func());
-        else
-            setTabBarItem(nullptr);
     }
 }
 

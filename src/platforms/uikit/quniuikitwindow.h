@@ -87,7 +87,6 @@ Q_SIGNALS:
 
 protected:
     QUniUIKitWindow(QUniUIKitWindowPrivate &dd);
-    void childEvent(QChildEvent *event) override;
 
 private:
     Q_DECLARE_PRIVATE(QUniUIKitWindow)

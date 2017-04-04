@@ -228,35 +228,6 @@ QByteArrayList QUniUIKitWindow::supportedNativeParentTypes()
     return QByteArrayList();
 }
 
-void QUniUIKitWindow::childEvent(QChildEvent *event)
-{
-    Q_D(QUniUIKitWindow);
-    // Note that event->child() might not be fully constructed at this point, if
-    // called from its constructor chain. But the private part will.
-    QObject *child = event->child();
-
-    if (QUniUIKitViewPrivate *dptr_child = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(child))) {
-        if (event->added()) {
-            // QUniUIKitView added as children of the window will have their
-            // UIViews added as children of the view controller view instead.
-            d->addSubViewToContentView(dptr_child->view());
-        } else if (event->removed()) {
-            [dptr_child->view() removeFromSuperview];
-        }
-    } else if (QUniUIKitViewControllerPrivate *dptr_child = dynamic_cast<QUniUIKitViewControllerPrivate *>(QObjectPrivate::get(child))) {
-        if (event->added()) {
-            if (!d->m_viewController || !d->m_viewControllerSetExplicit) {
-                // If no view controller is set from before (other than the default
-                // one), we let the first set child controller become the root view controller.
-                setRootViewController(dptr_child->q_func());
-            }
-        } else if (event->removed()) {
-            if (dptr_child->q_func() == d->m_viewController)
-                setRootViewController(nullptr);
-        }
-    }
-}
-
 #include "moc_quniuikitwindow.cpp"
 
 QT_END_NAMESPACE
