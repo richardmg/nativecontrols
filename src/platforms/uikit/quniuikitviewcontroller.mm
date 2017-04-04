@@ -110,15 +110,20 @@ QUniUIKitViewController *QUniUIKitViewController::parentViewController()
     return qobject_cast<QUniUIKitViewController *>(parent());
 }
 
-void QUniUIKitViewController::setTabBarItem(QUniUIKitTabBarItem *tabBarItem)
-{
-    d_func()->m_tabBarItem = tabBarItem;
-    uiViewControllerHandle().tabBarItem = tabBarItem->uiTabBarItemHandle();
-}
-
 QUniUIKitTabBarItem *QUniUIKitViewController::tabBarItem() const
 {
     return d_func()->m_tabBarItem;
+}
+
+void QUniUIKitViewController::setTabBarItem(QUniUIKitTabBarItem *newTabBarItem)
+{
+    if (newTabBarItem == tabBarItem())
+        return;
+
+    d_func()->m_tabBarItem = newTabBarItem;
+    uiViewControllerHandle().tabBarItem = newTabBarItem->uiTabBarItemHandle();
+
+    emit tabBarItemChanged(newTabBarItem);
 }
 
 QUniUIKitView *QUniUIKitViewController::view() const

@@ -17,6 +17,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitViewController : public QUniUIKitBase, 
 {
     Q_OBJECT
     Q_PROPERTY(QUniUIKitView *view READ view WRITE setView NOTIFY viewChanged)
+    Q_PROPERTY(QUniUIKitTabBarItem *tabBarItem READ tabBarItem WRITE setTabBarItem NOTIFY tabBarItemChanged)
 
 public:
     QUniUIKitViewController(QUniUIKitBase *parent = nullptr);
@@ -27,7 +28,7 @@ public:
 
     QUniUIKitViewController *parentViewController();
 
-    void setTabBarItem(QUniUIKitTabBarItem *tabBarItem);
+    void setTabBarItem(QUniUIKitTabBarItem *newTabBarItem);
     QUniUIKitTabBarItem *tabBarItem() const;
 
     UIViewController *uiViewControllerHandle();
@@ -41,6 +42,7 @@ public:
 
 Q_SIGNALS:
     void viewChanged(QUniUIKitView *contentView);
+    void tabBarItemChanged(QUniUIKitTabBarItem *tabBarItem);
 
 protected:
     QUniUIKitViewController(QUniUIKitViewControllerPrivate &dd, QUniUIKitBase *parent = nullptr);
