@@ -42,18 +42,53 @@
 #include <QtUniUIKitControls/quniuikitview.h>
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
 
+static void *KVOFrameChanged = &KVOFrameChanged;
+
+@interface QUniUIKitViewDelegate : NSObject {
+    QT_PREPEND_NAMESPACE(QUniUIKitViewPrivate) *_view;
+}
+@end
+
+@implementation QUniUIKitViewDelegate
+
+-(id)initWithQUniUIKitViewPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitViewPrivate) *)view
+{
+    self = [self init];
+    if (self) {
+        _view = view;
+    }
+
+    return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    Q_UNUSED(keyPath);
+    Q_UNUSED(object);
+    Q_UNUSED(change);
+
+    if (context == KVOFrameChanged)
+        _view->emitFrameChanged();
+    else
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+@end
+
 QT_BEGIN_NAMESPACE
 
 QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     : QUniUIKitBasePrivate(version)
     , m_attributes(0)
     , m_view(nil)
+    , m_delegate(nullptr)
 {
 }
 
 QUniUIKitViewPrivate::~QUniUIKitViewPrivate()
 {
+    [m_view removeObserver:m_delegate forKeyPath:@"frame" context:NULL];
     [m_view release];
+    [m_delegate release];
 }
 
 void QUniUIKitViewPrivate::connectSignals(QUniBase *base)
@@ -81,6 +116,28 @@ void QUniUIKitViewPrivate::initConnections()
     q->connect(q, &QUniUIKitView::yChanged, q, &QUniUIKitView::bottomChanged);
     q->connect(q, &QUniUIKitView::widthChanged, q, &QUniUIKitView::rightChanged);
     q->connect(q, &QUniUIKitView::heightChanged, q, &QUniUIKitView::bottomChanged);
+}
+
+void QUniUIKitViewPrivate::emitFrameChanged()
+{
+    Q_Q(QUniUIKitView);
+
+    // Update m_lastEmittedFrame before emitting signals
+    // to avoid recursive binding loops. This can happen if
+    // e.g changing width causes x to changes as well, since
+    // then we enter here recursively.
+    QRectF frame = q->frameGeometry();
+    QRectF lastFrame = m_lastEmittedFrame;
+    m_lastEmittedFrame = frame;
+
+    if (frame.x() != lastFrame.x())
+        emit q->xChanged(frame.x());
+    if (frame.y() != lastFrame.y())
+        emit q->yChanged(frame.y());
+    if (frame.width() != lastFrame.width())
+        emit q->widthChanged(frame.width());
+    if (frame.height() != lastFrame.height())
+        emit q->heightChanged(frame.height());
 }
 
 void QUniUIKitViewPrivate::updateLayout(bool recursive)
@@ -139,8 +196,19 @@ void QUniUIKitViewPrivate::updateImplicitSize()
 
 UIView *QUniUIKitViewPrivate::view()
 {
-    if (!m_view)
+    if (!m_view) {
         m_view = createView();
+        // UIKit will sometimes change the frame of a view on it's own.
+        // This will e.g happen for the root view inside a view controller
+        // upon orientation change, or when the root view inside a tab is
+        // made visible the first time.
+        // Since we only wrap the native controls, and as such, cannot easily
+        // override methods like "updateSubviews", we choose to use the
+        // infamous KVO pattern to catch the frame changes for now, so that
+        // we always emit signals when the frame changes.
+        m_delegate = [[QUniUIKitViewDelegate alloc] initWithQUniUIKitViewPrivate:this];
+        [m_view addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
+    }
     return m_view;
 }
 
@@ -353,8 +421,6 @@ void QUniUIKitView::setX(qreal newX)
     QRectF g = geometry();
     g.moveLeft(newX);
     d_func()->setGeometry(g);
-
-    emit xChanged(newX);
 }
 
 qreal QUniUIKitView::y() const
@@ -373,8 +439,6 @@ void QUniUIKitView::setY(qreal newY)
     QRectF g = geometry();
     g.moveTop(newY);
     d_func()->setGeometry(g);
-
-    emit yChanged(newY);
 }
 
 qreal QUniUIKitView::width() const
@@ -393,8 +457,6 @@ void QUniUIKitView::setWidth(qreal newWidth)
     QRectF g = geometry();
     g.setWidth(newWidth);
     d_func()->setGeometry(g);
-
-    emit widthChanged(newWidth);
 }
 
 qreal QUniUIKitView::height() const
@@ -413,8 +475,6 @@ void QUniUIKitView::setHeight(qreal newHeight)
     QRectF g = geometry();
     g.setHeight(newHeight);
     d_func()->setGeometry(g);
-
-    emit heightChanged(newHeight);
 }
 
 qreal QUniUIKitView::left() const

@@ -56,6 +56,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniUIKitView;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
+Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitViewDelegate);
 
 class QUniUIKitViewPrivate : public QUniUIKitBasePrivate
 {
@@ -70,6 +71,8 @@ public:
     CGRect alignmentRect() const;
     void setAlignmentRect(CGRect rect);
     void setGeometry(const QRectF &rect);
+
+    void emitFrameChanged();
 
     virtual void connectSignals(QUniBase *base) override;
     virtual void updateLayout(bool recursive);
@@ -109,6 +112,8 @@ protected:
 private:
     UIView *m_view;
     QSizeF m_implicitSize;
+    QRectF m_lastEmittedFrame;
+    QUniUIKitViewDelegate *m_delegate;
 };
 
 QT_END_NAMESPACE
