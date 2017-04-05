@@ -62,6 +62,7 @@ void registerTypes(const char *uri) override
     qmlRegisterType<QUniUIKitButton>(uri, 1, 0, "Button");
     qmlRegisterType<QUniUIKitTextField>(uri, 1, 0, "TextField");
     qmlRegisterType<QUniUIKitSearchField>(uri, 1, 0, "SearchField");
+    qmlRegisterType<QUniUIKitSlider>(uri, 1, 0, "Slider");
     qmlRegisterType<QUniUIKitViewController>(uri, 1, 0, "ViewController");
     qmlRegisterType<QUniUIKitTabBarController>(uri, 1, 0, "TabBarController");
     qmlRegisterType<QUniUIKitTabBarItem>(uri, 1, 0, "TabBarItem");
