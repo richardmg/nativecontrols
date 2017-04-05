@@ -84,7 +84,8 @@ UIViewController *QUniUIKitViewControllerPrivate::viewController()
 UIViewController *QUniUIKitViewControllerPrivate::createViewController()
 {
     m_viewController = [UIViewController new];
-    m_view = new QUniUIKitView(q_func());
+    if (!m_view)
+        m_view = new QUniUIKitView(q_func());
     m_viewController.view = m_view->uiViewHandle();
     return m_viewController;
 }
