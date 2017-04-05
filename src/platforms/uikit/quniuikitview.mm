@@ -249,6 +249,14 @@ void QUniUIKitViewPrivate::setAlignmentRect(CGRect rect)
 
 void QUniUIKitViewPrivate::setGeometry(const QRectF &rect)
 {
+    if (!rect.isValid()) {
+        // Because of the declarative nature of QML, we are sometimes
+        // told to set a geometry that is not valid. This can e.g
+        // happen if you bind 'width' to 'parent.width', and then
+        // set parent to null. To avoid a crash, we do a
+        // check before we continue.
+        return;
+    }
     setAlignmentRect(rect.toCGRect());
 }
 
