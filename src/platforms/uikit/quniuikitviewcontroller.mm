@@ -141,8 +141,17 @@ void QUniUIKitViewController::setView(QUniUIKitView *view)
     if (d->m_view == view)
         return;
 
-    d->m_view = view;
-    uiViewControllerHandle().view = view ? view->uiViewHandle() : nullptr;
+    @try {
+        d->m_view = view;
+        uiViewControllerHandle().view = view ? view->uiViewHandle() : nullptr;
+    } @catch (NSException *e) {
+        // UIKit will throw an exception if trying to move a view from one view controller to
+        // another without first removing it from the former viewcontroller explicit. Since it's
+        // not in the nature of QML to just crash for such issues, and since we at the same
+        // time don't want to add to much logic to work around UIKit, we choose to
+        // just catch it, and continue if possible.
+        NSLog(@"Exception: %@", e);
+    }
 
     emit viewChanged(view);
 }
