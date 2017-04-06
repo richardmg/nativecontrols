@@ -43,31 +43,44 @@ import QtQuick 2.5
 import Qt.UniUIKitControls 1.0
 
 Window {
-    id: theWindow
+    id: window
     visible: true
 
-    TabBarController {
+    rootViewController: TabBarController {
 
         ViewController {
-            TabBarItem {
+            tabBarItem: TabBarItem {
                 title: "Tab 1"
             }
-            View {
-                y: 20
-                Button {
-                    text: "click me"
+            view: View {
+                View {
+                    y: 30
+                    width: parent.width
+                    height: parent.height
+                    Button {
+                        text: "click me"
+                        onClicked: text = "clicked!"
+                    }
                 }
             }
         }
 
         ViewController {
-            TabBarItem {
+            tabBarItem: TabBarItem {
                 title: "Tab 2"
             }
-            View {
-                y: 20
-                Button {
-                    text: "click me"
+            view: View {
+                backgroundColor: Qt.rgba(255, 255, 0, 255)
+                View {
+                    y: 30
+                    width: parent.width
+                    height: parent.height
+                    backgroundColor: Qt.rgba(0, 255, 0, 255)
+                    Button {
+                        text: "click me as well"
+                        onClicked: text = "clicked!"
+                        backgroundColor: Qt.rgba(0, 0, 255, 255)
+                    }
                 }
             }
         }
