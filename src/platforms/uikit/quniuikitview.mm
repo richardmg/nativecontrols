@@ -249,15 +249,15 @@ void QUniUIKitViewPrivate::setAlignmentRect(CGRect rect)
 
 void QUniUIKitViewPrivate::setGeometry(const QRectF &rect)
 {
-    if (!rect.isValid()) {
-        // Because of the declarative nature of QML, we are sometimes
-        // told to set a geometry that is not valid. This can e.g
-        // happen if you bind 'width' to 'parent.width', and then
-        // set parent to null. To avoid a crash, we do a
-        // check before we continue.
-        return;
+    @try {
+        setAlignmentRect(rect.toCGRect());
+    } @catch (NSException *) {
+        // QML can sometimes end up evaluating a geometry
+        // binding to NaN. And trying to set that on a UIView
+        // will cause a CALayerInvalidGeometry exception to be
+        // thrown. We choose to ignore this here, and trust the
+        // app to set a valid geometry later.
     }
-    setAlignmentRect(rect.toCGRect());
 }
 
 QUniUIKitView::QUniUIKitView(QUniUIKitBase *parent)
