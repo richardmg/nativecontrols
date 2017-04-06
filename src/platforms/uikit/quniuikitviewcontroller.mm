@@ -142,7 +142,7 @@ void QUniUIKitViewController::setView(QUniUIKitView *view)
         return;
 
     d->m_view = view;
-    uiViewControllerHandle().view = view->uiViewHandle();
+    uiViewControllerHandle().view = view ? view->uiViewHandle() : nullptr;
 
     emit viewChanged(view);
 }
