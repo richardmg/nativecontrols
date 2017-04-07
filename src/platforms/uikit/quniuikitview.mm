@@ -86,9 +86,17 @@ QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
 
 QUniUIKitViewPrivate::~QUniUIKitViewPrivate()
 {
-    [m_view removeObserver:m_delegate forKeyPath:@"frame" context:NULL];
-    [m_view release];
-    [m_delegate release];
+    if (m_view) {
+        @try {
+            [m_view removeObserver:m_delegate forKeyPath:@"frame" context:NULL];
+        } @catch (NSException *) {
+            // Work-around: if that app starts, but ends, before the app 'didFinishLaunching'
+            // (which happens when running auto tests), we get a NSRangeException telling us that
+            // we never "registered as an observer". Which is wrong, and we therefore ignore.
+        }
+        [m_view release];
+        [m_delegate release];
+    }
 }
 
 void QUniUIKitViewPrivate::connectSignals(QUniBase *base)
