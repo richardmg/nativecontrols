@@ -70,6 +70,7 @@ QT_BEGIN_NAMESPACE
 
 QUniUIKitButtonPrivate::QUniUIKitButtonPrivate(int version)
     : QUniUIKitControlPrivate(version)
+    , m_delegate(nullptr)
 {
 }
 
@@ -121,8 +122,6 @@ QUniUIKitButton::QUniUIKitButton(QUniUIKitButtonPrivate &dd, QUniUIKitBase *pare
 
 QUniUIKitButton::~QUniUIKitButton()
 {
-    Q_D(QUniUIKitButton);
-    [d->m_delegate release];
 }
 
 UIButton *QUniUIKitButton::uiButtonHandle()
