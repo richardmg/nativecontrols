@@ -48,9 +48,9 @@ class tst_view : public QObject
 
 private slots:
     void hierarchyCheck();
-    void defaultGeometery();
+    void geometery();
     void setGeometery();
-    void defaultImplicitSize();
+    void implicitSize();
     void setImplicitSize();
     void setGeometryWithNaN();
     void reparentChildViews();
@@ -87,15 +87,44 @@ void tst_view::hierarchyCheck()
     QCOMPARE(viewController->uiViewControllerHandle().view, rootView->uiViewHandle());
 }
 
-void tst_view::defaultGeometery()
+void tst_view::geometery()
 {
+    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
+    QVERIFY(window);
+    QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(window->property("rootView"));
+    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
+    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
+
+    // Check that the views has the geometry we expect
+    QCOMPARE(rootView->geometry(), QRectF::fromCGRect(window->uiWindowHandle().frame));
+
+    QCOMPARE(contentView->geometry().x(), 0.);
+    QCOMPARE(contentView->geometry().y(), 20.);
+    QCOMPARE(contentView->geometry().size(), rootView->geometry().size());
+    QCOMPARE(contentView->geometry(), QRectF::fromCGRect(contentView->uiViewHandle().frame));
+
+    QCOMPARE(childView->geometry(), QRectF(0, 0, childView->implicitWidth(), childView->implicitHeight()));
 }
 
 void tst_view::setGeometery()
 {
+    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
+    QVERIFY(window);
+    QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(window->property("rootView"));
+    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
+    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
+    QRectF newGeometry(100, 100, 200, 200);
+
+    rootView->setGeometry(newGeometry);
+    childView->setGeometry(newGeometry);
+    QCOMPARE(rootView->geometry(), newGeometry);
+    QCOMPARE(childView->geometry(), newGeometry);
+
+    // contentView has bindings to rootView, so it should update its geometry as well
+    QCOMPARE(contentView->geometry().size(), newGeometry.size());
 }
 
-void tst_view::defaultImplicitSize()
+void tst_view::implicitSize()
 {
 }
 

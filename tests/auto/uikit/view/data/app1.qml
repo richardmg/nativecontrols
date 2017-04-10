@@ -17,7 +17,7 @@ Window {
                 id: contentView
                 y: 20
                 width: parent.width
-                height: parent.height - y
+                height: parent.height
                 View {
                     id: childView
                     implicitWidth: 100
