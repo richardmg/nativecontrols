@@ -61,30 +61,30 @@ private slots:
 
 void tst_view::hierarchyCheck()
 {
-    QSharedPointer<QObject> root = loadQml("app1.qml");
-    QVERIFY(root);
+    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
+    QVERIFY(window);
 
     // Ensure that all properties are set
-    QUniUIKitViewController *viewController = qvariant_cast<QUniUIKitViewController *>(root->property("rootViewController"));
-    QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(root->property("rootView"));
-    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(root->property("contentView"));
-    QUniUIKitButton *button = qvariant_cast<QUniUIKitButton *>(root->property("button"));
+    QUniUIKitViewController *viewController = qvariant_cast<QUniUIKitViewController *>(window->property("rootViewController"));
+    QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(window->property("rootView"));
+    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
+    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
     QVERIFY(viewController);
     QVERIFY(rootView);
     QVERIFY(contentView);
-    QVERIFY(button);
+    QVERIFY(childView);
 
     // Check that the hierarchy that was specified in QML matches
     // the hierarchy that is reported from the platform controls
-    QVERIFY(viewController->view() == rootView);
-    QVERIFY(contentView->parentView() == rootView);
-    QVERIFY(button->parentView() == contentView);
+    QCOMPARE(viewController->view(), rootView);
+    QCOMPARE(contentView->parentView(), rootView);
+    QCOMPARE(childView->parentView(), contentView);
 
     // Check that the hierarchy of the native UIKit controls matches
     // the hierarchy of the platform controls
-    QVERIFY(button->uiButtonHandle().superview == contentView->uiViewHandle());
-    QVERIFY(contentView->uiViewHandle().superview == rootView->uiViewHandle());
-    QVERIFY(viewController->uiViewControllerHandle().view == rootView->uiViewHandle());
+    QCOMPARE(childView->uiViewHandle().superview, contentView->uiViewHandle());
+    QCOMPARE(contentView->uiViewHandle().superview, rootView->uiViewHandle());
+    QCOMPARE(viewController->uiViewControllerHandle().view, rootView->uiViewHandle());
 }
 
 void tst_view::defaultGeometery()

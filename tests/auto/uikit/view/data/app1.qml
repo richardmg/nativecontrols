@@ -8,7 +8,7 @@ Window {
 
     property alias rootView: rootView
     property alias contentView: contentView
-    property alias button: button
+    property alias childView: childView
 
     rootViewController: ViewController {
         view: View {
@@ -17,11 +17,11 @@ Window {
                 id: contentView
                 y: 20
                 width: parent.width
-                height: parent.height
-                Button {
-                    id: button
-                    text: "click me"
-                    onClicked: text = "clicked!"
+                height: parent.height - y
+                View {
+                    id: childView
+                    implicitWidth: 100
+                    implicitHeight: 100
                 }
             }
         }
