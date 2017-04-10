@@ -134,6 +134,21 @@ void tst_view::setImplicitSize()
 
 void tst_view::setGeometryWithNaN()
 {
+    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
+    QVERIFY(window);
+    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
+    QRectF geometery = childView->geometry();
+
+    // Check that we don't crash in UIKit just because we try to set geometry
+    // with NaN, as this can easily happen when using bindings (e.g if binding
+    // width to parent.width, and then parent is set to null).
+    childView->setX(std::numeric_limits<double>::quiet_NaN());
+    childView->setWidth(std::numeric_limits<double>::quiet_NaN());
+    QCOMPARE(childView->geometry(), geometery);
+
+    childView->setX(50);
+    childView->setWidth(200);
+    QCOMPARE(childView->geometry(), QRectF(50, geometery.y(), 200, geometery.height()));
 }
 
 void tst_view::reparentChildViews()
