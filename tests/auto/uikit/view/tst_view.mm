@@ -138,6 +138,28 @@ void tst_view::setGeometryWithNaN()
 
 void tst_view::reparentChildViews()
 {
+    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
+    QVERIFY(window);
+    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
+    QUniUIKitView *orphanView = qvariant_cast<QUniUIKitView *>(window->property("orphanView"));
+    QVERIFY(orphanView);
+
+    // Check that initial configuration is as expected
+    QVERIFY(orphanView->geometry().isEmpty());
+    QCOMPARE(orphanView->parent(), window->rootViewController());
+    QCOMPARE(orphanView->uiViewHandle().superview, nullptr);
+
+    // Reparent orphanView in, and check that geometry bindings take effect
+    orphanView->setParent(contentView);
+    QCOMPARE(orphanView->parent(), contentView);
+    QCOMPARE(orphanView->uiViewHandle().superview, contentView->uiViewHandle());
+    QCOMPARE(orphanView->geometry().size(), contentView->geometry().size());
+
+    // Reparent orphanView out again where it came from
+    orphanView->setParent(window->rootViewController());
+    QCOMPARE(orphanView->parent(), window->rootViewController());
+    QCOMPARE(orphanView->uiViewHandle().superview, nullptr);
+    QVERIFY(orphanView->geometry().isEmpty());
 }
 
 void tst_view::reparentRootViews()

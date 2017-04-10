@@ -9,6 +9,7 @@ Window {
     property alias rootView: rootView
     property alias contentView: contentView
     property alias childView: childView
+    property alias orphanView: orphanView
 
     rootViewController: ViewController {
         view: View {
@@ -23,6 +24,14 @@ Window {
                     implicitWidth: 100
                     implicitHeight: 100
                 }
+            }
+        }
+
+        View {
+            id: orphanView
+            onParentChanged: {
+                width = parent.hasOwnProperty("width") ? Qt.binding(function() { return parent.width; }) : 0;
+                height = parent.hasOwnProperty("height") ? Qt.binding(function() { return parent.height; }) : 0;
             }
         }
     }
