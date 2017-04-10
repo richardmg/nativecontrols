@@ -94,8 +94,14 @@ QUniUIKitViewPrivate::~QUniUIKitViewPrivate()
             // (which happens when running auto tests), we get a NSRangeException telling us that
             // we never "registered as an observer". Which is wrong, and we therefore ignore.
         }
-        [m_view release];
-        [m_delegate release];
+
+        dispatch_async(dispatch_get_main_queue (), ^{
+            // Because KVO removeObserver above is not executed by UIKit straight away, we
+            // get an 'NSInternalInconsistencyException' if we release m_view directly
+            // after. So, work around this for now by postponing the release.
+            [m_view release];
+            [m_delegate release];
+        });
     }
 }
 
