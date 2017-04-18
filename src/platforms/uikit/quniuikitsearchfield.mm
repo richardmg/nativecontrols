@@ -121,7 +121,7 @@ void QUniUIKitSearchField::setText(const QString &newText)
         return;
 
     uiSearchBarHandle().text = newText.toNSString();
-    d_func()->updateImplicitSize();
+    d_func()->updateIntrinsicContentSize();
 
     emit textChanged(newText);
 }
@@ -137,7 +137,7 @@ void QUniUIKitSearchField::setPlaceholderText(const QString &newPlaceholderText)
         return;
 
     uiSearchBarHandle().placeholder = newPlaceholderText.toNSString();
-    d_func()->updateImplicitSize();
+    d_func()->updateIntrinsicContentSize();
 
     emit placeholderTextChanged(newPlaceholderText);
 }

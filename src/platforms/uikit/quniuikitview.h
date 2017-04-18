@@ -57,8 +57,8 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitBase
     Q_PROPERTY(qreal top READ top NOTIFY yChanged FINAL)
     Q_PROPERTY(qreal right READ right NOTIFY rightChanged FINAL)
     Q_PROPERTY(qreal bottom READ bottom NOTIFY bottomChanged FINAL)
-    Q_PROPERTY(qreal implicitWidth READ implicitWidth WRITE setImplicitWidth NOTIFY implicitWidthChanged FINAL)
-    Q_PROPERTY(qreal implicitHeight READ implicitHeight WRITE setImplicitHeight NOTIFY implicitHeightChanged FINAL)
+    Q_PROPERTY(qreal intrinsicContentWidth READ intrinsicContentWidth WRITE setIntrinsicContentWidth NOTIFY intrinsicContentWidthChanged FINAL)
+    Q_PROPERTY(qreal intrinsicContentHeight READ intrinsicContentHeight WRITE setIntrinsicContentHeight NOTIFY intrinsicContentHeightChanged FINAL)
     Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged FINAL)
 
 public:
@@ -100,10 +100,10 @@ public:
     qreal right() const;
     qreal bottom() const;
 
-    qreal implicitWidth() const;
-    void setImplicitWidth(qreal width);
-    qreal implicitHeight() const;
-    void setImplicitHeight(qreal height);
+    qreal intrinsicContentWidth() const;
+    void setIntrinsicContentWidth(qreal width);
+    qreal intrinsicContentHeight() const;
+    void setIntrinsicContentHeight(qreal height);
 
     QColor backgroundColor() const;
     void setBackgroundColor(const QColor &color);
@@ -120,8 +120,8 @@ Q_SIGNALS:
     void heightChanged(qreal h);
     void rightChanged(qreal right);
     void bottomChanged(qreal bottom);
-    void implicitWidthChanged(qreal w);
-    void implicitHeightChanged(qreal h);
+    void intrinsicContentWidthChanged(qreal w);
+    void intrinsicContentHeightChanged(qreal h);
     void backgroundColorChanged(const QColor &color);
 
 protected:

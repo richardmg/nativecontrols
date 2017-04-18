@@ -121,7 +121,7 @@ void QUniUIKitTextField::setText(const QString &newText)
         return;
 
     uiTextFieldHandle().text = newText.toNSString();
-    d_func()->updateImplicitSize();
+    d_func()->updateIntrinsicContentSize();
 
     emit textChanged(newText);
 }
@@ -137,7 +137,7 @@ void QUniUIKitTextField::setPlaceholderText(const QString &newPlaceholderText)
         return;
 
     uiTextFieldHandle().placeholder = newPlaceholderText.toNSString();
-    d_func()->updateImplicitSize();
+    d_func()->updateIntrinsicContentSize();
 
     emit placeholderTextChanged(newPlaceholderText);
 }

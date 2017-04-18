@@ -124,7 +124,7 @@ void QUniUIKitSlider::setValue(const float &newValue)
         return;
 
     d_func()->uiSlider().value = newValue;
-    d_func()->updateImplicitSize();
+    d_func()->updateIntrinsicContentSize();
 
     emit valueChanged(newValue);
 }

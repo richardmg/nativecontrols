@@ -77,7 +77,7 @@ public:
     virtual void updateLayout(bool recursive);
 
     void initConnections();
-    void updateImplicitSize();
+    void updateIntrinsicContentSize();
 
     Q_DECLARE_PUBLIC(QUniUIKitView)
 
@@ -90,8 +90,6 @@ protected:
         MovedY			= 0x00000004,
         ResizedWidth	= 0x00000008,
         ResizedHeight	= 0x00000010,
-        ResizedImplicitWidth = 0x00000020,
-        ResizedImplicitHeight = 0x00000040,
     };
 
     uint m_attributes;
@@ -110,7 +108,7 @@ protected:
 
 private:
     UIView *m_view;
-    QSizeF m_implicitSize;
+    QSizeF m_intrinsicContentSize;
     QRectF m_lastEmittedFrame;
     QUniUIKitViewDelegate *m_delegate;
 };

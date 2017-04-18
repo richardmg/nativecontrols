@@ -130,7 +130,7 @@ void QUniUIKitButton::setText(const QString &newText)
         return;
 
     [uiButtonHandle() setTitle:newText.toNSString() forState:UIControlStateNormal];
-    d_func()->updateImplicitSize();
+    d_func()->updateIntrinsicContentSize();
 
     emit textChanged(newText);
 }

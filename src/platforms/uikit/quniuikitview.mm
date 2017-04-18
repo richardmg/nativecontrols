@@ -43,6 +43,13 @@
 
 static void *KVOFrameChanged = &KVOFrameChanged;
 
+@interface QPlainUIKitView : UIView
+@property (nonatomic, readwrite) CGSize intrinsicContentSize;
+@end
+
+@implementation QPlainUIKitView
+@end
+
 @interface QUniUIKitViewDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QUniUIKitViewPrivate) *_view;
 }
@@ -139,15 +146,19 @@ void QUniUIKitViewPrivate::updateLayout(bool recursive)
 {
     Q_Q(QUniUIKitView);
 
-    if (!testAttribute(ResizedWidth)) {
-        q->setWidth(q->implicitWidth());
-        setAttribute(ResizedWidth, false);
-    }
+//    TODO: perhaps check if width/heigth has been set automatically
+//            by uikit, and that we therefore need to emit signals. Or
+//            perhaps this should be done in updateIntrinsicContentSize?
 
-    if (!testAttribute(ResizedHeight)) {
-        q->setHeight(q->implicitHeight());
-        setAttribute(ResizedHeight, false);
-    }
+//    if (!testAttribute(ResizedWidth)) {
+//        q->setWidth(q->intrinsicContentWidth());
+//        setAttribute(ResizedWidth, false);
+//    }
+
+//    if (!testAttribute(ResizedHeight)) {
+//        q->setHeight(q->intrinsicContentHeight());
+//        setAttribute(ResizedHeight, false);
+//    }
 
     if (recursive) {
         for (QObject *child : q->children()) {
@@ -157,36 +168,23 @@ void QUniUIKitViewPrivate::updateLayout(bool recursive)
     }
 }
 
-void QUniUIKitViewPrivate::updateImplicitSize()
+void QUniUIKitViewPrivate::updateIntrinsicContentSize()
 {
+    // This function should be called whenever the view
+    // changes properties that can affect intrinsic size.
     Q_Q(QUniUIKitView);
-    // This function should be called whenever the view changes properties
-    // that can affect implicit size. But if the app has set an implicit
-    // size explicit, that size should always be kept, and if we can just return.
-    // Otherwise, we ask UIKit for the best size that fits the view.
-    const bool resizedImplicitWidth = testAttribute(ResizedImplicitWidth);
-    const bool resizedImplicitHeight = testAttribute(ResizedImplicitHeight);
-    if (resizedImplicitWidth && resizedImplicitHeight)
-        return;
+    QSizeF oldSize = m_intrinsicContentSize;
+    CGSize newSize = view().intrinsicContentSize;
 
-    QSizeF oldSize = m_implicitSize;
-    CGSize sizeThatFits = [view() sizeThatFits:CGSizeZero];
-    bool layoutNeeded = false;
-
-    if (!resizedImplicitWidth && sizeThatFits.width != oldSize.width()) {
-        m_implicitSize.setWidth(sizeThatFits.width);
-        emit q->implicitWidthChanged(sizeThatFits.width);
-        layoutNeeded = true;
+    if (newSize.width != oldSize.width()) {
+        m_intrinsicContentSize.setWidth(newSize.width);
+        emit q->intrinsicContentWidthChanged(newSize.width);
     }
 
-    if (!resizedImplicitHeight && sizeThatFits.height != oldSize.height()) {
-        m_implicitSize.setHeight(sizeThatFits.height);
-        emit q->implicitHeightChanged(sizeThatFits.height);
-        layoutNeeded = true;
+    if (newSize.height != oldSize.height()) {
+        m_intrinsicContentSize.setHeight(newSize.height);
+        emit q->intrinsicContentHeightChanged(newSize.height);
     }
-
-    if (layoutNeeded)
-        updateLayout(false);
 }
 
 UIView *QUniUIKitViewPrivate::view()
@@ -214,7 +212,7 @@ UIView *QUniUIKitViewPrivate::view() const
 
 UIView *QUniUIKitViewPrivate::createView()
 {
-    UIView *view = [UIView new];
+    UIView *view = [QPlainUIKitView new];
     view.backgroundColor = [UIColor whiteColor];
     return view;
 }
@@ -327,54 +325,63 @@ void QUniUIKitView::resize(const QSizeF size)
     setHeight(size.height());
 }
 
-QSizeF QUniUIKitView::implicitSize() const
+QSizeF QUniUIKitView::intrinsicSize() const
 {
-    Q_D(const QUniUIKitView);
-    if (!d->m_implicitSize.isValid())
-        const_cast<QUniUIKitViewPrivate *>(d)->updateImplicitSize();
-    return d->m_implicitSize;
+    return QSizeF::fromCGSize(d_func()->view().intrinsicContentSize);
 }
 
-void QUniUIKitView::setImplicitSize(const QSizeF &size)
+void QUniUIKitView::setIntrinsicSize(const QSizeF &size)
 {
-    setImplicitWidth(size.width());
-    setImplicitHeight(size.height());
+    setIntrinsicContentWidth(size.width());
+    setIntrinsicContentHeight(size.height());
 }
 
-qreal QUniUIKitView::implicitWidth() const
+qreal QUniUIKitView::intrinsicContentWidth() const
 {
-    return implicitSize().width();
+    return d_func()->view().intrinsicContentSize.width;
 }
 
-void QUniUIKitView::setImplicitWidth(qreal width)
+void QUniUIKitView::setIntrinsicContentWidth(qreal width)
 {
     Q_D(QUniUIKitView);
-    d->setAttribute(QUniUIKitViewPrivate::ResizedImplicitWidth);
 
-    if (width == d->m_implicitSize.width())
+    CGSize size = d->view().intrinsicContentSize;
+    if (width == size.width)
         return;
 
-    d->m_implicitSize.setWidth(width);
-    d->updateLayout(false);
-    emit implicitWidthChanged(width);
+    if (![d->view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
+        qWarning("Cannot set intrinsicContentWidth for %s", qPrintable(QString::fromNSString(NSStringFromClass([d->view() class]))));
+        return;
+    }
+
+    size.width = width;
+    static_cast<QPlainUIKitView *>(d->view()).intrinsicContentSize = size;
+
+    emit intrinsicContentWidthChanged(width);
 }
 
-qreal QUniUIKitView::implicitHeight() const
+qreal QUniUIKitView::intrinsicContentHeight() const
 {
-    return implicitSize().height();
+    return d_func()->view().intrinsicContentSize.height;
 }
 
-void QUniUIKitView::setImplicitHeight(qreal height)
+void QUniUIKitView::setIntrinsicContentHeight(qreal height)
 {
     Q_D(QUniUIKitView);
-    d->setAttribute(QUniUIKitViewPrivate::ResizedImplicitHeight);
 
-    if (height == d->m_implicitSize.height())
+    CGSize size = d->view().intrinsicContentSize;
+    if (height == size.height)
         return;
 
-    d->m_implicitSize.setHeight(height);
-    d->updateLayout(false);
-    emit implicitHeightChanged(height);
+    if (![d->view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
+        qWarning("Cannot set intrinsicContentHeight for %s", qPrintable(QString::fromNSString(NSStringFromClass([d->view() class]))));
+        return;
+    }
+
+    size.height = height;
+    static_cast<QPlainUIKitView *>(d->view()).intrinsicContentSize = size;
+
+    emit intrinsicContentHeightChanged(height);
 }
 
 QColor QUniUIKitView::backgroundColor() const
