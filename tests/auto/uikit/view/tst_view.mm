@@ -74,8 +74,8 @@ void tst_view::hierarchyCheck()
     QVERIFY(contentView);
     QVERIFY(childView);
 
-    // Check that the hierarchy that was specified in QML matches
-    // the hierarchy that is reported from the platform controls
+    // Check that the hierarchy specified in QML matches
+    // the hierarchy reported from the platform controls
     QCOMPARE(viewController->view(), rootView);
     QCOMPARE(contentView->parentView(), rootView);
     QCOMPARE(childView->parentView(), contentView);
@@ -95,7 +95,7 @@ void tst_view::geometery()
     QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
     QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
 
-    // Check that the views has the geometry we expect
+    // Check that the views has the geometry specified in the QML file
     QCOMPARE(rootView->geometry(), QRectF::fromCGRect(window->uiWindowHandle().frame));
 
     QCOMPARE(contentView->geometry().x(), 0.);
@@ -159,7 +159,7 @@ void tst_view::reparentChildViews()
     QUniUIKitView *orphanView = qvariant_cast<QUniUIKitView *>(window->property("orphanView"));
     QVERIFY(orphanView);
 
-    // Check that initial configuration is as expected
+    // Check that initial configuration is as specified in the QML file
     QVERIFY(orphanView->geometry().isEmpty());
     QCOMPARE(orphanView->parent(), window->rootViewController());
     QCOMPARE(orphanView->uiViewHandle().superview, nullptr);
@@ -170,7 +170,7 @@ void tst_view::reparentChildViews()
     QCOMPARE(orphanView->uiViewHandle().superview, contentView->uiViewHandle());
     QCOMPARE(orphanView->geometry().size(), contentView->geometry().size());
 
-    // Reparent orphanView out again where it came from
+    // Reparent orphanView out, and check that it ends up without a superview
     orphanView->setParent(window->rootViewController());
     QCOMPARE(orphanView->parent(), window->rootViewController());
     QCOMPARE(orphanView->uiViewHandle().superview, nullptr);
