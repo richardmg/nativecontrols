@@ -42,6 +42,20 @@
 
 #include "../../shared/util.h"
 
+#define LOAD_QML_FILE_APP1 \
+    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>(); \
+    QVERIFY(window); \
+    QUniUIKitViewController *viewController = qvariant_cast<QUniUIKitViewController *>(window->property("rootViewController")); \
+    QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(window->property("rootView")); \
+    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView")); \
+    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView")); \
+    QUniUIKitView *orphanView = qvariant_cast<QUniUIKitView *>(window->property("orphanView")); \
+    QVERIFY(viewController); \
+    QVERIFY(rootView); \
+    QVERIFY(contentView); \
+    QVERIFY(childView); \
+    QVERIFY(orphanView);
+
 class tst_view : public QObject
 {
     Q_OBJECT
@@ -61,18 +75,7 @@ private slots:
 
 void tst_view::hierarchyCheck()
 {
-    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
-    QVERIFY(window);
-
-    // Ensure that all properties are set
-    QUniUIKitViewController *viewController = qvariant_cast<QUniUIKitViewController *>(window->property("rootViewController"));
-    QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(window->property("rootView"));
-    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
-    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
-    QVERIFY(viewController);
-    QVERIFY(rootView);
-    QVERIFY(contentView);
-    QVERIFY(childView);
+    LOAD_QML_FILE_APP1
 
     // Check that the hierarchy specified in QML matches
     // the hierarchy reported from the platform controls
@@ -89,11 +92,7 @@ void tst_view::hierarchyCheck()
 
 void tst_view::geometery()
 {
-    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
-    QVERIFY(window);
-    QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(window->property("rootView"));
-    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
-    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
+    LOAD_QML_FILE_APP1
 
     // Check that the views has the geometry specified in the QML file
     QCOMPARE(rootView->geometry(), QRectF::fromCGRect(window->uiWindowHandle().frame));
@@ -108,11 +107,8 @@ void tst_view::geometery()
 
 void tst_view::setGeometery()
 {
-    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
-    QVERIFY(window);
-    QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(window->property("rootView"));
-    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
-    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
+    LOAD_QML_FILE_APP1
+
     QRectF newGeometry(100, 100, 200, 200);
 
     rootView->setGeometry(newGeometry);
@@ -134,9 +130,8 @@ void tst_view::setImplicitSize()
 
 void tst_view::setGeometryWithNaN()
 {
-    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
-    QVERIFY(window);
-    QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView"));
+    LOAD_QML_FILE_APP1
+
     QRectF geometery = childView->geometry();
 
     // Check that we don't crash in UIKit just because we try to set geometry
@@ -153,11 +148,7 @@ void tst_view::setGeometryWithNaN()
 
 void tst_view::reparentChildViews()
 {
-    QSharedPointer<QUniUIKitWindow> window = loadQml("app1.qml").dynamicCast<QUniUIKitWindow>();
-    QVERIFY(window);
-    QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView"));
-    QUniUIKitView *orphanView = qvariant_cast<QUniUIKitView *>(window->property("orphanView"));
-    QVERIFY(orphanView);
+    LOAD_QML_FILE_APP1
 
     // Check that initial configuration is as specified in the QML file
     QVERIFY(orphanView->geometry().isEmpty());
