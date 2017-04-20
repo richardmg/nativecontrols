@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
     QObject::connect(&button2, &QUniUIKitButton::clicked, [&button2](){ button2.setText(QStringLiteral("Clicked!")); });
 
     QUniUIKitSlider slider(contentViewTab2);
-    slider.setGeometry(50, 50, window.width() - 100, slider.implicitHeight());
+    slider.setGeometry(50, 50, window.width() - 100, slider.intrinsicContentHeight());
     QObject::connect(&slider, &QUniUIKitSlider::valueChanged, [&slider](){ qDebug() << "new value:" << slider.value(); });
 
     QUniUIKitTextField textField2(contentViewTab1);

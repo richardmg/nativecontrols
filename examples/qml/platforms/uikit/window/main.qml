@@ -58,8 +58,17 @@ Window {
                     width: parent.width
                     height: parent.height
                     Button {
+                        objectName: "myButton"
+                        width: intrinsicContentWidth
+                        height: intrinsicContentHeight
                         text: "click me"
-                        onClicked: text = "clicked!"
+                        onClicked: text = "clicked with a very long string!"
+                        intrinsicContentWidth: 100
+                        Component.onCompleted: {
+                            print("intr w:", intrinsicContentWidth)
+                            print("intr h:", intrinsicContentHeight)
+                        }
+                        onIntrinsicContentWidthChanged: print("new intr w:", intrinsicContentWidth)
                     }
                 }
             }
@@ -77,6 +86,8 @@ Window {
                     height: parent.height
                     backgroundColor: Qt.rgba(0, 255, 0, 255)
                     Button {
+                        width: intrinsicContentWidth
+                        height: intrinsicContentHeight
                         text: "click me as well"
                         onClicked: text = "clicked!"
                         backgroundColor: Qt.rgba(0, 0, 255, 255)

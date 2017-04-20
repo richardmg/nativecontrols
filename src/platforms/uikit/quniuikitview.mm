@@ -324,7 +324,8 @@ void QUniUIKitView::setIntrinsicContentWidth(qreal width)
         return;
 
     if (![d->view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
-        qWarning("Cannot set intrinsicContentWidth for %s", qPrintable(QString::fromNSString(NSStringFromClass([d->view() class]))));
+        qWarning("Warning: Cannot set intrinsicContentWidth for %s",
+                 qPrintable(QString::fromNSString(NSStringFromClass([d->view() class]))));
         return;
     }
 
@@ -348,7 +349,8 @@ void QUniUIKitView::setIntrinsicContentHeight(qreal height)
         return;
 
     if (![d->view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
-        qWarning("Cannot set intrinsicContentHeight for %s", qPrintable(QString::fromNSString(NSStringFromClass([d->view() class]))));
+        qWarning("Warning: Cannot set intrinsicContentHeight for %s",
+                 qPrintable(QString::fromNSString(NSStringFromClass([d->view() class]))));
         return;
     }
 
