@@ -74,8 +74,6 @@ public:
 
     void emitFrameChanged();
 
-    virtual void updateLayout(bool recursive);
-
     void initConnections();
     void updateIntrinsicContentSize();
 
@@ -85,7 +83,6 @@ protected:
     // Attributes to keep track of explicit
     // application assignments
     enum Attribute {
-        LayedOut		= 0x00000001,
         MovedX			= 0x00000002,
         MovedY			= 0x00000004,
         ResizedWidth	= 0x00000008,

@@ -142,32 +142,6 @@ void QUniUIKitViewPrivate::emitFrameChanged()
         emit q->heightChanged(frame.height());
 }
 
-void QUniUIKitViewPrivate::updateLayout(bool recursive)
-{
-    Q_Q(QUniUIKitView);
-
-//    TODO: perhaps check if width/heigth has been set automatically
-//            by uikit, and that we therefore need to emit signals. Or
-//            perhaps this should be done in updateIntrinsicContentSize?
-
-//    if (!testAttribute(ResizedWidth)) {
-//        q->setWidth(q->intrinsicContentWidth());
-//        setAttribute(ResizedWidth, false);
-//    }
-
-//    if (!testAttribute(ResizedHeight)) {
-//        q->setHeight(q->intrinsicContentHeight());
-//        setAttribute(ResizedHeight, false);
-//    }
-
-    if (recursive) {
-        for (QObject *child : q->children()) {
-            if (QUniUIKitViewPrivate *childPrivate = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(child)))
-                childPrivate->updateLayout(recursive);
-        }
-    }
-}
-
 void QUniUIKitViewPrivate::updateIntrinsicContentSize()
 {
     // This function should be called whenever the view

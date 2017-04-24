@@ -64,8 +64,6 @@ public:
     explicit QUniUIKitWindowPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitWindowPrivate();
 
-    virtual void updateLayout(bool recursive) override;
-
     void addSubViewToContentView(UIView *uiView);
 
     Q_DECLARE_PUBLIC(QUniUIKitWindow)

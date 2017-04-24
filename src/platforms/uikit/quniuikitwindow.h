@@ -65,8 +65,6 @@ public:
     void setPosition(const QPointF &) {}
     void resize(const QSizeF &) {}
 
-    bool event(QEvent *e);
-
     qreal width() const;
     qreal height() const;
 

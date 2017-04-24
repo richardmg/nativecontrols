@@ -57,20 +57,6 @@ QUniUIKitWindowPrivate::~QUniUIKitWindowPrivate()
 {
 }
 
-void QUniUIKitWindowPrivate::updateLayout(bool recursive)
-{
-    if (testAttribute(LayedOut))
-        return;
-    setAttribute(LayedOut);
-
-    if (recursive) {
-        for (QObject *child : q_func()->children()) {
-            if (QUniUIKitViewPrivate *basePrivate = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(child)))
-                basePrivate->updateLayout(recursive);
-        }
-    }
-}
-
 void QUniUIKitWindowPrivate::addSubViewToContentView(UIView *uiView)
 {
     Q_Q(QUniUIKitWindow);
@@ -149,19 +135,7 @@ void QUniUIKitWindow::setVisible(bool newVisible)
     if (newVisible == isVisible())
         return;
 
-    if (newVisible) {
-        // Now that the window becomes visible, we should check if any of its
-        // children needs to be resized to implicit size. Since children
-        // are added after the call to setVisible when using QML, we need to
-        // post the update request.
-        qApp->postEvent(this, new QEvent(QEvent::LayoutRequest));
-        // Also, UIKit expects there to always be a root view controller
-        // in a UIWindow, so if hasn't been added yet, create one now.
-        rootViewController();
-        [uiWindowHandle() makeKeyAndVisible];
-    } else {
-        qWarning("not implemented");
-    }
+    [uiWindowHandle() makeKeyAndVisible];
 
     emit visibleChanged(newVisible);
 }
@@ -174,18 +148,6 @@ void QUniUIKitWindow::showFullScreen()
 QRectF QUniUIKitWindow::geometry() const
 {
     return QRectF::fromCGRect(d_func()->view().frame);
-}
-
-bool QUniUIKitWindow::event(QEvent *e)
-{
-    Q_D(QUniUIKitWindow);
-    switch (e->type()) {
-    case QEvent::LayoutRequest:
-        d->updateLayout(true);
-    default:
-        return QUniUIKitBase::event(e);
-    }
-    return true;
 }
 
 #include "moc_quniuikitwindow.cpp"
