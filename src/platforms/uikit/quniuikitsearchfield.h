@@ -37,7 +37,6 @@
 #ifndef QUNIUIKITSEARCHFIELD_H
 #define QUNIUIKITSEARCHFIELD_H
 
-#include <QtUniControls/quniplatformsearchfield.h>
 #include <QtUniUIKitControls/quniuikitcontrol.h>
 
 QT_BEGIN_NAMESPACE
@@ -45,7 +44,7 @@ QT_BEGIN_NAMESPACE
 class QUniUIKitSearchFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UISearchBar);
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitSearchField : public QUniUIKitControl, public virtual QUniPlatformSearchField
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitSearchField : public QUniUIKitControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -58,11 +57,11 @@ public:
 
     UISearchBar *uiSearchBarHandle();
 
-    virtual QString text() override;
-    virtual void setText(const QString &text) override;
+    QString text();
+    void setText(const QString &text);
 
-    virtual QString placeholderText() override;
-    virtual void setPlaceholderText(const QString &placeholderText) override;
+    QString placeholderText();
+    void setPlaceholderText(const QString &placeholderText);
 
 Q_SIGNALS:
     void textChanged(const QString &text);

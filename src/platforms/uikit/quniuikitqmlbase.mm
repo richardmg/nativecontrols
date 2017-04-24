@@ -34,8 +34,6 @@
 **
 ****************************************************************************/
 
-#include <QtUniControls/qunibase.h>
-
 #include <QtUniUIKitControls/quniuikitqmlbase.h>
 #include <QtUniUIKitControls/private/quniuikitqmlbase_p.h>
 #include <QtUniUIKitControls/quniuikitbase.h>
@@ -69,13 +67,7 @@ void QUniUIKitQmlBasePrivate::appendChild(QQmlListProperty<QObject> *list, QObje
             QCoreApplication::sendEvent(uikitParent, &e);
         }
     } else {
-        // The child doesn't belong to QUniUIKit. If it belongs
-        // to QUni, try to parent it using the childs cross-parenting API
-        QUniBase *quniChild = qobject_cast<QUniBase *>(child);
-        if (!quniChild || !quniChild->setNativeParent(uikitParent)) {
-            // ...otherwise we fall back to normal QObject parenting
-            child->setParent(qparent);
-        }
+        child->setParent(qparent);
     }
 }
 

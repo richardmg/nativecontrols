@@ -4,14 +4,13 @@
 #include <QObject>
 
 #include <QtUniUIKitControls/quniuikitviewcontroller.h>
-#include <QtUniControls/quniplatformtabspage.h>
 
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitTabBarControllerPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarController);
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarController : public QUniUIKitViewController, public virtual QUniPlatformTabsPage
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarController : public QUniUIKitViewController
 {
     Q_OBJECT
 

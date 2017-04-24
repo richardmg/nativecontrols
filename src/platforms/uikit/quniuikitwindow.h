@@ -37,8 +37,7 @@
 #ifndef QUNIIOSWINDOW_H
 #define QUNIIOSWINDOW_H
 
-#include <QtUniControls/quniplatformwindow.h>
-
+#include <QtCore>
 #include <QtUniUIKitControls/quniuikitview.h>
 
 QT_BEGIN_NAMESPACE
@@ -47,7 +46,7 @@ class QUniUIKitWindowPrivate;
 class QUniUIKitViewController;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIWindow);
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitWindow : public QUniUIKitView, public virtual QUniPlatformWindow
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitWindow : public QUniUIKitView
 {
     Q_OBJECT
     Q_PROPERTY(QUniUIKitViewController *rootViewController READ rootViewController WRITE setRootViewController NOTIFY rootViewControllerChanged)
@@ -56,28 +55,23 @@ public:
     QUniUIKitWindow();
     virtual ~QUniUIKitWindow();
 
-    virtual bool isVisible() const override;
-    virtual void setVisible(bool isVisible) override;
-    virtual void showFullScreen() override;
+    bool isVisible() const;
+    void setVisible(bool isVisible);
+    void showFullScreen();
 
-    virtual QRectF geometry() const override;
-    virtual void setGeometry(const QRectF &) override {}
+    QRectF geometry() const;
+    void setGeometry(const QRectF &) {}
 
-    virtual void setPosition(const QPointF &) override {}
-    virtual void resize(const QSizeF) override {}
+    void setPosition(const QPointF &) {}
+    void resize(const QSizeF &) {}
 
-    virtual bool event(QEvent *e) override;
+    bool event(QEvent *e);
 
     qreal width() const;
     qreal height() const;
 
     void setRootViewController(QUniUIKitViewController *rootViewController);
     QUniUIKitViewController *rootViewController() const;
-
-    bool addNativeChild(QObject *child) override;
-    bool addNativeChild(const QByteArray &type, void *child) override;
-    QByteArrayList supportedNativeChildTypes() override;
-    QByteArrayList supportedNativeParentTypes() override;
 
     UIWindow *uiWindowHandle();
 

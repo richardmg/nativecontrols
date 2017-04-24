@@ -97,6 +97,7 @@ public:
 
     virtual QUniPlatformView* createView(QUniView *view) const override
     {
+        return 0;
         auto platform = new QUniUIKitView();
         static_cast<QUniUIKitBase *>(platform)->d_func()->connectSignals(view);
         return platform;

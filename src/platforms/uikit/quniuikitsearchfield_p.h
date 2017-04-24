@@ -65,8 +65,6 @@ public:
     explicit QUniUIKitSearchFieldPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitSearchFieldPrivate();
 
-    virtual void connectSignals(QUniBase *base) override;
-
     QUniUIKitSearchFieldDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QUniUIKitSearchField)

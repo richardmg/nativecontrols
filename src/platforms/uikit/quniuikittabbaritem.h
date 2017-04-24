@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-#include <QtUniControls/quniplatformtabspagetab.h>
 #include <QtUniUIKitControls/quniuikitview.h>
 
 QT_BEGIN_NAMESPACE
@@ -11,7 +10,7 @@ QT_BEGIN_NAMESPACE
 class QUniUIKitTabBarItemPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITabBarItem);
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarItem : public QUniUIKitBase, public virtual QUniPlatformTabsPageTab
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarItem : public QUniUIKitBase
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
@@ -21,8 +20,8 @@ public:
     explicit QUniUIKitTabBarItem(const QString &title, QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitTabBarItem();
 
-    virtual QString title() const override;
-    virtual void setTitle(const QString &newTitle) override;
+    QString title() const;
+    void setTitle(const QString &newTitle);
 
     UITabBarItem *uiTabBarItemHandle();
 

@@ -4,7 +4,6 @@
 #include <QObject>
 
 #include <QtUniUIKitControls/quniuikitbase.h>
-#include <QtUniControls/quniplatformpage.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -13,7 +12,7 @@ class QUniUIKitViewControllerPrivate;
 class QUniUIKitTabBarItem;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIViewController);
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitViewController : public QUniUIKitBase, public virtual QUniPlatformPage
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitViewController : public QUniUIKitBase
 {
     Q_OBJECT
     Q_PROPERTY(QUniUIKitView *view READ view WRITE setView NOTIFY viewChanged)
@@ -32,13 +31,6 @@ public:
     QUniUIKitTabBarItem *tabBarItem() const;
 
     UIViewController *uiViewControllerHandle();
-
-    bool setNativeParent(QObject *parent) override;
-    bool setNativeParent(const QByteArray &type, void *parent) override;
-    bool addNativeChild(QObject *child) override;
-    bool addNativeChild(const QByteArray &type, void *child) override;
-    QByteArrayList supportedNativeChildTypes() override;
-    QByteArrayList supportedNativeParentTypes() override;
 
 Q_SIGNALS:
     void viewChanged(QUniUIKitView *contentView);

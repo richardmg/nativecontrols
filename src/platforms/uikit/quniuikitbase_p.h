@@ -65,9 +65,6 @@ public:
     explicit QUniUIKitBasePrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitBasePrivate();
 
-    // Used by QUniUIKitPlatformPlugin
-    virtual void connectSignals(QUniBase *) {}
-
     Q_DECLARE_PUBLIC(QUniUIKitBase)
 };
 

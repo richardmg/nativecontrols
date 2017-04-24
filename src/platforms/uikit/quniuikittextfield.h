@@ -37,7 +37,6 @@
 #ifndef QUNIUIKITTEXTFIELD_H
 #define QUNIUIKITTEXTFIELD_H
 
-#include <QtUniControls/quniplatformtextfield.h>
 #include <QtUniUIKitControls/quniuikitcontrol.h>
 
 QT_BEGIN_NAMESPACE
@@ -45,7 +44,7 @@ QT_BEGIN_NAMESPACE
 class QUniUIKitTextFieldPrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITextField);
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTextField : public QUniUIKitControl, public virtual QUniPlatformTextField
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTextField : public QUniUIKitControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -58,11 +57,11 @@ public:
 
     UITextField *uiTextFieldHandle();
 
-    virtual QString text() override;
-    virtual void setText(const QString &text) override;
+    QString text();
+    void setText(const QString &text);
 
-    virtual QString placeholderText() override;
-    virtual void setPlaceholderText(const QString &placeholderText) override;
+    QString placeholderText();
+    void setPlaceholderText(const QString &placeholderText);
 
 Q_SIGNALS:
     void textChanged(const QString &text);

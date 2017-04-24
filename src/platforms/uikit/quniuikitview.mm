@@ -38,7 +38,6 @@
 
 #include <QtCore>
 
-#include <QtUniControls/qunicontrol.h>
 #include <QtUniUIKitControls/quniuikitview.h>
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
 
@@ -103,24 +102,6 @@ QUniUIKitViewPrivate::~QUniUIKitViewPrivate()
             [m_delegate release];
         });
     }
-}
-
-void QUniUIKitViewPrivate::connectSignals(QUniBase *base)
-{
-    Q_Q(QUniUIKitView);
-    QUniUIKitBasePrivate::connectSignals(base);
-    const auto b = static_cast<QUniControl *>(base);
-    q->connect(q, &QUniUIKitView::visibleChanged, b, &QUniControl::visibleChanged);
-    q->connect(q, &QUniUIKitView::xChanged, b, &QUniControl::xChanged);
-    q->connect(q, &QUniUIKitView::rightChanged, b, &QUniControl::rightChanged);
-    q->connect(q, &QUniUIKitView::yChanged, b, &QUniControl::yChanged);
-    q->connect(q, &QUniUIKitView::bottomChanged, b, &QUniControl::bottomChanged);
-    q->connect(q, &QUniUIKitView::widthChanged, b, &QUniControl::widthChanged);
-    q->connect(q, &QUniUIKitView::rightChanged, b, &QUniControl::rightChanged);
-    q->connect(q, &QUniUIKitView::heightChanged, b, &QUniControl::heightChanged);
-    q->connect(q, &QUniUIKitView::bottomChanged, b, &QUniControl::bottomChanged);
-    q->connect(q, &QUniUIKitView::implicitWidthChanged, b, &QUniControl::implicitWidthChanged);
-    q->connect(q, &QUniUIKitView::implicitHeightChanged, b, &QUniControl::implicitHeightChanged);
 }
 
 void QUniUIKitViewPrivate::initConnections()
@@ -527,52 +508,6 @@ QUniUIKitView *QUniUIKitView::parentView()
 UIView *QUniUIKitView::uiViewHandle()
 {
    return d_func()->view();
-}
-
-bool QUniUIKitView::setNativeParent(QObject *parent)
-{
-    if (QUniUIKitView *p = qobject_cast<QUniUIKitView *>(parent))
-        setParent(p);
-    else
-        return QUniUIKitBase::setNativeParent(parent);
-    return true;
-}
-
-bool QUniUIKitView::setNativeParent(const QByteArray &type, void *parent)
-{
-    if (type == "UIView")
-        [static_cast<UIView *>(parent) addSubview:uiViewHandle()];
-    else
-        return QUniUIKitBase::setNativeParent(type, parent);
-    return true;
-}
-
-bool QUniUIKitView::addNativeChild(QObject *child)
-{
-    if (QUniUIKitView *c = qobject_cast<QUniUIKitView *>(child))
-        c->setParent(this);
-    else
-        return QUniUIKitBase::addNativeChild(child);
-    return true;
-}
-
-bool QUniUIKitView::addNativeChild(const QByteArray &type, void *child)
-{
-    if (type == "UIView")
-        d_func()->addSubView(static_cast<UIView *>(child));
-    else
-        return QUniUIKitBase::addNativeChild(type, child);
-    return true;
-}
-
-QByteArrayList QUniUIKitView::supportedNativeChildTypes()
-{
-    return QUniUIKitBase::supportedNativeChildTypes() << "UIView";
-}
-
-QByteArrayList QUniUIKitView::supportedNativeParentTypes()
-{
-    return supportedNativeChildTypes();
 }
 
 void QUniUIKitView::childEvent(QChildEvent *event)

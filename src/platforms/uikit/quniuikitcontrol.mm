@@ -38,7 +38,6 @@
 
 #include <QtCore>
 
-#include <QtUniControls/qunicontrol.h>
 #include <QtUniUIKitControls/quniuikitcontrol.h>
 #include <QtUniUIKitControls/private/quniuikitcontrol_p.h>
 

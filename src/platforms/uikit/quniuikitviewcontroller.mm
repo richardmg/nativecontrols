@@ -161,56 +161,6 @@ UIViewController *QUniUIKitViewController::uiViewControllerHandle()
     return d_func()->viewController();
 }
 
-bool QUniUIKitViewController::setNativeParent(QObject *parent)
-{
-    if (QUniUIKitViewController *p = qobject_cast<QUniUIKitViewController *>(parent))
-        setParent(p);
-    else
-        return QUniUIKitBase::setNativeParent(parent);
-    return true;
-}
-
-bool QUniUIKitViewController::setNativeParent(const QByteArray &type, void *parent)
-{
-    if (type == "UIViewController")
-        [static_cast<UIViewController *>(parent) addChildViewController:uiViewControllerHandle()];
-    else
-        return QUniUIKitBase::setNativeParent(type, parent);
-    return true;
-}
-
-bool QUniUIKitViewController::addNativeChild(QObject *child)
-{
-    if (QUniUIKitView *c = qobject_cast<QUniUIKitView *>(child))
-        c->setParent(this);
-    else if (QUniUIKitViewController *c = qobject_cast<QUniUIKitViewController *>(child))
-        c->setParent(this);
-    else
-        return QUniUIKitBase::addNativeChild(child);
-    return true;
-}
-
-bool QUniUIKitViewController::addNativeChild(const QByteArray &type, void *child)
-{
-    if (type == "UIView")
-        d_func()->addSubViewToContentView(static_cast<UIView *>(child));
-    else if (type == "UIViewController")
-        [uiViewControllerHandle() addChildViewController:static_cast<UIViewController *>(child)];
-    else
-        return QUniUIKitBase::addNativeChild(type, child);
-    return true;
-}
-
-QByteArrayList QUniUIKitViewController::supportedNativeChildTypes()
-{
-    return QUniUIKitBase::supportedNativeChildTypes() << "UIView" << "UIViewController";
-}
-
-QByteArrayList QUniUIKitViewController::supportedNativeParentTypes()
-{
-    return QUniUIKitBase::supportedNativeChildTypes() << "UIViewController";
-}
-
 void QUniUIKitViewController::childEvent(QChildEvent *event)
 {
     Q_D(QUniUIKitViewController);

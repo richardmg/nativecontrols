@@ -38,7 +38,6 @@
 
 #include <QtCore>
 
-#include <QtUniControls/qunitextfield.h>
 #include <QtUniUIKitControls/quniuikitsearchfield.h>
 #include <QtUniUIKitControls/private/quniuikitsearchfield_p.h>
 
@@ -72,15 +71,6 @@ QUniUIKitSearchFieldPrivate::QUniUIKitSearchFieldPrivate(int version)
 QUniUIKitSearchFieldPrivate::~QUniUIKitSearchFieldPrivate()
 {
     [m_delegate release];
-}
-
-void QUniUIKitSearchFieldPrivate::connectSignals(QUniBase *base)
-{
-    Q_Q(QUniUIKitSearchField);
-    QUniUIKitControlPrivate::connectSignals(base);
-    const auto b = static_cast<QUniSearchField *>(base);
-    q->connect(q, &QUniUIKitSearchField::textChanged, b, &QUniSearchField::textChanged);
-    q->connect(q, &QUniUIKitSearchField::placeholderTextChanged, b, &QUniSearchField::placeholderTextChanged);
 }
 
 UIView *QUniUIKitSearchFieldPrivate::createView()

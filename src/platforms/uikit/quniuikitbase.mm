@@ -41,8 +41,6 @@
 #include <QtUniUIKitControls/quniuikitbase.h>
 #include <QtUniUIKitControls/private/quniuikitbase_p.h>
 
-#include <QtUniControls/qunibase.h>
-
 QT_BEGIN_NAMESPACE
 
 QUniUIKitBasePrivate::QUniUIKitBasePrivate(int version)
@@ -80,11 +78,6 @@ void QUniUIKitBase::setParent(QUniUIKitBase *parentBase)
 QUniUIKitBase *QUniUIKitBase::parentBase()
 {
     return qobject_cast<QUniUIKitBase *>(parent());
-}
-
-void QUniUIKitBase::setPlatformParent(QUniPlatformBase *parent)
-{
-    setParent(dynamic_cast<QUniUIKitBase *>(parent));
 }
 
 #include "moc_quniuikitbase.cpp"

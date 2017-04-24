@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-#include <QtUniControls/quniplatformbase.h>
 #include <QtUniUIKitControls/quniuikitcontrolsglobal.h>
 #include <QtUniUIKitControls/quniuikitqmlbase.h>
 
@@ -12,7 +11,7 @@ QT_BEGIN_NAMESPACE
 class QUniUIKitBasePrivate;
 Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitBase : public QUniUIKitQmlBase, public virtual QUniPlatformBase
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitBase : public QUniUIKitQmlBase
 {
     Q_OBJECT
     Q_PROPERTY(QUniUIKitBase *parent READ parentBase WRITE setParent NOTIFY parentChanged DESIGNABLE false)
@@ -23,8 +22,6 @@ public:
 
     void setParent(QUniUIKitBase *parent);
     QUniUIKitBase *parentBase();
-
-    void setPlatformParent(QUniPlatformBase *) override;
 
 Q_SIGNALS:
     void parentChanged(QUniUIKitBase *parent);

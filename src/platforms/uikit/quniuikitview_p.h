@@ -74,7 +74,6 @@ public:
 
     void emitFrameChanged();
 
-    virtual void connectSignals(QUniBase *base) override;
     virtual void updateLayout(bool recursive);
 
     void initConnections();

@@ -64,7 +64,6 @@ public:
     explicit QUniUIKitWindowPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitWindowPrivate();
 
-    virtual void connectSignals(QUniBase *base) override;
     virtual void updateLayout(bool recursive) override;
 
     void addSubViewToContentView(UIView *uiView);

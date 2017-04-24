@@ -65,8 +65,6 @@ public:
     explicit QUniUIKitTextFieldPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitTextFieldPrivate();
 
-    virtual void connectSignals(QUniBase *base) override;
-
     QUniUIKitTextFieldDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QUniUIKitTextField)

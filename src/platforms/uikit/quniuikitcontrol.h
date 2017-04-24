@@ -3,14 +3,13 @@
 
 #include <QObject>
 
-#include <QtUniControls/quniplatformcontrol.h>
 #include <QtUniUIKitControls/quniuikitview.h>
 
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitControlPrivate;
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitControl : public QUniUIKitView, public virtual QUniPlatformControl
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitControl : public QUniUIKitView
 {
     Q_OBJECT
 

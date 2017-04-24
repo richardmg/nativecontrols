@@ -65,8 +65,6 @@ public:
     explicit QUniUIKitButtonPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitButtonPrivate();
 
-    virtual void connectSignals(QUniBase *base) override;
-
     UIButton *uiButton() const;
     QUniUIKitButtonDelegate *m_delegate;
 

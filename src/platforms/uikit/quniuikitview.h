@@ -39,14 +39,13 @@
 
 #include <QObject>
 
-#include <QtUniControls/quniplatformcontrol.h>
 #include <QtUniUIKitControls/quniuikitbase.h>
 
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitViewPrivate;
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitBase, public virtual QUniPlatformView
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitBase
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
@@ -66,19 +65,19 @@ public:
     QUniUIKitView(QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitView();
 
-    virtual bool visible() const override;
-    virtual void setVisible(bool visible) override;
+    bool visible() const;
+    void setVisible(bool visible);
 
-    virtual QRectF geometry() const override;
-    virtual void setGeometry(const QRectF &rect) override;
+    QRectF geometry() const;
+    void setGeometry(const QRectF &rect);
 
-    virtual QRectF frameGeometry() const override;
+    QRectF frameGeometry() const;
 
-    virtual void move(const QPointF &pos) override;
-    virtual void resize(const QSizeF size) override;
+    void move(const QPointF &pos);
+    void resize(const QSizeF size);
 
-    virtual QSizeF implicitSize() const override;
-    virtual void setImplicitSize(const QSizeF &size) override;
+    QSizeF intrinsicSize() const;
+    void setIntrinsicSize(const QSizeF &size);
 
     void setGeometry(qreal posx, qreal posy, qreal w, qreal h);
     void move(qreal posx, qreal posy);
@@ -110,13 +109,6 @@ public:
     void setBackgroundColor(const QColor &color);
 
     QUniUIKitView *parentView();
-
-    bool setNativeParent(QObject *parent) override;
-    bool setNativeParent(const QByteArray &type, void *parent) override;
-    bool addNativeChild(QObject *child) override;
-    bool addNativeChild(const QByteArray &type, void *child) override;
-    QByteArrayList supportedNativeChildTypes() override;
-    QByteArrayList supportedNativeParentTypes() override;
 
     UIView *uiViewHandle();
 

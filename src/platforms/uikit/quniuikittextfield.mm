@@ -38,7 +38,6 @@
 
 #include <QtCore>
 
-#include <QtUniControls/qunitextfield.h>
 #include <QtUniUIKitControls/quniuikittextfield.h>
 #include <QtUniUIKitControls/private/quniuikittextfield_p.h>
 
@@ -72,17 +71,6 @@ QUniUIKitTextFieldPrivate::QUniUIKitTextFieldPrivate(int version)
 QUniUIKitTextFieldPrivate::~QUniUIKitTextFieldPrivate()
 {
     [m_delegate release];
-}
-
-void QUniUIKitTextFieldPrivate::connectSignals(QUniBase *base)
-{
-    Q_Q(QUniUIKitTextField);
-    QUniUIKitControlPrivate::connectSignals(base);
-    const auto b = static_cast<QUniTextField *>(base);
-    q->connect(q, &QUniUIKitTextField::textChanged,
-               b, &QUniTextField::textChanged);
-    q->connect(q, &QUniUIKitTextField::placeholderTextChanged,
-               b, &QUniTextField::placeholderTextChanged);
 }
 
 UIView *QUniUIKitTextFieldPrivate::createView()

@@ -38,7 +38,6 @@
 
 #include <QtCore>
 
-#include <QtUniControls/qunibutton.h>
 #include <QtUniUIKitControls/quniuikitbutton.h>
 #include <QtUniUIKitControls/private/quniuikitbutton_p.h>
 
@@ -77,15 +76,6 @@ QUniUIKitButtonPrivate::QUniUIKitButtonPrivate(int version)
 QUniUIKitButtonPrivate::~QUniUIKitButtonPrivate()
 {
     [m_delegate release];
-}
-
-void QUniUIKitButtonPrivate::connectSignals(QUniBase *base)
-{
-    Q_Q(QUniUIKitButton);
-    QUniUIKitControlPrivate::connectSignals(base);
-    const auto b = static_cast<QUniButton *>(base);
-    q->connect(q, &QUniUIKitButton::textChanged, b, &QUniButton::textChanged);
-    q->connect(q, &QUniUIKitButton::clicked, b, &QUniButton::clicked);
 }
 
 UIView *QUniUIKitButtonPrivate::createView()
