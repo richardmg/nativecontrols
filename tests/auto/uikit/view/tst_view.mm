@@ -49,11 +49,13 @@
     QUniUIKitView *rootView = qvariant_cast<QUniUIKitView *>(window->property("rootView")); \
     QUniUIKitView *contentView = qvariant_cast<QUniUIKitView *>(window->property("contentView")); \
     QUniUIKitView *childView = qvariant_cast<QUniUIKitView *>(window->property("childView")); \
+    QUniUIKitView *childView2 = qvariant_cast<QUniUIKitView *>(window->property("childView2")); \
     QUniUIKitView *orphanView = qvariant_cast<QUniUIKitView *>(window->property("orphanView")); \
     QVERIFY(viewController); \
     QVERIFY(rootView); \
     QVERIFY(contentView); \
     QVERIFY(childView); \
+    QVERIFY(childView2); \
     QVERIFY(orphanView);
 
 class tst_view : public QObject
@@ -64,8 +66,8 @@ private slots:
     void hierarchyCheck();
     void geometery();
     void setGeometery();
-    void implicitSize();
-    void setImplicitSize();
+    void intrinsicSize();
+    void setIntrinsicSize();
     void setGeometryWithNaN();
     void reparentChildViews();
     void reparentRootViews();
@@ -102,7 +104,8 @@ void tst_view::geometery()
     QCOMPARE(contentView->geometry().size(), rootView->geometry().size());
     QCOMPARE(contentView->geometry(), QRectF::fromCGRect(contentView->uiViewHandle().frame));
 
-    QCOMPARE(childView->geometry(), QRectF(0, 0, childView->implicitWidth(), childView->implicitHeight()));
+    QCOMPARE(childView->geometry(), QRectF());
+    QCOMPARE(childView2->geometry(), QRectF(0, 0, contentView->width(), 0));
 }
 
 void tst_view::setGeometery()
@@ -120,12 +123,27 @@ void tst_view::setGeometery()
     QCOMPARE(contentView->geometry().size(), newGeometry.size());
 }
 
-void tst_view::implicitSize()
+void tst_view::intrinsicSize()
 {
+    LOAD_QML_FILE_APP1
+
+    // Check that the views has the implicit size as (un)specified in the QML file
+    QCOMPARE(childView->intrinsicSize(), QSizeF(100, 100));
+    QCOMPARE(childView2->intrinsicSize(), QSizeF(contentView->width(), 0));
 }
 
-void tst_view::setImplicitSize()
+void tst_view::setIntrinsicSize()
 {
+    LOAD_QML_FILE_APP1
+
+    QSizeF newSize(50, 50);
+
+    childView->setIntrinsicSize(newSize);
+    childView2->setIntrinsicSize(newSize);
+
+    QCOMPARE(childView->intrinsicSize(), newSize);
+    QCOMPARE(childView2->intrinsicSize(), newSize);
+    QCOMPARE(childView2->width(), newSize.width());
 }
 
 void tst_view::setGeometryWithNaN()

@@ -9,6 +9,7 @@ Window {
     property alias rootView: rootView
     property alias contentView: contentView
     property alias childView: childView
+    property alias childView2: childView2
     property alias orphanView: orphanView
 
     rootViewController: ViewController {
@@ -21,8 +22,13 @@ Window {
                 height: parent.height
                 View {
                     id: childView
-                    implicitWidth: 100
-                    implicitHeight: 100
+                    intrinsicContentWidth: 100
+                    intrinsicContentHeight: 100
+                }
+                View {
+                    id: childView2
+                    width: intrinsicContentWidth
+                    intrinsicContentWidth: contentView.width
                 }
             }
         }
