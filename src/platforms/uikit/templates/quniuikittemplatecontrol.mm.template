@@ -111,8 +111,6 @@ QUniUIKitTemplateControl::QUniUIKitTemplateControl(QUniUIKitTemplateControlPriva
 
 QUniUIKitTemplateControl::~QUniUIKitTemplateControl()
 {
-    Q_D(QUniUIKitTemplateControl);
-    [d->m_delegate release];
 }
 
 UITemplateControl *QUniUIKitTemplateControl::uiTemplateControlHandle()

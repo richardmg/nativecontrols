@@ -101,8 +101,6 @@ QUniUIKitSearchField::QUniUIKitSearchField(QUniUIKitSearchFieldPrivate &dd, QUni
 
 QUniUIKitSearchField::~QUniUIKitSearchField()
 {
-    Q_D(QUniUIKitSearchField);
-    [d->m_delegate release];
 }
 
 UISearchBar *QUniUIKitSearchField::uiSearchBarHandle()

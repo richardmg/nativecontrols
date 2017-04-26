@@ -104,8 +104,6 @@ QUniUIKitSlider::QUniUIKitSlider(QUniUIKitSliderPrivate &dd, QUniUIKitBase *pare
 
 QUniUIKitSlider::~QUniUIKitSlider()
 {
-    Q_D(QUniUIKitSlider);
-    [d->m_delegate release];
 }
 
 UISlider *QUniUIKitSlider::uiSliderHandle()

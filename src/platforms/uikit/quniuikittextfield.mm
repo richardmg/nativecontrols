@@ -101,8 +101,6 @@ QUniUIKitTextField::QUniUIKitTextField(QUniUIKitTextFieldPrivate &dd, QUniUIKitB
 
 QUniUIKitTextField::~QUniUIKitTextField()
 {
-    Q_D(QUniUIKitTextField);
-    [d->m_delegate release];
 }
 
 UITextField *QUniUIKitTextField::uiTextFieldHandle()
