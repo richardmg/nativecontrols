@@ -34,83 +34,64 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVUIKITVIEW_P_H
-#define QNATIVUIKITVIEW_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
+#include <UIKit/UIKit.h>
 
 #include <QtCore>
 
-#include <QtUniUIKitControls/private/quniuikitbase_p.h>
+#include <QtUniUIKitControls/quniuikitindexpath.h>
+#include <QtUniUIKitControls/private/quniuikitindexpath_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QUniUIKitView;
-Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitViewDelegate);
-
-class QUniUIKitViewPrivate : public QUniUIKitBasePrivate
+QUniUIKitIndexPathPrivate::QUniUIKitIndexPathPrivate(int version)
+    : QObjectPrivate(version)
 {
-public:
-    explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
-    virtual ~QUniUIKitViewPrivate();
+}
 
-    UIView *view();
-    UIView *view() const;
-    bool isViewCreated() { return bool(m_view); }
-    void addSubView(UIView *subView);
+QUniUIKitIndexPathPrivate::~QUniUIKitIndexPathPrivate()
+{
+    [m_indexPath release];
+}
 
-    CGRect alignmentRect() const;
-    void setAlignmentRect(CGRect rect);
-    void setGeometry(const QRectF &rect);
+QUniUIKitIndexPath::QUniUIKitIndexPath(QObject *parent)
+    : QObject(*new QUniUIKitIndexPathPrivate(), parent)
+{
+}
 
-    void emitFrameChanged();
+QUniUIKitIndexPath::QUniUIKitIndexPath(int row, int section, QObject *parent)
+    : QObject(*new QUniUIKitIndexPathPrivate(), parent)
+{
+    d_func()->m_indexPath = [[NSIndexPath indexPathForRow:row inSection:section] retain];
+}
 
-    void initConnections();
-    void updateIntrinsicContentSize();
+QUniUIKitIndexPath::QUniUIKitIndexPath(NSIndexPath *indexPath, QObject *parent)
+    : QObject(*new QUniUIKitIndexPathPrivate(), parent)
+{
+    d_func()->m_indexPath = [indexPath retain];
+}
 
-    Q_DECLARE_PUBLIC(QUniUIKitView)
+QUniUIKitIndexPath *QUniUIKitIndexPath::create(int row, int section)
+{
+    return new QUniUIKitIndexPath(row, section);
+}
 
-protected:
-    // Attributes to keep track of explicit
-    // application assignments
-    enum Attribute {
-        MovedX			= 0x00000002,
-        MovedY			= 0x00000004,
-        ResizedWidth	= 0x00000008,
-        ResizedHeight	= 0x00000010,
-    };
+NSIndexPath *QUniUIKitIndexPath::nsIndexPathHandle()
+{
+    return d_func()->m_indexPath;
+}
 
-    uint m_attributes;
+int QUniUIKitIndexPath::row() const
+{
+    return d_func()->m_indexPath.row;
+}
 
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
+int QUniUIKitIndexPath::section() const
+{
+    return d_func()->m_indexPath.section;
+}
 
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
 
-    virtual UIView*createView();
-
-private:
-    UIView *m_view;
-    QSizeF m_intrinsicContentSize;
-    QRectF m_lastEmittedFrame;
-    QUniUIKitViewDelegate *m_delegate;
-};
+#include "moc_quniuikitindexpath.cpp"
 
 QT_END_NAMESPACE
 
-#endif //QNATIVUIKITVIEW_P_H

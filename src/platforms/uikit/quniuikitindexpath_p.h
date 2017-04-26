@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVUIKITVIEW_P_H
-#define QNATIVUIKITVIEW_P_H
+#ifndef QUNIUIKITINDEXPATH_P_H
+#define QUNIUIKITINDEXPATH_P_H
 
 //
 //  W A R N I N G
@@ -49,68 +49,25 @@
 //
 
 #include <QtCore>
+#include <QtCore/private/qobject_p.h>
 
-#include <QtUniUIKitControls/private/quniuikitbase_p.h>
+#include <QtUniUIKitControls/quniuikitindexpath.h>
 
 QT_BEGIN_NAMESPACE
 
-class QUniUIKitView;
-Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitViewDelegate);
+Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitIndexPathDelegate);
 
-class QUniUIKitViewPrivate : public QUniUIKitBasePrivate
+class QUniUIKitIndexPathPrivate : public QObjectPrivate
 {
 public:
-    explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
-    virtual ~QUniUIKitViewPrivate();
+    explicit QUniUIKitIndexPathPrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitIndexPathPrivate();
 
-    UIView *view();
-    UIView *view() const;
-    bool isViewCreated() { return bool(m_view); }
-    void addSubView(UIView *subView);
+    NSIndexPath *m_indexPath;
 
-    CGRect alignmentRect() const;
-    void setAlignmentRect(CGRect rect);
-    void setGeometry(const QRectF &rect);
-
-    void emitFrameChanged();
-
-    void initConnections();
-    void updateIntrinsicContentSize();
-
-    Q_DECLARE_PUBLIC(QUniUIKitView)
-
-protected:
-    // Attributes to keep track of explicit
-    // application assignments
-    enum Attribute {
-        MovedX			= 0x00000002,
-        MovedY			= 0x00000004,
-        ResizedWidth	= 0x00000008,
-        ResizedHeight	= 0x00000010,
-    };
-
-    uint m_attributes;
-
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
-
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
-
-    virtual UIView*createView();
-
-private:
-    UIView *m_view;
-    QSizeF m_intrinsicContentSize;
-    QRectF m_lastEmittedFrame;
-    QUniUIKitViewDelegate *m_delegate;
+    Q_DECLARE_PUBLIC(QUniUIKitIndexPath)
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVUIKITVIEW_P_H
+#endif // QUNIUIKITINDEXPATH_P_H

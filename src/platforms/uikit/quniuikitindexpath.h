@@ -34,83 +34,40 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVUIKITVIEW_P_H
-#define QNATIVUIKITVIEW_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
+#ifndef QUNIUIKITINDEXPATH_H
+#define QUNIUIKITINDEXPATH_H
 
 #include <QtCore>
-
-#include <QtUniUIKitControls/private/quniuikitbase_p.h>
+#include <QtUniUIKitControls/quniuikitcontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class QUniUIKitView;
-Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitViewDelegate);
+class QUniUIKitIndexPathPrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(NSIndexPath);
 
-class QUniUIKitViewPrivate : public QUniUIKitBasePrivate
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitIndexPath : public QObject
 {
+    Q_OBJECT
+    Q_PROPERTY(int section READ section)
+    Q_PROPERTY(int row READ row)
+
 public:
-    explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
-    virtual ~QUniUIKitViewPrivate();
+    QUniUIKitIndexPath(QObject *parent = nullptr);
+    QUniUIKitIndexPath(int row, int section, QObject *parent = nullptr);
+    QUniUIKitIndexPath(NSIndexPath *indexPath, QObject *parent = nullptr);
 
-    UIView *view();
-    UIView *view() const;
-    bool isViewCreated() { return bool(m_view); }
-    void addSubView(UIView *subView);
+    Q_INVOKABLE static QUniUIKitIndexPath *create(int row, int section);
 
-    CGRect alignmentRect() const;
-    void setAlignmentRect(CGRect rect);
-    void setGeometry(const QRectF &rect);
+    NSIndexPath *nsIndexPathHandle();
 
-    void emitFrameChanged();
-
-    void initConnections();
-    void updateIntrinsicContentSize();
-
-    Q_DECLARE_PUBLIC(QUniUIKitView)
-
-protected:
-    // Attributes to keep track of explicit
-    // application assignments
-    enum Attribute {
-        MovedX			= 0x00000002,
-        MovedY			= 0x00000004,
-        ResizedWidth	= 0x00000008,
-        ResizedHeight	= 0x00000010,
-    };
-
-    uint m_attributes;
-
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
-
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
-
-    virtual UIView*createView();
+    int row() const;
+    int section() const;
 
 private:
-    UIView *m_view;
-    QSizeF m_intrinsicContentSize;
-    QRectF m_lastEmittedFrame;
-    QUniUIKitViewDelegate *m_delegate;
+    Q_DECLARE_PRIVATE(QUniUIKitIndexPath)
+    Q_DISABLE_COPY(QUniUIKitIndexPath)
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVUIKITVIEW_P_H
+#endif // QUNIUIKITINDEXPATH_H

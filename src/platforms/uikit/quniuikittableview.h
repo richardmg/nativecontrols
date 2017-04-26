@@ -34,83 +34,45 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVUIKITVIEW_P_H
-#define QNATIVUIKITVIEW_P_H
+#ifndef QUNIUIKITTABLEVIEW_H
+#define QUNIUIKITTABLEVIEW_H
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <QtCore>
-
-#include <QtUniUIKitControls/private/quniuikitbase_p.h>
+#include <QtUniUIKitControls/quniuikitcontrol.h>
 
 QT_BEGIN_NAMESPACE
 
-class QUniUIKitView;
-Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitViewDelegate);
+class QUniUIKitTableViewPrivate;
+class QUniUIKitTableViewCell;
+class QUniUIKitTableViewDataSource;
+Q_FORWARD_DECLARE_OBJC_CLASS(UITableView);
 
-class QUniUIKitViewPrivate : public QUniUIKitBasePrivate
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTableView : public QUniUIKitControl
 {
+    Q_OBJECT
+    Q_PROPERTY(QUniUIKitTableViewDataSource *dataSource READ dataSource WRITE setDataSource NOTIFY dataSourceChanged)
+
 public:
-    explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
-    virtual ~QUniUIKitViewPrivate();
+    QUniUIKitTableView(QUniUIKitBase *parent = nullptr);
+    virtual ~QUniUIKitTableView();
 
-    UIView *view();
-    UIView *view() const;
-    bool isViewCreated() { return bool(m_view); }
-    void addSubView(UIView *subView);
+    UITableView *uiTableViewHandle();
 
-    CGRect alignmentRect() const;
-    void setAlignmentRect(CGRect rect);
-    void setGeometry(const QRectF &rect);
+    Q_INVOKABLE QUniUIKitTableViewCell *dequeueReusableCellWithIdentifier(const QString &id);
 
-    void emitFrameChanged();
+    QUniUIKitTableViewDataSource *dataSource() const;
+    void setDataSource(QUniUIKitTableViewDataSource *dataSource);
 
-    void initConnections();
-    void updateIntrinsicContentSize();
-
-    Q_DECLARE_PUBLIC(QUniUIKitView)
+Q_SIGNALS:
+    void dataSourceChanged(QUniUIKitTableViewDataSource *dataSource);
 
 protected:
-    // Attributes to keep track of explicit
-    // application assignments
-    enum Attribute {
-        MovedX			= 0x00000002,
-        MovedY			= 0x00000004,
-        ResizedWidth	= 0x00000008,
-        ResizedHeight	= 0x00000010,
-    };
-
-    uint m_attributes;
-
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
-
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
-
-    virtual UIView*createView();
+    QUniUIKitTableView(QUniUIKitTableViewPrivate &dd, QUniUIKitBase *parent = nullptr);
 
 private:
-    UIView *m_view;
-    QSizeF m_intrinsicContentSize;
-    QRectF m_lastEmittedFrame;
-    QUniUIKitViewDelegate *m_delegate;
+    Q_DECLARE_PRIVATE(QUniUIKitTableView)
+    Q_DISABLE_COPY(QUniUIKitTableView)
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVUIKITVIEW_P_H
+#endif // QUNIUIKITTABLEVIEW_H

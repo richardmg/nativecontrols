@@ -34,83 +34,47 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVUIKITVIEW_P_H
-#define QNATIVUIKITVIEW_P_H
+#ifndef QUNIUIKITTABLEVIEWCELL_H
+#define QUNIUIKITTABLEVIEWCELL_H
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <QtCore>
-
-#include <QtUniUIKitControls/private/quniuikitbase_p.h>
+#include <QtUniUIKitControls/quniuikitview.h>
 
 QT_BEGIN_NAMESPACE
 
-class QUniUIKitView;
-Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitViewDelegate);
+class QUniUIKitTableViewCellPrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(UITableViewCell);
 
-class QUniUIKitViewPrivate : public QUniUIKitBasePrivate
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTableViewCell : public QUniUIKitView
 {
+    Q_OBJECT
+    Q_PROPERTY(QString reuseIdentifier READ reuseIdentifier WRITE setReuseIdentifier)
+    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+
 public:
-    explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
-    virtual ~QUniUIKitViewPrivate();
+    QUniUIKitTableViewCell(QUniUIKitBase *parent = nullptr);
+    QUniUIKitTableViewCell(const QString &reuseIdentifier, QUniUIKitBase *parent = nullptr);
+    virtual ~QUniUIKitTableViewCell();
 
-    UIView *view();
-    UIView *view() const;
-    bool isViewCreated() { return bool(m_view); }
-    void addSubView(UIView *subView);
+    UITableViewCell *uiTableViewCellHandle();
 
-    CGRect alignmentRect() const;
-    void setAlignmentRect(CGRect rect);
-    void setGeometry(const QRectF &rect);
+    QString text() const;
+    void setText(const QString &text);
 
-    void emitFrameChanged();
+    QString reuseIdentifier() const;
+    void setReuseIdentifier(const QString &newValue);
 
-    void initConnections();
-    void updateIntrinsicContentSize();
-
-    Q_DECLARE_PUBLIC(QUniUIKitView)
+Q_SIGNALS:
+    void textChanged(const QString &text);
+    void clicked();
 
 protected:
-    // Attributes to keep track of explicit
-    // application assignments
-    enum Attribute {
-        MovedX			= 0x00000002,
-        MovedY			= 0x00000004,
-        ResizedWidth	= 0x00000008,
-        ResizedHeight	= 0x00000010,
-    };
-
-    uint m_attributes;
-
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
-
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
-
-    virtual UIView*createView();
+    QUniUIKitTableViewCell(QUniUIKitTableViewCellPrivate &dd, QUniUIKitBase *parent = nullptr);
 
 private:
-    UIView *m_view;
-    QSizeF m_intrinsicContentSize;
-    QRectF m_lastEmittedFrame;
-    QUniUIKitViewDelegate *m_delegate;
+    Q_DECLARE_PRIVATE(QUniUIKitTableViewCell)
+    Q_DISABLE_COPY(QUniUIKitTableViewCell)
 };
 
 QT_END_NAMESPACE
 
-#endif //QNATIVUIKITVIEW_P_H
+#endif // QUNIUIKITTABLEVIEWCELL_H

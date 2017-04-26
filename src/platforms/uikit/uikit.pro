@@ -18,9 +18,13 @@ IOS_CONTROLS = \
     textfield \
     searchfield \
     slider \
+    tableview \
+    tableviewcell \
+    tableviewdatasource \
     viewcontroller \
     tabbarcontroller \
-    tabbaritem
+    tabbaritem \
+    indexpath
 
 for(c,IOS_CONTROLS) {
     HEADERS += quniuikit$${c}.h
