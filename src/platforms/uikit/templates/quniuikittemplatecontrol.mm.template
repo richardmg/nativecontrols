@@ -41,7 +41,8 @@
 #include <QtUniUIKitControls/quniuikittemplatecontrol.h>
 #include <QtUniUIKitControls/private/quniuikittemplatecontrol_p.h>
 
-@interface QUniUIKitTemplateControlDelegate : NSObject {
+@interface QUniUIKitTemplateControlDelegate : NSObject
+{
     QT_PREPEND_NAMESPACE(QUniUIKitTemplateControlPrivate) *_quniuikittemplatecontrol;
 }
 @end
@@ -131,7 +132,7 @@ void QUniUIKitTemplateControl::setText(const QString &newText)
         return;
 
     // update value here, and if needed, update implicit size
-    d_func()->updateImplicitSize();
+    d_func()->updateIntrinsicContentSize();
 
     emit textChanged(newText);
 }
@@ -148,7 +149,7 @@ void QUniUIKitTemplateControl::setValue(const float &newValue)
         return;
 
     // update value here, and if needed, update implicit size
-    d_func()->updateImplicitSize();
+    d_func()->updateIntrinsicContentSize();
 
     emit valueChanged(newValue);
 }
