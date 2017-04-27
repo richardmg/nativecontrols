@@ -165,6 +165,12 @@ UIView *QUniUIKitViewPrivate::view()
 {
     if (!m_view) {
         m_view = createView();
+
+        if (QUniUIKitView *qparentView = q_func()->parentView()) {
+            // Let the UIView hierarchy mirror the QUniUIKitView hierarchy
+            qparentView->d_func()->addSubView(m_view);
+        }
+
         // UIKit will sometimes change the frame of a view on it's own.
         // This will e.g happen for the root view inside a view controller
         // upon orientation change, or when the root view inside a tab is
@@ -501,6 +507,14 @@ void QUniUIKitView::childEvent(QChildEvent *event)
     QUniUIKitViewPrivate *dptr_child = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(event->child()));
     if (!dptr_child)
         return;
+
+    if (!dptr_child->isViewCreated()) {
+        // Delay setting up the parent-child relationship on the UIViews as long as possible.
+        // This is especially important to support dynamic object creation from QML like
+        // 'uiTableViewCellComponent.createObject(tableView, { reuseIdentifier: id });', where
+        // reuseIdentifier cannot be set/changed after the view has been created.
+        return;
+    }
 
     if (event->added()) {
         d->addSubView(dptr_child->view());
