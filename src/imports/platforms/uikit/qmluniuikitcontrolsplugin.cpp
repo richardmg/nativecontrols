@@ -63,9 +63,13 @@ void registerTypes(const char *uri) override
     qmlRegisterType<QUniUIKitTextField>(uri, 1, 0, "TextField");
     qmlRegisterType<QUniUIKitSearchField>(uri, 1, 0, "SearchField");
     qmlRegisterType<QUniUIKitSlider>(uri, 1, 0, "Slider");
+    qmlRegisterType<QUniUIKitTableView>(uri, 1, 0, "TableView");
+    qmlRegisterType<QUniUIKitTableViewCell>(uri, 1, 0, "TableViewCell");
+    qmlRegisterType<QUniUIKitTableViewDataSource>(uri, 1, 0, "TableViewDataSource");
     qmlRegisterType<QUniUIKitViewController>(uri, 1, 0, "ViewController");
     qmlRegisterType<QUniUIKitTabBarController>(uri, 1, 0, "TabBarController");
     qmlRegisterType<QUniUIKitTabBarItem>(uri, 1, 0, "TabBarItem");
+    qmlRegisterType<QUniUIKitIndexPath>(uri, 1, 0, "IndexPath");
 }
 
 void initializeEngine(QQmlEngine *engine, const char *uri) override
