@@ -63,12 +63,6 @@ Window {
                         height: intrinsicContentHeight
                         text: "click me"
                         onClicked: text = "clicked with a very long string!"
-                        intrinsicContentWidth: 100
-                        Component.onCompleted: {
-                            print("intr w:", intrinsicContentWidth)
-                            print("intr h:", intrinsicContentHeight)
-                        }
-                        onIntrinsicContentWidthChanged: print("new intr w:", intrinsicContentWidth)
                     }
                 }
             }
@@ -91,6 +85,68 @@ Window {
                         text: "click me as well"
                         onClicked: text = "clicked!"
                         backgroundColor: Qt.rgba(0, 0, 255, 255)
+                    }
+                }
+            }
+        }
+
+        ViewController {
+            tabBarItem: TabBarItem {
+                title: "Tab 3"
+            }
+            view: View {
+                backgroundColor: Qt.rgba(255, 0, 0, 255)
+
+                TableView {
+                    y: 30
+                    width: parent.width
+                    height: parent.height;
+                    dataSource: planetsDataSource
+                }
+
+                TableViewDataSource {
+                    id: planetsDataSource
+                    property var planets: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptun"]
+
+                    numberOfSectionsInTableView: function(tableView) {
+                        return 10;
+                    }
+
+                    numberOfRowsInSection: function(tableView, section) {
+                        return planets.length
+                    }
+
+                    titleForHeaderInSection: function(tableView, section) {
+                        return "Header " + section;
+                    }
+
+                    titleForFooterInSection: function(tableView, section) {
+                        return "Footer " + section;
+                    }
+
+                    sectionIndexTitlesForTableView: function(tableView) {
+                        var titles = [];
+                        var sectionCount = numberOfSectionsInTableView(tableView);
+                        for (var i = 0; i < sectionCount; ++i)
+                            titles[i]  = "Section " + i;
+                        return titles;
+                    }
+
+                    cellForRowAtIndexPath: function(tableView, indexPath) {
+                        var id = "planetcell";
+                        var cell = tableView.dequeueReusableCellWithIdentifier(id);
+                        if (cell === null)
+                            cell = planetsCellComponent.createObject(tableView, { reuseIdentifier: id });
+
+                        cell.text = planets[indexPath.row] + " (section " + indexPath.section + ")";
+                        return cell;
+                    }
+
+                    Component {
+                        id: planetsCellComponent
+                        TableViewCell {
+//                            style: TableViewCell.TableViewCellStyleDefault
+                        }
                     }
                 }
             }
