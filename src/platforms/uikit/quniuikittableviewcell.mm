@@ -46,7 +46,8 @@
 -(id)initWithQUniUIKitTableViewCellPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTableViewCellPrivate) *)tableViewCellPrivate
 {
     NSString *id = tableViewCellPrivate->m_reuseIndentifier.toNSString();
-    self = [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id];
+    UITableViewCellStyle cellStyle = static_cast<UITableViewCellStyle>(tableViewCellPrivate->m_cellStyle);
+    self = [self initWithStyle:cellStyle reuseIdentifier:id];
     if (self) {
         _tableViewCellPrivate = tableViewCellPrivate;
     }
@@ -65,7 +66,11 @@ QT_BEGIN_NAMESPACE
 
 QUniUIKitTableViewCellPrivate::QUniUIKitTableViewCellPrivate(int version)
     : QUniUIKitViewPrivate(version)
+    , m_cellStyle(QUniUIKitTableViewCell::StyleDefault)
 {
+    // Avoid assiging UITableViewCellStyleDefault directly into the enum, since
+    // then we require all users of the header file to compile as obj-c++.
+    Q_ASSERT(int(QUniUIKitTableViewCell::StyleDefault) == int(UITableViewCellStyleDefault));
 }
 
 QUniUIKitTableViewCellPrivate::~QUniUIKitTableViewCellPrivate()
@@ -140,6 +145,26 @@ void QUniUIKitTableViewCell::setReuseIdentifier(const QString &newReuseIdentifie
     }
 
     d->m_reuseIndentifier = newReuseIdentifier;
+}
+
+QUniUIKitTableViewCell::CellStyle QUniUIKitTableViewCell::cellStyle() const
+{
+    return d_func()->m_cellStyle;
+}
+
+void QUniUIKitTableViewCell::setCellStyle(QUniUIKitTableViewCell::CellStyle cellStyle)
+{
+    Q_D(QUniUIKitTableViewCell);
+    if (d->m_cellStyle == cellStyle)
+        return;
+
+    if (d->isViewCreated()) {
+        qWarning("TableViewCell: cellStyle cannot change once the backing UITableViewCell has been created!");
+        return;
+    }
+
+    d->m_cellStyle = cellStyle;
+    emit cellStyleChanged(cellStyle);
 }
 
 #include "moc_quniuikittableviewcell.cpp"

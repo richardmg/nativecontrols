@@ -49,8 +49,17 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTableViewCell : public QUniUIKitView
     Q_OBJECT
     Q_PROPERTY(QString reuseIdentifier READ reuseIdentifier WRITE setReuseIdentifier)
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(CellStyle cellStyle READ cellStyle WRITE setCellStyle NOTIFY cellStyleChanged)
 
 public:
+    enum CellStyle {
+        StyleDefault,
+        StyleValue1,
+        StyleValue2,
+        StyleSubtitle
+    };
+    Q_ENUM(CellStyle)
+
     QUniUIKitTableViewCell(QUniUIKitBase *parent = nullptr);
     QUniUIKitTableViewCell(const QString &reuseIdentifier, QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitTableViewCell();
@@ -63,9 +72,13 @@ public:
     QString reuseIdentifier() const;
     void setReuseIdentifier(const QString &newValue);
 
+    CellStyle cellStyle() const;
+    void setCellStyle(CellStyle cellStyle);
+
 Q_SIGNALS:
     void textChanged(const QString &text);
     void clicked();
+    void cellStyleChanged(CellStyle cellStyle);
 
 protected:
     QUniUIKitTableViewCell(QUniUIKitTableViewCellPrivate &dd, QUniUIKitBase *parent = nullptr);
