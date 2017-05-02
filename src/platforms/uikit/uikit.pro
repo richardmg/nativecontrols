@@ -17,6 +17,7 @@ IOS_CONTROLS = \
     button \
     textfield \
     searchfield \
+    label \
     slider \
     tableview \
     tableviewcell \
