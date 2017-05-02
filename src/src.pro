@@ -1,10 +1,10 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    controls \
     platforms \
-    plugins \
+#   controls \
+#   plugins \
     imports
 
-platforms.depends = controls
-plugins.depends = controls platforms
-imports.depends = controls platforms
+# platforms.depends = controls
+# plugins.depends = controls platforms
+# imports.depends = controls platforms
