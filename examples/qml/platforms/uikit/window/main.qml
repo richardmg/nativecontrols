@@ -145,7 +145,8 @@ Window {
                     Component {
                         id: planetsCellComponent
                         TableViewCell {
-//                            style: TableViewCell.TableViewCellStyleDefault
+                            cellStyle: TableViewCell.StyleValue2
+                            backgroundColor: Qt.rgba(100, 100, 0, 255)
                         }
                     }
                 }
