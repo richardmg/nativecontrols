@@ -164,23 +164,11 @@ void QUniUIKitViewPrivate::updateIntrinsicContentSize()
 UIView *QUniUIKitViewPrivate::view()
 {
     if (!m_view) {
-        m_view = createView();
-
-        if (QUniUIKitView *qparentView = q_func()->parentView()) {
-            // Let the UIView hierarchy mirror the QUniUIKitView hierarchy
-            qparentView->d_func()->addSubView(m_view);
-        }
-
-        // UIKit will sometimes change the frame of a view on it's own.
-        // This will e.g happen for the root view inside a view controller
-        // upon orientation change, or when the root view inside a tab is
-        // made visible the first time.
-        // Since we only wrap the native controls, and as such, cannot easily
-        // override methods like "updateSubviews", we choose to use the
-        // infamous KVO pattern to catch the frame changes for now, so that
-        // we always emit signals when the frame changes.
-        m_delegate = [[QUniUIKitViewDelegate alloc] initWithQUniUIKitViewPrivate:this];
-        [m_view addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
+        // Lazy create view if a subclass
+        // have not set one already
+        UIView *view = createView();
+        setView(view);
+        [view release];
     }
     return m_view;
 }
@@ -188,6 +176,28 @@ UIView *QUniUIKitViewPrivate::view()
 UIView *QUniUIKitViewPrivate::view() const
 {
     return const_cast<QUniUIKitViewPrivate *>(this)->view();
+}
+
+void QUniUIKitViewPrivate::setView(UIView *view)
+{
+    Q_ASSERT(!m_view);
+    m_view = [view retain];
+
+    if (QUniUIKitView *qparentView = q_func()->parentView()) {
+        // Let the UIView hierarchy mirror the QUniUIKitView hierarchy
+        qparentView->d_func()->addSubView(m_view);
+    }
+
+    // UIKit will sometimes change the frame of a view on it's own.
+    // This will e.g happen for the root view inside a view controller
+    // upon orientation change, or when the root view inside a tab is
+    // made visible the first time.
+    // Since we only wrap the native controls, and as such, cannot easily
+    // override methods like "updateSubviews", we choose to use the
+    // infamous KVO pattern to catch the frame changes for now, so that
+    // we always emit signals when the frame changes.
+    m_delegate = [[QUniUIKitViewDelegate alloc] initWithQUniUIKitViewPrivate:this];
+    [m_view addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
 }
 
 UIView *QUniUIKitViewPrivate::createView()

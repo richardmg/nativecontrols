@@ -66,6 +66,7 @@ public:
 
     UIView *view();
     UIView *view() const;
+    void setView(UIView *view);
     bool isViewCreated() { return bool(m_view); }
     void addSubView(UIView *subView);
 
