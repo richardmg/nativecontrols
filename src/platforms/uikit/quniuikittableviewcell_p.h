@@ -74,6 +74,8 @@ public:
     QUniUITableViewCell *uiTableViewCell() const;
 
     QString m_reuseIndentifier;
+    QUniUIKitLabel *m_textLabel;
+    QUniUIKitLabel *m_detailTextLabel;
     QUniUIKitTableViewCell::CellStyle m_cellStyle;
 
     Q_DECLARE_PUBLIC(QUniUIKitTableViewCell)

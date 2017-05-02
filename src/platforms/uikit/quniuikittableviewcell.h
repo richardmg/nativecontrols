@@ -42,13 +42,15 @@
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitTableViewCellPrivate;
+class QUniUIKitLabel;
 Q_FORWARD_DECLARE_OBJC_CLASS(UITableViewCell);
 
 class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTableViewCell : public QUniUIKitView
 {
     Q_OBJECT
     Q_PROPERTY(QString reuseIdentifier READ reuseIdentifier WRITE setReuseIdentifier)
-    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(QUniUIKitLabel *textLabel READ textLabel)
+    Q_PROPERTY(QUniUIKitLabel *detailTextLabel READ detailTextLabel)
     Q_PROPERTY(CellStyle cellStyle READ cellStyle WRITE setCellStyle NOTIFY cellStyleChanged)
 
 public:
@@ -66,8 +68,8 @@ public:
 
     UITableViewCell *uiTableViewCellHandle();
 
-    QString text() const;
-    void setText(const QString &text);
+    QUniUIKitLabel *textLabel() const;
+    QUniUIKitLabel *detailTextLabel() const;
 
     QString reuseIdentifier() const;
     void setReuseIdentifier(const QString &newValue);
@@ -76,8 +78,6 @@ public:
     void setCellStyle(CellStyle cellStyle);
 
 Q_SIGNALS:
-    void textChanged(const QString &text);
-    void clicked();
     void cellStyleChanged(CellStyle cellStyle);
 
 protected:

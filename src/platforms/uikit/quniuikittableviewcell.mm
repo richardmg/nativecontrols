@@ -39,6 +39,7 @@
 #include <QtCore>
 
 #include <QtUniUIKitControls/quniuikittableviewcell.h>
+#include <QtUniUIKitControls/quniuikitlabel.h>
 #include <QtUniUIKitControls/private/quniuikittableviewcell_p.h>
 
 @implementation QUniUITableViewCell
@@ -66,6 +67,8 @@ QT_BEGIN_NAMESPACE
 
 QUniUIKitTableViewCellPrivate::QUniUIKitTableViewCellPrivate(int version)
     : QUniUIKitViewPrivate(version)
+    , m_textLabel(nullptr)
+    , m_detailTextLabel(nullptr)
     , m_cellStyle(QUniUIKitTableViewCell::StyleDefault)
 {
     // Avoid assiging UITableViewCellStyleDefault directly into the enum, since
@@ -112,20 +115,24 @@ UITableViewCell *QUniUIKitTableViewCell::uiTableViewCellHandle()
     return d_func()->uiTableViewCell();
 }
 
-QString QUniUIKitTableViewCell::text() const
+QUniUIKitLabel *QUniUIKitTableViewCell::textLabel() const
 {
-    return QString::fromNSString(d_func()->uiTableViewCell().textLabel.text);
+    Q_D(const QUniUIKitTableViewCell);
+    if (!d->m_textLabel) {
+        QUniUIKitTableViewCell *me = const_cast<QUniUIKitTableViewCell *>(this);
+        me->d_func()->m_textLabel = new QUniUIKitLabel(me->uiTableViewCellHandle().textLabel, me);
+    }
+    return d->m_textLabel;
 }
 
-void QUniUIKitTableViewCell::setText(const QString &newText)
+QUniUIKitLabel *QUniUIKitTableViewCell::detailTextLabel() const
 {
-    if (newText == text())
-        return;
-
-    d_func()->uiTableViewCell().textLabel.text = newText.toNSString();
-    d_func()->updateIntrinsicContentSize();
-
-    emit textChanged(newText);
+    Q_D(const QUniUIKitTableViewCell);
+    if (!d->m_detailTextLabel) {
+        QUniUIKitTableViewCell *me = const_cast<QUniUIKitTableViewCell *>(this);
+        me->d_func()->m_detailTextLabel = new QUniUIKitLabel(me->uiTableViewCellHandle().detailTextLabel, me);
+    }
+    return d->m_detailTextLabel;
 }
 
 QString QUniUIKitTableViewCell::reuseIdentifier() const
