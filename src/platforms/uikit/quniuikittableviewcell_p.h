@@ -60,7 +60,7 @@ class QUniUIKitTableViewCellPrivate;
 
 @interface QUniUITableViewCell : UITableViewCell
 {
-    QT_PREPEND_NAMESPACE(QUniUIKitTableViewCellPrivate) *_quniuikittableviewcell;
+    QT_PREPEND_NAMESPACE(QUniUIKitTableViewCellPrivate) *_tableViewCellPrivate;
 }
 -(QUniUIKitTableViewCell *)qUniUiKitTableViewCellHandle;
 @end

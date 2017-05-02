@@ -43,21 +43,12 @@
 
 @implementation QUniUITableViewCell
 
--(id)initWithQUniUIKitTableViewCellPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTableViewCellPrivate) *)quniuikittableviewcell
+-(id)initWithQUniUIKitTableViewCellPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTableViewCellPrivate) *)tableViewCellPrivate
 {
-    NSString *id = quniuikittableviewcell->m_reuseIndentifier.toNSString();
+    NSString *id = tableViewCellPrivate->m_reuseIndentifier.toNSString();
     self = [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id];
     if (self) {
-
-        // NB: TAKE EXTRA CARE OF OWNERSHIP.
-        // We should probably let UITableView take ownership over this object, so it gets deleted
-        // when the table view no longer needs it. But the problem then, is that we should also
-        // delete QUniUIKitTableViewCell. But that object might still be referenced from QML.
-        // It might be OK as it is, since QML will probably delete QUniUIKitTableViewCell once
-        // no-one uses it, which will send a release to QUniTableViewCell. And then UITableView
-        // will release it once more when it doesn't need either. Which will deallocate it.
-
-        _quniuikittableviewcell = quniuikittableviewcell;
+        _tableViewCellPrivate = tableViewCellPrivate;
     }
 
     return self;
@@ -65,7 +56,7 @@
 
 -(QUniUIKitTableViewCell *)qUniUiKitTableViewCellHandle
 {
-    return _quniuikittableviewcell->q_func();
+    return _tableViewCellPrivate->q_func();
 }
 
 @end
