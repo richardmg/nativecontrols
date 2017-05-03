@@ -64,6 +64,7 @@ public:
     virtual ~QUniUIKitTabBarControllerPrivate();
 
     QList<QUniUIKitViewController *> m_viewControllers;
+    int m_selectedIndex;
 
     Q_DECLARE_PUBLIC(QUniUIKitTabBarController)
 
