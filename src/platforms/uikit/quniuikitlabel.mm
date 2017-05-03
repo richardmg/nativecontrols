@@ -53,11 +53,11 @@ QUniUIKitLabelPrivate::~QUniUIKitLabelPrivate()
     [m_delegate release];
 }
 
-UIView *QUniUIKitLabelPrivate::createView()
+void QUniUIKitLabelPrivate::createView()
 {
-    UILabel *uiLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    UILabel *uiLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
     [uiLabel sizeToFit];
-    return uiLabel;
+    setView(uiLabel);
 }
 
 UILabel *QUniUIKitLabelPrivate::uiLabel() const

@@ -71,7 +71,7 @@ public:
     Q_DECLARE_PUBLIC(QUniUIKitButton)
 
 protected:
-    UIView *createView() override;
+    void createView() override;
 
 };
 

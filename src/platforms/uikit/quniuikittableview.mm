@@ -74,11 +74,11 @@ QUniUIKitTableViewPrivate::~QUniUIKitTableViewPrivate()
 {
 }
 
-UIView *QUniUIKitTableViewPrivate::createView()
+void QUniUIKitTableViewPrivate::createView()
 {
-    QUniUITableView *uiTableView = [[QUniUITableView alloc] initWithQUniUIKitTableViewPrivate:this];
+    QUniUITableView *uiTableView = [[[QUniUITableView alloc] initWithQUniUIKitTableViewPrivate:this] autorelease];
     [uiTableView sizeToFit];
-    return uiTableView;
+    setView(uiTableView);
 }
 
 UITableView *QUniUIKitTableViewPrivate::uiTableView() const

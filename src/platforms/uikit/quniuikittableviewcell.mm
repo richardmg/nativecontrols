@@ -80,9 +80,11 @@ QUniUIKitTableViewCellPrivate::~QUniUIKitTableViewCellPrivate()
 {
 }
 
-UIView *QUniUIKitTableViewCellPrivate::createView()
+void QUniUIKitTableViewCellPrivate::createView()
 {
-    return [[QUniUITableViewCell alloc] initWithQUniUIKitTableViewCellPrivate:this];
+    QUniUITableViewCell *uiCell = [[QUniUITableViewCell alloc] initWithQUniUIKitTableViewCellPrivate:this];
+    [uiCell autorelease];
+    setView(uiCell);
 }
 
 QUniUITableViewCell *QUniUIKitTableViewCellPrivate::uiTableViewCell() const

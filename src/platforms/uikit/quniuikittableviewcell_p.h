@@ -81,7 +81,7 @@ public:
     Q_DECLARE_PUBLIC(QUniUIKitTableViewCell)
 
 protected:
-    UIView *createView() override;
+    void createView() override;
 
 };
 

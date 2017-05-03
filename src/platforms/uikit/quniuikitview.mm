@@ -87,6 +87,9 @@ QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     , m_attributes(0)
     , m_view(nil)
     , m_delegate(nullptr)
+#ifdef QT_DEBUG
+    , m_createViewRecursionGuard(false)
+#endif
 {
 }
 
@@ -164,11 +167,22 @@ void QUniUIKitViewPrivate::updateIntrinsicContentSize()
 UIView *QUniUIKitViewPrivate::view()
 {
     if (!m_view) {
-        // Lazy create view if a subclass
-        // have not set one already
-        UIView *view = createView();
-        setView(view);
-        [view release];
+#ifdef QT_DEBUG
+        // Check that we don't end up calling view() from createView(). This can
+        // easily happen if we e.g create several views inside createView, and
+        // construct parent-child relationships. The solution is to call setView
+        // early on from within createView() before creating child views.
+        Q_ASSERT(!m_createViewRecursionGuard);
+        m_createViewRecursionGuard = true;
+#endif
+        // The common case should be that we enter this block to lazy create the UIView
+        // we wrap when someone actually needs it (which is usually when properties
+        // are assigned values, or another QUniUIKitView is set as child). But for
+        // subclasses that adopts an already existing UIView, e.g to wrap read-only
+        // UIView properties in other UIViews (like UITableViewCell.label), calling
+        // setView early on is necessary.
+        createView();
+        Q_ASSERT(m_view);
     }
     return m_view;
 }
@@ -180,7 +194,7 @@ UIView *QUniUIKitViewPrivate::view() const
 
 void QUniUIKitViewPrivate::setView(UIView *view)
 {
-    Q_ASSERT(!m_view);
+    Q_ASSERT_X(!m_view, Q_FUNC_INFO, "setView should only be called once");
     m_view = [view retain];
 
     if (QUniUIKitView *qparentView = q_func()->parentView()) {
@@ -200,11 +214,11 @@ void QUniUIKitViewPrivate::setView(UIView *view)
     [m_view addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
 }
 
-UIView *QUniUIKitViewPrivate::createView()
+void QUniUIKitViewPrivate::createView()
 {
-    UIView *view = [QPlainUIKitView new];
+    UIView *view = [[QPlainUIKitView new] autorelease];
     view.backgroundColor = [UIColor whiteColor];
-    return view;
+    setView(view);
 }
 
 void QUniUIKitViewPrivate::addSubView(UIView *subView)

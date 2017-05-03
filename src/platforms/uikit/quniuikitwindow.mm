@@ -65,9 +65,9 @@ void QUniUIKitWindowPrivate::addSubViewToContentView(UIView *uiView)
     dptr_contentView->addSubView(uiView);
 }
 
-UIView *QUniUIKitWindowPrivate::createView()
+void QUniUIKitWindowPrivate::createView()
 {
-    return [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    setView([[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]);
 }
 
 QUniUIKitWindow::QUniUIKitWindow()

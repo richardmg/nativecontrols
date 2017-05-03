@@ -73,14 +73,12 @@ QUniUIKitTextFieldPrivate::~QUniUIKitTextFieldPrivate()
     [m_delegate release];
 }
 
-UIView *QUniUIKitTextFieldPrivate::createView()
+void QUniUIKitTextFieldPrivate::createView()
 {
-    m_delegate = [[QUniUIKitTextFieldDelegate alloc] initWithQUniUIKitTextFieldPrivate:this];
-
     UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
     [uiTextField sizeToFit];
-
-    return uiTextField;
+    m_delegate = [[QUniUIKitTextFieldDelegate alloc] initWithQUniUIKitTextFieldPrivate:this];
+    setView(uiTextField);
 }
 
 QUniUIKitTextField::QUniUIKitTextField(QUniUIKitBase *parent)

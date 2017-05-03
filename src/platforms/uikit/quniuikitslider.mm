@@ -77,14 +77,14 @@ QUniUIKitSliderPrivate::~QUniUIKitSliderPrivate()
     [m_delegate release];
 }
 
-UIView *QUniUIKitSliderPrivate::createView()
+void QUniUIKitSliderPrivate::createView()
 {
-    UISlider *uiSlider = [[UISlider alloc] initWithFrame:CGRectZero];
+    UISlider *uiSlider = [[[UISlider alloc] initWithFrame:CGRectZero] autorelease];
     [uiSlider sizeToFit];
 
     m_delegate = [[QUniUIKitSliderDelegate alloc] initWithQUniUIKitSliderPrivate:this];
     [uiSlider addTarget:m_delegate action:@selector(onValueChanged) forControlEvents:UIControlEventValueChanged];
-    return uiSlider;
+    setView(uiSlider);
 }
 
 UISlider *QUniUIKitSliderPrivate::uiSlider() const

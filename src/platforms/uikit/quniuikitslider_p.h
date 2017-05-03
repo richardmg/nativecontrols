@@ -70,7 +70,7 @@ public:
     Q_DECLARE_PUBLIC(QUniUIKitSlider)
 
 protected:
-    UIView *createView() override;
+    void createView() override;
 
 };
 
