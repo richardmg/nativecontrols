@@ -95,8 +95,6 @@ Window {
                 title: "Tab 3"
             }
             view: View {
-                backgroundColor: Qt.rgba(255, 0, 0, 255)
-
                 TableView {
                     y: 30
                     width: parent.width
@@ -107,6 +105,7 @@ Window {
                 TableViewDataSource {
                     id: planetsDataSource
                     property var planets: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptun"]
+                    property var distances: ["0.39", "0.72", "1", "1.52", "1.52", "5.20", "9.53", "19.18", "30.06"]
 
                     numberOfSectionsInTableView: function(tableView) {
                         return 10;
@@ -117,11 +116,7 @@ Window {
                     }
 
                     titleForHeaderInSection: function(tableView, section) {
-                        return "Header " + section;
-                    }
-
-                    titleForFooterInSection: function(tableView, section) {
-                        return "Footer " + section;
+                        return "Section " + section;
                     }
 
                     sectionIndexTitlesForTableView: function(tableView) {
@@ -133,20 +128,22 @@ Window {
                     }
 
                     cellForRowAtIndexPath: function(tableView, indexPath) {
-                        var id = "planetcell";
-                        var cell = tableView.dequeueReusableCellWithIdentifier(id);
+                        var reuseId = "planetcell" + (indexPath.section % 2);
+                        var cell = tableView.dequeueReusableCellWithIdentifier(reuseId);
                         if (cell === null)
-                            cell = planetsCellComponent.createObject(tableView, { reuseIdentifier: id });
+                            cell = planetsCellComponent.createObject(tableView, { reuseIdentifier: reuseId, section: indexPath.section });
 
-                        cell.text = planets[indexPath.row] + " (section " + indexPath.section + ")";
+                        cell.textLabel.text = planets[indexPath.row];
+                        cell.detailTextLabel.text = distances[indexPath.row] + " AU"
                         return cell;
                     }
 
                     Component {
                         id: planetsCellComponent
                         TableViewCell {
-                            cellStyle: TableViewCell.StyleValue2
-                            backgroundColor: Qt.rgba(100, 100, 0, 255)
+                            property var section
+                            cellStyle: TableViewCell.StyleValue1
+                            backgroundColor: section % 2 ? Qt.rgba(0.90, 0.90, 0.95, 255) : Qt.rgba(1., 1., 1. ,255)
                         }
                     }
                 }
