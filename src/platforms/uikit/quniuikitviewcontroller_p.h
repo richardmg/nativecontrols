@@ -68,6 +68,7 @@ public:
     Q_DECLARE_PUBLIC(QUniUIKitViewController)
 
     UIViewController *viewController();
+    UIViewController *viewController() const;
     void addChildViewController(UIViewController *child);
     void addSubViewToContentView(UIView *uiView);
 

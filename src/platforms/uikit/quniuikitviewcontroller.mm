@@ -81,6 +81,11 @@ UIViewController *QUniUIKitViewControllerPrivate::viewController()
     return m_viewController;
 }
 
+UIViewController *QUniUIKitViewControllerPrivate::viewController() const
+{
+    return const_cast<QUniUIKitViewControllerPrivate *>(this)->viewController();
+}
+
 UIViewController *QUniUIKitViewControllerPrivate::createViewController()
 {
     m_viewController = [UIViewController new];
