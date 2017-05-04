@@ -48,6 +48,9 @@ Window {
 
     rootViewController: TabBarController {
 
+        selectedIndex: 2
+        onSelectedIndexChanged: print("index:", selectedIndex)
+
         ViewController {
             tabBarItem: TabBarItem {
                 title: "Tab 1"
@@ -62,7 +65,10 @@ Window {
                         width: intrinsicContentWidth
                         height: intrinsicContentHeight
                         text: "click me"
-                        onClicked: text = "clicked with a very long string!"
+                        onClicked: {
+                            text = "clicked with a very long string!"
+                            rootViewController.selectedIndex = 1
+                        }
                     }
                 }
             }
