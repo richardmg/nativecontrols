@@ -44,25 +44,6 @@
 #include <QtUniUIKitControls/private/quniuikittableview_p.h>
 #include <QtUniUIKitControls/private/quniuikittableviewcell_p.h>
 
-@implementation QUniUITableView
-
--(id)initWithQUniUIKitTableViewPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTableViewPrivate) *)tableViewPrivate
-{
-    self = [self initWithFrame:CGRectZero];
-    if (self) {
-        _tableViewPrivate = tableViewPrivate;
-    }
-
-    return self;
-}
-
--(QT_PREPEND_NAMESPACE(QUniUIKitTableView) *)qUniUIKitTableViewHandle
-{
-    return _tableViewPrivate->q_func();
-}
-
-@end
-
 QT_BEGIN_NAMESPACE
 
 QUniUIKitTableViewPrivate::QUniUIKitTableViewPrivate(int version)
@@ -76,7 +57,7 @@ QUniUIKitTableViewPrivate::~QUniUIKitTableViewPrivate()
 
 void QUniUIKitTableViewPrivate::createView()
 {
-    QUniUITableView *uiTableView = [[[QUniUITableView alloc] initWithQUniUIKitTableViewPrivate:this] autorelease];
+    UITableView *uiTableView = [[[UITableView alloc] initWithFrame:CGRectZero] autorelease];
     [uiTableView sizeToFit];
     setView(uiTableView);
 }

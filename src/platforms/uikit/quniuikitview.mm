@@ -210,6 +210,7 @@ void QUniUIKitViewPrivate::setView(UIView *view)
     // override methods like "updateSubviews", we choose to use the
     // infamous KVO pattern to catch the frame changes for now, so that
     // we always emit signals when the frame changes.
+    QUniUIKitBasePrivate::setAssociatedObject(m_view, q_func());
     m_delegate = [[QUniUIKitViewDelegate alloc] initWithQUniUIKitViewPrivate:this];
     [m_view addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
 }

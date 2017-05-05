@@ -54,14 +54,6 @@
 #include <QtUniUIKitControls/quniuikittableview.h>
 #include <QtUniUIKitControls/private/quniuikitcontrol_p.h>
 
-@interface QUniUITableView : UITableView
-{
-    QT_PREPEND_NAMESPACE(QUniUIKitTableViewPrivate) *_tableViewPrivate;
-}
--(id)initWithQUniUIKitTableViewPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTableViewPrivate) *)tableViewPrivate;
--(QT_PREPEND_NAMESPACE(QUniUIKitTableView) *)qUniUIKitTableViewHandle;
-@end
-
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitTableViewDataSource;

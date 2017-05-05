@@ -71,21 +71,9 @@
     return [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""] autorelease];
 }
 
-- (QUniUIKitTableView *)qUniUIKitTableViewFrom:(UITableView *)tableView
-{
-    // Since a TableViewDataSource can potentially be shared amongst several TableViews, we
-    // need each UITableView to carry information about which QUniUIKitTableView it corresponds to.
-    // But since it's possible (but unlikely) that an app, through native code, uses a custom
-    // UITableView with this tableSource assinged, we do some extra checking.
-    if ([tableView isKindOfClass:[QUniUITableView class]])
-        return [static_cast<QUniUITableView *>(tableView) qUniUIKitTableViewHandle];
-    qWarning("TableViewDataSource: QUniUIKitTableViewDataSource can only be assigned to a QUniUIKitTableView");
-    return nullptr;
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    QUniUIKitTableView *qtableView = [self qUniUIKitTableViewFrom:tableView];
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
     if (!qtableView)
         return 0;
 
@@ -110,7 +98,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = [self qUniUIKitTableViewFrom:tableView];
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
     if (!qtableView)
         return 0;
 
@@ -136,7 +124,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QUniUIKitTableView *qtableView = [self qUniUIKitTableViewFrom:tableView];
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
     if (!qtableView)
         return [self emptyCell];
 
@@ -164,7 +152,7 @@
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    QUniUIKitTableView *qtableView = [self qUniUIKitTableViewFrom:tableView];
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
     if (!qtableView)
         return [NSArray array];
 
@@ -190,7 +178,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = [self qUniUIKitTableViewFrom:tableView];
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
     if (!qtableView)
         return nil;
 
@@ -212,7 +200,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = [self qUniUIKitTableViewFrom:tableView];
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
     if (!qtableView)
         return nil;
 
