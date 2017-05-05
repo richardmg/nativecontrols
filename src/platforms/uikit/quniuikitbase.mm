@@ -35,11 +35,14 @@
 ****************************************************************************/
 
 #include <UIKit/UIKit.h>
+#include <objc/runtime.h>
 
 #include <QtCore>
 
 #include <QtUniUIKitControls/quniuikitbase.h>
 #include <QtUniUIKitControls/private/quniuikitbase_p.h>
+
+static const char *kIdAssociatedQObject = "qobject";
 
 QT_BEGIN_NAMESPACE
 
@@ -50,6 +53,17 @@ QUniUIKitBasePrivate::QUniUIKitBasePrivate(int version)
 
 QUniUIKitBasePrivate::~QUniUIKitBasePrivate()
 {
+}
+
+void QUniUIKitBasePrivate::setAssociatedObject(NSObject *nsObject, QObject *qObject)
+{
+    objc_setAssociatedObject(nsObject, kIdAssociatedQObject, id(qObject), OBJC_ASSOCIATION_ASSIGN);
+}
+
+QObject *QUniUIKitBasePrivate::getAssociatedObject(NSObject *nsObject)
+{
+    id ref = objc_getAssociatedObject(nsObject, kIdAssociatedQObject);
+    return static_cast<QObject *>(ref);
 }
 
 QUniUIKitBase::QUniUIKitBase(QUniUIKitBase *parent)

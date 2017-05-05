@@ -65,6 +65,9 @@ public:
     explicit QUniUIKitBasePrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitBasePrivate();
 
+    static void setAssociatedObject(NSObject *nsObject, QObject *qObject);
+    static QObject *getAssociatedObject(NSObject *nsObject);
+
     Q_DECLARE_PUBLIC(QUniUIKitBase)
 };
 
