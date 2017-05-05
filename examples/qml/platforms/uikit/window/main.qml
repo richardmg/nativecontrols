@@ -64,11 +64,8 @@ Window {
                         objectName: "myButton"
                         width: intrinsicContentWidth
                         height: intrinsicContentHeight
-                        text: "click me"
-                        onClicked: {
-                            text = "clicked with a very long string!"
-                            rootViewController.selectedIndex = 1
-                        }
+                        text: "click me to add another tab"
+                        onClicked: tabComponent.createObject(rootViewController);
                     }
                 }
             }
@@ -88,8 +85,8 @@ Window {
                     Button {
                         width: intrinsicContentWidth
                         height: intrinsicContentHeight
-                        text: "click me as well"
-                        onClicked: text = "clicked!"
+                        text: "click me to set tab 2"
+                        onClicked: rootViewController.selectedIndex = 2
                         backgroundColor: Qt.rgba(0, 0, 255, 255)
                     }
                 }
@@ -97,6 +94,7 @@ Window {
         }
 
         ViewController {
+            id: lastTab
             tabBarItem: TabBarItem {
                 title: "Tab 3"
             }
@@ -156,6 +154,32 @@ Window {
             }
         }
 
+    }
+
+    Component {
+        id: tabComponent
+        ViewController {
+            id: tab
+            tabBarItem: TabBarItem {
+                title: "Tab"
+            }
+            view: View {
+                backgroundColor: Qt.rgba(255, 255, 0, 255)
+                View {
+                    y: 30
+                    width: parent.width
+                    height: parent.height
+                    backgroundColor: Qt.rgba(0, 255, 0, 255)
+                    Button {
+                        width: intrinsicContentWidth
+                        height: intrinsicContentHeight
+                        text: "Click to remove this tab"
+                        onClicked: tab.parent = null
+                        backgroundColor: Qt.rgba(0, 0, 255, 255)
+                    }
+                }
+            }
+        }
     }
 
 }
