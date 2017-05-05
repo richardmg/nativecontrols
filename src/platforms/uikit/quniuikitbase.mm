@@ -42,9 +42,20 @@
 #include <QtUniUIKitControls/quniuikitbase.h>
 #include <QtUniUIKitControls/private/quniuikitbase_p.h>
 
+QT_BEGIN_NAMESPACE
+
 static const char *kIdAssociatedQObject = "qobject";
 
-QT_BEGIN_NAMESPACE
+void qt_setAssociatedQObject(NSObject *nsObject, QObject *qObject)
+{
+    objc_setAssociatedObject(nsObject, kIdAssociatedQObject, id(qObject), OBJC_ASSOCIATION_ASSIGN);
+}
+
+QObject *qt_getAssociatedQObject(NSObject *nsObject)
+{
+    id ref = objc_getAssociatedObject(nsObject, kIdAssociatedQObject);
+    return static_cast<QObject *>(ref);
+}
 
 QUniUIKitBasePrivate::QUniUIKitBasePrivate(int version)
     : QUniUIKitQmlBasePrivate(version)
@@ -53,17 +64,6 @@ QUniUIKitBasePrivate::QUniUIKitBasePrivate(int version)
 
 QUniUIKitBasePrivate::~QUniUIKitBasePrivate()
 {
-}
-
-void QUniUIKitBasePrivate::setAssociatedObject(NSObject *nsObject, QObject *qObject)
-{
-    objc_setAssociatedObject(nsObject, kIdAssociatedQObject, id(qObject), OBJC_ASSOCIATION_ASSIGN);
-}
-
-QObject *QUniUIKitBasePrivate::getAssociatedObject(NSObject *nsObject)
-{
-    id ref = objc_getAssociatedObject(nsObject, kIdAssociatedQObject);
-    return static_cast<QObject *>(ref);
 }
 
 QUniUIKitBase::QUniUIKitBase(QUniUIKitBase *parent)

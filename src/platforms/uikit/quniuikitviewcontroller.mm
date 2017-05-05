@@ -79,7 +79,7 @@ UIViewController *QUniUIKitViewControllerPrivate::viewController()
     if (!m_viewController) {
         m_viewController = createViewController();
         Q_ASSERT(m_viewController);
-        QUniUIKitBasePrivate::setAssociatedObject(m_viewController, q_func());
+        qt_setAssociatedQObject(m_viewController, q_func());
     }
     return m_viewController;
 }
@@ -112,12 +112,6 @@ void QUniUIKitViewControllerPrivate::addSubViewToContentView(UIView *uiView)
     }
     QUniUIKitViewPrivate *dptr_contentView = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(view));
     dptr_contentView->addSubView(uiView);
-}
-
-QUniUIKitViewController *QUniUIKitViewControllerPrivate::getAssociatedObject(UIViewController *viewController)
-{
-    QObject *obj = QUniUIKitBasePrivate::getAssociatedObject(viewController);
-    return static_cast<QUniUIKitViewController *>(obj);
 }
 
 QUniUIKitViewController *QUniUIKitViewController::parentViewController()

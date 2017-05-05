@@ -73,7 +73,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
     if (!qtableView)
         return 0;
 
@@ -98,7 +98,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
     if (!qtableView)
         return 0;
 
@@ -124,7 +124,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
     if (!qtableView)
         return [self emptyCell];
 
@@ -152,7 +152,7 @@
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
     if (!qtableView)
         return [NSArray array];
 
@@ -178,7 +178,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
     if (!qtableView)
         return nil;
 
@@ -200,7 +200,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(QUniUIKitBasePrivate::getAssociatedObject(tableView));
+    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
     if (!qtableView)
         return nil;
 
