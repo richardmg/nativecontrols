@@ -72,6 +72,8 @@ public:
     void addChildViewController(UIViewController *child);
     void addSubViewToContentView(UIView *uiView);
 
+    static QUniUIKitViewController *getAssociatedObject(UIViewController *viewController);
+
     QUniUIKitTabBarItem *m_tabBarItem;
 protected:
     virtual UIViewController *createViewController();
