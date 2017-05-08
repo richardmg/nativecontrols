@@ -63,8 +63,6 @@ public:
     explicit QUniUIKitTabBarControllerPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitTabBarControllerPrivate();
 
-    QQmlListProperty<QObject> viewControllersAsQmlList();
-
     QList<QUniUIKitViewController *> m_viewControllers;
     QUniUIKitViewController *m_requestedSelectedViewController;
     int m_requestedSelectedIndex;
@@ -73,7 +71,11 @@ public:
 
 protected:
     virtual UIViewController *createViewController();
-    static void appendChild(QQmlListProperty<QObject> *list, QObject *obj);
+
+    static void appendChild(QQmlListProperty<QUniUIKitViewController> *list, QUniUIKitViewController *obj);
+    static int count(QQmlListProperty<QUniUIKitViewController> *);
+    static QUniUIKitViewController *at(QQmlListProperty<QUniUIKitViewController> *, int);
+    static void clear(QQmlListProperty<QUniUIKitViewController> *);
 };
 
 QT_END_NAMESPACE

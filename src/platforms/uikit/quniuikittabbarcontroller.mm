@@ -99,7 +99,7 @@ UIViewController *QUniUIKitTabBarControllerPrivate::createViewController()
     return tabBarController;
 }
 
-void QUniUIKitTabBarControllerPrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
+void QUniUIKitTabBarControllerPrivate::appendChild(QQmlListProperty<QUniUIKitViewController> *list, QUniUIKitViewController *child)
 {
     QUniUIKitTabBarController *qq = static_cast<QUniUIKitTabBarController *>(list->object);
     QUniUIKitViewController *vcChild = qobject_cast<QUniUIKitViewController *>(child);
@@ -109,9 +109,31 @@ void QUniUIKitTabBarControllerPrivate::appendChild(QQmlListProperty<QObject> *li
     qq->setViewControllers(qq->viewControllers() << vcChild);
 }
 
-QQmlListProperty<QObject> QUniUIKitTabBarControllerPrivate::viewControllersAsQmlList()
+int QUniUIKitTabBarControllerPrivate::count(QQmlListProperty<QUniUIKitViewController> *list)
 {
-    return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
+    QUniUIKitTabBarController *qq = static_cast<QUniUIKitTabBarController *>(list->object);
+    return qq->d_func()->m_viewControllers.count();
+}
+
+QUniUIKitViewController *QUniUIKitTabBarControllerPrivate::at(QQmlListProperty<QUniUIKitViewController> *list, int index)
+{
+    QUniUIKitTabBarController *qq = static_cast<QUniUIKitTabBarController *>(list->object);
+    return qq->d_func()->m_viewControllers.at(index);
+}
+
+void QUniUIKitTabBarControllerPrivate::clear(QQmlListProperty<QUniUIKitViewController> *list)
+{
+    QUniUIKitTabBarController *qq = static_cast<QUniUIKitTabBarController *>(list->object);
+    qq->setViewControllers(QList<QUniUIKitViewController *>());
+}
+
+QQmlListProperty<QUniUIKitViewController> QUniUIKitTabBarController::viewControllersAsQmlList()
+{
+    return QQmlListProperty<QUniUIKitViewController>(this, 0
+         , QUniUIKitTabBarControllerPrivate::appendChild
+         , QUniUIKitTabBarControllerPrivate::count
+         , QUniUIKitTabBarControllerPrivate::at
+         , QUniUIKitTabBarControllerPrivate::clear);
 }
 
 QUniUIKitTabBarController::QUniUIKitTabBarController(QUniUIKitBase *parent)
@@ -222,18 +244,9 @@ void QUniUIKitTabBarController::childEvent(QChildEvent *event)
     // Note that event->child() might not be fully constructed at this point, if
     // called from its constructor chain. But the private part will.
     QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
-
-    if (QUniUIKitViewControllerPrivate *dptr_child = dynamic_cast<QUniUIKitViewControllerPrivate *>(childPrivate)) {
-        if (event->added()) {
-            setViewControllers(viewControllers() << dptr_child->q_func());
-        } else {
-            auto list = viewControllers();
-            list.removeOne(dptr_child->q_func());
-            setViewControllers(list);
-        }
-    } else {
+    // Only support setting tabs using setViewControllers.
+    if (!dynamic_cast<QUniUIKitViewControllerPrivate *>(childPrivate))
         QUniUIKitViewController::childEvent(event);
-    }
 }
 
 #include "moc_quniuikittabbarcontroller.cpp"
