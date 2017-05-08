@@ -14,6 +14,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarController : public QUniUIKitView
 {
     Q_OBJECT
     Q_PROPERTY(int selectedIndex READ selectedIndex WRITE setSelectedIndex NOTIFY selectedIndexChanged)
+    Q_PROPERTY(QUniUIKitViewController *selectedViewController READ selectedViewController WRITE setSelectedViewController NOTIFY selectedViewControllerChanged)
 
 public:
     QUniUIKitTabBarController(QUniUIKitBase *parent = nullptr);
@@ -28,8 +29,12 @@ public:
     int selectedIndex() const;
     void setSelectedIndex(int selectedIndex);
 
+    QUniUIKitViewController *selectedViewController() const;
+    void setSelectedViewController(QUniUIKitViewController *viewController);
+
 Q_SIGNALS:
-    void selectedIndexChanged(int selectedIndex);
+    void selectedIndexChanged(int index);
+    void selectedViewControllerChanged(QUniUIKitViewController *viewController);
 
 protected:
     QUniUIKitTabBarController(QUniUIKitTabBarControllerPrivate &dd, QUniUIKitBase *parent = nullptr);

@@ -63,9 +63,17 @@
 - (void)tabBarController:(UITabBarController *)tabBarController
     didSelectViewController:(UIViewController *)viewController
 {
+    Q_UNUSED(tabBarController);
     Q_UNUSED(viewController);
-    _tabBarPrivate->m_selectedIndex = tabBarController.selectedIndex;
-    emit _tabBarPrivate->q_func()->selectedIndexChanged(_tabBarPrivate->m_selectedIndex);
+    QUniUIKitTabBarController *qtabBar = _tabBarPrivate->q_func();
+    _tabBarPrivate->m_requestedSelectedIndex = qtabBar->selectedIndex();
+    if (_tabBarPrivate->m_requestedSelectedViewController) {
+        // Only set m_requestedSelectedViewController if already specified
+        // by the application, since setting it will override m_requestedSelectedIndex.
+        _tabBarPrivate->m_requestedSelectedViewController = qtabBar->selectedViewController();
+    }
+    emit qtabBar->selectedIndexChanged(_tabBarPrivate->m_requestedSelectedIndex);
+    emit qtabBar->selectedViewControllerChanged(_tabBarPrivate->m_requestedSelectedViewController);
 }
 
 @end
@@ -74,7 +82,8 @@ QT_BEGIN_NAMESPACE
 
 QUniUIKitTabBarControllerPrivate::QUniUIKitTabBarControllerPrivate(int version)
     : QUniUIKitViewControllerPrivate(version)
-    , m_selectedIndex(0)
+    , m_requestedSelectedViewController(nullptr)
+    , m_requestedSelectedIndex(0)
 {
 }
 
@@ -112,32 +121,74 @@ QUniUIKitView *QUniUIKitTabBarController::view() const
 
 int QUniUIKitTabBarController::selectedIndex() const
 {
-    return d_func()->m_selectedIndex;
+    return static_cast<UITabBarController *>(d_func()->viewController()).selectedIndex;
 }
 
 void QUniUIKitTabBarController::setSelectedIndex(int newSelectedIndex)
 {
     Q_D(QUniUIKitTabBarController);
-    if (d->m_selectedIndex == newSelectedIndex)
-        return;
-
     // Note that it's fully possible to set an invalid index at this
     // point that later becomes valid after assigning viewControllers.
-    // As such, we need a helper variable (m_selectedIndex).
-    d->m_selectedIndex = newSelectedIndex;
+    // As such, we need a helper variable (m_requestedSelectedIndex).
+    d->m_requestedSelectedIndex = newSelectedIndex;
+    d->m_requestedSelectedViewController = nullptr;
+    if (selectedIndex() == newSelectedIndex)
+        return;
+
     uiTabBarControllerHandle().selectedIndex = newSelectedIndex;
-    emit selectedIndexChanged(newSelectedIndex);
+
+    emit selectedIndexChanged(selectedIndex());
+    emit selectedViewControllerChanged(selectedViewController());
+}
+
+QUniUIKitViewController *QUniUIKitTabBarController::selectedViewController() const
+{
+    UITabBarController *tabBar = static_cast<UITabBarController *>(d_func()->viewController());
+    return static_cast<QUniUIKitViewController *>(qt_getAssociatedQObject(tabBar.selectedViewController));
+}
+
+void QUniUIKitTabBarController::setSelectedViewController(QUniUIKitViewController *newSelectedViewController)
+{
+    Q_D(QUniUIKitTabBarController);
+    // Note that it's fully possible to set an invalid viewcontroller at this
+    // point that later becomes valid after assigning viewControllers.
+    // As such, we need a helper variable (m_requestedSelectedViewController).
+    d->m_requestedSelectedViewController = newSelectedViewController;
+    if (selectedViewController() == newSelectedViewController)
+        return;
+
+    if (!d->m_viewControllers.contains(newSelectedViewController))
+        return;
+
+    uiTabBarControllerHandle().selectedViewController = newSelectedViewController->uiViewControllerHandle();
+
+    emit selectedIndexChanged(selectedIndex());
+    emit selectedViewControllerChanged(selectedViewController());
 }
 
 void QUniUIKitTabBarController::setViewControllers(QList<QUniUIKitViewController *> list)
 {
     Q_D(QUniUIKitTabBarController);
+    int prevSelectedIndex = selectedIndex();
+    QUniUIKitViewController *prevSelectedViewController = selectedViewController();
+
     d->m_viewControllers = list;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:list.length()];
     for (auto viewController : list)
         [array addObject:viewController->uiViewControllerHandle()];
     uiTabBarControllerHandle().viewControllers = array;
-    uiTabBarControllerHandle().selectedIndex = d->m_selectedIndex;
+
+    if (d->m_requestedSelectedViewController) {
+        if (d->m_viewControllers.contains(d->m_requestedSelectedViewController))
+            uiTabBarControllerHandle().selectedViewController = d->m_requestedSelectedViewController->uiViewControllerHandle();
+    } else {
+        uiTabBarControllerHandle().selectedIndex = d->m_requestedSelectedIndex;
+    }
+
+    if (prevSelectedIndex != selectedIndex())
+        emit selectedIndexChanged(selectedIndex());
+    if (prevSelectedViewController != selectedViewController())
+        emit selectedViewControllerChanged(selectedViewController());
 }
 
 QList<QUniUIKitViewController *> QUniUIKitTabBarController::viewControllers() const
@@ -152,8 +203,21 @@ UITabBarController *QUniUIKitTabBarController::uiTabBarControllerHandle()
 
 void QUniUIKitTabBarController::childEvent(QChildEvent *event)
 {
-    QUniUIKitViewController::childEvent(event);
-    uiTabBarControllerHandle().selectedIndex = d_func()->m_selectedIndex;
+    // Note that event->child() might not be fully constructed at this point, if
+    // called from its constructor chain. But the private part will.
+    QObjectPrivate *childPrivate = QObjectPrivate::get(event->child());
+
+    if (QUniUIKitViewControllerPrivate *dptr_child = dynamic_cast<QUniUIKitViewControllerPrivate *>(childPrivate)) {
+        if (event->added()) {
+            setViewControllers(viewControllers() << dptr_child->q_func());
+        } else {
+            auto list = viewControllers();
+            list.removeOne(dptr_child->q_func());
+            setViewControllers(list);
+        }
+    } else {
+        QUniUIKitViewController::childEvent(event);
+    }
 }
 
 #include "moc_quniuikittabbarcontroller.cpp"
