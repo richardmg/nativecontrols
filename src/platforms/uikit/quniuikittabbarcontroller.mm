@@ -99,6 +99,21 @@ UIViewController *QUniUIKitTabBarControllerPrivate::createViewController()
     return tabBarController;
 }
 
+void QUniUIKitTabBarControllerPrivate::appendChild(QQmlListProperty<QObject> *list, QObject *child)
+{
+    QUniUIKitTabBarController *qq = static_cast<QUniUIKitTabBarController *>(list->object);
+    QUniUIKitViewController *vcChild = qobject_cast<QUniUIKitViewController *>(child);
+    if (!vcChild)
+        return;
+
+    qq->setViewControllers(qq->viewControllers() << vcChild);
+}
+
+QQmlListProperty<QObject> QUniUIKitTabBarControllerPrivate::viewControllersAsQmlList()
+{
+    return QQmlListProperty<QObject>(q_func(), 0, appendChild, 0, 0, 0);
+}
+
 QUniUIKitTabBarController::QUniUIKitTabBarController(QUniUIKitBase *parent)
     : QUniUIKitViewController(*new QUniUIKitTabBarControllerPrivate(), parent)
 {
@@ -189,6 +204,7 @@ void QUniUIKitTabBarController::setViewControllers(QList<QUniUIKitViewController
         emit selectedIndexChanged(selectedIndex());
     if (prevSelectedViewController != selectedViewController())
         emit selectedViewControllerChanged(selectedViewController());
+    emit viewControllersChanged(d->m_viewControllers);
 }
 
 QList<QUniUIKitViewController *> QUniUIKitTabBarController::viewControllers() const

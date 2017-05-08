@@ -15,6 +15,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTabBarController : public QUniUIKitView
     Q_OBJECT
     Q_PROPERTY(int selectedIndex READ selectedIndex WRITE setSelectedIndex NOTIFY selectedIndexChanged)
     Q_PROPERTY(QUniUIKitViewController *selectedViewController READ selectedViewController WRITE setSelectedViewController NOTIFY selectedViewControllerChanged)
+    Q_PRIVATE_PROPERTY(QUniUIKitTabBarController::d_func(), QQmlListProperty<QObject> viewControllers READ viewControllersAsQmlList)
 
 public:
     QUniUIKitTabBarController(QUniUIKitBase *parent = nullptr);
@@ -35,6 +36,7 @@ public:
 Q_SIGNALS:
     void selectedIndexChanged(int index);
     void selectedViewControllerChanged(QUniUIKitViewController *viewController);
+    void viewControllersChanged(QList<QUniUIKitViewController *> viewControllers);
 
 protected:
     QUniUIKitTabBarController(QUniUIKitTabBarControllerPrivate &dd, QUniUIKitBase *parent = nullptr);
