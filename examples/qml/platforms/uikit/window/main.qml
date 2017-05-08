@@ -47,11 +47,13 @@ Window {
     visible: true
 
     rootViewController: TabBarController {
+        id: tabBarController
 
         selectedIndex: 2
-        onSelectedIndexChanged: print("index:", selectedIndex)
+        viewControllers: [tab1, tab2, tab3]
 
         ViewController {
+            id: tab1
             tabBarItem: TabBarItem {
                 title: "Tab 1"
             }
@@ -65,13 +67,19 @@ Window {
                         width: intrinsicContentWidth
                         height: intrinsicContentHeight
                         text: "click me to add another tab"
-                        onClicked: tabComponent.createObject(rootViewController);
+                        onClicked: {
+                            var l = tabBarController.viewControllers;
+                            l[1].tabBarItem.title = "Nice"
+
+                            l.push(tabComponent.createObject())
+                        }
                     }
                 }
             }
         }
 
         ViewController {
+            id: tab2
             tabBarItem: TabBarItem {
                 title: "Tab 2"
             }
@@ -94,7 +102,7 @@ Window {
         }
 
         ViewController {
-            id: lastTab
+            id: tab3
             tabBarItem: TabBarItem {
                 title: "Tab 3"
             }
@@ -174,7 +182,15 @@ Window {
                         width: intrinsicContentWidth
                         height: intrinsicContentHeight
                         text: "Click to remove this tab"
-                        onClicked: tab.parent = null
+                        onClicked: {
+                            var vc = tabBarController.viewControllers
+                            var newlist = []
+                            for (var i = 0; i < vc.length; ++i) {
+                                if (vc[i] !== tab)
+                                    newlist.push(vc[i])
+                            }
+                            tabBarController.viewControllers = newlist
+                        }
                         backgroundColor: Qt.rgba(0, 0, 255, 255)
                     }
                 }
