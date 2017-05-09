@@ -1,21 +1,18 @@
 #!/bin/bash
 
-if test "$#" -lt "3"; then
-    echo "Usage: ./create <class name> <base class> <native type to wrap> [target path]"
-    echo "Example: ./create QUniUIKitSlider QUniUIKitControl UISlider"
+if test "$#" -lt "6"; then
+    echo "Usage: ./create <new class name> <new base class> <new native type> <template class name> <template class base> <template native type>"
+    echo "Example: ./create QUniUIKitSlider QUniUIKitControl UISlider QUniUIKitButton QUniUIKitControl UIButton"
     exit -1
 fi
-
-# Class name to substitute in templates
-OLD_CLASS_NAME=QUniUIKitTemplateControl
-OLD_BASE_CLASS=QUniUIKitTemplateBaseControl
-OLD_NATIVE_TYPE=UITemplateControl
 
 # Assign better arg names, and escape control charcters
 NEW_CLASS_NAME=$(echo $1|sed -e 's/[]\/$*.^|[]/\\&/g')
 NEW_BASE_CLASS=$(echo $2|sed -e 's/[\/&]/\\&/g')
 NEW_NATIVE_TYPE=$(echo $3|sed -e 's/[\/&]/\\&/g')
-TARGETPATH=$([[ -n $4 ]] && echo $4 || echo ".")
+OLD_CLASS_NAME=$(echo $4|sed -e 's/[]\/$*.^|[]/\\&/g')
+OLD_BASE_CLASS=$(echo $5|sed -e 's/[\/&]/\\&/g')
+OLD_NATIVE_TYPE=$(echo $6|sed -e 's/[\/&]/\\&/g')
 
 # Create upper-, and lowercase versions
 OLD_CLASS_NAME_UC=$(echo "$OLD_CLASS_NAME" | awk '{print toupper($0)}')
@@ -37,19 +34,20 @@ OLD_NATIVE_TYPE_CC=$(echo "$OLD_NATIVE_TYPE" | awk '{print tolower(substr($0, 0,
 NEW_NATIVE_TYPE_CC=$(echo "$NEW_NATIVE_TYPE" | awk '{print tolower(substr($0, 0, 2)) substr($0, 3)}')
 
 function createFile() {
-   FILENAME_OLD=${OLD_CLASS_NAME_LC}${1}.template
-   FILENAME_NEW=${TARGETPATH}/${NEW_CLASS_NAME_LC}$1
+   FILENAME_OLD=$1
+   FILENAME_NEW=$2
 
    sed s/$OLD_CLASS_NAME/$NEW_CLASS_NAME/g $FILENAME_OLD > $FILENAME_NEW
    sed -i "" s/$OLD_CLASS_NAME_UC/$NEW_CLASS_NAME_UC/g $FILENAME_NEW
    sed -i "" s/$OLD_NATIVE_TYPE/$NEW_NATIVE_TYPE/g $FILENAME_NEW
    sed -i "" s/$OLD_BASE_CLASS/$NEW_BASE_CLASS/g $FILENAME_NEW
+   sed -i "" s/$OLD_CLASS_NAME_LC/$NEW_CLASS_NAME_LC/g $FILENAME_NEW
    sed -i "" s/$OLD_BASE_CLASS_LC/$NEW_BASE_CLASS_LC/g $FILENAME_NEW
    sed -i "" s/$OLD_CLASS_NAME_LC/$NEW_CLASS_NAME_LC/g $FILENAME_NEW
    sed -i "" s/$OLD_NATIVE_TYPE_CC/$NEW_NATIVE_TYPE_CC/g $FILENAME_NEW
 }
 
-createFile ".h"
-createFile "_p.h"
-createFile ".mm"
+createFile "${OLD_CLASS_NAME_LC}.h" "${NEW_CLASS_NAME_LC}.h"
+createFile "${OLD_CLASS_NAME_LC}_p.h" "${NEW_CLASS_NAME_LC}_p.h"
+createFile "${OLD_CLASS_NAME_LC}.mm" "${NEW_CLASS_NAME_LC}.mm"
 
