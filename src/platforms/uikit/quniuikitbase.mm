@@ -59,11 +59,50 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject)
 
 QUniUIKitBasePrivate::QUniUIKitBasePrivate(int version)
     : QUniUIKitQmlBasePrivate(version)
+#ifdef QT_DEBUG
+    , m_createNSObjectRecursionGuard(false)
+#endif
 {
 }
 
 QUniUIKitBasePrivate::~QUniUIKitBasePrivate()
 {
+    [m_nsObject release];
+}
+
+NSObject *QUniUIKitBasePrivate::nsObject()
+{
+    if (!m_nsObject) {
+#ifdef QT_DEBUG
+        // Check that we don't end up calling nsObject() from createNSObject(). This can
+        // easily happen if we e.g create several UIViews inside createNSObject, and
+        // construct parent-child relationships. The solution is to call setNSObject
+        // early on from within createNSObject, before creating child views.
+        Q_ASSERT(!m_createNSObjectRecursionGuard);
+        m_createNSObjectRecursionGuard = true;
+#endif
+        // The common case should be that we enter this block to lazy create the UIView
+        // we wrap when someone actually needs it (which is usually when properties
+        // are assigned values, or another QUniUIKitView is set as child). But for
+        // subclasses that adopts an already existing NSObject, e.g to wrap read-only
+        // UIView properties in other UIViews (like UITableViewCell.label), calling
+        // setNSObject early on is necessary.
+        createNSObject();
+        Q_ASSERT(m_nsObject);
+    }
+    return m_nsObject;
+}
+
+NSObject *QUniUIKitBasePrivate::nsObject() const
+{
+    return const_cast<QUniUIKitBasePrivate *>(this)->nsObject();
+}
+
+void QUniUIKitBasePrivate::setNSObject(NSObject *nsObject)
+{
+    Q_ASSERT_X(!m_nsObject, Q_FUNC_INFO, "setNSObject should only be called once");
+    m_nsObject = [nsObject retain];
+    qt_setAssociatedQObject(m_nsObject, q_func());
 }
 
 QUniUIKitBase::QUniUIKitBase(QUniUIKitBase *parent)

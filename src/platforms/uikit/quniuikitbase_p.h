@@ -65,7 +65,21 @@ public:
     explicit QUniUIKitBasePrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitBasePrivate();
 
+    NSObject *nsObject();
+    NSObject *nsObject() const;
+    bool isNSObjectCreated() { return bool(m_nsObject); }
+
     Q_DECLARE_PUBLIC(QUniUIKitBase)
+
+protected:
+    virtual void createNSObject() { /* should be pure virtual */ }
+    virtual void setNSObject(NSObject *nsObject);
+
+private:
+    NSObject *m_nsObject;
+#ifdef QT_DEBUG
+    bool m_createNSObjectRecursionGuard;
+#endif
 };
 
 void qt_setAssociatedQObject(NSObject *nsObject, QObject *qObject);
