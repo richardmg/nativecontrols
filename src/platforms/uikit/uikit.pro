@@ -16,6 +16,7 @@ IOS_CONTROLS = \
     control \
     button \
     textfield \
+    textfielddelegate \
     searchfield \
     label \
     slider \

@@ -34,52 +34,49 @@
 **
 ****************************************************************************/
 
-#ifndef QUNIUIKITTEXTFIELD_H
-#define QUNIUIKITTEXTFIELD_H
+#ifndef QUNIUIKITTEXTFIELDDELEGATE_P_H
+#define QUNIUIKITTEXTFIELDDELEGATE_P_H
 
-#include <QtUniUIKitControls/quniuikitcontrol.h>
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+#include <QtCore>
+#include <QtCore/private/qobject_p.h>
+#include <QtQml/qjsvalue.h>
+
+#include <QtUniUIKitControls/quniuikittextfielddelegate.h>
+#include <QtUniUIKitControls/private/quniuikitbase_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QUniUIKitTextFieldPrivate;
-class QUniUIKitTextFieldDelegate;
-Q_FORWARD_DECLARE_OBJC_CLASS(UITextField);
+Q_FORWARD_DECLARE_OBJC_CLASS(QUniUITextFieldDelegateDelegate);
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTextField : public QUniUIKitControl
+class QUniUIKitTextFieldDelegatePrivate : public QUniUIKitBasePrivate
 {
-    Q_OBJECT
-    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
-    Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
-    Q_PROPERTY(QUniUIKitTextFieldDelegate *delegate READ delegate WRITE setDelegate NOTIFY delegateChanged)
-
 public:
-    QUniUIKitTextField(QUniUIKitBase *parent = nullptr);
-    QUniUIKitTextField(const QString &text, QUniUIKitBase *parent = nullptr);
-    virtual ~QUniUIKitTextField();
+    explicit QUniUIKitTextFieldDelegatePrivate(int version = QObjectPrivateVersion);
+    virtual ~QUniUIKitTextFieldDelegatePrivate();
 
-    UITextField *uiTextFieldHandle();
+    QJSValue m_textFieldShouldBeginEditing;
+    QJSValue m_textFieldDidBeginEditing;
+    QJSValue m_textFieldShouldEndEditing;
+    QJSValue m_textFieldDidEndEditing;
+    QJSValue m_textFieldShouldClear;
+    QJSValue m_textFieldShouldReturn;
 
-    QString text();
-    void setText(const QString &text);
+    id<UITextFieldDelegate> m_delegate;
 
-    QString placeholderText();
-    void setPlaceholderText(const QString &placeholderText);
-
-    QUniUIKitTextFieldDelegate *delegate() const;
-    void setDelegate(QUniUIKitTextFieldDelegate *delegate);
-
-Q_SIGNALS:
-    void textChanged(const QString &text);
-    void placeholderTextChanged(const QString &placeholderText);
-    void delegateChanged(QUniUIKitTextFieldDelegate *delegate);
-
-protected:
-    QUniUIKitTextField(QUniUIKitTextFieldPrivate &dd, QUniUIKitBase *parent = nullptr);
-
-private:
-    Q_DECLARE_PRIVATE(QUniUIKitTextField)
-    Q_DISABLE_COPY(QUniUIKitTextField)
+    Q_DECLARE_PUBLIC(QUniUIKitTextFieldDelegate)
 };
 
 QT_END_NAMESPACE
-#endif // QUNIUIKITTEXTFIELD_H
+
+#endif // QUNIUIKITTEXTFIELDDELEGATE_P_H

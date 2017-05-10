@@ -57,7 +57,7 @@ QT_BEGIN_NAMESPACE
 
 class QUniTextField;
 class QUniUIKitTextField;
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitTextFieldDelegate);
+class QUniUIKitTextFieldDelegate;
 
 class QUniUIKitTextFieldPrivate : public QUniUIKitControlPrivate
 {

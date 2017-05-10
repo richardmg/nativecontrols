@@ -40,25 +40,7 @@
 
 #include <QtUniUIKitControls/quniuikittextfield.h>
 #include <QtUniUIKitControls/private/quniuikittextfield_p.h>
-
-@interface QUniUIKitTextFieldDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QUniUIKitTextFieldPrivate) *_textField;
-}
-@end
-
-@implementation QUniUIKitTextFieldDelegate
-
--(id)initWithQUniUIKitTextFieldPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTextFieldPrivate) *)textField
-{
-    self = [self init];
-    if (self) {
-        _textField = textField;
-    }
-
-    return self;
-}
-
-@end
+#include <QtUniUIKitControls/quniuikittextfielddelegate.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -70,14 +52,12 @@ QUniUIKitTextFieldPrivate::QUniUIKitTextFieldPrivate(int version)
 
 QUniUIKitTextFieldPrivate::~QUniUIKitTextFieldPrivate()
 {
-    [m_delegate release];
 }
 
 void QUniUIKitTextFieldPrivate::createView()
 {
     UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
     [uiTextField sizeToFit];
-    m_delegate = [[QUniUIKitTextFieldDelegate alloc] initWithQUniUIKitTextFieldPrivate:this];
     setView(uiTextField);
 }
 
@@ -136,6 +116,22 @@ void QUniUIKitTextField::setPlaceholderText(const QString &newPlaceholderText)
     d_func()->updateIntrinsicContentSize();
 
     emit placeholderTextChanged(newPlaceholderText);
+}
+
+QUniUIKitTextFieldDelegate *QUniUIKitTextField::delegate() const
+{
+    return d_func()->m_delegate;
+}
+
+void QUniUIKitTextField::setDelegate(QUniUIKitTextFieldDelegate *delegate)
+{
+    Q_D(QUniUIKitTextField);
+    if (d->m_delegate == delegate)
+        return;
+
+    d->m_delegate = delegate;
+    uiTextFieldHandle().delegate = static_cast<id<UITextFieldDelegate>>(delegate->uiTextFieldDelegateHandle());
+    emit delegateChanged(delegate);
 }
 
 #include "moc_quniuikittextfield.cpp"
