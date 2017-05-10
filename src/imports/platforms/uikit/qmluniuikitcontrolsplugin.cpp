@@ -56,6 +56,7 @@ QmlUniUIKitControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(paren
 
 void registerTypes(const char *uri) override
 {
+    qmlRegisterType<QUniUIKitResponder>();
     qmlRegisterType<QUniUIKitControl>();
     qmlRegisterType<QUniUIKitWindow>(uri, 1, 0, "Window");
     qmlRegisterType<QUniUIKitView>(uri, 1, 0, "View");
