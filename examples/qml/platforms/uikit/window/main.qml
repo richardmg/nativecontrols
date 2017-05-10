@@ -63,15 +63,23 @@ Window {
                     width: parent.width
                     height: parent.height
                     Button {
-                        objectName: "myButton"
+                        id: addTabButton
+                        text: "Add another tab"
                         width: intrinsicContentWidth
                         height: intrinsicContentHeight
-                        text: "click me to add another tab"
-                        onClicked: {
-                            var l = tabBarController.viewControllers;
-                            l[1].tabBarItem.title = "Nice"
-
-                            l.push(tabComponent.createObject())
+                        onClicked: tabBarController.viewControllers.push(tabComponent.createObject())
+                    }
+                    TextField {
+                        id: tabLabel
+                        width: intrinsicContentWidth
+                        height: intrinsicContentHeight
+                        y: addTabButton.bottom + 10
+                        text: "Tab 1"
+                        delegate: TextFieldDelegate {
+                            textFieldShouldReturn: function() {
+                                tab1.tabBarItem.title = tabLabel.text
+                                return true
+                            }
                         }
                     }
                 }
