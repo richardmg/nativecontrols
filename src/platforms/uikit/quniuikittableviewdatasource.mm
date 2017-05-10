@@ -77,7 +77,7 @@
     if (!qtableView)
         return 0;
 
-    QJSValue jsFunction = _dataSourcePrivate->m_numberOfRowsInSection;
+    QJSValue jsFunction = _dataSourcePrivate->m_numberOfSectionsInTableView;
     if (jsFunction.isUndefined())
         return 0;
 
