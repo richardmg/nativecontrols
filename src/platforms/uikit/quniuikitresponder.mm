@@ -34,87 +34,55 @@
 **
 ****************************************************************************/
 
-#ifndef QNATIVUIKITVIEW_P_H
-#define QNATIVUIKITVIEW_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
+#include <UIKit/UIKit.h>
 
 #include <QtCore>
 
+#include <QtUniUIKitControls/quniuikitresponder.h>
 #include <QtUniUIKitControls/private/quniuikitresponder_p.h>
 
 QT_BEGIN_NAMESPACE
 
-Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitViewDelegate);
-
-class QUniUIKitViewPrivate : public QUniUIKitResponderPrivate
+QUniUIKitResponderPrivate::QUniUIKitResponderPrivate(int version)
+    : QUniUIKitBasePrivate(version)
 {
-public:
-    explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
-    virtual ~QUniUIKitViewPrivate();
+}
 
-    UIView *view();
-    UIView *view() const;
-    void setView(UIView *view);
-    bool isViewCreated() { return bool(m_view); }
-    void addSubView(UIView *subView);
+QUniUIKitResponderPrivate::~QUniUIKitResponderPrivate()
+{
+}
 
-    CGRect alignmentRect() const;
-    void setAlignmentRect(CGRect rect);
-    void setGeometry(const QRectF &rect);
+QUniUIKitResponder::QUniUIKitResponder(QUniUIKitBase *parent)
+    : QUniUIKitBase(*new QUniUIKitResponderPrivate(), parent)
+{
+}
 
-    void emitFrameChanged();
+QUniUIKitResponder::QUniUIKitResponder(QUniUIKitResponderPrivate &dd, QUniUIKitBase *parent)
+    : QUniUIKitBase(dd, parent)
+{
+}
 
-    void initConnections();
-    void updateIntrinsicContentSize();
+QUniUIKitResponder::~QUniUIKitResponder()
+{
+}
 
-    Q_DECLARE_PUBLIC(QUniUIKitView)
+bool QUniUIKitResponder::firstResponder() const
+{
+    return false;//m_firstResponder;
+}
 
-protected:
-    // Attributes to keep track of explicit
-    // application assignments
-    enum Attribute {
-        MovedX			= 0x00000002,
-        MovedY			= 0x00000004,
-        ResizedWidth	= 0x00000008,
-        ResizedHeight	= 0x00000010,
-    };
+bool QUniUIKitResponder::setFirstResponder(bool firstResponder)
+{
+    Q_UNUSED(firstResponder)
+//    if (m_firstResponder == firstResponder)
+//        return;
 
-    uint m_attributes;
+//    //m_firstResponder = firstResponder;
+//    emit firstResponderChanged(firstResponder);
 
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
+    return true;
+}
 
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
-
-    virtual void createView();
-
-private:
-    UIView *m_view;
-    QSizeF m_intrinsicContentSize;
-    QRectF m_lastEmittedFrame;
-    QUniUIKitViewDelegate *m_delegate;
-
-#ifdef QT_DEBUG
-    bool m_createViewRecursionGuard;
-#endif
-};
+#include "moc_quniuikitresponder.cpp"
 
 QT_END_NAMESPACE
-
-#endif //QNATIVUIKITVIEW_P_H

@@ -39,13 +39,13 @@
 
 #include <QObject>
 
-#include <QtUniUIKitControls/quniuikitbase.h>
+#include <QtUniUIKitControls/quniuikitresponder.h>
 
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitViewPrivate;
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitBase
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitResponder
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)

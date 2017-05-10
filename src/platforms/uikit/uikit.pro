@@ -11,6 +11,7 @@ LIBS += -framework CoreGraphics -framework Foundation -framework UIKit
 IOS_CONTROLS = \
     qmlbase \
     base \
+    responder \
     window \
     view \
     control \

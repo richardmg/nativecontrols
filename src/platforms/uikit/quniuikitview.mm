@@ -83,7 +83,7 @@ static void *KVOFrameChanged = &KVOFrameChanged;
 QT_BEGIN_NAMESPACE
 
 QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
-    : QUniUIKitBasePrivate(version)
+    : QUniUIKitResponderPrivate(version)
     , m_attributes(0)
     , m_view(nil)
     , m_delegate(nullptr)
@@ -259,13 +259,13 @@ void QUniUIKitViewPrivate::setGeometry(const QRectF &rect)
 }
 
 QUniUIKitView::QUniUIKitView(QUniUIKitBase *parent)
-    : QUniUIKitBase(*new QUniUIKitViewPrivate(), parent)
+    : QUniUIKitResponder(*new QUniUIKitResponderPrivate(), parent)
 {
     d_func()->initConnections();
 }
 
 QUniUIKitView::QUniUIKitView(QUniUIKitViewPrivate &dd, QUniUIKitBase *parent)
-    : QUniUIKitBase(dd, parent)
+    : QUniUIKitResponder(dd, parent)
 {
     d_func()->initConnections();
 }
