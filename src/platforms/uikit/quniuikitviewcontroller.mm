@@ -82,13 +82,10 @@ void QUniUIKitViewControllerPrivate::createNSObject()
     UIViewController *vc = [[UIViewController new] autorelease];
     setNSObject(vc);
 
-    if (!m_view) {
-        // UIKit might try to access a viewcontrollers view behind our back, so
-        // ensure we create one before that happens.
-        m_view = new QUniUIKitView(q_func());
-    }
-
-    vc.view = m_view->uiViewHandle();
+    if (m_view)
+        vc.view = m_view->uiViewHandle();
+    else
+        m_view = new QUniUIKitView(viewController().view, q_func());
 }
 
 void QUniUIKitViewControllerPrivate::addChildViewController(UIViewController *child)
