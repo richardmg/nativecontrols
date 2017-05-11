@@ -70,7 +70,7 @@ public:
     Q_DECLARE_PUBLIC(QUniUIKitLabel)
 
 protected:
-    void createView() override;
+    void createNSObject() override;
 
 };
 

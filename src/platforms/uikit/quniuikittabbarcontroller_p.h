@@ -70,7 +70,7 @@ public:
     Q_DECLARE_PUBLIC(QUniUIKitTabBarController)
 
 protected:
-    virtual UIViewController *createViewController();
+    virtual void createNSObject() override;
 
     static void appendChild(QQmlListProperty<QUniUIKitViewController> *list, QUniUIKitViewController *obj);
     static int count(QQmlListProperty<QUniUIKitViewController> *);

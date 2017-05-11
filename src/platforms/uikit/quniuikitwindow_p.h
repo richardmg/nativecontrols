@@ -69,7 +69,7 @@ public:
     Q_DECLARE_PUBLIC(QUniUIKitWindow)
 
 protected:
-    void createView() override;
+    void createNSObject() override;
 
 private:
     QUniUIKitViewController *m_viewController;

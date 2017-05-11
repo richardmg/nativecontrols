@@ -70,7 +70,7 @@ public:
     Q_DECLARE_PUBLIC(QUniUIKitTextField)
 
 protected:
-    void createView() override;
+    void createNSObject() override;
 
 };
 

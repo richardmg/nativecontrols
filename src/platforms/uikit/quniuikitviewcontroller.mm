@@ -50,14 +50,12 @@ QT_BEGIN_NAMESPACE
 QUniUIKitViewControllerPrivate::QUniUIKitViewControllerPrivate(int version)
     : QUniUIKitBasePrivate(version)
     , m_tabBarItem(nullptr)
-    , m_viewController(nullptr)
     , m_view(nullptr)
 {
 }
 
 QUniUIKitViewControllerPrivate::~QUniUIKitViewControllerPrivate()
 {
-    [m_viewController release];
 }
 
 QUniUIKitViewController::QUniUIKitViewController(QUniUIKitBase *parent)
@@ -74,28 +72,23 @@ QUniUIKitViewController::~QUniUIKitViewController()
 {
 }
 
-UIViewController *QUniUIKitViewControllerPrivate::viewController()
-{
-    if (!m_viewController) {
-        m_viewController = createViewController();
-        Q_ASSERT(m_viewController);
-        qt_setAssociatedQObject(m_viewController, q_func());
-    }
-    return m_viewController;
-}
-
 UIViewController *QUniUIKitViewControllerPrivate::viewController() const
 {
-    return const_cast<QUniUIKitViewControllerPrivate *>(this)->viewController();
+    return static_cast<UIViewController *>(nsObject());
 }
 
-UIViewController *QUniUIKitViewControllerPrivate::createViewController()
+void QUniUIKitViewControllerPrivate::createNSObject()
 {
-    m_viewController = [UIViewController new];
-    if (!m_view)
+    UIViewController *vc = [[UIViewController new] autorelease];
+    setNSObject(vc);
+
+    if (!m_view) {
+        // UIKit might try to access a viewcontrollers view behind our back, so
+        // ensure we create one before that happens.
         m_view = new QUniUIKitView(q_func());
-    m_viewController.view = m_view->uiViewHandle();
-    return m_viewController;
+    }
+
+    vc.view = m_view->uiViewHandle();
 }
 
 void QUniUIKitViewControllerPrivate::addChildViewController(UIViewController *child)
@@ -180,7 +173,7 @@ void QUniUIKitViewController::childEvent(QChildEvent *event)
         if (event->added())
             d->addChildViewController(dptr_child->q_func()->uiViewControllerHandle());
         else
-            [dptr_child->m_viewController removeFromParentViewController];
+            [dptr_child->viewController() removeFromParentViewController];
     }
 }
 

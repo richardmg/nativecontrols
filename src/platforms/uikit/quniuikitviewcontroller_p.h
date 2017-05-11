@@ -67,17 +67,16 @@ public:
 
     Q_DECLARE_PUBLIC(QUniUIKitViewController)
 
-    UIViewController *viewController();
     UIViewController *viewController() const;
     void addChildViewController(UIViewController *child);
     void addSubViewToContentView(UIView *uiView);
 
     QUniUIKitTabBarItem *m_tabBarItem;
+
 protected:
-    virtual UIViewController *createViewController();
+    virtual void createNSObject() override;
 
 private:
-    UIViewController *m_viewController;
     QUniUIKitView *m_view;
 };
 

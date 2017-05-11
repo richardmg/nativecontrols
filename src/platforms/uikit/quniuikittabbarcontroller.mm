@@ -92,11 +92,12 @@ QUniUIKitTabBarControllerPrivate::~QUniUIKitTabBarControllerPrivate()
     [static_cast<UITabBarController *>(viewController()).delegate release];
 }
 
-UIViewController *QUniUIKitTabBarControllerPrivate::createViewController()
+void QUniUIKitTabBarControllerPrivate::createNSObject()
 {
-    UITabBarController *tabBarController = [UITabBarController new];
+    UITabBarController *tabBarController = [[UITabBarController new] autorelease];
+    setNSObject(tabBarController);
+
     tabBarController.delegate = [[QUniUIKitTabBarControllerDelegate alloc] initWithQUniUIKitTabBarControllerPrivate:this];
-    return tabBarController;
 }
 
 void QUniUIKitTabBarControllerPrivate::appendChild(QQmlListProperty<QUniUIKitViewController> *list, QUniUIKitViewController *child)

@@ -53,11 +53,11 @@ QUniUIKitLabelPrivate::~QUniUIKitLabelPrivate()
     [m_delegate release];
 }
 
-void QUniUIKitLabelPrivate::createView()
+void QUniUIKitLabelPrivate::createNSObject()
 {
     UILabel *uiLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
     [uiLabel sizeToFit];
-    setView(uiLabel);
+    setNSObject(uiLabel);
 }
 
 UILabel *QUniUIKitLabelPrivate::uiLabel() const
@@ -73,7 +73,7 @@ QUniUIKitLabel::QUniUIKitLabel(QUniUIKitBase *parent)
 QUniUIKitLabel::QUniUIKitLabel(UILabel *label, QUniUIKitBase *parent)
     : QUniUIKitView(*new QUniUIKitLabelPrivate(), parent)
 {
-    d_func()->setView(label);
+    d_func()->setNSObject(label);
 }
 
 QUniUIKitLabel::QUniUIKitLabel(QUniUIKitLabelPrivate &dd, QUniUIKitBase *parent)

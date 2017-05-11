@@ -78,7 +78,7 @@ QUniUIKitButtonPrivate::~QUniUIKitButtonPrivate()
     [m_delegate release];
 }
 
-void QUniUIKitButtonPrivate::createView()
+void QUniUIKitButtonPrivate::createNSObject()
 {
     UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
@@ -87,7 +87,7 @@ void QUniUIKitButtonPrivate::createView()
     m_delegate = [[QUniUIKitButtonDelegate alloc] initWithQUniUIKitButtonPrivate:this];
     [uiButton addTarget:m_delegate action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
     [uiButton autorelease];
-    setView(uiButton);
+    setNSObject(uiButton);
 }
 
 UIButton *QUniUIKitButtonPrivate::uiButton() const

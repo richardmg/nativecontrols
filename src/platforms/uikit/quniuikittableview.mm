@@ -55,11 +55,11 @@ QUniUIKitTableViewPrivate::~QUniUIKitTableViewPrivate()
 {
 }
 
-void QUniUIKitTableViewPrivate::createView()
+void QUniUIKitTableViewPrivate::createNSObject()
 {
     UITableView *uiTableView = [[[UITableView alloc] initWithFrame:CGRectZero] autorelease];
     [uiTableView sizeToFit];
-    setView(uiTableView);
+    setNSObject(uiTableView);
 }
 
 UITableView *QUniUIKitTableViewPrivate::uiTableView() const

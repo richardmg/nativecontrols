@@ -63,10 +63,7 @@ public:
     explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitViewPrivate();
 
-    UIView *view();
     UIView *view() const;
-    void setView(UIView *view);
-    bool isViewCreated() { return bool(m_view); }
     void addSubView(UIView *subView);
 
     CGRect alignmentRect() const;
@@ -102,17 +99,14 @@ protected:
         return bool(m_attributes & attribute);
     }
 
-    virtual void createView();
+protected:
+    virtual void createNSObject() override;
+    virtual void setNSObject(NSObject *nsObject) override;
 
 private:
-    UIView *m_view;
     QSizeF m_intrinsicContentSize;
     QRectF m_lastEmittedFrame;
     QUniUIKitViewDelegate *m_delegate;
-
-#ifdef QT_DEBUG
-    bool m_createViewRecursionGuard;
-#endif
 };
 
 QT_END_NAMESPACE

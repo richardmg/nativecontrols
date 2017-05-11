@@ -80,11 +80,11 @@ QUniUIKitTableViewCellPrivate::~QUniUIKitTableViewCellPrivate()
 {
 }
 
-void QUniUIKitTableViewCellPrivate::createView()
+void QUniUIKitTableViewCellPrivate::createNSObject()
 {
     QUniUITableViewCell *uiCell = [[QUniUITableViewCell alloc] initWithQUniUIKitTableViewCellPrivate:this];
     [uiCell autorelease];
-    setView(uiCell);
+    setNSObject(uiCell);
 }
 
 QUniUITableViewCell *QUniUIKitTableViewCellPrivate::uiTableViewCell() const
@@ -148,7 +148,7 @@ void QUniUIKitTableViewCell::setReuseIdentifier(const QString &newReuseIdentifie
         return;
 
     Q_D(QUniUIKitTableViewCell);
-    if (d->isViewCreated()) {
+    if (d->isNSObjectCreated()) {
         qWarning("TableViewCell: reuseIdentifer cannot change once the backing UITableViewCell has been created!");
         return;
     }
@@ -167,7 +167,7 @@ void QUniUIKitTableViewCell::setCellStyle(QUniUIKitTableViewCell::CellStyle cell
     if (d->m_cellStyle == cellStyle)
         return;
 
-    if (d->isViewCreated()) {
+    if (d->isNSObjectCreated()) {
         qWarning("TableViewCell: cellStyle cannot change once the backing UITableViewCell has been created!");
         return;
     }

@@ -65,14 +65,13 @@ public:
     explicit QUniUIKitBasePrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitBasePrivate();
 
-    NSObject *nsObject();
     NSObject *nsObject() const;
     bool isNSObjectCreated() { return bool(m_nsObject); }
 
     Q_DECLARE_PUBLIC(QUniUIKitBase)
 
 protected:
-    virtual void createNSObject() { /* should be pure virtual */ }
+    virtual void createNSObject() {}
     virtual void setNSObject(NSObject *nsObject);
 
 private:

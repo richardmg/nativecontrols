@@ -73,11 +73,11 @@ QUniUIKitSearchFieldPrivate::~QUniUIKitSearchFieldPrivate()
     [m_delegate release];
 }
 
-void QUniUIKitSearchFieldPrivate::createView()
+void QUniUIKitSearchFieldPrivate::createNSObject()
 {
     UISearchBar *uiSearchField = [[[UISearchBar alloc] init] autorelease];
     [uiSearchField sizeToFit];
-    setView(uiSearchField);
+    setNSObject(uiSearchField);
 
     m_delegate = [[QUniUIKitSearchFieldDelegate alloc] initWithQUniUIKitSearchFieldPrivate:this];
 }

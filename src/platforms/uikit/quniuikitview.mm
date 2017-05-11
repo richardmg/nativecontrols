@@ -85,31 +85,29 @@ QT_BEGIN_NAMESPACE
 QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     : QUniUIKitResponderPrivate(version)
     , m_attributes(0)
-    , m_view(nil)
     , m_delegate(nullptr)
-#ifdef QT_DEBUG
-    , m_createViewRecursionGuard(false)
-#endif
 {
 }
 
 QUniUIKitViewPrivate::~QUniUIKitViewPrivate()
 {
-    if (m_view) {
+    if (isNSObjectCreated()) {
         @try {
-            [m_view removeObserver:m_delegate forKeyPath:@"frame" context:NULL];
+            [view() removeObserver:m_delegate forKeyPath:@"frame" context:NULL];
         } @catch (NSException *) {
             // Work-around: if that app starts, but ends, before the app 'didFinishLaunching'
             // (which happens when running auto tests), we get a NSRangeException telling us that
             // we never "registered as an observer". Which is wrong, and we therefore ignore.
         }
 
+        [m_delegate release];
+
+        // Because KVO removeObserver above is not executed by UIKit straight away, we
+        // get an 'NSInternalInconsistencyException' if we release the view directly
+        // after. So, work around this for now by postponing the release.
+        UIView *blockView = [view() retain];
         dispatch_async(dispatch_get_main_queue (), ^{
-            // Because KVO removeObserver above is not executed by UIKit straight away, we
-            // get an 'NSInternalInconsistencyException' if we release m_view directly
-            // after. So, work around this for now by postponing the release.
-            [m_view release];
-            [m_delegate release];
+            [blockView release];
         });
     }
 }
@@ -164,42 +162,18 @@ void QUniUIKitViewPrivate::updateIntrinsicContentSize()
     }
 }
 
-UIView *QUniUIKitViewPrivate::view()
-{
-    if (!m_view) {
-#ifdef QT_DEBUG
-        // Check that we don't end up calling view() from createView(). This can
-        // easily happen if we e.g create several views inside createView, and
-        // construct parent-child relationships. The solution is to call setView
-        // early on from within createView() before creating child views.
-        Q_ASSERT(!m_createViewRecursionGuard);
-        m_createViewRecursionGuard = true;
-#endif
-        // The common case should be that we enter this block to lazy create the UIView
-        // we wrap when someone actually needs it (which is usually when properties
-        // are assigned values, or another QUniUIKitView is set as child). But for
-        // subclasses that adopts an already existing UIView, e.g to wrap read-only
-        // UIView properties in other UIViews (like UITableViewCell.label), calling
-        // setView early on is necessary.
-        createView();
-        Q_ASSERT(m_view);
-    }
-    return m_view;
-}
-
 UIView *QUniUIKitViewPrivate::view() const
 {
-    return const_cast<QUniUIKitViewPrivate *>(this)->view();
+    return static_cast<UIView *>(nsObject());
 }
 
-void QUniUIKitViewPrivate::setView(UIView *view)
+void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
 {
-    Q_ASSERT_X(!m_view, Q_FUNC_INFO, "setView should only be called once");
-    m_view = [view retain];
+    QUniUIKitBasePrivate::setNSObject(nsObject);
 
     if (QUniUIKitView *qparentView = q_func()->parentView()) {
         // Let the UIView hierarchy mirror the QUniUIKitView hierarchy
-        qparentView->d_func()->addSubView(m_view);
+        qparentView->d_func()->addSubView(view());
     }
 
     // UIKit will sometimes change the frame of a view on it's own.
@@ -210,16 +184,15 @@ void QUniUIKitViewPrivate::setView(UIView *view)
     // override methods like "updateSubviews", we choose to use the
     // infamous KVO pattern to catch the frame changes for now, so that
     // we always emit signals when the frame changes.
-    qt_setAssociatedQObject(m_view, q_func());
     m_delegate = [[QUniUIKitViewDelegate alloc] initWithQUniUIKitViewPrivate:this];
-    [m_view addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
+    [view() addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
 }
 
-void QUniUIKitViewPrivate::createView()
+void QUniUIKitViewPrivate::createNSObject()
 {
     UIView *view = [[QPlainUIKitView new] autorelease];
     view.backgroundColor = [UIColor whiteColor];
-    setView(view);
+    setNSObject(view);
 }
 
 void QUniUIKitViewPrivate::addSubView(UIView *subView)
@@ -259,7 +232,7 @@ void QUniUIKitViewPrivate::setGeometry(const QRectF &rect)
 }
 
 QUniUIKitView::QUniUIKitView(QUniUIKitBase *parent)
-    : QUniUIKitResponder(*new QUniUIKitResponderPrivate(), parent)
+    : QUniUIKitResponder(*new QUniUIKitViewPrivate(), parent)
 {
     d_func()->initConnections();
 }
@@ -533,7 +506,7 @@ void QUniUIKitView::childEvent(QChildEvent *event)
     if (!dptr_child)
         return;
 
-    if (!dptr_child->isViewCreated()) {
+    if (!dptr_child->isNSObjectCreated()) {
         // Delay setting up the parent-child relationship on the UIViews as long as possible.
         // This is especially important to support dynamic object creation from QML like
         // 'uiTableViewCellComponent.createObject(tableView, { reuseIdentifier: id });', where

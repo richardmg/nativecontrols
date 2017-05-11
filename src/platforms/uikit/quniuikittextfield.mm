@@ -54,11 +54,11 @@ QUniUIKitTextFieldPrivate::~QUniUIKitTextFieldPrivate()
 {
 }
 
-void QUniUIKitTextFieldPrivate::createView()
+void QUniUIKitTextFieldPrivate::createNSObject()
 {
     UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
     [uiTextField sizeToFit];
-    setView(uiTextField);
+    setNSObject(uiTextField);
 }
 
 QUniUIKitTextField::QUniUIKitTextField(QUniUIKitBase *parent)

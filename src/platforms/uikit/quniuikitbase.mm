@@ -59,6 +59,7 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject)
 
 QUniUIKitBasePrivate::QUniUIKitBasePrivate(int version)
     : QUniUIKitQmlBasePrivate(version)
+    , m_nsObject(nullptr)
 #ifdef QT_DEBUG
     , m_createNSObjectRecursionGuard(false)
 #endif
@@ -70,32 +71,28 @@ QUniUIKitBasePrivate::~QUniUIKitBasePrivate()
     [m_nsObject release];
 }
 
-NSObject *QUniUIKitBasePrivate::nsObject()
+NSObject *QUniUIKitBasePrivate::nsObject() const
 {
     if (!m_nsObject) {
+        QUniUIKitBasePrivate *self = const_cast<QUniUIKitBasePrivate *>(this);
 #ifdef QT_DEBUG
         // Check that we don't end up calling nsObject() from createNSObject(). This can
         // easily happen if we e.g create several UIViews inside createNSObject, and
         // construct parent-child relationships. The solution is to call setNSObject
         // early on from within createNSObject, before creating child views.
         Q_ASSERT(!m_createNSObjectRecursionGuard);
-        m_createNSObjectRecursionGuard = true;
+        self->m_createNSObjectRecursionGuard = true;
 #endif
-        // The common case should be that we enter this block to lazy create the UIView
+        // The common case should be that we enter this block to lazy create the NSObject
         // we wrap when someone actually needs it (which is usually when properties
-        // are assigned values, or another QUniUIKitView is set as child). But for
-        // subclasses that adopts an already existing NSObject, e.g to wrap read-only
+        // are assigned values, or the object becomes a parent of some other object).
+        // But for subclasses that adopts an already existing NSObject, e.g to wrap read-only
         // UIView properties in other UIViews (like UITableViewCell.label), calling
-        // setNSObject early on is necessary.
-        createNSObject();
+        // setNSObject explicit during construction might be necessary.
+        self->createNSObject();
         Q_ASSERT(m_nsObject);
     }
     return m_nsObject;
-}
-
-NSObject *QUniUIKitBasePrivate::nsObject() const
-{
-    return const_cast<QUniUIKitBasePrivate *>(this)->nsObject();
 }
 
 void QUniUIKitBasePrivate::setNSObject(NSObject *nsObject)
