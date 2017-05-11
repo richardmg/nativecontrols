@@ -52,6 +52,11 @@ QUniUIKitResponderPrivate::~QUniUIKitResponderPrivate()
 {
 }
 
+UIResponder *QUniUIKitResponderPrivate::responder() const
+{
+   return static_cast<UIResponder *>(nsObject());
+}
+
 QUniUIKitResponder::QUniUIKitResponder(QUniUIKitBase *parent)
     : QUniUIKitBase(*new QUniUIKitResponderPrivate(), parent)
 {
@@ -66,21 +71,39 @@ QUniUIKitResponder::~QUniUIKitResponder()
 {
 }
 
-bool QUniUIKitResponder::firstResponder() const
+UIResponder *QUniUIKitResponder::uiResponder()
 {
-    return false;//m_firstResponder;
+   return static_cast<UIResponder *>(d_func()->nsObject());
 }
 
-bool QUniUIKitResponder::setFirstResponder(bool firstResponder)
+bool QUniUIKitResponder::firstResponder()
 {
-    Q_UNUSED(firstResponder)
-//    if (m_firstResponder == firstResponder)
-//        return;
+    return [d_func()->responder() isFirstResponder];
+}
 
-//    //m_firstResponder = firstResponder;
-//    emit firstResponderChanged(firstResponder);
+bool QUniUIKitResponder::setFirstResponder(bool set)
+{
+    if (firstResponder() == set)
+        return true;
 
-    return true;
+    bool success = set ?
+        [uiResponder() becomeFirstResponder] :
+        [uiResponder() resignFirstResponder];
+
+    if (success)
+        emit firstResponderChanged(set);
+
+    return success;
+}
+
+bool QUniUIKitResponder::canBecomeFirstResponder()
+{
+    return [d_func()->responder() canBecomeFirstResponder];
+}
+
+bool QUniUIKitResponder::canResignFirstResponder()
+{
+    return [d_func()->responder() canResignFirstResponder];
 }
 
 #include "moc_quniuikitresponder.cpp"

@@ -62,6 +62,8 @@ public:
     explicit QUniUIKitResponderPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitResponderPrivate();
 
+    UIResponder *responder() const;
+
     Q_DECLARE_PUBLIC(QUniUIKitResponder)
 };
 
