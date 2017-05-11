@@ -44,6 +44,7 @@
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitViewPrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
 
 class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitResponder
 {
@@ -63,6 +64,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitResponder
 
 public:
     QUniUIKitView(QUniUIKitBase *parent = nullptr);
+    QUniUIKitView(UIView *view, QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitView();
 
     bool visible() const;

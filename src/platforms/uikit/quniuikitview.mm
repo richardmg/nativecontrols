@@ -237,6 +237,14 @@ QUniUIKitView::QUniUIKitView(QUniUIKitBase *parent)
     d_func()->initConnections();
 }
 
+QUniUIKitView::QUniUIKitView(UIView *view, QUniUIKitBase *parent)
+    : QUniUIKitResponder(*new QUniUIKitViewPrivate(), parent)
+{
+    Q_D(QUniUIKitView);
+    d->setNSObject(view);
+    d->initConnections();
+}
+
 QUniUIKitView::QUniUIKitView(QUniUIKitViewPrivate &dd, QUniUIKitBase *parent)
     : QUniUIKitResponder(dd, parent)
 {
