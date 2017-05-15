@@ -49,12 +49,12 @@ Q_FORWARD_DECLARE_OBJC_CLASS(UITableViewDataSource);
 class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTableViewDataSource : public QUniUIKitBase
 {
     Q_OBJECT
-    Q_PROPERTY(QJSValue numberOfSectionsInTableView READ numberOfSectionsInTableView WRITE setNumberOfSectionsInTableView)
-    Q_PROPERTY(QJSValue numberOfRowsInSection READ numberOfRowsInSection WRITE setNumberOfRowsInSection)
-    Q_PROPERTY(QJSValue cellForRowAtIndexPath READ cellForRowAtIndexPath WRITE setCellForRowAtIndexPath)
-    Q_PROPERTY(QJSValue sectionIndexTitlesForTableView READ sectionIndexTitlesForTableView WRITE setSectionIndexTitlesForTableView)
-    Q_PROPERTY(QJSValue titleForHeaderInSection READ titleForHeaderInSection WRITE setTitleForHeaderInSection)
-    Q_PROPERTY(QJSValue titleForFooterInSection READ titleForFooterInSection WRITE setTitleForFooterInSection)
+    Q_PROPERTY(QJSValue numberOfSectionsInTableView READ numberOfSectionsInTableView WRITE setNumberOfSectionsInTableView NOTIFY numberOfSectionsInTableViewChanged)
+    Q_PROPERTY(QJSValue numberOfRowsInSection READ numberOfRowsInSection WRITE setNumberOfRowsInSection NOTIFY numberOfRowsInSectionChanged)
+    Q_PROPERTY(QJSValue cellForRowAtIndexPath READ cellForRowAtIndexPath WRITE setCellForRowAtIndexPath NOTIFY cellForRowAtIndexPathChanged)
+    Q_PROPERTY(QJSValue sectionIndexTitlesForTableView READ sectionIndexTitlesForTableView WRITE setSectionIndexTitlesForTableView NOTIFY sectionIndexTitlesForTableViewChanged)
+    Q_PROPERTY(QJSValue titleForHeaderInSection READ titleForHeaderInSection WRITE setTitleForHeaderInSection NOTIFY titleForHeaderInSectionChanged)
+    Q_PROPERTY(QJSValue titleForFooterInSection READ titleForFooterInSection WRITE setTitleForFooterInSection NOTIFY titleForFooterInSectionChanged)
 
 public:
     QUniUIKitTableViewDataSource(QUniUIKitBase *parent = nullptr);
@@ -79,6 +79,14 @@ public:
 
     QJSValue titleForFooterInSection() const;
     void setTitleForFooterInSection(const QJSValue &value);
+
+Q_SIGNALS:
+    void numberOfSectionsInTableViewChanged(QUniUIKitTableViewDataSource *dataSource);
+    void numberOfRowsInSectionChanged(QUniUIKitTableViewDataSource *dataSource);
+    void cellForRowAtIndexPathChanged(QUniUIKitTableViewDataSource *dataSource);
+    void sectionIndexTitlesForTableViewChanged(QUniUIKitTableViewDataSource *dataSource);
+    void titleForHeaderInSectionChanged(QUniUIKitTableViewDataSource *dataSource);
+    void titleForFooterInSectionChanged(QUniUIKitTableViewDataSource *dataSource);
 
 private:
     Q_DECLARE_PRIVATE(QUniUIKitTableViewDataSource)

@@ -44,39 +44,23 @@
 #include <QtUniUIKitControls/quniuikitindexpath.h>
 #include <QtUniUIKitControls/quniuikittableviewcell.h>
 #include <QtUniUIKitControls/private/quniuikittextfielddelegate_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
-#define DELEGATE_GETTER_AND_SETTER(NAME) \
-QJSValue QUniUIKitTextFieldDelegate::textField##NAME() const  {  return d_func()->m_textField##NAME; } \
-void QUniUIKitTextFieldDelegate::setTextField##NAME(const QJSValue &value) { d_func()->m_textField##NAME = value; }
-
-#define DELEGATE_METHOD_BOOL(NAME) \
+#define QUNIUITEXTFIELDDELEGATE_METHOD_BOOL(NAME) \
 - (BOOL)textField##NAME:(UITextField *)textField \
 { \
-    QUniUIKitTextField *qtextField = static_cast<QUniUIKitTextField *>(qt_getAssociatedQObject(textField)); \
-    if (!qtextField) \
-        return YES; \
-    QJSValue jsFunction = _delegatePrivate->m_textField##NAME; \
-    if (jsFunction.isUndefined()) \
-        return YES; \
-    if (!jsFunction.isCallable()) { \
-        qWarning("TextFieldDelegate: property 'textField" #NAME "' doesn't point to a JS function"); \
-        return YES; \
-    } \
-    QJSValue jsTextField = qmlEngine(qtextField)->newQObject(qtextField); \
-    QJSValue returnValue = jsFunction.call(QJSValueList() << jsTextField); \
-    if (!returnValue.isBool()) { \
-        qWarning("TextFieldDelegate: property 'textField" #NAME "' doesn't return a bool"); \
-        return YES; \
-    } \
-    return returnValue.toBool(); \
+    GET_PROPERTY_QJSVALUE(_delegatePrivate->m_textField##NAME, QUniUIKitTextField, textField) \
+    return property.isUndefined() ? YES : property.toBool(); \
 }
 
-#define DELEGATE_METHOD_EMIT(NAME) \
+#define QUNIUITEXTFIELDDELEGATE_METHOD_EMIT(NAME) \
 - (void)textField##NAME:(UITextField *)textField \
 { \
     QUniUIKitTextField *qtextField = static_cast<QUniUIKitTextField *>(qt_getAssociatedQObject(textField)); \
     emit _delegatePrivate->q_func()->textField##NAME(qtextField); \
 }
+
+// --------------------------------------------------------------------------
 
 @interface QUniUITextFieldDelegate : NSObject <UITextFieldDelegate>
 {
@@ -96,14 +80,25 @@ void QUniUIKitTextFieldDelegate::setTextField##NAME(const QJSValue &value) { d_f
     return self;
 }
 
-DELEGATE_METHOD_BOOL(ShouldBeginEditing)
-DELEGATE_METHOD_EMIT(DidBeginEditing)
-DELEGATE_METHOD_BOOL(ShouldEndEditing)
-DELEGATE_METHOD_EMIT(DidEndEditing)
-DELEGATE_METHOD_BOOL(ShouldClear)
-DELEGATE_METHOD_BOOL(ShouldReturn)
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // We special case textFieldShouldReturn since we want to emit a textFieldDidReturn as well
+    GET_PROPERTY_QJSVALUE(_delegatePrivate->m_textFieldShouldReturn, QUniUIKitTextField, textField)
+    bool shouldReturn = property.isUndefined() ? true : property.toBool();
+    if (shouldReturn)
+        emit _delegatePrivate->q_func()->textFieldDidReturn(associatedQObject);
+    return shouldReturn;
+}
+
+QUNIUITEXTFIELDDELEGATE_METHOD_BOOL(ShouldBeginEditing)
+QUNIUITEXTFIELDDELEGATE_METHOD_BOOL(ShouldEndEditing)
+QUNIUITEXTFIELDDELEGATE_METHOD_BOOL(ShouldClear)
+QUNIUITEXTFIELDDELEGATE_METHOD_EMIT(DidBeginEditing)
+QUNIUITEXTFIELDDELEGATE_METHOD_EMIT(DidEndEditing)
 
 @end
+
+// --------------------------------------------------------------------------
 
 QT_BEGIN_NAMESPACE
 
@@ -132,10 +127,10 @@ NSObject *QUniUIKitTextFieldDelegate::uiTextFieldDelegateHandle() const
     return d_func()->m_delegate;
 }
 
-DELEGATE_GETTER_AND_SETTER(ShouldBeginEditing)
-DELEGATE_GETTER_AND_SETTER(ShouldEndEditing)
-DELEGATE_GETTER_AND_SETTER(ShouldClear)
-DELEGATE_GETTER_AND_SETTER(ShouldReturn)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldBeginEditing, setTextFieldShouldBeginEditing, toBool)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldEndEditing, setTextFieldShouldEndEditing, toBool)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldClear, setTextFieldShouldClear, toBool)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldReturn, setTextFieldShouldReturn, toBool)
 
 #include "moc_quniuikittextfielddelegate.cpp"
 

@@ -45,6 +45,7 @@
 #include <QtUniUIKitControls/quniuikittableviewcell.h>
 #include <QtUniUIKitControls/private/quniuikittableviewdatasource_p.h>
 #include <QtUniUIKitControls/private/quniuikittableview_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 @interface QUniUITableViewDataSource : NSObject <UITableViewDataSource>
 {
@@ -73,101 +74,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
-    if (!qtableView)
-        return 0;
-
-    QJSValue jsFunction = _dataSourcePrivate->m_numberOfSectionsInTableView;
-    if (jsFunction.isUndefined())
-        return 0;
-
-    if (!jsFunction.isCallable()) {
-        qWarning("TableViewDataSource: property 'numberOfSectionsInTableView' doesn't point to a JS function");
-        return 0;
-    }
-
-    QJSValue jsTableView = qmlEngine(qtableView)->newQObject(qtableView);
-    QJSValue returnValue = jsFunction.call(QJSValueList() << jsTableView);
-    if (!returnValue.isNumber()) {
-        qWarning("TableViewDataSource: property 'numberOfSectionsInTableView' doesn't return a number");
-        return 0;
-    }
-
-    return returnValue.toInt();
+    GET_PROPERTY_QJSVALUE(_dataSourcePrivate->m_numberOfSectionsInTableView, QUniUIKitTableView, tableView)
+    return property.toInt();
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
-    if (!qtableView)
-        return 0;
-
-    QJSValue jsFunction = _dataSourcePrivate->m_numberOfRowsInSection;
-    if (jsFunction.isUndefined())
-        return 0;
-
-    if (!jsFunction.isCallable()) {
-        qWarning("TableViewDataSource: property 'numberOfRowsInSection' doesn't point to a JS function");
-        return 0;
-    }
-
-    QJSValue jsTableView = qmlEngine(qtableView)->newQObject(qtableView);
-    QJSValue jsSection((int)section);
-    QJSValue returnValue = jsFunction.call(QJSValueList() << jsTableView << jsSection);
-    if (!returnValue.isNumber()) {
-        qWarning("TableViewDataSource: property 'numberOfRowsInSection' doesn't return a number");
-        return 0;
-    }
-
-    return returnValue.toInt();
+    GET_PROPERTY_QJSVALUE_BEGIN(_dataSourcePrivate->m_numberOfRowsInSection, QUniUIKitTableView, tableView)
+    args << QJSValue((int)section);
+    GET_PROPERTY_QJSVALUE_END
+    return property.toInt();
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
-    if (!qtableView)
-        return [self emptyCell];
-
-    QJSValue jsFunction = _dataSourcePrivate->m_cellForRowAtIndexPath;
-    if (jsFunction.isUndefined())
-        return [self emptyCell];
-
-    if (!jsFunction.isCallable()) {
-        qWarning("TableViewDataSource: property 'cellForRowAtIndexPath' doesn't point to a JS function");
-        return [self emptyCell];
-    }
-
+    GET_PROPERTY_QJSVALUE_BEGIN(_dataSourcePrivate->m_cellForRowAtIndexPath, QUniUIKitTableView, tableView)
     QUniUIKitIndexPath qindexPath(indexPath);
-    QJSValue jsTableView = qmlEngine(qtableView)->newQObject(qtableView);
-    QJSValue jsIndexPath = qmlEngine(qtableView)->newQObject(&qindexPath);
-    QJSValue returnValue = jsFunction.call(QJSValueList() << jsTableView << jsIndexPath);
-    QUniUIKitTableViewCell *qcell = dynamic_cast<QUniUIKitTableViewCell *>(returnValue.toQObject());
-    if (!qcell) {
-        qWarning("TableViewDataSource: property 'cellForRowAtIndexPath' doesn't return a TableViewCell");
-        return [self emptyCell];
-    }
+    args << engine->newQObject(&qindexPath);
+    GET_PROPERTY_QJSVALUE_END
 
-    return qcell->uiTableViewCellHandle();
+    if (QUniUIKitTableViewCell *cell = dynamic_cast<QUniUIKitTableViewCell *>(property.toQObject()))
+        return cell->uiTableViewCellHandle();
+    else
+        return [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""] autorelease];
 }
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
-    if (!qtableView)
-        return [NSArray array];
-
-    QJSValue jsFunction = _dataSourcePrivate->m_sectionIndexTitlesForTableView;
-    if (jsFunction.isUndefined())
-        return [NSArray array];
-
-    if (!jsFunction.isCallable()) {
-        qWarning("TableViewDataSource: property 'sectionIndexTitlesForTableView' doesn't point to a JS function");
-        return [NSArray array];
-    }
-
-    QJSValue jsTableView = qmlEngine(qtableView)->newQObject(qtableView);
-    QJSValue returnValue = jsFunction.call(QJSValueList() << jsTableView);
-    QVariantList list = returnValue.toVariant().toList();
+    GET_PROPERTY_QJSVALUE(_dataSourcePrivate->m_sectionIndexTitlesForTableView, QUniUIKitTableView, tableView)
+    QVariantList list = property.toVariant().toList();
 
     NSMutableArray *titleArray = [NSMutableArray arrayWithCapacity:list.length()];
     for (QVariant title : list)
@@ -178,46 +113,18 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
-    if (!qtableView)
-        return nil;
-
-    QJSValue jsFunction = _dataSourcePrivate->m_titleForHeaderInSection;
-    if (jsFunction.isUndefined())
-        return nil;
-
-    if (!jsFunction.isCallable()) {
-        qWarning("TableViewDataSource: property 'titleForHeaderInSection' doesn't point to a JS function");
-        return nil;
-    }
-
-    QJSValue jsTableView = qmlEngine(qtableView)->newQObject(qtableView);
-    QJSValue jsSection((int)section);
-    QJSValue returnValue = jsFunction.call(QJSValueList() << jsTableView << jsSection);
-
-    return returnValue.toString().toNSString();
+    GET_PROPERTY_QJSVALUE_BEGIN(_dataSourcePrivate->m_titleForHeaderInSection, QUniUIKitTableView, tableView)
+    args << QJSValue((int)section);
+    GET_PROPERTY_QJSVALUE_END
+    return property.toString().toNSString();
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    QUniUIKitTableView *qtableView = static_cast<QUniUIKitTableView *>(qt_getAssociatedQObject(tableView));
-    if (!qtableView)
-        return nil;
-
-    QJSValue jsFunction = _dataSourcePrivate->m_titleForFooterInSection;
-    if (jsFunction.isUndefined())
-        return nil;
-
-    if (!jsFunction.isCallable()) {
-        qWarning("TableViewDataSource: property 'titleForFooterInSection' doesn't point to a JS function");
-        return nil;
-    }
-
-    QJSValue jsTableView = qmlEngine(qtableView)->newQObject(qtableView);
-    QJSValue jsSection((int)section);
-    QJSValue returnValue = jsFunction.call(QJSValueList() << jsTableView << jsSection);
-
-    return returnValue.toString().toNSString();
+    GET_PROPERTY_QJSVALUE_BEGIN(_dataSourcePrivate->m_titleForFooterInSection, QUniUIKitTableView, tableView)
+    args << QJSValue((int)section);
+    GET_PROPERTY_QJSVALUE_END
+    return property.isUndefined() ? nil : property.toString().toNSString();
 }
 
 @end
@@ -249,65 +156,12 @@ NSObject *QUniUIKitTableViewDataSource::uiTableViewDataSourceHandle() const
     return d_func()->m_dataSource;
 }
 
-QJSValue QUniUIKitTableViewDataSource::numberOfSectionsInTableView() const
-{
-    return d_func()->m_numberOfSectionsInTableView;
-}
-
-void QUniUIKitTableViewDataSource::setNumberOfSectionsInTableView(const QJSValue &value)
-{
-    d_func()->m_numberOfSectionsInTableView = value;
-}
-
-QJSValue QUniUIKitTableViewDataSource::numberOfRowsInSection() const
-{
-    return d_func()->m_numberOfRowsInSection;
-}
-
-void QUniUIKitTableViewDataSource::setNumberOfRowsInSection(const QJSValue &value)
-{
-    d_func()->m_numberOfRowsInSection = value;
-}
-
-QJSValue QUniUIKitTableViewDataSource::cellForRowAtIndexPath() const
-{
-    return d_func()->m_cellForRowAtIndexPath;
-}
-
-void QUniUIKitTableViewDataSource::setCellForRowAtIndexPath(const QJSValue &value)
-{
-    d_func()->m_cellForRowAtIndexPath = value;
-}
-
-QJSValue QUniUIKitTableViewDataSource::sectionIndexTitlesForTableView() const
-{
-    return d_func()->m_sectionIndexTitlesForTableView;
-}
-
-void QUniUIKitTableViewDataSource::setSectionIndexTitlesForTableView(const QJSValue &value)
-{
-    d_func()->m_sectionIndexTitlesForTableView = value;
-}
-
-QJSValue QUniUIKitTableViewDataSource::titleForHeaderInSection() const
-{
-    return d_func()->m_titleForHeaderInSection;
-}
-
-void QUniUIKitTableViewDataSource::setTitleForHeaderInSection(const QJSValue &value)
-{
-    d_func()->m_titleForHeaderInSection = value;
-}
-
-QJSValue QUniUIKitTableViewDataSource::titleForFooterInSection() const
-{
-    return d_func()->m_titleForFooterInSection;
-}
-
-void QUniUIKitTableViewDataSource::setTitleForFooterInSection(const QJSValue &value)
-{
-    d_func()->m_titleForFooterInSection = value;
-}
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, numberOfSectionsInTableView, setNumberOfSectionsInTableView, toInt)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, numberOfRowsInSection, setNumberOfRowsInSection, toInt)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, titleForHeaderInSection, setTitleForHeaderInSection, toString)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, cellForRowAtIndexPath, setCellForRowAtIndexPath, toQObject)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, sectionIndexTitlesForTableView, setSectionIndexTitlesForTableView, toVariant)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, titleForFooterInSection, setTitleForFooterInSection, toString)
 
 #include "moc_quniuikittableviewdatasource.cpp"
 

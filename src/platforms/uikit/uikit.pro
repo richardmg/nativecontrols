@@ -36,7 +36,8 @@ for(c,IOS_CONTROLS) {
 }
 
 HEADERS += \
-    quniuikitcontrolsglobal.h
+    quniuikitcontrolsglobal.h \
+    quniuikitpropertymacros_p.h
 
 OTHER_FILES += \
     templates/quniuikittemplatecontrol.h.template \
