@@ -62,6 +62,13 @@ Window {
                     y: 30
                     width: parent.width
                     height: parent.height
+
+//                    UniTextField {
+//                        text: "foo"
+//                        validator: myValidator
+//                        ios.delegate: function() {}
+//                    }
+
                     Button {
                         id: addTabButton
                         text: "Add another tab"
@@ -69,6 +76,7 @@ Window {
                         height: intrinsicContentHeight
                         onClicked: tabBarController.viewControllers.push(tabComponent.createObject())
                     }
+
                     TextField {
                         id: tabLabel
                         width: intrinsicContentWidth
@@ -76,9 +84,9 @@ Window {
                         y: addTabButton.bottom + 10
                         text: "Tab 1"
                         delegate: TextFieldDelegate {
-                            textFieldShouldReturn: function() {
+                            onTextFieldDidReturn: {
                                 tab1.tabBarItem.title = tabLabel.text
-                                return true
+                                textField.firstResponder = false;
                             }
                         }
                     }
@@ -127,13 +135,8 @@ Window {
                     property var planets: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptun"]
                     property var distances: ["0.39", "0.72", "1", "1.52", "1.52", "5.20", "9.53", "19.18", "30.06"]
 
-                    numberOfSectionsInTableView: function(tableView) {
-                        return 10;
-                    }
-
-                    numberOfRowsInSection: function(tableView, section) {
-                        return planets.length
-                    }
+                    numberOfSectionsInTableView: 10
+                    numberOfRowsInSection: planets.length
 
                     titleForHeaderInSection: function(tableView, section) {
                         return "Section " + section;
