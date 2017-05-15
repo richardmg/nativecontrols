@@ -43,6 +43,7 @@
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitTextFieldDelegatePrivate;
+class QUniUIKitTextField;
 Q_FORWARD_DECLARE_OBJC_CLASS(NSObject);
 Q_FORWARD_DECLARE_OBJC_CLASS(UITextFieldDelegate);
 
@@ -50,9 +51,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTextFieldDelegate : public QUniUIKitBas
 {
     Q_OBJECT
     Q_PROPERTY(QJSValue textFieldShouldBeginEditing READ textFieldShouldBeginEditing WRITE setTextFieldShouldBeginEditing)
-    Q_PROPERTY(QJSValue textFieldDidBeginEditing READ textFieldDidBeginEditing WRITE setTextFieldDidBeginEditing)
     Q_PROPERTY(QJSValue textFieldShouldEndEditing READ textFieldShouldEndEditing WRITE setTextFieldShouldEndEditing)
-    Q_PROPERTY(QJSValue textFieldDidEndEditing READ textFieldDidEndEditing WRITE setTextFieldDidEndEditing)
     Q_PROPERTY(QJSValue textFieldShouldClear READ textFieldShouldClear WRITE setTextFieldShouldClear)
     Q_PROPERTY(QJSValue textFieldShouldReturn READ textFieldShouldReturn WRITE setTextFieldShouldReturn)
 
@@ -65,20 +64,20 @@ public:
     QJSValue textFieldShouldBeginEditing() const;
     void setTextFieldShouldBeginEditing(const QJSValue &value);
 
-    QJSValue textFieldDidBeginEditing() const;
-    void setTextFieldDidBeginEditing(const QJSValue &value);
-
     QJSValue textFieldShouldEndEditing() const;
     void setTextFieldShouldEndEditing(const QJSValue &value);
-
-    QJSValue textFieldDidEndEditing() const;
-    void setTextFieldDidEndEditing(const QJSValue &value);
 
     QJSValue textFieldShouldClear() const;
     void setTextFieldShouldClear(const QJSValue &value);
 
     QJSValue textFieldShouldReturn() const;
     void setTextFieldShouldReturn(const QJSValue &value);
+
+Q_SIGNALS:
+    void textFieldDidBeginEditing(QUniUIKitTextField *textField);
+    void textFieldDidEndEditing(QUniUIKitTextField *textField);
+    void textFieldDidReturn(QUniUIKitTextField *textField);
+    void textFieldDidClear(QUniUIKitTextField *textField);
 
 private:
     Q_DECLARE_PRIVATE(QUniUIKitTextFieldDelegate)

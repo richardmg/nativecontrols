@@ -71,21 +71,11 @@ void QUniUIKitTextFieldDelegate::setTextField##NAME(const QJSValue &value) { d_f
     return returnValue.toBool(); \
 }
 
-#define DELEGATE_METHOD_VOID(NAME) \
+#define DELEGATE_METHOD_EMIT(NAME) \
 - (void)textField##NAME:(UITextField *)textField \
 { \
     QUniUIKitTextField *qtextField = static_cast<QUniUIKitTextField *>(qt_getAssociatedQObject(textField)); \
-    if (!qtextField) \
-        return; \
-    QJSValue jsFunction = _delegatePrivate->m_textField##NAME; \
-    if (jsFunction.isUndefined()) \
-        return; \
-    if (!jsFunction.isCallable()) { \
-        qWarning("TextFieldDelegate: property 'textField" #NAME "' doesn't point to a JS function"); \
-        return; \
-    } \
-    QJSValue jsTextField = qmlEngine(qtextField)->newQObject(qtextField); \
-    jsFunction.call(QJSValueList() << jsTextField); \
+    emit _delegatePrivate->q_func()->textField##NAME(qtextField); \
 }
 
 @interface QUniUITextFieldDelegate : NSObject <UITextFieldDelegate>
@@ -107,9 +97,9 @@ void QUniUIKitTextFieldDelegate::setTextField##NAME(const QJSValue &value) { d_f
 }
 
 DELEGATE_METHOD_BOOL(ShouldBeginEditing)
-DELEGATE_METHOD_VOID(DidBeginEditing)
+DELEGATE_METHOD_EMIT(DidBeginEditing)
 DELEGATE_METHOD_BOOL(ShouldEndEditing)
-DELEGATE_METHOD_VOID(DidEndEditing)
+DELEGATE_METHOD_EMIT(DidEndEditing)
 DELEGATE_METHOD_BOOL(ShouldClear)
 DELEGATE_METHOD_BOOL(ShouldReturn)
 
@@ -143,9 +133,7 @@ NSObject *QUniUIKitTextFieldDelegate::uiTextFieldDelegateHandle() const
 }
 
 DELEGATE_GETTER_AND_SETTER(ShouldBeginEditing)
-DELEGATE_GETTER_AND_SETTER(DidBeginEditing)
 DELEGATE_GETTER_AND_SETTER(ShouldEndEditing)
-DELEGATE_GETTER_AND_SETTER(DidEndEditing)
 DELEGATE_GETTER_AND_SETTER(ShouldClear)
 DELEGATE_GETTER_AND_SETTER(ShouldReturn)
 
