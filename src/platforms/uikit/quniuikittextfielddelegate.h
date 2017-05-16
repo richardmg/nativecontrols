@@ -50,10 +50,10 @@ Q_FORWARD_DECLARE_OBJC_CLASS(UITextFieldDelegate);
 class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTextFieldDelegate : public QUniUIKitBase
 {
     Q_OBJECT
-    Q_PROPERTY(QJSValue textFieldShouldBeginEditing READ textFieldShouldBeginEditing WRITE setTextFieldShouldBeginEditing)
-    Q_PROPERTY(QJSValue textFieldShouldEndEditing READ textFieldShouldEndEditing WRITE setTextFieldShouldEndEditing)
-    Q_PROPERTY(QJSValue textFieldShouldClear READ textFieldShouldClear WRITE setTextFieldShouldClear)
-    Q_PROPERTY(QJSValue textFieldShouldReturn READ textFieldShouldReturn WRITE setTextFieldShouldReturn)
+    Q_PROPERTY(QJSValue textFieldShouldBeginEditing READ textFieldShouldBeginEditing WRITE setTextFieldShouldBeginEditing NOTIFY textFieldShouldBeginEditingChanged)
+    Q_PROPERTY(QJSValue textFieldShouldEndEditing READ textFieldShouldEndEditing WRITE setTextFieldShouldEndEditing NOTIFY textFieldShouldEndEditingChanged)
+    Q_PROPERTY(QJSValue textFieldShouldClear READ textFieldShouldClear WRITE setTextFieldShouldClear NOTIFY textFieldShouldClearChanged)
+    Q_PROPERTY(QJSValue textFieldShouldReturn READ textFieldShouldReturn WRITE setTextFieldShouldReturn NOTIFY textFieldShouldReturnChanged)
 
 public:
     QUniUIKitTextFieldDelegate(QUniUIKitBase *parent = nullptr);
@@ -74,6 +74,11 @@ public:
     void setTextFieldShouldReturn(const QJSValue &value);
 
 Q_SIGNALS:
+    void textFieldShouldBeginEditingChanged(QUniUIKitTextFieldDelegate *delegate);
+    void textFieldShouldEndEditingChanged(QUniUIKitTextFieldDelegate *delegate);
+    void textFieldShouldReturnChanged(QUniUIKitTextFieldDelegate *delegate);
+    void textFieldShouldClearChanged(QUniUIKitTextFieldDelegate *delegate);
+
     void textFieldDidBeginEditing(QUniUIKitTextField *textField);
     void textFieldDidEndEditing(QUniUIKitTextField *textField);
     void textFieldDidReturn(QUniUIKitTextField *textField);
