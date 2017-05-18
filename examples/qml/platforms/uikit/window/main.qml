@@ -88,6 +88,8 @@ Window {
                                 tab1.tabBarItem.title = tabLabel.text
                                 textField.firstResponder = false;
                             }
+                            textFieldShouldChangeCharactersInRange: function(textField, range, str) { return str !== 'x'; }
+                            textFieldShouldReturn: tabLabel.text !== "Foo"
                         }
                     }
                 }
