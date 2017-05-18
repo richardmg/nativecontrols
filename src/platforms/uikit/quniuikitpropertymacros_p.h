@@ -68,6 +68,8 @@
         } \
     }
 
+// Convenience macro for cases where the QML function
+// only takes one argument (the owner of the delegate)
 #define GET_PROPERTY_QJSVALUE(PROPERTY_NAME, QT_TYPE, NSOBJECT) \
     GET_PROPERTY_QJSVALUE_BEGIN(PROPERTY_NAME, QT_TYPE, NSOBJECT) \
     GET_PROPERTY_QJSVALUE_END

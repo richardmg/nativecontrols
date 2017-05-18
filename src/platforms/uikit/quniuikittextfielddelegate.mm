@@ -43,7 +43,9 @@
 #include <QtUniUIKitControls/quniuikittextfield.h>
 #include <QtUniUIKitControls/quniuikitindexpath.h>
 #include <QtUniUIKitControls/quniuikittableviewcell.h>
+#include <QtUniUIKitControls/quniuikitrange.h>
 #include <QtUniUIKitControls/private/quniuikittextfielddelegate_p.h>
+#include <QtUniUIKitControls/private/quniuikittextfield_p.h>
 #include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 #define QUNIUITEXTFIELDDELEGATE_METHOD_BOOL(NAME) \
@@ -78,6 +80,16 @@
     }
 
     return self;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    GET_PROPERTY_QJSVALUE_BEGIN(_delegatePrivate->m_textFieldShouldChangeCharactersInRange, QUniUIKitTextField, textField)
+        QUniUIKitRange qrange(range.location, range.length);
+        args << engine->newQObject(&qrange);
+        args << engine->toScriptValue(QString::fromNSString(string));
+    GET_PROPERTY_QJSVALUE_END
+    return property.isUndefined() ? true : property.toBool();
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -131,6 +143,7 @@ IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldBeginEdit
 IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldEndEditing, setTextFieldShouldEndEditing, toBool)
 IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldClear, setTextFieldShouldClear, toBool)
 IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldReturn, setTextFieldShouldReturn, toBool)
+IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldChangeCharactersInRange, setTextFieldShouldChangeCharactersInRange, toBool)
 
 #include "moc_quniuikittextfielddelegate.cpp"
 

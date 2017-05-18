@@ -54,6 +54,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTextFieldDelegate : public QUniUIKitBas
     Q_PROPERTY(QJSValue textFieldShouldEndEditing READ textFieldShouldEndEditing WRITE setTextFieldShouldEndEditing NOTIFY textFieldShouldEndEditingChanged)
     Q_PROPERTY(QJSValue textFieldShouldClear READ textFieldShouldClear WRITE setTextFieldShouldClear NOTIFY textFieldShouldClearChanged)
     Q_PROPERTY(QJSValue textFieldShouldReturn READ textFieldShouldReturn WRITE setTextFieldShouldReturn NOTIFY textFieldShouldReturnChanged)
+    Q_PROPERTY(QJSValue textFieldShouldChangeCharactersInRange READ textFieldShouldChangeCharactersInRange WRITE setTextFieldShouldChangeCharactersInRange NOTIFY textFieldShouldChangeCharactersInRangeChanged)
 
 public:
     QUniUIKitTextFieldDelegate(QUniUIKitBase *parent = nullptr);
@@ -73,11 +74,15 @@ public:
     QJSValue textFieldShouldReturn() const;
     void setTextFieldShouldReturn(const QJSValue &value);
 
+    QJSValue textFieldShouldChangeCharactersInRange() const;
+    void setTextFieldShouldChangeCharactersInRange(const QJSValue &value);
+
 Q_SIGNALS:
     void textFieldShouldBeginEditingChanged(QUniUIKitTextFieldDelegate *delegate);
     void textFieldShouldEndEditingChanged(QUniUIKitTextFieldDelegate *delegate);
     void textFieldShouldReturnChanged(QUniUIKitTextFieldDelegate *delegate);
     void textFieldShouldClearChanged(QUniUIKitTextFieldDelegate *delegate);
+    void textFieldShouldChangeCharactersInRangeChanged(QUniUIKitTextFieldDelegate *delegate);
 
     void textFieldDidBeginEditing(QUniUIKitTextField *textField);
     void textFieldDidEndEditing(QUniUIKitTextField *textField);

@@ -71,6 +71,7 @@ public:
     QJSValue m_textFieldDidEndEditing;
     QJSValue m_textFieldShouldClear;
     QJSValue m_textFieldShouldReturn;
+    QJSValue m_textFieldShouldChangeCharactersInRange;
 
     id<UITextFieldDelegate> m_delegate;
 
