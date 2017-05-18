@@ -42,12 +42,56 @@
 #include <QtUniUIKitControls/private/quniuikittextfield_p.h>
 #include <QtUniUIKitControls/quniuikittextfielddelegate.h>
 
+QUniUITextFieldStaticDelegate *QUniUIKitTextFieldPrivate::s_delegate = nullptr;
+
+@interface QUniUITextFieldStaticDelegate : NSObject
+@end
+
+@implementation QUniUITextFieldStaticDelegate
+
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter]
+            addObserver:self
+            selector:@selector(textFieldDidChange:)
+            name:UITextFieldTextDidChangeNotification object:nil];
+    }
+
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]
+        removeObserver:self
+        name:UITextFieldTextDidChangeNotification object:nil];
+    [super dealloc];
+}
+
+- (void)textFieldDidChange:(NSNotification *)notification
+{
+    UITextField *textField = static_cast<UITextField *>(notification.object);
+    QUniUIKitTextField *qtextField = static_cast<QUniUIKitTextField *>(qt_getAssociatedQObject(textField));
+    QUniUIKitTextFieldPrivate *d = static_cast<QUniUIKitTextFieldPrivate *>(QObjectPrivate::get(qtextField));
+
+    d->updateIntrinsicContentSize();
+    emit qtextField->textChanged(qtextField->text());
+}
+
+@end
+
+// --------------------------------------------------------------------------
+
 QT_BEGIN_NAMESPACE
 
 QUniUIKitTextFieldPrivate::QUniUIKitTextFieldPrivate(int version)
     : QUniUIKitControlPrivate(version)
     , m_delegate(nullptr)
 {
+    if (!s_delegate)
+        s_delegate = [QUniUITextFieldStaticDelegate new];
 }
 
 QUniUIKitTextFieldPrivate::~QUniUIKitTextFieldPrivate()
