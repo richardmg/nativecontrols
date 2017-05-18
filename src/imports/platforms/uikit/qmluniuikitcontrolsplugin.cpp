@@ -54,25 +54,28 @@ QmlUniUIKitControlsPlugin(QObject *parent = nullptr) : QQmlExtensionPlugin(paren
 #endif
 }
 
+#define REGISTER_TYPE(NAME) qmlRegisterType<QUniUIKit##NAME>(uri, 1, 0, #NAME);
+
 void registerTypes(const char *uri) override
 {
-    qmlRegisterType<QUniUIKitResponder>();
-    qmlRegisterType<QUniUIKitControl>();
-    qmlRegisterType<QUniUIKitWindow>(uri, 1, 0, "Window");
-    qmlRegisterType<QUniUIKitView>(uri, 1, 0, "View");
-    qmlRegisterType<QUniUIKitButton>(uri, 1, 0, "Button");
-    qmlRegisterType<QUniUIKitTextField>(uri, 1, 0, "TextField");
-    qmlRegisterType<QUniUIKitTextFieldDelegate>(uri, 1, 0, "TextFieldDelegate");
-    qmlRegisterType<QUniUIKitSearchField>(uri, 1, 0, "SearchField");
-    qmlRegisterType<QUniUIKitLabel>(uri, 1, 0, "Label");
-    qmlRegisterType<QUniUIKitSlider>(uri, 1, 0, "Slider");
-    qmlRegisterType<QUniUIKitTableView>(uri, 1, 0, "TableView");
-    qmlRegisterType<QUniUIKitTableViewCell>(uri, 1, 0, "TableViewCell");
-    qmlRegisterType<QUniUIKitTableViewDataSource>(uri, 1, 0, "TableViewDataSource");
-    qmlRegisterType<QUniUIKitViewController>(uri, 1, 0, "ViewController");
-    qmlRegisterType<QUniUIKitTabBarController>(uri, 1, 0, "TabBarController");
-    qmlRegisterType<QUniUIKitTabBarItem>(uri, 1, 0, "TabBarItem");
-    qmlRegisterType<QUniUIKitIndexPath>(uri, 1, 0, "IndexPath");
+    REGISTER_TYPE(Responder)
+    REGISTER_TYPE(Control)
+    REGISTER_TYPE(Window)
+    REGISTER_TYPE(View)
+    REGISTER_TYPE(Button)
+    REGISTER_TYPE(TextField)
+    REGISTER_TYPE(TextFieldDelegate)
+    REGISTER_TYPE(SearchField)
+    REGISTER_TYPE(Label)
+    REGISTER_TYPE(Slider)
+    REGISTER_TYPE(TableView)
+    REGISTER_TYPE(TableViewCell)
+    REGISTER_TYPE(TableViewDataSource)
+    REGISTER_TYPE(ViewController)
+    REGISTER_TYPE(TabBarController)
+    REGISTER_TYPE(TabBarItem)
+    REGISTER_TYPE(IndexPath)
+    REGISTER_TYPE(Range)
 }
 
 void initializeEngine(QQmlEngine *engine, const char *uri) override
