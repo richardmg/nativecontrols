@@ -27,7 +27,8 @@ IOS_CONTROLS = \
     viewcontroller \
     tabbarcontroller \
     tabbaritem \
-    indexpath
+    indexpath \
+    range
 
 for(c,IOS_CONTROLS) {
     HEADERS += quniuikit$${c}.h
