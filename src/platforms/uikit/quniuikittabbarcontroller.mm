@@ -52,7 +52,7 @@
 
 -(id)initWithQUniUIKitTabBarControllerPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTabBarControllerPrivate) *)tabBarPrivate
 {
-    self = [self init];
+    self = [super init];
     if (self) {
         _tabBarPrivate = tabBarPrivate;
     }

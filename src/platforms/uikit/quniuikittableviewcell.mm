@@ -48,7 +48,7 @@
 {
     NSString *id = tableViewCellPrivate->m_reuseIndentifier.toNSString();
     UITableViewCellStyle cellStyle = static_cast<UITableViewCellStyle>(tableViewCellPrivate->m_cellStyle);
-    self = [self initWithStyle:cellStyle reuseIdentifier:id];
+    self = [super initWithStyle:cellStyle reuseIdentifier:id];
     if (self) {
         _tableViewCellPrivate = tableViewCellPrivate;
     }

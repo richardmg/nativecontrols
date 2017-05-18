@@ -74,7 +74,7 @@
 
 -(id)initWithQUniUIKitTextFieldDelegatePrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTextFieldDelegatePrivate) *)delegatePrivate
 {
-    self = [self init];
+    self = [super init];
     if (self) {
         _delegatePrivate = delegatePrivate;
     }

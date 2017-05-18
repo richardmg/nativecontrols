@@ -50,7 +50,7 @@
 
 -(id)initWithQUniUIKitSliderPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitSliderPrivate) *)quniuikitslider
 {
-    self = [self init];
+    self = [super init];
     if (self) {
         _quniuikitslider = quniuikitslider;
     }

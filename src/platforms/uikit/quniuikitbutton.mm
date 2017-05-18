@@ -50,7 +50,7 @@
 
 -(id)initWithQUniUIKitButtonPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitButtonPrivate) *)button
 {
-    self = [self init];
+    self = [super init];
     if (self) {
         _button = button;
     }

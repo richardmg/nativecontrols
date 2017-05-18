@@ -57,7 +57,7 @@
 
 -(id)initWithQUniUIKitTableViewDataSourcePrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTableViewDataSourcePrivate) *)dataSourcePrivate
 {
-    self = [self init];
+    self = [super init];
     if (self) {
         _dataSourcePrivate = dataSourcePrivate;
     }

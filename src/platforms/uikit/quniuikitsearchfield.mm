@@ -50,7 +50,7 @@
 
 -(id)initWithQUniUIKitSearchFieldPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitSearchFieldPrivate) *)searchField
 {
-    self = [self init];
+    self = [super init];
     if (self) {
         _searchField = searchField;
     }

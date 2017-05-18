@@ -59,7 +59,7 @@ static void *KVOFrameChanged = &KVOFrameChanged;
 
 -(id)initWithQUniUIKitViewPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitViewPrivate) *)view
 {
-    self = [self init];
+    self = [super init];
     if (self) {
         _view = view;
     }
