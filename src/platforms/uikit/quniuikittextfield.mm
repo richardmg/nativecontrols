@@ -98,6 +98,11 @@ QUniUIKitTextFieldPrivate::~QUniUIKitTextFieldPrivate()
 {
 }
 
+UITextField *QUniUIKitTextFieldPrivate::textField() const
+{
+    return static_cast<UITextField *>(nsObject());
+}
+
 void QUniUIKitTextFieldPrivate::createNSObject()
 {
     UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
@@ -127,12 +132,12 @@ QUniUIKitTextField::~QUniUIKitTextField()
 
 UITextField *QUniUIKitTextField::uiTextFieldHandle()
 {
-    return static_cast<UITextField *>(d_func()->view());
+    return d_func()->textField();
 }
 
-QString QUniUIKitTextField::text()
+QString QUniUIKitTextField::text() const
 {
-    return QString::fromNSString(uiTextFieldHandle().text);
+    return QString::fromNSString(d_func()->textField().text);
 }
 
 void QUniUIKitTextField::setText(const QString &newText)
@@ -146,9 +151,9 @@ void QUniUIKitTextField::setText(const QString &newText)
     emit textChanged(newText);
 }
 
-QString QUniUIKitTextField::placeholderText()
+QString QUniUIKitTextField::placeholderText() const
 {
-    return QString::fromNSString(uiTextFieldHandle().placeholder);
+    return QString::fromNSString(d_func()->textField().placeholder);
 }
 
 void QUniUIKitTextField::setPlaceholderText(const QString &newPlaceholderText)

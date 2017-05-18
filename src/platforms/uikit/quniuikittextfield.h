@@ -59,10 +59,10 @@ public:
 
     UITextField *uiTextFieldHandle();
 
-    QString text();
+    QString text() const;
     void setText(const QString &text);
 
-    QString placeholderText();
+    QString placeholderText() const;
     void setPlaceholderText(const QString &placeholderText);
 
     QUniUIKitTextFieldDelegate *delegate() const;

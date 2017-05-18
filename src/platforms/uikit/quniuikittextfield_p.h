@@ -58,6 +58,7 @@ QT_BEGIN_NAMESPACE
 class QUniTextField;
 class QUniUIKitTextField;
 class QUniUIKitTextFieldDelegate;
+Q_FORWARD_DECLARE_OBJC_CLASS(UITextField);
 Q_FORWARD_DECLARE_OBJC_CLASS(QUniUITextFieldStaticDelegate);
 
 class QUniUIKitTextFieldPrivate : public QUniUIKitControlPrivate
@@ -65,6 +66,8 @@ class QUniUIKitTextFieldPrivate : public QUniUIKitControlPrivate
 public:
     explicit QUniUIKitTextFieldPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitTextFieldPrivate();
+
+    UITextField *textField() const;
 
     QUniUIKitTextFieldDelegate *m_delegate;
     static QUniUITextFieldStaticDelegate *s_delegate;
