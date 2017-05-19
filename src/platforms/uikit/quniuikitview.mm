@@ -74,7 +74,7 @@ static void *KVOFrameChanged = &KVOFrameChanged;
     Q_UNUSED(change);
 
     if (context == KVOFrameChanged)
-        _view->emitFrameChanged();
+        _view->emitGeometryChanged();
     else
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
@@ -121,7 +121,7 @@ void QUniUIKitViewPrivate::initConnections()
     q->connect(q, &QUniUIKitView::heightChanged, q, &QUniUIKitView::bottomChanged);
 }
 
-void QUniUIKitViewPrivate::emitFrameChanged()
+void QUniUIKitViewPrivate::emitGeometryChanged()
 {
     Q_Q(QUniUIKitView);
 
@@ -129,18 +129,18 @@ void QUniUIKitViewPrivate::emitFrameChanged()
     // to avoid recursive binding loops. This can happen if
     // e.g changing width causes x to changes as well, since
     // then we enter here recursively.
-    QRectF frame = q->frameGeometry();
-    QRectF lastFrame = m_lastEmittedFrame;
-    m_lastEmittedFrame = frame;
+    QRectF geometry = q->geometry();
+    QRectF lastGeometry = m_lastEmittedGeometry;
+    m_lastEmittedGeometry = geometry;
 
-    if (frame.x() != lastFrame.x())
-        emit q->xChanged(frame.x());
-    if (frame.y() != lastFrame.y())
-        emit q->yChanged(frame.y());
-    if (frame.width() != lastFrame.width())
-        emit q->widthChanged(frame.width());
-    if (frame.height() != lastFrame.height())
-        emit q->heightChanged(frame.height());
+    if (geometry.x() != lastGeometry.x())
+        emit q->xChanged(geometry.x());
+    if (geometry.y() != lastGeometry.y())
+        emit q->yChanged(geometry.y());
+    if (geometry.width() != lastGeometry.width())
+        emit q->widthChanged(geometry.width());
+    if (geometry.height() != lastGeometry.height())
+        emit q->heightChanged(geometry.height());
 }
 
 void QUniUIKitViewPrivate::updateIntrinsicContentSize()

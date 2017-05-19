@@ -70,7 +70,7 @@ public:
     void setAlignmentRect(CGRect rect);
     void setGeometry(const QRectF &rect);
 
-    void emitFrameChanged();
+    void emitGeometryChanged();
 
     void initConnections();
     void updateIntrinsicContentSize();
@@ -105,7 +105,7 @@ protected:
 
 private:
     QSizeF m_intrinsicContentSize;
-    QRectF m_lastEmittedFrame;
+    QRectF m_lastEmittedGeometry;
     QUniUIKitViewDelegate *m_delegate;
 };
 
