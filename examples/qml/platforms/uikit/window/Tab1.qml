@@ -59,14 +59,15 @@ ViewController {
                 id: addTabButton
                 objectName: "addTabButton"
                 text: "Add another tab"
-                width: intrinsicContentWidth
+                x: 10
+                width: parent.width - (x * 2)
                 height: intrinsicContentHeight
                 onClicked: tabBarController.viewControllers.push(newTab.createObject())
             }
 
             TextField {
                 id: tabLabel
-                width: intrinsicContentWidth
+                width: parent.width - (x * 2)
                 height: intrinsicContentHeight
                 x: 10
                 y: addTabButton.bottom + 10
@@ -80,6 +81,14 @@ ViewController {
                     textFieldShouldChangeCharactersInRange: function(textField, range, str) { return str !== 'x'; }
                     textFieldShouldReturn: tabLabel.text !== "Foo"
                 }
+            }
+
+            Slider {
+                id: slider
+                x: 50
+                y: tabLabel.bottom + 10
+                width: parent.width - (x * 2)
+                height: intrinsicContentHeight
             }
 
             Component {
