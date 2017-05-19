@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Tab1.qml</file>
+        <file>Tab2.qml</file>
+        <file>Tab3.qml</file>
+        <file>NewTab.qml</file>
     </qresource>
 </RCC>

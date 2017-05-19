@@ -10,8 +10,12 @@ SOURCES += main.cpp
 
 RESOURCES += main.qrc
 
-OTHER_FILES += \
-    main.qml
+DISTFILES += \
+    main.qml \
+    Tab1.qml \
+    Tab2.qml \
+    Tab3.qml \
+    NewTab.qml
 
 target.path = $$[QT_INSTALL_EXAMPLES]/qml/platforms/uikit/$$TARGET
 INSTALLS += target

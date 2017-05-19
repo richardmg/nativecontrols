@@ -42,17 +42,50 @@ import QtQml 2.0
 import QtQuick 2.5
 import Qt.UniUIKitControls 1.0
 
-Window {
-    id: window
-    visible: true
-    rootViewController: tabBarController
+ViewController {
+    id: tab1
 
-    TabBarController {
-        id: tabBarController
-        viewControllers: [
-            Tab1 {},
-            Tab2 {},
-            Tab3 {}
-        ]
+    tabBarItem: TabBarItem {
+        title: "Tab 1"
+    }
+
+    view: View {
+        View {
+            y: 30
+            width: parent.width
+            height: parent.height
+
+            Button {
+                id: addTabButton
+                objectName: "addTabButton"
+                text: "Add another tab"
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+                onClicked: tabBarController.viewControllers.push(newTab.createObject())
+            }
+
+            TextField {
+                id: tabLabel
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+                x: 10
+                y: addTabButton.bottom + 10
+                text: "Tab 1"
+
+                delegate: TextFieldDelegate {
+                    onTextFieldDidReturn: {
+                        tab1.tabBarItem.title = tabLabel.text
+                        textField.firstResponder = false;
+                    }
+                    textFieldShouldChangeCharactersInRange: function(textField, range, str) { return str !== 'x'; }
+                    textFieldShouldReturn: tabLabel.text !== "Foo"
+                }
+            }
+
+            Component {
+                id: newTab
+                NewTab {}
+            }
+        }
     }
 }

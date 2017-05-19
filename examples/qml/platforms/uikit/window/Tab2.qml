@@ -42,17 +42,29 @@ import QtQml 2.0
 import QtQuick 2.5
 import Qt.UniUIKitControls 1.0
 
-Window {
-    id: window
-    visible: true
-    rootViewController: tabBarController
+ViewController {
+    id: tab2
 
-    TabBarController {
-        id: tabBarController
-        viewControllers: [
-            Tab1 {},
-            Tab2 {},
-            Tab3 {}
-        ]
+    tabBarItem: TabBarItem {
+        title: "Tab 2"
+    }
+
+    view: View {
+        backgroundColor: Qt.rgba(255, 255, 0, 255)
+
+        View {
+            y: 30
+            width: parent.width
+            height: parent.height
+            backgroundColor: Qt.rgba(0, 255, 0, 255)
+
+            Button {
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+                text: "click me to set tab 2"
+                onClicked: rootViewController.selectedIndex = 2
+                backgroundColor: Qt.rgba(0, 0, 255, 255)
+            }
+        }
     }
 }

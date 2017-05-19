@@ -42,17 +42,37 @@ import QtQml 2.0
 import QtQuick 2.5
 import Qt.UniUIKitControls 1.0
 
-Window {
-    id: window
-    visible: true
-    rootViewController: tabBarController
+ViewController {
+    id: tab
 
-    TabBarController {
-        id: tabBarController
-        viewControllers: [
-            Tab1 {},
-            Tab2 {},
-            Tab3 {}
-        ]
+    tabBarItem: TabBarItem {
+        title: "NewTab"
+    }
+
+    view: View {
+        backgroundColor: Qt.rgba(255, 255, 0, 255)
+
+        View {
+            y: 30
+            width: parent.width
+            height: parent.height
+            backgroundColor: Qt.rgba(0, 255, 0, 255)
+
+            Button {
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+                text: "Click to remove this tab"
+                onClicked: {
+                    var vc = tabBarController.viewControllers
+                    var newlist = []
+                    for (var i = 0; i < vc.length; ++i) {
+                        if (vc[i] !== tab)
+                            newlist.push(vc[i])
+                    }
+                    tabBarController.viewControllers = newlist
+                }
+                backgroundColor: Qt.rgba(0, 0, 255, 255)
+            }
+        }
     }
 }

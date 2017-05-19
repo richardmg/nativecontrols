@@ -42,17 +42,61 @@ import QtQml 2.0
 import QtQuick 2.5
 import Qt.UniUIKitControls 1.0
 
-Window {
-    id: window
-    visible: true
-    rootViewController: tabBarController
+ViewController {
+    id: tab3
 
-    TabBarController {
-        id: tabBarController
-        viewControllers: [
-            Tab1 {},
-            Tab2 {},
-            Tab3 {}
-        ]
+    tabBarItem: TabBarItem {
+        title: "Tab 3"
+    }
+
+    view: View {
+
+        TableView {
+            y: 30
+            width: parent.width
+            height: parent.height;
+            dataSource: planetsDataSource
+        }
+
+        TableViewDataSource {
+            id: planetsDataSource
+            property var planets: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptun"]
+            property var distances: ["0.39", "0.72", "1", "1.52", "1.52", "5.20", "9.53", "19.18", "30.06"]
+
+            numberOfSectionsInTableView: 10
+            numberOfRowsInSection: planets.length
+
+            titleForHeaderInSection: function(tableView, section) {
+                return "Section " + section;
+            }
+
+            sectionIndexTitlesForTableView: function(tableView) {
+                var titles = [];
+                var sectionCount = numberOfSectionsInTableView(tableView);
+                for (var i = 0; i < sectionCount; ++i)
+                    titles[i]  = "Section " + i;
+                return titles;
+            }
+
+            cellForRowAtIndexPath: function(tableView, indexPath) {
+                var reuseId = "planetcell" + (indexPath.section % 2);
+                var cell = tableView.dequeueReusableCellWithIdentifier(reuseId);
+                if (cell === null)
+                    cell = planetsCellComponent.createObject(tableView, { reuseIdentifier: reuseId, section: indexPath.section });
+
+                cell.textLabel.text = planets[indexPath.row];
+                cell.detailTextLabel.text = distances[indexPath.row] + " AU"
+                return cell;
+            }
+
+            Component {
+                id: planetsCellComponent
+                TableViewCell {
+                    property var section
+                    cellStyle: TableViewCell.StyleValue1
+                    backgroundColor: section % 2 ? Qt.rgba(0.90, 0.90, 0.95, 255) : Qt.rgba(1., 1., 1. ,255)
+                }
+            }
+        }
     }
 }
