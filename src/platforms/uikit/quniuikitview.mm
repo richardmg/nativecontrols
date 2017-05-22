@@ -218,10 +218,17 @@ void QUniUIKitViewPrivate::setAlignmentRect(CGRect rect)
     view().frame = [view() frameForAlignmentRect:rect];
 }
 
-void QUniUIKitViewPrivate::setGeometry(const QRectF &rect)
+void QUniUIKitViewPrivate::updateGeometry()
 {
+    // When assigning a frame to a uiview, UIKit might modify the frame so that
+    // it ends up with a positive width and height. This causes problems if you bind
+    // e.g 'x: 10', and then width ends up negative, since then UIKit will 'swap' x and
+    // width. So to ensure that we don't loose the original x, we need to remember the
+    // requested geometry. But at the same time, we always return the actual geometry/frame
+    // when queried by the app.
+
     @try {
-        setAlignmentRect(rect.toCGRect());
+        setAlignmentRect(m_requestedGeometry.toCGRect());
     } @catch (NSException *) {
         // QML can sometimes end up evaluating a geometry
         // binding to NaN. And trying to set that on a UIView
@@ -413,12 +420,11 @@ void QUniUIKitView::setX(qreal newX)
     Q_D(QUniUIKitView);
     d->setAttribute(QUniUIKitViewPrivate::MovedX);
 
-    if (newX == x())
+    if (newX == d->m_requestedGeometry.x())
         return;
 
-    QRectF g = geometry();
-    g.moveLeft(newX);
-    d_func()->setGeometry(g);
+    d->m_requestedGeometry.moveLeft(newX);
+    d->updateGeometry();
 }
 
 qreal QUniUIKitView::y() const
@@ -431,12 +437,11 @@ void QUniUIKitView::setY(qreal newY)
     Q_D(QUniUIKitView);
     d->setAttribute(QUniUIKitViewPrivate::MovedY);
 
-    if (newY == y())
+    if (newY == d->m_requestedGeometry.y())
         return;
 
-    QRectF g = geometry();
-    g.moveTop(newY);
-    d_func()->setGeometry(g);
+    d->m_requestedGeometry.moveTop(newY);
+    d->updateGeometry();
 }
 
 qreal QUniUIKitView::width() const
@@ -449,12 +454,11 @@ void QUniUIKitView::setWidth(qreal newWidth)
     Q_D(QUniUIKitView);
     d->setAttribute(QUniUIKitViewPrivate::ResizedWidth);
 
-    if (newWidth == width())
+    if (newWidth == d->m_requestedGeometry.width())
         return;
 
-    QRectF g = geometry();
-    g.setWidth(newWidth);
-    d_func()->setGeometry(g);
+    d->m_requestedGeometry.setWidth(newWidth);
+    d->updateGeometry();
 }
 
 qreal QUniUIKitView::height() const
@@ -467,12 +471,11 @@ void QUniUIKitView::setHeight(qreal newHeight)
     Q_D(QUniUIKitView);
     d->setAttribute(QUniUIKitViewPrivate::ResizedHeight);
 
-    if (newHeight == height())
+    if (newHeight == d->m_requestedGeometry.height())
         return;
 
-    QRectF g = geometry();
-    g.setHeight(newHeight);
-    d_func()->setGeometry(g);
+    d->m_requestedGeometry.setHeight(newHeight);
+    d->updateGeometry();
 }
 
 qreal QUniUIKitView::left() const

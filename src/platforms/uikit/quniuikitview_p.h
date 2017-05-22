@@ -65,17 +65,16 @@ public:
 
     UIView *view() const;
     void addSubView(UIView *subView);
-
-    CGRect alignmentRect() const;
-    void setAlignmentRect(CGRect rect);
-    void setGeometry(const QRectF &rect);
-
-    void emitGeometryChanged();
-
-    void initConnections();
     void updateIntrinsicContentSize();
 
     Q_DECLARE_PUBLIC(QUniUIKitView)
+
+private:
+    CGRect alignmentRect() const;
+    void setAlignmentRect(CGRect rect);
+    void updateGeometry();
+    void emitGeometryChanged();
+    void initConnections();
 
 protected:
     // Attributes to keep track of explicit
@@ -106,6 +105,7 @@ protected:
 private:
     QSizeF m_intrinsicContentSize;
     QRectF m_lastEmittedGeometry;
+    QRectF m_requestedGeometry;
     QUniUIKitViewDelegate *m_delegate;
 };
 
