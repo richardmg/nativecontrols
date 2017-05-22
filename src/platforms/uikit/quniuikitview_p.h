@@ -63,9 +63,22 @@ public:
     explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitViewPrivate();
 
+    // Attributes to keep track of explicit
+    // application assignments
+    enum Attribute {
+        MovedX			= 0x00000002,
+        MovedY			= 0x00000004,
+        ResizedWidth	= 0x00000008,
+        ResizedHeight	= 0x00000010
+    };
+    Q_DECLARE_FLAGS(Attributes, Attribute)
+
     UIView *view() const;
     void addSubView(UIView *subView);
     void updateIntrinsicContentSize();
+
+    void onFrameChangedCallback();
+    void onEmitGeometryChangesLater();
 
     Q_DECLARE_PUBLIC(QUniUIKitView)
 
@@ -73,20 +86,10 @@ private:
     CGRect alignmentRect() const;
     void setAlignmentRect(CGRect rect);
     void updateGeometry();
-    void emitGeometryChanged();
     void initConnections();
+    void emitGeometryChanges(Attributes emitFlags);
 
 protected:
-    // Attributes to keep track of explicit
-    // application assignments
-    enum Attribute {
-        MovedX			= 0x00000002,
-        MovedY			= 0x00000004,
-        ResizedWidth	= 0x00000008,
-        ResizedHeight	= 0x00000010,
-    };
-
-    uint m_attributes;
 
     inline void setAttribute(Attribute attribute, bool on = true)
     {
@@ -103,10 +106,15 @@ protected:
     virtual void setNSObject(NSObject *nsObject) override;
 
 private:
-    QSizeF m_intrinsicContentSize;
-    QRectF m_lastEmittedGeometry;
-    QRectF m_requestedGeometry;
+    Attributes m_attributes;
     QUniUIKitViewDelegate *m_delegate;
+    QSizeF m_intrinsicContentSize;
+    QRectF m_currentGeometry;
+    Attributes m_kvoEmitMask;
+    Attributes m_qeventEmitMask;
+
+public:
+    QRectF m_requestedGeometry;
 };
 
 QT_END_NAMESPACE

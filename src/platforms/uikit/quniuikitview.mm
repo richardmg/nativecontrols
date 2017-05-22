@@ -42,6 +42,7 @@
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
 
 static void *KVOFrameChanged = &KVOFrameChanged;
+const QEvent::Type kEventTypeEmitGeometryChangesLater = QEvent::User;
 
 @interface QPlainUIKitView : UIView
 @property (nonatomic, readwrite) CGSize intrinsicContentSize;
@@ -74,7 +75,7 @@ static void *KVOFrameChanged = &KVOFrameChanged;
     Q_UNUSED(change);
 
     if (context == KVOFrameChanged)
-        _view->emitGeometryChanged();
+        _view->onFrameChangedCallback();
     else
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
@@ -86,6 +87,8 @@ QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     : QUniUIKitResponderPrivate(version)
     , m_attributes(0)
     , m_delegate(nullptr)
+    , m_kvoEmitMask(0)
+    , m_qeventEmitMask(0)
 {
 }
 
@@ -121,25 +124,78 @@ void QUniUIKitViewPrivate::initConnections()
     q->connect(q, &QUniUIKitView::heightChanged, q, &QUniUIKitView::bottomChanged);
 }
 
-void QUniUIKitViewPrivate::emitGeometryChanged()
+void QUniUIKitViewPrivate::onFrameChangedCallback()
 {
     Q_Q(QUniUIKitView);
+    // This callback can either happen synchronously when setting geometry (frame)
+    // from QUniUIKitView, or because of spontanious changes from UIKit (e.g orientation
+    // change). In the former case we set a m_kvoEmitMask in the setter function
+    // so we know which signal to emit. Otherwise we emit signals for all detected
+    // changes.
+    // The problem is that when we assign a frame to a uiview, UIKit might modify the
+    // frame so that it ends up with a positive width and height. This causes problems
+    // if you bind width to e.g 'width: parent.width - x', since if the expression ends
+    // up negative, UIKit will 'flip' x and width, which means that we need to emit changed
+    // signals for both. But, we can only emit a signal for the property currently being set
+    // from QML, otherwise we can cause binding loops to happen (e.g if we emit xChanged in
+    // the binding example above, when it sets a new width). As such, we need to emit the
+    // remaining properties async later.
 
-    // Update m_lastEmittedFrame before emitting signals
-    // to avoid recursive binding loops. This can happen if
-    // e.g changing width causes x to changes as well, since
-    // then we enter here recursively.
+    Attributes changedMask = 0;
+    QRectF actualGeometry = q->geometry();
+
+    if (m_currentGeometry.x() != actualGeometry.x())
+        changedMask |= MovedX;
+    if (m_currentGeometry.y() != actualGeometry.y())
+        changedMask |= MovedY;
+    if (m_currentGeometry.width() != actualGeometry.width())
+        changedMask |= ResizedWidth;
+    if (m_currentGeometry.height() != actualGeometry.height())
+        changedMask |= ResizedHeight;
+
+    m_currentGeometry = actualGeometry;
+
+    if (m_kvoEmitMask == 0) {
+        // Spontanious update not related to setting a qproperty.
+        // Emit changes to all needed properties, and avoid emitting
+        // them once more later in case we have a pending
+        // kEventTypeEmitGeometryChangesLater posted.
+        m_kvoEmitMask = changedMask;
+        m_qeventEmitMask &= ~changedMask;
+    } else {
+        // Synchronous update as a result of setting a qproperty.
+        // If properties other than the one expected has changed
+        // as well, we need to post an event and handle those later.
+        if (m_kvoEmitMask != changedMask) {
+            m_qeventEmitMask |= (changedMask & ~m_kvoEmitMask);
+            qApp->postEvent(q, new QEvent(kEventTypeEmitGeometryChangesLater));
+        }
+    }
+
+    emitGeometryChanges(m_kvoEmitMask);
+    m_kvoEmitMask = 0;
+}
+
+void QUniUIKitViewPrivate::onEmitGeometryChangesLater()
+{
+    Q_Q(QUniUIKitView);
+    qApp->removePostedEvents(q, kEventTypeEmitGeometryChangesLater);
+    emitGeometryChanges(m_qeventEmitMask);
+    m_qeventEmitMask = 0;
+}
+
+void QUniUIKitViewPrivate::emitGeometryChanges(Attributes emitFlags)
+{
+    Q_Q(QUniUIKitView);
     QRectF geometry = q->geometry();
-    QRectF lastGeometry = m_lastEmittedGeometry;
-    m_lastEmittedGeometry = geometry;
 
-    if (geometry.x() != lastGeometry.x())
+    if (emitFlags & MovedX)
         emit q->xChanged(geometry.x());
-    if (geometry.y() != lastGeometry.y())
+    if (emitFlags & MovedY)
         emit q->yChanged(geometry.y());
-    if (geometry.width() != lastGeometry.width())
+    if (emitFlags & ResizedWidth)
         emit q->widthChanged(geometry.width());
-    if (geometry.height() != lastGeometry.height())
+    if (emitFlags & ResizedHeight)
         emit q->heightChanged(geometry.height());
 }
 
@@ -423,6 +479,7 @@ void QUniUIKitView::setX(qreal newX)
     if (newX == d->m_requestedGeometry.x())
         return;
 
+    d->m_kvoEmitMask = QUniUIKitViewPrivate::MovedX;
     d->m_requestedGeometry.moveLeft(newX);
     d->updateGeometry();
 }
@@ -440,6 +497,7 @@ void QUniUIKitView::setY(qreal newY)
     if (newY == d->m_requestedGeometry.y())
         return;
 
+    d->m_kvoEmitMask = QUniUIKitViewPrivate::MovedY;
     d->m_requestedGeometry.moveTop(newY);
     d->updateGeometry();
 }
@@ -457,6 +515,7 @@ void QUniUIKitView::setWidth(qreal newWidth)
     if (newWidth == d->m_requestedGeometry.width())
         return;
 
+    d->m_kvoEmitMask = QUniUIKitViewPrivate::ResizedWidth;
     d->m_requestedGeometry.setWidth(newWidth);
     d->updateGeometry();
 }
@@ -474,6 +533,7 @@ void QUniUIKitView::setHeight(qreal newHeight)
     if (newHeight == d->m_requestedGeometry.height())
         return;
 
+    d->m_kvoEmitMask = QUniUIKitViewPrivate::ResizedHeight;
     d->m_requestedGeometry.setHeight(newHeight);
     d->updateGeometry();
 }
@@ -506,6 +566,19 @@ QUniUIKitView *QUniUIKitView::parentView()
 UIView *QUniUIKitView::uiViewHandle()
 {
    return d_func()->view();
+}
+
+bool QUniUIKitView::event(QEvent *event)
+{
+    Q_D(QUniUIKitView);
+    switch (event->type()) {
+    case kEventTypeEmitGeometryChangesLater:
+        d->onEmitGeometryChangesLater();
+        break;
+    default:
+        return QUniUIKitResponder::event(event);
+    }
+    return true;
 }
 
 void QUniUIKitView::childEvent(QChildEvent *event)

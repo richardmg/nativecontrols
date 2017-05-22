@@ -128,7 +128,8 @@ Q_SIGNALS:
 
 protected:
     QUniUIKitView(QUniUIKitViewPrivate &dd, QUniUIKitBase *parent = nullptr);
-    void childEvent(QChildEvent *event) override;
+    virtual bool event(QEvent *e) override;
+    virtual void childEvent(QChildEvent *event) override;
 
 private:
     Q_DECLARE_PRIVATE(QUniUIKitView)
