@@ -56,7 +56,6 @@ ViewController {
             y: 30
             width: parent.width
             height: parent.height
-            backgroundColor: Qt.rgba(0, 255, 0, 255)
 
             Button {
                 width: intrinsicContentWidth
@@ -71,7 +70,6 @@ ViewController {
                     }
                     tabBarController.viewControllers = newlist
                 }
-                backgroundColor: Qt.rgba(0, 0, 255, 255)
             }
         }
     }

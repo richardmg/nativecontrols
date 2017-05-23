@@ -72,6 +72,7 @@ ViewController {
                 x: 10
                 y: addTabButton.bottom + 10
                 text: "Tab 1"
+                backgroundColor: Qt.rgba(sliderRed.value, sliderGreen.value, sliderBlue.value, 1)
 
                 delegate: TextFieldDelegate {
                     onTextFieldDidReturn: {
@@ -84,11 +85,30 @@ ViewController {
             }
 
             Slider {
-                id: slider
+                id: sliderRed
                 x: 50
                 y: tabLabel.bottom + 10
                 width: parent.width - (x * 2)
                 height: intrinsicContentHeight
+                value: 1
+            }
+
+            Slider {
+                id: sliderGreen
+                x: sliderRed.x
+                y: sliderRed.bottom + 10
+                width: sliderRed.width
+                height: intrinsicContentHeight
+                value: 1
+            }
+
+            Slider {
+                id: sliderBlue
+                x: sliderRed.x
+                y: sliderGreen.bottom + 10
+                width: sliderRed.width
+                height: intrinsicContentHeight
+                value: 1
             }
 
             Component {

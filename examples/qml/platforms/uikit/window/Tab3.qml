@@ -54,7 +54,7 @@ ViewController {
         TableView {
             y: 30
             width: parent.width
-            height: parent.height;
+            height: parent.height - y;
             dataSource: planetsDataSource
         }
 
