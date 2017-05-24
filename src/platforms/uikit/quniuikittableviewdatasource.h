@@ -60,7 +60,7 @@ public:
     QUniUIKitTableViewDataSource(QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitTableViewDataSource();
 
-    NSObject *uiTableViewDataSourceHandle() const;
+    NSObject *uiTableViewDataSourceHandle();
 
     QJSValue numberOfSectionsInTableView() const;
     void setNumberOfSectionsInTableView(const QJSValue &value);

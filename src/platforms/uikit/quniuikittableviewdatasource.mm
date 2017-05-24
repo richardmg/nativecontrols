@@ -134,12 +134,15 @@ QT_BEGIN_NAMESPACE
 QUniUIKitTableViewDataSourcePrivate::QUniUIKitTableViewDataSourcePrivate(int version)
     : QUniUIKitBasePrivate(version)
 {
-    m_dataSource = [[QUniUITableViewDataSource alloc] initWithQUniUIKitTableViewDataSourcePrivate:this];
 }
 
 QUniUIKitTableViewDataSourcePrivate::~QUniUIKitTableViewDataSourcePrivate()
 {
-    [m_dataSource release];
+}
+
+void QUniUIKitTableViewDataSourcePrivate::createNSObject()
+{
+    setNSObject([[[QUniUITableViewDataSource alloc] initWithQUniUIKitTableViewDataSourcePrivate:this] autorelease]);
 }
 
 QUniUIKitTableViewDataSource::QUniUIKitTableViewDataSource(QUniUIKitBase *parent)
@@ -151,9 +154,9 @@ QUniUIKitTableViewDataSource::~QUniUIKitTableViewDataSource()
 {
 }
 
-NSObject *QUniUIKitTableViewDataSource::uiTableViewDataSourceHandle() const
+NSObject *QUniUIKitTableViewDataSource::uiTableViewDataSourceHandle()
 {
-    return d_func()->m_dataSource;
+    return d_func()->nsObject();
 }
 
 IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, numberOfSectionsInTableView, setNumberOfSectionsInTableView, toInt)

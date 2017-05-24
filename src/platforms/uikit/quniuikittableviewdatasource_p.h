@@ -72,9 +72,10 @@ public:
     QJSValue m_titleForHeaderInSection;
     QJSValue m_titleForFooterInSection;
 
-    id<UITableViewDataSource> m_dataSource;
-
     Q_DECLARE_PUBLIC(QUniUIKitTableViewDataSource)
+
+protected:
+    void createNSObject() override;
 };
 
 QT_END_NAMESPACE
