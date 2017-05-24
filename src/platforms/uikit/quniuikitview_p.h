@@ -110,8 +110,8 @@ private:
     QUniUIKitViewDelegate *m_delegate;
     QSizeF m_intrinsicContentSize;
     QRectF m_currentGeometry;
-    Attributes m_kvoEmitMask;
-    Attributes m_qeventEmitMask;
+    Attributes m_emitMaskToUseOnFrameChanged;
+    Attributes m_delayedEmitMask;
 
 public:
     QRectF m_requestedGeometry;

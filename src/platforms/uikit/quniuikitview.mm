@@ -87,8 +87,8 @@ QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     : QUniUIKitResponderPrivate(version)
     , m_attributes(0)
     , m_delegate(nullptr)
-    , m_kvoEmitMask(0)
-    , m_qeventEmitMask(0)
+    , m_emitMaskToUseOnFrameChanged(0)
+    , m_delayedEmitMask(0)
 {
 }
 
@@ -155,33 +155,34 @@ void QUniUIKitViewPrivate::onFrameChangedCallback()
 
     m_currentGeometry = actualGeometry;
 
-    if (m_kvoEmitMask == 0) {
+    if (m_emitMaskToUseOnFrameChanged == 0) {
         // Spontanious update not related to setting a qproperty.
-        // Emit changes to all needed properties, and avoid emitting
-        // them once more later in case we have a pending
-        // kEventTypeEmitGeometryChangesLater posted.
-        m_kvoEmitMask = changedMask;
-        m_qeventEmitMask &= ~changedMask;
+        // Emit changes to all needed properties.
+        m_emitMaskToUseOnFrameChanged = changedMask;
     } else {
-        // Synchronous update as a result of setting a qproperty.
-        // If properties other than the one expected has changed
-        // as well, we need to post an event and handle those later.
-        if (m_kvoEmitMask != changedMask) {
-            m_qeventEmitMask |= (changedMask & ~m_kvoEmitMask);
+        // Synchronous update as a result of setting a qproperty
+        if (m_emitMaskToUseOnFrameChanged != changedMask) {
+            // Properties other than the one expected has changed, so
+            // we need to post an event and handle those later.
+            m_delayedEmitMask |= changedMask;
             qApp->postEvent(q, new QEvent(kEventTypeEmitGeometryChangesLater));
         }
     }
 
-    emitGeometryChanges(m_kvoEmitMask);
-    m_kvoEmitMask = 0;
+    // Since we are about to emit the changes in m_kvoEmitMask, we can
+    // remove them from m_qeventEmitMask so we don't emit them once more later.
+    m_delayedEmitMask &= ~m_emitMaskToUseOnFrameChanged;
+
+    emitGeometryChanges(m_emitMaskToUseOnFrameChanged);
+    m_emitMaskToUseOnFrameChanged = 0;
 }
 
 void QUniUIKitViewPrivate::onEmitGeometryChangesLater()
 {
     Q_Q(QUniUIKitView);
     qApp->removePostedEvents(q, kEventTypeEmitGeometryChangesLater);
-    emitGeometryChanges(m_qeventEmitMask);
-    m_qeventEmitMask = 0;
+    emitGeometryChanges(m_delayedEmitMask);
+    m_delayedEmitMask = 0;
 }
 
 void QUniUIKitViewPrivate::emitGeometryChanges(Attributes emitFlags)
@@ -479,7 +480,7 @@ void QUniUIKitView::setX(qreal newX)
     if (newX == d->m_requestedGeometry.x())
         return;
 
-    d->m_kvoEmitMask = QUniUIKitViewPrivate::MovedX;
+    d->m_emitMaskToUseOnFrameChanged = QUniUIKitViewPrivate::MovedX;
     d->m_requestedGeometry.moveLeft(newX);
     d->updateGeometry();
 }
@@ -497,7 +498,7 @@ void QUniUIKitView::setY(qreal newY)
     if (newY == d->m_requestedGeometry.y())
         return;
 
-    d->m_kvoEmitMask = QUniUIKitViewPrivate::MovedY;
+    d->m_emitMaskToUseOnFrameChanged = QUniUIKitViewPrivate::MovedY;
     d->m_requestedGeometry.moveTop(newY);
     d->updateGeometry();
 }
@@ -515,7 +516,7 @@ void QUniUIKitView::setWidth(qreal newWidth)
     if (newWidth == d->m_requestedGeometry.width())
         return;
 
-    d->m_kvoEmitMask = QUniUIKitViewPrivate::ResizedWidth;
+    d->m_emitMaskToUseOnFrameChanged = QUniUIKitViewPrivate::ResizedWidth;
     d->m_requestedGeometry.setWidth(newWidth);
     d->updateGeometry();
 }
@@ -533,7 +534,7 @@ void QUniUIKitView::setHeight(qreal newHeight)
     if (newHeight == d->m_requestedGeometry.height())
         return;
 
-    d->m_kvoEmitMask = QUniUIKitViewPrivate::ResizedHeight;
+    d->m_emitMaskToUseOnFrameChanged = QUniUIKitViewPrivate::ResizedHeight;
     d->m_requestedGeometry.setHeight(newHeight);
     d->updateGeometry();
 }
