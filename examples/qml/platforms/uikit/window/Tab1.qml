@@ -121,6 +121,16 @@ ViewController {
                 value: 1
             }
 
+            Button {
+                objectName: "addTabButton"
+                text: "ButtonTypeContactAdd"
+                x: 10
+                y: sliderAlpha.bottom + 10
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+                buttonType: Button.ButtonTypeContactAdd
+            }
+
             Component {
                 id: newTab
                 NewTab {}
