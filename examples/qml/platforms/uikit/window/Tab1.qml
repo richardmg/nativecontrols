@@ -73,6 +73,7 @@ ViewController {
                 y: addTabButton.bottom + 10
                 text: "Tab 1"
                 backgroundColor: Qt.rgba(sliderRed.value, sliderGreen.value, sliderBlue.value, 1)
+                alpha: sliderAlpha.value
 
                 delegate: TextFieldDelegate {
                     onTextFieldDidReturn: {
@@ -106,6 +107,15 @@ ViewController {
                 id: sliderBlue
                 x: sliderRed.x
                 y: sliderGreen.bottom + 10
+                width: sliderRed.width
+                height: intrinsicContentHeight
+                value: 1
+            }
+
+            Slider {
+                id: sliderAlpha
+                x: sliderRed.x
+                y: sliderBlue.bottom + 10
                 width: sliderRed.width
                 height: intrinsicContentHeight
                 value: 1
