@@ -73,9 +73,10 @@ public:
     QJSValue m_textFieldShouldReturn;
     QJSValue m_textFieldShouldChangeCharactersInRange;
 
-    id<UITextFieldDelegate> m_delegate;
-
     Q_DECLARE_PUBLIC(QUniUIKitTextFieldDelegate)
+
+protected:
+    void createNSObject() override;
 };
 
 QT_END_NAMESPACE

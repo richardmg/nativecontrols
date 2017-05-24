@@ -116,13 +116,16 @@ QT_BEGIN_NAMESPACE
 
 QUniUIKitTextFieldDelegatePrivate::QUniUIKitTextFieldDelegatePrivate(int version)
     : QUniUIKitBasePrivate(version)
-    , m_delegate([[QUniUITextFieldDelegate alloc] initWithQUniUIKitTextFieldDelegatePrivate:this])
 {
 }
 
 QUniUIKitTextFieldDelegatePrivate::~QUniUIKitTextFieldDelegatePrivate()
 {
-    [m_delegate release];
+}
+
+void QUniUIKitTextFieldDelegatePrivate::createNSObject()
+{
+    setNSObject([[[QUniUITextFieldDelegate alloc] initWithQUniUIKitTextFieldDelegatePrivate:this] autorelease]);
 }
 
 QUniUIKitTextFieldDelegate::QUniUIKitTextFieldDelegate(QUniUIKitBase *parent)
@@ -136,7 +139,7 @@ QUniUIKitTextFieldDelegate::~QUniUIKitTextFieldDelegate()
 
 NSObject *QUniUIKitTextFieldDelegate::uiTextFieldDelegateHandle() const
 {
-    return d_func()->m_delegate;
+    return d_func()->nsObject();
 }
 
 IMPLEMENT_PROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldBeginEditing, setTextFieldShouldBeginEditing, toBool)
