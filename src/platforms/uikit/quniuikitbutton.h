@@ -48,8 +48,19 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitButton : public QUniUIKitControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(ButtonType buttonType READ buttonType WRITE setButtonType NOTIFY buttonTypeChanged)
 
 public:
+    enum ButtonType {
+        ButtonTypeCustom,
+        ButtonTypeSystem,
+        ButtonTypeInfoLight,
+        ButtonTypeInfoDark,
+        ButtonTypeContactAdd,
+        ButtonTypeRoundedRect
+    };
+    Q_ENUM(ButtonType)
+
     QUniUIKitButton(QUniUIKitBase *parent = nullptr);
     QUniUIKitButton(const QString &text, QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitButton();
@@ -59,8 +70,12 @@ public:
     QString text() const;
     void setText(const QString &text);
 
+    ButtonType buttonType() const;
+    void setButtonType(ButtonType buttonType);
+
 Q_SIGNALS:
     void textChanged(const QString &text);
+    void buttonTypeChanged(ButtonType buttonType);
     void clicked();
 
 protected:

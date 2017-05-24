@@ -70,7 +70,11 @@ QT_BEGIN_NAMESPACE
 QUniUIKitButtonPrivate::QUniUIKitButtonPrivate(int version)
     : QUniUIKitControlPrivate(version)
     , m_delegate(nullptr)
+    , m_buttonType(QUniUIKitButton::ButtonTypeCustom)
 {
+    // Avoid mapping enum values directly to UIKit enum values in the enum
+    // declaration, since then we require all users of the header file to compile as obj-c++.
+    Q_ASSERT(int(QUniUIKitButton::ButtonTypeCustom) == int(UIButtonTypeCustom));
 }
 
 QUniUIKitButtonPrivate::~QUniUIKitButtonPrivate()
@@ -80,7 +84,7 @@ QUniUIKitButtonPrivate::~QUniUIKitButtonPrivate()
 
 void QUniUIKitButtonPrivate::createNSObject()
 {
-    UIButton *uiButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    UIButton *uiButton = [UIButton buttonWithType:static_cast<UIButtonType>(m_buttonType)];
     [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
     [uiButton sizeToFit];
 
@@ -134,6 +138,26 @@ void QUniUIKitButton::setText(const QString &newText)
     d_func()->updateIntrinsicContentSize();
 
     emit textChanged(newText);
+}
+
+QUniUIKitButton::ButtonType QUniUIKitButton::buttonType() const
+{
+    return d_func()->m_buttonType;
+}
+
+void QUniUIKitButton::setButtonType(QUniUIKitButton::ButtonType newButtonType)
+{
+    Q_D(QUniUIKitButton);
+    if (newButtonType == d->m_buttonType)
+        return;
+
+    if (d->isNSObjectCreated()) {
+        qWarning("Button: buttonType cannot change once the backing UIButton has been created!");
+        return;
+    }
+
+    d->m_buttonType = newButtonType;
+    emit buttonTypeChanged(newButtonType);
 }
 
 #include "moc_quniuikitbutton.cpp"

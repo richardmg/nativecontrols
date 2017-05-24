@@ -71,8 +71,8 @@ QUniUIKitTableViewCellPrivate::QUniUIKitTableViewCellPrivate(int version)
     , m_detailTextLabel(nullptr)
     , m_cellStyle(QUniUIKitTableViewCell::StyleDefault)
 {
-    // Avoid assiging UITableViewCellStyleDefault directly into the enum, since
-    // then we require all users of the header file to compile as obj-c++.
+    // Avoid mapping enum values directly to UIKit enum values in the enum
+    // declaration, since then we require all users of the header file to compile as obj-c++.
     Q_ASSERT(int(QUniUIKitTableViewCell::StyleDefault) == int(UITableViewCellStyleDefault));
 }
 

@@ -49,13 +49,11 @@
 //
 
 #include <QtCore>
-#include <QtCore/private/qobject_p.h>
-
+#include <QtUniUIKitControls/quniuikitbutton.h>
 #include <QtUniUIKitControls/private/quniuikitcontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QUniButton;
 class QUniUIKitButton;
 Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitButtonDelegate);
 
@@ -66,12 +64,15 @@ public:
     virtual ~QUniUIKitButtonPrivate();
 
     UIButton *uiButton() const;
+
     QUniUIKitButtonDelegate *m_delegate;
+    QUniUIKitButton::ButtonType m_buttonType;
 
     Q_DECLARE_PUBLIC(QUniUIKitButton)
 
 protected:
     void createNSObject() override;
+
 
 };
 
