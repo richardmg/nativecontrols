@@ -73,7 +73,6 @@ public:
 protected:
     void createNSObject() override;
 
-
 };
 
 QT_END_NAMESPACE

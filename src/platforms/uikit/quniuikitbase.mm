@@ -85,7 +85,8 @@ NSObject *QUniUIKitBasePrivate::nsObject() const
 #endif
         // The common case should be that we enter this block to lazy create the NSObject
         // we wrap when someone actually needs it (which is usually when properties
-        // are assigned values, or the object becomes a parent of some other object).
+        // are assigned values, or the object becomes a parent of some other object, or
+        // componentComplete).
         // But for subclasses that adopts an already existing NSObject, e.g to wrap read-only
         // UIView properties in other UIViews (like UITableViewCell.label), calling
         // setNSObject explicit during construction might be necessary.
@@ -128,6 +129,11 @@ void QUniUIKitBase::setParent(QUniUIKitBase *parentBase)
 QUniUIKitBase *QUniUIKitBase::parentBase()
 {
     return qobject_cast<QUniUIKitBase *>(parent());
+}
+
+void QUniUIKitBase::componentComplete()
+{
+    (void)d_func()->nsObject();
 }
 
 #include "moc_quniuikitbase.cpp"

@@ -39,21 +39,26 @@
 
 #include <QObject>
 #include <QQmlListProperty>
+#include <QtQml/qqmlparserstatus.h>
 #include <QtUniUIKitControls/quniuikitcontrolsglobal.h>
 
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitQmlBasePrivate;
 
-class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitQmlBase : public QObject
+class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitQmlBase : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
     Q_PRIVATE_PROPERTY(QUniUIKitQmlBase::d_func(), QQmlListProperty<QObject> data READ data DESIGNABLE false)
     Q_CLASSINFO("DefaultProperty", "data")
+    Q_INTERFACES(QQmlParserStatus)
 
 public:
     explicit QUniUIKitQmlBase(QUniUIKitQmlBase *parent = nullptr);
     virtual ~QUniUIKitQmlBase();
+
+    virtual void classBegin() override;
+    virtual void componentComplete() override;
 
 protected:
     QUniUIKitQmlBase(QUniUIKitQmlBasePrivate &dd, QUniUIKitQmlBase *parent = nullptr);

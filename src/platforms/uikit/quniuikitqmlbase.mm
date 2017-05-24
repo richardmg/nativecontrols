@@ -97,6 +97,14 @@ QUniUIKitQmlBase::~QUniUIKitQmlBase()
     // delete children in m_data?
 }
 
+void QUniUIKitQmlBase::classBegin()
+{
+}
+
+void QUniUIKitQmlBase::componentComplete()
+{
+}
+
 #include "moc_quniuikitqmlbase.cpp"
 
 QT_END_NAMESPACE

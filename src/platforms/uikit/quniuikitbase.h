@@ -23,6 +23,8 @@ public:
     void setParent(QUniUIKitBase *parent);
     QUniUIKitBase *parentBase();
 
+    virtual void componentComplete() override;
+
 Q_SIGNALS:
     void parentChanged(QUniUIKitBase *parent);
 
