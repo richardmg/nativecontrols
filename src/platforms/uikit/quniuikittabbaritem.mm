@@ -45,7 +45,6 @@ QT_BEGIN_NAMESPACE
 
 QUniUIKitTabBarItemPrivate::QUniUIKitTabBarItemPrivate(int version)
     : QUniUIKitBasePrivate(version)
-    , m_tabBarItem(nullptr)
 {
 }
 
@@ -53,11 +52,14 @@ QUniUIKitTabBarItemPrivate::~QUniUIKitTabBarItemPrivate()
 {
 }
 
-UITabBarItem *QUniUIKitTabBarItemPrivate::tabBarItem()
+UITabBarItem *QUniUIKitTabBarItemPrivate::tabBarItem() const
 {
-    if (!m_tabBarItem)
-        m_tabBarItem = [[UITabBarItem alloc] initWithTitle:@"" image:nil tag:1];
-    return m_tabBarItem;
+    return static_cast<UITabBarItem *>(nsObject());
+}
+
+void QUniUIKitTabBarItemPrivate::createNSObject()
+{
+    setNSObject([[[UITabBarItem alloc] initWithTitle:@"" image:nil tag:1] autorelease]);
 }
 
 UITabBarItem *QUniUIKitTabBarItem::uiTabBarItemHandle()

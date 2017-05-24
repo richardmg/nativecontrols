@@ -63,12 +63,12 @@ public:
     explicit QUniUIKitTabBarItemPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitTabBarItemPrivate();
 
-    UITabBarItem *tabBarItem();
+    UITabBarItem *tabBarItem() const;
 
     Q_DECLARE_PUBLIC(QUniUIKitTabBarItem)
 
-private:
-    UITabBarItem *m_tabBarItem;
+protected:
+    void createNSObject() override;
 };
 
 QT_END_NAMESPACE
