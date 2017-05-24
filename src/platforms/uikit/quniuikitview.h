@@ -50,6 +50,8 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitResponder
 {
     Q_OBJECT
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
+    Q_PROPERTY(float alpha READ alpha WRITE setAlpha NOTIFY alphaChanged)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged FINAL)
     Q_PROPERTY(qreal x READ x WRITE setX NOTIFY xChanged FINAL)
     Q_PROPERTY(qreal y READ y WRITE setY NOTIFY yChanged FINAL)
     Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY widthChanged FINAL)
@@ -60,7 +62,6 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitResponder
     Q_PROPERTY(qreal bottom READ bottom NOTIFY bottomChanged FINAL)
     Q_PROPERTY(qreal intrinsicContentWidth READ intrinsicContentWidth WRITE setIntrinsicContentWidth NOTIFY intrinsicContentWidthChanged FINAL)
     Q_PROPERTY(qreal intrinsicContentHeight READ intrinsicContentHeight WRITE setIntrinsicContentHeight NOTIFY intrinsicContentHeightChanged FINAL)
-    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged FINAL)
 
 public:
     QUniUIKitView(QUniUIKitBase *parent = nullptr);
@@ -69,6 +70,12 @@ public:
 
     bool visible() const;
     void setVisible(bool visible);
+
+    float alpha() const;
+    void setAlpha(float alpha);
+
+    QColor backgroundColor() const;
+    void setBackgroundColor(const QColor &color);
 
     QRectF geometry() const;
     void setGeometry(const QRectF &rect);
@@ -107,15 +114,14 @@ public:
     qreal intrinsicContentHeight() const;
     void setIntrinsicContentHeight(qreal height);
 
-    QColor backgroundColor() const;
-    void setBackgroundColor(const QColor &color);
-
     QUniUIKitView *parentView();
 
     UIView *uiViewHandle();
 
 Q_SIGNALS:
     void visibleChanged(bool visible);
+    void backgroundColorChanged(const QColor &color);
+    void alphaChanged(float alpha);
     void xChanged(qreal x);
     void yChanged(qreal y);
     void widthChanged(qreal w);
@@ -124,7 +130,6 @@ Q_SIGNALS:
     void bottomChanged(qreal bottom);
     void intrinsicContentWidthChanged(qreal w);
     void intrinsicContentHeightChanged(qreal h);
-    void backgroundColorChanged(const QColor &color);
 
 protected:
     QUniUIKitView(QUniUIKitViewPrivate &dd, QUniUIKitBase *parent = nullptr);

@@ -569,6 +569,20 @@ UIView *QUniUIKitView::uiViewHandle()
    return d_func()->view();
 }
 
+float QUniUIKitView::alpha() const
+{
+    return d_func()->view().alpha;
+}
+
+void QUniUIKitView::setAlpha(float newAlpha)
+{
+    if (alpha() == newAlpha)
+        return;
+
+    uiViewHandle().alpha = newAlpha;
+    emit alphaChanged(newAlpha);
+}
+
 bool QUniUIKitView::event(QEvent *event)
 {
     Q_D(QUniUIKitView);
