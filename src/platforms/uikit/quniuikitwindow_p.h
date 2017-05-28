@@ -73,7 +73,6 @@ protected:
 
 private:
     QUniUIKitViewController *m_viewController;
-    bool m_viewControllerSetExplicit;
 };
 
 QT_END_NAMESPACE

@@ -50,7 +50,6 @@ QT_BEGIN_NAMESPACE
 QUniUIKitWindowPrivate::QUniUIKitWindowPrivate(int version)
     : QUniUIKitViewPrivate(version)
     , m_viewController(nullptr)
-    , m_viewControllerSetExplicit(false)
 {
 }
 
@@ -96,7 +95,6 @@ void QUniUIKitWindow::setRootViewController(QUniUIKitViewController *controller)
     if (d->m_viewController == controller)
         return;
 
-    d->m_viewControllerSetExplicit = true;
     d->m_viewController = controller;
     uiWindowHandle().rootViewController = d->m_viewController->uiViewControllerHandle();
     emit rootViewControllerChanged(controller);
@@ -108,10 +106,6 @@ QUniUIKitViewController *QUniUIKitWindow::rootViewController() const
     if (!d->m_viewController) {
         QUniUIKitWindow *self = const_cast<QUniUIKitWindow *>(this);
         self->setRootViewController(new QUniUIKitViewController(self));
-        // Keep track of whether or not the view controller was created
-        // by ourselves, in case we accidentally create one before
-        // the app gets around to add one as a child.
-        const_cast<QUniUIKitWindowPrivate *>(d)->m_viewControllerSetExplicit = false;
     }
     return d->m_viewController;
 }
