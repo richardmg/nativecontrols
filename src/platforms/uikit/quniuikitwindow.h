@@ -55,18 +55,8 @@ public:
     QUniUIKitWindow();
     virtual ~QUniUIKitWindow();
 
-    bool isVisible() const;
     void setVisible(bool isVisible);
     void showFullScreen();
-
-    QRectF geometry() const;
-    void setGeometry(const QRectF &) {}
-
-    void setPosition(const QPointF &) {}
-    void resize(const QSizeF &) {}
-
-    qreal width() const;
-    qreal height() const;
 
     void setRootViewController(QUniUIKitViewController *rootViewController);
     QUniUIKitViewController *rootViewController() const;

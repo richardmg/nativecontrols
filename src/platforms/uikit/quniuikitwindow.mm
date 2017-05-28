@@ -43,6 +43,7 @@
 #include <QtUniUIKitControls/private/quniuikitwindow_p.h>
 #include <QtUniUIKitControls/private/quniuikitviewcontroller_p.h>
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -115,24 +116,9 @@ QUniUIKitViewController *QUniUIKitWindow::rootViewController() const
     return d->m_viewController;
 }
 
-qreal QUniUIKitWindow::width() const
-{
-    return geometry().width();
-}
-
-qreal QUniUIKitWindow::height() const
-{
-    return geometry().height();
-}
-
-bool QUniUIKitWindow::isVisible() const
-{
-    return !d_func()->view().hidden;
-}
-
 void QUniUIKitWindow::setVisible(bool newVisible)
 {
-    if (newVisible == isVisible())
+    if (newVisible == visible())
         return;
 
     [uiWindowHandle() makeKeyAndVisible];
@@ -143,11 +129,6 @@ void QUniUIKitWindow::setVisible(bool newVisible)
 void QUniUIKitWindow::showFullScreen()
 {
     setVisible(true);
-}
-
-QRectF QUniUIKitWindow::geometry() const
-{
-    return QRectF::fromCGRect(d_func()->view().frame);
 }
 
 #include "moc_quniuikitwindow.cpp"

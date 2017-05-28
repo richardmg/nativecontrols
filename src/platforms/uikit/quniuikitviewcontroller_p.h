@@ -75,6 +75,7 @@ public:
 
 protected:
     virtual void createNSObject() override;
+    virtual void setNSObject(NSObject *nsObject) override;
 
 private:
     QUniUIKitView *m_view;
