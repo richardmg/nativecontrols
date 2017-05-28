@@ -49,7 +49,7 @@ QT_BEGIN_NAMESPACE
 
 QUniUIKitWindowPrivate::QUniUIKitWindowPrivate(int version)
     : QUniUIKitViewPrivate(version)
-    , m_viewController(nullptr)
+    , m_rootViewController(nullptr)
 {
 }
 
@@ -67,7 +67,32 @@ void QUniUIKitWindowPrivate::addSubViewToContentView(UIView *uiView)
 
 void QUniUIKitWindowPrivate::createNSObject()
 {
+    if (!m_rootViewController)
+        m_rootViewController = new QUniUIKitViewController(q_func());
+
     setNSObject([[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]);
+}
+
+void QUniUIKitWindowPrivate::setNSObject(NSObject *nsObject)
+{
+    QUniUIKitViewPrivate::setNSObject(nsObject);
+
+    syncRootViewController();
+    if (m_visible)
+        [static_cast<UIWindow *>(nsObject) makeKeyAndVisible];
+}
+
+void QUniUIKitWindowPrivate::syncVisible()
+{
+    if (!m_visible)
+        return;
+
+    [q_func()->uiWindowHandle() makeKeyAndVisible];
+}
+
+void QUniUIKitWindowPrivate::syncRootViewController()
+{
+    q_func()->uiWindowHandle().rootViewController = m_rootViewController->uiViewControllerHandle();
 }
 
 QUniUIKitWindow::QUniUIKitWindow()
@@ -84,40 +109,12 @@ QUniUIKitWindow::~QUniUIKitWindow()
 {
 }
 
+IMPLEMENT_GETTER_AND_SETTER_POINTER(rootViewController, RootViewController, QUniUIKitViewController, QUniUIKitWindow)
+IMPLEMENT_GETTER_AND_SETTER(visible, Visible, bool, QUniUIKitWindow)
+
 UIWindow *QUniUIKitWindow::uiWindowHandle()
 {
     return static_cast<UIWindow *>(d_func()->view());
-}
-
-void QUniUIKitWindow::setRootViewController(QUniUIKitViewController *controller)
-{
-    Q_D(QUniUIKitWindow);
-    if (d->m_viewController == controller)
-        return;
-
-    d->m_viewController = controller;
-    uiWindowHandle().rootViewController = d->m_viewController->uiViewControllerHandle();
-    emit rootViewControllerChanged(controller);
-}
-
-QUniUIKitViewController *QUniUIKitWindow::rootViewController() const
-{
-    Q_D(const QUniUIKitWindow);
-    if (!d->m_viewController) {
-        QUniUIKitWindow *self = const_cast<QUniUIKitWindow *>(this);
-        self->setRootViewController(new QUniUIKitViewController(self));
-    }
-    return d->m_viewController;
-}
-
-void QUniUIKitWindow::setVisible(bool newVisible)
-{
-    if (newVisible == visible())
-        return;
-
-    [uiWindowHandle() makeKeyAndVisible];
-
-    emit visibleChanged(newVisible);
 }
 
 void QUniUIKitWindow::showFullScreen()

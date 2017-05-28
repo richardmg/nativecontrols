@@ -68,11 +68,16 @@ public:
 
     Q_DECLARE_PUBLIC(QUniUIKitWindow)
 
+private:
+    void syncVisible();
+    void syncRootViewController();
+
 protected:
-    void createNSObject() override;
+    virtual void createNSObject() override;
+    virtual void setNSObject(NSObject *nsObject) override;
 
 private:
-    QUniUIKitViewController *m_viewController;
+    QUniUIKitViewController *m_rootViewController;
 };
 
 QT_END_NAMESPACE

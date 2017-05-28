@@ -55,7 +55,8 @@ public:
     QUniUIKitWindow();
     virtual ~QUniUIKitWindow();
 
-    void setVisible(bool isVisible);
+    bool visible() const;
+    void setVisible(const bool &isVisible);
     void showFullScreen();
 
     void setRootViewController(QUniUIKitViewController *rootViewController);
