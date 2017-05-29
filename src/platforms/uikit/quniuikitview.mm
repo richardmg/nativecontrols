@@ -40,6 +40,7 @@
 
 #include <QtUniUIKitControls/quniuikitview.h>
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 static void *KVOFrameChanged = &KVOFrameChanged;
 const QEvent::Type kEventTypeEmitGeometryChangesLater = QEvent::User;
@@ -83,12 +84,33 @@ const QEvent::Type kEventTypeEmitGeometryChangesLater = QEvent::User;
 
 QT_BEGIN_NAMESPACE
 
+static UIColor *qt_toUIColor(const QColor &qcolor)
+{
+    return [UIColor
+            colorWithRed:qcolor.red()/ 255.
+            green:qcolor.green() / 255.
+            blue:qcolor.blue() / 255.
+            alpha:qcolor.alpha() / 255.];
+}
+
+//static QColor qt_nsColorToQColor(UIColor *uiColor)
+//{
+//    CGFloat r, g, b, a;
+//    [uiColor getRed:&r green:&g blue:&b alpha:&a];
+//    return QColor::fromRgba(qRgba(r * 255, g * 255, b * 255, a * 255));
+//}
+
 QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     : QUniUIKitResponderPrivate(version)
     , m_attributes(0)
     , m_delegate(nullptr)
+    , m_intrinsicContentWidth(-1)
+    , m_intrinsicContentHeight(-1)
     , m_emitMaskToUseOnFrameChanged(0)
     , m_delayedEmitMask(0)
+    , m_visible(true)
+    , m_alpha(1)
+    , m_backgroundColor(Qt::white)
 {
 }
 
@@ -142,7 +164,7 @@ void QUniUIKitViewPrivate::onFrameChangedCallback()
     // remaining properties async later.
 
     Attributes changedMask = 0;
-    QRectF actualGeometry = q->geometry();
+    QRectF actualGeometry = QRectF::fromCGRect(view().frame);
 
     if (m_currentGeometry.x() != actualGeometry.x())
         changedMask |= MovedX;
@@ -205,17 +227,16 @@ void QUniUIKitViewPrivate::updateIntrinsicContentSize()
     // This function should be called whenever the view
     // changes properties that can affect intrinsic size.
     Q_Q(QUniUIKitView);
-    QSizeF oldSize = m_intrinsicContentSize;
     CGSize newSize = view().intrinsicContentSize;
 
-    if (newSize.width != oldSize.width()) {
-        m_intrinsicContentSize.setWidth(newSize.width);
-        emit q->intrinsicContentWidthChanged(newSize.width);
+    if (m_intrinsicContentWidth != newSize.width) {
+        m_intrinsicContentWidth = newSize.width;
+        emit q->intrinsicContentWidthChanged(m_intrinsicContentWidth);
     }
 
-    if (newSize.height != oldSize.height()) {
-        m_intrinsicContentSize.setHeight(newSize.height);
-        emit q->intrinsicContentHeightChanged(newSize.height);
+    if (m_intrinsicContentWidth != newSize.height) {
+        m_intrinsicContentHeight = newSize.height;
+        emit q->intrinsicContentHeightChanged(m_intrinsicContentHeight);
     }
 }
 
@@ -226,12 +247,32 @@ UIView *QUniUIKitViewPrivate::view() const
 
 void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
 {
+    Q_Q(QUniUIKitView);
     QUniUIKitBasePrivate::setNSObject(nsObject);
 
-    if (QUniUIKitView *qparentView = q_func()->parentView()) {
-        // Let the UIView hierarchy mirror the QUniUIKitView hierarchy
-        qparentView->d_func()->addSubView(view());
+    UIView *v = static_cast<UIView *>(nsObject);
+
+    if (testAttribute(MovedX) || testAttribute(MovedY) || testAttribute(ResizedWidth) || testAttribute(ResizedHeight)) {
+        updateGeometry();
+    } else {
+        m_currentGeometry = QRectF::fromCGRect(view().frame);
+        emit q->xChanged(m_currentGeometry.x());
+        emit q->yChanged(m_currentGeometry.y());
+        emit q->heightChanged(m_currentGeometry.height());
+        emit q->widthChanged(m_currentGeometry.width());
     }
+
+    syncAlpha();
+    syncBackgroundColor();
+    syncVisible();
+
+    syncIntrinsicContentWidth();
+    syncIntrinsicContentHeight();
+    emit q->intrinsicContentWidthChanged(m_intrinsicContentWidth);
+    emit q->intrinsicContentHeightChanged(m_intrinsicContentHeight);
+
+    if (QUniUIKitView *qparentView = q->parentView())
+        qparentView->d_func()->addSubView(v);
 
     // UIKit will sometimes change the frame of a view on it's own.
     // This will e.g happen for the root view inside a view controller
@@ -242,7 +283,7 @@ void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
     // infamous KVO pattern to catch the frame changes for now, so that
     // we always emit signals when the frame changes.
     m_delegate = [[QUniUIKitViewDelegate alloc] initWithQUniUIKitViewPrivate:this];
-    [view() addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
+    [v addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
 }
 
 void QUniUIKitViewPrivate::createNSObject()
@@ -285,7 +326,7 @@ void QUniUIKitViewPrivate::updateGeometry()
     // when queried by the app.
 
     @try {
-        setAlignmentRect(m_requestedGeometry.toCGRect());
+        setAlignmentRect(m_currentGeometry.toCGRect());
     } @catch (NSException *) {
         // QML can sometimes end up evaluating a geometry
         // binding to NaN. And trying to set that on a UIView
@@ -293,6 +334,47 @@ void QUniUIKitViewPrivate::updateGeometry()
         // thrown. We choose to ignore this here, and trust the
         // app to set a valid geometry later.
     }
+}
+
+void QUniUIKitViewPrivate::syncIntrinsicContentWidth()
+{
+    if (m_intrinsicContentWidth == -1)
+        return;
+    if (![view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
+        qWarning("Warning: Cannot set intrinsicContentHeight for %s",
+                 qPrintable(QString::fromNSString(NSStringFromClass([view() class]))));
+        return;
+    }
+    CGSize size = CGSizeMake(m_intrinsicContentWidth, m_intrinsicContentHeight);
+    static_cast<QPlainUIKitView *>(view()).intrinsicContentSize = size;
+}
+
+void QUniUIKitViewPrivate::syncIntrinsicContentHeight()
+{
+    if (m_intrinsicContentHeight == -1)
+        return;
+    if (![view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
+        qWarning("Warning: Cannot set intrinsicContentHeight for %s",
+                 qPrintable(QString::fromNSString(NSStringFromClass([view() class]))));
+        return;
+    }
+    CGSize size = CGSizeMake(m_intrinsicContentWidth, m_intrinsicContentHeight);
+    static_cast<QPlainUIKitView *>(view()).intrinsicContentSize = size;
+}
+
+void QUniUIKitViewPrivate::syncVisible()
+{
+    view().hidden = !m_visible;
+}
+
+void QUniUIKitViewPrivate::syncAlpha()
+{
+    view().alpha = m_alpha;
+}
+
+void QUniUIKitViewPrivate::syncBackgroundColor()
+{
+    view().backgroundColor = qt_toUIColor(m_backgroundColor);
 }
 
 QUniUIKitView::QUniUIKitView(QUniUIKitBase *parent)
@@ -319,21 +401,11 @@ QUniUIKitView::~QUniUIKitView()
 {
 }
 
-bool QUniUIKitView::visible() const
-{
-    return !d_func()->view().hidden;
-}
-
-void QUniUIKitView::setVisible(bool newVisible)
-{
-    if (newVisible == visible())
-        return;
-
-    Q_D(QUniUIKitView);
-    d->view().hidden = !newVisible;
-
-    emit visibleChanged(newVisible);
-}
+IMPLEMENT_GETTER_AND_SETTER(intrinsicContentWidth, IntrinsicContentWidth, qreal, QUniUIKitView)
+IMPLEMENT_GETTER_AND_SETTER(intrinsicContentHeight, IntrinsicContentHeight, qreal, QUniUIKitView)
+IMPLEMENT_GETTER_AND_SETTER(visible, Visible, bool, QUniUIKitView)
+IMPLEMENT_GETTER_AND_SETTER(alpha, Alpha, qreal, QUniUIKitView)
+IMPLEMENT_GETTER_AND_SETTER(backgroundColor, BackgroundColor, QColor, QUniUIKitView)
 
 void QUniUIKitView::setGeometry(const QRectF &rect)
 {
@@ -377,7 +449,8 @@ void QUniUIKitView::resize(const QSizeF size)
 
 QSizeF QUniUIKitView::intrinsicSize() const
 {
-    return QSizeF::fromCGSize(d_func()->view().intrinsicContentSize);
+    Q_D(const QUniUIKitView);
+    return QSizeF(d->m_intrinsicContentWidth, d->m_intrinsicContentHeight);
 }
 
 void QUniUIKitView::setIntrinsicSize(const QSizeF &size)
@@ -386,80 +459,9 @@ void QUniUIKitView::setIntrinsicSize(const QSizeF &size)
     setIntrinsicContentHeight(size.height());
 }
 
-qreal QUniUIKitView::intrinsicContentWidth() const
-{
-    return d_func()->view().intrinsicContentSize.width;
-}
-
-void QUniUIKitView::setIntrinsicContentWidth(qreal width)
-{
-    Q_D(QUniUIKitView);
-
-    CGSize size = d->view().intrinsicContentSize;
-    if (width == size.width)
-        return;
-
-    if (![d->view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
-        qWarning("Warning: Cannot set intrinsicContentWidth for %s",
-                 qPrintable(QString::fromNSString(NSStringFromClass([d->view() class]))));
-        return;
-    }
-
-    size.width = width;
-    static_cast<QPlainUIKitView *>(d->view()).intrinsicContentSize = size;
-
-    emit intrinsicContentWidthChanged(width);
-}
-
-qreal QUniUIKitView::intrinsicContentHeight() const
-{
-    return d_func()->view().intrinsicContentSize.height;
-}
-
-void QUniUIKitView::setIntrinsicContentHeight(qreal height)
-{
-    Q_D(QUniUIKitView);
-
-    CGSize size = d->view().intrinsicContentSize;
-    if (height == size.height)
-        return;
-
-    if (![d->view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
-        qWarning("Warning: Cannot set intrinsicContentHeight for %s",
-                 qPrintable(QString::fromNSString(NSStringFromClass([d->view() class]))));
-        return;
-    }
-
-    size.height = height;
-    static_cast<QPlainUIKitView *>(d->view()).intrinsicContentSize = size;
-
-    emit intrinsicContentHeightChanged(height);
-}
-
-QColor QUniUIKitView::backgroundColor() const
-{
-    CGFloat r, g, b, a;
-    [d_func()->view().backgroundColor getRed:&r green:&g blue:&b alpha:&a];
-    return QColor::fromRgba(qRgba(r * 255, g * 255, b * 255, a * 255));
-}
-
-void QUniUIKitView::setBackgroundColor(const QColor &color)
-{
-    if (backgroundColor() == color)
-        return;
-
-    uiViewHandle().backgroundColor = [UIColor
-            colorWithRed:color.red() / 255.
-            green:color.green() / 255.
-            blue:color.blue() / 255.
-            alpha:color.alpha() / 255.];
-
-    emit backgroundColorChanged(color);
-}
-
 QRectF QUniUIKitView::geometry() const
 {
-    return QRectF::fromCGRect(d_func()->alignmentRect());
+    return d_func()->m_currentGeometry;
 }
 
 QRectF QUniUIKitView::frameGeometry() const
@@ -477,11 +479,14 @@ void QUniUIKitView::setX(qreal newX)
     Q_D(QUniUIKitView);
     d->setAttribute(QUniUIKitViewPrivate::MovedX);
 
-    if (newX == d->m_requestedGeometry.x())
+    if (newX == d->m_currentGeometry.x())
+        return;
+
+    d->m_currentGeometry.moveLeft(newX);
+    if (!d->isNSObjectCreated())
         return;
 
     d->m_emitMaskToUseOnFrameChanged = QUniUIKitViewPrivate::MovedX;
-    d->m_requestedGeometry.moveLeft(newX);
     d->updateGeometry();
 }
 
@@ -495,11 +500,14 @@ void QUniUIKitView::setY(qreal newY)
     Q_D(QUniUIKitView);
     d->setAttribute(QUniUIKitViewPrivate::MovedY);
 
-    if (newY == d->m_requestedGeometry.y())
+    if (newY == d->m_currentGeometry.y())
+        return;
+
+    d->m_currentGeometry.moveTop(newY);
+    if (!d->isNSObjectCreated())
         return;
 
     d->m_emitMaskToUseOnFrameChanged = QUniUIKitViewPrivate::MovedY;
-    d->m_requestedGeometry.moveTop(newY);
     d->updateGeometry();
 }
 
@@ -513,11 +521,14 @@ void QUniUIKitView::setWidth(qreal newWidth)
     Q_D(QUniUIKitView);
     d->setAttribute(QUniUIKitViewPrivate::ResizedWidth);
 
-    if (newWidth == d->m_requestedGeometry.width())
+    if (newWidth == d->m_currentGeometry.width())
+        return;
+
+    d->m_currentGeometry.setWidth(newWidth);
+    if (!d->isNSObjectCreated())
         return;
 
     d->m_emitMaskToUseOnFrameChanged = QUniUIKitViewPrivate::ResizedWidth;
-    d->m_requestedGeometry.setWidth(newWidth);
     d->updateGeometry();
 }
 
@@ -531,11 +542,14 @@ void QUniUIKitView::setHeight(qreal newHeight)
     Q_D(QUniUIKitView);
     d->setAttribute(QUniUIKitViewPrivate::ResizedHeight);
 
-    if (newHeight == d->m_requestedGeometry.height())
+    if (newHeight == d->m_currentGeometry.height())
+        return;
+
+    d->m_currentGeometry.setHeight(newHeight);
+    if (!d->isNSObjectCreated())
         return;
 
     d->m_emitMaskToUseOnFrameChanged = QUniUIKitViewPrivate::ResizedHeight;
-    d->m_requestedGeometry.setHeight(newHeight);
     d->updateGeometry();
 }
 
@@ -566,22 +580,9 @@ QUniUIKitView *QUniUIKitView::parentView()
 
 UIView *QUniUIKitView::uiViewHandle()
 {
-   return d_func()->view();
+    return d_func()->view();
 }
 
-float QUniUIKitView::alpha() const
-{
-    return d_func()->view().alpha;
-}
-
-void QUniUIKitView::setAlpha(float newAlpha)
-{
-    if (alpha() == newAlpha)
-        return;
-
-    uiViewHandle().alpha = newAlpha;
-    emit alphaChanged(newAlpha);
-}
 
 bool QUniUIKitView::event(QEvent *event)
 {

@@ -89,6 +89,12 @@ private:
     void initConnections();
     void emitGeometryChanges(Attributes emitFlags);
 
+    void syncAlpha();
+    void syncVisible();
+    void syncBackgroundColor();
+    void syncIntrinsicContentWidth();
+    void syncIntrinsicContentHeight();
+
 protected:
 
     inline void setAttribute(Attribute attribute, bool on = true)
@@ -105,16 +111,16 @@ protected:
     virtual void createNSObject() override;
     virtual void setNSObject(NSObject *nsObject) override;
 
-private:
     Attributes m_attributes;
     QUniUIKitViewDelegate *m_delegate;
-    QSizeF m_intrinsicContentSize;
+    qreal m_intrinsicContentWidth;
+    qreal m_intrinsicContentHeight;
     QRectF m_currentGeometry;
     Attributes m_emitMaskToUseOnFrameChanged;
     Attributes m_delayedEmitMask;
-
-public:
-    QRectF m_requestedGeometry;
+    bool m_visible;
+    qreal m_alpha;
+    QColor m_backgroundColor;
 };
 
 QT_END_NAMESPACE

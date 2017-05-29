@@ -69,10 +69,10 @@ public:
     virtual ~QUniUIKitView();
 
     bool visible() const;
-    void setVisible(bool visible);
+    void setVisible(const bool &visible);
 
-    float alpha() const;
-    void setAlpha(float alpha);
+    qreal alpha() const;
+    void setAlpha(const qreal &alpha);
 
     QColor backgroundColor() const;
     void setBackgroundColor(const QColor &color);
@@ -110,9 +110,9 @@ public:
     qreal bottom() const;
 
     qreal intrinsicContentWidth() const;
-    void setIntrinsicContentWidth(qreal width);
+    void setIntrinsicContentWidth(const qreal &width);
     qreal intrinsicContentHeight() const;
-    void setIntrinsicContentHeight(qreal height);
+    void setIntrinsicContentHeight(const qreal &height);
 
     QUniUIKitView *parentView();
 
