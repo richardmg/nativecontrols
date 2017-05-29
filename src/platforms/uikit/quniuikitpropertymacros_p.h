@@ -86,4 +86,44 @@ void CLASS::SETTER(const QJSValue &value) { \
         emit GETTER##Changed(this); \
 }
 
+#define IMPLEMENT_GETTER_AND_SETTER(LOWER, UPPER, TYPE, CLASS) \
+TYPE CLASS::LOWER() const \
+{ \
+    return d_func()->m_##LOWER; \
+} \
+\
+void CLASS::set##UPPER(const TYPE &newValue) \
+{ \
+    Q_D(CLASS); \
+    if (d->m_##LOWER == newValue) \
+        return; \
+\
+    d->m_##LOWER = newValue; \
+    if (!d->isNSObjectCreated()) \
+        return; \
+\
+    d->sync##UPPER(); \
+    emit LOWER##Changed(newValue); \
+}
+
+#define IMPLEMENT_GETTER_AND_SETTER_POINTER(LOWER, UPPER, TYPE, CLASS) \
+TYPE *CLASS::LOWER() const \
+{ \
+    return d_func()->m_##LOWER; \
+} \
+\
+void CLASS::set##UPPER(TYPE *newValue) \
+{ \
+    Q_D(CLASS); \
+    if (d->m_##LOWER == newValue) \
+        return; \
+\
+    d->m_##LOWER = newValue; \
+    if (!d->isNSObjectCreated()) \
+        return; \
+\
+    d->sync##UPPER(); \
+    emit LOWER##Changed(newValue); \
+}
+
 #endif // QUNIUIKITPROPERTYMACROS_H
