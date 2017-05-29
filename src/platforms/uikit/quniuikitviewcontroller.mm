@@ -44,6 +44,7 @@
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
 #include <QtUniUIKitControls/private/quniuikitviewcontroller_p.h>
 #include <QtUniUIKitControls/private/quniuikittabbaritem_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -80,12 +81,38 @@ UIViewController *QUniUIKitViewControllerPrivate::viewController() const
 void QUniUIKitViewControllerPrivate::createNSObject()
 {
     UIViewController *vc = [[UIViewController new] autorelease];
-    setNSObject(vc);
 
-    if (m_view)
-        vc.view = m_view->uiViewHandle();
-    else
-        m_view = new QUniUIKitView(viewController().view, q_func());
+    if (!m_view)
+        m_view = new QUniUIKitView(vc.view, q_func());
+
+    setNSObject(vc);
+}
+
+void QUniUIKitViewControllerPrivate::setNSObject(NSObject *nsObject)
+{
+    QUniUIKitBasePrivate::setNSObject(nsObject);
+
+    syncTabBarItem();
+    syncView();
+}
+
+void QUniUIKitViewControllerPrivate::syncView()
+{
+    @try {
+        viewController().view = m_view ? m_view->uiViewHandle() : nullptr;
+    } @catch (NSException *e) {
+        // UIKit will throw an exception if trying to move a view from one view controller to
+        // another without first removing it from the former viewcontroller explicit. Since it's
+        // not in the nature of QML to just crash for such issues, and since we at the same
+        // time don't want to add to much logic to work around UIKit, we choose to
+        // just catch it, and continue if possible.
+        NSLog(@"Exception: %@", e);
+    }
+}
+
+void QUniUIKitViewControllerPrivate::syncTabBarItem()
+{
+    viewController().tabBarItem = m_tabBarItem ? m_tabBarItem->uiTabBarItemHandle() : nil;
 }
 
 void QUniUIKitViewControllerPrivate::addChildViewController(UIViewController *child)
@@ -104,59 +131,17 @@ void QUniUIKitViewControllerPrivate::addSubViewToContentView(UIView *uiView)
     dptr_contentView->addSubView(uiView);
 }
 
-QUniUIKitViewController *QUniUIKitViewController::parentViewController()
-{
-    return qobject_cast<QUniUIKitViewController *>(parent());
-}
-
-QUniUIKitTabBarItem *QUniUIKitViewController::tabBarItem() const
-{
-    return d_func()->m_tabBarItem;
-}
-
-void QUniUIKitViewController::setTabBarItem(QUniUIKitTabBarItem *newTabBarItem)
-{
-    if (newTabBarItem == tabBarItem())
-        return;
-
-    d_func()->m_tabBarItem = newTabBarItem;
-    uiViewControllerHandle().tabBarItem = newTabBarItem->uiTabBarItemHandle();
-
-    emit tabBarItemChanged(newTabBarItem);
-}
-
-QUniUIKitView *QUniUIKitViewController::view() const
-{
-    // Note that a decendant view controller might not use a view
-    // (e.g QUniUIKitTabsViewController). In that case, we return nil
-    const_cast<QUniUIKitViewController *>(this)->uiViewControllerHandle();
-    return d_func()->m_view;
-}
-
-void QUniUIKitViewController::setView(QUniUIKitView *view)
-{
-    Q_D(QUniUIKitViewController);
-    if (d->m_view == view)
-        return;
-
-    @try {
-        d->m_view = view;
-        uiViewControllerHandle().view = view ? view->uiViewHandle() : nullptr;
-    } @catch (NSException *e) {
-        // UIKit will throw an exception if trying to move a view from one view controller to
-        // another without first removing it from the former viewcontroller explicit. Since it's
-        // not in the nature of QML to just crash for such issues, and since we at the same
-        // time don't want to add to much logic to work around UIKit, we choose to
-        // just catch it, and continue if possible.
-        NSLog(@"Exception: %@", e);
-    }
-
-    emit viewChanged(view);
-}
+IMPLEMENT_GETTER_AND_SETTER_POINTER(tabBarItem, TabBarItem, QUniUIKitTabBarItem, QUniUIKitViewController)
+IMPLEMENT_GETTER_AND_SETTER_POINTER(view, View, QUniUIKitView, QUniUIKitViewController)
 
 UIViewController *QUniUIKitViewController::uiViewControllerHandle()
 {
     return d_func()->viewController();
+}
+
+QUniUIKitViewController *QUniUIKitViewController::parentViewController()
+{
+    return qobject_cast<QUniUIKitViewController *>(parent());
 }
 
 void QUniUIKitViewController::childEvent(QChildEvent *event)
