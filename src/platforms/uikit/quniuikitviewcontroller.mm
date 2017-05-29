@@ -59,20 +59,6 @@ QUniUIKitViewControllerPrivate::~QUniUIKitViewControllerPrivate()
 {
 }
 
-QUniUIKitViewController::QUniUIKitViewController(QUniUIKitBase *parent)
-    : QUniUIKitBase(*new QUniUIKitViewControllerPrivate(), parent)
-{
-}
-
-QUniUIKitViewController::QUniUIKitViewController(QUniUIKitViewControllerPrivate &dd, QUniUIKitBase *parent)
-    :QUniUIKitBase(dd, parent)
-{
-}
-
-QUniUIKitViewController::~QUniUIKitViewController()
-{
-}
-
 UIViewController *QUniUIKitViewControllerPrivate::viewController() const
 {
     return static_cast<UIViewController *>(nsObject());
@@ -129,6 +115,20 @@ void QUniUIKitViewControllerPrivate::addSubViewToContentView(UIView *uiView)
     }
     QUniUIKitViewPrivate *dptr_contentView = dynamic_cast<QUniUIKitViewPrivate *>(QObjectPrivate::get(view));
     dptr_contentView->addSubView(uiView);
+}
+
+QUniUIKitViewController::QUniUIKitViewController(QUniUIKitBase *parent)
+    : QUniUIKitBase(*new QUniUIKitViewControllerPrivate(), parent)
+{
+}
+
+QUniUIKitViewController::QUniUIKitViewController(QUniUIKitViewControllerPrivate &dd, QUniUIKitBase *parent)
+    :QUniUIKitBase(dd, parent)
+{
+}
+
+QUniUIKitViewController::~QUniUIKitViewController()
+{
 }
 
 IMPLEMENT_GETTER_AND_SETTER_POINTER(tabBarItem, TabBarItem, QUniUIKitTabBarItem, QUniUIKitViewController)
