@@ -51,6 +51,7 @@
 #include <QtCore>
 
 #include <QtUniUIKitControls/private/quniuikitresponder_p.h>
+#include <QtUniUIKitControls/private/quniuikitoptional_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -85,10 +86,14 @@ public:
 private:
     CGRect alignmentRect() const;
     void setAlignmentRect(CGRect rect);
-    void updateGeometry();
+    void updateGeometry(Attributes propertiesToUpdate);
     void initConnections();
     void emitGeometryChanges(Attributes emitFlags);
 
+    void syncX();
+    void syncY();
+    void syncWidth();
+    void syncHeight();
     void syncAlpha();
     void syncVisible();
     void syncBackgroundColor();
@@ -96,31 +101,21 @@ private:
     void syncIntrinsicContentHeight();
 
 protected:
-
-    inline void setAttribute(Attribute attribute, bool on = true)
-    {
-        m_attributes = on ? m_attributes |= attribute : m_attributes &= ~attribute;
-    }
-
-    inline bool testAttribute(Attribute attribute)
-    {
-        return bool(m_attributes & attribute);
-    }
-
-protected:
     virtual void createNSObject() override;
     virtual void setNSObject(NSObject *nsObject) override;
 
-    Attributes m_attributes;
-    QUniUIKitViewDelegate *m_delegate;
-    qreal m_intrinsicContentWidth;
-    qreal m_intrinsicContentHeight;
-    QRectF m_currentGeometry;
     Attributes m_emitMaskToUseOnFrameChanged;
     Attributes m_delayedEmitMask;
-    bool m_visible;
-    qreal m_alpha;
-    QColor m_backgroundColor;
+    QUniUIKitViewDelegate *m_delegate;
+    QUniUIKitFallibleOptional<qreal> m_x;
+    QUniUIKitFallibleOptional<qreal> m_y;
+    QUniUIKitFallibleOptional<qreal> m_width;
+    QUniUIKitFallibleOptional<qreal> m_height;
+    QUniUIKitOptional<qreal> m_intrinsicContentWidth;
+    QUniUIKitOptional<qreal> m_intrinsicContentHeight;
+    QUniUIKitOptional<bool> m_visible;
+    QUniUIKitOptional<qreal> m_alpha;
+    QUniUIKitOptional<QColor> m_backgroundColor;
 };
 
 QT_END_NAMESPACE

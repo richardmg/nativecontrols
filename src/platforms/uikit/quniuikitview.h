@@ -93,16 +93,16 @@ public:
     void resize(qreal width, qreal height);
 
     qreal x() const;
-    void setX(qreal);
+    void setX(const qreal &);
 
     qreal y() const;
-    void setY(qreal);
+    void setY(const qreal &);
 
     qreal width() const;
-    void setWidth(qreal);
+    void setWidth(const qreal &);
 
     qreal height() const;
-    void setHeight(qreal);
+    void setHeight(const qreal &);
 
     qreal left() const;
     qreal top() const;
