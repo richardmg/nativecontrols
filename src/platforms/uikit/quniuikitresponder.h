@@ -21,10 +21,10 @@ public:
     QUniUIKitResponder(QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitResponder();
 
-    Q_INVOKABLE virtual bool firstResponder();
-    Q_INVOKABLE virtual bool setFirstResponder(bool set);
-    Q_INVOKABLE virtual bool canBecomeFirstResponder();
-    Q_INVOKABLE virtual bool canResignFirstResponder();
+    Q_INVOKABLE virtual bool firstResponder() const;
+    Q_INVOKABLE virtual void setFirstResponder(const bool &set);
+    Q_INVOKABLE virtual bool canBecomeFirstResponder() const;
+    Q_INVOKABLE virtual bool canResignFirstResponder() const;
 
     UIResponder *uiResponder();
 

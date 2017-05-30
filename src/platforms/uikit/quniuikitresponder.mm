@@ -40,11 +40,13 @@
 
 #include <QtUniUIKitControls/quniuikitresponder.h>
 #include <QtUniUIKitControls/private/quniuikitresponder_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 QT_BEGIN_NAMESPACE
 
 QUniUIKitResponderPrivate::QUniUIKitResponderPrivate(int version)
     : QUniUIKitBasePrivate(version)
+    , m_firstResponder(false)
 {
 }
 
@@ -54,7 +56,22 @@ QUniUIKitResponderPrivate::~QUniUIKitResponderPrivate()
 
 UIResponder *QUniUIKitResponderPrivate::responder() const
 {
-   return static_cast<UIResponder *>(nsObject());
+    return static_cast<UIResponder *>(nsObject());
+}
+
+void QUniUIKitResponderPrivate::setNSObject(NSObject *nsObject)
+{
+    QUniUIKitBasePrivate::setNSObject(nsObject);
+    syncFirstResponder();
+}
+
+void QUniUIKitResponderPrivate::syncFirstResponder()
+{
+    if (m_firstResponder)
+        [responder() becomeFirstResponder];
+    else
+        [responder() resignFirstResponder];
+    m_firstResponder = [responder() isFirstResponder];
 }
 
 QUniUIKitResponder::QUniUIKitResponder(QUniUIKitBase *parent)
@@ -76,32 +93,14 @@ UIResponder *QUniUIKitResponder::uiResponder()
    return static_cast<UIResponder *>(d_func()->nsObject());
 }
 
-bool QUniUIKitResponder::firstResponder()
-{
-    return [d_func()->responder() isFirstResponder];
-}
+IMPLEMENT_GETTER_AND_SETTER(firstResponder, FirstResponder, bool, QUniUIKitResponder)
 
-bool QUniUIKitResponder::setFirstResponder(bool set)
-{
-    if (firstResponder() == set)
-        return true;
-
-    bool success = set ?
-        [uiResponder() becomeFirstResponder] :
-        [uiResponder() resignFirstResponder];
-
-    if (success)
-        emit firstResponderChanged(set);
-
-    return success;
-}
-
-bool QUniUIKitResponder::canBecomeFirstResponder()
+bool QUniUIKitResponder::canBecomeFirstResponder() const
 {
     return [d_func()->responder() canBecomeFirstResponder];
 }
 
-bool QUniUIKitResponder::canResignFirstResponder()
+bool QUniUIKitResponder::canResignFirstResponder() const
 {
     return [d_func()->responder() canResignFirstResponder];
 }

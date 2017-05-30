@@ -64,7 +64,15 @@ public:
 
     UIResponder *responder() const;
 
+    bool m_firstResponder;
+
     Q_DECLARE_PUBLIC(QUniUIKitResponder)
+
+private:
+    void syncFirstResponder();
+
+protected:
+    virtual void setNSObject(NSObject *nsObject);
 };
 
 QT_END_NAMESPACE
