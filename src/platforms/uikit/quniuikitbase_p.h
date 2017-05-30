@@ -66,7 +66,7 @@ public:
     virtual ~QUniUIKitBasePrivate();
 
     NSObject *nsObject() const;
-    bool isNSObjectCreated() { return bool(m_nsObject); }
+    inline bool isNSObjectCreated() { return bool(m_nsObject); }
 
     Q_DECLARE_PUBLIC(QUniUIKitBase)
 
