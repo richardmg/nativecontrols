@@ -50,8 +50,9 @@
 
 #include <QtCore>
 
-#include <QtUniUIKitControls/private/quniuikitbase_p.h>
 #include <QtUniUIKitControls/quniuikitresponder.h>
+#include <QtUniUIKitControls/private/quniuikitbase_p.h>
+#include <QtUniUIKitControls/private/quniuikitoptional_p.h>
 Q_FORWARD_DECLARE_OBJC_CLASS(UIResponder);
 
 QT_BEGIN_NAMESPACE
@@ -64,7 +65,7 @@ public:
 
     UIResponder *responder() const;
 
-    bool m_firstResponder;
+    QUniUIKitFallibleOptional<bool> m_firstResponder;
 
     Q_DECLARE_PUBLIC(QUniUIKitResponder)
 
