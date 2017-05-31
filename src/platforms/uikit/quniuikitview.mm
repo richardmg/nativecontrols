@@ -221,6 +221,10 @@ void QUniUIKitViewPrivate::updateIntrinsicContentSize()
 {
     // This function should be called whenever the view
     // changes properties that can affect intrinsic size.
+
+    if (!isNSObjectCreated())
+        return;
+
     syncIntrinsicContentWidth();
     syncIntrinsicContentHeight();
 }
