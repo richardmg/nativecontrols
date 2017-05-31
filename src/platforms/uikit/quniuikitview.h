@@ -119,17 +119,17 @@ public:
     UIView *uiViewHandle();
 
 Q_SIGNALS:
-    void visibleChanged(bool visible);
-    void backgroundColorChanged(const QColor &color);
-    void alphaChanged(float alpha);
-    void xChanged(qreal x);
-    void yChanged(qreal y);
-    void widthChanged(qreal w);
-    void heightChanged(qreal h);
-    void rightChanged(qreal right);
-    void bottomChanged(qreal bottom);
-    void intrinsicContentWidthChanged(qreal w);
-    void intrinsicContentHeightChanged(qreal h);
+    void visibleChanged(bool value);
+    void backgroundColorChanged(const QColor &value);
+    void alphaChanged(float value);
+    void xChanged(qreal value);
+    void yChanged(qreal value);
+    void widthChanged(qreal value);
+    void heightChanged(qreal value);
+    void rightChanged(qreal value);
+    void bottomChanged(qreal value);
+    void intrinsicContentWidthChanged(qreal value);
+    void intrinsicContentHeightChanged(qreal value);
 
 protected:
     QUniUIKitView(QUniUIKitViewPrivate &dd, QUniUIKitBase *parent = nullptr);

@@ -134,10 +134,10 @@ QUniUIKitViewPrivate::~QUniUIKitViewPrivate()
 void QUniUIKitViewPrivate::initConnections()
 {
     Q_Q(QUniUIKitView);
-    q->connect(q, &QUniUIKitView::xChanged, q, &QUniUIKitView::rightChanged);
-    q->connect(q, &QUniUIKitView::yChanged, q, &QUniUIKitView::bottomChanged);
-    q->connect(q, &QUniUIKitView::widthChanged, q, &QUniUIKitView::rightChanged);
-    q->connect(q, &QUniUIKitView::heightChanged, q, &QUniUIKitView::bottomChanged);
+    q->connect(q, &QUniUIKitView::xChanged, q, [q](){ emit q->rightChanged(q->right()); });
+    q->connect(q, &QUniUIKitView::yChanged, q, [q](){ emit q->bottomChanged(q->bottom()); });
+    q->connect(q, &QUniUIKitView::widthChanged, q, [q](){ emit q->rightChanged(q->right()); });
+    q->connect(q, &QUniUIKitView::heightChanged, q, [q](){ emit q->bottomChanged(q->bottom()); });
 }
 
 void QUniUIKitViewPrivate::onFrameChangedCallback()
