@@ -221,18 +221,8 @@ void QUniUIKitViewPrivate::updateIntrinsicContentSize()
 {
     // This function should be called whenever the view
     // changes properties that can affect intrinsic size.
-    Q_Q(QUniUIKitView);
-    CGSize newSize = view().intrinsicContentSize;
-
-    if (m_intrinsicContentWidth != newSize.width) {
-        m_intrinsicContentWidth = newSize.width;
-        emit q->intrinsicContentWidthChanged(m_intrinsicContentWidth);
-    }
-
-    if (m_intrinsicContentWidth != newSize.height) {
-        m_intrinsicContentHeight = newSize.height;
-        emit q->intrinsicContentHeightChanged(m_intrinsicContentHeight);
-    }
+    syncIntrinsicContentWidth();
+    syncIntrinsicContentHeight();
 }
 
 UIView *QUniUIKitViewPrivate::view() const
