@@ -84,12 +84,17 @@ NSObject *QUniUIKitBasePrivate::nsObject() const
         self->m_createNSObjectRecursionGuard = true;
 #endif
         // The common case should be that we enter this block to lazy create the NSObject
-        // we wrap when someone actually needs it (which is usually when properties
+        // we wrap when someone actually needs it. This usually happens when properties
         // are assigned values, or the object becomes a parent of some other object, or
-        // componentComplete).
-        // But for subclasses that adopts an already existing NSObject, e.g to wrap read-only
+        // upon componentComplete. Only the leaf class will be responsible for creating the
+        // NSObject, but all it's anchestors should afterwards get a call to setNSObject
+        // so that they can initialize and sync their own local properties. For NSObjects
+        // that requires property values to be known already in the constructor, it might
+        // be necessary to delay creating the NSObject until all properties have been assigned
+        // values. For those cases 'setNSObject' normally happens upon 'componentComplete'.
+        // For subclasses that adopts an already existing NSObject, e.g to wrap read-only
         // UIView properties in other UIViews (like UITableViewCell.label), calling
-        // setNSObject explicit during construction might be necessary.
+        // setNSObject explicit early on, perhaps during construction, might be necessary.
         self->createNSObject();
         Q_ASSERT(m_nsObject);
     }
