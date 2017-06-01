@@ -40,6 +40,7 @@
 
 #include <QtUniUIKitControls/quniuikitbutton.h>
 #include <QtUniUIKitControls/private/quniuikitbutton_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 @interface QUniUIKitButtonDelegate : NSObject {
     QT_PREPEND_NAMESPACE(QUniUIKitButtonPrivate) *_button;
@@ -84,7 +85,7 @@ QUniUIKitButtonPrivate::~QUniUIKitButtonPrivate()
 
 void QUniUIKitButtonPrivate::createNSObject()
 {
-    UIButton *uiButton = [UIButton buttonWithType:static_cast<UIButtonType>(m_buttonType)];
+    UIButton *uiButton = [UIButton buttonWithType:m_buttonType.staticCast<UIButtonType>()];
     [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
     [uiButton sizeToFit];
 
@@ -94,9 +95,26 @@ void QUniUIKitButtonPrivate::createNSObject()
     setNSObject(uiButton);
 }
 
+void QUniUIKitButtonPrivate::setNSObject(NSObject *nsObject)
+{
+    QUniUIKitControlPrivate::setNSObject(nsObject);
+    syncText();
+}
+
 UIButton *QUniUIKitButtonPrivate::uiButton() const
 {
     return static_cast<UIButton *>(view());
+}
+
+void QUniUIKitButtonPrivate::syncText()
+{
+    [uiButton() setTitle:m_text.staticCast<QString>().toNSString() forState:UIControlStateNormal];
+    updateIntrinsicContentSize();
+}
+
+void QUniUIKitButtonPrivate::syncButtonType()
+{
+    qWarning("Button: buttonType cannot change once the backing UIButton has been created!");
 }
 
 QUniUIKitButton::QUniUIKitButton(QUniUIKitBase *parent)
@@ -124,41 +142,8 @@ UIButton *QUniUIKitButton::uiButtonHandle()
     return d_func()->uiButton();
 }
 
-QString QUniUIKitButton::text() const
-{
-    return QString::fromNSString([d_func()->uiButton() titleForState:UIControlStateNormal]);
-}
-
-void QUniUIKitButton::setText(const QString &newText)
-{
-    if (newText == text())
-        return;
-
-    [uiButtonHandle() setTitle:newText.toNSString() forState:UIControlStateNormal];
-    d_func()->updateIntrinsicContentSize();
-
-    emit textChanged(newText);
-}
-
-QUniUIKitButton::ButtonType QUniUIKitButton::buttonType() const
-{
-    return d_func()->m_buttonType;
-}
-
-void QUniUIKitButton::setButtonType(QUniUIKitButton::ButtonType newButtonType)
-{
-    Q_D(QUniUIKitButton);
-    if (newButtonType == d->m_buttonType)
-        return;
-
-    if (d->isNSObjectCreated()) {
-        qWarning("Button: buttonType cannot change once the backing UIButton has been created!");
-        return;
-    }
-
-    d->m_buttonType = newButtonType;
-    emit buttonTypeChanged(newButtonType);
-}
+SYNTHESIZE_QPROPERTY_CACHED(text, Text, QString, QUniUIKitButton)
+SYNTHESIZE_QPROPERTY_CACHED(buttonType, ButtonType, QUniUIKitButton::ButtonType, QUniUIKitButton)
 
 #include "moc_quniuikitbutton.cpp"
 

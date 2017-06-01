@@ -71,7 +71,7 @@ public:
     void setText(const QString &text);
 
     ButtonType buttonType() const;
-    void setButtonType(ButtonType buttonType);
+    void setButtonType(const ButtonType &buttonType);
 
 Q_SIGNALS:
     void textChanged(const QString &text);

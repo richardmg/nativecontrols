@@ -51,6 +51,7 @@
 #include <QtCore>
 #include <QtUniUIKitControls/quniuikitbutton.h>
 #include <QtUniUIKitControls/private/quniuikitcontrol_p.h>
+#include <QtUniUIKitControls/private/quniuikitoptional_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -63,16 +64,20 @@ public:
     explicit QUniUIKitButtonPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitButtonPrivate();
 
-    UIButton *uiButton() const;
-
-    QUniUIKitButtonDelegate *m_delegate;
-    QUniUIKitButton::ButtonType m_buttonType;
-
     Q_DECLARE_PUBLIC(QUniUIKitButton)
 
 protected:
-    void createNSObject() override;
+    UIButton *uiButton() const;
 
+    virtual void createNSObject() override;
+    virtual void setNSObject(NSObject *nsObject) override;
+
+    void syncText();
+    void syncButtonType();
+
+    QUniUIKitButtonDelegate *m_delegate;
+    QUniUIKitOptional<QString>m_text;
+    QUniUIKitOptional<QUniUIKitButton::ButtonType> m_buttonType;
 };
 
 QT_END_NAMESPACE
