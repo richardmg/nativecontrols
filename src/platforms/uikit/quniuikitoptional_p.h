@@ -71,6 +71,9 @@ public:
     bool isNotNull() const Q_DECL_NOTHROW { return m_isExplicit; }
     bool hasExplicitValue() const Q_DECL_NOTHROW { return m_isExplicit; }
 
+    template <typename C>
+    C staticCast() { return static_cast<C>(value); }
+
 protected:
     T value;
     bool m_isExplicit;
