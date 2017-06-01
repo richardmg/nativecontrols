@@ -122,13 +122,53 @@ ViewController {
             }
 
             Button {
-                objectName: "addTabButton"
+                id: buttonContactAdd
+                buttonType: Button.ButtonTypeContactAdd
                 text: "ButtonTypeContactAdd"
                 x: 10
                 y: sliderAlpha.bottom + 10
                 width: intrinsicContentWidth
                 height: intrinsicContentHeight
-                buttonType: Button.ButtonTypeContactAdd
+            }
+
+            Button {
+                id: buttonInfoDark
+                buttonType: Button.ButtonTypeInfoDark
+                text: "ButtonTypeInfoDark"
+                x: 10
+                y: buttonContactAdd.bottom + 10
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+            }
+
+            Button {
+                id: buttonInfoLight
+                buttonType: Button.ButtonTypeInfoLight
+                text: "ButtonTypeInfoLight"
+                x: 10
+                y: buttonInfoDark.bottom + 10
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+            }
+
+            Button {
+                id: buttonRoundedRect
+                buttonType: Button.ButtonTypeRoundedRect
+                text: "ButtonTypeRoundedRect"
+                x: 10
+                y: buttonInfoLight.bottom + 10
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+            }
+
+            Button {
+                id: buttonSystem
+                buttonType: Button.ButtonTypeSystem
+                text: "ButtonTypeSystem"
+                x: 10
+                y: buttonRoundedRect.bottom + 10
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
             }
 
             Component {
