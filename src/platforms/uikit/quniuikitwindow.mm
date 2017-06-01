@@ -109,8 +109,8 @@ QUniUIKitWindow::~QUniUIKitWindow()
 {
 }
 
-IMPLEMENT_GETTER_AND_SETTER_POINTER(rootViewController, RootViewController, QUniUIKitViewController, QUniUIKitWindow)
-IMPLEMENT_GETTER_AND_SETTER(visible, Visible, bool, QUniUIKitWindow)
+SYNTHESIZE_QPROPERTY_CACHED_POINTER(rootViewController, RootViewController, QUniUIKitViewController, QUniUIKitWindow)
+SYNTHESIZE_QPROPERTY_CACHED(visible, Visible, bool, QUniUIKitWindow)
 
 UIWindow *QUniUIKitWindow::uiWindowHandle()
 {

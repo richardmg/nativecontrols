@@ -74,7 +74,7 @@
     GET_PROPERTY_QJSVALUE_BEGIN(PROPERTY_NAME, QT_TYPE, NSOBJECT) \
     GET_PROPERTY_QJSVALUE_END
 
-#define IMPLEMENT_PROPERTY_QJSVALUE(CLASS, GETTER, SETTER, CONVERT) \
+#define SYNTHESIZE_QPROPERTY_QJSVALUE(CLASS, GETTER, SETTER, CONVERT) \
 QJSValue CLASS::GETTER() const  { \
     return d_func()->m_##GETTER; \
 } \
@@ -86,7 +86,7 @@ void CLASS::SETTER(const QJSValue &value) { \
         emit GETTER##Changed(this); \
 }
 
-#define IMPLEMENT_GETTER_AND_SETTER(LOWER, UPPER, TYPE, CLASS) \
+#define SYNTHESIZE_QPROPERTY_CACHED(LOWER, UPPER, TYPE, CLASS) \
 TYPE CLASS::LOWER() const \
 { \
     return d_func()->m_##LOWER; \
@@ -106,7 +106,7 @@ void CLASS::set##UPPER(const TYPE &newValue) \
     emit LOWER##Changed(newValue); \
 }
 
-#define IMPLEMENT_GETTER_AND_SETTER_POINTER(LOWER, UPPER, TYPE, CLASS) \
+#define SYNTHESIZE_QPROPERTY_CACHED_POINTER(LOWER, UPPER, TYPE, CLASS) \
 TYPE *CLASS::LOWER() const \
 { \
     return d_func()->m_##LOWER; \

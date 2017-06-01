@@ -131,8 +131,8 @@ QUniUIKitViewController::~QUniUIKitViewController()
 {
 }
 
-IMPLEMENT_GETTER_AND_SETTER_POINTER(tabBarItem, TabBarItem, QUniUIKitTabBarItem, QUniUIKitViewController)
-IMPLEMENT_GETTER_AND_SETTER_POINTER(view, View, QUniUIKitView, QUniUIKitViewController)
+SYNTHESIZE_QPROPERTY_CACHED_POINTER(tabBarItem, TabBarItem, QUniUIKitTabBarItem, QUniUIKitViewController)
+SYNTHESIZE_QPROPERTY_CACHED_POINTER(view, View, QUniUIKitView, QUniUIKitViewController)
 
 UIViewController *QUniUIKitViewController::uiViewControllerHandle()
 {

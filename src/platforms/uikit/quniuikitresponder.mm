@@ -96,7 +96,7 @@ UIResponder *QUniUIKitResponder::uiResponder()
    return static_cast<UIResponder *>(d_func()->nsObject());
 }
 
-IMPLEMENT_GETTER_AND_SETTER(firstResponder, FirstResponder, bool, QUniUIKitResponder)
+SYNTHESIZE_QPROPERTY_CACHED(firstResponder, FirstResponder, bool, QUniUIKitResponder)
 
 bool QUniUIKitResponder::canBecomeFirstResponder() const
 {

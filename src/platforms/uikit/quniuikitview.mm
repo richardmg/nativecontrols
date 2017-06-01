@@ -450,15 +450,15 @@ QUniUIKitView::~QUniUIKitView()
 {
 }
 
-IMPLEMENT_GETTER_AND_SETTER(x, X, qreal, QUniUIKitView)
-IMPLEMENT_GETTER_AND_SETTER(y, Y, qreal, QUniUIKitView)
-IMPLEMENT_GETTER_AND_SETTER(width, Width, qreal, QUniUIKitView)
-IMPLEMENT_GETTER_AND_SETTER(height, Height, qreal, QUniUIKitView)
-IMPLEMENT_GETTER_AND_SETTER(intrinsicContentWidth, IntrinsicContentWidth, qreal, QUniUIKitView)
-IMPLEMENT_GETTER_AND_SETTER(intrinsicContentHeight, IntrinsicContentHeight, qreal, QUniUIKitView)
-IMPLEMENT_GETTER_AND_SETTER(visible, Visible, bool, QUniUIKitView)
-IMPLEMENT_GETTER_AND_SETTER(alpha, Alpha, qreal, QUniUIKitView)
-IMPLEMENT_GETTER_AND_SETTER(backgroundColor, BackgroundColor, QColor, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(x, X, qreal, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(y, Y, qreal, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(width, Width, qreal, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(height, Height, qreal, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(intrinsicContentWidth, IntrinsicContentWidth, qreal, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(intrinsicContentHeight, IntrinsicContentHeight, qreal, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(visible, Visible, bool, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(alpha, Alpha, qreal, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(backgroundColor, BackgroundColor, QColor, QUniUIKitView)
 
 QRectF QUniUIKitView::geometry() const
 {
