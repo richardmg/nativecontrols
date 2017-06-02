@@ -41,6 +41,15 @@
 #include <QtUniUIKitControls/quniuikitlabel.h>
 #include <QtUniUIKitControls/private/quniuikitlabel_p.h>
 
+@interface QUniUILabel : UILabel
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
+@end
+
+@implementation QUniUILabel
+#define QUNI_INTERFACE_IMPLEMENTATION
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
+@end
+
 QT_BEGIN_NAMESPACE
 
 QUniUIKitLabelPrivate::QUniUIKitLabelPrivate(int version)
@@ -55,9 +64,7 @@ QUniUIKitLabelPrivate::~QUniUIKitLabelPrivate()
 
 void QUniUIKitLabelPrivate::createNSObject()
 {
-    UILabel *uiLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
-    [uiLabel sizeToFit];
-    setNSObject(uiLabel);
+    setNSObject([[[QUniUILabel alloc] initWithFrame:CGRectZero] autorelease]);
 }
 
 UILabel *QUniUIKitLabelPrivate::uiLabel() const
