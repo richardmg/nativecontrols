@@ -84,6 +84,17 @@ QUniUITextFieldStaticDelegate *QUniUIKitTextFieldPrivate::s_delegate = nullptr;
 
 // --------------------------------------------------------------------------
 
+@interface QUniUITextField : UITextField
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
+@end
+
+@implementation QUniUITextField
+#define QUNI_INTERFACE_IMPLEMENTATION
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
+@end
+
+// --------------------------------------------------------------------------
+
 QT_BEGIN_NAMESPACE
 
 QUniUIKitTextFieldPrivate::QUniUIKitTextFieldPrivate(int version)
@@ -105,8 +116,7 @@ UITextField *QUniUIKitTextFieldPrivate::textField() const
 
 void QUniUIKitTextFieldPrivate::createNSObject()
 {
-    UITextField *uiTextField = [[[UITextField alloc] init] autorelease];
-    [uiTextField sizeToFit];
+    UITextField *uiTextField = [[[QUniUITextField alloc] init] autorelease];
     setNSObject(uiTextField);
 }
 
