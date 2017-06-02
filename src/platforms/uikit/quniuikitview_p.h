@@ -100,7 +100,7 @@ private:
     void syncIntrinsicContentWidth();
     void syncIntrinsicContentHeight();
 
-protected:
+public:
     virtual void createNSObject() override;
     virtual void setNSObject(NSObject *nsObject) override;
 

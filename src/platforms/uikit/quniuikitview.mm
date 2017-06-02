@@ -45,11 +45,13 @@
 static void *KVOFrameChanged = &KVOFrameChanged;
 const QEvent::Type kEventTypeEmitGeometryChangesLater = QEvent::User;
 
-@interface QPlainUIKitView : UIView
-@property (nonatomic, readwrite) CGSize intrinsicContentSize;
+@interface QUniUIView : UIView
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
 @end
 
-@implementation QPlainUIKitView
+@implementation QUniUIView
+#define QUNI_INTERFACE_IMPLEMENTATION
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
 @end
 
 @interface QUniUIKitViewDelegate : NSObject {
@@ -267,7 +269,7 @@ void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
 
 void QUniUIKitViewPrivate::createNSObject()
 {
-    UIView *view = [[QPlainUIKitView new] autorelease];
+    UIView *view = [[QUniUIView new] autorelease];
     view.backgroundColor = [UIColor whiteColor];
     setNSObject(view);
 }
@@ -376,7 +378,7 @@ void QUniUIKitViewPrivate::syncIntrinsicContentWidth()
             return;
         }
         CGSize size = CGSizeMake(m_intrinsicContentWidth, m_intrinsicContentHeight);
-        static_cast<QPlainUIKitView *>(view()).intrinsicContentSize = size;
+        static_cast<QUniUIView *>(view()).intrinsicContentSize = size;
     } else {
         float value = view().intrinsicContentSize.width;
         if (value != m_intrinsicContentWidth) {
@@ -395,7 +397,7 @@ void QUniUIKitViewPrivate::syncIntrinsicContentHeight()
             return;
         }
         CGSize size = CGSizeMake(m_intrinsicContentWidth, m_intrinsicContentHeight);
-        static_cast<QPlainUIKitView *>(view()).intrinsicContentSize = size;
+        static_cast<QUniUIView *>(view()).intrinsicContentSize = size;
     } else {
         float value = view().intrinsicContentSize.height;
         if (value != m_intrinsicContentHeight) {
