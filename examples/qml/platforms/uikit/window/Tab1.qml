@@ -171,6 +171,14 @@ ViewController {
                 height: intrinsicContentHeight
             }
 
+            Label {
+                text: "Normal label";
+                x: 10
+                y: buttonSystem.bottom + 10
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+            }
+
             Component {
                 id: newTab
                 NewTab {}
