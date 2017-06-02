@@ -72,12 +72,8 @@ QUniUITextFieldStaticDelegate *QUniUIKitTextFieldPrivate::s_delegate = nullptr;
 
 - (void)textFieldDidChange:(NSNotification *)notification
 {
-    UITextField *textField = static_cast<UITextField *>(notification.object);
-    QUniUIKitTextField *qtextField = static_cast<QUniUIKitTextField *>(qt_getAssociatedQObject(textField));
-    QUniUIKitTextFieldPrivate *d = static_cast<QUniUIKitTextFieldPrivate *>(QObjectPrivate::get(qtextField));
-
-    d->updateIntrinsicContentSize();
-    emit qtextField->textChanged(qtextField->text());
+    Q_D_NSOBJECT2(QUniUIKitTextField, notification.object);
+    d->onTextChanged();
 }
 
 @end
@@ -120,6 +116,13 @@ void QUniUIKitTextFieldPrivate::createNSObject()
     setNSObject(uiTextField);
 }
 
+void QUniUIKitTextFieldPrivate::onTextChanged()
+{
+    Q_Q(QUniUIKitTextField);
+    updateIntrinsicContentSize();
+    emit q->textChanged(q->text());
+}
+
 QUniUIKitTextField::QUniUIKitTextField(QUniUIKitBase *parent)
     : QUniUIKitControl(*new QUniUIKitTextFieldPrivate(), parent)
 {
@@ -156,9 +159,6 @@ void QUniUIKitTextField::setText(const QString &newText)
         return;
 
     uiTextFieldHandle().text = newText.toNSString();
-    d_func()->updateIntrinsicContentSize();
-
-    emit textChanged(newText);
 }
 
 QString QUniUIKitTextField::placeholderText() const
