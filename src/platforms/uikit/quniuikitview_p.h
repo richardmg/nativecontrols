@@ -78,7 +78,7 @@ public:
     void addSubView(UIView *subView);
     void updateIntrinsicContentSize();
 
-    void onFrameChangedCallback();
+    void onFrameChanged();
     void onEmitGeometryChangesLater();
 
     Q_DECLARE_PUBLIC(QUniUIKitView)

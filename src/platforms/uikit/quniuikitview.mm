@@ -78,7 +78,7 @@ const QEvent::Type kEventTypeEmitGeometryChangesLater = QEvent::User;
     Q_UNUSED(change);
 
     if (context == KVOFrameChanged)
-        _view->onFrameChangedCallback();
+        _view->onFrameChanged();
     else
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
@@ -142,7 +142,7 @@ void QUniUIKitViewPrivate::initConnections()
     q->connect(q, &QUniUIKitView::heightChanged, q, [q](){ emit q->bottomChanged(q->bottom()); });
 }
 
-void QUniUIKitViewPrivate::onFrameChangedCallback()
+void QUniUIKitViewPrivate::onFrameChanged()
 {
     Q_Q(QUniUIKitView);
     // This callback can either happen synchronously when setting geometry (frame)
