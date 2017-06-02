@@ -56,7 +56,6 @@
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitButton;
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitButtonDelegate);
 
 class QUniUIKitButtonPrivate : public QUniUIKitControlPrivate
 {
@@ -75,7 +74,6 @@ protected:
     void syncText();
     void syncButtonType();
 
-    QUniUIKitButtonDelegate *m_delegate;
     QUniUIKitOptional<QString>m_text;
     QUniUIKitOptional<QUniUIKitButton::ButtonType> m_buttonType;
 };

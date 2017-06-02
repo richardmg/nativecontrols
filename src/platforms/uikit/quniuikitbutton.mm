@@ -42,35 +42,25 @@
 #include <QtUniUIKitControls/private/quniuikitbutton_p.h>
 #include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
-@interface QUniUIKitButtonDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QUniUIKitButtonPrivate) *_button;
-}
+@interface QUniUIButton : UIButton
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
 @end
 
-@implementation QUniUIKitButtonDelegate
-
--(id)initWithQUniUIKitButtonPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitButtonPrivate) *)button
-{
-    self = [super init];
-    if (self) {
-        _button = button;
-    }
-
-    return self;
-}
+@implementation QUniUIButton
+#define QUNI_INTERFACE_IMPLEMENTATION
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
 
 -(void)onClicked
 {
-    emit _button->q_func()->clicked();
+    Q_D_NSOBJECT(QUniUIKitButton);
+    emit d->q_func()->clicked();
 }
-
 @end
 
 QT_BEGIN_NAMESPACE
 
 QUniUIKitButtonPrivate::QUniUIKitButtonPrivate(int version)
     : QUniUIKitControlPrivate(version)
-    , m_delegate(nullptr)
     , m_buttonType(QUniUIKitButton::ButtonTypeCustom)
 {
     // Avoid mapping enum values directly to UIKit enum values in the enum
@@ -80,24 +70,21 @@ QUniUIKitButtonPrivate::QUniUIKitButtonPrivate(int version)
 
 QUniUIKitButtonPrivate::~QUniUIKitButtonPrivate()
 {
-    [m_delegate release];
 }
 
 void QUniUIKitButtonPrivate::createNSObject()
 {
-    UIButton *uiButton = [UIButton buttonWithType:m_buttonType.staticCast<UIButtonType>()];
-    [uiButton setTitleColor:uiButton.tintColor forState:UIControlStateNormal];
-    [uiButton sizeToFit];
-
-    m_delegate = [[QUniUIKitButtonDelegate alloc] initWithQUniUIKitButtonPrivate:this];
-    [uiButton addTarget:m_delegate action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
-    [uiButton autorelease];
-    setNSObject(uiButton);
+    setNSObject([[QUniUIButton buttonWithType:m_buttonType.staticCast<UIButtonType>()] autorelease]);
 }
 
 void QUniUIKitButtonPrivate::setNSObject(NSObject *nsObject)
 {
     QUniUIKitControlPrivate::setNSObject(nsObject);
+
+    QUniUIButton *button = static_cast<QUniUIButton *>(nsObject);
+    [button addTarget:button action:@selector(onClicked) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitleColor:button.tintColor forState:UIControlStateNormal];
+
     syncText();
 }
 
