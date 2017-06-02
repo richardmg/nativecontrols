@@ -67,11 +67,13 @@ public:
     UISlider *uiSlider() const;
     QUniUIKitSliderDelegate *m_delegate;
 
+    void onValueChanged();
+
     Q_DECLARE_PUBLIC(QUniUIKitSlider)
 
 protected:
-    void createNSObject() override;
-
+    virtual void createNSObject() override;
+    virtual void setNSObject(NSObject *nsObject) override;
 };
 
 QT_END_NAMESPACE

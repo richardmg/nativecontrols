@@ -41,26 +41,18 @@
 #include <QtUniUIKitControls/quniuikitslider.h>
 #include <QtUniUIKitControls/private/quniuikitslider_p.h>
 
-@interface QUniUIKitSliderDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QUniUIKitSliderPrivate) *_quniuikitslider;
-}
+@interface QUniUISlider : UISlider
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
 @end
 
-@implementation QUniUIKitSliderDelegate
-
--(id)initWithQUniUIKitSliderPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitSliderPrivate) *)quniuikitslider
-{
-    self = [super init];
-    if (self) {
-        _quniuikitslider = quniuikitslider;
-    }
-
-    return self;
-}
+@implementation QUniUISlider
+#define QUNI_INTERFACE_IMPLEMENTATION
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
 
 -(void)onValueChanged
 {
-    emit _quniuikitslider->q_func()->valueChanged(_quniuikitslider->uiSlider().value);
+    Q_D_NSOBJECT(QUniUIKitSlider);
+    emit d->onValueChanged();
 }
 
 @end
@@ -79,17 +71,25 @@ QUniUIKitSliderPrivate::~QUniUIKitSliderPrivate()
 
 void QUniUIKitSliderPrivate::createNSObject()
 {
-    UISlider *uiSlider = [[[UISlider alloc] initWithFrame:CGRectZero] autorelease];
-    [uiSlider sizeToFit];
+    setNSObject([[[QUniUISlider alloc] initWithFrame:CGRectZero] autorelease]);
+}
 
-    m_delegate = [[QUniUIKitSliderDelegate alloc] initWithQUniUIKitSliderPrivate:this];
-    [uiSlider addTarget:m_delegate action:@selector(onValueChanged) forControlEvents:UIControlEventValueChanged];
-    setNSObject(uiSlider);
+void QUniUIKitSliderPrivate::setNSObject(NSObject *nsObject)
+{
+    QUniUIKitControlPrivate::setNSObject(nsObject);
+    QUniUISlider *slider = static_cast<QUniUISlider *>(nsObject);
+    [slider addTarget:slider action:@selector(onValueChanged) forControlEvents:UIControlEventValueChanged];
 }
 
 UISlider *QUniUIKitSliderPrivate::uiSlider() const
 {
     return static_cast<UISlider *>(view());
+}
+
+void QUniUIKitSliderPrivate::onValueChanged()
+{
+    Q_Q(QUniUIKitSlider);
+    emit q->valueChanged(q->value());
 }
 
 QUniUIKitSlider::QUniUIKitSlider(QUniUIKitBase *parent)
@@ -122,9 +122,6 @@ void QUniUIKitSlider::setValue(const float &newValue)
         return;
 
     d_func()->uiSlider().value = newValue;
-    d_func()->updateIntrinsicContentSize();
-
-    emit valueChanged(newValue);
 }
 
 #include "moc_quniuikitslider.cpp"
