@@ -76,6 +76,8 @@ void QUniUIKitResponderPrivate::onFirstResponderChanged(bool isFirstResponder)
 
 void QUniUIKitResponderPrivate::syncFirstResponder()
 {
+    // We listen for responder changes in the
+    // subviews, and emit changes from there.
     if (m_firstResponder.hasExplicitValue()) {
         if (m_firstResponder)
             m_firstResponder = [responder() becomeFirstResponder];

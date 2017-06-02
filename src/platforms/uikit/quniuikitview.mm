@@ -246,6 +246,8 @@ void QUniUIKitViewPrivate::updateGeometry(Attributes propertiesToUpdate)
     @try {
         m_emitMaskToUseOnFrameChanged = propertiesToUpdate;
         setAlignmentRect(CGRectMake(m_x.writeValue(), m_y.writeValue(), m_width.writeValue(), m_height.writeValue()));
+        [view() setNeedsLayout];
+        [view() layoutIfNeeded];
     } @catch (NSException *) {
         // QML can sometimes end up evaluating a geometry
         // binding to NaN. And trying to set that on a UIView
@@ -317,11 +319,12 @@ void QUniUIKitViewPrivate::syncIntrinsicContentWidth()
         }
         CGSize size = CGSizeMake(m_intrinsicContentWidth, m_intrinsicContentHeight);
         static_cast<QUniUIView *>(view()).intrinsicContentSize = size;
+        emit q_func()->intrinsicContentWidthChanged(m_intrinsicContentWidth);
     } else {
         float value = view().intrinsicContentSize.width;
         if (value != m_intrinsicContentWidth) {
             m_intrinsicContentWidth.reset(view().intrinsicContentSize.width);
-            emit q_func()->intrinsicContentWidthChanged(value);
+            emit q_func()->intrinsicContentWidthChanged(m_intrinsicContentWidth);
         }
     }
 }
@@ -336,11 +339,12 @@ void QUniUIKitViewPrivate::syncIntrinsicContentHeight()
         }
         CGSize size = CGSizeMake(m_intrinsicContentWidth, m_intrinsicContentHeight);
         static_cast<QUniUIView *>(view()).intrinsicContentSize = size;
+        emit q_func()->intrinsicContentHeightChanged(m_intrinsicContentHeight);
     } else {
         float value = view().intrinsicContentSize.height;
         if (value != m_intrinsicContentHeight) {
             m_intrinsicContentHeight.reset(view().intrinsicContentSize.height);
-            emit q_func()->intrinsicContentHeightChanged(value);
+            emit q_func()->intrinsicContentHeightChanged(m_intrinsicContentHeight);
         }
     }
 }
@@ -350,6 +354,7 @@ void QUniUIKitViewPrivate::syncVisible()
     if (m_visible.hasExplicitValue())
         view().hidden = !m_visible;
     m_visible.reset(!view().hidden);
+    emit q_func()->visibleChanged(m_visible);
 }
 
 void QUniUIKitViewPrivate::syncAlpha()
@@ -357,6 +362,7 @@ void QUniUIKitViewPrivate::syncAlpha()
     if (m_alpha.hasExplicitValue())
         view().alpha = m_alpha;
     m_alpha.reset(view().alpha);
+    emit q_func()->alphaChanged(m_alpha);
 }
 
 void QUniUIKitViewPrivate::syncBackgroundColor()
@@ -364,6 +370,7 @@ void QUniUIKitViewPrivate::syncBackgroundColor()
     if (m_backgroundColor.hasExplicitValue())
         view().backgroundColor = qt_toUIColor(m_backgroundColor);
     m_backgroundColor.reset(qt_nsColorToQColor(view().backgroundColor));
+    emit q_func()->backgroundColorChanged(m_backgroundColor);
 }
 
 QUniUIKitView::QUniUIKitView(QUniUIKitBase *parent)

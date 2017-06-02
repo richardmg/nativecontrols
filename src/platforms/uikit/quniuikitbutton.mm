@@ -95,8 +95,12 @@ UIButton *QUniUIKitButtonPrivate::uiButton() const
 
 void QUniUIKitButtonPrivate::syncText()
 {
+    if (!m_text.hasExplicitValue())
+        return;
+
     [uiButton() setTitle:m_text.staticCast<QString>().toNSString() forState:UIControlStateNormal];
     updateIntrinsicContentSize();
+    emit q_func()->textChanged(m_text);
 }
 
 void QUniUIKitButtonPrivate::syncButtonType()

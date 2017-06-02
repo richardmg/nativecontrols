@@ -78,8 +78,7 @@ void QUniUIKitWindowPrivate::setNSObject(NSObject *nsObject)
     QUniUIKitViewPrivate::setNSObject(nsObject);
 
     syncRootViewController();
-    if (m_visible)
-        [static_cast<UIWindow *>(nsObject) makeKeyAndVisible];
+    syncVisible();
 }
 
 void QUniUIKitWindowPrivate::syncVisible()
@@ -88,11 +87,13 @@ void QUniUIKitWindowPrivate::syncVisible()
         return;
 
     [q_func()->uiWindowHandle() makeKeyAndVisible];
+    emit q_func()->visibleChanged(m_visible);
 }
 
 void QUniUIKitWindowPrivate::syncRootViewController()
 {
     q_func()->uiWindowHandle().rootViewController = m_rootViewController->uiViewControllerHandle();
+    emit q_func()->rootViewControllerChanged(m_rootViewController);
 }
 
 QUniUIKitWindow::QUniUIKitWindow()

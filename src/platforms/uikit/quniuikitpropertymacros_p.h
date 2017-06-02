@@ -103,7 +103,6 @@ void CLASS::set##UPPER(const TYPE &newValue) \
         return; \
 \
     d->sync##UPPER(); \
-    emit LOWER##Changed(newValue); \
 }
 
 #define SYNTHESIZE_QPROPERTY_CACHED_POINTER(LOWER, UPPER, TYPE, CLASS) \

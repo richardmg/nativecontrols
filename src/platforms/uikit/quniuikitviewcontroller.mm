@@ -86,6 +86,7 @@ void QUniUIKitViewControllerPrivate::syncView()
 {
     @try {
         viewController().view = m_view ? m_view->uiViewHandle() : nullptr;
+        emit q_func()->viewChanged(m_view);
     } @catch (NSException *e) {
         // UIKit will throw an exception if trying to move a view from one view controller to
         // another without first removing it from the former viewcontroller explicit. Since it's
@@ -99,6 +100,7 @@ void QUniUIKitViewControllerPrivate::syncView()
 void QUniUIKitViewControllerPrivate::syncTabBarItem()
 {
     viewController().tabBarItem = m_tabBarItem ? m_tabBarItem->uiTabBarItemHandle() : nil;
+    emit q_func()->tabBarItemChanged(m_tabBarItem);
 }
 
 void QUniUIKitViewControllerPrivate::addChildViewController(UIViewController *child)
