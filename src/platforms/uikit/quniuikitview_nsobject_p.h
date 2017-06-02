@@ -63,6 +63,13 @@
     return size;
 }
 
+- (void)layoutSubviews
+{
+    Q_D_NSOBJECT(QUniUIKitView);
+    [super layoutSubviews];
+    d->onFrameChanged();
+}
+
 - (BOOL)becomeFirstResponder
 {
     Q_D_NSOBJECT(QUniUIKitView);

@@ -56,7 +56,6 @@
 QT_BEGIN_NAMESPACE
 
 Q_FORWARD_DECLARE_OBJC_CLASS(UIView);
-Q_FORWARD_DECLARE_OBJC_CLASS(QUniUIKitViewDelegate);
 
 class QUniUIKitViewPrivate : public QUniUIKitResponderPrivate
 {
@@ -106,7 +105,6 @@ public:
 
     Attributes m_emitMaskToUseOnFrameChanged;
     Attributes m_delayedEmitMask;
-    QUniUIKitViewDelegate *m_delegate;
     QUniUIKitFallibleOptional<qreal> m_x;
     QUniUIKitFallibleOptional<qreal> m_y;
     QUniUIKitFallibleOptional<qreal> m_width;

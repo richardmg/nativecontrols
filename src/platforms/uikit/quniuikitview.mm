@@ -42,7 +42,6 @@
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
 #include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
-static void *KVOFrameChanged = &KVOFrameChanged;
 const QEvent::Type kEventTypeEmitGeometryChangesLater = QEvent::User;
 
 @interface QUniUIView : UIView
@@ -52,36 +51,6 @@ const QEvent::Type kEventTypeEmitGeometryChangesLater = QEvent::User;
 @implementation QUniUIView
 #define QUNI_INTERFACE_IMPLEMENTATION
 #include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
-@end
-
-@interface QUniUIKitViewDelegate : NSObject {
-    QT_PREPEND_NAMESPACE(QUniUIKitViewPrivate) *_view;
-}
-@end
-
-@implementation QUniUIKitViewDelegate
-
--(id)initWithQUniUIKitViewPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitViewPrivate) *)view
-{
-    self = [super init];
-    if (self) {
-        _view = view;
-    }
-
-    return self;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    Q_UNUSED(keyPath);
-    Q_UNUSED(object);
-    Q_UNUSED(change);
-
-    if (context == KVOFrameChanged)
-        _view->onFrameChanged();
-    else
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-}
 @end
 
 QT_BEGIN_NAMESPACE
@@ -106,31 +75,11 @@ QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     : QUniUIKitResponderPrivate(version)
     , m_emitMaskToUseOnFrameChanged(0)
     , m_delayedEmitMask(0)
-    , m_delegate(nullptr)
 {
 }
 
 QUniUIKitViewPrivate::~QUniUIKitViewPrivate()
 {
-    if (isNSObjectCreated()) {
-        @try {
-            [view() removeObserver:m_delegate forKeyPath:@"frame" context:NULL];
-        } @catch (NSException *) {
-            // Work-around: if that app starts, but ends, before the app 'didFinishLaunching'
-            // (which happens when running auto tests), we get a NSRangeException telling us that
-            // we never "registered as an observer". Which is wrong, and we therefore ignore.
-        }
-
-        [m_delegate release];
-
-        // Because KVO removeObserver above is not executed by UIKit straight away, we
-        // get an 'NSInternalInconsistencyException' if we release the view directly
-        // after. So, work around this for now by postponing the release.
-        UIView *blockView = [view() retain];
-        dispatch_async(dispatch_get_main_queue (), ^{
-            [blockView release];
-        });
-    }
 }
 
 void QUniUIKitViewPrivate::initConnections()
@@ -241,17 +190,6 @@ void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
     Q_Q(QUniUIKitView);
     QUniUIKitBasePrivate::setNSObject(nsObject);
     UIView *v = static_cast<UIView *>(nsObject);
-
-    // UIKit will sometimes change the frame of a view on it's own.
-    // This will e.g happen for the root view inside a view controller
-    // upon orientation change, or when the root view inside a tab is
-    // made visible the first time.
-    // Since we only wrap the native controls, and as such, cannot easily
-    // override methods like "updateSubviews", we choose to use the
-    // infamous KVO pattern to catch the frame changes for now, so that
-    // we always emit signals when the frame changes.
-    m_delegate = [[QUniUIKitViewDelegate alloc] initWithQUniUIKitViewPrivate:this];
-    [v addObserver:m_delegate forKeyPath:@"frame" options:0 context:KVOFrameChanged];
 
     syncX();
     syncY();
