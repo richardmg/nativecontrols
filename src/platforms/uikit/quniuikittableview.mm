@@ -44,6 +44,15 @@
 #include <QtUniUIKitControls/private/quniuikittableview_p.h>
 #include <QtUniUIKitControls/private/quniuikittableviewcell_p.h>
 
+@interface QUniUITableView : UITableView
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
+@end
+
+@implementation QUniUITableView
+#define QUNI_INTERFACE_IMPLEMENTATION
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
+@end
+
 QT_BEGIN_NAMESPACE
 
 QUniUIKitTableViewPrivate::QUniUIKitTableViewPrivate(int version)
@@ -57,9 +66,7 @@ QUniUIKitTableViewPrivate::~QUniUIKitTableViewPrivate()
 
 void QUniUIKitTableViewPrivate::createNSObject()
 {
-    UITableView *uiTableView = [[[UITableView alloc] initWithFrame:CGRectZero] autorelease];
-    [uiTableView sizeToFit];
-    setNSObject(uiTableView);
+    setNSObject([[[QUniUITableView alloc] initWithFrame:CGRectZero] autorelease]);
 }
 
 UITableView *QUniUIKitTableViewPrivate::uiTableView() const
