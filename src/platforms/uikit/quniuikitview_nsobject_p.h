@@ -63,4 +63,24 @@
     return size;
 }
 
+- (BOOL)becomeFirstResponder
+{
+    Q_D_NSOBJECT(QUniUIKitView);
+    if ([super becomeFirstResponder]) {
+        d->onFirstResponderChanged(true);
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)resignFirstResponder
+{
+    Q_D_NSOBJECT(QUniUIKitView);
+    if ([super resignFirstResponder]) {
+        d->onFirstResponderChanged(false);
+        return YES;
+    }
+    return NO;
+}
+
 #endif

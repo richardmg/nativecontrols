@@ -65,6 +65,15 @@ void QUniUIKitResponderPrivate::setNSObject(NSObject *nsObject)
     syncFirstResponder();
 }
 
+void QUniUIKitResponderPrivate::onFirstResponderChanged(bool isFirstResponder)
+{
+    if (m_firstResponder == isFirstResponder)
+        return;
+
+    m_firstResponder.reset(isFirstResponder);
+    emit q_func()->firstResponderChanged(isFirstResponder);
+}
+
 void QUniUIKitResponderPrivate::syncFirstResponder()
 {
     if (m_firstResponder.hasExplicitValue()) {
@@ -73,7 +82,7 @@ void QUniUIKitResponderPrivate::syncFirstResponder()
         else if ([responder() isFirstResponder])
             m_firstResponder = ![responder() resignFirstResponder];
     } else {
-        m_firstResponder.setReadValue([responder() isFirstResponder]);
+        m_firstResponder.reset([responder() isFirstResponder]);
     }
 }
 

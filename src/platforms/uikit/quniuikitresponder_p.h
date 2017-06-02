@@ -65,7 +65,9 @@ public:
 
     UIResponder *responder() const;
 
-    QUniUIKitFallibleOptional<bool> m_firstResponder;
+    QUniUIKitOptional<bool> m_firstResponder;
+
+    void onFirstResponderChanged(bool isFirstResponder);
 
     Q_DECLARE_PUBLIC(QUniUIKitResponder)
 
