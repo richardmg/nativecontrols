@@ -64,7 +64,12 @@ public:
     explicit QUniUIKitControlPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitControlPrivate();
 
+    UIControl *control() const;
+
     Q_DECLARE_PUBLIC(QUniUIKitControl)
+
+protected:
+    void createNSObject();
 };
 
 QT_END_NAMESPACE

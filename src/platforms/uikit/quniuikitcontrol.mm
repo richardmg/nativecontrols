@@ -41,6 +41,15 @@
 #include <QtUniUIKitControls/quniuikitcontrol.h>
 #include <QtUniUIKitControls/private/quniuikitcontrol_p.h>
 
+@interface QUniUIControl : UIControl
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
+@end
+
+@implementation QUniUIControl
+#define QUNI_INTERFACE_IMPLEMENTATION
+#include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
+@end
+
 QT_BEGIN_NAMESPACE
 
 QUniUIKitControlPrivate::QUniUIKitControlPrivate(int version)
@@ -50,6 +59,16 @@ QUniUIKitControlPrivate::QUniUIKitControlPrivate(int version)
 
 QUniUIKitControlPrivate::~QUniUIKitControlPrivate()
 {
+}
+
+UIControl *QUniUIKitControlPrivate::control() const
+{
+    return static_cast<UIControl *>(nsObject());
+}
+
+void QUniUIKitControlPrivate::createNSObject()
+{
+    setNSObject([[[QUniUIControl alloc] init] autorelease]);
 }
 
 QUniUIKitControl::QUniUIKitControl(QUniUIKitBase *parent)
@@ -64,6 +83,11 @@ QUniUIKitControl::QUniUIKitControl(QUniUIKitControlPrivate &dd, QUniUIKitBase *p
 
 QUniUIKitControl::~QUniUIKitControl()
 {
+}
+
+UIControl *QUniUIKitControl::uiControlHandle()
+{
+    return d_func()->control();
 }
 
 #include "moc_quniuikitcontrol.cpp"

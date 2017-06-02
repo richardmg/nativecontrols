@@ -8,6 +8,7 @@
 QT_BEGIN_NAMESPACE
 
 class QUniUIKitControlPrivate;
+Q_FORWARD_DECLARE_OBJC_CLASS(UIControl);
 
 class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitControl : public QUniUIKitView
 {
@@ -16,6 +17,8 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitControl : public QUniUIKitView
 public:
     QUniUIKitControl(QUniUIKitBase *parent = nullptr);
     virtual ~QUniUIKitControl();
+
+    UIControl *uiControlHandle();
 
 protected:
     QUniUIKitControl(QUniUIKitControlPrivate &dd, QUniUIKitBase *parent = nullptr);
