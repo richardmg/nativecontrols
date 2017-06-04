@@ -98,6 +98,7 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
     if (!d) { \
         CLASSNAME *q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(self)); \
         d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q)); \
+        self.d = d; \
     }
 
 QT_END_NAMESPACE
