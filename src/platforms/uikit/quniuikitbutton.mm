@@ -52,8 +52,8 @@
 
 -(void)onClicked
 {
-    Q_D_NSOBJECT(QUniUIKitButton);
-    emit d->q_func()->clicked();
+    Q_Q_NSOBJECT(QUniUIKitButton);
+    emit q->clicked();
 }
 @end
 
