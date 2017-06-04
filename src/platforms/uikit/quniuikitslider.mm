@@ -51,8 +51,8 @@
 
 -(void)onValueChanged
 {
-    Q_D_NSOBJECT(QUniUIKitSlider);
-    emit d->onValueChanged();
+    Q_Q_NSOBJECT(QUniUIKitSlider);
+    emit q->valueChanged(q->value());
 }
 
 @end
@@ -84,12 +84,6 @@ void QUniUIKitSliderPrivate::setNSObject(NSObject *nsObject)
 UISlider *QUniUIKitSliderPrivate::uiSlider() const
 {
     return static_cast<UISlider *>(view());
-}
-
-void QUniUIKitSliderPrivate::onValueChanged()
-{
-    Q_Q(QUniUIKitSlider);
-    emit q->valueChanged(q->value());
 }
 
 QUniUIKitSlider::QUniUIKitSlider(QUniUIKitBase *parent)
