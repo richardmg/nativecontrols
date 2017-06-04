@@ -47,7 +47,7 @@
 
 #if !defined(QUNI_INTERFACE_IMPLEMENTATION)
 
-@property (nonatomic, readwrite) QUniUIKitViewPrivate *d;
+@property (nonatomic, readwrite) QUniUIKitView *q;
 @property (nonatomic, readwrite) CGSize intrinsicContentSize;
 
 #else
