@@ -85,20 +85,34 @@ void qt_setAssociatedQObject(NSObject *nsObject, QObject *qObject);
 QObject *qt_getAssociatedQObject(NSObject *nsObject);
 
 // Can be used if the nsobject has an associated QObject
+#define Q_Q_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
+    CLASSNAME *q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(OBJC_OBJECT));
+
+// Can be used if the nsobject has an associated QObject
 #define Q_D_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
-    CLASSNAME *q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(OBJC_OBJECT)); \
-    CLASSNAME##Private *d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q)); \
-    (void)(q); \
-    (void)(d)
+    CLASSNAME##Private *d; \
+    { \
+        Q_Q_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
+        d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q)); \
+    }
 
 // Can be used if the nsobject implements quniuikitview_nsobject_p.h.
 // Should be a bit more optimizing than using Q_D_NSOBJECT2 directly.
 #define Q_D_NSOBJECT(CLASSNAME) \
     CLASSNAME##Private *d = static_cast<CLASSNAME##Private *>(self.d); \
     if (!d) { \
-        CLASSNAME *q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(self)); \
+        Q_Q_NSOBJECT2(CLASSNAME, self) \
         d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q)); \
         self.d = d; \
+    }
+
+// Can be used if the nsobject implements quniuikitview_nsobject_p.h.
+// Should be a bit more optimizing than using Q_Q_NSOBJECT2 directly.
+#define Q_Q_NSOBJECT(CLASSNAME) \
+    CLASSNAME *q; \
+    { \
+        Q_D_NSOBJECT(CLASSNAME); \
+        q = d->q_func(); \
     }
 
 QT_END_NAMESPACE
