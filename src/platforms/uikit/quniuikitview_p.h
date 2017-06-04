@@ -63,31 +63,19 @@ public:
     explicit QUniUIKitViewPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitViewPrivate();
 
-    // Attributes to keep track of explicit
-    // application assignments
-    enum Attribute {
-        MovedX			= 0x00000002,
-        MovedY			= 0x00000004,
-        ResizedWidth	= 0x00000008,
-        ResizedHeight	= 0x00000010
-    };
-    Q_DECLARE_FLAGS(Attributes, Attribute)
-
     UIView *view() const;
     void addSubView(UIView *subView);
     void updateIntrinsicContentSize();
 
     void onFrameChanged();
-    void onEmitGeometryChangesLater();
 
     Q_DECLARE_PUBLIC(QUniUIKitView)
 
 private:
     CGRect alignmentRect() const;
     void setAlignmentRect(CGRect rect);
-    void updateGeometry(Attributes propertiesToUpdate);
+    void updateGeometry();
     void initConnections();
-    void emitGeometryChanges(Attributes emitFlags);
 
     void syncX();
     void syncY();
@@ -103,8 +91,6 @@ public:
     virtual void createNSObject() override;
     virtual void setNSObject(NSObject *nsObject) override;
 
-    Attributes m_emitMaskToUseOnFrameChanged;
-    Attributes m_delayedEmitMask;
     QUniUIKitFallibleOptional<qreal> m_x;
     QUniUIKitFallibleOptional<qreal> m_y;
     QUniUIKitFallibleOptional<qreal> m_width;

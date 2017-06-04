@@ -42,8 +42,6 @@
 #include <QtUniUIKitControls/private/quniuikitview_p.h>
 #include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
-const QEvent::Type kEventTypeEmitGeometryChangesLater = QEvent::User;
-
 @interface QUniUIView : UIView
 #include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
 @end
@@ -73,8 +71,6 @@ static QColor qt_nsColorToQColor(UIColor *uiColor)
 
 QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     : QUniUIKitResponderPrivate(version)
-    , m_emitMaskToUseOnFrameChanged(0)
-    , m_delayedEmitMask(0)
 {
 }
 
@@ -93,79 +89,38 @@ void QUniUIKitViewPrivate::initConnections()
 
 void QUniUIKitViewPrivate::onFrameChanged()
 {
-    Q_Q(QUniUIKitView);
-    // This callback can either happen synchronously when setting geometry (frame)
+    // This callback can either happen async when setting geometry (frame)
     // from QUniUIKitView, or because of spontanious changes from UIKit (e.g orientation
-    // change). In the former case we set a m_kvoEmitMask in the setter function
-    // so we know which signal to emit. Otherwise we emit signals for all detected
-    // changes.
-    // The problem is that when we assign a frame to a uiview, UIKit might modify the
+    // change).
+    // Note that when we assign a frame to a uiview, UIKit might modify the
     // frame so that it ends up with a positive width and height. This causes problems
     // if you bind width to e.g 'width: parent.width - x', since if the expression ends
-    // up negative, UIKit will 'flip' x and width, which means that we need to emit changed
-    // signals for both. But, we can only emit a signal for the property currently being set
-    // from QML, otherwise we can cause binding loops to happen (e.g if we emit xChanged in
-    // the binding example above, when it sets a new width). As such, we need to emit the
-    // remaining properties async later.
+    // up negative, UIKit will 'flip' x and width. For those cases it means that we might
+    // temporary report "wrong" geometry until we get this callback and read the actual
+    // values.
 
-    Attributes changedMask = 0;
+    Q_Q(QUniUIKitView);
     CGRect actualRect = alignmentRect();
 
-    if (m_x != actualRect.origin.x)
-        changedMask |= MovedX;
-    if (m_y != actualRect.origin.y)
-        changedMask |= MovedY;
-    if (m_width != actualRect.size.width)
-        changedMask |= ResizedWidth;
-    if (m_height != actualRect.size.height)
-        changedMask |= ResizedHeight;
-
-    m_x.setReadValue(actualRect.origin.x);
-    m_y.setReadValue(actualRect.origin.y);
-    m_width.setReadValue(actualRect.size.width);
-    m_height.setReadValue(actualRect.size.height);
-
-    if (m_emitMaskToUseOnFrameChanged == 0) {
-        // Spontanious update not related to setting a qproperty.
-        // Emit changes to all needed properties.
-        m_emitMaskToUseOnFrameChanged = changedMask;
-    } else {
-        // Synchronous update as a result of setting a qproperty
-        if (m_emitMaskToUseOnFrameChanged != changedMask) {
-            // Properties other than the one expected has changed, so
-            // we need to post an event and handle those later.
-            m_delayedEmitMask |= changedMask;
-            qApp->postEvent(q, new QEvent(kEventTypeEmitGeometryChangesLater));
-        }
+    if (m_x != actualRect.origin.x) {
+        m_x.setReadValue(actualRect.origin.x);
+        emit q->xChanged(m_x);
     }
 
-    // Since we are about to emit the changes in m_kvoEmitMask, we can
-    // remove them from m_qeventEmitMask so we don't emit them once more later.
-    m_delayedEmitMask &= ~m_emitMaskToUseOnFrameChanged;
-
-    emitGeometryChanges(m_emitMaskToUseOnFrameChanged);
-    m_emitMaskToUseOnFrameChanged = 0;
-}
-
-void QUniUIKitViewPrivate::onEmitGeometryChangesLater()
-{
-    Q_Q(QUniUIKitView);
-    qApp->removePostedEvents(q, kEventTypeEmitGeometryChangesLater);
-    emitGeometryChanges(m_delayedEmitMask);
-    m_delayedEmitMask = 0;
-}
-
-void QUniUIKitViewPrivate::emitGeometryChanges(Attributes emitFlags)
-{
-    Q_Q(QUniUIKitView);
-    if (emitFlags & MovedX)
-        emit q->xChanged(m_x);
-    if (emitFlags & MovedY)
+    if (m_y != actualRect.origin.y) {
+        m_y.setReadValue(actualRect.origin.y);
         emit q->yChanged(m_y);
-    if (emitFlags & ResizedWidth)
+    }
+
+    if (m_width != actualRect.size.width) {
+        m_width.setReadValue(actualRect.size.width);
         emit q->widthChanged(m_width);
-    if (emitFlags & ResizedHeight)
+    }
+
+    if (m_height != actualRect.size.height) {
+        m_height.setReadValue(actualRect.size.height);
         emit q->heightChanged(m_height);
+    }
 }
 
 void QUniUIKitViewPrivate::updateIntrinsicContentSize()
@@ -235,7 +190,7 @@ void QUniUIKitViewPrivate::setAlignmentRect(CGRect rect)
     view().frame = [view() frameForAlignmentRect:rect];
 }
 
-void QUniUIKitViewPrivate::updateGeometry(Attributes propertiesToUpdate)
+void QUniUIKitViewPrivate::updateGeometry()
 {
     // When assigning a frame to a uiview, UIKit might modify the frame so that
     // it ends up with a positive width and height. This causes problems if you bind
@@ -244,10 +199,8 @@ void QUniUIKitViewPrivate::updateGeometry(Attributes propertiesToUpdate)
     // geometry variables (handled by the type), and always try to reapply the
     // written requested geometry whenever some of the values are updated.
     @try {
-        m_emitMaskToUseOnFrameChanged = propertiesToUpdate;
         setAlignmentRect(CGRectMake(m_x.writeValue(), m_y.writeValue(), m_width.writeValue(), m_height.writeValue()));
         [view() setNeedsLayout];
-        [view() layoutIfNeeded];
     } @catch (NSException *) {
         // QML can sometimes end up evaluating a geometry
         // binding to NaN. And trying to set that on a UIView
@@ -260,7 +213,8 @@ void QUniUIKitViewPrivate::updateGeometry(Attributes propertiesToUpdate)
 void QUniUIKitViewPrivate::syncX()
 {
     if (m_x.hasExplicitValue()) {
-        updateGeometry(MovedX);
+        updateGeometry();
+        emit q_func()->xChanged(m_x);
     } else {
         float value = alignmentRect().origin.x;
         if (m_x != value) {
@@ -273,7 +227,8 @@ void QUniUIKitViewPrivate::syncX()
 void QUniUIKitViewPrivate::syncY()
 {
     if (m_y.hasExplicitValue()) {
-        updateGeometry(MovedY);
+        updateGeometry();
+        emit q_func()->yChanged(m_y);
     } else {
         float value = alignmentRect().origin.y;
         if (m_y != value) {
@@ -286,7 +241,8 @@ void QUniUIKitViewPrivate::syncY()
 void QUniUIKitViewPrivate::syncWidth()
 {
     if (m_width.hasExplicitValue()) {
-        updateGeometry(ResizedWidth);
+        updateGeometry();
+        emit q_func()->widthChanged(m_width);
     } else {
         float value = alignmentRect().size.width;
         if (m_width != value) {
@@ -299,7 +255,8 @@ void QUniUIKitViewPrivate::syncWidth()
 void QUniUIKitViewPrivate::syncHeight()
 {
     if (m_height.hasExplicitValue()) {
-        updateGeometry(ResizedHeight);
+        updateGeometry();
+        emit q_func()->heightChanged(m_height);
     } else {
         float value = alignmentRect().size.height;
         if (m_height != value) {
@@ -498,19 +455,6 @@ QUniUIKitView *QUniUIKitView::parentView()
 UIView *QUniUIKitView::uiViewHandle()
 {
     return d_func()->view();
-}
-
-bool QUniUIKitView::event(QEvent *event)
-{
-    Q_D(QUniUIKitView);
-    switch (event->type()) {
-    case kEventTypeEmitGeometryChangesLater:
-        d->onEmitGeometryChangesLater();
-        break;
-    default:
-        return QUniUIKitResponder::event(event);
-    }
-    return true;
 }
 
 void QUniUIKitView::childEvent(QChildEvent *event)
