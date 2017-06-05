@@ -112,8 +112,7 @@ UITextField *QUniUIKitTextFieldPrivate::textField() const
 
 void QUniUIKitTextFieldPrivate::createNSObject()
 {
-    UITextField *uiTextField = [[[QUniUITextField alloc] init] autorelease];
-    setNSObject(uiTextField);
+    setNSObject([[[QUniUITextField alloc] init] autorelease]);
 }
 
 void QUniUIKitTextFieldPrivate::onTextChanged()
