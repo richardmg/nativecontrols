@@ -112,7 +112,13 @@ QUniUIKitLabel *QUniUIKitTableViewCell::detailTextLabel() const
     Q_D(const QUniUIKitTableViewCell);
     if (!d->m_detailTextLabel) {
         QUniUIKitTableViewCell *me = const_cast<QUniUIKitTableViewCell *>(this);
-        me->d_func()->m_detailTextLabel = new QUniUIKitLabel(me->uiTableViewCellHandle().detailTextLabel, me);
+        UILabel *label = me->uiTableViewCellHandle().detailTextLabel;
+        if (!label) {
+            // Some cell types does not have a detail text
+            // label. For those cases, we just create a placeholder.
+            label = [[UILabel new] autorelease];
+        }
+        me->d_func()->m_detailTextLabel = new QUniUIKitLabel(label, me);
     }
     return d->m_detailTextLabel;
 }
