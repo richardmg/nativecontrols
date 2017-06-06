@@ -41,18 +41,23 @@
 #include <QtUniUIKitControls/quniuikittableviewcell.h>
 #include <QtUniUIKitControls/quniuikitlabel.h>
 #include <QtUniUIKitControls/private/quniuikittableviewcell_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 QT_BEGIN_NAMESPACE
 
 QUniUIKitTableViewCellPrivate::QUniUIKitTableViewCellPrivate(int version)
     : QUniUIKitViewPrivate(version)
-    , m_textLabel(nullptr)
-    , m_detailTextLabel(nullptr)
     , m_cellStyle(QUniUIKitTableViewCell::StyleDefault)
 {
+    Q_Q(QUniUIKitTableViewCell);
     // Avoid mapping enum values directly to UIKit enum values in the enum
     // declaration, since then we require all users of the header file to compile as obj-c++.
     Q_ASSERT(int(QUniUIKitTableViewCell::StyleDefault) == int(UITableViewCellStyleDefault));
+
+    // Create temporary labels, since we cannot create a UITableViewCell
+    // before we know cellStyle and reuseIdentifier.
+    m_textLabel = new QUniUIKitLabel(q);
+    m_detailTextLabel = new QUniUIKitLabel(q);
 }
 
 QUniUIKitTableViewCellPrivate::~QUniUIKitTableViewCellPrivate()
@@ -61,15 +66,54 @@ QUniUIKitTableViewCellPrivate::~QUniUIKitTableViewCellPrivate()
 
 void QUniUIKitTableViewCellPrivate::createNSObject()
 {
-    NSString *id = m_reuseIndentifier.toNSString();
+    NSString *id = m_reuseIdentifier.toNSString();
     UITableViewCellStyle cellStyle = static_cast<UITableViewCellStyle>(m_cellStyle);
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:cellStyle reuseIdentifier:id];
     setNSObject([cell autorelease]);
 }
 
+void QUniUIKitTableViewCellPrivate::setNSObject(NSObject *nsObject)
+{
+    QUniUIKitViewPrivate::setNSObject(nsObject);
+    syncTextLabel();
+    syncDetailTextLabel();
+}
+
 UITableViewCell *QUniUIKitTableViewCellPrivate::uiTableViewCell() const
 {
     return static_cast<UITableViewCell *>(view());
+}
+
+void QUniUIKitTableViewCellPrivate::syncReuseIdentifier()
+{
+    qWarning("TableViewCell: reuseIdentifer cannot change once the backing UITableViewCell has been created!");
+}
+
+void QUniUIKitTableViewCellPrivate::syncCellStyle()
+{
+    qWarning("TableViewCell: cellStyle cannot change once the backing UITableViewCell has been created!");
+}
+
+void QUniUIKitTableViewCellPrivate::syncTextLabel()
+{
+    auto placeholder = m_textLabel;
+    m_textLabel = new QUniUIKitLabel(uiTableViewCell().textLabel, q_func());
+    m_textLabel->setText(placeholder->text());
+    *m_textLabel = *placeholder;
+
+    delete placeholder;
+}
+
+void QUniUIKitTableViewCellPrivate::syncDetailTextLabel()
+{
+    if (!uiTableViewCell().detailTextLabel)
+        return;
+
+    auto placeholder = m_detailTextLabel;
+    m_detailTextLabel = new QUniUIKitLabel(uiTableViewCell().detailTextLabel, q_func());
+    *m_detailTextLabel = *placeholder;
+
+    delete placeholder;
 }
 
 QUniUIKitTableViewCell::QUniUIKitTableViewCell(QUniUIKitBase *parent)
@@ -97,70 +141,10 @@ UITableViewCell *QUniUIKitTableViewCell::uiTableViewCellHandle()
     return d_func()->uiTableViewCell();
 }
 
-QUniUIKitLabel *QUniUIKitTableViewCell::textLabel() const
-{
-    Q_D(const QUniUIKitTableViewCell);
-    if (!d->m_textLabel) {
-        QUniUIKitTableViewCell *me = const_cast<QUniUIKitTableViewCell *>(this);
-        me->d_func()->m_textLabel = new QUniUIKitLabel(me->uiTableViewCellHandle().textLabel, me);
-    }
-    return d->m_textLabel;
-}
-
-QUniUIKitLabel *QUniUIKitTableViewCell::detailTextLabel() const
-{
-    Q_D(const QUniUIKitTableViewCell);
-    if (!d->m_detailTextLabel) {
-        QUniUIKitTableViewCell *me = const_cast<QUniUIKitTableViewCell *>(this);
-        UILabel *label = me->uiTableViewCellHandle().detailTextLabel;
-        if (!label) {
-            // Some cell types does not have a detail text
-            // label. For those cases, we just create a placeholder.
-            label = [[UILabel new] autorelease];
-        }
-        me->d_func()->m_detailTextLabel = new QUniUIKitLabel(label, me);
-    }
-    return d->m_detailTextLabel;
-}
-
-QString QUniUIKitTableViewCell::reuseIdentifier() const
-{
-    return d_func()->m_reuseIndentifier;
-}
-
-void QUniUIKitTableViewCell::setReuseIdentifier(const QString &newReuseIdentifier)
-{
-    if (newReuseIdentifier == reuseIdentifier())
-        return;
-
-    Q_D(QUniUIKitTableViewCell);
-    if (d->isNSObjectCreated()) {
-        qWarning("TableViewCell: reuseIdentifer cannot change once the backing UITableViewCell has been created!");
-        return;
-    }
-
-    d->m_reuseIndentifier = newReuseIdentifier;
-}
-
-QUniUIKitTableViewCell::CellStyle QUniUIKitTableViewCell::cellStyle() const
-{
-    return d_func()->m_cellStyle;
-}
-
-void QUniUIKitTableViewCell::setCellStyle(QUniUIKitTableViewCell::CellStyle cellStyle)
-{
-    Q_D(QUniUIKitTableViewCell);
-    if (d->m_cellStyle == cellStyle)
-        return;
-
-    if (d->isNSObjectCreated()) {
-        qWarning("TableViewCell: cellStyle cannot change once the backing UITableViewCell has been created!");
-        return;
-    }
-
-    d->m_cellStyle = cellStyle;
-    emit cellStyleChanged(cellStyle);
-}
+SYNTHESIZE_QPROPERTY_CACHED(reuseIdentifier, ReuseIdentifier, QString, QUniUIKitTableViewCell)
+SYNTHESIZE_QPROPERTY_CACHED(cellStyle, CellStyle, QUniUIKitTableViewCell::CellStyle, QUniUIKitTableViewCell)
+SYNTHESIZE_QPROPERTY_GETTER_CACHED_POINTER(textLabel, QUniUIKitLabel, QUniUIKitTableViewCell)
+SYNTHESIZE_QPROPERTY_GETTER_CACHED_POINTER(detailTextLabel, QUniUIKitLabel, QUniUIKitTableViewCell)
 
 #include "moc_quniuikittableviewcell.cpp"
 

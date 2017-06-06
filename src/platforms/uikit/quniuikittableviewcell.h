@@ -75,7 +75,7 @@ public:
     void setReuseIdentifier(const QString &newValue);
 
     CellStyle cellStyle() const;
-    void setCellStyle(CellStyle cellStyle);
+    void setCellStyle(const CellStyle &cellStyle);
 
 Q_SIGNALS:
     void cellStyleChanged(CellStyle cellStyle);

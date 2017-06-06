@@ -66,16 +66,22 @@ public:
 
     UITableViewCell *uiTableViewCell() const;
 
-    QString m_reuseIndentifier;
+    QString m_reuseIdentifier;
     QUniUIKitLabel *m_textLabel;
     QUniUIKitLabel *m_detailTextLabel;
     QUniUIKitTableViewCell::CellStyle m_cellStyle;
 
     Q_DECLARE_PUBLIC(QUniUIKitTableViewCell)
 
-protected:
-    void createNSObject() override;
+private:
+    void syncReuseIdentifier();
+    void syncCellStyle();
+    void syncTextLabel();
+    void syncDetailTextLabel();
 
+protected:
+    virtual void createNSObject() override;
+    virtual void setNSObject(NSObject *nsObject) override;
 };
 
 QT_END_NAMESPACE
