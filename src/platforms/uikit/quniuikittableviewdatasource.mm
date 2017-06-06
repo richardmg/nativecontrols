@@ -159,12 +159,12 @@ NSObject *QUniUIKitTableViewDataSource::uiTableViewDataSourceHandle()
     return d_func()->nsObject();
 }
 
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, numberOfSectionsInTableView, setNumberOfSectionsInTableView, toInt)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, numberOfRowsInSection, setNumberOfRowsInSection, toInt)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, titleForHeaderInSection, setTitleForHeaderInSection, toString)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, cellForRowAtIndexPath, setCellForRowAtIndexPath, toQObject)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, sectionIndexTitlesForTableView, setSectionIndexTitlesForTableView, toVariant)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTableViewDataSource, titleForFooterInSection, setTitleForFooterInSection, toString)
+SYNTHESIZE_QPROPERTY_QJSVALUE(numberOfSectionsInTableView, NumberOfSectionsInTableView, toInt, QUniUIKitTableViewDataSource)
+SYNTHESIZE_QPROPERTY_QJSVALUE(numberOfRowsInSection, NumberOfRowsInSection, toInt, QUniUIKitTableViewDataSource)
+SYNTHESIZE_QPROPERTY_QJSVALUE(titleForHeaderInSection, TitleForHeaderInSection, toString, QUniUIKitTableViewDataSource)
+SYNTHESIZE_QPROPERTY_QJSVALUE(cellForRowAtIndexPath, CellForRowAtIndexPath, toQObject, QUniUIKitTableViewDataSource)
+SYNTHESIZE_QPROPERTY_QJSVALUE(sectionIndexTitlesForTableView, SectionIndexTitlesForTableView, toVariant, QUniUIKitTableViewDataSource)
+SYNTHESIZE_QPROPERTY_QJSVALUE(titleForFooterInSection, TitleForFooterInSection, toString, QUniUIKitTableViewDataSource)
 
 #include "moc_quniuikittableviewdatasource.cpp"
 

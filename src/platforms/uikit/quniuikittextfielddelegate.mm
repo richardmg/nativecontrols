@@ -142,11 +142,11 @@ NSObject *QUniUIKitTextFieldDelegate::uiTextFieldDelegateHandle() const
     return d_func()->nsObject();
 }
 
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldBeginEditing, setTextFieldShouldBeginEditing, toBool)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldEndEditing, setTextFieldShouldEndEditing, toBool)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldClear, setTextFieldShouldClear, toBool)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldReturn, setTextFieldShouldReturn, toBool)
-SYNTHESIZE_QPROPERTY_QJSVALUE(QUniUIKitTextFieldDelegate, textFieldShouldChangeCharactersInRange, setTextFieldShouldChangeCharactersInRange, toBool)
+SYNTHESIZE_QPROPERTY_QJSVALUE(textFieldShouldBeginEditing, TextFieldShouldBeginEditing, toBool, QUniUIKitTextFieldDelegate)
+SYNTHESIZE_QPROPERTY_QJSVALUE(textFieldShouldEndEditing, TextFieldShouldEndEditing, toBool, QUniUIKitTextFieldDelegate)
+SYNTHESIZE_QPROPERTY_QJSVALUE(textFieldShouldClear, TextFieldShouldClear, toBool, QUniUIKitTextFieldDelegate)
+SYNTHESIZE_QPROPERTY_QJSVALUE(textFieldShouldReturn, TextFieldShouldReturn, toBool, QUniUIKitTextFieldDelegate)
+SYNTHESIZE_QPROPERTY_QJSVALUE(textFieldShouldChangeCharactersInRange, TextFieldShouldChangeCharactersInRange, toBool, QUniUIKitTextFieldDelegate)
 
 #include "moc_quniuikittextfielddelegate.cpp"
 

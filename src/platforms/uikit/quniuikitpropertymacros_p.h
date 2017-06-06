@@ -74,16 +74,16 @@
     GET_PROPERTY_QJSVALUE_BEGIN(PROPERTY_NAME, QT_TYPE, NSOBJECT) \
     GET_PROPERTY_QJSVALUE_END
 
-#define SYNTHESIZE_QPROPERTY_QJSVALUE(CLASS, GETTER, SETTER, CONVERT) \
-QJSValue CLASS::GETTER() const  { \
-    return d_func()->m_##GETTER; \
+#define SYNTHESIZE_QPROPERTY_QJSVALUE(LOWER, UPPER, CONVERT, CLASS) \
+QJSValue CLASS::LOWER() const  { \
+    return d_func()->m_##LOWER; \
 } \
-void CLASS::SETTER(const QJSValue &value) { \
+void CLASS::set##UPPER(const QJSValue &value) { \
     Q_D(CLASS); \
-    auto prevValue = d->m_##GETTER.CONVERT(); \
-    d->m_##GETTER = value; \
+    auto prevValue = d->m_##LOWER.CONVERT(); \
+    d->m_##LOWER = value; \
     if (prevValue != value.CONVERT()) \
-        emit GETTER##Changed(this); \
+        emit LOWER##Changed(this); \
 }
 
 #define SYNTHESIZE_QPROPERTY_CACHED(LOWER, UPPER, TYPE, CLASS) \
