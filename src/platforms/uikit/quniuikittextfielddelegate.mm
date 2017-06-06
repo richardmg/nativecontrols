@@ -98,7 +98,7 @@
     GET_PROPERTY_QJSVALUE(_delegatePrivate->m_textFieldShouldReturn, QUniUIKitTextField, textField)
     bool shouldReturn = property.isUndefined() ? true : property.toBool();
     if (shouldReturn)
-        emit _delegatePrivate->q_func()->textFieldDidReturn(associatedQObject);
+        emit _delegatePrivate->q_func()->textFieldDidReturn(q);
     return shouldReturn;
 }
 

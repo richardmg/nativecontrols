@@ -48,6 +48,8 @@
 // We mean it.
 //
 
+#include <QtUniUIKitControls/private/quniuikitbase_p.h>
+
 // We often expect properties in QML to contain functions that
 // we can forward calls to when UIKit query our delegates for
 // information. But since it's so common to assign values directly
@@ -56,16 +58,14 @@
 // encapsulate this into a set of helper macros.
 #define GET_PROPERTY_QJSVALUE_BEGIN(PROPERTY_NAME, QT_TYPE, NSOBJECT) \
     QJSValue property = PROPERTY_NAME; \
-    QT_TYPE *associatedQObject = static_cast<QT_TYPE *>(qt_getAssociatedQObject(NSOBJECT)); \
+    Q_Q_NSOBJECT2(QT_TYPE, NSOBJECT); \
     if (property.isCallable()) { \
-        if (associatedQObject) { \
-            QQmlEngine *engine = qmlEngine(associatedQObject); \
-            QJSValueList args; \
-            args << engine->newQObject(associatedQObject);
+        QQmlEngine *engine = qmlEngine(q); \
+        QJSValueList args; \
+        args << engine->newQObject(q);
 
 #define GET_PROPERTY_QJSVALUE_END \
-            property = property.call(args); \
-        } \
+        property = property.call(args); \
     }
 
 // Convenience macro for cases where the QML function

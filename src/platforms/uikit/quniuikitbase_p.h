@@ -86,7 +86,8 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
 
 // Can be used if the nsobject has an associated QObject
 #define Q_Q_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
-    CLASSNAME *q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(OBJC_OBJECT));
+    CLASSNAME *q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(OBJC_OBJECT)); \
+    Q_ASSERT(q);
 
 // Can be used if the nsobject has an associated QObject
 #define Q_D_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
@@ -104,6 +105,7 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
         q = static_cast<CLASSNAME *>(self.q); \
     } else { \
         q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(self)); \
+        Q_ASSERT(q); \
         self.q = q; \
     }
 
@@ -115,6 +117,7 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
         d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(self.q)); \
     } else { \
         self.q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(self)); \
+        Q_ASSERT(self.q); \
         d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(self.q)); \
     }
 
