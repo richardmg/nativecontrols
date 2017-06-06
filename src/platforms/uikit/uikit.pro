@@ -21,6 +21,7 @@ IOS_CONTROLS = \
     searchfield \
     label \
     slider \
+    switch \
     tableview \
     tableviewcell \
     tableviewdatasource \
