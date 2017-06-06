@@ -59,7 +59,6 @@ QUniUIKitLabelPrivate::QUniUIKitLabelPrivate(int version)
 
 QUniUIKitLabelPrivate::~QUniUIKitLabelPrivate()
 {
-    [m_delegate release];
 }
 
 void QUniUIKitLabelPrivate::createNSObject()

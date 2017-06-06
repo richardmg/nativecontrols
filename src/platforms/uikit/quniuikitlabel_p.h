@@ -65,7 +65,6 @@ public:
     virtual ~QUniUIKitLabelPrivate();
 
     UILabel *uiLabel() const;
-    QUniUIKitLabelDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QUniUIKitLabel)
 
