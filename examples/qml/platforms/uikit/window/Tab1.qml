@@ -172,9 +172,17 @@ ViewController {
             }
 
             Label {
+                id: normalLabel
                 text: "Normal label";
                 x: 10
                 y: buttonSystem.bottom + 10
+                width: intrinsicContentWidth
+                height: intrinsicContentHeight
+            }
+
+            Switch {
+                x: 10
+                y: normalLabel.bottom + 10
                 width: intrinsicContentWidth
                 height: intrinsicContentHeight
             }
