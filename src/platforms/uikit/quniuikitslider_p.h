@@ -65,7 +65,6 @@ public:
     virtual ~QUniUIKitSliderPrivate();
 
     UISlider *uiSlider() const;
-    QUniUIKitSliderDelegate *m_delegate;
 
     Q_DECLARE_PUBLIC(QUniUIKitSlider)
 

@@ -66,7 +66,6 @@ QUniUIKitSliderPrivate::QUniUIKitSliderPrivate(int version)
 
 QUniUIKitSliderPrivate::~QUniUIKitSliderPrivate()
 {
-    [m_delegate release];
 }
 
 void QUniUIKitSliderPrivate::createNSObject()
