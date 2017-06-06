@@ -103,6 +103,7 @@ NSObject *QUniUIKitBasePrivate::nsObject() const
 
 void QUniUIKitBasePrivate::setNSObject(NSObject *nsObject)
 {
+    Q_ASSERT(nsObject);
     Q_ASSERT_X(!m_nsObject, Q_FUNC_INFO, "setNSObject should only be called once");
     m_nsObject = [nsObject retain];
     qt_setAssociatedQObject(m_nsObject, q_func());
