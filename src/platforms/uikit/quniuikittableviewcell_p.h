@@ -58,20 +58,13 @@ QT_BEGIN_NAMESPACE
 
 class QUniUIKitTableViewCellPrivate;
 
-@interface QUniUITableViewCell : UITableViewCell
-{
-    QT_PREPEND_NAMESPACE(QUniUIKitTableViewCellPrivate) *_tableViewCellPrivate;
-}
--(QUniUIKitTableViewCell *)qUniUiKitTableViewCellHandle;
-@end
-
 class QUniUIKitTableViewCellPrivate : public QUniUIKitViewPrivate
 {
 public:
     explicit QUniUIKitTableViewCellPrivate(int version = QObjectPrivateVersion);
     virtual ~QUniUIKitTableViewCellPrivate();
 
-    QUniUITableViewCell *uiTableViewCell() const;
+    UITableViewCell *uiTableViewCell() const;
 
     QString m_reuseIndentifier;
     QUniUIKitLabel *m_textLabel;

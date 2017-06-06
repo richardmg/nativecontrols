@@ -42,27 +42,6 @@
 #include <QtUniUIKitControls/quniuikitlabel.h>
 #include <QtUniUIKitControls/private/quniuikittableviewcell_p.h>
 
-@implementation QUniUITableViewCell
-
--(id)initWithQUniUIKitTableViewCellPrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTableViewCellPrivate) *)tableViewCellPrivate
-{
-    NSString *id = tableViewCellPrivate->m_reuseIndentifier.toNSString();
-    UITableViewCellStyle cellStyle = static_cast<UITableViewCellStyle>(tableViewCellPrivate->m_cellStyle);
-    self = [super initWithStyle:cellStyle reuseIdentifier:id];
-    if (self) {
-        _tableViewCellPrivate = tableViewCellPrivate;
-    }
-
-    return self;
-}
-
--(QUniUIKitTableViewCell *)qUniUiKitTableViewCellHandle
-{
-    return _tableViewCellPrivate->q_func();
-}
-
-@end
-
 QT_BEGIN_NAMESPACE
 
 QUniUIKitTableViewCellPrivate::QUniUIKitTableViewCellPrivate(int version)
@@ -82,14 +61,15 @@ QUniUIKitTableViewCellPrivate::~QUniUIKitTableViewCellPrivate()
 
 void QUniUIKitTableViewCellPrivate::createNSObject()
 {
-    QUniUITableViewCell *uiCell = [[QUniUITableViewCell alloc] initWithQUniUIKitTableViewCellPrivate:this];
-    [uiCell autorelease];
-    setNSObject(uiCell);
+    NSString *id = m_reuseIndentifier.toNSString();
+    UITableViewCellStyle cellStyle = static_cast<UITableViewCellStyle>(m_cellStyle);
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:cellStyle reuseIdentifier:id];
+    setNSObject([cell autorelease]);
 }
 
-QUniUITableViewCell *QUniUIKitTableViewCellPrivate::uiTableViewCell() const
+UITableViewCell *QUniUIKitTableViewCellPrivate::uiTableViewCell() const
 {
-    return static_cast<QUniUITableViewCell *>(view());
+    return static_cast<UITableViewCell *>(view());
 }
 
 QUniUIKitTableViewCell::QUniUIKitTableViewCell(QUniUIKitBase *parent)

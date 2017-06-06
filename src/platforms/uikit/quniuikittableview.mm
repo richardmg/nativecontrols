@@ -97,8 +97,8 @@ QUniUIKitTableViewCell *QUniUIKitTableView::dequeueReusableCellWithIdentifier(co
 {
     NSString *nsID = id.toNSString();
     if (UITableViewCell *cell = [uiTableViewHandle() dequeueReusableCellWithIdentifier:nsID]) {
-        if ([cell isKindOfClass:[QUniUITableViewCell class]])
-            return [static_cast<QUniUITableViewCell *>(cell) qUniUiKitTableViewCellHandle];
+        Q_Q_NSOBJECT2(QUniUIKitTableViewCell, cell);
+        return q;
     }
 
     return nullptr;
