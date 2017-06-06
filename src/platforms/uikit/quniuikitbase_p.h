@@ -97,7 +97,18 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
         d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q)); \
     }
 
-// Can be used if the nsobject implements quniuikitview_nsobject_p.h.
+#define Q_AND_D_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
+    CLASSNAME *q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(OBJC_OBJECT)); \
+    Q_ASSERT(q); \
+    CLASSNAME##Private *d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q));
+
+#define Q_AND_D_NSOBJECT4(CLASSNAME, OBJC_OBJECT, VAR_Q, VAR_D) \
+    CLASSNAME *VAR_Q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(OBJC_OBJECT)); \
+    Q_ASSERT(VAR_Q); \
+    CLASSNAME##Private *VAR_D = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q)); \
+    Q_UNUSED(VAR_D)
+
+// Can be used if the nsobject has a "@property (nonatomic, readwrite) QUniUIKitView *q;"
 // Should be a bit more optimizing than using Q_Q_NSOBJECT2 directly.
 #define Q_Q_NSOBJECT(CLASSNAME) \
     CLASSNAME *q; \
@@ -109,7 +120,7 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
         self.q = q; \
     }
 
-// Can be used if the nsobject implements quniuikitview_nsobject_p.h.
+// Can be used if the nsobject has a "@property (nonatomic, readwrite) QUniUIKitView *q;"
 // Should be a bit more optimizing than using Q_D_NSOBJECT2 directly.
 #define Q_D_NSOBJECT(CLASSNAME) \
     CLASSNAME##Private *d; \

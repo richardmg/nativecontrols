@@ -48,22 +48,10 @@
 #include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 @interface QUniUITableViewDataSource : NSObject <UITableViewDataSource>
-{
-    QT_PREPEND_NAMESPACE(QUniUIKitTableViewDataSourcePrivate) *_dataSourcePrivate;
-}
+@property (nonatomic, readwrite) QUniUIKitBase *q;
 @end
 
 @implementation QUniUITableViewDataSource
-
--(id)initWithQUniUIKitTableViewDataSourcePrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTableViewDataSourcePrivate) *)dataSourcePrivate
-{
-    self = [super init];
-    if (self) {
-        _dataSourcePrivate = dataSourcePrivate;
-    }
-
-    return self;
-}
 
 - (UITableViewCell *)emptyCell
 {
@@ -74,13 +62,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    GET_PROPERTY_QJSVALUE(_dataSourcePrivate->m_numberOfSectionsInTableView, QUniUIKitTableView, tableView)
+    GET_PROPERTY_QJSVALUE(m_numberOfSectionsInTableView, QUniUIKitTableViewDataSource, tableView)
     return property.toInt();
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    GET_PROPERTY_QJSVALUE_BEGIN(_dataSourcePrivate->m_numberOfRowsInSection, QUniUIKitTableView, tableView)
+    GET_PROPERTY_QJSVALUE_BEGIN(m_numberOfRowsInSection, QUniUIKitTableViewDataSource, tableView)
     args << QJSValue((int)section);
     GET_PROPERTY_QJSVALUE_END
     return property.toInt();
@@ -88,7 +76,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GET_PROPERTY_QJSVALUE_BEGIN(_dataSourcePrivate->m_cellForRowAtIndexPath, QUniUIKitTableView, tableView)
+    GET_PROPERTY_QJSVALUE_BEGIN(m_cellForRowAtIndexPath, QUniUIKitTableViewDataSource, tableView)
     QUniUIKitIndexPath qindexPath(indexPath);
     args << engine->newQObject(&qindexPath);
     GET_PROPERTY_QJSVALUE_END
@@ -101,7 +89,7 @@
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    GET_PROPERTY_QJSVALUE(_dataSourcePrivate->m_sectionIndexTitlesForTableView, QUniUIKitTableView, tableView)
+    GET_PROPERTY_QJSVALUE(m_sectionIndexTitlesForTableView, QUniUIKitTableViewDataSource, tableView)
     QVariantList list = property.toVariant().toList();
 
     NSMutableArray *titleArray = [NSMutableArray arrayWithCapacity:list.length()];
@@ -113,7 +101,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    GET_PROPERTY_QJSVALUE_BEGIN(_dataSourcePrivate->m_titleForHeaderInSection, QUniUIKitTableView, tableView)
+    GET_PROPERTY_QJSVALUE_BEGIN(m_titleForHeaderInSection, QUniUIKitTableViewDataSource, tableView)
     args << QJSValue((int)section);
     GET_PROPERTY_QJSVALUE_END
     return property.toString().toNSString();
@@ -121,7 +109,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    GET_PROPERTY_QJSVALUE_BEGIN(_dataSourcePrivate->m_titleForFooterInSection, QUniUIKitTableView, tableView)
+    GET_PROPERTY_QJSVALUE_BEGIN(m_titleForFooterInSection, QUniUIKitTableViewDataSource, tableView)
     args << QJSValue((int)section);
     GET_PROPERTY_QJSVALUE_END
     return property.isUndefined() ? nil : property.toString().toNSString();
@@ -142,7 +130,7 @@ QUniUIKitTableViewDataSourcePrivate::~QUniUIKitTableViewDataSourcePrivate()
 
 void QUniUIKitTableViewDataSourcePrivate::createNSObject()
 {
-    setNSObject([[[QUniUITableViewDataSource alloc] initWithQUniUIKitTableViewDataSourcePrivate:this] autorelease]);
+    setNSObject([[QUniUITableViewDataSource new] autorelease]);
 }
 
 QUniUIKitTableViewDataSource::QUniUIKitTableViewDataSource(QUniUIKitBase *parent)

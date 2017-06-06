@@ -51,40 +51,28 @@
 #define QUNIUITEXTFIELDDELEGATE_METHOD_BOOL(NAME) \
 - (BOOL)textField##NAME:(UITextField *)textField \
 { \
-    GET_PROPERTY_QJSVALUE(_delegatePrivate->m_textField##NAME, QUniUIKitTextField, textField) \
+    GET_PROPERTY_QJSVALUE(m_textField##NAME, QUniUIKitTextFieldDelegate, textField) \
     return property.isUndefined() ? YES : property.toBool(); \
 }
 
 #define QUNIUITEXTFIELDDELEGATE_METHOD_EMIT(NAME) \
 - (void)textField##NAME:(UITextField *)textField \
 { \
-    QUniUIKitTextField *qtextField = static_cast<QUniUIKitTextField *>(qt_getAssociatedQObject(textField)); \
-    emit _delegatePrivate->q_func()->textField##NAME(qtextField); \
+    Q_Q_NSOBJECT2(QUniUIKitTextField, textField); \
+    emit q->delegate()->textField##NAME(q); \
 }
 
 // --------------------------------------------------------------------------
 
 @interface QUniUITextFieldDelegate : NSObject <UITextFieldDelegate>
-{
-    QT_PREPEND_NAMESPACE(QUniUIKitTextFieldDelegatePrivate) *_delegatePrivate;
-}
+@property (nonatomic, readwrite) QUniUIKitBase *q;
 @end
 
 @implementation QUniUITextFieldDelegate
 
--(id)initWithQUniUIKitTextFieldDelegatePrivate:(QT_PREPEND_NAMESPACE(QUniUIKitTextFieldDelegatePrivate) *)delegatePrivate
-{
-    self = [super init];
-    if (self) {
-        _delegatePrivate = delegatePrivate;
-    }
-
-    return self;
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    GET_PROPERTY_QJSVALUE_BEGIN(_delegatePrivate->m_textFieldShouldChangeCharactersInRange, QUniUIKitTextField, textField)
+    GET_PROPERTY_QJSVALUE_BEGIN(m_textFieldShouldChangeCharactersInRange, QUniUIKitTextFieldDelegate, textField)
         QUniUIKitRange qrange(range.location, range.length);
         args << engine->newQObject(&qrange);
         args << engine->toScriptValue(QString::fromNSString(string));
@@ -95,10 +83,12 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     // We special case textFieldShouldReturn since we want to emit a textFieldDidReturn as well
-    GET_PROPERTY_QJSVALUE(_delegatePrivate->m_textFieldShouldReturn, QUniUIKitTextField, textField)
+    GET_PROPERTY_QJSVALUE(m_textFieldShouldReturn, QUniUIKitTextFieldDelegate, textField)
     bool shouldReturn = property.isUndefined() ? true : property.toBool();
-    if (shouldReturn)
-        emit _delegatePrivate->q_func()->textFieldDidReturn(q);
+    if (shouldReturn) {
+        Q_AND_D_NSOBJECT4(QUniUIKitTextField, textField, qtextField, dtextField);
+        emit q->textFieldDidReturn(qtextField);
+    }
     return shouldReturn;
 }
 
@@ -125,7 +115,7 @@ QUniUIKitTextFieldDelegatePrivate::~QUniUIKitTextFieldDelegatePrivate()
 
 void QUniUIKitTextFieldDelegatePrivate::createNSObject()
 {
-    setNSObject([[[QUniUITextFieldDelegate alloc] initWithQUniUIKitTextFieldDelegatePrivate:this] autorelease]);
+    setNSObject([[QUniUITextFieldDelegate new] autorelease]);
 }
 
 QUniUIKitTextFieldDelegate::QUniUIKitTextFieldDelegate(QUniUIKitBase *parent)

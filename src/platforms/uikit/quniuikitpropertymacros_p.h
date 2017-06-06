@@ -56,13 +56,14 @@
 // to properties in QML, we need to check for this as well.
 // To avoid reimplement the same pattern over and over, we
 // encapsulate this into a set of helper macros.
-#define GET_PROPERTY_QJSVALUE_BEGIN(PROPERTY_NAME, QT_TYPE, NSOBJECT) \
-    QJSValue property = PROPERTY_NAME; \
-    Q_Q_NSOBJECT2(QT_TYPE, NSOBJECT); \
+#define GET_PROPERTY_QJSVALUE_BEGIN(PROPERTY_NAME, QT_TYPE, FIRST_ARG) \
+    Q_AND_D_NSOBJECT2(QT_TYPE, self); \
+    QJSValue property = d->PROPERTY_NAME; \
     if (property.isCallable()) { \
+        Q_AND_D_NSOBJECT4(QT_TYPE, FIRST_ARG, q##FIRST_ARG, d##FIRST_ARG); \
         QQmlEngine *engine = qmlEngine(q); \
         QJSValueList args; \
-        args << engine->newQObject(q);
+        args << engine->newQObject(q##FIRST_ARG);
 
 #define GET_PROPERTY_QJSVALUE_END \
         property = property.call(args); \
@@ -70,8 +71,8 @@
 
 // Convenience macro for cases where the QML function
 // only takes one argument (the owner of the delegate)
-#define GET_PROPERTY_QJSVALUE(PROPERTY_NAME, QT_TYPE, NSOBJECT) \
-    GET_PROPERTY_QJSVALUE_BEGIN(PROPERTY_NAME, QT_TYPE, NSOBJECT) \
+#define GET_PROPERTY_QJSVALUE(PROPERTY_NAME, QT_TYPE, FIRST_ARG) \
+    GET_PROPERTY_QJSVALUE_BEGIN(PROPERTY_NAME, QT_TYPE, FIRST_ARG) \
     GET_PROPERTY_QJSVALUE_END
 
 #define SYNTHESIZE_QPROPERTY_QJSVALUE(LOWER, UPPER, CONVERT, CLASS) \
