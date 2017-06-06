@@ -68,6 +68,7 @@ void registerTypes(const char *uri) override
     REGISTER_TYPE(SearchField)
     REGISTER_TYPE(Label)
     REGISTER_TYPE(Slider)
+    REGISTER_TYPE(Switch)
     REGISTER_TYPE(TableView)
     REGISTER_TYPE(TableViewCell)
     REGISTER_TYPE(TableViewDataSource)
