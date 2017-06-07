@@ -72,8 +72,9 @@ QUniUITextFieldStaticDelegate *QUniUIKitTextFieldPrivate::s_delegate = nullptr;
 
 - (void)textFieldDidChange:(NSNotification *)notification
 {
-    Q_D_NSOBJECT2(QUniUIKitTextField, notification.object);
-    d->onTextChanged();
+    Q_AND_D_NSOBJECT2(QUniUIKitTextField, notification.object);
+    d->updateIntrinsicContentSize();
+    emit q->textChanged(q->text());
 }
 
 @end
@@ -113,13 +114,6 @@ UITextField *QUniUIKitTextFieldPrivate::textField() const
 void QUniUIKitTextFieldPrivate::createNSObject()
 {
     setNSObject([[[QUniUITextField alloc] init] autorelease]);
-}
-
-void QUniUIKitTextFieldPrivate::onTextChanged()
-{
-    Q_Q(QUniUIKitTextField);
-    updateIntrinsicContentSize();
-    emit q->textChanged(q->text());
 }
 
 QUniUIKitTextField::QUniUIKitTextField(QUniUIKitBase *parent)

@@ -72,8 +72,6 @@ public:
     QUniUIKitTextFieldDelegate *m_delegate;
     static QUniUITextFieldStaticDelegate *s_delegate;
 
-    void onTextChanged();
-
     Q_DECLARE_PUBLIC(QUniUIKitTextField)
 
 protected:
