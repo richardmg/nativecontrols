@@ -99,7 +99,6 @@ void QUniUIKitTableViewCellPrivate::syncTextLabel()
     auto placeholder = m_textLabel;
     m_textLabel = new QUniUIKitLabel(uiTableViewCell().textLabel, q_func());
     m_textLabel->setText(placeholder->text());
-    *m_textLabel = *placeholder;
 
     delete placeholder;
 }
@@ -111,7 +110,7 @@ void QUniUIKitTableViewCellPrivate::syncDetailTextLabel()
 
     auto placeholder = m_detailTextLabel;
     m_detailTextLabel = new QUniUIKitLabel(uiTableViewCell().detailTextLabel, q_func());
-    *m_detailTextLabel = *placeholder;
+    m_detailTextLabel->setText(placeholder->text());
 
     delete placeholder;
 }

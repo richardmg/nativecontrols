@@ -96,13 +96,6 @@ UILabel *QUniUIKitLabel::uiLabelHandle()
     return d_func()->uiLabel();
 }
 
-QUniUIKitLabel &QUniUIKitLabel::operator=(const QUniUIKitLabel &label)
-{
-    Q_D(QUniUIKitLabel);
-    d->uiLabel().text = label.text().toNSString();
-    return *this;
-}
-
 QString QUniUIKitLabel::text() const
 {
     return QString::fromNSString(d_func()->uiLabel().text);

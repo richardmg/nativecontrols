@@ -56,8 +56,6 @@ public:
 
     UILabel *uiLabelHandle();
 
-    QUniUIKitLabel& operator=(const QUniUIKitLabel &label);
-
     QString text() const;
     void setText(const QString &text);
 
@@ -69,6 +67,7 @@ protected:
 
 private:
     Q_DECLARE_PRIVATE(QUniUIKitLabel)
+    Q_DISABLE_COPY(QUniUIKitLabel)
 };
 
 QT_END_NAMESPACE
