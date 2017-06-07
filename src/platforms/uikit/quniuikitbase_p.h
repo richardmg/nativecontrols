@@ -118,7 +118,7 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
         q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(self)); \
         Q_ASSERT(q); \
         self.q = q; \
-    }
+    } qt_noop()
 
 // Can be used if the nsobject has a "@property (nonatomic, readwrite) QUniUIKitView *q;"
 // Should be a bit more optimizing than using Q_D_NSOBJECT2 directly.
@@ -130,7 +130,7 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
         self.q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(self)); \
         Q_ASSERT(self.q); \
         d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(self.q)); \
-    }
+    } qt_noop()
 
 QT_END_NAMESPACE
 
