@@ -95,7 +95,7 @@ UIButton *QUniUIKitButtonPrivate::uiButton() const
 
 void QUniUIKitButtonPrivate::syncText()
 {
-    if (!m_text.hasExplicitValue())
+    if (!m_text.isExplicit())
         return;
 
     [uiButton() setTitle:m_text.staticCast<QString>().toNSString() forState:UIControlStateNormal];

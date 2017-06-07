@@ -69,7 +69,7 @@ public:
 
     bool isNull() const Q_DECL_NOTHROW { return !m_isExplicit; }
     bool isNotNull() const Q_DECL_NOTHROW { return m_isExplicit; }
-    bool hasExplicitValue() const Q_DECL_NOTHROW { return m_isExplicit; }
+    bool isExplicit() const Q_DECL_NOTHROW { return m_isExplicit; }
 
     template <typename C>
     C staticCast() { return static_cast<C>(value); }

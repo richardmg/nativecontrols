@@ -213,7 +213,7 @@ void QUniUIKitViewPrivate::updateGeometry()
 
 void QUniUIKitViewPrivate::syncX()
 {
-    if (m_x.hasExplicitValue()) {
+    if (m_x.isExplicit()) {
         updateGeometry();
         emit q_func()->xChanged(m_x);
     } else {
@@ -227,7 +227,7 @@ void QUniUIKitViewPrivate::syncX()
 
 void QUniUIKitViewPrivate::syncY()
 {
-    if (m_y.hasExplicitValue()) {
+    if (m_y.isExplicit()) {
         updateGeometry();
         emit q_func()->yChanged(m_y);
     } else {
@@ -241,7 +241,7 @@ void QUniUIKitViewPrivate::syncY()
 
 void QUniUIKitViewPrivate::syncWidth()
 {
-    if (m_width.hasExplicitValue()) {
+    if (m_width.isExplicit()) {
         updateGeometry();
         emit q_func()->widthChanged(m_width);
     } else {
@@ -255,7 +255,7 @@ void QUniUIKitViewPrivate::syncWidth()
 
 void QUniUIKitViewPrivate::syncHeight()
 {
-    if (m_height.hasExplicitValue()) {
+    if (m_height.isExplicit()) {
         updateGeometry();
         emit q_func()->heightChanged(m_height);
     } else {
@@ -269,7 +269,7 @@ void QUniUIKitViewPrivate::syncHeight()
 
 void QUniUIKitViewPrivate::syncIntrinsicContentWidth()
 {
-    if (m_intrinsicContentWidth.hasExplicitValue()) {
+    if (m_intrinsicContentWidth.isExplicit()) {
         if (![view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
             qWarning("Warning: Cannot set intrinsicContentWidth for %s",
                      qPrintable(QString::fromNSString(NSStringFromClass([view() class]))));
@@ -291,7 +291,7 @@ void QUniUIKitViewPrivate::syncIntrinsicContentWidth()
 
 void QUniUIKitViewPrivate::syncIntrinsicContentHeight()
 {
-    if (m_intrinsicContentHeight.hasExplicitValue()) {
+    if (m_intrinsicContentHeight.isExplicit()) {
         if (![view() respondsToSelector:@selector(setIntrinsicContentSize:)]) {
             qWarning("Warning: Cannot set intrinsicContentHeight for %s",
                      qPrintable(QString::fromNSString(NSStringFromClass([view() class]))));
@@ -316,7 +316,7 @@ void QUniUIKitViewPrivate::syncSizeToFit()
     if (!m_sizeToFit)
         return;
 
-    if (!m_width.hasExplicitValue()) {
+    if (!m_width.isExplicit()) {
         // Implement an implicit binding "width:
         // intrinsicContentWidth" when width is unspecified
         if (m_width != m_intrinsicContentWidth) {
@@ -326,7 +326,7 @@ void QUniUIKitViewPrivate::syncSizeToFit()
         }
     }
 
-    if (!m_height.hasExplicitValue()) {
+    if (!m_height.isExplicit()) {
         // Implement an implicit binding "height:
         // intrinsicContentHeight" when height is unspecified
         if (m_height != m_intrinsicContentHeight) {
@@ -339,7 +339,7 @@ void QUniUIKitViewPrivate::syncSizeToFit()
 
 void QUniUIKitViewPrivate::syncVisible()
 {
-    if (m_visible.hasExplicitValue())
+    if (m_visible.isExplicit())
         view().hidden = !m_visible;
     m_visible.reset(!view().hidden);
     emit q_func()->visibleChanged(m_visible);
@@ -347,7 +347,7 @@ void QUniUIKitViewPrivate::syncVisible()
 
 void QUniUIKitViewPrivate::syncAlpha()
 {
-    if (m_alpha.hasExplicitValue())
+    if (m_alpha.isExplicit())
         view().alpha = m_alpha;
     m_alpha.reset(view().alpha);
     emit q_func()->alphaChanged(m_alpha);
@@ -355,7 +355,7 @@ void QUniUIKitViewPrivate::syncAlpha()
 
 void QUniUIKitViewPrivate::syncBackgroundColor()
 {
-    if (m_backgroundColor.hasExplicitValue())
+    if (m_backgroundColor.isExplicit())
         view().backgroundColor = qt_toUIColor(m_backgroundColor);
     m_backgroundColor.reset(qt_nsColorToQColor(view().backgroundColor));
     emit q_func()->backgroundColorChanged(m_backgroundColor);

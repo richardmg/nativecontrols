@@ -56,9 +56,9 @@
 {
     Q_D_NSOBJECT(QUniUIKitView);
     CGSize size = [super intrinsicContentSize];
-    if (d->m_intrinsicContentWidth.hasExplicitValue())
+    if (d->m_intrinsicContentWidth.isExplicit())
         size.width = _intrinsicContentSize.width;
-    if (d->m_intrinsicContentHeight.hasExplicitValue())
+    if (d->m_intrinsicContentHeight.isExplicit())
         size.height = _intrinsicContentSize.height;
     return size;
 }
