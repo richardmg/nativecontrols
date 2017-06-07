@@ -59,8 +59,6 @@ ViewController {
             backgroundColor: Qt.rgba(0, 255, 0, 255)
 
             Button {
-                width: intrinsicContentWidth
-                height: intrinsicContentHeight
                 text: "click me to set tab 2"
                 onClicked: rootViewController.selectedIndex = 2
                 backgroundColor: Qt.rgba(0, 0, 255, 255)

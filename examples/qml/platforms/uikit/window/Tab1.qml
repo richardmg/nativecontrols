@@ -61,14 +61,12 @@ ViewController {
                 text: "Add another tab"
                 x: 10
                 width: parent.width - (x * 2)
-                height: intrinsicContentHeight
                 onClicked: tabBarController.viewControllers.push(newTab.createObject())
             }
 
             TextField {
                 id: tabLabel
                 width: parent.width - (x * 2)
-                height: intrinsicContentHeight
                 x: 10
                 y: addTabButton.bottom + 10
                 text: "Tab 1"
@@ -90,7 +88,6 @@ ViewController {
                 x: 50
                 y: tabLabel.bottom + 10
                 width: parent.width - (x * 2)
-                height: intrinsicContentHeight
                 value: 1
             }
 
@@ -99,7 +96,6 @@ ViewController {
                 x: sliderRed.x
                 y: sliderRed.bottom + 10
                 width: sliderRed.width
-                height: intrinsicContentHeight
                 value: 1
             }
 
@@ -108,7 +104,6 @@ ViewController {
                 x: sliderRed.x
                 y: sliderGreen.bottom + 10
                 width: sliderRed.width
-                height: intrinsicContentHeight
                 value: 1
             }
 
@@ -117,7 +112,6 @@ ViewController {
                 x: sliderRed.x
                 y: sliderBlue.bottom + 10
                 width: sliderRed.width
-                height: intrinsicContentHeight
                 value: 1
             }
 
@@ -127,8 +121,6 @@ ViewController {
                 text: "ButtonTypeContactAdd"
                 x: 10
                 y: sliderAlpha.bottom + 10
-                width: intrinsicContentWidth
-                height: intrinsicContentHeight
             }
 
             Button {
@@ -137,8 +129,6 @@ ViewController {
                 text: "ButtonTypeInfoDark"
                 x: 10
                 y: buttonContactAdd.bottom + 10
-                width: intrinsicContentWidth
-                height: intrinsicContentHeight
             }
 
             Button {
@@ -147,8 +137,6 @@ ViewController {
                 text: "ButtonTypeInfoLight"
                 x: 10
                 y: buttonInfoDark.bottom + 10
-                width: intrinsicContentWidth
-                height: intrinsicContentHeight
             }
 
             Button {
@@ -157,8 +145,6 @@ ViewController {
                 text: "ButtonTypeRoundedRect"
                 x: 10
                 y: buttonInfoLight.bottom + 10
-                width: intrinsicContentWidth
-                height: intrinsicContentHeight
             }
 
             Button {
@@ -167,8 +153,6 @@ ViewController {
                 text: "ButtonTypeSystem"
                 x: 10
                 y: buttonRoundedRect.bottom + 10
-                width: intrinsicContentWidth
-                height: intrinsicContentHeight
             }
 
             Label {
@@ -176,15 +160,11 @@ ViewController {
                 text: "Normal label";
                 x: 10
                 y: buttonSystem.bottom + 10
-                width: intrinsicContentWidth
-                height: intrinsicContentHeight
             }
 
             Switch {
                 x: 10
                 y: normalLabel.bottom + 10
-                width: intrinsicContentWidth
-                height: intrinsicContentHeight
             }
 
             Component {
