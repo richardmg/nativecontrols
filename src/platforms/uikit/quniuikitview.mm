@@ -62,7 +62,7 @@ static UIColor *qt_toUIColor(const QColor &qcolor)
             alpha:qcolor.alpha() / 255.];
 }
 
-static QColor qt_nsColorToQColor(UIColor *uiColor)
+static QColor qt_fromUIColor(UIColor *uiColor)
 {
     CGFloat r, g, b, a;
     [uiColor getRed:&r green:&g blue:&b alpha:&a];
@@ -359,7 +359,7 @@ void QUniUIKitViewPrivate::syncBackgroundColor()
 {
     if (m_backgroundColor.isExplicit())
         view().backgroundColor = qt_toUIColor(m_backgroundColor);
-    m_backgroundColor.reset(qt_nsColorToQColor(view().backgroundColor));
+    m_backgroundColor.reset(qt_fromUIColor(view().backgroundColor));
     emit q_func()->backgroundColorChanged(m_backgroundColor);
 }
 
