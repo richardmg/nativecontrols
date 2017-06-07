@@ -41,6 +41,7 @@
 #include <QtUniUIKitControls/quniuikittextfield.h>
 #include <QtUniUIKitControls/private/quniuikittextfield_p.h>
 #include <QtUniUIKitControls/quniuikittextfielddelegate.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 QUniUITextFieldStaticDelegate *QUniUIKitTextFieldPrivate::s_delegate = nullptr;
 
@@ -141,34 +142,8 @@ UITextField *QUniUIKitTextField::uiTextFieldHandle()
     return d_func()->textField();
 }
 
-QString QUniUIKitTextField::text() const
-{
-    return QString::fromNSString(d_func()->textField().text);
-}
-
-void QUniUIKitTextField::setText(const QString &newText)
-{
-    if (newText == text())
-        return;
-
-    uiTextFieldHandle().text = newText.toNSString();
-}
-
-QString QUniUIKitTextField::placeholderText() const
-{
-    return QString::fromNSString(d_func()->textField().placeholder);
-}
-
-void QUniUIKitTextField::setPlaceholderText(const QString &newPlaceholderText)
-{
-    if (newPlaceholderText == placeholderText())
-        return;
-
-    uiTextFieldHandle().placeholder = newPlaceholderText.toNSString();
-    d_func()->updateIntrinsicContentSize();
-
-    emit placeholderTextChanged(newPlaceholderText);
-}
+SYNTHESIZE_QPROPERTY_CALLBACK_QSTRING(text, Text, textField(), QUniUIKitTextField)
+SYNTHESIZE_QPROPERTY_INTRINSIC_QSTRING(placeholder, Placeholder, textField(), QUniUIKitTextField)
 
 QUniUIKitTextFieldDelegate *QUniUIKitTextField::delegate() const
 {

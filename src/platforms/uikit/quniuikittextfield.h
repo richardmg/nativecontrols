@@ -49,7 +49,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitTextField : public QUniUIKitControl
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
-    Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText NOTIFY placeholderTextChanged)
+    Q_PROPERTY(QString placeholder READ placeholder WRITE setPlaceholder NOTIFY placeholderChanged)
     Q_PROPERTY(QUniUIKitTextFieldDelegate *delegate READ delegate WRITE setDelegate NOTIFY delegateChanged)
 
 public:
@@ -62,15 +62,15 @@ public:
     QString text() const;
     void setText(const QString &text);
 
-    QString placeholderText() const;
-    void setPlaceholderText(const QString &placeholderText);
+    QString placeholder() const;
+    void setPlaceholder(const QString &placeholder);
 
     QUniUIKitTextFieldDelegate *delegate() const;
     void setDelegate(QUniUIKitTextFieldDelegate *delegate);
 
 Q_SIGNALS:
     void textChanged(const QString &text);
-    void placeholderTextChanged(const QString &placeholderText);
+    void placeholderChanged(const QString &placeholder);
     void delegateChanged(QUniUIKitTextFieldDelegate *delegate);
 
 protected:

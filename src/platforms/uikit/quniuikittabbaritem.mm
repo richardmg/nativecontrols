@@ -40,6 +40,7 @@
 
 #include <QtUniUIKitControls/quniuikittabbaritem.h>
 #include <QtUniUIKitControls/private/quniuikittabbaritem_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -87,20 +88,7 @@ QUniUIKitTabBarItem::~QUniUIKitTabBarItem()
 {
 }
 
-QString QUniUIKitTabBarItem::title() const
-{
-    return QString::fromNSString(const_cast<QUniUIKitTabBarItem *>(this)->uiTabBarItemHandle().title);
-}
-
-void QUniUIKitTabBarItem::setTitle(const QString &newTitle)
-{
-    if (title() == newTitle)
-        return;
-
-    uiTabBarItemHandle().title = newTitle.toNSString();
-
-    emit titleChanged(newTitle);
-}
+SYNTHESIZE_QPROPERTY_QSTRING(title, Title, tabBarItem(), QUniUIKitTabBarItem)
 
 #include "moc_quniuikittabbaritem.cpp"
 

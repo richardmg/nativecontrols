@@ -40,6 +40,7 @@
 
 #include <QtUniUIKitControls/quniuikitswitch.h>
 #include <QtUniUIKitControls/private/quniuikitswitch_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 @interface QUniUISwitch : UISwitch
 #include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
@@ -104,18 +105,7 @@ UISwitch *QUniUIKitSwitch::uiSwitchHandle()
     return d_func()->uiSwitch();
 }
 
-bool QUniUIKitSwitch::on() const
-{
-    return d_func()->uiSwitch().on;
-}
-
-void QUniUIKitSwitch::setOn(const bool &newValue)
-{
-    if (newValue == on())
-        return;
-
-    d_func()->uiSwitch().on = newValue;
-}
+SYNTHESIZE_QPROPERTY_CALLBACK(on, On, bool, uiSwitch(), QUniUIKitSwitch)
 
 void QUniUIKitSwitch::setOnAnimated(const bool &newValue)
 {

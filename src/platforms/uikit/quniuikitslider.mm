@@ -40,6 +40,7 @@
 
 #include <QtUniUIKitControls/quniuikitslider.h>
 #include <QtUniUIKitControls/private/quniuikitslider_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 @interface QUniUISlider : UISlider
 #include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
@@ -104,18 +105,7 @@ UISlider *QUniUIKitSlider::uiSliderHandle()
     return d_func()->uiSlider();
 }
 
-float QUniUIKitSlider::value() const
-{
-    return d_func()->uiSlider().value;
-}
-
-void QUniUIKitSlider::setValue(const float &newValue)
-{
-    if (newValue == value())
-        return;
-
-    d_func()->uiSlider().value = newValue;
-}
+SYNTHESIZE_QPROPERTY_CALLBACK(value, Value, float, uiSlider(), QUniUIKitSlider)
 
 #include "moc_quniuikitslider.cpp"
 

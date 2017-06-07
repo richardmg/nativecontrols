@@ -40,6 +40,7 @@
 
 #include <QtUniUIKitControls/quniuikitlabel.h>
 #include <QtUniUIKitControls/private/quniuikitlabel_p.h>
+#include <QtUniUIKitControls/private/quniuikitpropertymacros_p.h>
 
 @interface QUniUILabel : UILabel
 #include <QtUniUIKitControls/private/quniuikitview_nsobject_p.h>
@@ -96,22 +97,7 @@ UILabel *QUniUIKitLabel::uiLabelHandle()
     return d_func()->uiLabel();
 }
 
-QString QUniUIKitLabel::text() const
-{
-    return QString::fromNSString(d_func()->uiLabel().text);
-}
-
-void QUniUIKitLabel::setText(const QString &newText)
-{
-    if (newText == text())
-        return;
-
-    Q_D(QUniUIKitLabel);
-    d->uiLabel().text = newText.toNSString();
-    d->updateIntrinsicContentSize();
-
-    emit textChanged(newText);
-}
+SYNTHESIZE_QPROPERTY_INTRINSIC_QSTRING(text, Text, uiLabel(), QUniUIKitLabel)
 
 #include "moc_quniuikitlabel.cpp"
 
