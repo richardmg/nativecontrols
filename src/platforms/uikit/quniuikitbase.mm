@@ -103,6 +103,11 @@ NSObject *QUniUIKitBasePrivate::nsObject() const
 
 void QUniUIKitBasePrivate::setNSObject(NSObject *nsObject)
 {
+    // Currently we only support setting a backend nsobject once. If this needs to
+    // change at on point, logic must be implemented, not only for releasing the old
+    // backend objects, but also for reverting parent-child relationships, and ensure
+    // that any associations in UIKit (including those that might exist between the
+    // native controls) will be dealt with.
     Q_ASSERT(nsObject);
     Q_ASSERT_X(!m_nsObject, Q_FUNC_INFO, "setNSObject should only be called once");
     m_nsObject = [nsObject retain];
