@@ -54,10 +54,11 @@ public:
     enum ButtonType {
         ButtonTypeCustom,
         ButtonTypeSystem,
+        ButtonTypeDetailDisclosure,
         ButtonTypeInfoLight,
         ButtonTypeInfoDark,
         ButtonTypeContactAdd,
-        ButtonTypeRoundedRect
+        ButtonTypeRoundedRect = ButtonTypeSystem
     };
     Q_ENUM(ButtonType)
 
