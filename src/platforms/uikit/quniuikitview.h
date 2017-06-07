@@ -62,6 +62,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitResponder
     Q_PROPERTY(qreal bottom READ bottom NOTIFY bottomChanged FINAL)
     Q_PROPERTY(qreal intrinsicContentWidth READ intrinsicContentWidth WRITE setIntrinsicContentWidth NOTIFY intrinsicContentWidthChanged FINAL)
     Q_PROPERTY(qreal intrinsicContentHeight READ intrinsicContentHeight WRITE setIntrinsicContentHeight NOTIFY intrinsicContentHeightChanged FINAL)
+    Q_PROPERTY(bool sizeToFit READ sizeToFit WRITE setSizeToFit NOTIFY sizeToFitChanged FINAL)
 
 public:
     QUniUIKitView(QUniUIKitBase *parent = nullptr);
@@ -114,6 +115,9 @@ public:
     qreal intrinsicContentHeight() const;
     void setIntrinsicContentHeight(const qreal &height);
 
+    bool sizeToFit() const;
+    void setSizeToFit(const bool &sizeToFit);
+
     QUniUIKitView *parentView();
 
     UIView *uiViewHandle();
@@ -130,6 +134,7 @@ Q_SIGNALS:
     void bottomChanged(qreal value);
     void intrinsicContentWidthChanged(qreal value);
     void intrinsicContentHeightChanged(qreal value);
+    void sizeToFitChanged(bool sizeToFit);
 
 protected:
     QUniUIKitView(QUniUIKitViewPrivate &dd, QUniUIKitBase *parent = nullptr);

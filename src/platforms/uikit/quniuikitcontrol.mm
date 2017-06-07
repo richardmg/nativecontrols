@@ -55,6 +55,11 @@ QT_BEGIN_NAMESPACE
 QUniUIKitControlPrivate::QUniUIKitControlPrivate(int version)
     : QUniUIKitViewPrivate(version)
 {
+    // We expect controls to have some content and as such, a default size. Natively, setting
+    // a size based on the intrinsic since is done implicit by Xcode already in the interface
+    // designer (and not runtime). So to mimic the same behaviour (and not forcing you to set
+    // a size on all controls) we set m_sizeToFit to true.
+    m_sizeToFit = true;
 }
 
 QUniUIKitControlPrivate::~QUniUIKitControlPrivate()

@@ -71,6 +71,7 @@ static QColor qt_nsColorToQColor(UIColor *uiColor)
 
 QUniUIKitViewPrivate::QUniUIKitViewPrivate(int version)
     : QUniUIKitResponderPrivate(version)
+    , m_sizeToFit(false)
 {
 }
 
@@ -146,6 +147,8 @@ void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
     QUniUIKitBasePrivate::setNSObject(nsObject);
     UIView *v = static_cast<UIView *>(nsObject);
 
+    syncIntrinsicContentWidth();
+    syncIntrinsicContentHeight();
     syncX();
     syncY();
     syncWidth();
@@ -153,8 +156,6 @@ void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
     syncAlpha();
     syncBackgroundColor();
     syncVisible();
-    syncIntrinsicContentWidth();
-    syncIntrinsicContentHeight();
 
     if (QUniUIKitView *qparentView = q->parentView())
         qparentView->d_func()->addSubView(v);
@@ -284,6 +285,8 @@ void QUniUIKitViewPrivate::syncIntrinsicContentWidth()
             emit q_func()->intrinsicContentWidthChanged(m_intrinsicContentWidth);
         }
     }
+
+    syncSizeToFit();
 }
 
 void QUniUIKitViewPrivate::syncIntrinsicContentHeight()
@@ -302,6 +305,34 @@ void QUniUIKitViewPrivate::syncIntrinsicContentHeight()
         if (value != m_intrinsicContentHeight) {
             m_intrinsicContentHeight.reset(view().intrinsicContentSize.height);
             emit q_func()->intrinsicContentHeightChanged(m_intrinsicContentHeight);
+        }
+    }
+
+    syncSizeToFit();
+}
+
+void QUniUIKitViewPrivate::syncSizeToFit()
+{
+    if (!m_sizeToFit)
+        return;
+
+    if (!m_width.hasExplicitValue()) {
+        // Implement an implicit binding "width:
+        // intrinsicContentWidth" when width is unspecified
+        if (m_width != m_intrinsicContentWidth) {
+            m_width.reset(m_intrinsicContentWidth);
+            updateGeometry();
+            emit q_func()->widthChanged(m_width);
+        }
+    }
+
+    if (!m_height.hasExplicitValue()) {
+        // Implement an implicit binding "height:
+        // intrinsicContentHeight" when height is unspecified
+        if (m_height != m_intrinsicContentHeight) {
+            m_height.reset(m_intrinsicContentHeight);
+            updateGeometry();
+            emit q_func()->heightChanged(m_height);
         }
     }
 }
@@ -360,6 +391,7 @@ SYNTHESIZE_QPROPERTY_CACHED(width, Width, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(height, Height, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(intrinsicContentWidth, IntrinsicContentWidth, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(intrinsicContentHeight, IntrinsicContentHeight, qreal, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(sizeToFit, SizeToFit, bool, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(visible, Visible, bool, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(alpha, Alpha, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(backgroundColor, BackgroundColor, QColor, QUniUIKitView)
