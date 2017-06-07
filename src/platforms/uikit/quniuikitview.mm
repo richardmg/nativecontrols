@@ -156,6 +156,7 @@ void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
     syncAlpha();
     syncBackgroundColor();
     syncVisible();
+    syncClipsToBounds();
 
     if (QUniUIKitView *qparentView = q->parentView())
         qparentView->d_func()->addSubView(v);
@@ -361,6 +362,15 @@ void QUniUIKitViewPrivate::syncBackgroundColor()
     emit q_func()->backgroundColorChanged(m_backgroundColor);
 }
 
+void QUniUIKitViewPrivate::syncClipsToBounds()
+{
+    if (!m_clipsToBounds.isExplicit())
+        return;
+
+    view().clipsToBounds = m_clipsToBounds;
+    emit q_func()->clipsToBoundsChanged(m_clipsToBounds);
+}
+
 QUniUIKitView::QUniUIKitView(QUniUIKitBase *parent)
     : QUniUIKitResponder(*new QUniUIKitViewPrivate(), parent)
 {
@@ -392,6 +402,7 @@ SYNTHESIZE_QPROPERTY_CACHED(height, Height, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(intrinsicContentWidth, IntrinsicContentWidth, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(intrinsicContentHeight, IntrinsicContentHeight, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(sizeToFit, SizeToFit, bool, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(clipsToBounds, ClipsToBounds, bool, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(visible, Visible, bool, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(alpha, Alpha, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(backgroundColor, BackgroundColor, QColor, QUniUIKitView)

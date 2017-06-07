@@ -87,6 +87,7 @@ private:
     void syncIntrinsicContentWidth();
     void syncIntrinsicContentHeight();
     void syncSizeToFit();
+    void syncClipsToBounds();
 
 public:
     virtual void createNSObject() override;
@@ -101,6 +102,7 @@ public:
     QUniUIKitOptional<bool> m_visible;
     QUniUIKitOptional<qreal> m_alpha;
     QUniUIKitOptional<QColor> m_backgroundColor;
+    QUniUIKitOptional<bool> m_clipsToBounds;
     bool m_sizeToFit;
 };
 
