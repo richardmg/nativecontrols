@@ -84,12 +84,12 @@ private:
 void qt_setAssociatedQObject(NSObject *nsObject, QObject *qObject);
 QObject *qt_getAssociatedQObject(NSObject *nsObject);
 
-// Can be used if the nsobject has an associated QObject
+// Can be used if the OBJC_OBJECT has an associated QObject
 #define Q_Q_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
     CLASSNAME *q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(OBJC_OBJECT)); \
     Q_ASSERT(q);
 
-// Can be used if the nsobject has an associated QObject
+// Can be used if the OBJC_OBJECT has an associated QObject
 #define Q_D_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
     CLASSNAME##Private *d; \
     { \
@@ -97,16 +97,19 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
         d = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q)); \
     }
 
+// Can be used if the OBJC_OBJECT has an associated QObject, and
+// you need both q and d, but named differencly in case of name clashes.
 #define Q_AND_D_NSOBJECT4(CLASSNAME, OBJC_OBJECT, VAR_Q, VAR_D) \
     CLASSNAME *VAR_Q = static_cast<CLASSNAME *>(qt_getAssociatedQObject(OBJC_OBJECT)); \
     Q_ASSERT(VAR_Q); \
     CLASSNAME##Private *VAR_D = static_cast<CLASSNAME##Private *>(QObjectPrivate::get(q)); \
     Q_UNUSED(VAR_D)
 
+// Can be used if the OBJC_OBJECT has an associated QObject, and you need both q and d.
 #define Q_AND_D_NSOBJECT2(CLASSNAME, OBJC_OBJECT) \
     Q_AND_D_NSOBJECT4(CLASSNAME, OBJC_OBJECT, q, d)
 
-// Can be used if the nsobject has a "@property (nonatomic, readwrite) QUniUIKitView *q;"
+// Can be used inside a method if 'self' has a "@property (nonatomic, readwrite) QUniUIKitView *q;"
 // Should be a bit more optimizing than using Q_Q_NSOBJECT2 directly.
 #define Q_Q_NSOBJECT(CLASSNAME) \
     CLASSNAME *q; \
@@ -118,7 +121,7 @@ QObject *qt_getAssociatedQObject(NSObject *nsObject);
         self.q = q; \
     } qt_noop()
 
-// Can be used if the nsobject has a "@property (nonatomic, readwrite) QUniUIKitView *q;"
+// Can be used inside a method if 'self' has a "@property (nonatomic, readwrite) QUniUIKitView *q;"
 // Should be a bit more optimizing than using Q_D_NSOBJECT2 directly.
 #define Q_D_NSOBJECT(CLASSNAME) \
     CLASSNAME##Private *d; \
