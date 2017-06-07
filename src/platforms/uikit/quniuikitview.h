@@ -64,6 +64,7 @@ class Q_UNIUIKITCONTROLS_EXPORT QUniUIKitView : public QUniUIKitResponder
     Q_PROPERTY(qreal intrinsicContentHeight READ intrinsicContentHeight WRITE setIntrinsicContentHeight NOTIFY intrinsicContentHeightChanged FINAL)
     Q_PROPERTY(bool sizeToFit READ sizeToFit WRITE setSizeToFit NOTIFY sizeToFitChanged FINAL)
     Q_PROPERTY(bool clipsToBounds READ clipsToBounds WRITE setClipsToBounds NOTIFY clipsToBoundsChanged FINAL)
+    Q_PROPERTY(qreal cornerRadius READ cornerRadius WRITE setCornerRadius NOTIFY cornerRadiusChanged FINAL)
 
 public:
     QUniUIKitView(QUniUIKitBase *parent = nullptr);
@@ -122,6 +123,9 @@ public:
     bool clipsToBounds() const;
     void setClipsToBounds(const bool &clip);
 
+    qreal cornerRadius() const;
+    void setCornerRadius(const qreal &radius);
+
     QUniUIKitView *parentView();
 
     UIView *uiViewHandle();
@@ -140,6 +144,7 @@ Q_SIGNALS:
     void intrinsicContentHeightChanged(qreal value);
     void sizeToFitChanged(bool sizeToFit);
     void clipsToBoundsChanged(bool clipsToBounds);
+    void cornerRadiusChanged(qreal value);
 
 protected:
     QUniUIKitView(QUniUIKitViewPrivate &dd, QUniUIKitBase *parent = nullptr);

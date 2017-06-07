@@ -157,6 +157,7 @@ void QUniUIKitViewPrivate::setNSObject(NSObject *nsObject)
     syncBackgroundColor();
     syncVisible();
     syncClipsToBounds();
+    syncCornerRadius();
 
     if (QUniUIKitView *qparentView = q->parentView())
         qparentView->d_func()->addSubView(v);
@@ -371,6 +372,20 @@ void QUniUIKitViewPrivate::syncClipsToBounds()
     emit q_func()->clipsToBoundsChanged(m_clipsToBounds);
 }
 
+void QUniUIKitViewPrivate::syncCornerRadius()
+{
+    if (m_cornerRadius.isExplicit()) {
+        view().layer.cornerRadius = m_cornerRadius;
+        emit q_func()->cornerRadiusChanged(m_cornerRadius);
+    } else {
+        float value = view().layer.cornerRadius;
+        if (m_cornerRadius != value) {
+            m_cornerRadius.reset(value);
+            emit q_func()->cornerRadiusChanged(m_cornerRadius);
+        }
+    }
+}
+
 QUniUIKitView::QUniUIKitView(QUniUIKitBase *parent)
     : QUniUIKitResponder(*new QUniUIKitViewPrivate(), parent)
 {
@@ -406,6 +421,7 @@ SYNTHESIZE_QPROPERTY_CACHED(clipsToBounds, ClipsToBounds, bool, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(visible, Visible, bool, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(alpha, Alpha, qreal, QUniUIKitView)
 SYNTHESIZE_QPROPERTY_CACHED(backgroundColor, BackgroundColor, QColor, QUniUIKitView)
+SYNTHESIZE_QPROPERTY_CACHED(cornerRadius, CornerRadius, qreal, QUniUIKitView)
 
 QRectF QUniUIKitView::geometry() const
 {
